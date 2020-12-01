@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React from "react";
-import { useKarteStyle } from "../../../model/style/UseKarteStyle";
+import { useKarteStyle } from "./style/UseKarteStyle";
 
 function createSizeData(header: string, size: string) {
   return { header, size };

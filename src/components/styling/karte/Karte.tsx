@@ -3,7 +3,7 @@ import React from "react";
 
 import KarteResponse from "../../../model/api/response/karte/KarteResponse";
 
-import { useKarteStyle } from "../../../model/style/UseKarteStyle";
+import { useKarteStyle } from "./style/UseKarteStyle";
 import Basic from "./Basic";
 import Memo from "./Memo";
 import Size from "./Size";

@@ -11,7 +11,7 @@ import {
 import { ExpandMore } from "@material-ui/icons";
 import React from "react";
 import MemoResponse from "../../../model/api/response/karte/MemoResponse";
-import { useKarteStyle } from "../../../model/style/UseKarteStyle";
+import { useKarteStyle } from "./style/UseKarteStyle";
 import { useMemoPresenter } from "./presenter/UseMemoPresenter";
 
 interface MemoProps {

@@ -1,5 +1,4 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
-import { blue, red } from "@material-ui/core/colors";
 
 export const useKarteStyle = makeStyles((theme: Theme) =>
   createStyles({

@@ -10,7 +10,7 @@ import {
 import { ExpandMore } from "@material-ui/icons";
 import React from "react";
 import BasicResponse from "../../../model/api/response/karte/BasicResponse";
-import { useKarteStyle } from "../../../model/style/UseKarteStyle";
+import { useKarteStyle } from "./style/UseKarteStyle";
 import { useBasicPresenter } from "./presenter/UseBasicPresenter";
 
 interface BasicProps {

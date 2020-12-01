@@ -4,8 +4,8 @@ import { Drawer, ThemeProvider, Toolbar, Typography } from "@material-ui/core";
 import Karte from "./styling/karte/Karte";
 import SelectionProgress from "./styling/selection_progress/SelectionProgress";
 import ItemBrowse from "./styling/browse/ItemBrowse";
-import DefaultTheme from "../model/style/Theme";
-import { useAppStyle } from "../model/style/UseAppStyle";
+import DefaultTheme from "./style/Theme";
+import { useAppStyle } from "./style/UseAppStyle";
 
 const App = () => {
   const classes = useAppStyle();
