@@ -23,6 +23,7 @@ export const useAppStyle = makeStyles((theme: Theme) =>
     ProgressContainer: {
       height: 100,
       width: "100%",
+      marginTop: "auto",
       backgroundColor: red[500],
     },
   })
