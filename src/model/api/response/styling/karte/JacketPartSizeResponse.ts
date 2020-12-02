@@ -1,8 +1,8 @@
 export default interface JacketPartSizeResponse {
   size: string;
   dropSize: string;
-  shoulder: number;
-  bust: number;
-  lengthTop: number;
-  lengthArm: number;
+  shoulder: number | null;
+  bust: number | null;
+  lengthTop: number | null;
+  lengthArm: number | null;
 }
