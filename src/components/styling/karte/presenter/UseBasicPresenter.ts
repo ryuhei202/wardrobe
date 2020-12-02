@@ -1,4 +1,4 @@
-import BasicResponse from "../../../../model/api/response/karte/BasicResponse";
+import BasicResponse from "../../../../model/api/response/styling/karte/BasicResponse";
 
 export interface BasicPresenter {
   resultList: () => string[];

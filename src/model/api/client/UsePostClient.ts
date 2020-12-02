@@ -10,7 +10,7 @@ export const usePostClient = <T>(request: PostRequest): PostClient<T> => {
   const client = useClient<T>();
 
   const post = (): Promise<T> => {
-    const url = `${baseUrl}/${request.url()}`;
+    const url = `${baseUrl()}/${request.url()}`;
     const params = request.params();
     const api = client.createApi();
     return client.execute(api.post(url, params));

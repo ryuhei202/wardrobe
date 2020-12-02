@@ -1,4 +1,4 @@
-import MemoResponse from "../../../../model/api/response/karte/MemoResponse";
+import MemoResponse from "../../../../model/api/response/styling/karte/MemoResponse";
 
 export interface MemoPresenter {
   lastCoordinate: () => string;

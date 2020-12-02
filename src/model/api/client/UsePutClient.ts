@@ -10,7 +10,7 @@ export const usePutClient = <T>(request: PutRequest): PutClient<T> => {
   const client = useClient<T>();
 
   const put = (): Promise<T> => {
-    const url = `${baseUrl}/${request.url()}`;
+    const url = `${baseUrl()}/${request.url()}`;
     const params = request.params();
     const api = client.createApi();
     return client.execute(api.put(url, params));
