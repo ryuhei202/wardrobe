@@ -28,7 +28,7 @@ const Basic = (props: BasicProps) => {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography className={classes.heading}>カルテ情報</Typography>
+        <Typography className={classes.heading}>基本情報</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <List className={classes.drawerList}>

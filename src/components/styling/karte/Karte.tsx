@@ -1,8 +1,5 @@
 import { CircularProgress, Divider, Typography } from "@material-ui/core";
 import React from "react";
-
-import KarteResponse from "../../../model/api/response/styling/karte/KarteResponse";
-
 import { useKarteStyle } from "./style/UseKarteStyle";
 import Basic from "./Basic";
 import Memo from "./Memo";
