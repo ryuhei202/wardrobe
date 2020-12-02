@@ -10,7 +10,7 @@ export const usePatchClient = <T>(request: PatchRequest): PatchClient<T> => {
   const client = useClient<T>();
 
   const patch = (): Promise<T> => {
-    const url = `${baseUrl}/${request.url()}`;
+    const url = `${baseUrl()}/${request.url()}`;
     const params = request.params();
     const api = client.createApi();
     return client.execute(api.patch(url, params));

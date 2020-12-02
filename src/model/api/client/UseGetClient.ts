@@ -9,7 +9,7 @@ export interface GetClient<T> {
 export const useGetClient = <T>(request: GetRequest): GetClient<T> => {
   const client = useClient<T>();
   const get = (): Promise<T> => {
-    const url = `${baseUrl}/${request.url()}`;
+    const url = `${baseUrl()}/${request.url()}`;
     const params = request.params ? request.params() : null;
     const api = client.createApi();
     return client.execute(

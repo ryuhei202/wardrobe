@@ -1,12 +1,13 @@
-import { Divider, Typography } from "@material-ui/core";
+import { CircularProgress, Divider, Typography } from "@material-ui/core";
 import React from "react";
 
-import KarteResponse from "../../../model/api/response/karte/KarteResponse";
+import KarteResponse from "../../../model/api/response/styling/karte/KarteResponse";
 
 import { useKarteStyle } from "./style/UseKarteStyle";
 import Basic from "./Basic";
 import Memo from "./Memo";
 import Size from "./Size";
+import { useGetKarteCaller } from "../../../model/styling/karte/api_caller/UseGetKarteCaller";
 
 const karteResponse: KarteResponse = {
   basic: {
@@ -30,22 +31,27 @@ const karteResponse: KarteResponse = {
 
 const Karte = () => {
   const classes = useKarteStyle();
+  const apiCaller = useGetKarteCaller();
 
-  return (
-    <>
-      <div className={classes.drawerHeader}>
-        <Typography variant="h6" noWrap>
-          コーデ作成情報
-        </Typography>
-      </div>
-      <Divider />
-      <div className={classes.drawerContainer}>
-        <Basic data={karteResponse.basic} />
-        <Size />
-        <Memo data={karteResponse.memo} />
-      </div>
-    </>
-  );
+  if (apiCaller.isRunning()) {
+    return <CircularProgress />;
+  } else {
+    return (
+      <>
+        <div className={classes.drawerHeader}>
+          <Typography variant="h6" noWrap>
+            コーデ作成情報
+          </Typography>
+        </div>
+        <Divider />
+        <div className={classes.drawerContainer}>
+          <Basic data={karteResponse.basic} />
+          <Size />
+          <Memo data={karteResponse.memo} />
+        </div>
+      </>
+    );
+  }
 };
 
 export default Karte;
