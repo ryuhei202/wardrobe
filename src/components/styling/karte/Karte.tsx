@@ -32,7 +32,7 @@ const Karte = () => {
         <Divider />
         <div className={classes.drawerContainer}>
           <Basic data={apiCaller.response.basic} />
-          <Size />
+          <Size data={apiCaller.response.size} />
           <Memo data={apiCaller.response.memo} />
         </div>
       </>
