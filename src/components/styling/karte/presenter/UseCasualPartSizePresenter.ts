@@ -16,58 +16,46 @@ export const useCasualPartSizePresenter = (
     return [
       {
         label: "肩幅(0~+1)",
-        size: `${data.shoulder ? data.shoulder : ""}(${
-          data.referenceShoulder
-        })`,
+        size: `${data.shoulder ?? ""}(${data.referenceShoulder})`,
       },
       {
         label: "バスト(-4~+4)",
-        size: `${data.bust ? data.bust : ""}(${data.referenceBust})`,
+        size: `${data.bust ?? ""}(${data.referenceBust})`,
       },
       {
         label: "着丈(-5~)",
-        size: `${data.lengthTop ? data.lengthTop : ""}(${
-          data.referenceLengthTop
-        })`,
+        size: `${data.lengthTop ?? ""}(${data.referenceLengthTop})`,
       },
       {
         label: "袖丈(0~+1)",
-        size: `${data.lengthArm ? data.lengthArm : ""}(${
-          data.referenceLengthArm
-        })`,
+        size: `${data.lengthArm ?? ""}(${data.referenceLengthArm})`,
       },
       {
         label: "首周り(0~+1)",
-        size: `${data.roundNeck ? data.roundNeck : ""}`,
+        size: `${data.roundNeck ?? ""}`,
       },
       {
         label: "ウエスト(±0)",
-        size: `${data.waist ? data.waist : ""}(${data.referenceWaist})`,
+        size: `${data.waist ?? ""}(${data.referenceWaist})`,
       },
       {
         label: "ヒップ(-2~+2)",
-        size: `${data.hip ? data.hip : ""}(${data.referenceHip})`,
+        size: `${data.hip ?? ""}(${data.referenceHip})`,
       },
       {
         label: "もも周り(-2~+2)",
-        size: `${data.roundLeg ? data.roundLeg : ""}(${
-          data.referenceRoundLeg
-        })`,
+        size: `${data.roundLeg ?? ""}(${data.referenceRoundLeg})`,
       },
-      { label: "股上", size: `${data.lengthWaist ? data.lengthWaist : ""}` },
+      { label: "股上", size: `${data.lengthWaist ?? ""}` },
       {
         label: "股下(-5~+5)",
-        size: `${data.lengthLeg ? data.lengthLeg : ""}(${
-          data.referenceLengthLeg
-        })`,
+        size: `${data.lengthLeg ?? ""}(${data.referenceLengthLeg})`,
       },
       {
         label: "ふくらはぎ(-2~+2)",
-        size: `${data.roundCalf ? data.roundCalf : ""}(${
-          data.referenceRoundCalf
-        })`,
+        size: `${data.roundCalf ?? ""}(${data.referenceRoundCalf})`,
       },
-      { label: "足のサイズ", size: `${data.foot ? data.foot : ""}` },
+      { label: "足のサイズ", size: `${data.foot ?? ""}` },
     ];
   };
 

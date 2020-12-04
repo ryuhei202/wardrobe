@@ -16,12 +16,12 @@ export const useJacketPartSizePresenter = (
     return [
       {
         label: "サイズ",
-        size: `${data.size ? data.size : ""}：${data.dropSize}`,
+        size: `${data.size ?? ""}：${data.dropSize}`,
       },
-      { label: "肩幅", size: `${data.shoulder ? data.shoulder : ""}` },
-      { label: "バスト", size: `${data.bust ? data.bust : ""}` },
-      { label: "着丈", size: `${data.lengthTop ? data.lengthTop : ""}` },
-      { label: "袖丈", size: `${data.lengthArm ? data.lengthArm : ""}` },
+      { label: "肩幅", size: `${data.shoulder ?? ""}` },
+      { label: "バスト", size: `${data.bust ?? ""}` },
+      { label: "着丈", size: `${data.lengthTop ?? ""}` },
+      { label: "袖丈", size: `${data.lengthArm ?? ""}` },
     ];
   };
 
