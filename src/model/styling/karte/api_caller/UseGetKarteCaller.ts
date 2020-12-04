@@ -17,7 +17,7 @@ export const useGetKarteCaller = (): GetKarteCaller => {
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetKarteRequest(493782);
+  const request = useGetKarteRequest(384763);
   const client = useGetClient<KarteResponse>(request);
 
   useEffect(() => {

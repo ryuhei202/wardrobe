@@ -1,4 +1,5 @@
 export default interface MemoResponse {
-  lastCoordinateFeedback: string;
-  nextCoordinateRequest: string;
+  previousFeedback: string;
+  nextRequest: string;
+  other_note: string;
 }

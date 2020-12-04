@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse, AxiosInstance } from "axios";
+import applyCaseMiddleware from "axios-case-converter";
 import ErrorResponse from "../response/shared/ErrorResponse";
 
 export interface Client<T> {
@@ -8,7 +9,7 @@ export interface Client<T> {
 
 export const useClient = <T>(): Client<T> => {
   const createApi = (): AxiosInstance => {
-    return axios.create();
+    return applyCaseMiddleware(axios.create());
   };
 
   const execute = (method: Promise<AxiosResponse<T>>): Promise<T> => {
