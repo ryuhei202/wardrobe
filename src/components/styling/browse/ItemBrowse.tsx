@@ -12,6 +12,7 @@ import FilterGroupCollection from "./FilterGroupCollection";
 import { useItemBrowseHandler } from "./handler/UseItemBrowseHandler";
 import ItemCardCollection from "./ItemCardCollection";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
+import Pagination from "@material-ui/lab/Pagination";
 
 const ItemBrowse = () => {
   const classes = useBrowseStyle();
@@ -61,7 +62,15 @@ const ItemBrowse = () => {
             callback={handler.filterGroupCollectionCallback}
             refinement={handler.currentRefinement}
           />
-          <ItemCardCollection data={handler.searchResult()?.content ?? null} />
+          <ItemCardCollection data={handler.searchResult()?.itemCard ?? null} />
+        </div>
+        <div className={classes.paginationContainer}>
+          <Pagination
+            page={handler.currentRefinement.pageNo}
+            count={handler.searchResult()?.totalPageNum ?? 0}
+            color="secondary"
+            onChange={handler.onPageChanged}
+          />
         </div>
       </>
     );

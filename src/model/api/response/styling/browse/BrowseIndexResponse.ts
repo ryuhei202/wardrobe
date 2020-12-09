@@ -1,6 +1,7 @@
-import BrowseIndexContentResponse from "./BrowseIndexContentResponse";
+import ItemCardResponse from "./ItemCardResponse";
 
 export default interface BrowseIndexResponse {
   totalCount: number;
-  content: BrowseIndexContentResponse;
+  totalPageNum: number;
+  itemCard: ItemCardResponse[];
 }

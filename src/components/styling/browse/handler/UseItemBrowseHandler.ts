@@ -16,12 +16,14 @@ const defaultRefinement = {
   logos: [],
   options: [],
   sort: 1,
+  pageNo: 1,
 };
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
   searchResult: () => BrowseIndexResponse | null;
   onSortChanged: (event: React.ChangeEvent<{ value: unknown }>) => void;
+  onPageChanged: (event: any, page: number) => void;
   filterGroupCollectionCallback: FilterGroupCollectionCallback;
   appliedFiltersCallback: AppliedFiltersCallback;
 }
@@ -41,10 +43,22 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     }
   };
 
+  const setNewRefinementWithPageReset = (newRefinement: Refinement) => {
+    newRefinement.pageNo = 1;
+    setCurrentRefinement(newRefinement);
+    searchApiCaller.prepare();
+  };
+
   const onSortChanged = (event: React.ChangeEvent<{ value: unknown }>) => {
     const id = parseInt(event.target.value as string);
     const newRefinement = { ...currentRefinement };
     newRefinement.sort = id;
+    setNewRefinementWithPageReset(newRefinement);
+  };
+
+  const onPageChanged = (event: object, page: number) => {
+    const newRefinement = { ...currentRefinement };
+    newRefinement.pageNo = page;
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
@@ -65,15 +79,13 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
   const onLargeCategoryChanged = (filter: Filter) => {
     const newRefinement = { ...currentRefinement };
     newRefinement.largeCategory = filter;
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
+    setNewRefinementWithPageReset(newRefinement);
   };
 
   const onMediumCategoryChanged = (filter: Filter) => {
     const newRefinement = { ...currentRefinement };
     newRefinement.mediumCategory = filter;
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
+    setNewRefinementWithPageReset(newRefinement);
   };
 
   const onSmallCategoryChanged = (filter: Filter) => {
@@ -83,48 +95,42 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     );
     const newRefinement = { ...currentRefinement };
     newRefinement.smallCategories = newSmallCategories;
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
+    setNewRefinementWithPageReset(newRefinement);
   };
 
   const onSizeChanged = (filter: Filter) => {
     const newSizes = newFilterArray(filter, currentRefinement.sizes);
     const newRefinement = { ...currentRefinement };
     newRefinement.sizes = newSizes;
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
+    setNewRefinementWithPageReset(newRefinement);
   };
 
   const onColorChanged = (filter: Filter) => {
     const newColors = newFilterArray(filter, currentRefinement.colors);
     const newRefinement = { ...currentRefinement };
     newRefinement.colors = newColors;
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
+    setNewRefinementWithPageReset(newRefinement);
   };
 
   const onPatternChanged = (filter: Filter) => {
     const newPatterns = newFilterArray(filter, currentRefinement.patterns);
     const newRefinement = { ...currentRefinement };
     newRefinement.patterns = newPatterns;
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
+    setNewRefinementWithPageReset(newRefinement);
   };
 
   const onLogoChanged = (filter: Filter) => {
     const newLogos = newFilterArray(filter, currentRefinement.logos);
     const newRefinement = { ...currentRefinement };
     newRefinement.logos = newLogos;
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
+    setNewRefinementWithPageReset(newRefinement);
   };
 
   const onOptionChanged = (filter: Filter) => {
     const newOptions = newFilterArray(filter, currentRefinement.options);
     const newRefinement = { ...currentRefinement };
     newRefinement.options = newOptions;
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
+    setNewRefinementWithPageReset(newRefinement);
   };
 
   const onClear = () => {
@@ -136,6 +142,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     currentRefinement,
     searchResult,
     onSortChanged,
+    onPageChanged,
     filterGroupCollectionCallback: {
       onLargeCategoryChanged,
       onMediumCategoryChanged,

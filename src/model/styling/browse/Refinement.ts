@@ -10,4 +10,5 @@ export default interface Refinement {
   logos: Filter[];
   options: Filter[];
   sort: number;
+  pageNo: number;
 }
