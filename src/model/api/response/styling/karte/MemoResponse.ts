@@ -1,5 +1,5 @@
 export default interface MemoResponse {
-  previousFeedback: string;
-  nextRequest: string;
-  other_note: string;
+  readonly previousFeedback: string;
+  readonly nextRequest: string;
+  readonly other_note: string;
 }

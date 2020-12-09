@@ -3,10 +3,10 @@ import FilterResponse from "./FilterResponse";
 import LargeCategoryChoiceResponse from "./LargeCategoryChoiceResponse";
 
 export default interface FilterChoiceResponse {
-  largeCategory: LargeCategoryChoiceResponse[];
-  size: FilterResponse[];
-  color: FilterMediaResponse[];
-  pattern: FilterMediaResponse[];
-  logo: FilterMediaResponse[];
-  option: FilterResponse[];
+  readonly largeCategory: LargeCategoryChoiceResponse[];
+  readonly size: FilterResponse[];
+  readonly color: FilterMediaResponse[];
+  readonly pattern: FilterMediaResponse[];
+  readonly logo: FilterMediaResponse[];
+  readonly option: FilterResponse[];
 }

@@ -1,7 +1,7 @@
 import MediumCategoryChoiceResponse from "./MediumCategoryChoiceResponse";
 
 export default interface LargeCategoryChoiceResponse {
-  id: number;
-  name: string;
-  mediumCategory: MediumCategoryChoiceResponse[];
+  readonly id: number;
+  readonly name: string;
+  readonly mediumCategory: MediumCategoryChoiceResponse[];
 }

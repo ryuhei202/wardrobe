@@ -1,8 +1,8 @@
 export default interface ItemCardResponse {
-  id: number;
-  colorImagePath: string;
-  seriesName: string;
-  categoryName: string;
-  brandName: string;
-  imagePath: string;
+  readonly id: number;
+  readonly colorImagePath: string;
+  readonly seriesName: string;
+  readonly categoryName: string;
+  readonly brandName: string;
+  readonly imagePath: string;
 }
