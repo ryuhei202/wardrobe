@@ -4,5 +4,5 @@ export default interface ItemCardResponse {
   seriesName: string;
   categoryName: string;
   brandName: string;
-  imageUrl: string;
+  imagePath: string;
 }

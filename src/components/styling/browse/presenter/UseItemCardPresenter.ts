@@ -10,7 +10,7 @@ export const useItemCardPresenter = (
   data: ItemCardResponse
 ): ItemCardPresenter => {
   const itemImageUrl = (): string => {
-    return `${hostUrl()}${data.imageUrl}`;
+    return `${hostUrl()}${data.imagePath}`;
   };
 
   const colorImageUrl = (): string => {
