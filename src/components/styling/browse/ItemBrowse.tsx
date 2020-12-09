@@ -24,25 +24,17 @@ const ItemBrowse = () => {
   } else if (choiceApiCaller.errorResponse !== null) {
     return <Typography>{choiceApiCaller.errorResponse.message}</Typography>;
   } else if (choiceApiCaller.response !== null) {
-    let searchCount;
-    let searchResult = handler.searchResult();
-    if (searchResult) {
-      searchCount = searchResult.totalCount;
-    } else {
-      searchCount = 0;
-    }
-
     return (
       <>
         <Typography variant="h6" noWrap>
           アイテム一覧
         </Typography>
-        <Toolbar>
-          <div className={classes.filterPaper}>
+        <Toolbar className={classes.itemBrowseHeader}>
+          <div className={classes.searchResult}>
             <Typography paragraph={true}>
               検索結果
               <br />
-              {searchCount}件
+              {handler.searchResult()?.totalCount ?? 0}件
             </Typography>
           </div>
           <div className={classes.appliedFilterContainer}>
