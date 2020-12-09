@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import FilterMediaResponse from "../../../model/api/response/styling/browse/FilterMediaResponse";
+import { hostUrl } from "../../../model/HostUrl";
 import Filter from "../../../model/styling/browse/Filter";
 
 interface FilterMediaGroupProps {
@@ -48,7 +49,7 @@ const FilterMediaGroup = (props: FilterMediaGroupProps) => {
                 }
                 label={
                   <img
-                    src={"https://leeap.jp/" + row.imagePath}
+                    src={hostUrl() + row.imagePath}
                     width="40px"
                     height="auto"
                     alt=""

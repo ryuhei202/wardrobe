@@ -1,4 +1,5 @@
 import ItemCardResponse from "../../../../model/api/response/styling/browse/ItemCardResponse";
+import { hostUrl } from "../../../../model/HostUrl";
 
 export interface ItemCardPresenter {
   itemImageUrl: () => string;
@@ -9,11 +10,11 @@ export const useItemCardPresenter = (
   data: ItemCardResponse
 ): ItemCardPresenter => {
   const itemImageUrl = (): string => {
-    return `http://localhost:3000${data.imageUrl}`;
+    return `${hostUrl()}${data.imageUrl}`;
   };
 
   const colorImageUrl = (): string => {
-    return `https://leeap.jp/images/color/${data.mColorId}.jpg`;
+    return `${hostUrl()}${data.colorImagePath}`;
   };
 
   return { itemImageUrl, colorImageUrl };
