@@ -1,11 +1,11 @@
 export default interface BasicResponse {
-  planName: string;
-  shipmentDate: string;
-  tChartId: number;
-  tMemberId: number;
-  memberName: string;
-  memberAge: number;
-  stylistName: string;
-  memberPrefecture: string;
-  rentalNum: number;
+  readonly planName: string;
+  readonly shipmentDate: string;
+  readonly tChartId: number;
+  readonly tMemberId: number;
+  readonly memberName: string;
+  readonly memberAge: number;
+  readonly stylistName: string;
+  readonly memberPrefecture: string;
+  readonly rentalNum: number;
 }

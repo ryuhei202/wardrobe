@@ -20,11 +20,15 @@ export const useAppStyle = makeStyles((theme: Theme) =>
       overflow: "auto",
       backgroundColor: blue[500],
     },
-    ProgressContainer: {
+    progressContainer: {
       height: 100,
       width: "100%",
       marginTop: "auto",
       backgroundColor: red[500],
+    },
+    browseContainer: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
     },
   })
 );

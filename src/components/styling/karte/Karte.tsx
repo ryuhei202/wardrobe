@@ -13,12 +13,8 @@ const Karte = () => {
   if (apiCaller.isRunning()) {
     return <CircularProgress />;
   } else if (apiCaller.errorResponse !== null) {
-    console.log("Error");
-    console.log(apiCaller.errorResponse);
     return <Typography>{apiCaller.errorResponse.message}</Typography>;
   } else if (apiCaller.response !== null) {
-    console.log("Success");
-    console.log(apiCaller.response);
     return (
       <>
         <div className={classes.drawerHeader}>
