@@ -1,7 +1,7 @@
 import FilterResponse from "./FilterResponse";
 
 export default interface MediumCategoryChoiceResponse {
-  id: number;
-  name: string;
-  smallCategory: FilterResponse[];
+  readonly id: number;
+  readonly name: string;
+  readonly smallCategory: FilterResponse[];
 }

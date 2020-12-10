@@ -1,4 +1,4 @@
 export default interface Filter {
-  id: number;
-  name: string;
+  readonly id: number;
+  readonly name: string;
 }

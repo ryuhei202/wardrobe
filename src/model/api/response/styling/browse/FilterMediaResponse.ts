@@ -1,5 +1,5 @@
 export default interface FilterMediaResponse {
-  id: number;
-  name: string;
-  imagePath: string;
+  readonly id: number;
+  readonly name: string;
+  readonly imagePath: string;
 }
