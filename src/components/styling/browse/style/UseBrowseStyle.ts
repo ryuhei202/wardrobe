@@ -6,6 +6,14 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightRegular,
     },
+    itemBrowseHeader: {
+      padding: 0,
+    },
+    searchResult: {
+      margin: 0,
+      padding: theme.spacing(1, 1),
+      width: 200,
+    },
     filterPaper: {
       width: 256,
     },
@@ -27,7 +35,8 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     card: {
       width: 200,
       height: 425,
-      margin: theme.spacing(0, 1),
+      margin: theme.spacing(1, 1),
+      paddingBottom: theme.spacing(1),
     },
     cardActionArea: {
       width: 200,
@@ -43,6 +52,10 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       width: 200,
     },
     rightEndText: {
+      float: "right",
+    },
+    paginationContainer: {
+      marginTop: theme.spacing(1),
       float: "right",
     },
   })

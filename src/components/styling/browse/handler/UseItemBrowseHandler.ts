@@ -16,12 +16,14 @@ const defaultRefinement = {
   logos: [],
   options: [],
   sort: 1,
+  pageNo: 1,
 };
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
   searchResult: () => BrowseIndexResponse | null;
   onSortChanged: (event: React.ChangeEvent<{ value: unknown }>) => void;
+  onPageChanged: (event: any, page: number) => void;
   filterGroupCollectionCallback: FilterGroupCollectionCallback;
   appliedFiltersCallback: AppliedFiltersCallback;
 }
@@ -43,8 +45,13 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
 
   const onSortChanged = (event: React.ChangeEvent<{ value: unknown }>) => {
     const id = parseInt(event.target.value as string);
-    const newRefinement = { ...currentRefinement };
-    newRefinement.sort = id;
+    const newRefinement = { ...currentRefinement, sort: id, pageNo: 1 };
+    setCurrentRefinement(newRefinement);
+    searchApiCaller.prepare();
+  };
+
+  const onPageChanged = (event: object, page: number) => {
+    const newRefinement = { ...currentRefinement, pageNo: page };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
@@ -63,15 +70,21 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
   };
 
   const onLargeCategoryChanged = (filter: Filter) => {
-    const newRefinement = { ...currentRefinement };
-    newRefinement.largeCategory = filter;
+    const newRefinement = {
+      ...currentRefinement,
+      largeCategory: filter,
+      pageNo: 1,
+    };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
 
   const onMediumCategoryChanged = (filter: Filter) => {
-    const newRefinement = { ...currentRefinement };
-    newRefinement.mediumCategory = filter;
+    const newRefinement = {
+      ...currentRefinement,
+      mediumCategory: filter,
+      pageNo: 1,
+    };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
@@ -81,48 +94,58 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
       filter,
       currentRefinement.smallCategories
     );
-    const newRefinement = { ...currentRefinement };
-    newRefinement.smallCategories = newSmallCategories;
+    const newRefinement = {
+      ...currentRefinement,
+      smallCategories: newSmallCategories,
+      pageNo: 1,
+    };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
 
   const onSizeChanged = (filter: Filter) => {
     const newSizes = newFilterArray(filter, currentRefinement.sizes);
-    const newRefinement = { ...currentRefinement };
-    newRefinement.sizes = newSizes;
+    const newRefinement = { ...currentRefinement, sizes: newSizes, pageNo: 1 };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
 
   const onColorChanged = (filter: Filter) => {
     const newColors = newFilterArray(filter, currentRefinement.colors);
-    const newRefinement = { ...currentRefinement };
-    newRefinement.colors = newColors;
+    const newRefinement = {
+      ...currentRefinement,
+      colors: newColors,
+      pageNo: 1,
+    };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
 
   const onPatternChanged = (filter: Filter) => {
     const newPatterns = newFilterArray(filter, currentRefinement.patterns);
-    const newRefinement = { ...currentRefinement };
-    newRefinement.patterns = newPatterns;
+    const newRefinement = {
+      ...currentRefinement,
+      patterns: newPatterns,
+      pageNo: 1,
+    };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
 
   const onLogoChanged = (filter: Filter) => {
     const newLogos = newFilterArray(filter, currentRefinement.logos);
-    const newRefinement = { ...currentRefinement };
-    newRefinement.logos = newLogos;
+    const newRefinement = { ...currentRefinement, logos: newLogos, pageNo: 1 };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
 
   const onOptionChanged = (filter: Filter) => {
     const newOptions = newFilterArray(filter, currentRefinement.options);
-    const newRefinement = { ...currentRefinement };
-    newRefinement.options = newOptions;
+    const newRefinement = {
+      ...currentRefinement,
+      options: newOptions,
+      pageNo: 1,
+    };
     setCurrentRefinement(newRefinement);
     searchApiCaller.prepare();
   };
@@ -136,6 +159,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     currentRefinement,
     searchResult,
     onSortChanged,
+    onPageChanged,
     filterGroupCollectionCallback: {
       onLargeCategoryChanged,
       onMediumCategoryChanged,
