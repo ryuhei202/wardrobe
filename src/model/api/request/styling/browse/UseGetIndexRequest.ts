@@ -28,7 +28,7 @@ export const useGetIndexRequest = (
     return {
       chartId: karteId,
       sort: refinement.sort,
-      page_no: 1,
+      page_no: refinement.pageNo,
       filter: filterParams,
     };
   };

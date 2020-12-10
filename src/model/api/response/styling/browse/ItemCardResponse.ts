@@ -1,11 +1,8 @@
-import FilterChoiceResponse from "./FilterChoiceResponse";
-import FilterResponse from "./FilterResponse";
-
 export default interface ItemCardResponse {
-  id: number;
-  mColorId: number;
-  seriesName: string;
-  categoryName: string;
-  brandName: string;
-  imageUrl: string;
+  readonly id: number;
+  readonly colorImagePath: string;
+  readonly seriesName: string;
+  readonly categoryName: string;
+  readonly brandName: string;
+  readonly imagePath: string;
 }
