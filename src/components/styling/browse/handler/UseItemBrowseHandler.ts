@@ -6,19 +6,6 @@ import Refinement from "../../../../model/styling/browse/Refinement";
 import AppliedFiltersCallback from "../callback/AppliedFiltersCallback";
 import FilterGroupCollectionCallback from "../callback/FilterGroupCollectionCallback";
 
-const defaultRefinement = {
-  largeCategory: null,
-  mediumCategory: null,
-  smallCategories: [],
-  sizes: [],
-  colors: [],
-  patterns: [],
-  logos: [],
-  options: [],
-  sort: 1,
-  pageNo: 1,
-};
-
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
   searchResult: () => BrowseIndexResponse | null;
@@ -29,6 +16,19 @@ export interface ItemBrowseHandler {
 }
 
 export const useItemBrowseHandler = (): ItemBrowseHandler => {
+  const defaultRefinement = {
+    largeCategory: null,
+    mediumCategory: null,
+    smallCategories: [],
+    sizes: [],
+    colors: [],
+    patterns: [],
+    logos: [],
+    options: [],
+    sort: 1,
+    pageNo: 1,
+  };
+
   const [currentRefinement, setCurrentRefinement] = useState<Refinement>(
     defaultRefinement
   );
