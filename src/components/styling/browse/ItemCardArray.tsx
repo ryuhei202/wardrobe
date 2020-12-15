@@ -12,7 +12,7 @@ const ItemCardArray = (props: ItemCardArrayProps) => {
   return (
     <>
       <div className={classes.cardCollection}>
-        {props.data?.map((itemCard) => (
+        {props.data.map((itemCard) => (
           <ItemCard data={itemCard} />
         ))}
       </div>
