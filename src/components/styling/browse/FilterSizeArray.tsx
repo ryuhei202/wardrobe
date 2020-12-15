@@ -10,29 +10,15 @@ interface FilterSizeArrayProps {
 
 const FilterSizeArray = (props: FilterSizeArrayProps) => {
   return (
-    <ButtonGroup
-      color="secondary"
-      disableElevation
-      aria-label="outlined button group"
-    >
-      {props.data.map((row, index) => {
-        if (row.isSelected) {
-          return (
-            <Button
-              variant="contained"
-              onClick={() => props.callback.onClick(index)}
-            >
-              {row.name}
-            </Button>
-          );
-        } else {
-          return (
-            <Button onClick={() => props.callback.onClick(index)}>
-              {row.name}
-            </Button>
-          );
-        }
-      })}
+    <ButtonGroup color="secondary" disableElevation aria-label="button group">
+      {props.data.map((row, index) => (
+        <Button
+          variant={row.isSelected ? "contained" : "outlined"}
+          onClick={() => props.callback.onClick(index)}
+        >
+          {row.name}
+        </Button>
+      ))}
     </ButtonGroup>
   );
 };
