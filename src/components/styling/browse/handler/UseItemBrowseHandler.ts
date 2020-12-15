@@ -14,8 +14,10 @@ import { usePatternRefinementHandler } from "./UsePatternRefinementHandler";
 import { useLogoRefinementHandler } from "./UseLogoRefinementHandler";
 import { useOptionRefinementHandler } from "./UseOptionRefinementHandler";
 import ItemCardData from "../../../../model/styling/browse/data/ItemCardData";
+import BrowseIndexResponse from "../../../../model/api/response/styling/browse/BrowseIndexResponse";
 
 export interface ItemBrowseHandler {
+  searchResult: () => BrowseIndexResponse | null;
   onSortChanged: (
     choice: FilterResponse[]
   ) => (event: React.ChangeEvent<{ value: unknown }>) => void;
@@ -30,9 +32,6 @@ export interface ItemBrowseHandler {
   appliedFilterArrayData: (choice: FilterChoiceResponse) => AppliedFilterData[];
   itemCardData: () => ItemCardData[];
   sortSelection: (choice: FilterResponse[]) => string[];
-  totalItemCount: () => number;
-  currentPage: () => number;
-  totalPageNum: () => number;
 }
 
 export const useItemBrowseHandler = (): ItemBrowseHandler => {
@@ -54,10 +53,6 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
   );
 
   const searchApiCaller = useGetIndexCaller(currentRefinement);
-
-  /**
-   * @private
-   */
 
   const updateRefinement = (newRefinement: Refinement) => {
     setCurrentRefinement(newRefinement);
@@ -192,6 +187,9 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     return result;
   };
 
+  const searchResult = (): BrowseIndexResponse | null =>
+    searchApiCaller.response;
+
   const onSortChanged = (choice: FilterResponse[]) => (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -299,15 +297,8 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     return choice.map((sort) => sort.name);
   };
 
-  const totalItemCount = (): number =>
-    searchApiCaller.response?.totalCount ?? 0;
-
-  const totalPageNum = (): number =>
-    searchApiCaller.response?.totalPageNum ?? 0;
-
-  const currentPage = (): number => currentRefinement.pageNo;
-
   return {
+    searchResult,
     onSortChanged,
     onPageChanged,
     filterGroupCollectionCallback,
@@ -316,8 +307,5 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     appliedFilterArrayData,
     itemCardData,
     sortSelection,
-    totalItemCount,
-    totalPageNum,
-    currentPage,
   };
 };

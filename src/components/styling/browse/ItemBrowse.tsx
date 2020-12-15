@@ -13,12 +13,14 @@ import { useBrowseStyle } from "./style/UseBrowseStyle";
 import Pagination from "@material-ui/lab/Pagination";
 import FilterGroupCollection from "./FilterGroupCollection";
 import AppliedFilterArray from "./AppliedFilterArray";
+import { useItemBrowsePresenter } from "./presenter/UseItemBrowsePresenter";
 
 const ItemBrowse = () => {
   const classes = useBrowseStyle();
 
   const choiceApiCaller = useGetRefinementChoiceCaller();
   const handler = useItemBrowseHandler();
+  const presenter = useItemBrowsePresenter(handler.searchResult());
 
   if (choiceApiCaller.isRunning()) {
     return <CircularProgress />;
@@ -35,7 +37,7 @@ const ItemBrowse = () => {
             <Typography paragraph={true}>
               検索結果
               <br />
-              {handler.totalItemCount()}件
+              {presenter.totalItemCount}件
             </Typography>
           </div>
           <div className={classes.appliedFilterContainer}>
@@ -77,8 +79,8 @@ const ItemBrowse = () => {
         </div>
         <div className={classes.paginationContainer}>
           <Pagination
-            page={handler.currentPage()}
-            count={handler.totalPageNum()}
+            page={presenter.currentPage}
+            count={presenter.totalPageNum}
             color="secondary"
             onChange={handler.onPageChanged}
           />
