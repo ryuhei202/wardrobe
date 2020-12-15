@@ -7,37 +7,33 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import React from "react";
-import FilterResponse from "../../../model/api/response/styling/browse/FilterResponse";
-import Filter from "../../../model/styling/browse/Filter";
+import FilterCheckboxData from "../../../model/styling/browse/data/FilterCheckboxData";
+import FilterCheckboxArrayCallback from "./callback/FilterCheckboxArrayCallback";
 
-interface FilterCheckboxGroupProps {
+interface FilterCheckboxArrayProps {
   labelIdPrefix: string;
-  data: FilterResponse[];
-  selected: Filter[];
-  callback: (filter: Filter) => () => void;
+  data: FilterCheckboxData[];
+  callback: FilterCheckboxArrayCallback;
 }
 
-const FilterCheckboxGroup = (props: FilterCheckboxGroupProps) => {
+const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
   return (
     <List>
-      {props.data.map((row) => {
-        const labelId = props.labelIdPrefix + row.id;
+      {props.data.map((row, index) => {
+        const labelId = props.labelIdPrefix + index;
         return (
           <ListItem
-            key={row.id}
+            key={index}
             role={undefined}
             dense
             button
-            onClick={props.callback({ id: row.id, name: row.name })}
+            onClick={() => props.callback.onClick(index)}
           >
             <ListItemIcon>
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={
-                      props.selected.findIndex((item) => item.id === row.id) !==
-                      -1
-                    }
+                    checked={row.isSelected}
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ "aria-labelledby": labelId }}
@@ -54,4 +50,4 @@ const FilterCheckboxGroup = (props: FilterCheckboxGroupProps) => {
   );
 };
 
-export default FilterCheckboxGroup;
+export default FilterCheckboxArray;

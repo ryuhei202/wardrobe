@@ -7,26 +7,21 @@ import {
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React from "react";
-import FilterChoiceResponse from "../../../model/api/response/styling/browse/FilterChoiceResponse";
-import Refinement from "../../../model/styling/browse/Refinement";
 import FilterGroupCollectionCallback from "./callback/FilterGroupCollectionCallback";
 import FilterCategoryGroup from "./FilterCategoryGroup";
-import FilterMediaGroup from "./FilterMediaGroup";
-import FilterCheckboxGroup from "./FilterCheckboxGroup";
-import FilterSizeGroup from "./FilterSizeGroup";
-import { useFilterGroupCollectionHandler } from "./handler/UseFilterGroupCollectionHandler";
+import FilterMediaArray from "./FilterMediaArray";
+import FilterCheckboxArray from "./FilterCheckboxArray";
+import FilterSizeArray from "./FilterSizeArray";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
+import FilterGroupCollectionData from "../../../model/styling/browse/data/FilterGroupCollectionData";
 
 interface FilterGroupCollectionProps {
-  data: FilterChoiceResponse;
+  data: FilterGroupCollectionData;
   callback: FilterGroupCollectionCallback;
-  refinement: Refinement;
 }
 
 const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
   const classes = useBrowseStyle();
-
-  const handler = useFilterGroupCollectionHandler(props.callback);
 
   return (
     <div className={classes.filterPaper}>
@@ -41,9 +36,8 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
         <AccordionDetails>
           <List component="nav">
             <FilterCategoryGroup
-              data={props.data.largeCategory}
-              selected={props.refinement}
-              callback={handler.filterCategoryGroupCallback}
+              data={props.data.categoryData}
+              callback={props.callback.categoryCallback}
             />
           </List>
         </AccordionDetails>
@@ -57,10 +51,9 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           <Typography className={classes.heading}>サイズ</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FilterSizeGroup
-            data={props.data.size}
-            selected={props.refinement.sizes}
-            callback={handler.onSizeChanged}
+          <FilterSizeArray
+            data={props.data.sizeData}
+            callback={props.callback.sizeCallback}
           />
         </AccordionDetails>
       </Accordion>
@@ -73,11 +66,10 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           <Typography className={classes.heading}>カラー</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FilterMediaGroup
+          <FilterMediaArray
             labelIdPrefix="color-checkbox-list-label-"
-            data={props.data.color}
-            selected={props.refinement.colors}
-            callback={handler.onColorChanged}
+            data={props.data.colorData}
+            callback={props.callback.colorCallback}
           />
         </AccordionDetails>
       </Accordion>
@@ -90,11 +82,10 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           <Typography className={classes.heading}>柄</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FilterMediaGroup
+          <FilterMediaArray
             labelIdPrefix="pattern-checkbox-list-label-"
-            data={props.data.pattern}
-            selected={props.refinement.patterns}
-            callback={handler.onPatternChanged}
+            data={props.data.patternData}
+            callback={props.callback.patternCallback}
           />
         </AccordionDetails>
       </Accordion>
@@ -107,11 +98,10 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           <Typography className={classes.heading}>ロゴ</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FilterMediaGroup
+          <FilterMediaArray
             labelIdPrefix="logo-checkbox-list-label-"
-            data={props.data.logo}
-            selected={props.refinement.logos}
-            callback={handler.onLogoChanged}
+            data={props.data.logoData}
+            callback={props.callback.logoCallback}
           />
         </AccordionDetails>
       </Accordion>
@@ -124,11 +114,10 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           <Typography className={classes.heading}>その他</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FilterCheckboxGroup
+          <FilterCheckboxArray
             labelIdPrefix="option-checkbox-list-label-"
-            data={props.data.option}
-            selected={props.refinement.options}
-            callback={handler.onOptionChanged}
+            data={props.data.optionData}
+            callback={props.callback.optionCallback}
           />
         </AccordionDetails>
       </Accordion>

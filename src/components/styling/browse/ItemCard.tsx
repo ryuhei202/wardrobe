@@ -6,12 +6,12 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import ItemCardResponse from "../../../model/api/response/styling/browse/ItemCardResponse";
+import ItemCardData from "../../../model/styling/browse/data/ItemCardData";
 import { useItemCardPresenter } from "./presenter/UseItemCardPresenter";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
 interface ItemCardProps {
-  data: ItemCardResponse;
+  data: ItemCardData;
 }
 
 const ItemCard = (props: ItemCardProps) => {

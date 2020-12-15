@@ -7,12 +7,12 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { useGetRefinementChoiceCaller } from "../../../model/styling/browse/api_caller/UseGetRefinementChoiceCaller";
-import AppliedFilters from "./AppliedFilters";
-import FilterGroupCollection from "./FilterGroupCollection";
 import { useItemBrowseHandler } from "./handler/UseItemBrowseHandler";
-import ItemCardCollection from "./ItemCardCollection";
+import ItemCardCollection from "./ItemCardArray";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 import Pagination from "@material-ui/lab/Pagination";
+import FilterGroupCollection from "./FilterGroupCollection";
+import AppliedFilterArray from "./AppliedFilterArray";
 
 const ItemBrowse = () => {
   const classes = useBrowseStyle();
@@ -35,39 +35,50 @@ const ItemBrowse = () => {
             <Typography paragraph={true}>
               検索結果
               <br />
-              {handler.searchResult()?.totalCount ?? 0}件
+              {handler.totalItemCount()}件
             </Typography>
           </div>
           <div className={classes.appliedFilterContainer}>
             <Typography>適用済みフィルター</Typography>
-            <AppliedFilters
-              data={handler.currentRefinement}
-              callback={handler.appliedFiltersCallback}
+            <AppliedFilterArray
+              data={handler.appliedFilterArrayData(
+                choiceApiCaller.response.filter
+              )}
+              callback={handler.appliedFiltersCallback()}
             />
           </div>
           <div>
             <Typography>並べ替え</Typography>
             <FormControl className={classes.sortSelection}>
-              <Select native defaultValue={1} onChange={handler.onSortChanged}>
-                {choiceApiCaller.response.sort.map((row) => (
-                  <option value={row.id}>{row.name}</option>
-                ))}
+              <Select
+                native
+                defaultValue={1}
+                onChange={handler.onSortChanged(choiceApiCaller.response.sort)}
+              >
+                {handler
+                  .sortSelection(choiceApiCaller.response.sort)
+                  .map((row, index) => (
+                    <option value={index}>{row}</option>
+                  ))}
               </Select>
             </FormControl>
           </div>
         </Toolbar>
         <div className={classes.searchField}>
           <FilterGroupCollection
-            data={choiceApiCaller.response.filter}
-            callback={handler.filterGroupCollectionCallback}
-            refinement={handler.currentRefinement}
+            data={handler.filterGroupCollectionData(
+              choiceApiCaller.response.filter
+            )}
+            callback={handler.filterGroupCollectionCallback(
+              choiceApiCaller.response.filter
+            )}
           />
-          <ItemCardCollection data={handler.searchResult()?.itemCard ?? null} />
+          <ItemCardCollection data={handler.itemCardData()} />
         </div>
         <div className={classes.paginationContainer}>
           <Pagination
-            page={handler.currentRefinement.pageNo}
-            count={handler.searchResult()?.totalPageNum ?? 0}
+            page={handler.currentPage()}
+            count={handler.totalPageNum()}
             color="secondary"
             onChange={handler.onPageChanged}
           />

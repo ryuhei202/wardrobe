@@ -7,41 +7,34 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import React from "react";
-import FilterMediaResponse from "../../../model/api/response/styling/browse/FilterMediaResponse";
 import { hostUrl } from "../../../model/HostUrl";
-import Filter from "../../../model/styling/browse/Filter";
+import FilterMediaData from "../../../model/styling/browse/data/FilterMediaData";
+import FilterMediaArrayCallback from "./callback/FilterMediaArrayCallback";
 
-interface FilterMediaGroupProps {
+interface FilterMediaArrayProps {
   labelIdPrefix: string;
-  data: FilterMediaResponse[];
-  selected: Filter[];
-  callback: (filter: Filter) => () => void;
+  data: FilterMediaData[];
+  callback: FilterMediaArrayCallback;
 }
 
-const FilterMediaGroup = (props: FilterMediaGroupProps) => {
+const FilterMediaArray = (props: FilterMediaArrayProps) => {
   return (
     <List>
-      {props.data.map((row) => {
-        const labelId = props.labelIdPrefix + row.id;
+      {props.data.map((row, index) => {
+        const labelId = props.labelIdPrefix + index;
         return (
           <ListItem
-            key={row.id}
+            key={index}
             role={undefined}
             dense
             button
-            onClick={props.callback({
-              id: row.id,
-              name: row.name,
-            })}
+            onClick={() => props.callback.onClick(index)}
           >
             <ListItemIcon>
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={
-                      props.selected.findIndex((item) => item.id === row.id) !==
-                      -1
-                    }
+                    checked={row.isSelected}
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ "aria-labelledby": labelId }}
@@ -65,4 +58,4 @@ const FilterMediaGroup = (props: FilterMediaGroupProps) => {
   );
 };
 
-export default FilterMediaGroup;
+export default FilterMediaArray;
