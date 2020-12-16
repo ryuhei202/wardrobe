@@ -31,7 +31,7 @@ const DetailItemTable = (props: DetailItemTableProps) => {
         <TableBody>
           {props.data.rows.map((row) => {
             <TableRow
-              selected={row.selected}
+              selected={row.isSelected}
               onClick={() => props.callback.onSelect(row.itemId)}
             >
               <TableCell>{row.itemId}</TableCell>
