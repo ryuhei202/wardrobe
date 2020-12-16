@@ -13,21 +13,21 @@ export const useGetIndexRequest = (
 
   const params = (): GetIndexParams => {
     var filterParams: GetIndexFilterParams = {
-      smallCategory: refinement.smallCategories.map((filter) => filter.id),
-      size: refinement.sizes.map((filter) => filter.id),
-      color: refinement.colors.map((filter) => filter.id),
-      pattern: refinement.patterns.map((filter) => filter.id),
-      logo: refinement.logos.map((filter) => filter.id),
-      option: refinement.options.map((filter) => filter.id),
+      smallCategory: refinement.smallCategoryIds,
+      size: refinement.sizeIds,
+      color: refinement.colorIds,
+      pattern: refinement.patternIds,
+      logo: refinement.logoIds,
+      option: refinement.optionIds,
     };
-    if (refinement.mediumCategory)
-      filterParams.mediumCategory = refinement.mediumCategory.id;
-    if (refinement.largeCategory)
-      filterParams.largeCategory = refinement.largeCategory.id;
+    if (refinement.mediumCategoryId)
+      filterParams.mediumCategory = refinement.mediumCategoryId;
+    if (refinement.largeCategoryId)
+      filterParams.largeCategory = refinement.largeCategoryId;
 
     return {
       chartId: karteId,
-      sort: refinement.sort,
+      sort: refinement.sortId,
       page_no: refinement.pageNo,
       filter: filterParams,
     };

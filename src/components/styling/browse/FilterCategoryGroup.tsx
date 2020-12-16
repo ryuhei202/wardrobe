@@ -1,69 +1,32 @@
-import { List, ListItem, ListItemText } from "@material-ui/core";
 import React from "react";
-import FilterResponse from "../../../model/api/response/styling/browse/FilterResponse";
-import LargeCategoryChoiceResponse from "../../../model/api/response/styling/browse/LargeCategoryChoiceResponse";
-import Refinement from "../../../model/styling/browse/Refinement";
+import FilterCategoryGroupData from "../../../model/styling/browse/data/FilterCategoryGroupData";
 import FilterCategoryGroupCallback from "./callback/FilterCategoryGroupCallback";
-import FilterCheckboxGroup from "./FilterCheckboxGroup";
+import FilterCheckboxArray from "./FilterCheckboxArray";
+import FilterListButtonArray from "./FilterListButtonArray";
+import { useFilterCategoryGroupHandler } from "./handler/UseFilterCategoryGroupHandler";
 
 interface FilterCategoryGroupProps {
-  data: LargeCategoryChoiceResponse[];
-  selected: Refinement;
+  data: FilterCategoryGroupData;
   callback: FilterCategoryGroupCallback;
 }
 
 const FilterCategoryGroup = (props: FilterCategoryGroupProps) => {
-  if (props.selected.mediumCategory !== null) {
-    const selectedMediumCategory = props.data
-      .flatMap((largeCategory) => largeCategory.mediumCategory)
-      .find(
-        (mediumCategory) =>
-          mediumCategory.id === props.selected.mediumCategory?.id
-      );
-    const smallCategory: FilterResponse[] =
-      selectedMediumCategory?.smallCategory ?? [];
+  const handler = useFilterCategoryGroupHandler(props.callback);
+
+  if (props.data.broaderCategoryData === null) {
     return (
-      <FilterCheckboxGroup
+      <FilterCheckboxArray
         labelIdPrefix="small-category-checkbox-list-label-"
-        data={smallCategory}
-        selected={props.selected.smallCategories}
-        callback={props.callback.onSmallCategoryChanged}
+        data={props.data.smallCategoryData}
+        callback={handler.smallCategoryCallback}
       />
-    );
-  } else if (props.selected.largeCategory !== null) {
-    const selectedLargeCategory = props.data.find(
-      (largeCategory) => largeCategory.id === props.selected.largeCategory?.id
-    );
-    return (
-      <List>
-        {selectedLargeCategory?.mediumCategory.map((row) => (
-          <ListItem
-            button
-            onClick={props.callback.onMediumCategoryChanged({
-              id: row.id,
-              name: row.name,
-            })}
-          >
-            <ListItemText>{row.name}</ListItemText>
-          </ListItem>
-        ))}
-      </List>
     );
   } else {
     return (
-      <List>
-        {props.data.map((row) => (
-          <ListItem
-            button
-            onClick={props.callback.onLargeCategoryChanged({
-              id: row.id,
-              name: row.name,
-            })}
-          >
-            <ListItemText>{row.name}</ListItemText>
-          </ListItem>
-        ))}
-      </List>
+      <FilterListButtonArray
+        data={props.data.broaderCategoryData}
+        callback={handler.biggerCategoryCallback}
+      />
     );
   }
 };

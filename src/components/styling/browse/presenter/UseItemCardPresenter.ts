@@ -1,14 +1,12 @@
-import ItemCardResponse from "../../../../model/api/response/styling/browse/ItemCardResponse";
 import { hostUrl } from "../../../../model/HostUrl";
+import ItemCardData from "../../../../model/styling/browse/data/ItemCardData";
 
 export interface ItemCardPresenter {
   itemImageUrl: () => string;
   colorImageUrl: () => string;
 }
 
-export const useItemCardPresenter = (
-  data: ItemCardResponse
-): ItemCardPresenter => {
+export const useItemCardPresenter = (data: ItemCardData): ItemCardPresenter => {
   const itemImageUrl = (): string => {
     return `${hostUrl()}${data.imagePath}`;
   };

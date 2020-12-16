@@ -1,14 +1,12 @@
-import Filter from "./Filter";
-
 export default interface Refinement {
-  readonly largeCategory: Filter | null;
-  readonly mediumCategory: Filter | null;
-  readonly smallCategories: Filter[];
-  readonly sizes: Filter[];
-  readonly colors: Filter[];
-  readonly patterns: Filter[];
-  readonly logos: Filter[];
-  readonly options: Filter[];
-  readonly sort: number;
+  readonly largeCategoryId: number | null;
+  readonly mediumCategoryId: number | null;
+  readonly smallCategoryIds: number[];
+  readonly sizeIds: number[];
+  readonly colorIds: number[];
+  readonly patternIds: number[];
+  readonly logoIds: number[];
+  readonly optionIds: number[];
+  readonly sortId: number;
   readonly pageNo: number;
 }
