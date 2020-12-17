@@ -27,10 +27,6 @@ export const useBrowseDetailHandler = (
   );
   const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
 
-  useEffect(() => {
-    setSelectedItem(null);
-  }, [selectedSizeIndex]);
-
   const onClickSelectItemButton = () => {
     if (selectedItem) callback.onSelectItem(selectedItem);
   };
@@ -39,6 +35,7 @@ export const useBrowseDetailHandler = (
     return {
       onSelect: (index: number) => {
         setSelectedSizeIndex(index);
+        setSelectedItem(null);
       },
     };
   };

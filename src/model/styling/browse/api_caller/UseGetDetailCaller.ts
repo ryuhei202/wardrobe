@@ -23,11 +23,11 @@ export const useGetDetailCaller = (
   const client = useGetClient<DetailResponse>(request);
 
   useEffect(() => {
-    setCallStatus(CallStatus.Running);
+    setCallStatus(CallStatus.Preparing);
   }, [preregisteredItemId]);
 
   useEffect(() => {
-    if (callStatus === CallStatus.Prepareing) {
+    if (callStatus === CallStatus.Preparing) {
       const fetch = () => {
         client
           .get()

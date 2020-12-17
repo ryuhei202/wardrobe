@@ -79,5 +79,9 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     colorImage: {
       margin: theme.spacing(1, 1),
     },
+    itemTableContainer: {
+      height: 200,
+      width: "100%",
+    },
   })
 );

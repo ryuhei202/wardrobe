@@ -158,16 +158,20 @@ export const useCategoryRefinementHandler = (
     smallCategoryIds: number[]
   ): FilterCategoryGroupCallback => {
     return {
-      onBroaderCategoryClick: (index: number) =>
-        onBroaderCategoryChanged(index, choice, largeCategoryId),
-      onSmallCategoryClick: (index: number) =>
-        onSmallCategoryChanged(
-          index,
-          choice,
-          largeCategoryId,
-          mediumCategoryId,
-          smallCategoryIds
-        ),
+      broaderCategoryCallback: {
+        onClick: (index: number) =>
+          onBroaderCategoryChanged(index, choice, largeCategoryId),
+      },
+      smallerCategoryCallback: {
+        onClick: (index: number) =>
+          onSmallCategoryChanged(
+            index,
+            choice,
+            largeCategoryId,
+            mediumCategoryId,
+            smallCategoryIds
+          ),
+      },
     };
   };
 

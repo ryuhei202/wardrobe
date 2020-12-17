@@ -69,7 +69,7 @@ const BrowseDetail = (props: BrowseDetailProps) => {
           <Typography variant="body1">
             アイテム：{handler.selectedItemId}
           </Typography>
-          <div style={{ height: 200, width: "100%" }}>
+          <div className={classes.itemTableContainer}>
             <DetailItemTable
               data={handler.detailItemTableData()}
               callback={handler.detailItemTableCallback()}
