@@ -1,5 +1,5 @@
 import React from "react";
-import FilterCategoryGroupData from "../../../model/styling/browse/data/FilterCategoryGroupData";
+import FilterCategoryGroupData from "../../../model/styling/browse/props_data/FilterCategoryGroupData";
 import FilterCategoryGroupCallback from "./callback/FilterCategoryGroupCallback";
 import FilterCheckboxArray from "./FilterCheckboxArray";
 import FilterListButtonArray from "./FilterListButtonArray";

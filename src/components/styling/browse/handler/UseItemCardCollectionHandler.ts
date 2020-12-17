@@ -1,5 +1,5 @@
 import ItemCardResponse from "../../../../model/api/response/styling/browse/ItemCardResponse";
-import ItemCardData from "../../../../model/styling/browse/data/ItemCardData";
+import ItemCardData from "../../../../model/styling/browse/props_data/ItemCardData";
 import ItemCardCallback from "../callback/ItemCardCallback";
 import ItemCardCollectionCallback from "../callback/ItemCardCollectionCallback";
 

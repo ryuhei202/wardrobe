@@ -1,6 +1,6 @@
 import FilterMediaResponse from "../../../../model/api/response/styling/browse/FilterMediaResponse";
-import AppliedFilterData from "../../../../model/styling/browse/data/AppliedFilterData";
-import FilterMediaData from "../../../../model/styling/browse/data/FilterMediaData";
+import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import FilterMediaData from "../../../../model/styling/browse/props_data/FilterMediaData";
 import FilterMediaArrayCallback from "../callback/FilterMediaArrayCallback";
 
 export interface PatternRefinementHandler {

@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 import React from "react";
-import DetailItemTableData from "../../../model/styling/browse/data/DetailItemTableData";
+import DetailItemTableData from "../../../model/styling/browse/props_data/DetailItemTableData";
 import DetailItemTableCallback from "./callback/DetailItemTableCallback";
 
 interface DetailItemTableProps {

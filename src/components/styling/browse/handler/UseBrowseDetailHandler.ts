@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import DetailItemTableCallback from "../callback/DetailItemTableCallback";
 import DetailSizeButtonArrayCallback from "../callback/DetailSizeButtonArrayCallback";
-import DetailSizeButtonData from "../../../../model/styling/browse/data/DetailSizeButtonData";
-import DetailItemTableData from "../../../../model/styling/browse/data/DetailItemTableData";
+import DetailSizeButtonData from "../../../../model/styling/browse/props_data/DetailSizeButtonData";
+import DetailItemTableData from "../../../../model/styling/browse/props_data/DetailItemTableData";
 import DetailResponse from "../../../../model/api/response/styling/browse/DetailResponse";
 import BrowseDetailCallback from "../callback/BrowseDetailCallback";
 import SelectedItem from "../../../../model/styling/browse/SelectedItem";

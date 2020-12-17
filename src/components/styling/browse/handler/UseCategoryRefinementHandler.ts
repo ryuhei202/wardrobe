@@ -1,8 +1,8 @@
 import LargeCategoryChoiceResponse from "../../../../model/api/response/styling/browse/LargeCategoryChoiceResponse";
-import AppliedFilterData from "../../../../model/styling/browse/data/AppliedFilterData";
-import FilterCategoryGroupData from "../../../../model/styling/browse/data/FilterCategoryGroupData";
-import FilterCheckboxData from "../../../../model/styling/browse/data/FilterCheckboxData";
-import FilterListButtonData from "../../../../model/styling/browse/data/FilterListButtonData";
+import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import FilterCategoryGroupData from "../../../../model/styling/browse/props_data/FilterCategoryGroupData";
+import FilterCheckboxData from "../../../../model/styling/browse/props_data/FilterCheckboxData";
+import FilterListButtonData from "../../../../model/styling/browse/props_data/FilterListButtonData";
 import FilterCategoryGroupCallback from "../callback/FilterCategoryGroupCallback";
 
 export interface CategoryRefinementHandler {
