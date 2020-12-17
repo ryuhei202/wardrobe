@@ -3,6 +3,8 @@ import { hostUrl } from "../../../../model/HostUrl";
 
 export interface BrowseDetailPresenter {
   itemImageUrl: () => string;
+  seriesName: () => string;
+  brandName: () => string;
   colorName: () => string;
   colorImageUrl: () => string;
 }
@@ -14,6 +16,14 @@ export const useBrowseDetailPresenter = (
     return `${hostUrl()}${response.itemImagePath}`;
   };
 
+  const seriesName = (): string => {
+    return response.seriesName ?? "";
+  };
+
+  const brandName = (): string => {
+    return response.brandName;
+  };
+
   const colorName = (): string => {
     return response.color.name;
   };
@@ -22,5 +32,5 @@ export const useBrowseDetailPresenter = (
     return `${hostUrl()}${response.color.imagePath}`;
   };
 
-  return { itemImageUrl, colorName, colorImageUrl };
+  return { itemImageUrl, seriesName, brandName, colorName, colorImageUrl };
 };

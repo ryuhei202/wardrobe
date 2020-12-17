@@ -38,10 +38,10 @@ const BrowseDetail = (props: BrowseDetailProps) => {
             variant="h5"
             color="textSecondary"
           >
-            KZ-CS04
+            {presenter.seriesName()}
           </Typography>
           <Typography className={classes.itemInfoText} variant="h3">
-            leeap
+            {presenter.brandName()}
           </Typography>
           <Typography variant="body1">
             カラー：{presenter.colorName()}

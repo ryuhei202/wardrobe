@@ -3,7 +3,7 @@ import DetailSizeResponse from "./DetailSizeResponse";
 
 export default interface DetailResponse {
   readonly itemImagePath: string;
-  readonly seriesName: string;
+  readonly seriesName: string | null;
   readonly brandName: string;
   readonly color: DetailColorResponse;
   readonly sizes: DetailSizeResponse[];
