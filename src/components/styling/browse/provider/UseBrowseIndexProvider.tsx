@@ -5,10 +5,13 @@ import { useGetIndexCaller } from "../../../../model/styling/browse/api_caller/U
 import ItemCardCollection from "../ItemCardCollection";
 import { Pagination } from "@material-ui/lab";
 import BrowseIndexPaginationCallback from "../callback/BrowseIndexPaginationCallback";
+import ItemCardCollectionCallback from "../callback/ItemCardCollectionCallback";
 
 export interface BrowseIndexProvider {
   totalItemCountComponent: () => JSX.Element;
-  itemCardCollectionComponent: () => JSX.Element;
+  itemCardCollectionComponent: (
+    callback: ItemCardCollectionCallback
+  ) => JSX.Element;
   paginationComponent: (callback: BrowseIndexPaginationCallback) => JSX.Element;
 }
 
@@ -28,13 +31,20 @@ export const useBrowseIndexProvider = (
     );
   };
 
-  const itemCardCollectionComponent = (): JSX.Element => {
+  const itemCardCollectionComponent = (
+    callback: ItemCardCollectionCallback
+  ): JSX.Element => {
     if (searchApiCaller.isRunning()) {
       return <CircularProgress />;
     } else if (searchApiCaller.errorResponse) {
       return <Typography>{searchApiCaller.errorResponse.message}</Typography>;
     } else if (searchApiCaller.response) {
-      return <ItemCardCollection response={searchApiCaller.response} />;
+      return (
+        <ItemCardCollection
+          response={searchApiCaller.response.itemCard}
+          callback={callback}
+        />
+      );
     } else {
       return <></>;
     }
