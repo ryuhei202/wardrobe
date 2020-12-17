@@ -1,22 +1,27 @@
 import React from "react";
-import BrowseIndexResponse from "../../../model/api/response/styling/browse/BrowseIndexResponse";
+import ItemCardResponse from "../../../model/api/response/styling/browse/ItemCardResponse";
+import ItemCardCollectionCallback from "./callback/ItemCardCollectionCallback";
 import { useItemCardCollectionHandler } from "./handler/UseItemCardCollectionHandler";
 import ItemCard from "./ItemCard";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
 interface ItemCardCollectionProps {
-  response: BrowseIndexResponse;
+  response: ItemCardResponse[];
+  callback: ItemCardCollectionCallback;
 }
 
 const ItemCardCollection = (props: ItemCardCollectionProps) => {
   const classes = useBrowseStyle();
-  const handler = useItemCardCollectionHandler(props.response.itemCard);
+  const handler = useItemCardCollectionHandler(props.response, props.callback);
 
   return (
     <>
       <div className={classes.cardCollection}>
-        {handler.itemCardArrayData().map((itemCard) => (
-          <ItemCard data={itemCard} />
+        {handler.itemCardArrayData().map((itemCard, index) => (
+          <ItemCard
+            data={itemCard}
+            callback={handler.itemCardCallback(index)}
+          />
         ))}
       </div>
     </>
