@@ -2,29 +2,29 @@ import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
-import Refinement from "../Refinement";
-import BrowseIndexResponse from "../../../api/response/styling/browse/BrowseIndexResponse";
-import { useGetIndexRequest } from "../../../api/request/styling/browse/UseGetIndexRequest";
+import DetailResponse from "../../../api/response/styling/browse/DetailResponse";
+import { useGetDetailRequest } from "../../../api/request/styling/browse/UseGetDetailRequest";
 
-export interface GetIndexCaller {
+export interface GetDetailCaller {
   isRunning: () => boolean;
-  response: BrowseIndexResponse | null;
+  response: DetailResponse | null;
   errorResponse: ErrorResponse | null;
 }
 
-export const useGetIndexCaller = (refinement: Refinement): GetIndexCaller => {
-  const [response, setResponse] = useState<BrowseIndexResponse | null>(null);
-  const [callStatus, setCallStatus] = useState(CallStatus.Idle);
+export const useGetDetailCaller = (
+  preregisteredItemId: number
+): GetDetailCaller => {
+  const [response, setResponse] = useState<DetailResponse | null>(null);
+  const [callStatus, setCallStatus] = useState(CallStatus.Running);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
+  const request = useGetDetailRequest(384763, preregisteredItemId);
+  const client = useGetClient<DetailResponse>(request);
 
   useEffect(() => {
     setCallStatus(CallStatus.Preparing);
-  }, [refinement]);
-
-  const request = useGetIndexRequest(384763, refinement);
-  const client = useGetClient<BrowseIndexResponse>(request);
+  }, [preregisteredItemId]);
 
   useEffect(() => {
     if (callStatus === CallStatus.Preparing) {
