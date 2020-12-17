@@ -2,7 +2,7 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import { Drawer, ThemeProvider, Toolbar, Typography } from "@material-ui/core";
 import Karte from "./styling/karte/Karte";
-import SelectionProgress from "./styling/selection_progress/SelectionProgress";
+import SelectionProgress from "./styling/SelectionProgress";
 import ItemBrowse from "./styling/browse/ItemBrowse";
 import DefaultTheme from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";

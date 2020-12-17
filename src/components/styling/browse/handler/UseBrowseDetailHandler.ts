@@ -5,7 +5,7 @@ import DetailSizeButtonData from "../../../../model/styling/browse/data/DetailSi
 import DetailItemTableData from "../../../../model/styling/browse/data/DetailItemTableData";
 import DetailResponse from "../../../../model/api/response/styling/browse/DetailResponse";
 import BrowseDetailCallback from "../callback/BrowseDetailCallback";
-import SelectedItem from "../../../../model/styling/browse/SelectedItem";
+import SelectedItem from "../../../../model/styling/SelectedItem";
 
 export interface BrowseDetailHandler {
   onClickSelectItemButton: () => void;
