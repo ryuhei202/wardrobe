@@ -1,5 +1,5 @@
 import { hostUrl } from "../../../model/HostUrl";
-import SelectionProgressData from "../../../model/styling/data/SelectionProgressData";
+import SelectionProgressData from "../../../model/styling/props_data/SelectionProgressData";
 
 export interface SelectionProgressPresenter {
   itemImageUrl: (index: number) => string;

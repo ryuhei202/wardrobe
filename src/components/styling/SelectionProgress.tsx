@@ -1,7 +1,7 @@
 import { Step, StepButton, StepLabel, Stepper } from "@material-ui/core";
 import zIndex from "@material-ui/core/styles/zIndex";
 import React from "react";
-import SelectionProgressData from "../../model/styling/data/SelectionProgressData";
+import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
 import SelectionProgressCallback from "./callback/SelectionProgressCallback";
 import { useSelectionProgressPresenter } from "./presenter/UseSelectionProgressPresenter";
 import { useSelectionProgressStyle } from "./style/UseSelectionProgressStyle";
