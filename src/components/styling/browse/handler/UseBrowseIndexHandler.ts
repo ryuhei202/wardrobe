@@ -1,8 +1,6 @@
 import { useCategoryRefinementHandler } from "./UseCategoryRefinementHandler";
 import { useState } from "react";
 import FilterChoiceResponse from "../../../../model/api/response/styling/browse/FilterChoiceResponse";
-import FilterResponse from "../../../../model/api/response/styling/browse/FilterResponse";
-import { useGetIndexCaller } from "../../../../model/styling/browse/api_caller/UseGetIndexCaller";
 import AppliedFilterData from "../../../../model/styling/browse/data/AppliedFilterData";
 import FilterGroupCollectionData from "../../../../model/styling/browse/data/FilterGroupCollectionData";
 import Refinement from "../../../../model/styling/browse/Refinement";
@@ -13,28 +11,23 @@ import { useColorRefinementHandler } from "./UseColorRefinementHandler";
 import { usePatternRefinementHandler } from "./UsePatternRefinementHandler";
 import { useLogoRefinementHandler } from "./UseLogoRefinementHandler";
 import { useOptionRefinementHandler } from "./UseOptionRefinementHandler";
-import ItemCardData from "../../../../model/styling/browse/data/ItemCardData";
-import BrowseIndexResponse from "../../../../model/api/response/styling/browse/BrowseIndexResponse";
+import RefinementChoiceResponse from "../../../../model/api/response/styling/browse/RefinementChoiceResponse";
+import BrowseIndexPaginationCallback from "../callback/BrowseIndexPaginationCallback";
 
-export interface ItemBrowseHandler {
-  searchResult: () => BrowseIndexResponse | null;
-  onSortChanged: (
-    choice: FilterResponse[]
-  ) => (event: React.ChangeEvent<{ value: unknown }>) => void;
-  onPageChanged: (event: any, page: number) => void;
-  filterGroupCollectionCallback: (
-    choice: FilterChoiceResponse
-  ) => FilterGroupCollectionCallback;
+export interface BrowseIndexHandler {
+  currentRefinement: Refinement;
+  onSortChanged: () => (event: React.ChangeEvent<{ value: unknown }>) => void;
+  paginationCallback: () => BrowseIndexPaginationCallback;
+  filterGroupCollectionCallback: () => FilterGroupCollectionCallback;
   appliedFiltersCallback: () => AppliedFiltersCallback;
-  filterGroupCollectionData: (
-    choice: FilterChoiceResponse
-  ) => FilterGroupCollectionData;
-  appliedFilterArrayData: (choice: FilterChoiceResponse) => AppliedFilterData[];
-  itemCardData: () => ItemCardData[];
-  sortSelection: (choice: FilterResponse[]) => string[];
+  filterGroupCollectionData: () => FilterGroupCollectionData;
+  appliedFilterArrayData: () => AppliedFilterData[];
+  sortSelection: () => string[];
 }
 
-export const useItemBrowseHandler = (): ItemBrowseHandler => {
+export const useBrowseIndexHandler = (
+  choice: RefinementChoiceResponse
+): BrowseIndexHandler => {
   const defaultRefinement = {
     largeCategoryId: null,
     mediumCategoryId: null,
@@ -52,19 +45,13 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     defaultRefinement
   );
 
-  const searchApiCaller = useGetIndexCaller(currentRefinement);
-
-  const updateRefinement = (newRefinement: Refinement) => {
-    setCurrentRefinement(newRefinement);
-    searchApiCaller.prepare();
-  };
   const onLargeCategoryChanged = (newId: number) => {
     const newRefinement = {
       ...currentRefinement,
       largeCategoryId: newId,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
   const onMediumCategoryChanged = (newId: number) => {
@@ -73,7 +60,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
       mediumCategoryId: newId,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
   const onSmallCategoryChanged = (newIds: number[]) => {
@@ -82,7 +69,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
       smallCategoryIds: newIds,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
   const onSizeChanged = (newIds: number[]) => {
@@ -91,7 +78,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
       sizeIds: newIds,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
   const onColorChanged = (newIds: number[]) => {
@@ -100,7 +87,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
       colorIds: newIds,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
   const onPatternChanged = (newIds: number[]) => {
@@ -109,7 +96,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
       patternIds: newIds,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
   const onLogoChanged = (newIds: number[]) => {
@@ -118,7 +105,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
       logoIds: newIds,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
   const onOptionChanged = (newIds: number[]) => {
@@ -127,7 +114,7 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
       optionIds: newIds,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
   const categoryHandler = useCategoryRefinementHandler({
@@ -187,125 +174,109 @@ export const useItemBrowseHandler = (): ItemBrowseHandler => {
     return result;
   };
 
-  const searchResult = (): BrowseIndexResponse | null =>
-    searchApiCaller.response;
-
-  const onSortChanged = (choice: FilterResponse[]) => (
+  const onSortChanged = () => (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
     const index = parseInt(event.target.value as string);
     const newRefinement = {
       ...currentRefinement,
-      sortId: choice[index].id,
+      sortId: choice.sort[index].id,
       pageNo: 1,
     };
-    updateRefinement(newRefinement);
+    setCurrentRefinement(newRefinement);
   };
 
-  const onPageChanged = (event: object, page: number) => {
-    const newRefinement = { ...currentRefinement, pageNo: page };
-    updateRefinement(newRefinement);
+  const paginationCallback = () => {
+    return {
+      onPageChanged: (event: object, page: number) => {
+        const newRefinement = { ...currentRefinement, pageNo: page };
+        setCurrentRefinement(newRefinement);
+      },
+    };
   };
 
-  const filterGroupCollectionCallback = (
-    choice: FilterChoiceResponse
-  ): FilterGroupCollectionCallback => {
+  const filterGroupCollectionCallback = (): FilterGroupCollectionCallback => {
     return {
       categoryCallback: categoryHandler.categoryCallback(
-        choice.largeCategory,
+        choice.filter.largeCategory,
         currentRefinement.largeCategoryId,
         currentRefinement.mediumCategoryId,
         currentRefinement.smallCategoryIds
       ),
       sizeCallback: sizeHandler.sizeCallback(
-        choice.size,
+        choice.filter.size,
         currentRefinement.sizeIds
       ),
       colorCallback: colorHandler.colorCallback(
-        choice.color,
+        choice.filter.color,
         currentRefinement.colorIds
       ),
       patternCallback: patternHandler.patternCallback(
-        choice.pattern,
+        choice.filter.pattern,
         currentRefinement.patternIds
       ),
       logoCallback: logoHandler.logoCallback(
-        choice.logo,
+        choice.filter.logo,
         currentRefinement.logoIds
       ),
       optionCallback: optionHandler.optionCallback(
-        choice.option,
+        choice.filter.option,
         currentRefinement.optionIds
       ),
     };
   };
 
   const appliedFiltersCallback = (): AppliedFiltersCallback => {
-    return { onClear: () => updateRefinement(defaultRefinement) };
+    return { onClear: () => setCurrentRefinement(defaultRefinement) };
   };
 
-  const filterGroupCollectionData = (
-    choice: FilterChoiceResponse
-  ): FilterGroupCollectionData => {
+  const filterGroupCollectionData = (): FilterGroupCollectionData => {
     return {
       categoryData: categoryHandler.categoryData(
-        choice.largeCategory,
+        choice.filter.largeCategory,
         currentRefinement.largeCategoryId,
         currentRefinement.mediumCategoryId,
         currentRefinement.smallCategoryIds
       ),
-      sizeData: sizeHandler.sizeData(choice.size, currentRefinement.sizeIds),
+      sizeData: sizeHandler.sizeData(
+        choice.filter.size,
+        currentRefinement.sizeIds
+      ),
       colorData: colorHandler.colorData(
-        choice.color,
+        choice.filter.color,
         currentRefinement.colorIds
       ),
       patternData: patternHandler.patternData(
-        choice.pattern,
+        choice.filter.pattern,
         currentRefinement.patternIds
       ),
-      logoData: logoHandler.logoData(choice.logo, currentRefinement.logoIds),
+      logoData: logoHandler.logoData(
+        choice.filter.logo,
+        currentRefinement.logoIds
+      ),
       optionData: optionHandler.optionData(
-        choice.option,
+        choice.filter.option,
         currentRefinement.optionIds
       ),
     };
   };
 
-  const appliedFilterArrayData = (
-    choice: FilterChoiceResponse
-  ): AppliedFilterData[] => {
-    return getAppliedFilterData(choice);
+  const appliedFilterArrayData = (): AppliedFilterData[] => {
+    return getAppliedFilterData(choice.filter);
   };
 
-  const itemCardData = (): ItemCardData[] => {
-    if (searchApiCaller.response) {
-      return searchApiCaller.response.itemCard.map((item) => {
-        return {
-          colorImagePath: item.colorImagePath,
-          seriesName: item.seriesName,
-          categoryName: item.categoryName,
-          brandName: item.brandName,
-          imagePath: item.imagePath,
-        };
-      });
-    } else {
-      return [];
-    }
-  };
-
-  const sortSelection = (choice: FilterResponse[]): string[] => {
-    return choice.map((sort) => sort.name);
+  const sortSelection = (): string[] => {
+    return choice.sort.map((sort) => sort.name);
   };
 
   return {
-    searchResult,
+    currentRefinement,
     onSortChanged,
-    onPageChanged,
+    paginationCallback,
     filterGroupCollectionCallback,
     appliedFiltersCallback,
     filterGroupCollectionData,
     appliedFilterArrayData,
-    itemCardData,
     sortSelection,
   };
 };
