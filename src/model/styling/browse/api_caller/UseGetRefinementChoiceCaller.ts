@@ -15,7 +15,7 @@ export const useGetRefinementChoiceCaller = (): GetRefinementChoiceCaller => {
   const [response, setResponse] = useState<RefinementChoiceResponse | null>(
     null
   );
-  const [callStatus, setCallStatus] = useState(CallStatus.Prepareing);
+  const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
@@ -23,7 +23,7 @@ export const useGetRefinementChoiceCaller = (): GetRefinementChoiceCaller => {
   const client = useGetClient<RefinementChoiceResponse>(request);
 
   useEffect(() => {
-    if (callStatus === CallStatus.Prepareing) {
+    if (callStatus === CallStatus.Preparing) {
       const fetch = () => {
         client
           .get()

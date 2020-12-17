@@ -23,7 +23,7 @@ export const useGetIndexCaller = (refinement: Refinement): GetIndexCaller => {
   const client = useGetClient<BrowseIndexResponse>(request);
 
   useEffect(() => {
-    if (callStatus === CallStatus.Prepareing) {
+    if (callStatus === CallStatus.Preparing) {
       const fetch = () => {
         client
           .get()
@@ -47,7 +47,7 @@ export const useGetIndexCaller = (refinement: Refinement): GetIndexCaller => {
   };
 
   const prepare = (): void => {
-    setCallStatus(CallStatus.Prepareing);
+    setCallStatus(CallStatus.Preparing);
   };
 
   return { isRunning, prepare, response, errorResponse };

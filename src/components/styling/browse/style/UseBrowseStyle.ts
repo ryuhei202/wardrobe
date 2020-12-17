@@ -58,5 +58,30 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(1),
       float: "right",
     },
+    itemImage: {
+      height: 600,
+      width: 400,
+    },
+    itemImageContainer: {
+      marginRight: theme.spacing(2),
+    },
+    itemInfo: {
+      display: "flex",
+      flexWrap: "wrap",
+    },
+    itemInfoText: {
+      margin: theme.spacing(2, 0),
+    },
+    itemInfoTextContainer: {
+      flexGrow: 1,
+      margin: theme.spacing(0, 4, 0, 2),
+    },
+    colorImage: {
+      margin: theme.spacing(1, 1),
+    },
+    itemTableContainer: {
+      height: 200,
+      width: "100%",
+    },
   })
 );

@@ -1,24 +1,30 @@
-import { CallStatus } from "./../../../api/shared/CallStatus";
-import { useGetClient } from "./../../../api/client/UseGetClient";
+import { CallStatus } from "../../../api/shared/CallStatus";
+import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
-import { useGetKarteRequest } from "../../../api/request/styling/karte/UseGetKarteRequest";
-import KarteResponse from "../../../api/response/styling/karte/KarteResponse";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
+import DetailResponse from "../../../api/response/styling/browse/DetailResponse";
+import { useGetDetailRequest } from "../../../api/request/styling/browse/UseGetDetailRequest";
 
-export interface GetKarteCaller {
+export interface GetDetailCaller {
   isRunning: () => boolean;
-  response: KarteResponse | null;
+  response: DetailResponse | null;
   errorResponse: ErrorResponse | null;
 }
 
-export const useGetKarteCaller = (): GetKarteCaller => {
-  const [response, setResponse] = useState<KarteResponse | null>(null);
-  const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
+export const useGetDetailCaller = (
+  preregisteredItemId: number
+): GetDetailCaller => {
+  const [response, setResponse] = useState<DetailResponse | null>(null);
+  const [callStatus, setCallStatus] = useState(CallStatus.Running);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetKarteRequest(384763);
-  const client = useGetClient<KarteResponse>(request);
+  const request = useGetDetailRequest(384763, preregisteredItemId);
+  const client = useGetClient<DetailResponse>(request);
+
+  useEffect(() => {
+    setCallStatus(CallStatus.Preparing);
+  }, [preregisteredItemId]);
 
   useEffect(() => {
     if (callStatus === CallStatus.Preparing) {
