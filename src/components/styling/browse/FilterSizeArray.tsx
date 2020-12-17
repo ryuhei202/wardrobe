@@ -1,6 +1,6 @@
 import { Button, ButtonGroup } from "@material-ui/core";
 import React from "react";
-import FilterSizeData from "../../../model/styling/browse/data/FilterSizeData";
+import FilterSizeData from "../../../model/styling/browse/props_data/FilterSizeData";
 import FilterSizeArrayCallback from "./callback/FilterSizeArrayCallback";
 
 interface FilterSizeArrayProps {

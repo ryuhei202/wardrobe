@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import ItemCardData from "../../../model/styling/browse/data/ItemCardData";
+import ItemCardData from "../../../model/styling/browse/props_data/ItemCardData";
 import ItemCardCallback from "./callback/ItemCardCallback";
 import { useItemCardPresenter } from "./presenter/UseItemCardPresenter";
 import { useBrowseStyle } from "./style/UseBrowseStyle";

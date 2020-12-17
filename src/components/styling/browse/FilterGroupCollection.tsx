@@ -13,7 +13,7 @@ import FilterMediaArray from "./FilterMediaArray";
 import FilterCheckboxArray from "./FilterCheckboxArray";
 import FilterSizeArray from "./FilterSizeArray";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
-import FilterGroupCollectionData from "../../../model/styling/browse/data/FilterGroupCollectionData";
+import FilterGroupCollectionData from "../../../model/styling/browse/props_data/FilterGroupCollectionData";
 
 interface FilterGroupCollectionProps {
   data: FilterGroupCollectionData;

@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { hostUrl } from "../../../model/HostUrl";
-import FilterMediaData from "../../../model/styling/browse/data/FilterMediaData";
+import FilterMediaData from "../../../model/styling/browse/props_data/FilterMediaData";
 import FilterMediaArrayCallback from "./callback/FilterMediaArrayCallback";
 
 interface FilterMediaArrayProps {

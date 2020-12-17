@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemText } from "@material-ui/core";
 import React from "react";
-import FilterListButtonData from "../../../model/styling/browse/data/FilterListButtonData";
+import FilterListButtonData from "../../../model/styling/browse/props_data/FilterListButtonData";
 import FilterListButtonArrayCallback from "./callback/FilterListButtonArrayCallback";
 
 interface FilterListButtonArrayProps {

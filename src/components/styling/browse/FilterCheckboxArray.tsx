@@ -7,7 +7,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import React from "react";
-import FilterCheckboxData from "../../../model/styling/browse/data/FilterCheckboxData";
+import FilterCheckboxData from "../../../model/styling/browse/props_data/FilterCheckboxData";
 import FilterCheckboxArrayCallback from "./callback/FilterCheckboxArrayCallback";
 
 interface FilterCheckboxArrayProps {

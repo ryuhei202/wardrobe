@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import React from "react";
-import AppliedFilterData from "../../../model/styling/browse/data/AppliedFilterData";
+import AppliedFilterData from "../../../model/styling/browse/props_data/AppliedFilterData";
 import AppliedFiltersCallback from "./callback/AppliedFiltersCallback";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 

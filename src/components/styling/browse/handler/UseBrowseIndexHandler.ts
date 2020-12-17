@@ -1,8 +1,8 @@
 import { useCategoryRefinementHandler } from "./UseCategoryRefinementHandler";
 import { useState } from "react";
 import FilterChoiceResponse from "../../../../model/api/response/styling/browse/FilterChoiceResponse";
-import AppliedFilterData from "../../../../model/styling/browse/data/AppliedFilterData";
-import FilterGroupCollectionData from "../../../../model/styling/browse/data/FilterGroupCollectionData";
+import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import FilterGroupCollectionData from "../../../../model/styling/browse/props_data/FilterGroupCollectionData";
 import Refinement from "../../../../model/styling/browse/Refinement";
 import AppliedFiltersCallback from "../callback/AppliedFiltersCallback";
 import FilterGroupCollectionCallback from "../callback/FilterGroupCollectionCallback";

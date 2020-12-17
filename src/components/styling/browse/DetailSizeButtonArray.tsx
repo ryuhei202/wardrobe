@@ -1,6 +1,6 @@
 import { Button, Radio } from "@material-ui/core";
 import React from "react";
-import DetailSizeButtonData from "../../../model/styling/browse/data/DetailSizeButtonData";
+import DetailSizeButtonData from "../../../model/styling/browse/props_data/DetailSizeButtonData";
 import DetailSizeButtonArrayCallback from "./callback/DetailSizeButtonArrayCallback";
 
 interface DetailSizeButtonArrayProps {
