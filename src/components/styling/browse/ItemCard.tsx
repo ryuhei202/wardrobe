@@ -7,11 +7,13 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import ItemCardData from "../../../model/styling/browse/data/ItemCardData";
+import ItemCardCallback from "./callback/ItemCardCallback";
 import { useItemCardPresenter } from "./presenter/UseItemCardPresenter";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
 interface ItemCardProps {
   data: ItemCardData;
+  callback: ItemCardCallback;
 }
 
 const ItemCard = (props: ItemCardProps) => {
@@ -20,7 +22,10 @@ const ItemCard = (props: ItemCardProps) => {
 
   return (
     <Card className={classes.card}>
-      <CardActionArea className={classes.cardActionArea}>
+      <CardActionArea
+        className={classes.cardActionArea}
+        onClick={() => props.callback.onClick}
+      >
         <CardMedia className={classes.media} image={presenter.itemImageUrl()} />
         <CardContent>
           <img
