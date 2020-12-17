@@ -8,7 +8,6 @@ import { useGetIndexRequest } from "../../../api/request/styling/browse/UseGetIn
 
 export interface GetIndexCaller {
   isRunning: () => boolean;
-  prepare: () => void;
   response: BrowseIndexResponse | null;
   errorResponse: ErrorResponse | null;
 }
@@ -19,6 +18,11 @@ export const useGetIndexCaller = (refinement: Refinement): GetIndexCaller => {
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
+
+  useEffect(() => {
+    setCallStatus(CallStatus.Prepareing);
+  }, [refinement]);
+
   const request = useGetIndexRequest(384763, refinement);
   const client = useGetClient<BrowseIndexResponse>(request);
 
@@ -46,9 +50,5 @@ export const useGetIndexCaller = (refinement: Refinement): GetIndexCaller => {
     return callStatus === CallStatus.Running;
   };
 
-  const prepare = (): void => {
-    setCallStatus(CallStatus.Prepareing);
-  };
-
-  return { isRunning, prepare, response, errorResponse };
+  return { isRunning, response, errorResponse };
 };
