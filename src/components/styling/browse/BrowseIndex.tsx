@@ -6,9 +6,11 @@ import FilterGroupCollection from "./FilterGroupCollection";
 import AppliedFilterArray from "./AppliedFilterArray";
 import RefinementChoiceResponse from "../../../model/api/response/styling/browse/RefinementChoiceResponse";
 import { useBrowseIndexProvider } from "./provider/UseBrowseIndexProvider";
+import BrowseIndexCallback from "./callback/BrowseIndexCallback";
 
 export interface BrowseIndexProps {
   response: RefinementChoiceResponse;
+  callback: BrowseIndexCallback;
 }
 
 const BrowseIndex = (props: BrowseIndexProps) => {
@@ -49,7 +51,9 @@ const BrowseIndex = (props: BrowseIndexProps) => {
           data={handler.filterGroupCollectionData()}
           callback={handler.filterGroupCollectionCallback()}
         />
-        {provider.itemCardCollectionComponent()}
+        {provider.itemCardCollectionComponent(
+          props.callback.itemCardCollectionCallback
+        )}
       </div>
       <div className={classes.paginationContainer}>
         {provider.paginationComponent(handler.paginationCallback())}
