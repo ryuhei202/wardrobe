@@ -1,7 +1,6 @@
-import BrowseDetailCallback from "./callback/BrowseDetailCallback";
+import BrowseDetailContainer from "./BrowseDetailContainer";
 import ItemBrowseCallback from "./callback/ItemBrowseCallback";
 import { useItemBrowseHandler } from "./handler/UseItemBrowseHandler";
-import { useBrowseDetailProvider } from "./provider/UseBrowseDetailProvider";
 import { useRefinementChoiceProvider } from "./provider/UseRefinementChoiceProvider";
 
 export interface ItemBrowseProps {
@@ -15,7 +14,7 @@ const ItemBrowse = (props: ItemBrowseProps) => {
 
   if (handler.selectedPreregisteredItemId) {
     return (
-      <BrowseDetailComponent
+      <BrowseDetailContainer
         id={handler.selectedPreregisteredItemId}
         callback={handler.browseDetailCallback()}
       />
@@ -29,14 +28,6 @@ const ItemBrowse = (props: ItemBrowseProps) => {
       </>
     );
   }
-};
-
-const BrowseDetailComponent = (props: {
-  id: number;
-  callback: BrowseDetailCallback;
-}) => {
-  const browseDetailProvider = useBrowseDetailProvider(props.id);
-  return <>{browseDetailProvider.browseDetailComponent(props.callback)}</>;
 };
 
 export default ItemBrowse;
