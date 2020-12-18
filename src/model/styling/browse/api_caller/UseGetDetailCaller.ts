@@ -15,7 +15,7 @@ export const useGetDetailCaller = (
   preregisteredItemId: number
 ): GetDetailCaller => {
   const [response, setResponse] = useState<DetailResponse | null>(null);
-  const [callStatus, setCallStatus] = useState(CallStatus.Running);
+  const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );

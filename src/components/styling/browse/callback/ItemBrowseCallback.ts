@@ -1,6 +1,5 @@
 import SelectedItem from "../../../../model/styling/SelectedItem";
 
-export default interface BrowseDetailCallback {
+export default interface ItemBrowseCallback {
   onSelectItem: (item: SelectedItem) => void;
-  onClickBackButton: () => void;
 }
