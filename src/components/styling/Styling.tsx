@@ -1,4 +1,4 @@
-import { Drawer, Toolbar } from "@material-ui/core";
+import { Drawer, Paper, Toolbar } from "@material-ui/core";
 import React from "react";
 import ItemBrowseContainer from "./browse/ItemBrowseContainer";
 import { useStylingHandler } from "./handler/UseStylingHandler";
@@ -23,12 +23,12 @@ const Styling = () => {
         <div className={classes.karteContainer}>
           <Karte />
         </div>
-        <div className={classes.progressContainer}>
+        <Paper variant="outlined" className={classes.progressContainer}>
           <SelectionProgress
             data={handler.selectionProgressData()}
             callback={handler.selectionProgressCallback()}
           />
-        </div>
+        </Paper>
       </Drawer>
       <main className={classes.browseContainer}>
         <Toolbar />

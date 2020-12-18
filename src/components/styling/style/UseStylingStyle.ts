@@ -13,8 +13,6 @@ export const useStylingStyle = makeStyles((theme: Theme) =>
       overflow: "auto",
     },
     progressContainer: {
-      height: 100,
-      width: "100%",
       marginTop: "auto",
     },
     browseContainer: {
