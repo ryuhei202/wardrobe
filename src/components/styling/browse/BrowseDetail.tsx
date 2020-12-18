@@ -21,7 +21,7 @@ const BrowseDetail = (props: BrowseDetailProps) => {
 
   return (
     <>
-      <IconButton onClick={() => props.callback.onClickBackButton}>
+      <IconButton onClick={() => props.callback.onClickBackButton()}>
         <ArrowBack />
       </IconButton>
       <Paper className={classes.itemInfo}>

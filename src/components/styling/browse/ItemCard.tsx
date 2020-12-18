@@ -24,7 +24,7 @@ const ItemCard = (props: ItemCardProps) => {
     <Card className={classes.card}>
       <CardActionArea
         className={classes.cardActionArea}
-        onClick={() => props.callback.onClick}
+        onClick={() => props.callback.onClick()}
       >
         <CardMedia className={classes.media} image={presenter.itemImageUrl()} />
         <CardContent>
