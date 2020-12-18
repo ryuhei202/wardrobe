@@ -17,7 +17,7 @@ const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
         <Button
           variant="contained"
           color="secondary"
-          className={classes.button}
+          className={classes.appliedFilterButton}
         >
           {filter.name}
         </Button>
@@ -26,7 +26,7 @@ const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
         variant="contained"
         color="primary"
         onClick={props.callback.onClear}
-        className={classes.button}
+        className={classes.appliedFilterButton}
       >
         全ての条件を解除
       </Button>

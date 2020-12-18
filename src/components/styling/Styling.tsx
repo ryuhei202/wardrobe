@@ -1,6 +1,6 @@
 import { Drawer, Toolbar } from "@material-ui/core";
 import React from "react";
-import ItemBrowse from "./browse/ItemBrowse";
+import ItemBrowseContainer from "./browse/ItemBrowseContainer";
 import { useStylingHandler } from "./handler/UseStylingHandler";
 import Karte from "./karte/Karte";
 import SelectionProgress from "./SelectionProgress";
@@ -32,7 +32,7 @@ const Styling = () => {
       </Drawer>
       <main className={classes.browseContainer}>
         <Toolbar />
-        <ItemBrowse callback={handler.itemBrowseCallback()} />
+        <ItemBrowseContainer callback={handler.itemBrowseCallback()} />
       </main>
     </>
   );

@@ -82,7 +82,7 @@ export const useBrowseDetailHandler = (
         return {
           itemId: item.itemId,
           values: item.values,
-          isSelected: selectedItem?.itemId === item.itemId,
+          isSelected: selectedItem?.itemId === item.itemId ?? false,
         };
       }),
     };

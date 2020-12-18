@@ -29,17 +29,17 @@ const DetailItemTable = (props: DetailItemTableProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data.rows.map((row) => {
+          {props.data.rows.map((row) => (
             <TableRow
               selected={row.isSelected}
               onClick={() => props.callback.onSelect(row.itemId)}
             >
               <TableCell>{row.itemId}</TableCell>
               {row.values.map((value) => (
-                <TableCell>{value}</TableCell>
+                <TableCell>{value ?? ""}</TableCell>
               ))}
-            </TableRow>;
-          })}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>
