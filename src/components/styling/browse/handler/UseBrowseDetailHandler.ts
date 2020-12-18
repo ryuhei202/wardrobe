@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DetailItemTableCallback from "../callback/DetailItemTableCallback";
 import DetailSizeButtonArrayCallback from "../callback/DetailSizeButtonArrayCallback";
 import DetailSizeButtonData from "../../../../model/styling/browse/props_data/DetailSizeButtonData";
