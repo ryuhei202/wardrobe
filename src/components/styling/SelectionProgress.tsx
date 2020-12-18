@@ -1,5 +1,4 @@
-import { Step, StepButton, StepLabel, Stepper } from "@material-ui/core";
-import zIndex from "@material-ui/core/styles/zIndex";
+import { Box, Step, StepButton, StepLabel, Stepper } from "@material-ui/core";
 import React from "react";
 import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
 import SelectionProgressCallback from "./callback/SelectionProgressCallback";
@@ -19,16 +18,30 @@ const SelectionProgress = (props: SelectionProgressProps) => {
   for (let index = 0; index < 4; index++) {
     let stepLabel;
     if (props.data.items.length > index) {
-      stepLabel = (
-        <StepLabel
-          StepIconComponent={() => (
+      let iconComponent: JSX.Element;
+      if (props.data.selectedIndex === index) {
+        iconComponent = (
+          <Box display="flex" border={1} borderColor="primary.main">
             <img
               className={classes.stepperImage}
-              src={presenter.itemImageUrl(4)}
+              src={presenter.itemImageUrl(index)}
               alt=""
             />
-          )}
-        >
+          </Box>
+        );
+      } else {
+        iconComponent = (
+          <Box display="flex">
+            <img
+              className={classes.stepperImage}
+              src={presenter.itemImageUrl(index)}
+              alt=""
+            />
+          </Box>
+        );
+      }
+      stepLabel = (
+        <StepLabel StepIconComponent={() => <>{iconComponent}</>}>
           {presenter.labelText(index)}
         </StepLabel>
       );
@@ -36,8 +49,11 @@ const SelectionProgress = (props: SelectionProgressProps) => {
       stepLabel = <StepLabel>{presenter.labelText(index)}</StepLabel>;
     }
     steps.push(
-      <Step key={index}>
-        <StepButton onClick={() => props.callback.onSelect(index)}>
+      <Step key={index} disabled={props.data.items.length < index}>
+        <StepButton
+          className={classes.stepButton}
+          onClick={() => props.callback.onSelect(index)}
+        >
           {stepLabel}
         </StepButton>
       </Step>

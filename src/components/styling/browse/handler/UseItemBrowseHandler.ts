@@ -16,6 +16,7 @@ import ItemCardCollectionCallback from "../callback/ItemCardCollectionCallback";
 import BrowseDetailCallback from "../callback/BrowseDetailCallback";
 import ItemBrowseCallback from "../callback/ItemBrowseCallback";
 import ItemBrowsePaginationCallback from "../callback/ItemBrowsePaginationCallback";
+import SelectedItem from "../../../../model/styling/SelectedItem";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -198,7 +199,7 @@ export const useItemBrowseHandler = (
     setCurrentRefinement(newRefinement);
   };
 
-  const paginationCallback = () => {
+  const paginationCallback = (): ItemBrowsePaginationCallback => {
     return {
       onPageChanged: (event: object, page: number) => {
         const newRefinement = { ...currentRefinement, pageNo: page };
@@ -253,7 +254,11 @@ export const useItemBrowseHandler = (
   const browseDetailCallback = (): BrowseDetailCallback => {
     return {
       onClickBackButton: () => setSelectedPreregisteredItemId(null),
-      onSelectItem: callback.onSelectItem,
+      onSelectItem: (item: SelectedItem) => {
+        callback.onSelectItem(item);
+        setCurrentRefinement(defaultRefinement);
+        setSelectedPreregisteredItemId(null);
+      },
     };
   };
 

@@ -17,7 +17,7 @@ export const useSelectionProgressPresenter = (
     if (data.items.length > index) {
       return data.items[index].itemId.toString();
     } else {
-      return `アイテムNo.${index}`;
+      return `アイテムNo.${index + 1}`;
     }
   };
 
