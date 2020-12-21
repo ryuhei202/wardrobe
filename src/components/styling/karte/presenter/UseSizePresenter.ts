@@ -1,4 +1,3 @@
-import BasicResponse from "../../../../model/api/response/styling/karte/BasicResponse";
 import SizeResponse from "../../../../model/api/response/styling/karte/SizeResponse";
 
 export interface SizePresenter {

@@ -31,12 +31,14 @@ const App = () => {
           <div className={classes.karteContainer}>
             <Karte />
           </div>
-          <div className={classes.ProgressContainer}>
+          <div className={classes.progressContainer}>
             <SelectionProgress />
           </div>
         </Drawer>
-        <Toolbar />
-        <ItemBrowse />
+        <main className={classes.browseContainer}>
+          <Toolbar />
+          <ItemBrowse />
+        </main>
       </div>
     </ThemeProvider>
   );

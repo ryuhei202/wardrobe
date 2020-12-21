@@ -1,3 +1,4 @@
+import qs from "qs";
 import GetRequest from "../request/GetRequest";
 import { baseUrl } from "../shared/BaseUrl";
 import { useClient } from "./UseClient";
@@ -15,6 +16,8 @@ export const useGetClient = <T>(request: GetRequest): GetClient<T> => {
     return client.execute(
       api.get(url, {
         params: params,
+        paramsSerializer: (params) =>
+          qs.stringify(params, { arrayFormat: "brackets", encode: false }),
       })
     );
   };
