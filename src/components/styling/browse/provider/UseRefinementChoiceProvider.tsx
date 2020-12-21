@@ -1,24 +1,24 @@
 import { useGetRefinementChoiceCaller } from "../../../../model/styling/browse/api_caller/UseGetRefinementChoiceCaller";
 import { CircularProgress, Typography } from "@material-ui/core";
-import BrowseIndex from "../BrowseIndex";
+import ItemBrowse from "../ItemBrowse";
 import React from "react";
-import BrowseIndexCallback from "../callback/BrowseIndexCallback";
+import ItemBrowseCallback from "../callback/ItemBrowseCallback";
 
 export interface RefinementChoiceProvider {
-  browseIndexComponent: (callback: BrowseIndexCallback) => JSX.Element;
+  itemBrowseComponent: (callback: ItemBrowseCallback) => JSX.Element;
 }
 
 export const useRefinementChoiceProvider = (): RefinementChoiceProvider => {
   const choiceApiCaller = useGetRefinementChoiceCaller();
 
-  const browseIndexComponent = (callback: BrowseIndexCallback): JSX.Element => {
+  const itemBrowseComponent = (callback: ItemBrowseCallback): JSX.Element => {
     if (choiceApiCaller.isRunning()) {
       return <CircularProgress />;
     } else if (choiceApiCaller.errorResponse) {
       return <Typography>{choiceApiCaller.errorResponse.message}</Typography>;
     } else if (choiceApiCaller.response) {
       return (
-        <BrowseIndex response={choiceApiCaller.response} callback={callback} />
+        <ItemBrowse response={choiceApiCaller.response} callback={callback} />
       );
     } else {
       return <></>;
@@ -26,6 +26,6 @@ export const useRefinementChoiceProvider = (): RefinementChoiceProvider => {
   };
 
   return {
-    browseIndexComponent,
+    itemBrowseComponent,
   };
 };

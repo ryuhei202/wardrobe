@@ -1,5 +1,4 @@
-import { Step, StepButton, StepLabel, Stepper } from "@material-ui/core";
-import zIndex from "@material-ui/core/styles/zIndex";
+import { Box, Step, StepButton, StepLabel, Stepper } from "@material-ui/core";
 import React from "react";
 import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
 import SelectionProgressCallback from "./callback/SelectionProgressCallback";
@@ -18,15 +17,21 @@ const SelectionProgress = (props: SelectionProgressProps) => {
   let steps = [];
   for (let index = 0; index < 4; index++) {
     let stepLabel;
-    if (props.data.items.length > index) {
+    if (presenter.hasItemImage(index)) {
       stepLabel = (
         <StepLabel
           StepIconComponent={() => (
-            <img
-              className={classes.stepperImage}
-              src={presenter.itemImageUrl(4)}
-              alt=""
-            />
+            <Box
+              display="flex"
+              border={presenter.borderProp(index)}
+              borderColor="primary.main"
+            >
+              <img
+                className={classes.stepperImage}
+                src={presenter.itemImageUrl(index)}
+                alt=""
+              />
+            </Box>
           )}
         >
           {presenter.labelText(index)}
@@ -36,8 +41,11 @@ const SelectionProgress = (props: SelectionProgressProps) => {
       stepLabel = <StepLabel>{presenter.labelText(index)}</StepLabel>;
     }
     steps.push(
-      <Step key={index}>
-        <StepButton onClick={() => props.callback.onSelect(index)}>
+      <Step key={index} disabled={presenter.isDisabled(index)}>
+        <StepButton
+          className={classes.stepButton}
+          onClick={() => props.callback.onSelect(index)}
+        >
           {stepLabel}
         </StepButton>
       </Step>

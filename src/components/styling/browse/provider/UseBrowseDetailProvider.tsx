@@ -7,7 +7,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import { callbackify } from "util";
 import { useGetDetailCaller } from "../../../../model/styling/browse/api_caller/UseGetDetailCaller";
 import BrowseDetail from "../BrowseDetail";
 import BrowseDetailCallback from "../callback/BrowseDetailCallback";

@@ -21,7 +21,7 @@ const BrowseDetail = (props: BrowseDetailProps) => {
 
   return (
     <>
-      <IconButton onClick={() => props.callback.onClickBackButton}>
+      <IconButton onClick={() => props.callback.onClickBackButton()}>
         <ArrowBack />
       </IconButton>
       <Paper className={classes.itemInfo}>
@@ -58,7 +58,7 @@ const BrowseDetail = (props: BrowseDetailProps) => {
             </Box>
           </div>
           <Typography variant="body1">
-            サイズ：{handler.selectedSizeName}
+            サイズ：{handler.selectedSizeName()}
           </Typography>
           <div>
             <DetailSizeButtonArray
@@ -67,7 +67,7 @@ const BrowseDetail = (props: BrowseDetailProps) => {
             />
           </div>
           <Typography variant="body1">
-            アイテム：{handler.selectedItemId}
+            アイテム：{handler.selectedItemId()}
           </Typography>
           <div className={classes.itemTableContainer}>
             <DetailItemTable

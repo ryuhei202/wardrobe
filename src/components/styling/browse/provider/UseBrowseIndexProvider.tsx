@@ -4,15 +4,15 @@ import Refinement from "../../../../model/styling/browse/Refinement";
 import { useGetIndexCaller } from "../../../../model/styling/browse/api_caller/UseGetIndexCaller";
 import ItemCardCollection from "../ItemCardCollection";
 import { Pagination } from "@material-ui/lab";
-import BrowseIndexPaginationCallback from "../callback/BrowseIndexPaginationCallback";
 import ItemCardCollectionCallback from "../callback/ItemCardCollectionCallback";
+import ItemBrowsePaginationCallback from "../callback/ItemBrowsePaginationCallback";
 
 export interface BrowseIndexProvider {
   totalItemCountComponent: () => JSX.Element;
   itemCardCollectionComponent: (
     callback: ItemCardCollectionCallback
   ) => JSX.Element;
-  paginationComponent: (callback: BrowseIndexPaginationCallback) => JSX.Element;
+  paginationComponent: (callback: ItemBrowsePaginationCallback) => JSX.Element;
 }
 
 export const useBrowseIndexProvider = (
@@ -51,7 +51,7 @@ export const useBrowseIndexProvider = (
   };
 
   const paginationComponent = (
-    callback: BrowseIndexPaginationCallback
+    callback: ItemBrowsePaginationCallback
   ): JSX.Element => {
     const currentPage = searchApiCaller.response?.pageNo ?? 0;
     const totalPageNum = searchApiCaller.response?.totalPageNum ?? 0;
