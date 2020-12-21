@@ -1,9 +1,10 @@
 import { CallStatus } from "./../../../api/shared/CallStatus";
 import { useGetClient } from "./../../../api/client/UseGetClient";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useGetKarteRequest } from "../../../api/request/styling/karte/UseGetKarteRequest";
 import KarteResponse from "../../../api/response/styling/karte/KarteResponse";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
+import { ChartId } from "../../../../components/App";
 
 export interface GetKarteCaller {
   isRunning: () => boolean;
@@ -17,7 +18,7 @@ export const useGetKarteCaller = (): GetKarteCaller => {
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetKarteRequest(384763);
+  const request = useGetKarteRequest(useContext(ChartId));
   const client = useGetClient<KarteResponse>(request);
 
   useEffect(() => {
