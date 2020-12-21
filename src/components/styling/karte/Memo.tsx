@@ -6,6 +6,11 @@ import {
   ListItem,
   ListItemText,
   Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
   Typography,
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
@@ -38,7 +43,14 @@ const Memo = (props: MemoProps) => {
               <ListItemText>
                 前回のコーデ：
                 <Paper variant="outlined">
-                  <Typography>{memoPresenter.lastCoordinate()}</Typography>
+                  <Typography>
+                    {memoPresenter.lastCoordinate().map((word) => (
+                      <>
+                        {word}
+                        <br></br>
+                      </>
+                    ))}
+                  </Typography>
                 </Paper>
               </ListItemText>
             </ListItem>
@@ -46,7 +58,14 @@ const Memo = (props: MemoProps) => {
               <ListItemText>
                 次回のコーデ：
                 <Paper variant="outlined">
-                  <Typography>{memoPresenter.nextCoordinate()}</Typography>
+                  <Typography>
+                    {memoPresenter.nextCoordinate().map((word) => (
+                      <>
+                        {word}
+                        <br></br>
+                      </>
+                    ))}
+                  </Typography>
                 </Paper>
               </ListItemText>
             </ListItem>
@@ -55,13 +74,31 @@ const Memo = (props: MemoProps) => {
                 その他：
                 <Paper variant="outlined">
                   <Typography>
-                    ［NG］<br></br>［好み］<br></br>
-                    ［チャレンジ］あり。苦手な色柄なし<br></br>
-                    ［使用シーン］プライベート<br></br> ［体型］ †<br></br>{" "}
-                    ［持ち物］<br></br>
-                    【LINE】
+                    {memoPresenter.otherNote().map((word) => (
+                      <>
+                        {word}
+                        <br></br>
+                      </>
+                    ))}
                   </Typography>
                 </Paper>
+              </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText>
+                NGメモ：
+                <TableContainer component={Paper}>
+                  <Table size="small">
+                    <TableBody>
+                      {memoPresenter.memoNgs().map((row) => (
+                        <TableRow>
+                          <TableCell>{row.categoryName}</TableCell>
+                          <TableCell>{row.contentText}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </ListItemText>
             </ListItem>
           </List>
