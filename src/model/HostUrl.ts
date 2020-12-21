@@ -1,4 +1,4 @@
-export const hostUrl = (): string => {
+export const HostUrl = (): string => {
   if (process.env.NODE_ENV === "production") {
     return "https://leeap.jp";
   } else {

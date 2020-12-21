@@ -1,4 +1,4 @@
-import { hostUrl } from "../../../model/HostUrl";
+import { HostUrl } from "./../../../model/HostUrl";
 import SelectionProgressData from "../../../model/styling/props_data/SelectionProgressData";
 
 export interface SelectionProgressPresenter {
@@ -17,7 +17,7 @@ export const useSelectionProgressPresenter = (
   };
 
   const itemImageUrl = (index: number): string => {
-    return `${hostUrl()}${data.items[index].itemImagePath}`;
+    return `${HostUrl()}${data.items[index].itemImagePath}`;
   };
 
   const labelText = (index: number): string => {
