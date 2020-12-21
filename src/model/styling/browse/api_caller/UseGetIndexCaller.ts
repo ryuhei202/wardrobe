@@ -1,11 +1,11 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
 import Refinement from "../Refinement";
 import BrowseIndexResponse from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { useGetIndexRequest } from "../../../api/request/styling/browse/UseGetIndexRequest";
-import { ChartId } from "../../../../components/App";
+import { ChartId } from "../../../ChartId";
 
 export interface GetIndexCaller {
   isRunning: () => boolean;
@@ -24,7 +24,7 @@ export const useGetIndexCaller = (refinement: Refinement): GetIndexCaller => {
     setCallStatus(CallStatus.Preparing);
   }, [refinement]);
 
-  const request = useGetIndexRequest(useContext(ChartId), refinement);
+  const request = useGetIndexRequest(ChartId(), refinement);
   const client = useGetClient<BrowseIndexResponse>(request);
 
   useEffect(() => {
