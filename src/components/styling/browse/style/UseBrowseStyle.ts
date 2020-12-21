@@ -15,7 +15,8 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       width: 200,
     },
     filterPaper: {
-      width: 256,
+      width: 200,
+      maxWidth: 200,
     },
     appliedFilterContainer: {
       justifyContent: "flex-start",
@@ -23,8 +24,10 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       flexWrap: "wrap",
     },
     button: {
+      marginBlock: theme.spacing(1),
+    },
+    appliedFilterButton: {
       marginLeft: theme.spacing(1),
-      marginBottom: theme.spacing(1),
     },
     sortSelection: {
       minWidth: 100,
@@ -57,6 +60,30 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     paginationContainer: {
       marginTop: theme.spacing(1),
       float: "right",
+    },
+    itemImage: {
+      height: 600,
+      width: 400,
+    },
+    itemImageContainer: {
+      marginRight: theme.spacing(2),
+    },
+    itemInfo: {
+      display: "flex",
+    },
+    itemInfoText: {
+      margin: theme.spacing(2, 0),
+    },
+    itemInfoTextContainer: {
+      flexGrow: 1,
+      margin: theme.spacing(0, 4, 0, 2),
+    },
+    colorImage: {
+      margin: theme.spacing(1, 1),
+    },
+    itemTableContainer: {
+      height: "auto",
+      maxWidth: "100%",
     },
   })
 );

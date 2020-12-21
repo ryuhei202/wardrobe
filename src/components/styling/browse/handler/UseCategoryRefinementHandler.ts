@@ -1,8 +1,8 @@
 import LargeCategoryChoiceResponse from "../../../../model/api/response/styling/browse/LargeCategoryChoiceResponse";
-import AppliedFilterData from "../../../../model/styling/browse/data/AppliedFilterData";
-import FilterCategoryGroupData from "../../../../model/styling/browse/data/FilterCategoryGroupData";
-import FilterCheckboxData from "../../../../model/styling/browse/data/FilterCheckboxData";
-import FilterListButtonData from "../../../../model/styling/browse/data/FilterListButtonData";
+import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import FilterCategoryGroupData from "../../../../model/styling/browse/props_data/FilterCategoryGroupData";
+import FilterCheckboxData from "../../../../model/styling/browse/props_data/FilterCheckboxData";
+import FilterListButtonData from "../../../../model/styling/browse/props_data/FilterListButtonData";
 import FilterCategoryGroupCallback from "../callback/FilterCategoryGroupCallback";
 
 export interface CategoryRefinementHandler {
@@ -158,16 +158,20 @@ export const useCategoryRefinementHandler = (
     smallCategoryIds: number[]
   ): FilterCategoryGroupCallback => {
     return {
-      onBroaderCategoryClick: (index: number) =>
-        onBroaderCategoryChanged(index, choice, largeCategoryId),
-      onSmallCategoryClick: (index: number) =>
-        onSmallCategoryChanged(
-          index,
-          choice,
-          largeCategoryId,
-          mediumCategoryId,
-          smallCategoryIds
-        ),
+      broaderCategoryCallback: {
+        onClick: (index: number) =>
+          onBroaderCategoryChanged(index, choice, largeCategoryId),
+      },
+      smallerCategoryCallback: {
+        onClick: (index: number) =>
+          onSmallCategoryChanged(
+            index,
+            choice,
+            largeCategoryId,
+            mediumCategoryId,
+            smallCategoryIds
+          ),
+      },
     };
   };
 

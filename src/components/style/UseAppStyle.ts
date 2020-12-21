@@ -1,5 +1,4 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
-import { blue, red } from "@material-ui/core/colors";
 
 export const useAppStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,13 +17,11 @@ export const useAppStyle = makeStyles((theme: Theme) =>
     },
     karteContainer: {
       overflow: "auto",
-      backgroundColor: blue[500],
     },
     progressContainer: {
       height: 100,
       width: "100%",
       marginTop: "auto",
-      backgroundColor: red[500],
     },
     browseContainer: {
       flexGrow: 1,

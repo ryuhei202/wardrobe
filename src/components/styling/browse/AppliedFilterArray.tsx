@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import React from "react";
-import AppliedFilterData from "../../../model/styling/browse/data/AppliedFilterData";
+import AppliedFilterData from "../../../model/styling/browse/props_data/AppliedFilterData";
 import AppliedFiltersCallback from "./callback/AppliedFiltersCallback";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
@@ -17,7 +17,7 @@ const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
         <Button
           variant="contained"
           color="secondary"
-          className={classes.button}
+          className={classes.appliedFilterButton}
         >
           {filter.name}
         </Button>
@@ -26,7 +26,7 @@ const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
         variant="contained"
         color="primary"
         onClick={props.callback.onClear}
-        className={classes.button}
+        className={classes.appliedFilterButton}
       >
         全ての条件を解除
       </Button>

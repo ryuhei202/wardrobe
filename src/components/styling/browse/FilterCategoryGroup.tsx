@@ -1,9 +1,8 @@
 import React from "react";
-import FilterCategoryGroupData from "../../../model/styling/browse/data/FilterCategoryGroupData";
+import FilterCategoryGroupData from "../../../model/styling/browse/props_data/FilterCategoryGroupData";
 import FilterCategoryGroupCallback from "./callback/FilterCategoryGroupCallback";
 import FilterCheckboxArray from "./FilterCheckboxArray";
 import FilterListButtonArray from "./FilterListButtonArray";
-import { useFilterCategoryGroupHandler } from "./handler/UseFilterCategoryGroupHandler";
 
 interface FilterCategoryGroupProps {
   data: FilterCategoryGroupData;
@@ -11,21 +10,19 @@ interface FilterCategoryGroupProps {
 }
 
 const FilterCategoryGroup = (props: FilterCategoryGroupProps) => {
-  const handler = useFilterCategoryGroupHandler(props.callback);
-
   if (props.data.broaderCategoryData === null) {
     return (
       <FilterCheckboxArray
         labelIdPrefix="small-category-checkbox-list-label-"
         data={props.data.smallCategoryData}
-        callback={handler.smallCategoryCallback}
+        callback={props.callback.smallerCategoryCallback}
       />
     );
   } else {
     return (
       <FilterListButtonArray
         data={props.data.broaderCategoryData}
-        callback={handler.biggerCategoryCallback}
+        callback={props.callback.broaderCategoryCallback}
       />
     );
   }

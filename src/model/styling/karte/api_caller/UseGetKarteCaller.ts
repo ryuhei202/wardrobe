@@ -13,7 +13,7 @@ export interface GetKarteCaller {
 
 export const useGetKarteCaller = (): GetKarteCaller => {
   const [response, setResponse] = useState<KarteResponse | null>(null);
-  const [callStatus, setCallStatus] = useState(CallStatus.Prepareing);
+  const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
@@ -21,7 +21,7 @@ export const useGetKarteCaller = (): GetKarteCaller => {
   const client = useGetClient<KarteResponse>(request);
 
   useEffect(() => {
-    if (callStatus === CallStatus.Prepareing) {
+    if (callStatus === CallStatus.Preparing) {
       const fetch = () => {
         client
           .get()
