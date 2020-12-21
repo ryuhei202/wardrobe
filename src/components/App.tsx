@@ -5,6 +5,10 @@ import DefaultTheme from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";
 import Styling from "./styling/Styling";
 
+export const ChartId = React.createContext(
+  parseInt(window.location.pathname.substring(1))
+);
+
 const App = () => {
   const classes = useAppStyle();
 
