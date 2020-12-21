@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React from "react";
-import MemoResponse from "../../../model/api/response/karte/MemoResponse";
+import MemoResponse from "../../../model/api/response/styling/karte/MemoResponse";
 import { useKarteStyle } from "./style/UseKarteStyle";
 import { useMemoPresenter } from "./presenter/UseMemoPresenter";
 

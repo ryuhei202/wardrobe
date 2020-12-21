@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React from "react";
-import BasicResponse from "../../../model/api/response/karte/BasicResponse";
+import BasicResponse from "../../../model/api/response/styling/karte/BasicResponse";
 import { useKarteStyle } from "./style/UseKarteStyle";
 import { useBasicPresenter } from "./presenter/UseBasicPresenter";
 
@@ -28,7 +28,7 @@ const Basic = (props: BasicProps) => {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography className={classes.heading}>カルテ情報</Typography>
+        <Typography className={classes.heading}>基本情報</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <List className={classes.drawerList}>

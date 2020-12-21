@@ -1,4 +1,4 @@
-import BasicResponse from "../../../../model/api/response/karte/BasicResponse";
+import BasicResponse from "../../../../model/api/response/styling/karte/BasicResponse";
 
 export interface BasicPresenter {
   resultList: () => string[];
@@ -8,7 +8,13 @@ export const useBasicPresenter = (data: BasicResponse): BasicPresenter => {
   const resultList = (): string[] => {
     return [
       `プラン：${data.planName}`,
-      `出荷予定日：${data.shipmentDate.toLocaleDateString()}`,
+      `出荷予定日：${new Date(data.shipmentDate).toLocaleDateString()}`,
+      `カルテID：${data.tChartId}`,
+      `パートナーID：${data.tMemberId}`,
+      `名前：${data.memberName}(${data.memberAge})`,
+      `スタイリスト：${data.stylistName}`,
+      `都道府県：${data.memberPrefecture}`,
+      `レンタル回数：${data.rentalNum}`,
     ];
   };
 

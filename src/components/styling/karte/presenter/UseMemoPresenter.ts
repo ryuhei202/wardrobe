@@ -1,4 +1,4 @@
-import MemoResponse from "../../../../model/api/response/karte/MemoResponse";
+import MemoResponse from "../../../../model/api/response/styling/karte/MemoResponse";
 
 export interface MemoPresenter {
   lastCoordinate: () => string;
@@ -7,11 +7,11 @@ export interface MemoPresenter {
 
 export const useMemoPresenter = (data: MemoResponse): MemoPresenter => {
   const lastCoordinate = (): string => {
-    return data.lastCoordinateFeedback;
+    return data.previousFeedback;
   };
 
   const nextCoordinate = (): string => {
-    return data.nextCoordinateRequest;
+    return data.nextRequest;
   };
 
   return { lastCoordinate, nextCoordinate };
