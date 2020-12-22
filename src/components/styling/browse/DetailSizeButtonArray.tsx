@@ -31,6 +31,7 @@ const DetailSizeButtonArray = (props: DetailSizeButtonArrayProps) => {
               {buttonData.name}
             </Button>
           }
+          key={index}
         />
       ))}
     </>

@@ -50,8 +50,8 @@ const Size = (props: SizeProps) => {
         </AccordionSummary>
         <AccordionDetails>
           <List>
-            {presenter.resultList().map((text: string) => (
-              <ListItem>
+            {presenter.resultList().map((text: string, index: number) => (
+              <ListItem key={index}>
                 <ListItemText>{text}</ListItemText>
               </ListItem>
             ))}
@@ -78,8 +78,8 @@ const Size = (props: SizeProps) => {
                       <TableBody>
                         {casualPresenter
                           .resultList()
-                          .map((row: CasualPartSizeElement) => (
-                            <TableRow>
+                          .map((row: CasualPartSizeElement, index: number) => (
+                            <TableRow key={index}>
                               <TableCell>{row.label}</TableCell>
                               <TableCell>{row.size}</TableCell>
                             </TableRow>
@@ -95,7 +95,7 @@ const Size = (props: SizeProps) => {
                 <AccordionSummary
                   expandIcon={<ExpandMore />}
                   aria-controls="size1a-content"
-                  id="size1a-header"
+                  id="size2a-header"
                 >
                   <Typography className={classes.heading}>
                     ジャケット部位サイズ
@@ -113,8 +113,8 @@ const Size = (props: SizeProps) => {
                       <TableBody>
                         {jacketPresenter
                           .resultList()
-                          .map((row: JacketPartSizeElement) => (
-                            <TableRow>
+                          .map((row: JacketPartSizeElement, index: number) => (
+                            <TableRow key={index}>
                               <TableCell>{row.label}</TableCell>
                               <TableCell>{row.size}</TableCell>
                             </TableRow>

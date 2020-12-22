@@ -15,6 +15,7 @@ const FilterSizeArray = (props: FilterSizeArrayProps) => {
         <Button
           variant={row.isSelected ? "contained" : "outlined"}
           onClick={() => props.callback.onClick(index)}
+          key={index}
         >
           {row.name}
         </Button>
