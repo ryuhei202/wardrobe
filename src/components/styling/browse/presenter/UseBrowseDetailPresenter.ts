@@ -1,5 +1,5 @@
+import { HostUrl } from "./../../../../model/HostUrl";
 import DetailResponse from "../../../../model/api/response/styling/browse/DetailResponse";
-import { hostUrl } from "../../../../model/HostUrl";
 
 export interface BrowseDetailPresenter {
   itemImageUrl: () => string;
@@ -13,7 +13,7 @@ export const useBrowseDetailPresenter = (
   response: DetailResponse
 ): BrowseDetailPresenter => {
   const itemImageUrl = (): string => {
-    return `${hostUrl()}${response.itemImagePath}`;
+    return `${HostUrl()}${response.itemImagePath}`;
   };
 
   const seriesName = (): string => {
@@ -29,7 +29,7 @@ export const useBrowseDetailPresenter = (
   };
 
   const colorImageUrl = (): string => {
-    return `${hostUrl()}${response.color.imagePath}`;
+    return `${HostUrl()}${response.color.imagePath}`;
   };
 
   return { itemImageUrl, seriesName, brandName, colorName, colorImageUrl };
