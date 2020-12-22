@@ -21,6 +21,7 @@ const ItemCardCollection = (props: ItemCardCollectionProps) => {
           <ItemCard
             data={itemCard}
             callback={handler.itemCardCallback(index)}
+            key={index}
           />
         ))}
       </div>
