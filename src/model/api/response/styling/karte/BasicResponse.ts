@@ -1,6 +1,6 @@
 export default interface BasicResponse {
   readonly planName: string;
-  readonly shipmentDate: string;
+  readonly shipmentDate: string | null;
   readonly tChartId: number;
   readonly tMemberId: number;
   readonly memberName: string;
