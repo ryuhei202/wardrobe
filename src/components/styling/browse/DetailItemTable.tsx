@@ -29,11 +29,11 @@ const DetailItemTable = (props: DetailItemTableProps) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data.rows.map((row, index) => (
+          {props.data.rows.map((row) => (
             <TableRow
               selected={row.isSelected}
               onClick={() => props.callback.onSelect(row.itemId)}
-              key={index}
+              key={row.itemId}
             >
               <TableCell>{row.itemId}</TableCell>
               {row.values.map((value, index) => (
