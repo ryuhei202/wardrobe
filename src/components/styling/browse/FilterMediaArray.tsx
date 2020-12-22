@@ -7,7 +7,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import React from "react";
-import { hostUrl } from "../../../model/HostUrl";
+import { HostUrl } from "../../../model/HostUrl";
 import FilterMediaData from "../../../model/styling/browse/props_data/FilterMediaData";
 import FilterMediaArrayCallback from "./callback/FilterMediaArrayCallback";
 
@@ -42,7 +42,7 @@ const FilterMediaArray = (props: FilterMediaArrayProps) => {
                 }
                 label={
                   <img
-                    src={hostUrl() + row.imagePath}
+                    src={HostUrl() + row.imagePath}
                     width="40px"
                     height="auto"
                     alt=""

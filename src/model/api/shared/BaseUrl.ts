@@ -1,6 +1,6 @@
-import { hostUrl } from "../../HostUrl";
+import { HostUrl } from "./../../HostUrl";
 
 export const baseUrl = (): string => {
   const apiPath = "igoue_admin/wardrobe";
-  return `${hostUrl()}/${apiPath}`;
+  return `${HostUrl()}/${apiPath}`;
 };

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
 import DetailResponse from "../../../api/response/styling/browse/DetailResponse";
 import { useGetDetailRequest } from "../../../api/request/styling/browse/UseGetDetailRequest";
+import { ChartId } from "../../../ChartId";
 
 export interface GetDetailCaller {
   isRunning: () => boolean;
@@ -19,7 +20,7 @@ export const useGetDetailCaller = (
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetDetailRequest(384763, preregisteredItemId);
+  const request = useGetDetailRequest(ChartId(), preregisteredItemId);
   const client = useGetClient<DetailResponse>(request);
 
   useEffect(() => {
