@@ -10,7 +10,12 @@ interface FilterSizeArrayProps {
 
 const FilterSizeArray = (props: FilterSizeArrayProps) => {
   return (
-    <ButtonGroup color="secondary" disableElevation aria-label="button group">
+    <ButtonGroup
+      orientation="vertical"
+      color="secondary"
+      disableElevation
+      aria-label="button group"
+    >
       {props.data.map((row, index) => (
         <Button
           variant={row.isSelected ? "contained" : "outlined"}
