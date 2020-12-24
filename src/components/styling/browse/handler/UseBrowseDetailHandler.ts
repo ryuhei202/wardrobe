@@ -57,7 +57,7 @@ export const useBrowseDetailHandler = (
   const detailItemTableCallback = (): DetailItemTableCallback => {
     return {
       onSelect: (index: number) => {
-        if (selectedSizeIndex) {
+        if (selectedSizeIndex !== null) {
           const columns = detail.sizes[selectedSizeIndex].columns;
           const itemRecord = detail.sizes[selectedSizeIndex].itemRecords[index];
           setSelectedItem({
