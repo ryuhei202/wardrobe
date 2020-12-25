@@ -7,6 +7,7 @@ export interface SelectionProgressPresenter {
   labelText: (index: number) => string;
   borderProp: (index: number) => number;
   isDisabled: (index: number) => boolean;
+  tooltipText: (index: number) => string[];
 }
 
 export const useSelectionProgressPresenter = (
@@ -36,5 +37,21 @@ export const useSelectionProgressPresenter = (
     return data.items.length < index;
   };
 
-  return { hasItemImage, itemImageUrl, labelText, borderProp, isDisabled };
+  const tooltipText = (index: number): string[] => {
+    if (data.items.length > index) {
+      return data.items[index].partSizes.map(
+        (partSize) => `${partSize.name}: ${partSize.value ?? ""}`
+      );
+    }
+    return [];
+  };
+
+  return {
+    hasItemImage,
+    itemImageUrl,
+    labelText,
+    borderProp,
+    isDisabled,
+    tooltipText,
+  };
 };
