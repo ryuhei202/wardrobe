@@ -53,7 +53,7 @@ export const usePartSizeRefinementHandler = (
         name: filter.name,
         range: [filter.min, filter.max],
         selectedValue:
-          currentValues.find((filter) => filter.id === filter.id)?.value ??
+          currentValues.find((value) => value.id === filter.id)?.value ??
           filter.min,
       };
     });
