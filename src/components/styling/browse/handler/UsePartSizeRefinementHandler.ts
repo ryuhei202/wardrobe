@@ -29,7 +29,7 @@ export const usePartSizeRefinementHandler = (
     return {
       onChange: (index: number, value: number) => {
         const currentIndex = currentValues.findIndex(
-          (o) => o.id === choice[index].id
+          (filter) => filter.id === choice[index].id
         );
         const newPartSizes = [...currentValues];
         const newValue = { id: choice[index].id, value: value };
@@ -53,7 +53,8 @@ export const usePartSizeRefinementHandler = (
         name: filter.name,
         range: [filter.min, filter.max],
         selectedValue:
-          currentValues.find((o) => o.id === filter.id)?.value ?? filter.min,
+          currentValues.find((filter) => filter.id === filter.id)?.value ??
+          filter.min,
       };
     });
   };
@@ -63,7 +64,7 @@ export const usePartSizeRefinementHandler = (
     currentValues: ValueRefinement[]
   ): AppliedFilterData[] => {
     return currentValues.map((valueRefinement) => {
-      let filter = choice.find((o) => o.id === valueRefinement.id);
+      let filter = choice.find((row) => row.id === valueRefinement.id);
       return { name: `${filter?.name} ${valueRefinement.value}` };
     });
   };
