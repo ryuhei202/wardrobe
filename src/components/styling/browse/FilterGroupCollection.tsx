@@ -14,6 +14,7 @@ import FilterCheckboxArray from "./FilterCheckboxArray";
 import FilterSizeArray from "./FilterSizeArray";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 import FilterGroupCollectionData from "../../../model/styling/browse/props_data/FilterGroupCollectionData";
+import FilterSliderArray from "./FilterSliderArray";
 
 interface FilterGroupCollectionProps {
   data: FilterGroupCollectionData;
@@ -54,6 +55,21 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           <FilterSizeArray
             data={props.data.sizeData}
             callback={props.callback.sizeCallback}
+          />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="filter7a-content"
+          id="filter7a-header"
+        >
+          <Typography className={classes.heading}>部位数値</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FilterSliderArray
+            data={props.data.partSizeData}
+            callback={props.callback.partSizeCallback}
           />
         </AccordionDetails>
       </Accordion>
