@@ -17,6 +17,8 @@ import BrowseDetailCallback from "../callback/BrowseDetailCallback";
 import ItemBrowseCallback from "../callback/ItemBrowseCallback";
 import ItemBrowsePaginationCallback from "../callback/ItemBrowsePaginationCallback";
 import SelectedItem from "../../../../model/styling/SelectedItem";
+import ValueRefinement from "../../../../model/styling/browse/ValueRefinement";
+import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -42,6 +44,7 @@ export const useItemBrowseHandler = (
     mediumCategoryId: null,
     smallCategoryIds: [],
     sizeIds: [],
+    partSizes: [],
     colorIds: [],
     patternIds: [],
     logoIds: [],
@@ -94,6 +97,15 @@ export const useItemBrowseHandler = (
     setCurrentRefinement(newRefinement);
   };
 
+  const onPartSizeChanged = (newValues: ValueRefinement[]) => {
+    const newRefinement = {
+      ...currentRefinement,
+      partSizes: newValues,
+      pageNo: 1,
+    };
+    setCurrentRefinement(newRefinement);
+  };
+
   const onColorChanged = (newIds: number[]) => {
     const newRefinement = {
       ...currentRefinement,
@@ -136,6 +148,7 @@ export const useItemBrowseHandler = (
     onSmallCategoryChange: onSmallCategoryChanged,
   });
   const sizeHandler = useSizeRefinementHandler(onSizeChanged);
+  const partSizeHandler = usePartSizeRefinementHandler(onPartSizeChanged);
   const colorHandler = useColorRefinementHandler(onColorChanged);
   const patternHandler = usePatternRefinementHandler(onPatternChanged);
   const logoHandler = useLogoRefinementHandler(onLogoChanged);
@@ -159,6 +172,12 @@ export const useItemBrowseHandler = (
       currentRefinement.sizeIds
     );
     if (appliedSizes.length) result = result.concat(appliedSizes);
+
+    const appliedPartSizes = partSizeHandler.appliedFilters(
+      choice.partSize,
+      currentRefinement.partSizes
+    );
+    if (appliedPartSizes.length) result = result.concat(appliedPartSizes);
 
     const appliedColors = colorHandler.appliedFilters(
       choice.color,
@@ -220,6 +239,10 @@ export const useItemBrowseHandler = (
         choice.filter.size,
         currentRefinement.sizeIds
       ),
+      partSizeCallback: partSizeHandler.partSizeCallback(
+        choice.filter.partSize,
+        currentRefinement.partSizes
+      ),
       colorCallback: colorHandler.colorCallback(
         choice.filter.color,
         currentRefinement.colorIds
@@ -273,6 +296,10 @@ export const useItemBrowseHandler = (
       sizeData: sizeHandler.sizeData(
         choice.filter.size,
         currentRefinement.sizeIds
+      ),
+      partSizeData: partSizeHandler.partSizeData(
+        choice.filter.partSize,
+        currentRefinement.partSizes
       ),
       colorData: colorHandler.colorData(
         choice.filter.color,
