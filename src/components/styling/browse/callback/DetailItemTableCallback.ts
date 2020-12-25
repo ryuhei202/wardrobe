@@ -1,3 +1,3 @@
 export default interface DetailItemTableCallback {
-  onSelect: (itemId: number) => void;
+  onSelect: (index: number) => void;
 }
