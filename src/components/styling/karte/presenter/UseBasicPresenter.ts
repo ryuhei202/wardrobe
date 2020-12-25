@@ -1,7 +1,9 @@
+import { HostUrl } from "./../../../../model/HostUrl";
 import BasicResponse from "../../../../model/api/response/styling/karte/BasicResponse";
 
 export interface BasicPresenter {
   resultList: () => string[];
+  memberImageUrl: () => string;
 }
 
 export const useBasicPresenter = (data: BasicResponse): BasicPresenter => {
@@ -18,5 +20,9 @@ export const useBasicPresenter = (data: BasicResponse): BasicPresenter => {
     ];
   };
 
-  return { resultList };
+  const memberImageUrl = (): string => {
+    return `${HostUrl()}${data.memberImages[0].imagePath.original}`;
+  };
+
+  return { resultList, memberImageUrl };
 };

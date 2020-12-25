@@ -19,5 +19,8 @@ export const useKarteStyle = makeStyles((theme: Theme) =>
     drawerList: {
       width: 360,
     },
+    accordionDetails: {
+      display: "block",
+    },
   })
 );

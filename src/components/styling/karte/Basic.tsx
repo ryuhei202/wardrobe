@@ -30,7 +30,13 @@ const Basic = (props: BasicProps) => {
       >
         <Typography className={classes.heading}>基本情報</Typography>
       </AccordionSummary>
-      <AccordionDetails>
+      <AccordionDetails className={classes.accordionDetails}>
+        <img
+          src={presenter.memberImageUrl()}
+          height="100px"
+          width="auto"
+          alt=""
+        />
         <List className={classes.drawerList}>
           {presenter.resultList().map((text: string) => (
             <ListItem>
