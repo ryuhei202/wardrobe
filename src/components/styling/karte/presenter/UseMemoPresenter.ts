@@ -10,7 +10,7 @@ export interface MemoPresenter {
 
 export const useMemoPresenter = (data: MemoResponse): MemoPresenter => {
   const lastCoordinate = (): string[] => {
-    return data.previousFeedback.split("\n");
+    return data.pastOutfits[0].feedback.split("\n");
   };
 
   const nextCoordinate = (): string[] => {
