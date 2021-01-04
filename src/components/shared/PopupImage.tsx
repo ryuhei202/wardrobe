@@ -1,4 +1,4 @@
-import { Dialog, makeStyles } from "@material-ui/core";
+import { Dialog } from "@material-ui/core";
 import { useState } from "react";
 import PopupImageData from "../../model/shared/props_data/PopupImageData";
 
@@ -6,16 +6,7 @@ interface PopupImageProps {
   data: PopupImageData;
 }
 
-const useStyles = makeStyles({
-  originalImage: {
-    top: "50%",
-    position: "relative",
-    transform: "translateY(-50%)",
-  },
-});
-
 const PopupImage = (props: PopupImageProps) => {
-  const classes = useStyles();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   return (
@@ -26,7 +17,7 @@ const PopupImage = (props: PopupImageProps) => {
         height="auto"
         alt=""
         onClick={() => setIsPopupOpen(true)}
-        className={classes.originalImage}
+        className={props.data.imageStyle ?? ""}
       />
       <Dialog
         maxWidth="lg"
