@@ -2,16 +2,19 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  IconButton,
   List,
   ListItem,
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { ExpandMore } from "@material-ui/icons";
+import { ExpandMore, PhotoLibrary } from "@material-ui/icons";
 import React from "react";
 import BasicResponse from "../../../model/api/response/styling/karte/BasicResponse";
 import { useKarteStyle } from "./style/UseKarteStyle";
 import { useBasicPresenter } from "./presenter/UseBasicPresenter";
+import MemberImageCollectionDialog from "./MemberImageCollectionDialog";
+import { useBasicHandler } from "./handler/UseBasicHandler";
 
 interface BasicProps {
   data: BasicResponse;
@@ -19,6 +22,7 @@ interface BasicProps {
 
 const Basic = (props: BasicProps) => {
   const classes = useKarteStyle();
+  const handler = useBasicHandler(props.data);
   const presenter = useBasicPresenter(props.data);
 
   return (
@@ -36,6 +40,13 @@ const Basic = (props: BasicProps) => {
           height="100px"
           width="auto"
           alt=""
+        />
+        <IconButton color="primary" onClick={handler.setMemberImageDialogOpen}>
+          <PhotoLibrary />
+        </IconButton>
+        <MemberImageCollectionDialog
+          data={handler.memberImageDialogData()}
+          callback={handler.memberImageDialogCallback()}
         />
         <List className={classes.drawerList}>
           {presenter.resultList().map((text: string) => (
