@@ -8,7 +8,11 @@ export const useBasicPresenter = (data: BasicResponse): BasicPresenter => {
   const resultList = (): string[] => {
     return [
       `プラン：${data.planName}`,
-      `出荷予定日：${new Date(data.shipmentDate).toLocaleDateString()}`,
+      `出荷予定日：${
+        data.shipmentDate
+          ? new Date(data.shipmentDate).toLocaleDateString()
+          : ""
+      }`,
       `カルテID：${data.tChartId}`,
       `パートナーID：${data.tMemberId}`,
       `名前：${data.memberName}(${data.memberAge})`,

@@ -13,11 +13,12 @@ const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
   const classes = useBrowseStyle();
   return (
     <>
-      {props.data.map((filter) => (
+      {props.data.map((filter, index) => (
         <Button
           variant="contained"
           color="secondary"
           className={classes.appliedFilterButton}
+          key={index}
         >
           {filter.name}
         </Button>
