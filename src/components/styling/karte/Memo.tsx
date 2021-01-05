@@ -59,18 +59,22 @@ const Memo = (props: MemoProps) => {
                   callback={handler.pastOutfitDialogCallback()}
                 />
                 <div>
-                  {props.data.pastOutfits[0].items.map((item, index) => {
-                    return (
-                      <div className={classes.itemImage} key={index}>
-                        <PopupImage
-                          data={{
-                            originalImageUrl: HostUrl() + item.imagePath.large,
-                            popupImageUrl: HostUrl() + item.imagePath.original,
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
+                  {props.data.pastOutfits.length > 0
+                    ? props.data.pastOutfits[0].items.map((item, index) => {
+                        return (
+                          <div className={classes.itemImage} key={index}>
+                            <PopupImage
+                              data={{
+                                originalImageUrl:
+                                  HostUrl() + item.imagePath.large,
+                                popupImageUrl:
+                                  HostUrl() + item.imagePath.original,
+                              }}
+                            />
+                          </div>
+                        );
+                      })
+                    : null}
                 </div>
                 <Paper variant="outlined">
                   <Typography>
