@@ -7,7 +7,7 @@ import {
   Tooltip,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { Fragment } from "react";
 import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
 import SelectionProgressCallback from "./callback/SelectionProgressCallback";
 import { useSelectionProgressPresenter } from "./presenter/UseSelectionProgressPresenter";
@@ -51,19 +51,20 @@ const SelectionProgress = (props: SelectionProgressProps) => {
 
     steps.push(
       <Tooltip
+        key={index}
         title={
           <Typography>
-            {presenter.tooltipText(index).map((text) => (
-              <>
+            {presenter.tooltipText(index).map((text, index) => (
+              <Fragment key={index}>
                 {text}
                 <br />
-              </>
+              </Fragment>
             ))}
           </Typography>
         }
         placement="top-start"
       >
-        <Step key={index} disabled={presenter.isDisabled(index)}>
+        <Step disabled={presenter.isDisabled(index)}>
           <StepButton
             className={classes.stepButton}
             onClick={() => props.callback.onSelect(index)}

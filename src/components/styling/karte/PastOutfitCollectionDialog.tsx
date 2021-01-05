@@ -9,7 +9,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { Fragment } from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import PopupImage from "../../shared/PopupImage";
 import PastOutfitCollectionDialogData from "../../../model/styling/karte/props_data/PastOutfitCollectionDialogData";
@@ -38,11 +38,11 @@ const PastOutfitCollectionDialog = (props: PastOutfitCollectionDialogProps) => {
               コーデの評価：
               <Paper variant="outlined">
                 <Typography>
-                  {presenter.coordinateFeedback(index).map((word) => (
-                    <>
+                  {presenter.coordinateFeedback(index).map((word, index) => (
+                    <Fragment key={index}>
                       {word}
                       <br></br>
-                    </>
+                    </Fragment>
                   ))}
                 </Typography>
               </Paper>
