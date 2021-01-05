@@ -10,6 +10,7 @@ import { HostUrl } from "../../../model/HostUrl";
 import MemberImageCollectionDialogCallback from "./callback/MemberImageCollectionDialogCallback";
 import PopupImage from "../../shared/PopupImage";
 import MemberImageCollectionDialogData from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
+import { useKarteStyle } from "./style/UseKarteStyle";
 
 interface MemberImageCollectionDialogProps {
   data: MemberImageCollectionDialogData;
@@ -19,6 +20,8 @@ interface MemberImageCollectionDialogProps {
 const MemberImageCollectionDialog = (
   props: MemberImageCollectionDialogProps
 ) => {
+  const classes = useKarteStyle();
+
   return (
     <Dialog onClose={props.callback.onClose} open={props.data.isOpen}>
       <DialogTitle>パートナー画像一覧</DialogTitle>
@@ -29,6 +32,7 @@ const MemberImageCollectionDialog = (
               data={{
                 originalImageUrl: HostUrl() + image.imagePath.large,
                 popupImageUrl: HostUrl() + image.imagePath.original,
+                imageStyle: classes.memberImageCollectionImage,
               }}
             />
             <GridListTileBar title={image.comment} />
