@@ -6,6 +6,8 @@ import DetailItemTableData from "../../../../model/styling/browse/props_data/Det
 import DetailResponse from "../../../../model/api/response/styling/browse/DetailResponse";
 import BrowseDetailCallback from "../callback/BrowseDetailCallback";
 import SelectedItem from "../../../../model/styling/SelectedItem";
+import PartSize from "../../../../model/styling/PartSize";
+import DetailSizeItemRecordResponse from "../../../../model/api/response/styling/browse/DetailSizeItemRecordResponse";
 
 export interface BrowseDetailHandler {
   onClickSelectItemButton: () => void;
@@ -27,6 +29,18 @@ export const useBrowseDetailHandler = (
   );
   const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
 
+  const createPartSizes = (
+    columns: string[],
+    itemRecord: DetailSizeItemRecordResponse
+  ): PartSize[] => {
+    return columns.map((column, index) => {
+      return {
+        name: column,
+        value: itemRecord.values[index],
+      };
+    });
+  };
+
   const onClickSelectItemButton = () => {
     if (selectedItem) callback.onSelectItem(selectedItem);
   };
@@ -42,11 +56,16 @@ export const useBrowseDetailHandler = (
 
   const detailItemTableCallback = (): DetailItemTableCallback => {
     return {
-      onSelect: (itemId: number) => {
-        setSelectedItem({
-          itemId: itemId,
-          itemImagePath: detail.itemImagePath,
-        });
+      onSelect: (index: number) => {
+        if (selectedSizeIndex !== null) {
+          const columns = detail.sizes[selectedSizeIndex].columns;
+          const itemRecord = detail.sizes[selectedSizeIndex].itemRecords[index];
+          setSelectedItem({
+            itemId: itemRecord.itemId,
+            itemImagePath: detail.itemImagePath,
+            partSizes: createPartSizes(columns, itemRecord),
+          });
+        }
       },
     };
   };

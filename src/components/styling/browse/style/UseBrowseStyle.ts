@@ -85,5 +85,8 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       height: "auto",
       maxWidth: "100%",
     },
+    filterSliderList: {
+      width: "100%",
+    },
   })
 );

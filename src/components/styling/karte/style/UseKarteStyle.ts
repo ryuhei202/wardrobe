@@ -19,5 +19,17 @@ export const useKarteStyle = makeStyles((theme: Theme) =>
     drawerList: {
       width: 360,
     },
+    accordionDetails: {
+      display: "block",
+    },
+    itemImage: {
+      display: "inline-block",
+      width: "25%",
+    },
+    memberImageCollectionImage: {
+      top: "50%",
+      position: "relative",
+      transform: "translateY(-50%)",
+    },
   })
 );

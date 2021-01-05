@@ -1,5 +1,13 @@
-import { Box, Step, StepButton, StepLabel, Stepper } from "@material-ui/core";
-import React from "react";
+import {
+  Box,
+  Step,
+  StepButton,
+  StepLabel,
+  Stepper,
+  Tooltip,
+  Typography,
+} from "@material-ui/core";
+import React, { Fragment } from "react";
 import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
 import SelectionProgressCallback from "./callback/SelectionProgressCallback";
 import { useSelectionProgressPresenter } from "./presenter/UseSelectionProgressPresenter";
@@ -40,15 +48,31 @@ const SelectionProgress = (props: SelectionProgressProps) => {
     } else {
       stepLabel = <StepLabel>{presenter.labelText(index)}</StepLabel>;
     }
+
     steps.push(
-      <Step key={index} disabled={presenter.isDisabled(index)}>
-        <StepButton
-          className={classes.stepButton}
-          onClick={() => props.callback.onSelect(index)}
-        >
-          {stepLabel}
-        </StepButton>
-      </Step>
+      <Tooltip
+        key={index}
+        title={
+          <Typography>
+            {presenter.tooltipText(index).map((text, index) => (
+              <Fragment key={index}>
+                {text}
+                <br />
+              </Fragment>
+            ))}
+          </Typography>
+        }
+        placement="top-start"
+      >
+        <Step disabled={presenter.isDisabled(index)}>
+          <StepButton
+            className={classes.stepButton}
+            onClick={() => props.callback.onSelect(index)}
+          >
+            {stepLabel}
+          </StepButton>
+        </Step>
+      </Tooltip>
     );
   }
 
