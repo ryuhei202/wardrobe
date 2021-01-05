@@ -25,6 +25,7 @@ export const useBasicPresenter = (data: BasicResponse): BasicPresenter => {
   };
 
   const memberImageUrl = (): string => {
+    if (!data.memberImages.length) return "";
     return `${HostUrl()}${data.memberImages[0].imagePath.original}`;
   };
 
