@@ -17,7 +17,7 @@ const PopupImage = (props: PopupImageProps) => {
         height="auto"
         alt=""
         onClick={() => setIsPopupOpen(true)}
-        className={props.data.imageStyle ?? ""}
+        className={props.data.imageStyle}
       />
       <Dialog
         maxWidth="lg"

@@ -55,7 +55,6 @@ const PastOutfitCollectionDialog = (props: PastOutfitCollectionDialogProps) => {
                           data={{
                             originalImageUrl: HostUrl() + item.imagePath.large,
                             popupImageUrl: HostUrl() + item.imagePath.original,
-                            imageStyle: null,
                           }}
                         ></PopupImage>
                       </Avatar>

@@ -66,7 +66,6 @@ const Memo = (props: MemoProps) => {
                           data={{
                             originalImageUrl: HostUrl() + item.imagePath.large,
                             popupImageUrl: HostUrl() + item.imagePath.original,
-                            imageStyle: null,
                           }}
                         />
                       </div>
