@@ -15,7 +15,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ExpandMore, ListAlt } from "@material-ui/icons";
-import React from "react";
+import React, { Fragment } from "react";
 import MemoResponse from "../../../model/api/response/styling/karte/MemoResponse";
 import { useKarteStyle } from "./style/UseKarteStyle";
 import { useMemoPresenter } from "./presenter/UseMemoPresenter";
@@ -74,11 +74,11 @@ const Memo = (props: MemoProps) => {
                 </div>
                 <Paper variant="outlined">
                   <Typography>
-                    {memoPresenter.lastCoordinate().map((word) => (
-                      <>
+                    {memoPresenter.lastCoordinate().map((word, index) => (
+                      <Fragment key={index}>
                         {word}
                         <br></br>
-                      </>
+                      </Fragment>
                     ))}
                   </Typography>
                 </Paper>
@@ -89,11 +89,11 @@ const Memo = (props: MemoProps) => {
                 次回のコーデ：
                 <Paper variant="outlined">
                   <Typography>
-                    {memoPresenter.nextCoordinate().map((word) => (
-                      <>
+                    {memoPresenter.nextCoordinate().map((word, index) => (
+                      <Fragment key={index}>
                         {word}
                         <br></br>
-                      </>
+                      </Fragment>
                     ))}
                   </Typography>
                 </Paper>
@@ -104,11 +104,11 @@ const Memo = (props: MemoProps) => {
                 その他：
                 <Paper variant="outlined">
                   <Typography>
-                    {memoPresenter.otherNote().map((word) => (
-                      <>
+                    {memoPresenter.otherNote().map((word, index) => (
+                      <Fragment key={index}>
                         {word}
                         <br></br>
-                      </>
+                      </Fragment>
                     ))}
                   </Typography>
                 </Paper>
@@ -120,8 +120,8 @@ const Memo = (props: MemoProps) => {
                 <TableContainer component={Paper}>
                   <Table size="small">
                     <TableBody>
-                      {memoPresenter.memoNgs().map((row) => (
-                        <TableRow>
+                      {memoPresenter.memoNgs().map((row, index) => (
+                        <TableRow key={index}>
                           <TableCell>{row.categoryName}</TableCell>
                           <TableCell>{row.contentText}</TableCell>
                         </TableRow>

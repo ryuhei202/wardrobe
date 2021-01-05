@@ -53,7 +53,9 @@ const ItemBrowse = (props: ItemBrowseProps) => {
               onChange={handler.onSortChanged()}
             >
               {handler.sortSelection().map((row, index) => (
-                <option value={index}>{row}</option>
+                <option value={index} key={index}>
+                  {row}
+                </option>
               ))}
             </Select>
           </FormControl>

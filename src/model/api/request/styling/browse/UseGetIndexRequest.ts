@@ -15,6 +15,7 @@ export const useGetIndexRequest = (
     var filterParams: GetIndexFilterParams = {
       smallCategory: refinement.smallCategoryIds,
       size: refinement.sizeIds,
+      partSize: refinement.partSizes,
       color: refinement.colorIds,
       pattern: refinement.patternIds,
       logo: refinement.logoIds,

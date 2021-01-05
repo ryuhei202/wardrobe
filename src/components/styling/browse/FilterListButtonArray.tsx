@@ -12,7 +12,11 @@ const FilterListButtonArray = (props: FilterListButtonArrayProps) => {
   return (
     <List>
       {props.data.map((row, index) => (
-        <ListItem button onClick={() => props.callback.onClick(index)}>
+        <ListItem
+          key={index}
+          button
+          onClick={() => props.callback.onClick(index)}
+        >
           <ListItemText>{row.name}</ListItemText>
         </ListItem>
       ))}

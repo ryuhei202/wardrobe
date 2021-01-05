@@ -49,8 +49,8 @@ const Basic = (props: BasicProps) => {
           callback={handler.memberImageDialogCallback()}
         />
         <List className={classes.drawerList}>
-          {presenter.resultList().map((text: string) => (
-            <ListItem>
+          {presenter.resultList().map((text: string, index: number) => (
+            <ListItem key={index}>
               <ListItemText>{text}</ListItemText>
             </ListItem>
           ))}
