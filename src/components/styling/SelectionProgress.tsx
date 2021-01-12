@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Step,
   StepButton,
   StepLabel,
@@ -8,12 +9,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { Fragment } from "react";
+import KarteResponse from "../../model/api/response/styling/karte/KarteResponse";
 import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
 import SelectionProgressCallback from "./callback/SelectionProgressCallback";
 import { useSelectionProgressPresenter } from "./presenter/UseSelectionProgressPresenter";
 import { useSelectionProgressStyle } from "./style/UseSelectionProgressStyle";
 
 export interface SelectionProgressProps {
+  response: KarteResponse;
   data: SelectionProgressData;
   callback: SelectionProgressCallback;
 }
@@ -23,7 +26,7 @@ const SelectionProgress = (props: SelectionProgressProps) => {
   const presenter = useSelectionProgressPresenter(props.data);
 
   let steps = [];
-  for (let index = 0; index < 4; index++) {
+  for (let index = 0; index < props.response.rentableItemNum; index++) {
     let stepLabel;
     if (presenter.hasItemImage(index)) {
       stepLabel = (
@@ -76,14 +79,26 @@ const SelectionProgress = (props: SelectionProgressProps) => {
     );
   }
 
+  let completeButton;
+  if (props.response.rentableItemNum === props.data.items.length) {
+    completeButton = (
+      <Button variant="contained" color="primary">
+        アイテム選択完了
+      </Button>
+    );
+  }
+
   return (
-    <Stepper
-      activeStep={props.data.selectedIndex}
-      alternativeLabel
-      className={classes.stepper}
-    >
-      {steps}
-    </Stepper>
+    <>
+      {completeButton}
+      <Stepper
+        activeStep={props.data.selectedIndex}
+        alternativeLabel
+        className={classes.stepper}
+      >
+        {steps}
+      </Stepper>
+    </>
   );
 };
 
