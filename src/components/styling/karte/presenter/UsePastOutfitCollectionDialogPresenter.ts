@@ -4,6 +4,7 @@ import PastOutfitResponse from "../../../../model/api/response/styling/karte/Pas
 export interface PastOutfitCollectionDialogPresenter {
   shipmentDate: (index: number) => string;
   coordinateFeedback: (index: number) => string[];
+  itemListPrimary: (item: PastOutfitItemResponse) => string;
   itemListSecondary: (item: PastOutfitItemResponse) => string;
 }
 
@@ -19,6 +20,10 @@ export const usePastOutfitCollectionDialogPresenter = (
     return data[index].feedback.split("\n");
   };
 
+  const itemListPrimary = (item: PastOutfitItemResponse): string => {
+    return `${item.id}, ${item.categoryName}, ${item.colorName}`;
+  };
+
   const itemListSecondary = (item: PastOutfitItemResponse): string => {
     let result = `${item.size}`;
     item.partSizes.forEach((partSize) => {
@@ -27,5 +32,10 @@ export const usePastOutfitCollectionDialogPresenter = (
     return result;
   };
 
-  return { shipmentDate, coordinateFeedback, itemListSecondary };
+  return {
+    shipmentDate,
+    coordinateFeedback,
+    itemListPrimary,
+    itemListSecondary,
+  };
 };
