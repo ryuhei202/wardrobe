@@ -82,7 +82,11 @@ const SelectionProgress = (props: SelectionProgressProps) => {
   let completeButton;
   if (props.response.rentableItemNum === props.data.items.length) {
     completeButton = (
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={props.callback.onClickCompleteButton}
+      >
         アイテム選択完了
       </Button>
     );
