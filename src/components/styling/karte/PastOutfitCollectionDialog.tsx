@@ -60,7 +60,7 @@ const PastOutfitCollectionDialog = (props: PastOutfitCollectionDialogProps) => {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={item.categoryName}
+                      primary={presenter.itemListPrimary(item)}
                       secondary={presenter.itemListSecondary(item)}
                     ></ListItemText>
                   </ListItem>
