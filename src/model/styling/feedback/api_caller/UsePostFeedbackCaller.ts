@@ -46,7 +46,7 @@ export const usePostFeedbackCaller = (
       setCallStatus(CallStatus.Running);
       fetch();
     }
-  }, [callStatus, client]);
+  }, [callStatus, client, onSuccess]);
 
   const isRunning = (): boolean => {
     return callStatus === CallStatus.Running;
