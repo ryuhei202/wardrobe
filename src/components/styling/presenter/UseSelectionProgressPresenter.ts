@@ -8,6 +8,7 @@ export interface SelectionProgressPresenter {
   borderProp: (index: number) => number;
   isDisabled: (index: number) => boolean;
   tooltipText: (index: number) => string[];
+  isCompleteButtonAvailable: () => boolean;
 }
 
 export const useSelectionProgressPresenter = (
@@ -46,6 +47,10 @@ export const useSelectionProgressPresenter = (
     return [];
   };
 
+  const isCompleteButtonAvailable = () => {
+    return data.rentableItemNum === data.items.length;
+  };
+
   return {
     hasItemImage,
     itemImageUrl,
@@ -53,5 +58,6 @@ export const useSelectionProgressPresenter = (
     borderProp,
     isDisabled,
     tooltipText,
+    isCompleteButtonAvailable,
   };
 };

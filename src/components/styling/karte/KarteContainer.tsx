@@ -1,13 +1,13 @@
 import { Divider, Paper, Typography } from "@material-ui/core";
 import React from "react";
-import SelectionProgressData from "../../../model/styling/props_data/SelectionProgressData";
-import SelectionProgressCallback from "../callback/SelectionProgressCallback";
+import KarteContainerData from "../../../model/styling/karte/props_data/KarteContainerData";
 import { useStylingStyle } from "../style/UseStylingStyle";
+import KarteContainerCallback from "./callback/KarteContainerCallback";
 import { useKarteProvider } from "./provider/UseKarteProvider";
 
 export interface KarteContainerProps {
-  data: SelectionProgressData;
-  callback: SelectionProgressCallback;
+  data: KarteContainerData;
+  callback: KarteContainerCallback;
 }
 
 const KarteContainer = (props: KarteContainerProps) => {
@@ -26,7 +26,11 @@ const KarteContainer = (props: KarteContainerProps) => {
         {karteProvider.karteComponent()}
       </div>
       <Paper variant="outlined" className={classes.progressContainer}>
-        {karteProvider.selectionProgressComponent(props)}
+        {karteProvider.selectionProgressComponent(
+          props.data.selectedIndex,
+          props.data.items,
+          props.callback.selectionProgressCallback
+        )}
       </Paper>
     </>
   );
