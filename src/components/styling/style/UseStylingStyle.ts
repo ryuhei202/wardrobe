@@ -9,6 +9,13 @@ export const useStylingStyle = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: 360,
     },
+    drawerHeader: {
+      display: "flex",
+      alignItems: "center",
+      padding: theme.spacing(3),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+    },
     karteContainer: {
       overflow: "auto",
     },

@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Step,
   StepButton,
   StepLabel,
@@ -23,7 +24,7 @@ const SelectionProgress = (props: SelectionProgressProps) => {
   const presenter = useSelectionProgressPresenter(props.data);
 
   let steps = [];
-  for (let index = 0; index < 4; index++) {
+  for (let index = 0; index < props.data.rentableItemNum; index++) {
     let stepLabel;
     if (presenter.hasItemImage(index)) {
       stepLabel = (
@@ -76,14 +77,30 @@ const SelectionProgress = (props: SelectionProgressProps) => {
     );
   }
 
+  let completeButton;
+  if (presenter.isCompleteButtonAvailable()) {
+    completeButton = (
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={props.callback.onClickCompleteButton}
+      >
+        アイテム選択完了
+      </Button>
+    );
+  }
+
   return (
-    <Stepper
-      activeStep={props.data.selectedIndex}
-      alternativeLabel
-      className={classes.stepper}
-    >
-      {steps}
-    </Stepper>
+    <>
+      {completeButton}
+      <Stepper
+        activeStep={props.data.selectedIndex}
+        alternativeLabel
+        className={classes.stepper}
+      >
+        {steps}
+      </Stepper>
+    </>
   );
 };
 

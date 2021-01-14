@@ -6,4 +6,5 @@ export default interface KarteResponse {
   readonly basic: BasicResponse;
   readonly size: SizeResponse;
   readonly memo: MemoResponse;
+  readonly rentableItemNum: number;
 }
