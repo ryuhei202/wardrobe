@@ -26,7 +26,11 @@ const KarteContainer = (props: KarteContainerProps) => {
         {karteProvider.karteComponent()}
       </div>
       <Paper variant="outlined" className={classes.progressContainer}>
-        {karteProvider.selectionProgressComponent(props)}
+        {karteProvider.selectionProgressComponent(
+          props.data.selectedIndex,
+          props.data.items,
+          props.callback.selectionProgressCallback
+        )}
       </Paper>
     </>
   );

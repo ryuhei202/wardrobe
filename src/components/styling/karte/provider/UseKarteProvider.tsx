@@ -1,13 +1,18 @@
 import { CircularProgress, Typography } from "@material-ui/core";
 import React from "react";
 import { useGetKarteCaller } from "../../../../model/styling/karte/api_caller/UseGetKarteCaller";
+import SelectedItem from "../../../../model/styling/SelectedItem";
+import SelectionProgressCallback from "../../callback/SelectionProgressCallback";
 import SelectionProgress from "../../SelectionProgress";
 import Karte from "../Karte";
-import { KarteContainerProps } from "../KarteContainer";
 
 export interface KarteProvider {
   karteComponent: () => JSX.Element;
-  selectionProgressComponent: (props: KarteContainerProps) => JSX.Element;
+  selectionProgressComponent: (
+    selectedIndex: number,
+    items: SelectedItem[],
+    callback: SelectionProgressCallback
+  ) => JSX.Element;
 }
 
 export const useKarteProvider = (): KarteProvider => {
@@ -26,21 +31,23 @@ export const useKarteProvider = (): KarteProvider => {
   };
 
   const selectionProgressComponent = (
-    props: KarteContainerProps
+    selectedIndex: number,
+    items: SelectedItem[],
+    callback: SelectionProgressCallback
   ): JSX.Element => {
     if (apiCaller.isRunning()) {
       return <CircularProgress />;
     } else if (apiCaller.errorResponse !== null) {
       return <Typography>{apiCaller.errorResponse.message}</Typography>;
     } else if (apiCaller.response !== null) {
-      const selectionProgressData = {
-        ...props.data,
-        rentableItemNum: apiCaller.response.rentableItemNum,
-      };
       return (
         <SelectionProgress
-          data={selectionProgressData}
-          callback={props.callback.selectionProgressCallback}
+          data={{
+            selectedIndex: selectedIndex,
+            items: items,
+            rentableItemNum: apiCaller.response.rentableItemNum,
+          }}
+          callback={callback}
         />
       );
     } else {
