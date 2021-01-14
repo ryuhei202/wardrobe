@@ -1,0 +1,50 @@
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Typography,
+} from "@material-ui/core";
+import React, { Fragment } from "react";
+import SelectedItem from "../../model/styling/SelectedItem";
+import { useSelectedItemArrayPresenter } from "./presenter/UseSelectedItemArrayPresenter";
+import { useStylingStyle } from "./style/UseStylingStyle";
+
+export interface SelectionConfirmProps {
+  data: SelectedItem[];
+}
+
+const SelectedItemArray = (props: SelectionConfirmProps) => {
+  const classes = useStylingStyle();
+  const presenter = useSelectedItemArrayPresenter(props.data);
+
+  return (
+    <div className={classes.selectedItemsContainer}>
+      {props.data.map((selectedItem, index) => (
+        <Card key={selectedItem.itemId} className={classes.selectedItemCard}>
+          <CardHeader subheader={presenter.itemIdText(index)} />
+          <CardMedia
+            className={classes.selectedItemCardMedia}
+            image={presenter.itemImageUrl(index)}
+          />
+          <CardContent>
+            <Typography variant="subtitle1">
+              {presenter.locationName(index)}
+            </Typography>
+            <br />
+            <Typography variant="body2">
+              {presenter.sizeText(index).map((rowText, index) => (
+                <Fragment key={index}>
+                  {rowText}
+                  <br />
+                </Fragment>
+              ))}
+            </Typography>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+};
+
+export default SelectedItemArray;
