@@ -33,11 +33,14 @@ export const useKarteProvider = (): KarteProvider => {
     } else if (apiCaller.errorResponse !== null) {
       return <Typography>{apiCaller.errorResponse.message}</Typography>;
     } else if (apiCaller.response !== null) {
+      const selectionProgressData = {
+        ...props.data,
+        rentableItemNum: apiCaller.response.rentableItemNum,
+      };
       return (
         <SelectionProgress
-          response={apiCaller.response}
-          data={props.data}
-          callback={props.callback}
+          data={selectionProgressData}
+          callback={props.callback.selectionProgressCallback}
         />
       );
     } else {
