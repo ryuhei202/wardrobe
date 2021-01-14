@@ -1,15 +1,18 @@
 import {
   Button,
+  CircularProgress,
   Dialog,
+  DialogContent,
   DialogTitle,
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
+import { usePostFeedbackCaller } from "../../../model/styling/feedback/api_caller/UsePostFeedbackCaller";
 import FeedbackDialogData from "../../../model/styling/feedback/props_data/FeedbackDialogData";
 import FeedbackDialogCallback from "./callback/FeedbackDialogCallback";
-import { usePostFeedbackProvider } from "./provider/UsePostFeedbackProvider";
 
 export interface FeedbackDialogProps {
   data: FeedbackDialogData;
@@ -19,7 +22,11 @@ export interface FeedbackDialogProps {
 const FeedbackDialog = (props: FeedbackDialogProps) => {
   const [selectedCategory, setSelectedCategory] = useState(1);
   const [description, setDescription] = useState("");
-  const provider = usePostFeedbackProvider(selectedCategory, description);
+  const apiCaller = usePostFeedbackCaller(
+    selectedCategory,
+    description,
+    props.callback.onPostComplete
+  );
 
   return (
     <>
@@ -48,15 +55,23 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
             setDescription(event.target.value);
           }}
         ></TextField>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={provider.prepareApiCaller}
-        >
+        <Button variant="contained" color="primary" onClick={apiCaller.prepare}>
           アイテムを変更する
         </Button>
       </Dialog>
-      {provider.progressComponent(props.callback)}
+      <Dialog
+        open={apiCaller.isRunning()}
+        disableBackdropClick
+        disableEscapeKeyDown
+      >
+        <CircularProgress />
+      </Dialog>
+      <Dialog open={apiCaller.errorResponse !== null}>
+        <DialogTitle>エラー</DialogTitle>
+        <DialogContent>
+          <Typography>{apiCaller.errorResponse?.message ?? ""}</Typography>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

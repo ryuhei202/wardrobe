@@ -15,7 +15,8 @@ export interface PostFeedbackCaller {
 
 export const usePostFeedbackCaller = (
   category: number,
-  description: string
+  description: string,
+  onSuccess: () => void
 ): PostFeedbackCaller => {
   const [response, setResponse] = useState<any>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Idle);
@@ -35,6 +36,7 @@ export const usePostFeedbackCaller = (
             setResponse(response);
             setErrorResponse(null);
             setCallStatus(CallStatus.Idle);
+            onSuccess();
           })
           .catch((error: ErrorResponse) => {
             setErrorResponse(error);
