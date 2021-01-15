@@ -4,4 +4,5 @@ export default interface SelectedItem {
   readonly itemId: number;
   readonly itemImagePath: string;
   readonly partSizes: PartSize[];
+  readonly locationName: string;
 }
