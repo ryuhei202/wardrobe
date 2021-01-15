@@ -1,4 +1,4 @@
 export default interface PostRequest {
   url(): string;
-  params(): FormData;
+  params(): { [key: string]: any };
 }
