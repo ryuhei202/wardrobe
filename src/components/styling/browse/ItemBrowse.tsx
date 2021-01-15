@@ -20,13 +20,14 @@ const ItemBrowse = (props: ItemBrowseProps) => {
   const handler = useItemBrowseHandler(props.response, props.callback);
   const provider = useBrowseIndexProvider(handler.currentRefinement);
 
-  if (handler.selectedPreregisteredItemId)
+  if (handler.selectedPreregisteredItemId) {
     return (
       <BrowseDetailContainer
         id={handler.selectedPreregisteredItemId}
         callback={handler.browseDetailCallback()}
       />
     );
+  }
 
   return (
     <>

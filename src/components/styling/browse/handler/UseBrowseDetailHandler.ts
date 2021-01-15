@@ -64,6 +64,7 @@ export const useBrowseDetailHandler = (
             itemId: itemRecord.itemId,
             itemImagePath: detail.itemImagePath,
             partSizes: createPartSizes(columns, itemRecord),
+            locationName: itemRecord.locationName,
           });
         }
       },
