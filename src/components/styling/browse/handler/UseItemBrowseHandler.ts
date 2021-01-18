@@ -48,7 +48,7 @@ export const useItemBrowseHandler = (
     colorIds: [],
     patternIds: [],
     logoIds: [],
-    optionIds: [],
+    optionIds: [3, 4], // NGはデフォルトで選択
     sortId: 1,
     pageNo: 1,
   };
