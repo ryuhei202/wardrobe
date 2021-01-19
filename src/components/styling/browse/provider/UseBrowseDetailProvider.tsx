@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { useGetDetailCaller } from "../../../../model/styling/browse/api_caller/UseGetDetailCaller";
+import Refinement from "../../../../model/styling/browse/Refinement";
 import BrowseDetail from "../BrowseDetail";
 import BrowseDetailCallback from "../callback/BrowseDetailCallback";
 
@@ -16,9 +17,10 @@ export interface BrowseDetailProvider {
 }
 
 export const useBrowseDetailProvider = (
-  preregisteredItemId: number
+  preregisteredItemId: number,
+  refinement: Refinement
 ): BrowseDetailProvider => {
-  const detailApiCaller = useGetDetailCaller(preregisteredItemId);
+  const detailApiCaller = useGetDetailCaller(preregisteredItemId, refinement);
 
   const browseDetailComponent = (
     callback: BrowseDetailCallback
