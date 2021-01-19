@@ -11,6 +11,7 @@ export interface PostFeedbackCaller {
   response: BrowseIndexResponse | null;
   errorResponse: ErrorResponse | null;
   prepare: () => void;
+  clearErrorResponse: () => void;
 }
 
 export const usePostFeedbackCaller = (
@@ -56,5 +57,9 @@ export const usePostFeedbackCaller = (
     setCallStatus(CallStatus.Preparing);
   };
 
-  return { isRunning, response, errorResponse, prepare };
+  const clearErrorResponse = () => {
+    setErrorResponse(null);
+  };
+
+  return { isRunning, response, errorResponse, prepare, clearErrorResponse };
 };

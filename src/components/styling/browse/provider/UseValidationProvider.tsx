@@ -37,6 +37,7 @@ export const useValidationProvider = (
         </Dialog>
         <Dialog open={apiCaller.errorResponse !== null}>
           <DialogTitle>エラー</DialogTitle>
+          onClose={apiCaller.clearErrorResponse}
           <DialogContent>
             <Typography>{apiCaller.errorResponse?.message ?? ""}</Typography>
           </DialogContent>

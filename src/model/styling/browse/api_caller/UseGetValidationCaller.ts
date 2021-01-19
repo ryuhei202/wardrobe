@@ -10,6 +10,7 @@ export interface GetValidationCaller {
   isRunning: () => boolean;
   response: ValidationResponse[] | null;
   errorResponse: ErrorResponse | null;
+  clearErrorResponse: () => void;
 }
 
 export const useGetValidationCaller = (
@@ -50,5 +51,9 @@ export const useGetValidationCaller = (
     return callStatus === CallStatus.Running;
   };
 
-  return { isRunning, response, errorResponse };
+  const clearErrorResponse = () => {
+    setErrorResponse(null);
+  };
+
+  return { isRunning, response, errorResponse, clearErrorResponse };
 };
