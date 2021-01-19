@@ -26,28 +26,28 @@ export const useValidationProvider = (
   const validationDialogComponent = (
     callback: ValidationDialogCallback
   ): JSX.Element => {
-    if (apiCaller.isRunning()) {
-      return (
-        <Dialog open={true} disableBackdropClick disableEscapeKeyDown>
+    return (
+      <>
+        <Dialog
+          open={apiCaller.isRunning()}
+          disableBackdropClick
+          disableEscapeKeyDown
+        >
           <CircularProgress />
         </Dialog>
-      );
-    } else if (apiCaller.errorResponse) {
-      return (
-        <Dialog open={true} disableBackdropClick={false}>
+        <Dialog open={apiCaller.errorResponse !== null}>
           <DialogTitle>エラー</DialogTitle>
           <DialogContent>
-            <Typography>{apiCaller.errorResponse.message}</Typography>
+            <Typography>{apiCaller.errorResponse?.message ?? ""}</Typography>
           </DialogContent>
         </Dialog>
-      );
-    } else if (apiCaller.response) {
-      return (
-        <ValidationDialog response={apiCaller.response} callback={callback} />
-      );
-    } else {
-      return <></>;
-    }
+        <ValidationDialog
+          isOpen={apiCaller.response !== null}
+          response={apiCaller.response ?? []}
+          callback={callback}
+        />
+      </>
+    );
   };
 
   return {

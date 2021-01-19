@@ -9,10 +9,9 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography,
 } from "@material-ui/core";
 import { Error, Warning } from "@material-ui/icons";
-import React, { Fragment } from "react";
+import React from "react";
 import ValidationResponse from "../../../model/api/response/styling/browse/ValidationResponse";
 import ValidationDialogCallback from "./callback/ValidationDialogCallback";
 import { useValidationDialogPresenter } from "./presenter/UseValidationDialogPresenter";
@@ -20,6 +19,7 @@ import { useValidationDialogStyle } from "./style/UseValidationDialogStyle";
 
 export interface ValidationDialogProps {
   response: ValidationResponse[];
+  isOpen: boolean;
   callback: ValidationDialogCallback;
 }
 
@@ -28,7 +28,7 @@ const ValidationDialog = (props: ValidationDialogProps) => {
   const presenter = useValidationDialogPresenter(props.response);
 
   return (
-    <Dialog open={true} disableBackdropClick disableEscapeKeyDown>
+    <Dialog open={props.isOpen} disableBackdropClick disableEscapeKeyDown>
       <DialogTitle>コーデバリデーション</DialogTitle>
       <DialogContent>
         <List>
