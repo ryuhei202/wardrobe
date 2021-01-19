@@ -1,15 +1,22 @@
 import {
+  Avatar,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
   Typography,
 } from "@material-ui/core";
+import { Error, Warning } from "@material-ui/icons";
 import React, { Fragment } from "react";
 import ValidationResponse from "../../../model/api/response/styling/browse/ValidationResponse";
 import ValidationDialogCallback from "./callback/ValidationDialogCallback";
 import { useValidationDialogPresenter } from "./presenter/UseValidationDialogPresenter";
+import { useValidationDialogStyle } from "./style/UseValidationDialogStyle";
 
 export interface ValidationDialogProps {
   response: ValidationResponse[];
@@ -17,23 +24,31 @@ export interface ValidationDialogProps {
 }
 
 const ValidationDialog = (props: ValidationDialogProps) => {
+  const classes = useValidationDialogStyle();
   const presenter = useValidationDialogPresenter(props.response);
 
   return (
     <Dialog open={true} disableBackdropClick disableEscapeKeyDown>
       <DialogTitle>コーデバリデーション</DialogTitle>
       <DialogContent>
-        {presenter.contentList().map((content, index) => (
-          <Fragment key={index}>
-            <Typography
-              display="inline"
-              color={content.isRejected ? "error" : "secondary"}
-            >
-              {content.isRejected ? "[要交換]" : "[注意]"}
-            </Typography>
-            <Typography display="inline">{content.message}</Typography>
-          </Fragment>
-        ))}
+        <List>
+          {presenter.contentList().map((content, index) => (
+            <ListItem key={index}>
+              <ListItemAvatar>
+                {content.isRejected ? (
+                  <Avatar className={classes.error}>
+                    <Error />
+                  </Avatar>
+                ) : (
+                  <Avatar className={classes.warning}>
+                    <Warning />
+                  </Avatar>
+                )}
+              </ListItemAvatar>
+              <ListItemText>{content.message}</ListItemText>
+            </ListItem>
+          ))}
+        </List>
       </DialogContent>
       <DialogActions>
         <Button
