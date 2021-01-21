@@ -24,6 +24,7 @@ const ItemBrowse = (props: ItemBrowseProps) => {
     return (
       <BrowseDetailContainer
         id={handler.selectedPreregisteredItemId}
+        refinement={handler.currentRefinement}
         callback={handler.browseDetailCallback()}
       />
     );
