@@ -8,11 +8,15 @@ import BrowseDetailCallback from "../callback/BrowseDetailCallback";
 import SelectedItem from "../../../../model/styling/SelectedItem";
 import PartSize from "../../../../model/styling/PartSize";
 import DetailSizeItemRecordResponse from "../../../../model/api/response/styling/browse/DetailSizeItemRecordResponse";
+import ValidationDialogCallback from "../callback/ValidationDialogCallback";
 
 export interface BrowseDetailHandler {
+  selectedItem: SelectedItem | null;
+  isValidating: boolean;
   onClickSelectItemButton: () => void;
   detailSizeButtonArrayCallback: () => DetailSizeButtonArrayCallback;
   detailItemTableCallback: () => DetailItemTableCallback;
+  validationDialogCallback: () => ValidationDialogCallback;
   selectedSizeName: () => string;
   selectedItemId: () => string;
   isSelectItemButtonDisabled: () => boolean;
@@ -28,6 +32,7 @@ export const useBrowseDetailHandler = (
     null
   );
   const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
+  const [isValidating, setIsValidating] = useState(false);
 
   const createPartSizes = (
     columns: string[],
@@ -41,9 +46,7 @@ export const useBrowseDetailHandler = (
     });
   };
 
-  const onClickSelectItemButton = () => {
-    if (selectedItem) callback.onSelectItem(selectedItem);
-  };
+  const onClickSelectItemButton = () => setIsValidating(true);
 
   const detailSizeButtonArrayCallback = (): DetailSizeButtonArrayCallback => {
     return {
@@ -67,6 +70,15 @@ export const useBrowseDetailHandler = (
             locationName: itemRecord.locationName,
           });
         }
+      },
+    };
+  };
+
+  const validationDialogCallback = (): ValidationDialogCallback => {
+    return {
+      onClickCancelButton: () => setIsValidating(false),
+      onClickSelectButton: () => {
+        if (selectedItem) callback.onSelectItem(selectedItem);
       },
     };
   };
@@ -109,9 +121,12 @@ export const useBrowseDetailHandler = (
   };
 
   return {
+    selectedItem,
+    isValidating,
     onClickSelectItemButton,
     detailSizeButtonArrayCallback,
     detailItemTableCallback,
+    validationDialogCallback,
     selectedSizeName,
     selectedItemId,
     isSelectItemButtonDisabled,

@@ -8,6 +8,7 @@ import DetailSizeButtonArray from "./DetailSizeButtonArray";
 import { useBrowseDetailHandler } from "./handler/UseBrowseDetailHandler";
 import { useBrowseDetailPresenter } from "./presenter/UseBrowseDetailPresenter";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
+import ValidationDialogContainer from "./ValidationDialogContainer";
 
 interface BrowseDetailProps {
   response: DetailResponse;
@@ -18,6 +19,16 @@ const BrowseDetail = (props: BrowseDetailProps) => {
   const classes = useBrowseStyle();
   const handler = useBrowseDetailHandler(props.response, props.callback);
   const presenter = useBrowseDetailPresenter(props.response);
+
+  let validationDialogContainer;
+  if (handler.selectedItem && handler.isValidating) {
+    validationDialogContainer = (
+      <ValidationDialogContainer
+        itemId={handler.selectedItem.itemId}
+        callback={handler.validationDialogCallback()}
+      />
+    );
+  }
 
   return (
     <>
@@ -87,6 +98,7 @@ const BrowseDetail = (props: BrowseDetailProps) => {
           </Button>
         </div>
       </Paper>
+      {validationDialogContainer}
     </>
   );
 };
