@@ -80,7 +80,10 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
       >
         <CircularProgress />
       </Dialog>
-      <Dialog open={apiCaller.errorResponse !== null}>
+      <Dialog
+        open={apiCaller.errorResponse !== null}
+        onClose={apiCaller.clearErrorResponse}
+      >
         <DialogTitle>エラー</DialogTitle>
         <DialogContent>
           <Typography>{apiCaller.errorResponse?.message ?? ""}</Typography>
