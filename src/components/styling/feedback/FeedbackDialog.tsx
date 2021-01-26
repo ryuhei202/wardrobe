@@ -28,6 +28,7 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
   const apiCaller = usePostFeedbackCaller(
     selectedCategory,
     description,
+    props.data.itemIds,
     props.callback.onPostComplete
   );
 
@@ -48,7 +49,8 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
             }}
           >
             <MenuItem value={1}>アイテム行方不明</MenuItem>
-            <MenuItem value={2}>その他</MenuItem>
+            <MenuItem value={2}>色味</MenuItem>
+            <MenuItem value={99}>その他</MenuItem>
           </Select>
           <br />
           <TextField

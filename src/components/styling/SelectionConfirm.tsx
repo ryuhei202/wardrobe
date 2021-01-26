@@ -30,7 +30,10 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
         アイテムを変更する
       </Button>
       <FeedbackDialog
-        data={{ isOpen: isFeedbackDialogOpen }}
+        data={{
+          isOpen: isFeedbackDialogOpen,
+          itemIds: props.data.items.map((item) => item.itemId),
+        }}
         callback={{
           onClose: () => setIsFeedbackDialogOpen(false),
           onPostComplete: props.callback.onCancelSelection,
