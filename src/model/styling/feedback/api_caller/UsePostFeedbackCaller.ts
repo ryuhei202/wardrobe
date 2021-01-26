@@ -17,6 +17,7 @@ export interface PostFeedbackCaller {
 export const usePostFeedbackCaller = (
   category: number,
   description: string,
+  itemIds: number[],
   onSuccess: () => void
 ): PostFeedbackCaller => {
   const [response, setResponse] = useState<any>(null);
@@ -25,7 +26,12 @@ export const usePostFeedbackCaller = (
     null
   );
 
-  const request = usePostFeedbackRequest(ChartId(), category, description);
+  const request = usePostFeedbackRequest(
+    ChartId(),
+    category,
+    description,
+    itemIds
+  );
   const client = usePostClient(request);
 
   useEffect(() => {
