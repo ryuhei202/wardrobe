@@ -36,14 +36,9 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       display: "flex",
     },
     card: {
-      width: 200,
-      height: 425,
+      maxWidth: 200,
       margin: theme.spacing(1, 1),
       paddingBottom: theme.spacing(1),
-    },
-    cardActionArea: {
-      width: 200,
-      height: 425,
     },
     cardCollection: {
       display: "flex",
@@ -53,9 +48,6 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     media: {
       height: 300,
       width: 200,
-    },
-    rightEndText: {
-      float: "right",
     },
     paginationContainer: {
       marginTop: theme.spacing(1),
@@ -87,6 +79,12 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     },
     filterSliderList: {
       width: "100%",
+    },
+    primaryColor: {
+      backgroundColor: theme.palette.primary.dark,
+    },
+    darkBlue: {
+      backgroundColor: "#00266F",
     },
   })
 );

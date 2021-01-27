@@ -20,6 +20,7 @@ export const useItemCardCollectionHandler = (
         categoryName: item.categoryName,
         brandName: item.brandName,
         imagePath: item.imagePath,
+        isMarriage: item.isMarriage,
       };
     });
   };

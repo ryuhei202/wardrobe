@@ -4,4 +4,5 @@ export default interface ItemCardData {
   readonly categoryName: string;
   readonly brandName: string;
   readonly imagePath: string;
+  readonly isMarriage: boolean;
 }
