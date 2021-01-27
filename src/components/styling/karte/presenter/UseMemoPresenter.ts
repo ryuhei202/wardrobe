@@ -6,6 +6,7 @@ export interface MemoPresenter {
   nextCoordinate: () => string[];
   otherNote: () => string[];
   memoNgs: () => MemoNgResponse[];
+  ngTimestamp: (index: number) => string;
 }
 
 export const useMemoPresenter = (data: MemoResponse): MemoPresenter => {
@@ -24,5 +25,12 @@ export const useMemoPresenter = (data: MemoResponse): MemoPresenter => {
 
   const memoNgs = () => data.ngs;
 
-  return { lastCoordinate, nextCoordinate, otherNote, memoNgs };
+  const ngTimestamp = (index: number): string =>
+    `作成日:${new Date(
+      data.ngs[index].createdAt
+    ).toLocaleDateString()}　更新日:${new Date(
+      data.ngs[index].updatedAt
+    ).toLocaleDateString()}`;
+
+  return { lastCoordinate, nextCoordinate, otherNote, memoNgs, ngTimestamp };
 };
