@@ -27,12 +27,12 @@ export const usePartSizeRefinementHandler = (
     currentValues: ValueRefinement[]
   ): FilterSliderArrayCallback => {
     return {
-      onChange: (index: number, value: number) => {
+      onChange: (index: number, value: number[]) => {
         const currentIndex = currentValues.findIndex(
           (filter) => filter.id === choice[index].id
         );
         const newPartSizes = [...currentValues];
-        const newValue = { id: choice[index].id, value: value };
+        const newValue = { id: choice[index].id, min: value[0], max: value[1] };
         if (currentIndex === -1) {
           newPartSizes.push(newValue);
         } else {
@@ -52,9 +52,12 @@ export const usePartSizeRefinementHandler = (
         key: filter.id,
         name: filter.name,
         range: [filter.min, filter.max],
-        selectedValue:
-          currentValues.find((value) => value.id === filter.id)?.value ??
-          filter.min,
+        selectedValue: [
+          currentValues.find((value) => value.id === filter.id)?.min ??
+            filter.min,
+          currentValues.find((value) => value.id === filter.id)?.max ??
+            filter.max,
+        ],
       };
     });
   };
@@ -65,7 +68,9 @@ export const usePartSizeRefinementHandler = (
   ): AppliedFilterData[] => {
     return currentValues.map((valueRefinement) => {
       let filter = choice.find((row) => row.id === valueRefinement.id);
-      return { name: `${filter?.name} ${valueRefinement.value}` };
+      return {
+        name: `${filter?.name} ${valueRefinement.min}~${valueRefinement.max}`,
+      };
     });
   };
 
