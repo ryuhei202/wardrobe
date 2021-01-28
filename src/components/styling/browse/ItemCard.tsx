@@ -29,7 +29,7 @@ const ItemCard = (props: ItemCardProps) => {
           props.data.isMarriage ? (
             <Avatar className={classes.primaryColor}>婚活</Avatar>
           ) : (
-            <Avatar className={classes.darkBlue}>Leeap</Avatar>
+            <Avatar className={classes.darkBlue}>L</Avatar>
           )
         }
       />
