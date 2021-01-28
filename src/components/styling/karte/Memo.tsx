@@ -12,6 +12,7 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  Tooltip,
   Typography,
 } from "@material-ui/core";
 import { ExpandMore, ListAlt } from "@material-ui/icons";
@@ -122,13 +123,19 @@ const Memo = (props: MemoProps) => {
               <ListItemText>
                 NGメモ：
                 <TableContainer component={Paper}>
-                  <Table size="small">
+                  <Table>
                     <TableBody>
                       {memoPresenter.memoNgs().map((row, index) => (
-                        <TableRow key={index}>
-                          <TableCell>{row.categoryName}</TableCell>
-                          <TableCell>{row.contentText}</TableCell>
-                        </TableRow>
+                        <Tooltip
+                          title={memoPresenter.ngTimestamp(index)}
+                          placement="right"
+                          key={index}
+                        >
+                          <TableRow>
+                            <TableCell>{row.categoryName}</TableCell>
+                            <TableCell>{row.contentText}</TableCell>
+                          </TableRow>
+                        </Tooltip>
                       ))}
                     </TableBody>
                   </Table>
