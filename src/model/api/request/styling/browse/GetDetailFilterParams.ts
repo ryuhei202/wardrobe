@@ -1,7 +1,7 @@
-import GetIndexFilterValueParams from "./GetIndexFilterValueParams";
+import GetIndexFilterPartSizeParams from "./GetIndexFilterPartSizeParams";
 
 export default interface GetIndexFilterParams {
   size: number[];
-  partSize: GetIndexFilterValueParams[];
+  partSize: GetIndexFilterPartSizeParams[];
   option: number[];
 }
