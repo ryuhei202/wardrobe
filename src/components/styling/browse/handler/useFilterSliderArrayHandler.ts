@@ -3,7 +3,7 @@ import FilterSliderData from "../../../../model/styling/browse/props_data/Filter
 import FilterSliderArrayCallback from "../callback/FilterSliderArrayCallback";
 
 export interface FilterSliderArrayHandler {
-  value: (index: number) => number;
+  value: (index: number) => number[];
   onChangeCommitted: (
     index: number
   ) => (event: object, value: number | number[]) => void;
@@ -30,7 +30,7 @@ export const useFilterSliderArrayHandler = (
     event: object,
     value: number | number[]
   ) => {
-    callback.onChange(index, value as number);
+    callback.onChange(index, value as number[]);
   };
 
   const onChange = (index: number) => (
@@ -38,7 +38,7 @@ export const useFilterSliderArrayHandler = (
     value: number | number[]
   ) => {
     let newValues = [...currentValues];
-    newValues[index] = value as number;
+    newValues[index] = value as number[];
     setCurrentValues(newValues);
   };
 

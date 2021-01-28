@@ -1,11 +1,11 @@
-import GetIndexFilterValueParams from "./GetIndexFilterValueParams";
+import GetIndexFilterPartSizeParams from "./GetIndexFilterPartSizeParams";
 
 export default interface GetIndexFilterParams {
   largeCategory?: number;
   mediumCategory?: number;
   smallCategory: number[];
   size: number[];
-  partSize: GetIndexFilterValueParams[];
+  partSize: GetIndexFilterPartSizeParams[];
   color: number[];
   pattern: number[];
   logo: number[];

@@ -1,6 +1,6 @@
-export default interface FilterMediaData {
+export default interface FilterSliderData {
   readonly key: number;
   readonly name: string;
   readonly range: [number, number];
-  readonly selectedValue: number;
+  readonly selectedValue: number[];
 }
