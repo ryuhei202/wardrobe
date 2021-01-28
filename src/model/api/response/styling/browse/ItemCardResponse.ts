@@ -5,4 +5,5 @@ export default interface ItemCardResponse {
   readonly categoryName: string;
   readonly brandName: string;
   readonly imagePath: string;
+  readonly isMarriage: boolean;
 }

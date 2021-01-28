@@ -1,7 +1,9 @@
 import {
+  Avatar,
   Card,
   CardActionArea,
   CardContent,
+  CardHeader,
   CardMedia,
   Typography,
 } from "@material-ui/core";
@@ -22,10 +24,16 @@ const ItemCard = (props: ItemCardProps) => {
 
   return (
     <Card className={classes.card}>
-      <CardActionArea
-        className={classes.cardActionArea}
-        onClick={() => props.callback.onClick()}
-      >
+      <CardHeader
+        avatar={
+          props.data.isMarriage ? (
+            <Avatar className={classes.primaryColor}>婚活</Avatar>
+          ) : (
+            <Avatar className={classes.darkBlue}>L</Avatar>
+          )
+        }
+      />
+      <CardActionArea onClick={() => props.callback.onClick()}>
         <CardMedia className={classes.media} image={presenter.itemImageUrl()} />
         <CardContent>
           <img
@@ -34,19 +42,9 @@ const ItemCard = (props: ItemCardProps) => {
             height="auto"
             alt=""
           />
-          <br />
-          <Typography display="inline" variant="body2" color="textSecondary">
-            {props.data.categoryName}
-          </Typography>
-          <Typography
-            className={classes.rightEndText}
-            display="inline"
-            variant="body2"
-            color="textSecondary"
-          >
-            {props.data.seriesName}
-          </Typography>
-          <Typography variant="h6">{props.data.brandName}</Typography>
+          <Typography color="textSecondary">{props.data.seriesName}</Typography>
+          <Typography variant="h6">{props.data.categoryName}</Typography>
+          <Typography color="textSecondary">{props.data.brandName}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
