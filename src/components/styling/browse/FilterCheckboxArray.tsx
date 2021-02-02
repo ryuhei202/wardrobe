@@ -1,6 +1,5 @@
 import {
   Checkbox,
-  FormControlLabel,
   List,
   ListItem,
   ListItemIcon,
@@ -30,16 +29,12 @@ const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
             onClick={() => props.callback.onClick(index)}
           >
             <ListItemIcon>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={row.isSelected}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
-                  />
-                }
-                label=""
+              <Checkbox
+                edge="start"
+                checked={row.isSelected}
+                tabIndex={-1}
+                disableRipple
+                inputProps={{ "aria-labelledby": labelId }}
               />
             </ListItemIcon>
             <ListItemText>{row.name}</ListItemText>
