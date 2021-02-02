@@ -127,6 +127,22 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter6a-content"
           id="filter6a-header"
         >
+          <Typography className={classes.heading}>ドロップサイズ</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FilterCheckboxArray
+            labelIdPrefix="drop-size-checkbox-list-label-"
+            data={props.data.dropSizeData}
+            callback={props.callback.dropSizeCallback}
+          />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="filter7a-content"
+          id="filter7a-header"
+        >
           <Typography className={classes.heading}>その他</Typography>
         </AccordionSummary>
         <AccordionDetails>

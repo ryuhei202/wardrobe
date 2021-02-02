@@ -11,5 +11,6 @@ export default interface FilterGroupCollectionData {
   readonly colorData: FilterMediaData[];
   readonly patternData: FilterMediaData[];
   readonly logoData: FilterMediaData[];
+  readonly dropSizeData: FilterCheckboxData[];
   readonly optionData: FilterCheckboxData[];
 }

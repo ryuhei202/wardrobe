@@ -11,5 +11,6 @@ export default interface FilterGroupCollectionCallback {
   colorCallback: FilterMediaArrayCallback;
   patternCallback: FilterMediaArrayCallback;
   logoCallback: FilterMediaArrayCallback;
+  dropSizeCallback: FilterCheckboxArrayCallback;
   optionCallback: FilterCheckboxArrayCallback;
 }
