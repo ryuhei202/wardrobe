@@ -19,6 +19,7 @@ export const useGetIndexRequest = (
       color: refinement.colorIds,
       pattern: refinement.patternIds,
       logo: refinement.logoIds,
+      dropSize: refinement.dropSizes,
       option: refinement.optionIds,
     };
     if (refinement.mediumCategoryId)
