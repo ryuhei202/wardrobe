@@ -1,11 +1,4 @@
-import {
-  Checkbox,
-  FormControlLabel,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@material-ui/core";
+import { Checkbox, List, ListItem, ListItemIcon } from "@material-ui/core";
 import React from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import FilterMediaData from "../../../model/styling/browse/props_data/FilterMediaData";
@@ -28,29 +21,25 @@ const FilterMediaArray = (props: FilterMediaArrayProps) => {
             role={undefined}
             dense
             button
-            onClick={() => props.callback.onClick(index)}
+            onClick={() => {
+              props.callback.onClick(index);
+            }}
           >
             <ListItemIcon>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={row.isSelected}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
-                  />
-                }
-                label={
-                  <img
-                    src={HostUrl() + row.imagePath}
-                    width="40px"
-                    height="auto"
-                    alt=""
-                  />
-                }
+              <Checkbox
+                edge="start"
+                checked={row.isSelected}
+                tabIndex={-1}
+                disableRipple
+                inputProps={{ "aria-labelledby": labelId }}
               />
             </ListItemIcon>
-            <ListItemText>{row.name}</ListItemText>
+            <img
+              src={HostUrl() + row.imagePath}
+              width="40px"
+              height="auto"
+              alt=""
+            />
           </ListItem>
         );
       })}
