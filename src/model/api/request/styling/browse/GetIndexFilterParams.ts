@@ -9,5 +9,6 @@ export default interface GetIndexFilterParams {
   color: number[];
   pattern: number[];
   logo: number[];
+  dropSize: number[];
   option: number[];
 }

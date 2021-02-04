@@ -9,6 +9,7 @@ export default interface Refinement {
   readonly colorIds: number[];
   readonly patternIds: number[];
   readonly logoIds: number[];
+  readonly dropSizes: number[];
   readonly optionIds: number[];
   readonly sortId: number;
   readonly pageNo: number;

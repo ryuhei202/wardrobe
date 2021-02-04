@@ -19,6 +19,7 @@ import ItemBrowsePaginationCallback from "../callback/ItemBrowsePaginationCallba
 import SelectedItem from "../../../../model/styling/SelectedItem";
 import ValueRefinement from "../../../../model/styling/browse/ValueRefinement";
 import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
+import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -48,6 +49,7 @@ export const useItemBrowseHandler = (
     colorIds: [],
     patternIds: [],
     logoIds: [],
+    dropSizes: [],
     optionIds: [3, 4], // NGはデフォルトで選択
     sortId: 1,
     pageNo: 1,
@@ -133,6 +135,15 @@ export const useItemBrowseHandler = (
     setCurrentRefinement(newRefinement);
   };
 
+  const onDropSizeChanged = (newSizes: number[]) => {
+    const newRefinement = {
+      ...currentRefinement,
+      dropSizes: newSizes,
+      pageNo: 1,
+    };
+    setCurrentRefinement(newRefinement);
+  };
+
   const onOptionChanged = (newIds: number[]) => {
     const newRefinement = {
       ...currentRefinement,
@@ -152,6 +163,7 @@ export const useItemBrowseHandler = (
   const colorHandler = useColorRefinementHandler(onColorChanged);
   const patternHandler = usePatternRefinementHandler(onPatternChanged);
   const logoHandler = useLogoRefinementHandler(onLogoChanged);
+  const dropSizeHandler = useDropSizeRefinementHandler(onDropSizeChanged);
   const optionHandler = useOptionRefinementHandler(onOptionChanged);
 
   const getAppliedFilterData = (
@@ -255,6 +267,10 @@ export const useItemBrowseHandler = (
         choice.filter.logo,
         currentRefinement.logoIds
       ),
+      dropSizeCallback: dropSizeHandler.dropSizeCallback(
+        choice.filter.dropSize,
+        currentRefinement.dropSizes
+      ),
       optionCallback: optionHandler.optionCallback(
         choice.filter.option,
         currentRefinement.optionIds
@@ -312,6 +328,10 @@ export const useItemBrowseHandler = (
       logoData: logoHandler.logoData(
         choice.filter.logo,
         currentRefinement.logoIds
+      ),
+      dropSizeData: dropSizeHandler.dropSizeData(
+        choice.filter.dropSize,
+        currentRefinement.dropSizes
       ),
       optionData: optionHandler.optionData(
         choice.filter.option,

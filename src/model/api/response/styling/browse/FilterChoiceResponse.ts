@@ -10,5 +10,6 @@ export default interface FilterChoiceResponse {
   readonly color: FilterMediaResponse[];
   readonly pattern: FilterMediaResponse[];
   readonly logo: FilterMediaResponse[];
+  readonly dropSize: FilterResponse[];
   readonly option: FilterResponse[];
 }
