@@ -1,10 +1,11 @@
 import { Drawer, Toolbar } from "@material-ui/core";
 import React from "react";
+import ArrangeContainer from "./arrange/ArrangeContainer";
 import ItemBrowseContainer from "./browse/ItemBrowseContainer";
 import { useStylingHandler } from "./handler/UseStylingHandler";
 import KarteContainer from "./karte/KarteContainer";
-import SelectionConfirm from "./SelectionConfirm";
 import { useStylingStyle } from "./style/UseStylingStyle";
+import SelectionConfirmContainer from "./SelectionConfirmContainer";
 
 const Styling = () => {
   const classes = useStylingStyle();
@@ -27,13 +28,22 @@ const Styling = () => {
       </Drawer>
       <main className={classes.browseContainer}>
         <Toolbar />
-        {handler.isSelectionCompleted ? (
-          <SelectionConfirm
-            data={handler.selectionConfirmData()}
-            callback={handler.selectionConfirmCallback()}
+        {handler.isConfirmed ? (
+          <ArrangeContainer
+            data={handler.arrangeData()}
+            callback={handler.arrangeCallback()}
           />
         ) : (
-          <ItemBrowseContainer callback={handler.itemBrowseCallback()} />
+          <>
+            {handler.isSelectionCompleted ? (
+              <SelectionConfirmContainer
+                data={handler.selectionConfirmData()}
+                callback={handler.selectionConfirmCallback()}
+              />
+            ) : (
+              <ItemBrowseContainer callback={handler.itemBrowseCallback()} />
+            )}
+          </>
         )}
       </main>
     </>
