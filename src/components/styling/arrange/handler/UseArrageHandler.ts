@@ -27,6 +27,8 @@ export const useArrangeHandler = (
   items: SelectedItem[],
   responses: AdviceChoiceResponse[]
 ): ArrangeHandler => {
+  const defaultSelectedAdvices = Array(4).fill(undefined);
+
   const [selectedOutfits, setSelectedOutfits] = useState<SelectedOutfit[]>([]);
   const [editingOutfit, setEditingOutfit] = useState<number>(
     selectedOutfits.length
@@ -36,8 +38,14 @@ export const useArrangeHandler = (
   );
   const [editingSelectedAdvices, setEditingSelectedAdvices] = useState<
     SelectedAdvice[]
-  >(Array(4).fill(undefined));
+  >(defaultSelectedAdvices);
   const createOutfitCaller = usePostCreateOutfitCaller(selectedOutfits);
+
+  const initializeEditing = () => {
+    setEditingSelectedItems([]);
+    setEditingSelectedAdvices(defaultSelectedAdvices);
+    setEditingOutfit(selectedOutfits.length);
+  };
 
   const onClickComplete = () => {
     createOutfitCaller.prepare();
@@ -70,7 +78,7 @@ export const useArrangeHandler = (
   const onClickEdit = (index: number) => {
     let outfit = selectedOutfits[index];
     setEditingSelectedItems(outfit.itemIds);
-    let newSelectedAdvices = Array(4).fill(undefined);
+    let newSelectedAdvices = defaultSelectedAdvices;
     outfit.advices.forEach((advice, index) => {
       newSelectedAdvices[index] = advice;
     });
@@ -79,9 +87,7 @@ export const useArrangeHandler = (
   };
 
   const onClickNew = () => {
-    setEditingSelectedItems([]);
-    setEditingSelectedAdvices(Array(4).fill(undefined));
-    setEditingOutfit(selectedOutfits.length);
+    initializeEditing();
   };
 
   const addedOutfitListCallback = (): AddedOutfitListCallback => {
@@ -135,9 +141,7 @@ export const useArrangeHandler = (
           newSelectedOutfits[editingOutfit] = newSelectedOutfit;
         }
         setSelectedOutfits(newSelectedOutfits);
-        setEditingSelectedItems([]);
-        setEditingSelectedAdvices(Array(4).fill(undefined));
-        setEditingOutfit(newSelectedOutfits.length);
+        initializeEditing();
       },
       onSelectCategory: (selectedIndex: number, categoryIndex: number) => {
         let newSelectedAdvices = [...editingSelectedAdvices];
