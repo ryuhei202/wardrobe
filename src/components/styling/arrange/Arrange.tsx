@@ -48,7 +48,7 @@ const Arrange = (props: ArrangeProps) => {
         data={handler.addedOutfitListData()}
         callback={handler.addedOutfitListCallback()}
       />
-      {handler.editingOutfit >= 0 ? (
+      {handler.editingOutfitIndex >= 0 ? (
         <OutfitForm
           data={handler.outfitFormData()}
           callback={handler.outfitFormCallback()}

@@ -4,8 +4,8 @@ import ErrorResponse from "../../../api/response/shared/ErrorResponse";
 import BrowseIndexResponse from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { ChartId } from "../../../ChartId";
 import { usePostClient } from "../../../api/client/UsePostClient";
-import SelectedOutfit from "../SelectedOutfit";
 import { usePostCreateOutfitRequest } from "../../../api/request/styling/arrange/UsePostCreateOutfitRequest";
+import CreatingOutfit from "../CreatingOutfit";
 
 export interface PostCreateOutfitCaller {
   isRunning: () => boolean;
@@ -16,7 +16,7 @@ export interface PostCreateOutfitCaller {
 }
 
 export const usePostCreateOutfitCaller = (
-  outfits: SelectedOutfit[]
+  outfits: CreatingOutfit[]
 ): PostCreateOutfitCaller => {
   const [response, setResponse] = useState<any>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Idle);
