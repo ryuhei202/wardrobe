@@ -5,6 +5,7 @@ import { useGetKarteRequest } from "../../../api/request/styling/karte/UseGetKar
 import KarteResponse from "../../../api/response/styling/karte/KarteResponse";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
 import { ChartId } from "../../../ChartId";
+import SelectedItem from "../../SelectedItem";
 
 export interface GetKarteCaller {
   isRunning: () => boolean;
@@ -12,7 +13,10 @@ export interface GetKarteCaller {
   errorResponse: ErrorResponse | null;
 }
 
-export const useGetKarteCaller = (): GetKarteCaller => {
+export const useGetKarteCaller = (
+  onSuccess: () => void,
+  onItemRegistered: (items: SelectedItem[]) => void
+): GetKarteCaller => {
   const [response, setResponse] = useState<KarteResponse | null>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
@@ -30,6 +34,10 @@ export const useGetKarteCaller = (): GetKarteCaller => {
             setResponse(response);
             setErrorResponse(null);
             setCallStatus(CallStatus.Idle);
+            if (response.registeredItems.length > 0) {
+              onItemRegistered(response.registeredItems);
+            }
+            onSuccess();
           })
           .catch((error: ErrorResponse) => {
             setErrorResponse(error);
@@ -39,7 +47,7 @@ export const useGetKarteCaller = (): GetKarteCaller => {
       setCallStatus(CallStatus.Running);
       fetch();
     }
-  }, [callStatus, client]);
+  }, [callStatus, client, onSuccess, onItemRegistered]);
 
   const isRunning = (): boolean => {
     return callStatus === CallStatus.Running;

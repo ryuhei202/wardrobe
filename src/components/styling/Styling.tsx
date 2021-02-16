@@ -11,6 +11,27 @@ const Styling = () => {
   const classes = useStylingStyle();
   const handler = useStylingHandler();
 
+  let mainContent;
+  if (handler.isConfirmed) {
+    mainContent = (
+      <ArrangeContainer
+        data={handler.arrangeData()}
+        callback={handler.arrangeCallback()}
+      />
+    );
+  } else if (handler.isSelectionCompleted) {
+    mainContent = (
+      <SelectionConfirmContainer
+        data={handler.selectionConfirmData()}
+        callback={handler.selectionConfirmCallback()}
+      />
+    );
+  } else if (handler.isKarteFetched) {
+    mainContent = (
+      <ItemBrowseContainer callback={handler.itemBrowseCallback()} />
+    );
+  }
+
   return (
     <>
       <Drawer
@@ -28,23 +49,7 @@ const Styling = () => {
       </Drawer>
       <main className={classes.browseContainer}>
         <Toolbar />
-        {handler.isConfirmed ? (
-          <ArrangeContainer
-            data={handler.arrangeData()}
-            callback={handler.arrangeCallback()}
-          />
-        ) : (
-          <>
-            {handler.isSelectionCompleted ? (
-              <SelectionConfirmContainer
-                data={handler.selectionConfirmData()}
-                callback={handler.selectionConfirmCallback()}
-              />
-            ) : (
-              <ItemBrowseContainer callback={handler.itemBrowseCallback()} />
-            )}
-          </>
-        )}
+        {mainContent}
       </main>
     </>
   );

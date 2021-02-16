@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import ConfirmResponse from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/api/response/styling/browse/ValidationErrorType";
 import { usePostRegisterItemsCaller } from "../../model/styling/arrange/api_caller/UsePostRegisterItemsCaller";
@@ -57,13 +57,15 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
           <Select
             labelId="stylist-select-label"
             label="コーデ作成者"
-            value={stylist}
+            value={stylist ?? ""}
             onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
               setStylist(event.target.value as number);
             }}
           >
             {props.response.stylistChoice.map((stylist) => (
-              <MenuItem value={stylist.id}>{stylist.name}</MenuItem>
+              <MenuItem key={stylist.id} value={stylist.id}>
+                {stylist.name}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -78,14 +80,22 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
                 </ListSubheader>
               }
             >
-              {props.response.validateErrors.map((error) => {
+              {props.response.validateErrors.map((error, index) => {
                 switch (error.errorType) {
                   case ValidationErrorType.Rejected:
-                    return <Alert severity="error">{error.message}</Alert>;
+                    return (
+                      <Alert key={index} severity="error">
+                        {error.message}
+                      </Alert>
+                    );
                   case ValidationErrorType.Unliked:
-                    return <Alert severity="warning">{error.message}</Alert>;
+                    return (
+                      <Alert key={index} severity="warning">
+                        {error.message}
+                      </Alert>
+                    );
                   default:
-                    return <></>;
+                    return <Fragment key={index}></Fragment>;
                 }
               })}
             </List>
@@ -104,8 +114,8 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
                 </ListSubheader>
               }
             >
-              {props.response.misplacedItems.map((item) => (
-                <ListItem>
+              {props.response.misplacedItems.map((item, index) => (
+                <ListItem key={index}>
                   <ListItemText>{item}</ListItemText>
                 </ListItem>
               ))}

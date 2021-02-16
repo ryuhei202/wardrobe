@@ -9,6 +9,7 @@ import ArrangeData from "../../../model/styling/arrange/props_data/ArrangeData";
 import ArrangeCallback from "../arrange/callback/ArrangeCallback";
 
 export interface StylingHandler {
+  isKarteFetched: boolean;
   isSelectionCompleted: boolean;
   isConfirmed: boolean;
   karteContainerData: () => KarteContainerData;
@@ -23,6 +24,7 @@ export interface StylingHandler {
 export const useStylingHandler = (): StylingHandler => {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isKarteFetched, setIsKarteFetched] = useState(false);
   const [isSelectionCompleted, setIsSelectionCompleted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
 
@@ -35,6 +37,14 @@ export const useStylingHandler = (): StylingHandler => {
       selectionProgressCallback: {
         onSelect: (index: number) => setCurrentIndex(index),
         onClickCompleteButton: () => setIsSelectionCompleted(true),
+      },
+      onKarteFetched: () => {
+        setIsKarteFetched(true);
+      },
+      onItemRegistered: (items: SelectedItem[]) => {
+        setSelectedItems(items);
+        setIsConfirmed(true);
+        setIsSelectionCompleted(true);
       },
     };
   };
@@ -80,6 +90,7 @@ export const useStylingHandler = (): StylingHandler => {
   };
 
   return {
+    isKarteFetched,
     isSelectionCompleted,
     isConfirmed,
     karteContainerData,
