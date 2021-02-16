@@ -39,10 +39,14 @@ export const useArrangeHandler = (
           if (selectedOutfit.areItemsSelected[index]) result.push(item.itemId);
           return result;
         }, []),
-        adviceIds: selectedOutfit.advices.map(
-          (advice) =>
-            responses[advice.categoryIndex].advice[advice.adviceIndex!!].id
-        ),
+        adviceIds: selectedOutfit.advices.reduce((result: number[], advice) => {
+          if (advice && advice.adviceIndex) {
+            result.push(
+              responses[advice.categoryIndex].advice[advice.adviceIndex].id
+            );
+          }
+          return result;
+        }, []),
       };
     });
   };
@@ -179,10 +183,6 @@ export const useArrangeHandler = (
         });
       },
     };
-  };
-
-  const retrieveId = (categoryIndex: number, adviceIndex: number): number => {
-    return responses[categoryIndex].advice[adviceIndex].id;
   };
 
   return {
