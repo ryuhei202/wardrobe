@@ -96,7 +96,7 @@ export const useArrangeHandler = (
             []
           ),
           advices: outfit.advices.map((selectedAdvice) =>
-            selectedAdvice.adviceIndex
+            selectedAdvice && selectedAdvice.adviceIndex
               ? responses[selectedAdvice.categoryIndex].advice[
                   selectedAdvice.adviceIndex
                 ].title
