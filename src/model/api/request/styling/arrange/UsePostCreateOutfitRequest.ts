@@ -1,4 +1,4 @@
-import SelectedOutfit from "../../../../styling/arrange/SelectedOutfit";
+import CreatingOutfit from "../../../../styling/arrange/CreatingOutfit";
 import PostRequest from "../../PostRequest";
 
 interface PostCreateOutfitParams {
@@ -8,7 +8,7 @@ interface PostCreateOutfitParams {
 
 export const usePostCreateOutfitRequest = (
   karteId: number,
-  selectedOutfits: SelectedOutfit[]
+  outfits: CreatingOutfit[]
 ): PostRequest => {
   const url = (): string => {
     return "styling/arranges/create_outfits";
@@ -17,13 +17,10 @@ export const usePostCreateOutfitRequest = (
   const params = (): PostCreateOutfitParams => {
     return {
       chartId: karteId,
-      outfits: selectedOutfits.map((outfit) => {
+      outfits: outfits.map((outfit) => {
         return {
           itemIds: outfit.itemIds,
-          adviceIds: outfit.advices.reduce((result: number[], advice) => {
-            if (advice.adviceId) result.push(advice.adviceId);
-            return result;
-          }, []),
+          adviceIds: outfit.adviceIds,
         };
       }),
     };

@@ -1,6 +1,6 @@
 import SelectedAdvice from "./SelectedAdvice";
 
 export default interface SelectedOutfit {
-  readonly itemIds: number[];
+  readonly areItemsSelected: boolean[];
   readonly advices: SelectedAdvice[];
 }

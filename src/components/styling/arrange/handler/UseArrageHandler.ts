@@ -4,9 +4,9 @@ import {
   PostCreateOutfitCaller,
   usePostCreateOutfitCaller,
 } from "../../../../model/styling/arrange/api_caller/UsePostCreateOutfitCaller";
+import CreatingOutfit from "../../../../model/styling/arrange/CreatingOutfit";
 import AddedOutfitListData from "../../../../model/styling/arrange/props_data/AddedOutfitListData";
 import OutfitFormData from "../../../../model/styling/arrange/props_data/OutfitFormData";
-import SelectedAdvice from "../../../../model/styling/arrange/SelectedAdvice";
 import SelectedOutfit from "../../../../model/styling/arrange/SelectedOutfit";
 import SelectedItem from "../../../../model/styling/SelectedItem";
 import AddedOutfitListCallback from "../callback/AddedOutfitListCallback";
@@ -14,7 +14,7 @@ import OutfitFormCallback from "../callback/OutfitFormCallback";
 
 export interface ArrangeHandler {
   selectedOutfits: SelectedOutfit[];
-  editingOutfit: number;
+  editingOutfitIndex: number;
   createOutfitCaller: PostCreateOutfitCaller;
   onClickComplete: () => void;
   addedOutfitListData: () => AddedOutfitListData;
@@ -27,24 +27,44 @@ export const useArrangeHandler = (
   items: SelectedItem[],
   responses: AdviceChoiceResponse[]
 ): ArrangeHandler => {
+  const defaultIsItemSelected = Array(items.length).fill(false);
   const defaultSelectedAdvices = Array(4).fill(undefined);
 
+  const toCreatingOutfits = (
+    selectedOutfits: SelectedOutfit[]
+  ): CreatingOutfit[] => {
+    return selectedOutfits.map((selectedOutfit) => {
+      return {
+        itemIds: items.reduce((result: number[], item, index) => {
+          if (selectedOutfit.areItemsSelected[index]) result.push(item.itemId);
+          return result;
+        }, []),
+        adviceIds: selectedOutfit.advices.map(
+          (advice) =>
+            responses[advice.categoryIndex].advice[advice.adviceIndex!!].id
+        ),
+      };
+    });
+  };
+
   const [selectedOutfits, setSelectedOutfits] = useState<SelectedOutfit[]>([]);
-  const [editingOutfit, setEditingOutfit] = useState<number>(
+  const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(
     selectedOutfits.length
   );
-  const [editingSelectedItems, setEditingSelectedItems] = useState<number[]>(
-    []
+  const [editingOutfit, setEditingOutfit] = useState<SelectedOutfit>({
+    areItemsSelected: defaultIsItemSelected,
+    advices: defaultSelectedAdvices,
+  });
+  const createOutfitCaller = usePostCreateOutfitCaller(
+    toCreatingOutfits(selectedOutfits)
   );
-  const [editingSelectedAdvices, setEditingSelectedAdvices] = useState<
-    SelectedAdvice[]
-  >(defaultSelectedAdvices);
-  const createOutfitCaller = usePostCreateOutfitCaller(selectedOutfits);
 
   const initializeEditing = () => {
-    setEditingSelectedItems([]);
-    setEditingSelectedAdvices(defaultSelectedAdvices);
-    setEditingOutfit(selectedOutfits.length);
+    setEditingOutfit({
+      areItemsSelected: defaultIsItemSelected,
+      advices: defaultSelectedAdvices,
+    });
+    setEditingOutfitIndex(selectedOutfits.length);
   };
 
   const onClickComplete = () => {
@@ -53,61 +73,61 @@ export const useArrangeHandler = (
 
   const addedOutfitListData = (): AddedOutfitListData => {
     return {
-      outfitList: selectedOutfits.map((outfit, index) => {
+      outfitList: selectedOutfits.map((outfit) => {
         return {
-          items: outfit.itemIds.map((itemId) => {
-            return {
-              id: itemId,
-              categoryName:
-                items.find((item) => item.itemId === itemId)?.categoryName ??
-                "",
-            };
-          }),
-          advices: outfit.advices.map(
-            (selectedAdvice) =>
-              responses[selectedAdvice.categoryIndex].advice.find(
-                (advice) => advice.id === selectedAdvice.adviceId
-              )?.title ?? ""
+          items: outfit.areItemsSelected.reduce(
+            (
+              result: { id: number; categoryName: string }[],
+              isItemSelected,
+              index
+            ) => {
+              if (isItemSelected) {
+                result.push({
+                  id: items[index].itemId,
+                  categoryName: items[index].categoryName,
+                });
+              }
+              return result;
+            },
+            []
+          ),
+          advices: outfit.advices.map((selectedAdvice) =>
+            selectedAdvice.adviceIndex
+              ? responses[selectedAdvice.categoryIndex].advice[
+                  selectedAdvice.adviceIndex
+                ].title
+              : ""
           ),
         };
       }),
-      editingOutfit: editingOutfit,
+      editingOutfit: editingOutfitIndex,
     };
-  };
-
-  const onClickEdit = (index: number) => {
-    let outfit = selectedOutfits[index];
-    setEditingSelectedItems(outfit.itemIds);
-    let newSelectedAdvices = defaultSelectedAdvices;
-    outfit.advices.forEach((advice, index) => {
-      newSelectedAdvices[index] = advice;
-    });
-    setEditingSelectedAdvices(newSelectedAdvices);
-    setEditingOutfit(index);
-  };
-
-  const onClickNew = () => {
-    initializeEditing();
   };
 
   const addedOutfitListCallback = (): AddedOutfitListCallback => {
     return {
-      onClickEdit: onClickEdit,
-      onClickNew: onClickNew,
+      onClickEdit: (index: number) => {
+        let outfit = selectedOutfits[index];
+        setEditingOutfit(outfit);
+        setEditingOutfitIndex(index);
+      },
+      onClickNew: () => {
+        initializeEditing();
+      },
     };
   };
 
   const outfitFormData = (): OutfitFormData => {
     return {
-      items: items.map((item) => {
+      items: items.map((item, index) => {
         return {
           itemId: item.itemId,
           itemImagePath: item.itemImagePath,
           categoryName: item.categoryName,
-          isSelected: editingSelectedItems.indexOf(item.itemId) !== -1,
+          isSelected: editingOutfit.areItemsSelected[index],
         };
       }),
-      advices: editingSelectedAdvices.map((advice) => {
+      advices: editingOutfit.advices.map((advice) => {
         return {
           categoryChoice: responses.map((response) => response.name),
           selectedCategory: advice ? advice.categoryIndex : null,
@@ -116,12 +136,7 @@ export const useArrangeHandler = (
                 return { title: advice.title, description: advice.description };
               })
             : [],
-          selectedAdvice:
-            advice && advice.adviceId
-              ? responses[advice.categoryIndex].advice.findIndex(
-                  (choice) => choice.id === advice.adviceId
-                ) ?? null
-              : null,
+          selectedAdvice: advice ? advice.adviceIndex ?? null : null,
         };
       }),
     };
@@ -131,52 +146,48 @@ export const useArrangeHandler = (
     return {
       onClickAddOutfit: () => {
         let newSelectedOutfits = [...selectedOutfits];
-        let newSelectedOutfit = {
-          itemIds: editingSelectedItems,
-          advices: editingSelectedAdvices.filter((advice) => advice != null),
-        };
-        if (editingOutfit >= newSelectedOutfits.length) {
-          newSelectedOutfits.push(newSelectedOutfit);
+        if (editingOutfitIndex >= newSelectedOutfits.length) {
+          newSelectedOutfits.push(editingOutfit);
         } else {
-          newSelectedOutfits[editingOutfit] = newSelectedOutfit;
+          newSelectedOutfits[editingOutfitIndex] = editingOutfit;
         }
         setSelectedOutfits(newSelectedOutfits);
         initializeEditing();
       },
       onSelectCategory: (selectedIndex: number, categoryIndex: number) => {
-        let newSelectedAdvices = [...editingSelectedAdvices];
+        let newSelectedAdvices = [...editingOutfit.advices];
         newSelectedAdvices[selectedIndex] = {
-          ...editingSelectedAdvices[selectedIndex],
           categoryIndex: categoryIndex,
+          adviceIndex: undefined,
         };
-        setEditingSelectedAdvices(newSelectedAdvices);
+        setEditingOutfit({ ...editingOutfit, advices: newSelectedAdvices });
       },
       onSelectAdvice: (selectedIndex: number, adviceIndex: number) => {
-        let newSelectedAdvices = [...editingSelectedAdvices];
-        let categoryIndex = editingSelectedAdvices[selectedIndex].categoryIndex;
+        let newSelectedAdvices = [...editingOutfit.advices];
         newSelectedAdvices[selectedIndex] = {
-          ...editingSelectedAdvices[selectedIndex],
-          adviceId: responses[categoryIndex].advice[adviceIndex].id,
+          categoryIndex: editingOutfit.advices[selectedIndex].categoryIndex,
+          adviceIndex: adviceIndex,
         };
-        setEditingSelectedAdvices(newSelectedAdvices);
+        setEditingOutfit({ ...editingOutfit, advices: newSelectedAdvices });
       },
       onSelectItem: (index: number) => {
-        let item = items[index];
-        const currentIndex = editingSelectedItems.indexOf(item.itemId);
-        const newItems = [...editingSelectedItems];
-        if (currentIndex === -1) {
-          newItems.push(item.itemId);
-        } else {
-          newItems.splice(currentIndex, 1);
-        }
-        setEditingSelectedItems(newItems);
+        let newAreItemsSelected = [...editingOutfit.areItemsSelected];
+        newAreItemsSelected[index] = !editingOutfit.areItemsSelected[index];
+        setEditingOutfit({
+          ...editingOutfit,
+          areItemsSelected: newAreItemsSelected,
+        });
       },
     };
   };
 
+  const retrieveId = (categoryIndex: number, adviceIndex: number): number => {
+    return responses[categoryIndex].advice[adviceIndex].id;
+  };
+
   return {
     selectedOutfits,
-    editingOutfit,
+    editingOutfitIndex,
     createOutfitCaller,
     onClickComplete,
     addedOutfitListData,
