@@ -19,7 +19,7 @@ import { Alert } from "@material-ui/lab";
 import React, { useState } from "react";
 import ConfirmResponse from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/api/response/styling/browse/ValidationErrorType";
-import { usePostRegisterItemsCaller } from "../../model/styling/arrange/api_caller/UsePostFeedbackCaller";
+import { usePostRegisterItemsCaller } from "../../model/styling/arrange/api_caller/UsePostRegisterItemsCaller";
 import SelectionConfirmData from "../../model/styling/props_data/SelectionConfirmData";
 import SelectionConfirmCallback from "./callback/SelectionConfirmCallback";
 import FeedbackDialog from "./feedback/FeedbackDialog";
