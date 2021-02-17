@@ -7,11 +7,10 @@ import SelectionConfirmData from "../../../model/styling/props_data/SelectionCon
 import SelectionConfirmCallback from "../callback/SelectionConfirmCallback";
 import ArrangeData from "../../../model/styling/arrange/props_data/ArrangeData";
 import ArrangeCallback from "../arrange/callback/ArrangeCallback";
+import { MainContentType } from "../../../model/styling/MainContentType";
 
 export interface StylingHandler {
-  isKarteFetched: boolean;
-  isSelectionCompleted: boolean;
-  isConfirmed: boolean;
+  mainContentType: MainContentType | undefined;
   karteContainerData: () => KarteContainerData;
   karteContainerCallback: () => KarteContainerCallback;
   itemBrowseCallback: () => ItemBrowseCallback;
@@ -24,9 +23,7 @@ export interface StylingHandler {
 export const useStylingHandler = (): StylingHandler => {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isKarteFetched, setIsKarteFetched] = useState(false);
-  const [isSelectionCompleted, setIsSelectionCompleted] = useState(false);
-  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [mainContentType, setMainContentType] = useState<MainContentType>();
 
   const karteContainerData = (): KarteContainerData => {
     return { selectedIndex: currentIndex, items: selectedItems };
@@ -36,15 +33,19 @@ export const useStylingHandler = (): StylingHandler => {
     return {
       selectionProgressCallback: {
         onSelect: (index: number) => setCurrentIndex(index),
-        onClickCompleteButton: () => setIsSelectionCompleted(true),
+        onClickCompleteButton: () =>
+          setMainContentType(MainContentType.Confirm),
       },
-      onKarteFetched: () => {
-        setIsKarteFetched(true);
-      },
-      onItemRegistered: (items: SelectedItem[]) => {
-        setSelectedItems(items);
-        setIsConfirmed(true);
-        setIsSelectionCompleted(true);
+      onKarteFetched: (
+        isItemRegistered: boolean,
+        registeredItems: SelectedItem[]
+      ) => {
+        if (isItemRegistered) {
+          setSelectedItems(registeredItems);
+          setMainContentType(MainContentType.Arrange);
+        } else {
+          setMainContentType(MainContentType.Browse);
+        }
       },
     };
   };
@@ -72,8 +73,8 @@ export const useStylingHandler = (): StylingHandler => {
 
   const selectionConfirmCallback = (): SelectionConfirmCallback => {
     return {
-      onCancelSelection: () => setIsSelectionCompleted(false),
-      onConfirmSelection: () => setIsConfirmed(true),
+      onCancelSelection: () => setMainContentType(MainContentType.Browse),
+      onConfirmSelection: () => setMainContentType(MainContentType.Arrange),
     };
   };
 
@@ -85,14 +86,12 @@ export const useStylingHandler = (): StylingHandler => {
 
   const arrangeCallback = (): ArrangeCallback => {
     return {
-      onClickBackButton: () => setIsConfirmed(false),
+      onClickBackButton: () => setMainContentType(MainContentType.Confirm),
     };
   };
 
   return {
-    isKarteFetched,
-    isSelectionCompleted,
-    isConfirmed,
+    mainContentType,
     karteContainerData,
     karteContainerCallback,
     itemBrowseCallback,

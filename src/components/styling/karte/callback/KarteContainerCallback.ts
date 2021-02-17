@@ -3,6 +3,8 @@ import SelectionProgressCallback from "../../callback/SelectionProgressCallback"
 
 export default interface KarteContainerCallback {
   selectionProgressCallback: SelectionProgressCallback;
-  onKarteFetched: () => void;
-  onItemRegistered: (items: SelectedItem[]) => void;
+  onKarteFetched: (
+    isItemRegistered: boolean,
+    registeredItems: SelectedItem[]
+  ) => void;
 }

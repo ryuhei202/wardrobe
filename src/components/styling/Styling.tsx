@@ -6,30 +6,38 @@ import { useStylingHandler } from "./handler/UseStylingHandler";
 import KarteContainer from "./karte/KarteContainer";
 import { useStylingStyle } from "./style/UseStylingStyle";
 import SelectionConfirmContainer from "./SelectionConfirmContainer";
+import { MainContentType } from "../../model/styling/MainContentType";
 
 const Styling = () => {
   const classes = useStylingStyle();
   const handler = useStylingHandler();
 
   let mainContent;
-  if (handler.isConfirmed) {
-    mainContent = (
-      <ArrangeContainer
-        data={handler.arrangeData()}
-        callback={handler.arrangeCallback()}
-      />
-    );
-  } else if (handler.isSelectionCompleted) {
-    mainContent = (
-      <SelectionConfirmContainer
-        data={handler.selectionConfirmData()}
-        callback={handler.selectionConfirmCallback()}
-      />
-    );
-  } else if (handler.isKarteFetched) {
-    mainContent = (
-      <ItemBrowseContainer callback={handler.itemBrowseCallback()} />
-    );
+  switch (handler.mainContentType) {
+    case MainContentType.Browse: {
+      mainContent = (
+        <ItemBrowseContainer callback={handler.itemBrowseCallback()} />
+      );
+      break;
+    }
+    case MainContentType.Confirm: {
+      mainContent = (
+        <SelectionConfirmContainer
+          data={handler.selectionConfirmData()}
+          callback={handler.selectionConfirmCallback()}
+        />
+      );
+      break;
+    }
+    case MainContentType.Arrange: {
+      mainContent = (
+        <ArrangeContainer
+          data={handler.arrangeData()}
+          callback={handler.arrangeCallback()}
+        />
+      );
+      break;
+    }
   }
 
   return (

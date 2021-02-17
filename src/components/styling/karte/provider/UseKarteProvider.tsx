@@ -16,10 +16,12 @@ export interface KarteProvider {
 }
 
 export const useKarteProvider = (
-  onKarteFetched: () => void,
-  onItemRegistered: (items: SelectedItem[]) => void
+  onKarteFetched: (
+    isItemRegistered: boolean,
+    registeredItems: SelectedItem[]
+  ) => void
 ): KarteProvider => {
-  const apiCaller = useGetKarteCaller(onKarteFetched, onItemRegistered);
+  const apiCaller = useGetKarteCaller(onKarteFetched);
 
   const karteComponent = (): JSX.Element => {
     if (apiCaller.isRunning()) {

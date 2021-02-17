@@ -12,10 +12,7 @@ export interface KarteContainerProps {
 
 const KarteContainer = (props: KarteContainerProps) => {
   const classes = useStylingStyle();
-  const karteProvider = useKarteProvider(
-    props.callback.onKarteFetched,
-    props.callback.onItemRegistered
-  );
+  const karteProvider = useKarteProvider(props.callback.onKarteFetched);
 
   return (
     <>
