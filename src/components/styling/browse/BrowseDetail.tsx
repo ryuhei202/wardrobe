@@ -51,6 +51,9 @@ const BrowseDetail = (props: BrowseDetailProps) => {
           >
             {presenter.seriesName()}
           </Typography>
+          <Typography className={classes.itemInfoText} variant="h4">
+            {presenter.categoryName()}
+          </Typography>
           <Typography className={classes.itemInfoText} variant="h3">
             {presenter.brandName()}
           </Typography>

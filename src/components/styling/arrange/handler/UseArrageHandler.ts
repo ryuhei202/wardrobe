@@ -27,8 +27,10 @@ export const useArrangeHandler = (
   items: SelectedItem[],
   responses: AdviceChoiceResponse[]
 ): ArrangeHandler => {
-  const defaultIsItemSelected = Array(items.length).fill(false);
-  const defaultSelectedAdvices = Array(4).fill(undefined);
+  const defaultOutfit = {
+    areItemsSelected: Array(items.length).fill(false),
+    advices: Array(4).fill(undefined),
+  };
 
   const toCreatingOutfits = (
     selectedOutfits: SelectedOutfit[]
@@ -55,21 +57,12 @@ export const useArrangeHandler = (
   const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(
     selectedOutfits.length
   );
-  const [editingOutfit, setEditingOutfit] = useState<SelectedOutfit>({
-    areItemsSelected: defaultIsItemSelected,
-    advices: defaultSelectedAdvices,
-  });
+  const [editingOutfit, setEditingOutfit] = useState<SelectedOutfit>(
+    defaultOutfit
+  );
   const createOutfitCaller = usePostCreateOutfitCaller(
     toCreatingOutfits(selectedOutfits)
   );
-
-  const initializeEditing = () => {
-    setEditingOutfit({
-      areItemsSelected: defaultIsItemSelected,
-      advices: defaultSelectedAdvices,
-    });
-    setEditingOutfitIndex(selectedOutfits.length);
-  };
 
   const onClickComplete = () => {
     createOutfitCaller.prepare();
@@ -116,7 +109,8 @@ export const useArrangeHandler = (
         setEditingOutfitIndex(index);
       },
       onClickNew: () => {
-        initializeEditing();
+        setEditingOutfit(defaultOutfit);
+        setEditingOutfitIndex(selectedOutfits.length);
       },
     };
   };
@@ -156,7 +150,8 @@ export const useArrangeHandler = (
           newSelectedOutfits[editingOutfitIndex] = editingOutfit;
         }
         setSelectedOutfits(newSelectedOutfits);
-        initializeEditing();
+        setEditingOutfit(defaultOutfit);
+        setEditingOutfitIndex(newSelectedOutfits.length);
       },
       onSelectCategory: (selectedIndex: number, categoryIndex: number) => {
         let newSelectedAdvices = [...editingOutfit.advices];
