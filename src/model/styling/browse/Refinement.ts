@@ -1,6 +1,7 @@
 import ValueRefinement from "./ValueRefinement";
 
 export default interface Refinement {
+  readonly itemId: number | null;
   readonly largeCategoryId: number | null;
   readonly mediumCategoryId: number | null;
   readonly smallCategoryIds: number[];

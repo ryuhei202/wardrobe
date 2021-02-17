@@ -1,4 +1,9 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import {
+  createStyles,
+  fade,
+  makeStyles,
+  Theme,
+} from "@material-ui/core/styles";
 
 export const useBrowseStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,6 +90,9 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     },
     darkBlue: {
       backgroundColor: "#00266F",
+    },
+    idSearch: {
+      marginTop: theme.spacing(1),
     },
   })
 );
