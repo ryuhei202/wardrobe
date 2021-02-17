@@ -15,8 +15,13 @@ export interface KarteProvider {
   ) => JSX.Element;
 }
 
-export const useKarteProvider = (): KarteProvider => {
-  const apiCaller = useGetKarteCaller();
+export const useKarteProvider = (
+  onKarteFetched: (
+    isItemRegistered: boolean,
+    registeredItems: SelectedItem[]
+  ) => void
+): KarteProvider => {
+  const apiCaller = useGetKarteCaller(onKarteFetched);
 
   const karteComponent = (): JSX.Element => {
     if (apiCaller.isRunning()) {

@@ -3,9 +3,10 @@ import {
   AccordionDetails,
   AccordionSummary,
   List,
+  TextField,
   Typography,
 } from "@material-ui/core";
-import { ExpandMore } from "@material-ui/icons";
+import { ExpandMore, Search } from "@material-ui/icons";
 import React from "react";
 import FilterGroupCollectionCallback from "./callback/FilterGroupCollectionCallback";
 import FilterCategoryGroup from "./FilterCategoryGroup";
@@ -153,6 +154,18 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           />
         </AccordionDetails>
       </Accordion>
+      <TextField
+        className={classes.idSearch}
+        label="アイテムID"
+        InputProps={{ startAdornment: <Search /> }}
+        color="secondary"
+        type="number"
+        onKeyPress={(event: any) => {
+          if (event.key === "Enter") {
+            props.callback.onItemIdChanged(event.target.value as number);
+          }
+        }}
+      ></TextField>
     </div>
   );
 };

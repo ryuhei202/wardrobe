@@ -4,6 +4,7 @@ import DetailResponse from "../../../../model/api/response/styling/browse/Detail
 export interface BrowseDetailPresenter {
   itemImageUrl: () => string;
   seriesName: () => string;
+  categoryName: () => string;
   brandName: () => string;
   colorName: () => string;
   colorImageUrl: () => string;
@@ -20,6 +21,10 @@ export const useBrowseDetailPresenter = (
     return response.seriesName ?? "";
   };
 
+  const categoryName = (): string => {
+    return response.categoryName;
+  };
+
   const brandName = (): string => {
     return response.brandName;
   };
@@ -32,5 +37,12 @@ export const useBrowseDetailPresenter = (
     return `${HostUrl()}${response.color.imagePath}`;
   };
 
-  return { itemImageUrl, seriesName, brandName, colorName, colorImageUrl };
+  return {
+    itemImageUrl,
+    seriesName,
+    categoryName,
+    brandName,
+    colorName,
+    colorImageUrl,
+  };
 };

@@ -1,31 +1,25 @@
-import { CallStatus } from "./../../../api/shared/CallStatus";
-import { useGetClient } from "./../../../api/client/UseGetClient";
+import { CallStatus } from "../../../api/shared/CallStatus";
+import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
-import { useGetKarteRequest } from "../../../api/request/styling/karte/UseGetKarteRequest";
-import KarteResponse from "../../../api/response/styling/karte/KarteResponse";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
 import { ChartId } from "../../../ChartId";
-import SelectedItem from "../../SelectedItem";
+import { useGetConfirmRequest } from "../../../api/request/styling/browse/UseGetConfirmRequest";
+import ConfirmResponse from "../../../api/response/styling/browse/ConfirmResponse";
 
-export interface GetKarteCaller {
+export interface GetConfirmCaller {
   isRunning: () => boolean;
-  response: KarteResponse | null;
+  response: ConfirmResponse | null;
   errorResponse: ErrorResponse | null;
 }
 
-export const useGetKarteCaller = (
-  onSuccess: (
-    isItemRegistered: boolean,
-    registeredItems: SelectedItem[]
-  ) => void
-): GetKarteCaller => {
-  const [response, setResponse] = useState<KarteResponse | null>(null);
+export const useGetConfirmCaller = (itemIds: number[]): GetConfirmCaller => {
+  const [response, setResponse] = useState<ConfirmResponse | null>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetKarteRequest(ChartId());
-  const client = useGetClient<KarteResponse>(request);
+  const request = useGetConfirmRequest(ChartId(), itemIds);
+  const client = useGetClient<ConfirmResponse>(request);
 
   useEffect(() => {
     if (callStatus === CallStatus.Preparing) {
@@ -36,11 +30,6 @@ export const useGetKarteCaller = (
             setResponse(response);
             setErrorResponse(null);
             setCallStatus(CallStatus.Idle);
-            if (response.registeredItems.length > 0) {
-              onSuccess(true, response.registeredItems);
-            } else {
-              onSuccess(false, []);
-            }
           })
           .catch((error: ErrorResponse) => {
             setErrorResponse(error);
@@ -50,7 +39,7 @@ export const useGetKarteCaller = (
       setCallStatus(CallStatus.Running);
       fetch();
     }
-  }, [callStatus, client, onSuccess]);
+  }, [callStatus, client]);
 
   const isRunning = (): boolean => {
     return callStatus === CallStatus.Running;

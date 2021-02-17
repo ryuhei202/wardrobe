@@ -12,7 +12,7 @@ import {
   Select,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { Fragment } from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import OutfitFormData from "../../../model/styling/arrange/props_data/OutfitFormData";
 import OutfitFormCallback from "./callback/OutfitFormCallback";
@@ -68,7 +68,7 @@ const OutfitForm = (props: OutfitFormProps) => {
       </List>
       <div>
         {props.data.advices.map((outfitAdvice, selectIndex) => (
-          <>
+          <Fragment key={selectIndex}>
             <FormControl className={classes.formControl}>
               <InputLabel id={`demo-simple-select-label-${selectIndex}`}>
                 カテゴリ
@@ -85,7 +85,9 @@ const OutfitForm = (props: OutfitFormProps) => {
                 }}
               >
                 {outfitAdvice.categoryChoice.map((name, index) => (
-                  <MenuItem value={index}>{name}</MenuItem>
+                  <MenuItem key={index} value={index}>
+                    {name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -98,7 +100,6 @@ const OutfitForm = (props: OutfitFormProps) => {
                 id={`simple-select-${selectIndex}`}
                 value={outfitAdvice.selectedAdvice ?? ""}
                 onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-                  console.log("hello");
                   props.callback.onSelectAdvice(
                     selectIndex,
                     event.target.value as number
@@ -106,7 +107,9 @@ const OutfitForm = (props: OutfitFormProps) => {
                 }}
               >
                 {outfitAdvice.adviceChoice.map((adviceChoice, index) => (
-                  <MenuItem value={index}>{adviceChoice.title}</MenuItem>
+                  <MenuItem key={index} value={index}>
+                    {adviceChoice.title}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -117,7 +120,7 @@ const OutfitForm = (props: OutfitFormProps) => {
                 : ""}
             </Typography>
             <br />
-          </>
+          </Fragment>
         ))}
       </div>
       <Button
