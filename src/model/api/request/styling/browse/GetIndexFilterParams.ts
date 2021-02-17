@@ -1,6 +1,7 @@
 import GetIndexFilterPartSizeParams from "./GetIndexFilterPartSizeParams";
 
 export default interface GetIndexFilterParams {
+  itemId?: number;
   largeCategory?: number;
   mediumCategory?: number;
   smallCategory: number[];

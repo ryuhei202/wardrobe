@@ -5,20 +5,25 @@ import KarteContainerData from "../../../model/styling/karte/props_data/KarteCon
 import KarteContainerCallback from "../karte/callback/KarteContainerCallback";
 import SelectionConfirmData from "../../../model/styling/props_data/SelectionConfirmData";
 import SelectionConfirmCallback from "../callback/SelectionConfirmCallback";
+import ArrangeData from "../../../model/styling/arrange/props_data/ArrangeData";
+import ArrangeCallback from "../arrange/callback/ArrangeCallback";
+import { MainContentType } from "../../../model/styling/MainContentType";
 
 export interface StylingHandler {
-  isSelectionCompleted: boolean;
+  mainContentType: MainContentType | undefined;
   karteContainerData: () => KarteContainerData;
   karteContainerCallback: () => KarteContainerCallback;
   itemBrowseCallback: () => ItemBrowseCallback;
   selectionConfirmData: () => SelectionConfirmData;
   selectionConfirmCallback: () => SelectionConfirmCallback;
+  arrangeData: () => ArrangeData;
+  arrangeCallback: () => ArrangeCallback;
 }
 
 export const useStylingHandler = (): StylingHandler => {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isSelectionCompleted, setIsSelectionCompleted] = useState(false);
+  const [mainContentType, setMainContentType] = useState<MainContentType>();
 
   const karteContainerData = (): KarteContainerData => {
     return { selectedIndex: currentIndex, items: selectedItems };
@@ -28,7 +33,19 @@ export const useStylingHandler = (): StylingHandler => {
     return {
       selectionProgressCallback: {
         onSelect: (index: number) => setCurrentIndex(index),
-        onClickCompleteButton: () => setIsSelectionCompleted(true),
+        onClickCompleteButton: () =>
+          setMainContentType(MainContentType.Confirm),
+      },
+      onKarteFetched: (
+        isItemRegistered: boolean,
+        registeredItems: SelectedItem[]
+      ) => {
+        if (isItemRegistered) {
+          setSelectedItems(registeredItems);
+          setMainContentType(MainContentType.Arrange);
+        } else {
+          setMainContentType(MainContentType.Browse);
+        }
       },
     };
   };
@@ -56,16 +73,31 @@ export const useStylingHandler = (): StylingHandler => {
 
   const selectionConfirmCallback = (): SelectionConfirmCallback => {
     return {
-      onCancelSelection: () => setIsSelectionCompleted(false),
+      onCancelSelection: () => setMainContentType(MainContentType.Browse),
+      onConfirmSelection: () => setMainContentType(MainContentType.Arrange),
+    };
+  };
+
+  const arrangeData = (): ArrangeData => {
+    return {
+      items: selectedItems,
+    };
+  };
+
+  const arrangeCallback = (): ArrangeCallback => {
+    return {
+      onClickBackButton: () => setMainContentType(MainContentType.Confirm),
     };
   };
 
   return {
-    isSelectionCompleted,
+    mainContentType,
     karteContainerData,
     karteContainerCallback,
     itemBrowseCallback,
     selectionConfirmData,
     selectionConfirmCallback,
+    arrangeData,
+    arrangeCallback,
   };
 };
