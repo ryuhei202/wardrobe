@@ -26,10 +26,6 @@ export const useStylingStyle = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(3),
     },
-    changeButton: {
-      marginTop: theme.spacing(2),
-      float: "right",
-    },
     selectedItemsContainer: {
       display: "flex",
       flexWrap: "wrap",
@@ -42,6 +38,20 @@ export const useStylingStyle = makeStyles((theme: Theme) =>
     selectedItemCardMedia: {
       height: 0,
       paddingTop: "150%",
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    confirmInfoContainer: {
+      padding: theme.spacing(1),
+    },
+    confirmInfoTitle: {
+      margin: theme.spacing(2),
+    },
+    changeButton: {
+      margin: theme.spacing(2),
+      float: "right",
     },
   })
 );

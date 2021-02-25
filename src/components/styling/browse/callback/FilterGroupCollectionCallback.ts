@@ -13,4 +13,5 @@ export default interface FilterGroupCollectionCallback {
   logoCallback: FilterMediaArrayCallback;
   dropSizeCallback: FilterCheckboxArrayCallback;
   optionCallback: FilterCheckboxArrayCallback;
+  onItemIdChanged: (newId: number) => void;
 }

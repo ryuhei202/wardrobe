@@ -41,6 +41,7 @@ export const useItemBrowseHandler = (
   callback: ItemBrowseCallback
 ): ItemBrowseHandler => {
   const defaultRefinement = {
+    itemId: null,
     largeCategoryId: null,
     mediumCategoryId: null,
     smallCategoryIds: [],
@@ -171,6 +172,12 @@ export const useItemBrowseHandler = (
   ): AppliedFilterData[] => {
     let result: AppliedFilterData[] = [];
 
+    if (currentRefinement.itemId !== null) {
+      result = result.concat({
+        name: `アイテムID：${currentRefinement.itemId}`,
+      });
+    }
+
     const appliedCategories = categoryHandler.appliedFilters(
       choice.largeCategory,
       currentRefinement.largeCategoryId,
@@ -275,6 +282,23 @@ export const useItemBrowseHandler = (
         choice.filter.option,
         currentRefinement.optionIds
       ),
+      onItemIdChanged: (newId: number) => {
+        let newRefinement;
+        if (newId) {
+          newRefinement = {
+            ...currentRefinement,
+            itemId: newId,
+            pageNo: 1,
+          };
+        } else {
+          newRefinement = {
+            ...currentRefinement,
+            itemId: null,
+            pageNo: 1,
+          };
+        }
+        setCurrentRefinement(newRefinement);
+      },
     };
   };
 

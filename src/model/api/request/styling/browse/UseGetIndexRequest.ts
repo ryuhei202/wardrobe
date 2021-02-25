@@ -26,6 +26,7 @@ export const useGetIndexRequest = (
       filterParams.mediumCategory = refinement.mediumCategoryId;
     if (refinement.largeCategoryId)
       filterParams.largeCategory = refinement.largeCategoryId;
+    if (refinement.itemId) filterParams.itemId = refinement.itemId;
 
     return {
       chartId: karteId,
