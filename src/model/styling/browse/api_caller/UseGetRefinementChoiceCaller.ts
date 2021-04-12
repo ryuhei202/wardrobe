@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
 import RefinementChoiceResponse from "../../../api/response/styling/browse/RefinementChoiceResponse";
 import { useGetRefinementChoiceRequest } from "../../../api/request/styling/browse/UseGetRefinementChoiceRequest";
+import { ChartId } from "../../../ChartId";
 
 export interface GetRefinementChoiceCaller {
   isRunning: () => boolean;
@@ -11,7 +12,9 @@ export interface GetRefinementChoiceCaller {
   errorResponse: ErrorResponse | null;
 }
 
-export const useGetRefinementChoiceCaller = (): GetRefinementChoiceCaller => {
+export const useGetRefinementChoiceCaller = (
+  categoryId: number
+): GetRefinementChoiceCaller => {
   const [response, setResponse] = useState<RefinementChoiceResponse | null>(
     null
   );
@@ -19,7 +22,12 @@ export const useGetRefinementChoiceCaller = (): GetRefinementChoiceCaller => {
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetRefinementChoiceRequest();
+
+  useEffect(() => {
+    setCallStatus(CallStatus.Preparing);
+  }, [categoryId]);
+
+  const request = useGetRefinementChoiceRequest(ChartId(), categoryId);
   const client = useGetClient<RefinementChoiceResponse>(request);
 
   useEffect(() => {
