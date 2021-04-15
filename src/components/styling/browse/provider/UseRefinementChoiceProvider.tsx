@@ -8,8 +8,10 @@ export interface RefinementChoiceProvider {
   itemBrowseComponent: (callback: ItemBrowseCallback) => JSX.Element;
 }
 
-export const useRefinementChoiceProvider = (): RefinementChoiceProvider => {
-  const choiceApiCaller = useGetRefinementChoiceCaller();
+export const useRefinementChoiceProvider = (
+  categoryId: number
+): RefinementChoiceProvider => {
+  const choiceApiCaller = useGetRefinementChoiceCaller(categoryId);
 
   const itemBrowseComponent = (callback: ItemBrowseCallback): JSX.Element => {
     if (choiceApiCaller.isRunning()) {
