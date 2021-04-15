@@ -1,9 +1,5 @@
-import {
-  createStyles,
-  fade,
-  makeStyles,
-  Theme,
-} from "@material-ui/core/styles";
+import { indigo, pink } from "@material-ui/core/colors";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 export const useBrowseStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,13 +82,17 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       width: "100%",
     },
     primaryColor: {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: pink[500],
     },
     darkBlue: {
-      backgroundColor: "#00266F",
+      backgroundColor: indigo[500],
     },
     idSearch: {
       marginTop: theme.spacing(1),
+    },
+    categorySelection: {
+      margin: theme.spacing(1),
+      minWidth: 120,
     },
   })
 );
