@@ -40,7 +40,7 @@ const Size = (props: SizeProps) => {
 
   return (
     <>
-      <Accordion>
+      <Accordion defaultExpanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMore />}
           aria-controls="panel2a-content"
@@ -56,7 +56,7 @@ const Size = (props: SizeProps) => {
               </ListItem>
             ))}
             <ListItem>
-              <Accordion>
+              <Accordion defaultExpanded={true}>
                 <AccordionSummary
                   expandIcon={<ExpandMore />}
                   aria-controls="size1a-content"
@@ -91,7 +91,7 @@ const Size = (props: SizeProps) => {
               </Accordion>
             </ListItem>
             <ListItem>
-              <Accordion>
+              <Accordion defaultExpanded={true}>
                 <AccordionSummary
                   expandIcon={<ExpandMore />}
                   aria-controls="size1a-content"
