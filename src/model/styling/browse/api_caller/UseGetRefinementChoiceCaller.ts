@@ -13,7 +13,8 @@ export interface GetRefinementChoiceCaller {
 }
 
 export const useGetRefinementChoiceCaller = (
-  categoryId: number
+  categoryId: number,
+  silhouetteId: number | null
 ): GetRefinementChoiceCaller => {
   const [response, setResponse] = useState<RefinementChoiceResponse | null>(
     null
@@ -25,9 +26,13 @@ export const useGetRefinementChoiceCaller = (
 
   useEffect(() => {
     setCallStatus(CallStatus.Preparing);
-  }, [categoryId]);
+  }, [categoryId, silhouetteId]);
 
-  const request = useGetRefinementChoiceRequest(ChartId(), categoryId);
+  const request = useGetRefinementChoiceRequest(
+    ChartId(),
+    categoryId,
+    silhouetteId
+  );
   const client = useGetClient<RefinementChoiceResponse>(request);
 
   useEffect(() => {
