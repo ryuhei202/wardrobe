@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
+  IconButton,
   InputLabel,
   List,
   ListItem,
@@ -15,6 +16,7 @@ import {
   Select,
   Typography,
 } from "@material-ui/core";
+import { ArrowBack } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 import React, { Fragment, useState } from "react";
 import ConfirmResponse from "../../model/api/response/styling/browse/ConfirmResponse";
@@ -44,6 +46,9 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
 
   return (
     <>
+      <IconButton onClick={() => props.callback.onCancelSelection()}>
+        <ArrowBack />
+      </IconButton>
       <Typography variant="h6" noWrap>
         選択コーデ確認画面
       </Typography>
