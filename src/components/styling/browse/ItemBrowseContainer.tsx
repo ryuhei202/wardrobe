@@ -4,11 +4,13 @@ import { useRefinementChoiceProvider } from "./provider/UseRefinementChoiceProvi
 export interface ItemBrowseContainerProps {
   callback: ItemBrowseCallback;
   categoryId: number;
+  silhouetteId: number | null;
 }
 
 const ItemBrowseContainer = (props: ItemBrowseContainerProps) => {
   const refinementChoiceProvider = useRefinementChoiceProvider(
-    props.categoryId
+    props.categoryId,
+    props.silhouetteId
   );
   return <>{refinementChoiceProvider.itemBrowseComponent(props.callback)}</>;
 };
