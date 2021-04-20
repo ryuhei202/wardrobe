@@ -27,8 +27,9 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     button: {
       marginBlock: theme.spacing(1),
     },
-    appliedFilterButton: {
-      marginLeft: theme.spacing(1),
+    appliedFilter: {
+      marginLeft: theme.spacing(0.5),
+      marginBottom: theme.spacing(0.5),
     },
     sortSelection: {
       minWidth: 100,

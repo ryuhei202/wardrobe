@@ -9,9 +9,13 @@ export interface RefinementChoiceProvider {
 }
 
 export const useRefinementChoiceProvider = (
-  categoryId: number
+  categoryId: number,
+  silhouetteId: number | null
 ): RefinementChoiceProvider => {
-  const choiceApiCaller = useGetRefinementChoiceCaller(categoryId);
+  const choiceApiCaller = useGetRefinementChoiceCaller(
+    categoryId,
+    silhouetteId
+  );
 
   const itemBrowseComponent = (callback: ItemBrowseCallback): JSX.Element => {
     if (choiceApiCaller.isRunning()) {

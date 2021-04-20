@@ -1,8 +1,8 @@
-import CoordinatorChoiceResponse from "./CoordinatorChoiceResponse";
+import SelectChoiceResponse from "./SelectChoiceResponse";
 import ValidationResponse from "./ValidationResponse";
 
 export default interface ConfirmResponse {
   readonly validateErrors: ValidationResponse[];
-  readonly stylistChoice: CoordinatorChoiceResponse[];
+  readonly stylistChoice: SelectChoiceResponse[];
   readonly misplacedItems: string[];
 }
