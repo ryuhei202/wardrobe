@@ -36,7 +36,7 @@ const Memo = (props: MemoProps) => {
 
   return (
     <>
-      <Accordion>
+      <Accordion defaultExpanded={true}>
         <AccordionSummary
           expandIcon={<ExpandMore />}
           aria-controls="panel3a-content"
