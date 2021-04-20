@@ -1,8 +1,19 @@
 import GetRequest from "../../GetRequest";
+import GetRefinementChoiceParams from "./GetRefinementChoiceParams";
 
-export const useGetRefinementChoiceRequest = (): GetRequest => {
+export const useGetRefinementChoiceRequest = (
+  chartId: number,
+  categoryId: number
+): GetRequest => {
   const url = (): string => {
     return `styling/browses/refinement_choice`;
   };
-  return { url };
+
+  const params = (): GetRefinementChoiceParams => {
+    return {
+      chartId: chartId,
+      categoryId: categoryId,
+    };
+  };
+  return { url, params };
 };
