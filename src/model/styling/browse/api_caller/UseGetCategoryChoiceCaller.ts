@@ -2,38 +2,25 @@ import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
-import RefinementChoiceResponse from "../../../api/response/styling/browse/RefinementChoiceResponse";
-import { useGetRefinementChoiceRequest } from "../../../api/request/styling/browse/UseGetRefinementChoiceRequest";
-import { ChartId } from "../../../ChartId";
+import { useGetSearchPrerequisiteRequest } from "../../../api/request/styling/browse/UseGetSearchPrerequisiteRequest";
+import SearchPrerequisiteResponse from "../../../api/response/styling/browse/SearchPrerequisiteResponse";
 
-export interface GetRefinementChoiceCaller {
+export interface GetCategoryChoiceCaller {
   isRunning: () => boolean;
-  response: RefinementChoiceResponse | null;
+  response: SearchPrerequisiteResponse | null;
   errorResponse: ErrorResponse | null;
 }
 
-export const useGetRefinementChoiceCaller = (
-  categoryId: number,
-  silhouetteId: number | null
-): GetRefinementChoiceCaller => {
-  const [response, setResponse] = useState<RefinementChoiceResponse | null>(
+export const useGetCategoryChoiceCaller = (): GetCategoryChoiceCaller => {
+  const [response, setResponse] = useState<SearchPrerequisiteResponse | null>(
     null
   );
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-
-  useEffect(() => {
-    setCallStatus(CallStatus.Preparing);
-  }, [categoryId, silhouetteId]);
-
-  const request = useGetRefinementChoiceRequest(
-    ChartId(),
-    categoryId,
-    silhouetteId
-  );
-  const client = useGetClient<RefinementChoiceResponse>(request);
+  const request = useGetSearchPrerequisiteRequest();
+  const client = useGetClient<SearchPrerequisiteResponse>(request);
 
   useEffect(() => {
     if (callStatus === CallStatus.Preparing) {

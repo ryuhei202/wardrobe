@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Chip } from "@material-ui/core";
 import React from "react";
 import AppliedFilterData from "../../../model/styling/browse/props_data/AppliedFilterData";
 import AppliedFiltersCallback from "./callback/AppliedFiltersCallback";
@@ -14,23 +14,19 @@ const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
   return (
     <>
       {props.data.map((filter, index) => (
-        <Button
-          variant="contained"
+        <Chip
           color="secondary"
-          className={classes.appliedFilterButton}
+          className={classes.appliedFilter}
           key={index}
-        >
-          {filter.name}
-        </Button>
+          label={filter.name}
+        />
       ))}
-      <Button
-        variant="contained"
+      <Chip
         color="primary"
         onClick={props.callback.onClear}
-        className={classes.appliedFilterButton}
-      >
-        全ての条件を解除
-      </Button>
+        className={classes.appliedFilter}
+        label="全ての条件を解除"
+      />
     </>
   );
 };

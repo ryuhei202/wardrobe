@@ -40,24 +40,8 @@ export const useItemBrowseHandler = (
   choice: RefinementChoiceResponse,
   callback: ItemBrowseCallback
 ): ItemBrowseHandler => {
-  const defaultRefinement = {
-    itemId: null,
-    largeCategoryId: null,
-    mediumCategoryId: null,
-    smallCategoryIds: [],
-    sizeIds: [],
-    partSizes: [],
-    colorIds: [],
-    patternIds: [],
-    logoIds: [],
-    dropSizes: [],
-    optionIds: [3, 4], // NGはデフォルトで選択
-    sortId: 1,
-    pageNo: 1,
-  };
-
   const [currentRefinement, setCurrentRefinement] = useState<Refinement>(
-    defaultRefinement
+    choice.defaultRefinement
   );
   const [
     selectedPreregisteredItemId,
@@ -303,7 +287,7 @@ export const useItemBrowseHandler = (
   };
 
   const appliedFiltersCallback = (): AppliedFiltersCallback => {
-    return { onClear: () => setCurrentRefinement(defaultRefinement) };
+    return { onClear: () => setCurrentRefinement(choice.defaultRefinement) };
   };
 
   const itemCardCollectionCallback = (): ItemCardCollectionCallback => {
@@ -319,7 +303,7 @@ export const useItemBrowseHandler = (
       onClickBackButton: () => setSelectedPreregisteredItemId(null),
       onSelectItem: (item: SelectedItem) => {
         callback.onSelectItem(item);
-        setCurrentRefinement(defaultRefinement);
+        setCurrentRefinement(choice.defaultRefinement);
         setSelectedPreregisteredItemId(null);
       },
     };
