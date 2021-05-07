@@ -57,7 +57,7 @@ export const useItemBrowseHandler = (
     setCurrentRefinement(newRefinement);
   };
 
-  const onMediumCategoryChanged = (newId: number) => {
+  const onMediumCategoryChanged = (newId: number | null) => {
     const newRefinement = {
       ...currentRefinement,
       mediumCategoryId: newId,
@@ -70,6 +70,16 @@ export const useItemBrowseHandler = (
     const newRefinement = {
       ...currentRefinement,
       smallCategoryIds: newIds,
+      pageNo: 1,
+    };
+    setCurrentRefinement(newRefinement);
+  };
+
+  const onMediumCategoryCancelled = () => {
+    const newRefinement = {
+      ...currentRefinement,
+      mediumCategoryId: null,
+      smallCategoryIds: [],
       pageNo: 1,
     };
     setCurrentRefinement(newRefinement);
@@ -142,6 +152,7 @@ export const useItemBrowseHandler = (
     onLargeCategoryChange: onLargeCategoryChanged,
     onMediumCategoryChange: onMediumCategoryChanged,
     onSmallCategoryChange: onSmallCategoryChanged,
+    onMediumCategoryCancelled: onMediumCategoryCancelled,
   });
   const sizeHandler = useSizeRefinementHandler(onSizeChanged);
   const partSizeHandler = usePartSizeRefinementHandler(onPartSizeChanged);
