@@ -23,7 +23,6 @@ const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
     backButton = (
       <IconButton
         onClick={() => {
-          console.log("I‘m here!");
           props.callback.onClickBackButton!!();
         }}
       >
