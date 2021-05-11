@@ -28,8 +28,9 @@ export interface CategoryRefinementHandler {
 
 export interface CategoryRefinementCallback {
   onLargeCategoryChange: (newId: number) => void;
-  onMediumCategoryChange: (newId: number) => void;
+  onMediumCategoryChange: (newId: number | null) => void;
   onSmallCategoryChange: (newIds: number[]) => void;
+  onMediumCategoryCancelled: () => void;
 }
 
 export const useCategoryRefinementHandler = (
@@ -171,6 +172,9 @@ export const useCategoryRefinementHandler = (
             mediumCategoryId,
             smallCategoryIds
           ),
+        onClickBackButton: () => {
+          callback.onMediumCategoryCancelled();
+        },
       },
     };
   };
