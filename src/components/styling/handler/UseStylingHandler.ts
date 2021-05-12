@@ -43,10 +43,9 @@ export const useStylingHandler = (): StylingHandler => {
       ) => {
         if (isItemRegistered) {
           setSelectedItems(registeredItems);
-          setMainContentType(MainContentType.Arrange);
-        } else {
-          setMainContentType(MainContentType.Browse);
+          setCurrentIndex(registeredItems.length);
         }
+        setMainContentType(MainContentType.Browse);
       },
     };
   };
