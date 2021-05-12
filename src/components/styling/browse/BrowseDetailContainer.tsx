@@ -6,6 +6,7 @@ export interface BrowseDetailContainerProps {
   id: number;
   refinement: Refinement;
   callback: BrowseDetailCallback;
+  currentSelectedItemId: number | null;
 }
 
 const BrowseDetailContainer = (props: BrowseDetailContainerProps) => {
@@ -13,7 +14,14 @@ const BrowseDetailContainer = (props: BrowseDetailContainerProps) => {
     props.id,
     props.refinement
   );
-  return <>{browseDetailProvider.browseDetailComponent(props.callback)}</>;
+  return (
+    <>
+      {browseDetailProvider.browseDetailComponent(
+        props.callback,
+        props.currentSelectedItemId
+      )}
+    </>
+  );
 };
 
 export default BrowseDetailContainer;

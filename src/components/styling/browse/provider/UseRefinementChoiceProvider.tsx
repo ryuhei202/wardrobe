@@ -5,7 +5,10 @@ import React from "react";
 import ItemBrowseCallback from "../callback/ItemBrowseCallback";
 
 export interface RefinementChoiceProvider {
-  itemBrowseComponent: (callback: ItemBrowseCallback) => JSX.Element;
+  itemBrowseComponent: (
+    callback: ItemBrowseCallback,
+    currentSelectedItemId: number | null
+  ) => JSX.Element;
 }
 
 export const useRefinementChoiceProvider = (
@@ -17,14 +20,21 @@ export const useRefinementChoiceProvider = (
     silhouetteId
   );
 
-  const itemBrowseComponent = (callback: ItemBrowseCallback): JSX.Element => {
+  const itemBrowseComponent = (
+    callback: ItemBrowseCallback,
+    currentSelectedItemId: number | null
+  ): JSX.Element => {
     if (choiceApiCaller.isRunning()) {
       return <CircularProgress />;
     } else if (choiceApiCaller.errorResponse) {
       return <Typography>{choiceApiCaller.errorResponse.message}</Typography>;
     } else if (choiceApiCaller.response) {
       return (
-        <ItemBrowse response={choiceApiCaller.response} callback={callback} />
+        <ItemBrowse
+          response={choiceApiCaller.response}
+          callback={callback}
+          currentSelectedItemId={currentSelectedItemId}
+        />
       );
     } else {
       return <></>;

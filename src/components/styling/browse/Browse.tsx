@@ -8,6 +8,7 @@ import { useBrowseStyle } from "./style/UseBrowseStyle";
 interface BrowseProps {
   response: SearchPrerequisiteResponse;
   callback: ItemBrowseCallback;
+  currentSelectedItemId: number | null;
 }
 
 const Browse = (props: BrowseProps) => {
@@ -22,6 +23,7 @@ const Browse = (props: BrowseProps) => {
         callback={props.callback}
         categoryId={categoryId!!}
         silhouetteId={silhouetteId}
+        currentSelectedItemId={props.currentSelectedItemId}
       />
     );
   }

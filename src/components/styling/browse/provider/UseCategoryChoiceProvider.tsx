@@ -5,19 +5,31 @@ import { useGetCategoryChoiceCaller } from "../../../../model/styling/browse/api
 import Browse from "../Browse";
 
 export interface CategoryChoiceProvider {
-  browseComponent: (callback: ItemBrowseCallback) => JSX.Element;
+  browseComponent: (
+    callback: ItemBrowseCallback,
+    previousSelectedItemId: number | null
+  ) => JSX.Element;
 }
 
 export const useCategoryChoiceProvider = (): CategoryChoiceProvider => {
   const choiceApiCaller = useGetCategoryChoiceCaller();
 
-  const browseComponent = (callback: ItemBrowseCallback): JSX.Element => {
+  const browseComponent = (
+    callback: ItemBrowseCallback,
+    currentSelectedItemId: number | null
+  ): JSX.Element => {
     if (choiceApiCaller.isRunning()) {
       return <CircularProgress />;
     } else if (choiceApiCaller.errorResponse) {
       return <Typography>{choiceApiCaller.errorResponse.message}</Typography>;
     } else if (choiceApiCaller.response) {
-      return <Browse response={choiceApiCaller.response} callback={callback} />;
+      return (
+        <Browse
+          response={choiceApiCaller.response}
+          callback={callback}
+          currentSelectedItemId={currentSelectedItemId}
+        />
+      );
     } else {
       return <></>;
     }

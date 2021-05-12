@@ -18,6 +18,7 @@ export interface StylingHandler {
   selectionConfirmCallback: () => SelectionConfirmCallback;
   arrangeData: () => ArrangeData;
   arrangeCallback: () => ArrangeCallback;
+  currentSelectedItem: () => SelectedItem | null;
 }
 
 export const useStylingHandler = (): StylingHandler => {
@@ -90,6 +91,14 @@ export const useStylingHandler = (): StylingHandler => {
     };
   };
 
+  const currentSelectedItem = (): SelectedItem | null => {
+    if (currentIndex >= selectedItems.length) {
+      return null;
+    } else {
+      return selectedItems[currentIndex];
+    }
+  };
+
   return {
     mainContentType,
     karteContainerData,
@@ -99,5 +108,6 @@ export const useStylingHandler = (): StylingHandler => {
     selectionConfirmCallback,
     arrangeData,
     arrangeCallback,
+    currentSelectedItem,
   };
 };

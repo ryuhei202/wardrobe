@@ -9,14 +9,19 @@ import SelectedItem from "../../../../model/styling/SelectedItem";
 import PartSize from "../../../../model/styling/PartSize";
 import DetailSizeItemRecordResponse from "../../../../model/api/response/styling/browse/DetailSizeItemRecordResponse";
 import ValidationDialogCallback from "../callback/ValidationDialogCallback";
+import ValidationError from "../../../../model/styling/browse/ValidationError";
+import { DetailStatus } from "../../../../model/styling/browse/DetailStatus";
+import PostSelectCallback from "../callback/PostSelectCallback";
 
 export interface BrowseDetailHandler {
   selectedItem: SelectedItem | null;
-  isValidating: boolean;
+  currentValidationErrors: ValidationError[];
+  detailStatus: DetailStatus;
   onClickSelectItemButton: () => void;
   detailSizeButtonArrayCallback: () => DetailSizeButtonArrayCallback;
   detailItemTableCallback: () => DetailItemTableCallback;
   validationDialogCallback: () => ValidationDialogCallback;
+  postSelectCallback: () => PostSelectCallback;
   selectedSizeName: () => string;
   selectedItemId: () => string;
   isSelectItemButtonDisabled: () => boolean;
@@ -32,7 +37,12 @@ export const useBrowseDetailHandler = (
     null
   );
   const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
-  const [isValidating, setIsValidating] = useState(false);
+  const [currentValidationErrors, setCurrentValidationErrors] = useState<
+    ValidationError[]
+  >([]);
+  const [detailStatus, setDetailStatus] = useState<DetailStatus>(
+    DetailStatus.Browsing
+  );
 
   const createPartSizes = (
     columns: string[],
@@ -46,7 +56,8 @@ export const useBrowseDetailHandler = (
     });
   };
 
-  const onClickSelectItemButton = () => setIsValidating(true);
+  const onClickSelectItemButton = () =>
+    setDetailStatus(DetailStatus.Validating);
 
   const detailSizeButtonArrayCallback = (): DetailSizeButtonArrayCallback => {
     return {
@@ -61,8 +72,10 @@ export const useBrowseDetailHandler = (
     return {
       onSelect: (index: number) => {
         if (selectedSizeIndex !== null) {
-          const columns = detail.sizes[selectedSizeIndex].columns;
-          const itemRecord = detail.sizes[selectedSizeIndex].itemRecords[index];
+          const selectedSize = detail.sizes[selectedSizeIndex];
+          const columns = selectedSize.columns;
+          const itemRecord = selectedSize.itemRecords[index];
+          setCurrentValidationErrors(itemRecord.validationErrors);
           setSelectedItem({
             itemId: itemRecord.itemId,
             itemImagePath: detail.itemImagePath,
@@ -77,10 +90,17 @@ export const useBrowseDetailHandler = (
 
   const validationDialogCallback = (): ValidationDialogCallback => {
     return {
-      onClickCancelButton: () => setIsValidating(false),
-      onClickSelectButton: () => {
+      onClickCancelButton: () => setDetailStatus(DetailStatus.Browsing),
+      onClickSelectButton: () => setDetailStatus(DetailStatus.Selecting),
+    };
+  };
+
+  const postSelectCallback = (): PostSelectCallback => {
+    return {
+      onSuccess: () => {
         if (selectedItem) callback.onSelectItem(selectedItem);
       },
+      onFailure: () => setDetailStatus(DetailStatus.Browsing),
     };
   };
 
@@ -123,11 +143,13 @@ export const useBrowseDetailHandler = (
 
   return {
     selectedItem,
-    isValidating,
+    currentValidationErrors,
+    detailStatus,
     onClickSelectItemButton,
     detailSizeButtonArrayCallback,
     detailItemTableCallback,
     validationDialogCallback,
+    postSelectCallback,
     selectedSizeName,
     selectedItemId,
     isSelectItemButtonDisabled,
