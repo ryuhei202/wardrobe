@@ -13,16 +13,16 @@ interface BrowseProps {
 
 const Browse = (props: BrowseProps) => {
   const classes = useBrowseStyle();
-  const [categoryId, setCategoryId] = useState<number | null>(null);
-  const [silhouetteId, setSilhouetteId] = useState<number | null>(null);
+  const [categoryId, setCategoryId] = useState<number | string>("");
+  const [silhouetteId, setSilhouetteId] = useState<number | string>("");
 
   let itemBrowse;
-  if (categoryId) {
+  if (categoryId !== "") {
     itemBrowse = (
       <ItemBrowseContainer
         callback={props.callback}
-        categoryId={categoryId!!}
-        silhouetteId={silhouetteId}
+        categoryId={categoryId! as number}
+        silhouetteId={silhouetteId !== "" ? (silhouetteId as number) : null}
         currentSelectedItemId={props.currentSelectedItemId}
       />
     );
