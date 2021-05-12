@@ -21,7 +21,7 @@ const Browse = (props: BrowseProps) => {
     itemBrowse = (
       <ItemBrowseContainer
         callback={props.callback}
-        categoryId={categoryId! as number}
+        categoryId={categoryId!!}
         silhouetteId={silhouetteId}
         currentSelectedItemId={props.currentSelectedItemId}
       />
