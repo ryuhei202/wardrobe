@@ -17,11 +17,11 @@ const Browse = (props: BrowseProps) => {
   const [silhouetteId, setSilhouetteId] = useState<number | null>(null);
 
   let itemBrowse;
-  if (categoryId) {
+  if (categoryId !== null) {
     itemBrowse = (
       <ItemBrowseContainer
         callback={props.callback}
-        categoryId={categoryId!!}
+        categoryId={categoryId! as number}
         silhouetteId={silhouetteId}
         currentSelectedItemId={props.currentSelectedItemId}
       />
@@ -35,7 +35,7 @@ const Browse = (props: BrowseProps) => {
         <Select
           labelId="category-select-label"
           id="category-select"
-          value={categoryId}
+          value={categoryId ?? ""}
           onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
             setCategoryId(event.target.value as number);
           }}
@@ -52,7 +52,7 @@ const Browse = (props: BrowseProps) => {
         <Select
           labelId="silhouette-select-label"
           id="silhouette-select"
-          value={silhouetteId}
+          value={silhouetteId ?? ""}
           onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
             setSilhouetteId(event.target.value as number);
           }}
