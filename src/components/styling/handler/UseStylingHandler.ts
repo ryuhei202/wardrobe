@@ -25,6 +25,7 @@ export const useStylingHandler = (): StylingHandler => {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mainContentType, setMainContentType] = useState<MainContentType>();
+  const [rentableItemNum, setRentableItemNum] = useState(0);
 
   const karteContainerData = (): KarteContainerData => {
     return { selectedIndex: currentIndex, items: selectedItems };
@@ -39,11 +40,17 @@ export const useStylingHandler = (): StylingHandler => {
       },
       onKarteFetched: (
         isItemRegistered: boolean,
-        registeredItems: SelectedItem[]
+        registeredItems: SelectedItem[],
+        rentableItemNum: number
       ) => {
+        setRentableItemNum(rentableItemNum);
         if (isItemRegistered) {
           setSelectedItems(registeredItems);
-          setCurrentIndex(registeredItems.length);
+          if (registeredItems.length >= rentableItemNum) {
+            setCurrentIndex(rentableItemNum - 1);
+          } else {
+            setCurrentIndex(registeredItems.length);
+          }
         }
         setMainContentType(MainContentType.Browse);
       },
@@ -60,7 +67,11 @@ export const useStylingHandler = (): StylingHandler => {
           newSelectedItems.push(item);
         }
         setSelectedItems(newSelectedItems);
-        setCurrentIndex(newSelectedItems.length);
+        if (newSelectedItems.length >= rentableItemNum) {
+          setCurrentIndex(rentableItemNum - 1);
+        } else {
+          setCurrentIndex(newSelectedItems.length);
+        }
       },
     };
   };

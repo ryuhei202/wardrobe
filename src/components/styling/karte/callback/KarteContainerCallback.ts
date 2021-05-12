@@ -5,6 +5,7 @@ export default interface KarteContainerCallback {
   selectionProgressCallback: SelectionProgressCallback;
   onKarteFetched: (
     isItemRegistered: boolean,
-    registeredItems: SelectedItem[]
+    registeredItems: SelectedItem[],
+    rentableItemNum: number
   ) => void;
 }

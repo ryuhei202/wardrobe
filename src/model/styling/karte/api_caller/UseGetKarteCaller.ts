@@ -16,7 +16,8 @@ export interface GetKarteCaller {
 export const useGetKarteCaller = (
   onSuccess: (
     isItemRegistered: boolean,
-    registeredItems: SelectedItem[]
+    registeredItems: SelectedItem[],
+    rentableItemNum: number
   ) => void
 ): GetKarteCaller => {
   const [response, setResponse] = useState<KarteResponse | null>(null);
@@ -37,9 +38,13 @@ export const useGetKarteCaller = (
             setErrorResponse(null);
             setCallStatus(CallStatus.Idle);
             if (response.registeredItems.length > 0) {
-              onSuccess(true, response.registeredItems);
+              onSuccess(
+                true,
+                response.registeredItems,
+                response.rentableItemNum
+              );
             } else {
-              onSuccess(false, []);
+              onSuccess(false, [], response.rentableItemNum);
             }
           })
           .catch((error: ErrorResponse) => {
