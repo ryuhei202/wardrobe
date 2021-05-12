@@ -18,7 +18,8 @@ export interface KarteProvider {
 export const useKarteProvider = (
   onKarteFetched: (
     isItemRegistered: boolean,
-    registeredItems: SelectedItem[]
+    registeredItems: SelectedItem[],
+    rentableItemNum: number
   ) => void
 ): KarteProvider => {
   const apiCaller = useGetKarteCaller(onKarteFetched);

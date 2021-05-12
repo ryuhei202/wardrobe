@@ -1,41 +1,42 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
-import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
+import BrowseIndexResponse from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { ChartId } from "../../../ChartId";
-import ValidationResponse from "../../../api/response/styling/browse/ValidationResponse";
-import { useGetValidationRequest } from "../../../api/request/styling/browse/UseGetValidationRequest";
+import { usePostClient } from "../../../api/client/UsePostClient";
+import { usePostSelectRequest } from "../../../api/request/styling/browse/UsePostSelectRequest";
 
-export interface GetValidationCaller {
+export interface PostSelectCaller {
   isRunning: () => boolean;
-  response: ValidationResponse[] | null;
+  response: BrowseIndexResponse | null;
   errorResponse: ErrorResponse | null;
   clearErrorResponse: () => void;
 }
 
-export const useGetValidationCaller = (
+export const usePostSelectCaller = (
   itemId: number,
-  onSuccess: (response: ValidationResponse[]) => void
-): GetValidationCaller => {
-  const [response, setResponse] = useState<ValidationResponse[] | null>(null);
+  previousItemId: number | null,
+  onSuccess: () => void
+): PostSelectCaller => {
+  const [response, setResponse] = useState<any>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
 
-  const request = useGetValidationRequest(ChartId(), itemId);
-  const client = useGetClient<ValidationResponse[]>(request);
+  const request = usePostSelectRequest(ChartId(), itemId, previousItemId);
+  const client = usePostClient(request);
 
   useEffect(() => {
     if (callStatus === CallStatus.Preparing) {
       const fetch = () => {
         client
-          .get()
+          .post()
           .then((response) => {
             setResponse(response);
             setErrorResponse(null);
             setCallStatus(CallStatus.Idle);
-            onSuccess(response);
+            onSuccess();
           })
           .catch((error: ErrorResponse) => {
             setErrorResponse(error);

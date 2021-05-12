@@ -1,5 +1,5 @@
-import { ValidationErrorType } from "../../../../model/api/response/styling/browse/ValidationErrorType";
-import ValidationResponse from "../../../../model/api/response/styling/browse/ValidationResponse";
+import { ValidationErrorType } from "../../../../model/styling/browse/ValidationErrorType";
+import ValidationError from "../../../../model/styling/browse/ValidationError";
 
 export interface ValidationDialogPresenter {
   contentList: () => {
@@ -9,10 +9,10 @@ export interface ValidationDialogPresenter {
 }
 
 export const useValidationDialogPresenter = (
-  response: ValidationResponse[]
+  error: ValidationError[]
 ): ValidationDialogPresenter => {
   const contentList = (): { isRejected: boolean; message: string }[] => {
-    return response.map((row) => {
+    return error.map((row) => {
       return {
         isRejected: row.errorType === ValidationErrorType.Rejected,
         message: row.message,

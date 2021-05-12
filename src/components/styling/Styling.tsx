@@ -15,7 +15,12 @@ const Styling = () => {
   let mainContent;
   switch (handler.mainContentType) {
     case MainContentType.Browse: {
-      mainContent = <BrowseContainer callback={handler.itemBrowseCallback()} />;
+      mainContent = (
+        <BrowseContainer
+          callback={handler.itemBrowseCallback()}
+          currentSelectedItemId={handler.currentSelectedItem()?.itemId ?? null}
+        />
+      );
       break;
     }
     case MainContentType.Confirm: {

@@ -18,12 +18,14 @@ export interface StylingHandler {
   selectionConfirmCallback: () => SelectionConfirmCallback;
   arrangeData: () => ArrangeData;
   arrangeCallback: () => ArrangeCallback;
+  currentSelectedItem: () => SelectedItem | null;
 }
 
 export const useStylingHandler = (): StylingHandler => {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mainContentType, setMainContentType] = useState<MainContentType>();
+  const [rentableItemNum, setRentableItemNum] = useState(0);
 
   const karteContainerData = (): KarteContainerData => {
     return { selectedIndex: currentIndex, items: selectedItems };
@@ -38,14 +40,19 @@ export const useStylingHandler = (): StylingHandler => {
       },
       onKarteFetched: (
         isItemRegistered: boolean,
-        registeredItems: SelectedItem[]
+        registeredItems: SelectedItem[],
+        rentableItemNum: number
       ) => {
+        setRentableItemNum(rentableItemNum);
         if (isItemRegistered) {
           setSelectedItems(registeredItems);
-          setMainContentType(MainContentType.Arrange);
-        } else {
-          setMainContentType(MainContentType.Browse);
+          if (registeredItems.length >= rentableItemNum) {
+            setCurrentIndex(rentableItemNum - 1);
+          } else {
+            setCurrentIndex(registeredItems.length);
+          }
         }
+        setMainContentType(MainContentType.Browse);
       },
     };
   };
@@ -60,7 +67,11 @@ export const useStylingHandler = (): StylingHandler => {
           newSelectedItems.push(item);
         }
         setSelectedItems(newSelectedItems);
-        setCurrentIndex(newSelectedItems.length);
+        if (newSelectedItems.length >= rentableItemNum) {
+          setCurrentIndex(rentableItemNum - 1);
+        } else {
+          setCurrentIndex(newSelectedItems.length);
+        }
       },
     };
   };
@@ -90,6 +101,14 @@ export const useStylingHandler = (): StylingHandler => {
     };
   };
 
+  const currentSelectedItem = (): SelectedItem | null => {
+    if (currentIndex >= selectedItems.length) {
+      return null;
+    } else {
+      return selectedItems[currentIndex];
+    }
+  };
+
   return {
     mainContentType,
     karteContainerData,
@@ -99,5 +118,6 @@ export const useStylingHandler = (): StylingHandler => {
     selectionConfirmCallback,
     arrangeData,
     arrangeCallback,
+    currentSelectedItem,
   };
 };
