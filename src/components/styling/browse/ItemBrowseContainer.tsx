@@ -5,6 +5,7 @@ export interface ItemBrowseContainerProps {
   callback: ItemBrowseCallback;
   categoryId: number;
   silhouetteId: number | null;
+  currentSelectedItemId: number | null;
 }
 
 const ItemBrowseContainer = (props: ItemBrowseContainerProps) => {
@@ -12,7 +13,14 @@ const ItemBrowseContainer = (props: ItemBrowseContainerProps) => {
     props.categoryId,
     props.silhouetteId
   );
-  return <>{refinementChoiceProvider.itemBrowseComponent(props.callback)}</>;
+  return (
+    <>
+      {refinementChoiceProvider.itemBrowseComponent(
+        props.callback,
+        props.currentSelectedItemId
+      )}
+    </>
+  );
 };
 
 export default ItemBrowseContainer;

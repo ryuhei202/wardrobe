@@ -12,20 +12,20 @@ import {
 } from "@material-ui/core";
 import { Error, Warning } from "@material-ui/icons";
 import React from "react";
-import ValidationResponse from "../../../model/api/response/styling/browse/ValidationResponse";
+import ValidationError from "../../../model/styling/browse/ValidationError";
 import ValidationDialogCallback from "./callback/ValidationDialogCallback";
 import { useValidationDialogPresenter } from "./presenter/UseValidationDialogPresenter";
 import { useValidationDialogStyle } from "./style/UseValidationDialogStyle";
 
 export interface ValidationDialogProps {
-  response: ValidationResponse[];
+  errors: ValidationError[];
   isOpen: boolean;
   callback: ValidationDialogCallback;
 }
 
 const ValidationDialog = (props: ValidationDialogProps) => {
   const classes = useValidationDialogStyle();
-  const presenter = useValidationDialogPresenter(props.response);
+  const presenter = useValidationDialogPresenter(props.errors);
 
   return (
     <Dialog open={props.isOpen} disableBackdropClick disableEscapeKeyDown>

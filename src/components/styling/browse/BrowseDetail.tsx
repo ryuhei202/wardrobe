@@ -2,17 +2,20 @@ import { Box, Button, IconButton, Paper, Typography } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
 import React from "react";
 import DetailResponse from "../../../model/api/response/styling/browse/DetailResponse";
+import { DetailStatus } from "../../../model/styling/browse/DetailStatus";
 import BrowseDetailCallback from "./callback/BrowseDetailCallback";
 import DetailItemTable from "./DetailItemTable";
 import DetailSizeButtonArray from "./DetailSizeButtonArray";
 import { useBrowseDetailHandler } from "./handler/UseBrowseDetailHandler";
+import PostSelectDialog from "./PostSelectDialog";
 import { useBrowseDetailPresenter } from "./presenter/UseBrowseDetailPresenter";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
-import ValidationDialogContainer from "./ValidationDialogContainer";
+import ValidationDialog from "./ValidationDialog";
 
 interface BrowseDetailProps {
   response: DetailResponse;
   callback: BrowseDetailCallback;
+  previousSelectedItemId: number | null;
 }
 
 const BrowseDetail = (props: BrowseDetailProps) => {
@@ -20,14 +23,34 @@ const BrowseDetail = (props: BrowseDetailProps) => {
   const handler = useBrowseDetailHandler(props.response, props.callback);
   const presenter = useBrowseDetailPresenter(props.response);
 
-  let validationDialogContainer;
-  if (handler.selectedItem && handler.isValidating) {
-    validationDialogContainer = (
-      <ValidationDialogContainer
-        itemId={handler.selectedItem.itemId}
-        callback={handler.validationDialogCallback()}
-      />
-    );
+  let dialog;
+  if (handler.selectedItem) {
+    switch (handler.detailStatus) {
+      case DetailStatus.Validating: {
+        if (handler.currentValidationErrors.length === 0) {
+          handler.validationDialogCallback().onClickSelectButton();
+        } else {
+          dialog = (
+            <ValidationDialog
+              isOpen={true}
+              errors={handler.currentValidationErrors}
+              callback={handler.validationDialogCallback()}
+            />
+          );
+        }
+        break;
+      }
+      case DetailStatus.Selecting: {
+        dialog = (
+          <PostSelectDialog
+            selectedItemId={handler.selectedItem.itemId}
+            previousItemId={props.previousSelectedItemId}
+            callback={handler.postSelectCallback()}
+          />
+        );
+        break;
+      }
+    }
   }
 
   return (
@@ -101,7 +124,7 @@ const BrowseDetail = (props: BrowseDetailProps) => {
           </Button>
         </div>
       </Paper>
-      {validationDialogContainer}
+      {dialog}
     </>
   );
 };

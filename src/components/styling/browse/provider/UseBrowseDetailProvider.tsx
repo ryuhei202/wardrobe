@@ -13,7 +13,10 @@ import BrowseDetail from "../BrowseDetail";
 import BrowseDetailCallback from "../callback/BrowseDetailCallback";
 
 export interface BrowseDetailProvider {
-  browseDetailComponent: (callback: BrowseDetailCallback) => JSX.Element;
+  browseDetailComponent: (
+    callback: BrowseDetailCallback,
+    previousSelectedItemId: number | null
+  ) => JSX.Element;
 }
 
 export const useBrowseDetailProvider = (
@@ -23,7 +26,8 @@ export const useBrowseDetailProvider = (
   const detailApiCaller = useGetDetailCaller(preregisteredItemId, refinement);
 
   const browseDetailComponent = (
-    callback: BrowseDetailCallback
+    callback: BrowseDetailCallback,
+    previousSelectedItemId: number | null
   ): JSX.Element => {
     if (detailApiCaller.isRunning()) {
       return (
@@ -42,7 +46,11 @@ export const useBrowseDetailProvider = (
       );
     } else if (detailApiCaller.response) {
       return (
-        <BrowseDetail response={detailApiCaller.response} callback={callback} />
+        <BrowseDetail
+          previousSelectedItemId={previousSelectedItemId}
+          response={detailApiCaller.response}
+          callback={callback}
+        />
       );
     } else {
       return <></>;

@@ -12,6 +12,7 @@ import ItemBrowseCallback from "./callback/ItemBrowseCallback";
 export interface ItemBrowseProps {
   response: RefinementChoiceResponse;
   callback: ItemBrowseCallback;
+  currentSelectedItemId: number | null;
 }
 
 const ItemBrowse = (props: ItemBrowseProps) => {
@@ -26,6 +27,7 @@ const ItemBrowse = (props: ItemBrowseProps) => {
         id={handler.selectedPreregisteredItemId}
         refinement={handler.currentRefinement}
         callback={handler.browseDetailCallback()}
+        currentSelectedItemId={props.currentSelectedItemId}
       />
     );
   }
