@@ -220,6 +220,139 @@ export const useItemBrowseHandler = (
     return result;
   };
 
+  const deleteAppliedFilter = (index: number) => {
+    let currentIndex = 0;
+    let newRefinement = currentRefinement;
+    if (currentRefinement.itemId !== null) {
+      if (currentIndex === index) {
+        newRefinement = { ...currentRefinement, itemId: null, pageNo: 1 };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex++;
+    }
+    if (currentRefinement.smallCategoryIds.length > 0) {
+      if (currentRefinement.smallCategoryIds.length + currentIndex >= index) {
+        let newSmallCategoryIds = [...currentRefinement.smallCategoryIds];
+        newSmallCategoryIds.splice(index - currentIndex, 1);
+        newRefinement = {
+          ...currentRefinement,
+          smallCategoryIds: newSmallCategoryIds,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex += currentRefinement.smallCategoryIds.length;
+    } else if (currentRefinement.mediumCategoryId !== null) {
+      if (currentIndex === index) {
+        newRefinement = {
+          ...currentRefinement,
+          mediumCategoryId: null,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex++;
+    } else if (currentRefinement.largeCategoryId !== null) {
+      if (currentIndex === index) {
+        newRefinement = {
+          ...currentRefinement,
+          largeCategoryId: null,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex++;
+    }
+    if (currentRefinement.sizeIds.length > 0) {
+      if (currentRefinement.sizeIds.length - 1 + currentIndex >= index) {
+        let newSizeIds = [...currentRefinement.sizeIds];
+        newSizeIds.splice(index - currentIndex, 1);
+        newRefinement = {
+          ...currentRefinement,
+          sizeIds: newSizeIds,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex += currentRefinement.sizeIds.length;
+    }
+    if (currentRefinement.partSizes.length > 0) {
+      if (currentRefinement.partSizes.length - 1 + currentIndex >= index) {
+        let newPartSizes = [...currentRefinement.partSizes];
+        newPartSizes.splice(index - currentIndex, 1);
+        newRefinement = {
+          ...currentRefinement,
+          partSizes: newPartSizes,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex += currentRefinement.partSizes.length;
+    }
+    if (currentRefinement.colorIds.length > 0) {
+      if (currentRefinement.colorIds.length - 1 + currentIndex >= index) {
+        let newColorIds = [...currentRefinement.colorIds];
+        newColorIds.splice(index - currentIndex, 1);
+        newRefinement = {
+          ...currentRefinement,
+          colorIds: newColorIds,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex += currentRefinement.colorIds.length;
+    }
+    if (currentRefinement.patternIds.length > 0) {
+      if (currentRefinement.patternIds.length - 1 + currentIndex >= index) {
+        let newPatternIds = [...currentRefinement.patternIds];
+        newPatternIds.splice(index - currentIndex, 1);
+        newRefinement = {
+          ...currentRefinement,
+          patternIds: newPatternIds,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex += currentRefinement.patternIds.length;
+    }
+    if (currentRefinement.logoIds.length > 0) {
+      if (currentRefinement.logoIds.length - 1 + currentIndex >= index) {
+        let newLogoIds = [...currentRefinement.logoIds];
+        newLogoIds.splice(index - currentIndex, 1);
+        newRefinement = {
+          ...currentRefinement,
+          logoIds: newLogoIds,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex += currentRefinement.logoIds.length;
+    }
+    if (currentRefinement.optionIds.length > 0) {
+      if (currentRefinement.optionIds.length - 1 + currentIndex >= index) {
+        let newOptionIds = [...currentRefinement.optionIds];
+        newOptionIds.splice(index - currentIndex, 1);
+        newRefinement = {
+          ...currentRefinement,
+          optionIds: newOptionIds,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex += currentRefinement.optionIds.length;
+    }
+  };
+
   const onSortChanged = () => (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -298,7 +431,12 @@ export const useItemBrowseHandler = (
   };
 
   const appliedFiltersCallback = (): AppliedFiltersCallback => {
-    return { onClear: () => setCurrentRefinement(choice.defaultRefinement) };
+    return {
+      onClear: () => setCurrentRefinement(choice.defaultRefinement),
+      onDelete: (index: number) => {
+        deleteAppliedFilter(index);
+      },
+    };
   };
 
   const itemCardCollectionCallback = (): ItemCardCollectionCallback => {
