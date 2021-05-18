@@ -61,11 +61,9 @@ export const useColorRefinementHandler = (
     choice: FilterMediaResponse[],
     currentIds: number[]
   ): AppliedFilterData[] => {
-    return choice
-      .filter((filter) => currentIds.includes(filter.id))
-      .map((filter) => {
-        return { name: filter.name };
-      });
+    return currentIds.map((currentId) => {
+      return { name: choice.find((filter) => filter.id === currentId)!!.name };
+    });
   };
 
   return {

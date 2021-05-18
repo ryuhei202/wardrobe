@@ -213,11 +213,13 @@ export const useCategoryRefinementHandler = (
       (elem) => elem.id === mediumCategoryId
     );
     if (mediumCategoryChoice && smallCategoryIds.length) {
-      return mediumCategoryChoice.smallCategory
-        .filter((filter) => smallCategoryIds.includes(filter.id))
-        .map((filter) => {
-          return { name: filter.name };
-        });
+      return smallCategoryIds.map((categoryId) => {
+        return {
+          name: mediumCategoryChoice.smallCategory.find(
+            (filter) => filter.id === categoryId
+          )!!.name,
+        };
+      });
     }
     if (mediumCategoryChoice) return [{ name: mediumCategoryChoice.name }];
     else if (largeCategoryChoice) return [{ name: largeCategoryChoice.name }];
