@@ -16,10 +16,11 @@ export interface ColorRefinementHandler {
     choice: FilterMediaResponse[],
     currentIds: number[]
   ) => AppliedFilterData[];
+  deleteFilter: (currentIds: number[], index: number) => void;
 }
 
 export const useColorRefinementHandler = (
-  callback: (newIds: number[]) => void
+  onChange: (newIds: number[]) => void
 ): ColorRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
@@ -39,7 +40,7 @@ export const useColorRefinementHandler = (
     return {
       onClick: (index: number) => {
         const newColors = newFilterArray(choice[index].id, currentIds);
-        callback(newColors);
+        onChange(newColors);
       },
     };
   };
@@ -66,9 +67,16 @@ export const useColorRefinementHandler = (
     });
   };
 
+  const deleteFilter = (currentIds: number[], index: number) => {
+    let newColors = [...currentIds];
+    newColors.splice(index, 1);
+    onChange(newColors);
+  };
+
   return {
     colorCallback,
     colorData,
     appliedFilters,
+    deleteFilter,
   };
 };

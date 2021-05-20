@@ -16,10 +16,11 @@ export interface PatternRefinementHandler {
     choice: FilterMediaResponse[],
     currentIds: number[]
   ) => AppliedFilterData[];
+  deleteFilter: (currentIds: number[], index: number) => void;
 }
 
 export const usePatternRefinementHandler = (
-  callback: (newIds: number[]) => void
+  onChange: (newIds: number[]) => void
 ): PatternRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
@@ -39,7 +40,7 @@ export const usePatternRefinementHandler = (
     return {
       onClick: (index: number) => {
         const newPatterns = newFilterArray(choice[index].id, currentIds);
-        callback(newPatterns);
+        onChange(newPatterns);
       },
     };
   };
@@ -66,9 +67,16 @@ export const usePatternRefinementHandler = (
     });
   };
 
+  const deleteFilter = (currentIds: number[], index: number) => {
+    let newPatterns = [...currentIds];
+    newPatterns.splice(index, 1);
+    onChange(newPatterns);
+  };
+
   return {
     patternCallback,
     patternData,
     appliedFilters,
+    deleteFilter,
   };
 };

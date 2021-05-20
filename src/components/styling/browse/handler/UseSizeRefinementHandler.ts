@@ -16,10 +16,11 @@ export interface SizeRefinementHandler {
     choice: FilterResponse[],
     currentIds: number[]
   ) => AppliedFilterData[];
+  deleteFilter: (currentIds: number[], index: number) => void;
 }
 
 export const useSizeRefinementHandler = (
-  callback: (newIds: number[]) => void
+  onChange: (newIds: number[]) => void
 ): SizeRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
@@ -39,7 +40,7 @@ export const useSizeRefinementHandler = (
     return {
       onClick: (index: number) => {
         const newSizes = newFilterArray(choice[index].id, currentIds);
-        callback(newSizes);
+        onChange(newSizes);
       },
     };
   };
@@ -65,9 +66,16 @@ export const useSizeRefinementHandler = (
     });
   };
 
+  const deleteFilter = (currentIds: number[], index: number) => {
+    let newSizes = [...currentIds];
+    newSizes.splice(index, 1);
+    onChange(newSizes);
+  };
+
   return {
     sizeCallback,
     sizeData,
     appliedFilters,
+    deleteFilter,
   };
 };

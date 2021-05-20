@@ -24,10 +24,13 @@ export interface CategoryRefinementHandler {
     mediumCategoryId: number | null,
     smallCategoryIds: number[]
   ) => AppliedFilterData[];
+  deleteLargeCategoryFilter: () => void;
+  deleteMediumCategoryFilter: () => void;
+  deleteSmallCategoryFilter: (currentIds: number[], index: number) => void;
 }
 
 export interface CategoryRefinementCallback {
-  onLargeCategoryChange: (newId: number) => void;
+  onLargeCategoryChange: (newId: number | null) => void;
   onMediumCategoryChange: (newId: number | null) => void;
   onSmallCategoryChange: (newIds: number[]) => void;
   onMediumCategoryCancelled: () => void;
@@ -226,9 +229,26 @@ export const useCategoryRefinementHandler = (
     else return [];
   };
 
+  const deleteLargeCategoryFilter = () => {
+    callback.onLargeCategoryChange(null);
+  };
+
+  const deleteMediumCategoryFilter = () => {
+    callback.onMediumCategoryChange(null);
+  };
+
+  const deleteSmallCategoryFilter = (currentIds: number[], index: number) => {
+    let newSmallCategories = [...currentIds];
+    newSmallCategories.splice(index, 1);
+    callback.onSmallCategoryChange(newSmallCategories);
+  };
+
   return {
     categoryCallback,
     categoryData,
     appliedFilters,
+    deleteLargeCategoryFilter,
+    deleteMediumCategoryFilter,
+    deleteSmallCategoryFilter,
   };
 };

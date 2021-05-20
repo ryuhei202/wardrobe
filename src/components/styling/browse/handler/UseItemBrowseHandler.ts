@@ -48,7 +48,7 @@ export const useItemBrowseHandler = (
     setSelectedPreregisteredItemId,
   ] = useState<number | null>(null);
 
-  const onLargeCategoryChanged = (newId: number) => {
+  const onLargeCategoryChanged = (newId: number | null) => {
     const newRefinement = {
       ...currentRefinement,
       largeCategoryId: newId,
@@ -233,120 +233,82 @@ export const useItemBrowseHandler = (
     }
     if (currentRefinement.smallCategoryIds.length > 0) {
       if (currentRefinement.smallCategoryIds.length + currentIndex >= index) {
-        let newSmallCategoryIds = [...currentRefinement.smallCategoryIds];
-        newSmallCategoryIds.splice(index - currentIndex, 1);
-        newRefinement = {
-          ...currentRefinement,
-          smallCategoryIds: newSmallCategoryIds,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        categoryHandler.deleteSmallCategoryFilter(
+          currentRefinement.smallCategoryIds,
+          index - currentIndex
+        );
         return;
       }
       currentIndex += currentRefinement.smallCategoryIds.length;
     } else if (currentRefinement.mediumCategoryId !== null) {
       if (currentIndex === index) {
-        newRefinement = {
-          ...currentRefinement,
-          mediumCategoryId: null,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        categoryHandler.deleteMediumCategoryFilter();
         return;
       }
       currentIndex++;
     } else if (currentRefinement.largeCategoryId !== null) {
       if (currentIndex === index) {
-        newRefinement = {
-          ...currentRefinement,
-          largeCategoryId: null,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        categoryHandler.deleteLargeCategoryFilter();
         return;
       }
       currentIndex++;
     }
     if (currentRefinement.sizeIds.length > 0) {
       if (currentRefinement.sizeIds.length - 1 + currentIndex >= index) {
-        let newSizeIds = [...currentRefinement.sizeIds];
-        newSizeIds.splice(index - currentIndex, 1);
-        newRefinement = {
-          ...currentRefinement,
-          sizeIds: newSizeIds,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        sizeHandler.deleteFilter(
+          currentRefinement.sizeIds,
+          index - currentIndex
+        );
         return;
       }
       currentIndex += currentRefinement.sizeIds.length;
     }
     if (currentRefinement.partSizes.length > 0) {
       if (currentRefinement.partSizes.length - 1 + currentIndex >= index) {
-        let newPartSizes = [...currentRefinement.partSizes];
-        newPartSizes.splice(index - currentIndex, 1);
-        newRefinement = {
-          ...currentRefinement,
-          partSizes: newPartSizes,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        partSizeHandler.deleteFilter(
+          currentRefinement.partSizes,
+          index - currentIndex
+        );
         return;
       }
       currentIndex += currentRefinement.partSizes.length;
     }
     if (currentRefinement.colorIds.length > 0) {
       if (currentRefinement.colorIds.length - 1 + currentIndex >= index) {
-        let newColorIds = [...currentRefinement.colorIds];
-        newColorIds.splice(index - currentIndex, 1);
-        newRefinement = {
-          ...currentRefinement,
-          colorIds: newColorIds,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        colorHandler.deleteFilter(
+          currentRefinement.colorIds,
+          index - currentIndex
+        );
         return;
       }
       currentIndex += currentRefinement.colorIds.length;
     }
     if (currentRefinement.patternIds.length > 0) {
       if (currentRefinement.patternIds.length - 1 + currentIndex >= index) {
-        let newPatternIds = [...currentRefinement.patternIds];
-        newPatternIds.splice(index - currentIndex, 1);
-        newRefinement = {
-          ...currentRefinement,
-          patternIds: newPatternIds,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        patternHandler.deleteFilter(
+          currentRefinement.patternIds,
+          index - currentIndex
+        );
         return;
       }
       currentIndex += currentRefinement.patternIds.length;
     }
     if (currentRefinement.logoIds.length > 0) {
       if (currentRefinement.logoIds.length - 1 + currentIndex >= index) {
-        let newLogoIds = [...currentRefinement.logoIds];
-        newLogoIds.splice(index - currentIndex, 1);
-        newRefinement = {
-          ...currentRefinement,
-          logoIds: newLogoIds,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        logoHandler.deleteFilter(
+          currentRefinement.logoIds,
+          index - currentIndex
+        );
         return;
       }
       currentIndex += currentRefinement.logoIds.length;
     }
     if (currentRefinement.optionIds.length > 0) {
       if (currentRefinement.optionIds.length - 1 + currentIndex >= index) {
-        let newOptionIds = [...currentRefinement.optionIds];
-        newOptionIds.splice(index - currentIndex, 1);
-        newRefinement = {
-          ...currentRefinement,
-          optionIds: newOptionIds,
-          pageNo: 1,
-        };
-        setCurrentRefinement(newRefinement);
+        optionHandler.deleteFilter(
+          currentRefinement.optionIds,
+          index - currentIndex
+        );
         return;
       }
       currentIndex += currentRefinement.optionIds.length;

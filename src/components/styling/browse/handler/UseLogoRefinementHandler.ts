@@ -16,10 +16,11 @@ export interface LogoRefinementHandler {
     choice: FilterMediaResponse[],
     currentIds: number[]
   ) => AppliedFilterData[];
+  deleteFilter: (currentIds: number[], index: number) => void;
 }
 
 export const useLogoRefinementHandler = (
-  callback: (newIds: number[]) => void
+  onChange: (newIds: number[]) => void
 ): LogoRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
@@ -39,7 +40,7 @@ export const useLogoRefinementHandler = (
     return {
       onClick: (index: number) => {
         const newLogos = newFilterArray(choice[index].id, currentIds);
-        callback(newLogos);
+        onChange(newLogos);
       },
     };
   };
@@ -66,9 +67,16 @@ export const useLogoRefinementHandler = (
     });
   };
 
+  const deleteFilter = (currentIds: number[], index: number) => {
+    let newLogos = [...currentIds];
+    newLogos.splice(index, 1);
+    onChange(newLogos);
+  };
+
   return {
     logoCallback,
     logoData,
     appliedFilters,
+    deleteFilter,
   };
 };
