@@ -24,10 +24,13 @@ export interface CategoryRefinementHandler {
     mediumCategoryId: number | null,
     smallCategoryIds: number[]
   ) => AppliedFilterData[];
+  deleteLargeCategoryFilter: () => void;
+  deleteMediumCategoryFilter: () => void;
+  deleteSmallCategoryFilter: (currentIds: number[], index: number) => void;
 }
 
 export interface CategoryRefinementCallback {
-  onLargeCategoryChange: (newId: number) => void;
+  onLargeCategoryChange: (newId: number | null) => void;
   onMediumCategoryChange: (newId: number | null) => void;
   onSmallCategoryChange: (newIds: number[]) => void;
   onMediumCategoryCancelled: () => void;
@@ -213,20 +216,39 @@ export const useCategoryRefinementHandler = (
       (elem) => elem.id === mediumCategoryId
     );
     if (mediumCategoryChoice && smallCategoryIds.length) {
-      return mediumCategoryChoice.smallCategory
-        .filter((filter) => smallCategoryIds.includes(filter.id))
-        .map((filter) => {
-          return { name: filter.name };
-        });
+      return smallCategoryIds.map((categoryId) => {
+        return {
+          name: mediumCategoryChoice.smallCategory.find(
+            (filter) => filter.id === categoryId
+          )!!.name,
+        };
+      });
     }
     if (mediumCategoryChoice) return [{ name: mediumCategoryChoice.name }];
     else if (largeCategoryChoice) return [{ name: largeCategoryChoice.name }];
     else return [];
   };
 
+  const deleteLargeCategoryFilter = () => {
+    callback.onLargeCategoryChange(null);
+  };
+
+  const deleteMediumCategoryFilter = () => {
+    callback.onMediumCategoryChange(null);
+  };
+
+  const deleteSmallCategoryFilter = (currentIds: number[], index: number) => {
+    let newSmallCategories = [...currentIds];
+    newSmallCategories.splice(index, 1);
+    callback.onSmallCategoryChange(newSmallCategories);
+  };
+
   return {
     categoryCallback,
     categoryData,
     appliedFilters,
+    deleteLargeCategoryFilter,
+    deleteMediumCategoryFilter,
+    deleteSmallCategoryFilter,
   };
 };
