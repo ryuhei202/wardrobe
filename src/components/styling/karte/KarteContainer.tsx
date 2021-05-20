@@ -24,7 +24,7 @@ const KarteContainer = (props: KarteContainerProps) => {
             コーデ作成情報
           </Typography>
           <span className={classes.qrCode}>
-            <QRCode value={ChartId().toString()} size={50} />
+            <QRCode value={ChartId().toString()} size={75} />
           </span>
         </div>
         <Divider />
