@@ -48,7 +48,7 @@ export const useItemBrowseHandler = (
     setSelectedPreregisteredItemId,
   ] = useState<number | null>(null);
 
-  const onLargeCategoryChanged = (newId: number) => {
+  const onLargeCategoryChanged = (newId: number | null) => {
     const newRefinement = {
       ...currentRefinement,
       largeCategoryId: newId,
@@ -220,6 +220,101 @@ export const useItemBrowseHandler = (
     return result;
   };
 
+  const deleteAppliedFilter = (index: number) => {
+    let currentIndex = 0;
+    let newRefinement = currentRefinement;
+    if (currentRefinement.itemId !== null) {
+      if (currentIndex === index) {
+        newRefinement = { ...currentRefinement, itemId: null, pageNo: 1 };
+        setCurrentRefinement(newRefinement);
+        return;
+      }
+      currentIndex++;
+    }
+    if (currentRefinement.smallCategoryIds.length > 0) {
+      if (currentRefinement.smallCategoryIds.length + currentIndex >= index) {
+        categoryHandler.deleteSmallCategoryFilter(
+          currentRefinement.smallCategoryIds,
+          index - currentIndex
+        );
+        return;
+      }
+      currentIndex += currentRefinement.smallCategoryIds.length;
+    } else if (currentRefinement.mediumCategoryId !== null) {
+      if (currentIndex === index) {
+        categoryHandler.deleteMediumCategoryFilter();
+        return;
+      }
+      currentIndex++;
+    } else if (currentRefinement.largeCategoryId !== null) {
+      if (currentIndex === index) {
+        categoryHandler.deleteLargeCategoryFilter();
+        return;
+      }
+      currentIndex++;
+    }
+    if (currentRefinement.sizeIds.length > 0) {
+      if (currentRefinement.sizeIds.length - 1 + currentIndex >= index) {
+        sizeHandler.deleteFilter(
+          currentRefinement.sizeIds,
+          index - currentIndex
+        );
+        return;
+      }
+      currentIndex += currentRefinement.sizeIds.length;
+    }
+    if (currentRefinement.partSizes.length > 0) {
+      if (currentRefinement.partSizes.length - 1 + currentIndex >= index) {
+        partSizeHandler.deleteFilter(
+          currentRefinement.partSizes,
+          index - currentIndex
+        );
+        return;
+      }
+      currentIndex += currentRefinement.partSizes.length;
+    }
+    if (currentRefinement.colorIds.length > 0) {
+      if (currentRefinement.colorIds.length - 1 + currentIndex >= index) {
+        colorHandler.deleteFilter(
+          currentRefinement.colorIds,
+          index - currentIndex
+        );
+        return;
+      }
+      currentIndex += currentRefinement.colorIds.length;
+    }
+    if (currentRefinement.patternIds.length > 0) {
+      if (currentRefinement.patternIds.length - 1 + currentIndex >= index) {
+        patternHandler.deleteFilter(
+          currentRefinement.patternIds,
+          index - currentIndex
+        );
+        return;
+      }
+      currentIndex += currentRefinement.patternIds.length;
+    }
+    if (currentRefinement.logoIds.length > 0) {
+      if (currentRefinement.logoIds.length - 1 + currentIndex >= index) {
+        logoHandler.deleteFilter(
+          currentRefinement.logoIds,
+          index - currentIndex
+        );
+        return;
+      }
+      currentIndex += currentRefinement.logoIds.length;
+    }
+    if (currentRefinement.optionIds.length > 0) {
+      if (currentRefinement.optionIds.length - 1 + currentIndex >= index) {
+        optionHandler.deleteFilter(
+          currentRefinement.optionIds,
+          index - currentIndex
+        );
+        return;
+      }
+      currentIndex += currentRefinement.optionIds.length;
+    }
+  };
+
   const onSortChanged = () => (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -298,7 +393,12 @@ export const useItemBrowseHandler = (
   };
 
   const appliedFiltersCallback = (): AppliedFiltersCallback => {
-    return { onClear: () => setCurrentRefinement(choice.defaultRefinement) };
+    return {
+      onClear: () => setCurrentRefinement(choice.defaultRefinement),
+      onDelete: (index: number) => {
+        deleteAppliedFilter(index);
+      },
+    };
   };
 
   const itemCardCollectionCallback = (): ItemCardCollectionCallback => {

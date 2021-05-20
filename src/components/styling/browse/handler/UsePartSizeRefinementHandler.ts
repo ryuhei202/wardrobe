@@ -17,10 +17,11 @@ export interface PartSizeRefinementHandler {
     choice: FilterRangeResponse[],
     currentValues: ValueRefinement[]
   ) => AppliedFilterData[];
+  deleteFilter: (currentValues: ValueRefinement[], index: number) => void;
 }
 
 export const usePartSizeRefinementHandler = (
-  callback: (newValues: ValueRefinement[]) => void
+  onChange: (newValues: ValueRefinement[]) => void
 ): PartSizeRefinementHandler => {
   const partSizeCallback = (
     choice: FilterRangeResponse[],
@@ -38,7 +39,7 @@ export const usePartSizeRefinementHandler = (
         } else {
           newPartSizes.splice(currentIndex, 1, newValue);
         }
-        callback(newPartSizes);
+        onChange(newPartSizes);
       },
     };
   };
@@ -74,9 +75,16 @@ export const usePartSizeRefinementHandler = (
     });
   };
 
+  const deleteFilter = (currentValues: ValueRefinement[], index: number) => {
+    let newPartSizes = [...currentValues];
+    newPartSizes.splice(index, 1);
+    onChange(newPartSizes);
+  };
+
   return {
     partSizeCallback,
     partSizeData,
     appliedFilters,
+    deleteFilter,
   };
 };

@@ -19,6 +19,7 @@ const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
           className={classes.appliedFilter}
           key={index}
           label={filter.name}
+          onDelete={() => props.callback.onDelete(index)}
         />
       ))}
       <Chip
