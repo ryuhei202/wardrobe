@@ -1,11 +1,9 @@
-import { Divider, Paper, Typography } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import React from "react";
 import KarteContainerData from "../../../model/styling/karte/props_data/KarteContainerData";
 import { useStylingStyle } from "../style/UseStylingStyle";
 import KarteContainerCallback from "./callback/KarteContainerCallback";
 import { useKarteProvider } from "./provider/UseKarteProvider";
-import QRCode from "react-qr-code";
-import { ChartId } from "../../../model/ChartId";
 
 export interface KarteContainerProps {
   data: KarteContainerData;
@@ -19,15 +17,6 @@ const KarteContainer = (props: KarteContainerProps) => {
   return (
     <>
       <div className={classes.karteContainer}>
-        <div className={classes.drawerHeader}>
-          <Typography variant="h6" noWrap className={classes.sectionTitle}>
-            コーデ作成情報
-          </Typography>
-          <span className={classes.qrCode}>
-            <QRCode value={ChartId().toString()} size={75} />
-          </span>
-        </div>
-        <Divider />
         {karteProvider.karteComponent()}
       </div>
       <Paper variant="outlined" className={classes.progressContainer}>
