@@ -20,7 +20,7 @@ export const useBasicPresenter = (data: BasicResponse): BasicPresenter => {
       `名前：${data.memberName}(${data.memberAge})`,
       `スタイリスト：${data.stylistName}`,
       `都道府県：${data.memberPrefecture}`,
-      `レンタル回数：${data.rentalNum}`,
+      `レンタル回数：${data.rentalNum ?? 0}`,
     ];
   };
 

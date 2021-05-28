@@ -5,6 +5,7 @@ export default interface SizeResponse {
   readonly height: number;
   readonly weight: number;
   readonly bmi: number;
+  readonly registeredBottomsSize: string;
   readonly casualPartSize: CasualPartSizeResponse;
   readonly jacketPartSize: JacketPartSizeResponse;
 }
