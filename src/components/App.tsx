@@ -26,6 +26,7 @@ const App = () => {
               <Button
                 variant="contained"
                 color="primary"
+                disableElevation
                 startIcon={<CropFree />}
                 onClick={() => setIsQRCodeOpen(true)}
               >

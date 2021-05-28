@@ -88,7 +88,12 @@ const Size = (props: SizeProps) => {
                 .map((row: JacketPartSizeElement, index: number) => (
                   <TableRow key={index}>
                     <TableCell>{row.label}</TableCell>
-                    <TableCell>{row.size}</TableCell>
+                    <TableCell>
+                      <div
+                        className="content"
+                        dangerouslySetInnerHTML={{ __html: row.size }}
+                      />
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
