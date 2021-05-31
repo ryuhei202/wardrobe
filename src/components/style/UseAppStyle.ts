@@ -27,5 +27,11 @@ export const useAppStyle = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(3),
     },
+    qrCode: {
+      float: "right",
+    },
+    title: {
+      flexGrow: 1,
+    },
   })
 );

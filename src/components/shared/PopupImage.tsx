@@ -20,7 +20,7 @@ const PopupImage = (props: PopupImageProps) => {
         className={props.data.imageStyle}
       />
       <Dialog
-        maxWidth="lg"
+        maxWidth="sm"
         open={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
       >

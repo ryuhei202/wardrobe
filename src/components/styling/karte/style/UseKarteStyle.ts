@@ -2,15 +2,12 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 export const useKarteStyle = makeStyles((theme: Theme) =>
   createStyles({
-    drawerContainer: {
-      overflow: "auto",
-    },
     heading: {
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightRegular,
     },
     drawerList: {
-      width: 360,
+      maxWidth: 360,
     },
     accordionDetails: {
       display: "block",
@@ -23,6 +20,16 @@ export const useKarteStyle = makeStyles((theme: Theme) =>
       top: "50%",
       position: "relative",
       transform: "translateY(-50%)",
+    },
+    tabContainer: {
+      flexGrow: 1,
+      maxWidth: 360,
+    },
+    contentContainer: {
+      overflow: "auto",
+    },
+    tab: {
+      minWidth: 120,
     },
   })
 );
