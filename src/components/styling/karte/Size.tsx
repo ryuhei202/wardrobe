@@ -89,6 +89,7 @@ const Size = (props: SizeProps) => {
                   <TableRow key={index}>
                     <TableCell>{row.label}</TableCell>
                     <TableCell>
+                      {/* サーバー側の処理でHTMLタグを文字列で返してる部分があるのでここでフロント側で判別 */}
                       <div
                         className="content"
                         dangerouslySetInnerHTML={{ __html: row.size }}
