@@ -1,7 +1,4 @@
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   List,
   ListItem,
   ListItemText,
@@ -14,7 +11,6 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
-import { ExpandMore } from "@material-ui/icons";
 import React from "react";
 import SizeResponse from "../../../model/api/response/styling/karte/SizeResponse";
 import {
@@ -39,96 +35,73 @@ const Size = (props: SizeProps) => {
   const jacketPresenter = useJacketPartSizePresenter(props.data.jacketPartSize);
 
   return (
-    <>
-      <Accordion defaultExpanded={true}>
-        <AccordionSummary
-          expandIcon={<ExpandMore />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className={classes.heading}>サイズ情報</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <List>
-            {presenter.resultList().map((text: string, index: number) => (
-              <ListItem key={index}>
-                <ListItemText>{text}</ListItemText>
-              </ListItem>
-            ))}
-            <ListItem>
-              <Accordion defaultExpanded={true}>
-                <AccordionSummary
-                  expandIcon={<ExpandMore />}
-                  aria-controls="size1a-content"
-                  id="size1a-header"
-                >
-                  <Typography className={classes.heading}>
-                    カジュアル部位サイズ
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <TableContainer component={Paper}>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>部位</TableCell>
-                          <TableCell>設定(参考)</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {casualPresenter
-                          .resultList()
-                          .map((row: CasualPartSizeElement, index: number) => (
-                            <TableRow key={index}>
-                              <TableCell>{row.label}</TableCell>
-                              <TableCell>{row.size}</TableCell>
-                            </TableRow>
-                          ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </AccordionDetails>
-              </Accordion>
-            </ListItem>
-            <ListItem>
-              <Accordion defaultExpanded={true}>
-                <AccordionSummary
-                  expandIcon={<ExpandMore />}
-                  aria-controls="size1a-content"
-                  id="size2a-header"
-                >
-                  <Typography className={classes.heading}>
-                    ジャケット部位サイズ
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <TableContainer component={Paper}>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>部位</TableCell>
-                          <TableCell>設定</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {jacketPresenter
-                          .resultList()
-                          .map((row: JacketPartSizeElement, index: number) => (
-                            <TableRow key={index}>
-                              <TableCell>{row.label}</TableCell>
-                              <TableCell>{row.size}</TableCell>
-                            </TableRow>
-                          ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </AccordionDetails>
-              </Accordion>
-            </ListItem>
-          </List>
-        </AccordionDetails>
-      </Accordion>
-    </>
+    <List>
+      {presenter.resultList().map((text: string, index: number) => (
+        <ListItem key={index}>
+          <ListItemText>{text}</ListItemText>
+        </ListItem>
+      ))}
+      <ListItem>
+        <Typography className={classes.heading}>
+          カジュアル部位サイズ
+        </Typography>
+      </ListItem>
+      <ListItem>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>部位</TableCell>
+                <TableCell>設定(参考)</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {casualPresenter
+                .resultList()
+                .map((row: CasualPartSizeElement, index: number) => (
+                  <TableRow key={index}>
+                    <TableCell>{row.label}</TableCell>
+                    <TableCell>{row.size}</TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </ListItem>
+      <ListItem>
+        <Typography className={classes.heading}>
+          ジャケット部位サイズ
+        </Typography>
+      </ListItem>
+      <ListItem>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>部位</TableCell>
+                <TableCell>設定</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {jacketPresenter
+                .resultList()
+                .map((row: JacketPartSizeElement, index: number) => (
+                  <TableRow key={index}>
+                    <TableCell>{row.label}</TableCell>
+                    <TableCell>
+                      {/* サーバー側の処理でHTMLタグを文字列で返してる部分があるのでここでフロント側で判別 */}
+                      <div
+                        className="content"
+                        dangerouslySetInnerHTML={{ __html: row.size }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </ListItem>
+    </List>
   );
 };
 

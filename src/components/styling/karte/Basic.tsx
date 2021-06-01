@@ -1,14 +1,11 @@
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   IconButton,
   List,
   ListItem,
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { ExpandMore, PhotoLibrary } from "@material-ui/icons";
+import { PhotoLibrary } from "@material-ui/icons";
 import React from "react";
 import BasicResponse from "../../../model/api/response/styling/karte/BasicResponse";
 import { useKarteStyle } from "./style/UseKarteStyle";
@@ -26,15 +23,8 @@ const Basic = (props: BasicProps) => {
   const presenter = useBasicPresenter(props.data);
 
   return (
-    <Accordion defaultExpanded={true}>
-      <AccordionSummary
-        expandIcon={<ExpandMore />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Typography className={classes.heading}>基本情報</Typography>
-      </AccordionSummary>
-      <AccordionDetails className={classes.accordionDetails}>
+    <List className={classes.drawerList}>
+      <ListItem>
         <img
           src={presenter.memberImageUrl()}
           height="100px"
@@ -48,15 +38,13 @@ const Basic = (props: BasicProps) => {
           data={handler.memberImageDialogData()}
           callback={handler.memberImageDialogCallback()}
         />
-        <List className={classes.drawerList}>
-          {presenter.resultList().map((text: string, index: number) => (
-            <ListItem key={index}>
-              <ListItemText>{text}</ListItemText>
-            </ListItem>
-          ))}
-        </List>
-      </AccordionDetails>
-    </Accordion>
+      </ListItem>
+      {presenter.resultList().map((text: string, index: number) => (
+        <ListItem key={index}>
+          <ListItemText>{text}</ListItemText>
+        </ListItem>
+      ))}
+    </List>
   );
 };
 

@@ -53,11 +53,5 @@ export const useStylingStyle = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
       float: "right",
     },
-    sectionTitle: {
-      flexGrow: 1,
-    },
-    qrCode: {
-      float: "right",
-    },
   })
 );
