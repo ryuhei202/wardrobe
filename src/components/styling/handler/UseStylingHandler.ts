@@ -44,14 +44,21 @@ export const useStylingHandler = (): StylingHandler => {
         registeredItems: SelectedItem[],
         rentableItemNum: number
       ) => {
-        setRentableItemNum(rentableItemNum);
         if (isItemRegistered) {
+          // 選択済みのアイテム数がレンタル可能数より多い場合、選択済みアイテム数に合わせる
+          if (registeredItems.length >= rentableItemNum) {
+            setRentableItemNum(registeredItems.length);
+          } else {
+            setRentableItemNum(rentableItemNum);
+          }
           setSelectedItems(registeredItems);
           if (registeredItems.length >= rentableItemNum) {
-            setCurrentIndex(rentableItemNum - 1);
+            setCurrentIndex(registeredItems.length - 1);
           } else {
             setCurrentIndex(registeredItems.length);
           }
+        } else {
+          setRentableItemNum(rentableItemNum);
         }
         setMainContentType(MainContentType.Browse);
       },
