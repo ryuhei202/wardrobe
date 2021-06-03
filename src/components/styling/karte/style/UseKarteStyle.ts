@@ -28,7 +28,7 @@ export const useKarteStyle = makeStyles((theme: Theme) =>
     contentContainer: {
       overflow: "auto",
     },
-    tab: {
+    karteTab: {
       minWidth: 120,
     },
   })
