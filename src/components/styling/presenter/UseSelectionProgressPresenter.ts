@@ -48,7 +48,9 @@ export const useSelectionProgressPresenter = (
   };
 
   const isCompleteButtonAvailable = () => {
-    return data.rentableItemNum === data.items.length;
+    return (
+      data.rentableItemNum !== 0 && data.rentableItemNum === data.items.length
+    );
   };
 
   return {
