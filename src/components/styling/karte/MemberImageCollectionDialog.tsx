@@ -35,7 +35,7 @@ const MemberImageCollectionDialog = (
                 imageStyle: classes.memberImageCollectionImage,
               }}
             />
-            <GridListTileBar title={image.comment} />
+            <GridListTileBar title={image.comment} subtitle={image.createdAt} />
           </GridListTile>
         ))}
       </GridList>
