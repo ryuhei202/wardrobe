@@ -1,18 +1,20 @@
 import { useState } from "react";
 import ItemBrowseCallback from "../browse/callback/ItemBrowseCallback";
 import SelectedItem from "../../../model/styling/SelectedItem";
-import KarteContainerData from "../../../model/styling/karte/props_data/KarteContainerData";
 import KarteContainerCallback from "../karte/callback/KarteContainerCallback";
 import SelectionConfirmData from "../../../model/styling/props_data/SelectionConfirmData";
 import SelectionConfirmCallback from "../callback/SelectionConfirmCallback";
 import ArrangeData from "../../../model/styling/arrange/props_data/ArrangeData";
 import ArrangeCallback from "../arrange/callback/ArrangeCallback";
 import { MainContentType } from "../../../model/styling/MainContentType";
+import SelectionProgressData from "../../../model/styling/props_data/SelectionProgressData";
+import SelectionProgressCallback from "../callback/SelectionProgressCallback";
 
 export interface StylingHandler {
   mainContentType: MainContentType | undefined;
-  karteContainerData: () => KarteContainerData;
+  selectionProgressData: () => SelectionProgressData;
   karteContainerCallback: () => KarteContainerCallback;
+  selectionProgressCallback: () => SelectionProgressCallback;
   itemBrowseCallback: () => ItemBrowseCallback;
   selectionConfirmData: () => SelectionConfirmData;
   selectionConfirmCallback: () => SelectionConfirmCallback;
@@ -27,32 +29,49 @@ export const useStylingHandler = (): StylingHandler => {
   const [mainContentType, setMainContentType] = useState<MainContentType>();
   const [rentableItemNum, setRentableItemNum] = useState(0);
 
-  const karteContainerData = (): KarteContainerData => {
-    return { selectedIndex: currentIndex, items: selectedItems };
+  const selectionProgressData = (): SelectionProgressData => {
+    return {
+      selectedIndex: currentIndex,
+      items: selectedItems,
+      rentableItemNum: rentableItemNum,
+    };
   };
 
   const karteContainerCallback = (): KarteContainerCallback => {
     return {
-      selectionProgressCallback: {
-        onSelect: (index: number) => setCurrentIndex(index),
-        onClickCompleteButton: () =>
-          setMainContentType(MainContentType.Confirm),
-      },
       onKarteFetched: (
         isItemRegistered: boolean,
         registeredItems: SelectedItem[],
         rentableItemNum: number
       ) => {
-        setRentableItemNum(rentableItemNum);
         if (isItemRegistered) {
+          // 選択済みのアイテム数がレンタル可能数より多い場合、選択済みアイテム数に合わせる
+          if (registeredItems.length >= rentableItemNum) {
+            setRentableItemNum(registeredItems.length);
+          } else {
+            setRentableItemNum(rentableItemNum);
+          }
           setSelectedItems(registeredItems);
           if (registeredItems.length >= rentableItemNum) {
-            setCurrentIndex(rentableItemNum - 1);
+            setCurrentIndex(registeredItems.length - 1);
           } else {
             setCurrentIndex(registeredItems.length);
           }
+        } else {
+          setRentableItemNum(rentableItemNum);
         }
         setMainContentType(MainContentType.Browse);
+      },
+    };
+  };
+
+  const selectionProgressCallback = (): SelectionProgressCallback => {
+    return {
+      onSelect: (index: number) => setCurrentIndex(index),
+      onClickCompleteButton: () => setMainContentType(MainContentType.Confirm),
+      onAddItemNum: () => {
+        const newRentableNum = rentableItemNum + 1;
+        setRentableItemNum(newRentableNum);
       },
     };
   };
@@ -111,8 +130,9 @@ export const useStylingHandler = (): StylingHandler => {
 
   return {
     mainContentType,
-    karteContainerData,
+    selectionProgressData,
     karteContainerCallback,
+    selectionProgressCallback,
     itemBrowseCallback,
     selectionConfirmData,
     selectionConfirmCallback,
