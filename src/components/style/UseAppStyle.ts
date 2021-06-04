@@ -27,11 +27,14 @@ export const useAppStyle = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(3),
     },
-    qrCode: {
+    coordePickButton: {
       float: "right",
     },
     title: {
       flexGrow: 1,
+    },
+    qrCodeContainer: {
+      padding: theme.spacing(3),
     },
   })
 );
