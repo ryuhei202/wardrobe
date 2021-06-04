@@ -7,7 +7,7 @@ export const useKarteStyle = makeStyles((theme: Theme) =>
       fontWeight: theme.typography.fontWeightRegular,
     },
     drawerList: {
-      maxWidth: 360,
+      maxWidth: 480,
     },
     accordionDetails: {
       display: "block",
@@ -23,13 +23,10 @@ export const useKarteStyle = makeStyles((theme: Theme) =>
     },
     tabContainer: {
       flexGrow: 1,
-      maxWidth: 360,
+      maxWidth: 480,
     },
     contentContainer: {
       overflow: "auto",
-    },
-    karteTab: {
-      minWidth: 120,
     },
   })
 );
