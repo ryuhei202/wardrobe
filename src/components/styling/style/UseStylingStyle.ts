@@ -3,11 +3,11 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 export const useStylingStyle = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      width: 360,
+      width: 480,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: 360,
+      width: 480,
     },
     drawerHeader: {
       display: "flex",
