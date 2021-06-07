@@ -29,6 +29,7 @@ export const usePastOutfitCollectionDialogPresenter = (
     item.partSizes.forEach((partSize) => {
       result += `, ${partSize.name}: ${partSize.value ?? "未計測"}`;
     });
+    result += `, ドロップサイズ: ${item.dropSize}`;
     return result;
   };
 
