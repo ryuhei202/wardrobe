@@ -1,10 +1,4 @@
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@material-ui/core";
+import { IconButton, List, ListItem, ListItemText } from "@material-ui/core";
 import { PhotoLibrary } from "@material-ui/icons";
 import React from "react";
 import BasicResponse from "../../../model/api/response/styling/karte/BasicResponse";

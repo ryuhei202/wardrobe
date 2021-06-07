@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar/AppBar";
-import { Button, Dialog, Toolbar, Typography } from "@material-ui/core";
+import { Button, Dialog, Paper, Toolbar, Typography } from "@material-ui/core";
 import DefaultTheme from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";
 import Styling from "./styling/Styling";
@@ -22,7 +22,7 @@ const App = () => {
             <Typography variant="h6" noWrap className={classes.title}>
               WARDROBE
             </Typography>
-            <span className={classes.qrCode}>
+            <span className={classes.coordePickButton}>
               <Button
                 variant="contained"
                 color="primary"
@@ -36,7 +36,9 @@ const App = () => {
           </Toolbar>
         </AppBar>
         <Dialog open={isQRCodeOpen} onClose={() => setIsQRCodeOpen(false)}>
-          <QRCode value={ChartId().toString()} size={300} />
+          <Paper className={classes.qrCodeContainer}>
+            <QRCode value={ChartId().toString()} size={300} />
+          </Paper>
         </Dialog>
         <Styling />
       </div>

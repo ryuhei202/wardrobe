@@ -39,29 +39,13 @@ const Karte = (props: KarteProps) => {
           onChange={(_event: React.ChangeEvent<{}>, newValue: number) =>
             setCurrentValue(newValue)
           }
-          variant="fullWidth"
           indicatorColor="primary"
           textColor="primary"
           aria-label="icon tabs"
         >
-          <Tab
-            icon={<AccountBox />}
-            aria-label="basic"
-            className={classes.tab}
-            label="基本情報"
-          />
-          <Tab
-            icon={<SquareFoot />}
-            aria-label="size"
-            className={classes.tab}
-            label="サイズ情報"
-          />
-          <Tab
-            icon={<Chat />}
-            aria-label="memo"
-            className={classes.tab}
-            label="お話メモ"
-          />
+          <Tab icon={<AccountBox />} aria-label="basic" label="基本情報" />
+          <Tab icon={<SquareFoot />} aria-label="size" label="サイズ情報" />
+          <Tab icon={<Chat />} aria-label="memo" label="お話メモ" />
         </Tabs>
       </Paper>
       <div className={classes.contentContainer}>{content}</div>
