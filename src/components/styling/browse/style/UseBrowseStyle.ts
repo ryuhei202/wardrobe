@@ -16,6 +16,7 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       width: 200,
     },
     filterPaper: {
+      flexShrink: 0,
       width: 200,
       maxWidth: 200,
     },
@@ -40,12 +41,13 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     card: {
       maxWidth: 200,
       margin: theme.spacing(1, 1),
-      paddingBottom: theme.spacing(1),
+      height: "min-content",
     },
     cardCollection: {
       display: "flex",
       flexWrap: "wrap",
       margin: theme.spacing(0, 2),
+      height: "min-content",
     },
     media: {
       height: 300,
