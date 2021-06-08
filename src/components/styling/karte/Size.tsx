@@ -35,7 +35,7 @@ const Size = (props: SizeProps) => {
   const jacketPresenter = useJacketPartSizePresenter(props.data.jacketPartSize);
 
   return (
-    <List>
+    <List dense>
       {presenter.resultList().map((text: string, index: number) => (
         <ListItem key={index}>
           <ListItemText>{text}</ListItemText>
@@ -48,7 +48,7 @@ const Size = (props: SizeProps) => {
       </ListItem>
       <ListItem>
         <TableContainer component={Paper}>
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow>
                 <TableCell>部位</TableCell>
@@ -75,7 +75,7 @@ const Size = (props: SizeProps) => {
       </ListItem>
       <ListItem>
         <TableContainer component={Paper}>
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow>
                 <TableCell>部位</TableCell>
