@@ -1,6 +1,9 @@
 import {
   Box,
   Button,
+  Menu,
+  MenuItem,
+  PopoverPosition,
   Step,
   StepButton,
   StepLabel,
@@ -8,7 +11,7 @@ import {
   Tooltip,
   Typography,
 } from "@material-ui/core";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
 import SelectionProgressCallback from "./callback/SelectionProgressCallback";
 import { useSelectionProgressPresenter } from "./presenter/UseSelectionProgressPresenter";
@@ -19,9 +22,18 @@ export interface SelectionProgressProps {
   callback: SelectionProgressCallback;
 }
 
+const initialState = {
+  mouseX: null,
+  mouseY: null,
+};
+
 const SelectionProgress = (props: SelectionProgressProps) => {
   const classes = useSelectionProgressStyle();
   const presenter = useSelectionProgressPresenter(props.data);
+  const [position, setPosition] = useState<{
+    mouseX: null | Number;
+    mouseY: null | number;
+  }>(initialState);
 
   let steps = [];
   for (let index = 0; index < props.data.rentableItemNum; index++) {
@@ -91,7 +103,15 @@ const SelectionProgress = (props: SelectionProgressProps) => {
   }
 
   return (
-    <>
+    <div
+      onContextMenu={(event: React.MouseEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        setPosition({
+          mouseX: event.clientX - 2,
+          mouseY: event.clientY - 4,
+        });
+      }}
+    >
       {completeButton}
       <Stepper
         activeStep={props.data.selectedIndex}
@@ -100,7 +120,30 @@ const SelectionProgress = (props: SelectionProgressProps) => {
       >
         {steps}
       </Stepper>
-    </>
+      <Menu
+        keepMounted
+        open={position.mouseY !== null}
+        onClose={() => setPosition(initialState)}
+        anchorReference="anchorPosition"
+        anchorPosition={
+          position.mouseY !== null && position.mouseX !== null
+            ? ({
+                top: position.mouseY,
+                left: position.mouseX,
+              } as PopoverPosition)
+            : undefined
+        }
+      >
+        <MenuItem
+          onClick={() => {
+            props.callback.onAddItemNum();
+            setPosition(initialState);
+          }}
+        >
+          アイテム数を追加
+        </MenuItem>
+      </Menu>
+    </div>
   );
 };
 

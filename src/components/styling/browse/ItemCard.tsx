@@ -24,16 +24,14 @@ const ItemCard = (props: ItemCardProps) => {
 
   return (
     <Card className={classes.card}>
-      <CardHeader
-        avatar={
-          props.data.isMarriage ? (
-            <Avatar className={classes.primaryColor}>婚活</Avatar>
-          ) : (
-            <Avatar className={classes.darkBlue}>L</Avatar>
-          )
-        }
-      />
       <CardActionArea onClick={() => props.callback.onClick()}>
+        {props.data.isMarriage ? (
+          <CardHeader
+            avatar={<Avatar className={classes.primaryColor}>婚活</Avatar>}
+          />
+        ) : (
+          <></>
+        )}
         <CardMedia className={classes.media} image={presenter.itemImageUrl()} />
         <CardContent>
           <img

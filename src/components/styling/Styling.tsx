@@ -1,4 +1,4 @@
-import { Drawer, Toolbar } from "@material-ui/core";
+import { Drawer, Paper, Toolbar } from "@material-ui/core";
 import React from "react";
 import ArrangeContainer from "./arrange/ArrangeContainer";
 import { useStylingHandler } from "./handler/UseStylingHandler";
@@ -7,6 +7,7 @@ import { useStylingStyle } from "./style/UseStylingStyle";
 import SelectionConfirmContainer from "./SelectionConfirmContainer";
 import { MainContentType } from "../../model/styling/MainContentType";
 import BrowseContainer from "./browse/BrowseContainer";
+import SelectionProgress from "./SelectionProgress";
 
 const Styling = () => {
   const classes = useStylingStyle();
@@ -53,10 +54,15 @@ const Styling = () => {
         }}
       >
         <Toolbar />
-        <KarteContainer
-          data={handler.karteContainerData()}
-          callback={handler.karteContainerCallback()}
-        />
+        <div className={classes.karteContainer}>
+          <KarteContainer callback={handler.karteContainerCallback()} />
+        </div>
+        <Paper variant="outlined" className={classes.progressContainer}>
+          <SelectionProgress
+            data={handler.selectionProgressData()}
+            callback={handler.selectionProgressCallback()}
+          />
+        </Paper>
       </Drawer>
       <main className={classes.browseContainer}>
         <Toolbar />

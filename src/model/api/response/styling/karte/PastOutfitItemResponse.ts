@@ -8,4 +8,5 @@ export default interface PastOutfitItemResponse {
   readonly colorName: string;
   readonly size: string;
   readonly partSizes: PartSizeResponse[];
+  readonly dropSize: string;
 }
