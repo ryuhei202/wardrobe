@@ -22,7 +22,7 @@ const MemberImageCollectionDialog = (
         items={props.data.imageResponses.map((image) => {
           return {
             original: HostUrl() + image.imagePath.large,
-            thumbnail: HostUrl() + image.imagePath.large,
+            thumbnail: HostUrl() + image.imagePath.thumb,
             originalHeight: 650,
             description: image.comment,
             thumbnailLabel: image.createdAt,
