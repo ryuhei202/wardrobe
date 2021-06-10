@@ -329,7 +329,7 @@ export const useItemBrowseHandler = (
 
   const paginationCallback = (): ItemBrowsePaginationCallback => {
     return {
-      onPageChanged: (event: object, page: number) => {
+      onPageChanged: (page: number) => {
         const newRefinement = { ...currentRefinement, pageNo: page };
         setCurrentRefinement(newRefinement);
       },

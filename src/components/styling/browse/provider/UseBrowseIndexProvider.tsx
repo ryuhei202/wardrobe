@@ -60,7 +60,10 @@ export const useBrowseIndexProvider = (
         page={currentPage}
         count={totalPageNum}
         color="secondary"
-        onChange={callback.onPageChanged}
+        onChange={(_event: object, page: number) => {
+          window.scrollTo(0, 0);
+          callback.onPageChanged(page);
+        }}
       />
     );
   };
