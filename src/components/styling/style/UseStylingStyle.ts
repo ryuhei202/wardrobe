@@ -24,7 +24,7 @@ export const useStylingStyle = makeStyles((theme: Theme) =>
     },
     browseContainer: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(0, 3, 3, 3),
     },
     selectedItemsContainer: {
       display: "flex",

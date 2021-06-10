@@ -34,14 +34,13 @@ const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
   return (
     <>
       {backButton}
-      <List>
+      <List dense>
         {props.data.map((row, index) => {
           const labelId = props.labelIdPrefix + index;
           return (
             <ListItem
               key={index}
               role={undefined}
-              dense
               button
               onClick={() => props.callback.onClick(index)}
             >

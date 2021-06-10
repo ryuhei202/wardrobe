@@ -12,14 +12,13 @@ interface FilterMediaArrayProps {
 
 const FilterMediaArray = (props: FilterMediaArrayProps) => {
   return (
-    <List>
+    <List dense>
       {props.data.map((row, index) => {
         const labelId = props.labelIdPrefix + index;
         return (
           <ListItem
             key={index}
             role={undefined}
-            dense
             button
             onClick={() => {
               props.callback.onClick(index);

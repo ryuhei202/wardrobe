@@ -66,7 +66,7 @@ const SelectionProgress = (props: SelectionProgressProps) => {
       <Tooltip
         key={index}
         title={
-          <Typography>
+          <Typography variant="body2">
             {presenter.tooltipText(index).map((text, index) => (
               <Fragment key={index}>
                 {text}
