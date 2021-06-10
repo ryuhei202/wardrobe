@@ -1,16 +1,9 @@
-import {
-  Dialog,
-  DialogTitle,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-} from "@material-ui/core";
+import { Dialog } from "@material-ui/core";
 import React from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import MemberImageCollectionDialogCallback from "./callback/MemberImageCollectionDialogCallback";
-import PopupImage from "../../shared/PopupImage";
 import MemberImageCollectionDialogData from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
-import { useKarteStyle } from "./style/UseKarteStyle";
+import ImageGallery from "react-image-gallery";
 
 interface MemberImageCollectionDialogProps {
   data: MemberImageCollectionDialogData;
@@ -20,25 +13,22 @@ interface MemberImageCollectionDialogProps {
 const MemberImageCollectionDialog = (
   props: MemberImageCollectionDialogProps
 ) => {
-  const classes = useKarteStyle();
-
   return (
     <Dialog onClose={props.callback.onClose} open={props.data.isOpen}>
-      <DialogTitle>パートナー画像一覧</DialogTitle>
-      <GridList>
-        {props.data.imageResponses.map((image, index) => (
-          <GridListTile key={index}>
-            <PopupImage
-              data={{
-                originalImageUrl: HostUrl() + image.imagePath.large,
-                popupImageUrl: HostUrl() + image.imagePath.original,
-                imageStyle: classes.memberImageCollectionImage,
-              }}
-            />
-            <GridListTileBar title={image.comment} subtitle={image.createdAt} />
-          </GridListTile>
-        ))}
-      </GridList>
+      <ImageGallery
+        showFullscreenButton={false}
+        showPlayButton={false}
+        thumbnailPosition="left"
+        items={props.data.imageResponses.map((image) => {
+          return {
+            original: HostUrl() + image.imagePath.large,
+            thumbnail: HostUrl() + image.imagePath.thumb,
+            originalHeight: 650,
+            description: image.comment,
+            thumbnailLabel: image.createdAt,
+          };
+        })}
+      />
     </Dialog>
   );
 };
