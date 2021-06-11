@@ -3,10 +3,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 export const useBrowseStyle = makeStyles((theme: Theme) =>
   createStyles({
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      fontWeight: theme.typography.fontWeightRegular,
-    },
     itemBrowseHeader: {
       padding: 0,
     },

@@ -29,7 +29,7 @@ const PastOutfitCollectionDialog = (props: PastOutfitCollectionDialogProps) => {
   return (
     <Dialog onClose={props.callback.onClose} open={props.data.isOpen}>
       <DialogTitle>過去コーデ一覧</DialogTitle>
-      <List>
+      <List dense>
         {props.data.pastOutfitResponses.map((outfit, index) => (
           <ListItem key={index}>
             <ListItemText>
@@ -37,7 +37,7 @@ const PastOutfitCollectionDialog = (props: PastOutfitCollectionDialogProps) => {
               <br />
               コーデの評価：
               <Paper variant="outlined">
-                <Typography>
+                <Typography variant="body2">
                   {presenter.coordinateFeedback(index).map((word, index) => (
                     <Fragment key={index}>
                       {word}
@@ -46,7 +46,7 @@ const PastOutfitCollectionDialog = (props: PastOutfitCollectionDialogProps) => {
                   ))}
                 </Typography>
               </Paper>
-              <List>
+              <List dense>
                 {outfit.items.map((item, index) => (
                   <ListItem key={index}>
                     <ListItemAvatar>

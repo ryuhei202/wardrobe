@@ -32,7 +32,7 @@ const Memo = (props: MemoProps) => {
   const memoPresenter = useMemoPresenter(props.data);
 
   return (
-    <List>
+    <List dense>
       <ListItem>
         <ListItemText>
           前回のコーデ：
@@ -60,7 +60,7 @@ const Memo = (props: MemoProps) => {
               : null}
           </div>
           <Paper variant="outlined">
-            <Typography>
+            <Typography variant="body2">
               {memoPresenter.lastCoordinate().map((word, index) => (
                 <Fragment key={index}>
                   {word}
@@ -75,7 +75,7 @@ const Memo = (props: MemoProps) => {
         <ListItemText>
           次回のコーデ：
           <Paper variant="outlined">
-            <Typography>
+            <Typography variant="body2">
               {memoPresenter.nextCoordinate().map((word, index) => (
                 <Fragment key={index}>
                   {word}
@@ -90,7 +90,7 @@ const Memo = (props: MemoProps) => {
         <ListItemText>
           その他：
           <Paper variant="outlined">
-            <Typography>
+            <Typography variant="body2">
               {memoPresenter.otherNote().map((word, index) => (
                 <Fragment key={index}>
                   {word}
@@ -105,7 +105,7 @@ const Memo = (props: MemoProps) => {
         <ListItemText>
           NGメモ：
           <TableContainer component={Paper}>
-            <Table>
+            <Table size="small">
               <TableBody>
                 {memoPresenter.memoNgs().map((row, index) => (
                   <Tooltip

@@ -17,7 +17,7 @@ const Basic = (props: BasicProps) => {
   const presenter = useBasicPresenter(props.data);
 
   return (
-    <List className={classes.drawerList}>
+    <List dense className={classes.drawerList}>
       <ListItem>
         <img
           src={presenter.memberImageUrl()}
