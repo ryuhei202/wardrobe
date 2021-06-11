@@ -78,7 +78,7 @@ export const useBrowseDetailHandler = (
           setCurrentValidationErrors(itemRecord.validationErrors);
           setSelectedItem({
             itemId: itemRecord.itemId,
-            itemImagePath: detail.itemImagePath,
+            itemImagePath: detail.itemImagePath.thumb,
             partSizes: createPartSizes(columns, itemRecord),
             locationName: itemRecord.locationName,
             categoryName: detail.categoryName,
