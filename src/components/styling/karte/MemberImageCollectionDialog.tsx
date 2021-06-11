@@ -3,7 +3,7 @@ import React from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import MemberImageCollectionDialogCallback from "./callback/MemberImageCollectionDialogCallback";
 import MemberImageCollectionDialogData from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
-import ImageGallery from "react-image-gallery";
+import ReactImageGallery from "react-image-gallery";
 
 interface MemberImageCollectionDialogProps {
   data: MemberImageCollectionDialogData;
@@ -15,7 +15,7 @@ const MemberImageCollectionDialog = (
 ) => {
   return (
     <Dialog onClose={props.callback.onClose} open={props.data.isOpen}>
-      <ImageGallery
+      <ReactImageGallery
         showFullscreenButton={false}
         showPlayButton={false}
         thumbnailPosition="left"
