@@ -1,4 +1,4 @@
-import ImagePathResponse from "./ImagePathResponse";
+import ImagePathResponse from "../ImagePathResponse";
 
 export default interface MemberImageResponse {
   readonly imagePath: ImagePathResponse;
