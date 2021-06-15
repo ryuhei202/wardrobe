@@ -40,9 +40,11 @@ const ItemCard = (props: ItemCardProps) => {
             height="auto"
             alt=""
           />
-          <Typography color="textSecondary">{props.data.seriesName}</Typography>
-          <Typography variant="h6">{props.data.categoryName}</Typography>
-          <Typography color="textSecondary">{props.data.brandName}</Typography>
+          <Typography variant="body1">{props.data.seriesName}</Typography>
+          <Typography variant="body2" color="textSecondary">
+            {props.data.categoryName}
+          </Typography>
+          <Typography variant="body1">{props.data.brandName}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

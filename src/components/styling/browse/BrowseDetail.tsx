@@ -1,6 +1,7 @@
 import { Box, Button, IconButton, Paper, Typography } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
 import React from "react";
+import ReactImageGallery from "react-image-gallery";
 import DetailResponse from "../../../model/api/response/styling/browse/DetailResponse";
 import { DetailStatus } from "../../../model/styling/browse/DetailStatus";
 import BrowseDetailCallback from "./callback/BrowseDetailCallback";
@@ -60,10 +61,18 @@ const BrowseDetail = (props: BrowseDetailProps) => {
       </IconButton>
       <Paper className={classes.itemInfo}>
         <div className={classes.itemImageContainer}>
-          <img
-            className={classes.itemImage}
-            src={presenter.itemImageUrl()}
-            alt=""
+          <ReactImageGallery
+            showFullscreenButton={false}
+            showPlayButton={false}
+            showNav={false}
+            items={presenter.imageGalleryList().map((image) => {
+              return {
+                original: image.originalImagePath,
+                thumbnail: image.thumbnailImagePath,
+                originalWidth: 400,
+                originalHeight: 600,
+              };
+            })}
           />
         </div>
         <div className={classes.itemInfoTextContainer}>

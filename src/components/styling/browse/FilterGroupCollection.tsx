@@ -33,10 +33,10 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter1a-content"
           id="filter1a-header"
         >
-          <Typography className={classes.heading}>カテゴリー</Typography>
+          <Typography variant="body2">カテゴリー</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <List component="nav">
+          <List dense component="nav">
             <FilterCategoryGroup
               data={props.data.categoryData}
               callback={props.callback.categoryCallback}
@@ -50,7 +50,7 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter2a-content"
           id="filter2a-header"
         >
-          <Typography className={classes.heading}>サイズ</Typography>
+          <Typography variant="body2">サイズ</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FilterSizeArray
@@ -65,7 +65,7 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter7a-content"
           id="filter7a-header"
         >
-          <Typography className={classes.heading}>部位数値</Typography>
+          <Typography variant="body2">部位数値</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FilterSliderArray
@@ -80,7 +80,7 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter3a-content"
           id="filter3a-header"
         >
-          <Typography className={classes.heading}>カラー</Typography>
+          <Typography variant="body2">カラー</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FilterMediaArray
@@ -96,7 +96,7 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter4a-content"
           id="filter4a-header"
         >
-          <Typography className={classes.heading}>柄</Typography>
+          <Typography variant="body2">柄</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FilterMediaArray
@@ -112,7 +112,7 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter5a-content"
           id="filter5a-header"
         >
-          <Typography className={classes.heading}>ロゴ</Typography>
+          <Typography variant="body2">ロゴ</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FilterMediaArray
@@ -128,7 +128,7 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter6a-content"
           id="filter6a-header"
         >
-          <Typography className={classes.heading}>ドロップサイズ</Typography>
+          <Typography variant="body2">ドロップサイズ</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FilterCheckboxArray
@@ -144,7 +144,7 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter7a-content"
           id="filter7a-header"
         >
-          <Typography className={classes.heading}>その他</Typography>
+          <Typography variant="body2">その他</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FilterCheckboxArray

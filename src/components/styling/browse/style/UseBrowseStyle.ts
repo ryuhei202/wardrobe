@@ -3,10 +3,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 export const useBrowseStyle = makeStyles((theme: Theme) =>
   createStyles({
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      fontWeight: theme.typography.fontWeightRegular,
-    },
     itemBrowseHeader: {
       padding: 0,
     },
@@ -57,11 +53,8 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(1),
       float: "right",
     },
-    itemImage: {
-      height: 600,
-      width: 400,
-    },
     itemImageContainer: {
+      width: 400,
       marginRight: theme.spacing(2),
     },
     itemInfo: {

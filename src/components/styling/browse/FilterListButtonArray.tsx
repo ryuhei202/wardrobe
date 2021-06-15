@@ -10,7 +10,7 @@ interface FilterListButtonArrayProps {
 
 const FilterListButtonArray = (props: FilterListButtonArrayProps) => {
   return (
-    <List>
+    <List dense>
       {props.data.map((row, index) => (
         <ListItem
           key={index}

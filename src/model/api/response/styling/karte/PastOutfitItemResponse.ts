@@ -1,4 +1,4 @@
-import ImagePathResponse from "./ImagePathResponse";
+import ImagePathResponse from "../ImagePathResponse";
 import PartSizeResponse from "./PartSizeResponse";
 
 export default interface PastOutfitItemResponse {
