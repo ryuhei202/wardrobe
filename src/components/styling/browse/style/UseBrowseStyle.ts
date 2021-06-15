@@ -53,11 +53,8 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(1),
       float: "right",
     },
-    itemImage: {
-      height: 600,
-      width: 400,
-    },
     itemImageContainer: {
+      width: 400,
       marginRight: theme.spacing(2),
     },
     itemInfo: {
