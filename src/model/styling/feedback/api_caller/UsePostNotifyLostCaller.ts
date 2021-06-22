@@ -2,11 +2,10 @@ import { CallStatus } from "../../../api/shared/CallStatus";
 import { useEffect, useState } from "react";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
 import BrowseIndexResponse from "../../../api/response/styling/browse/BrowseIndexResponse";
-import { ChartId } from "../../../ChartId";
-import { usePostFeedbackRequest } from "../../../api/request/styling/feedback/UsePostFeedbackRequest";
 import { usePostClient } from "../../../api/client/UsePostClient";
+import { usePostNotifyLostRequest } from "../../../api/request/styling/feedback/UsePostNotifyLostRequest";
 
-export interface PostFeedbackCaller {
+export interface PostNotifyLostCaller {
   isRunning: () => boolean;
   response: BrowseIndexResponse | null;
   errorResponse: ErrorResponse | null;
@@ -14,24 +13,17 @@ export interface PostFeedbackCaller {
   clearErrorResponse: () => void;
 }
 
-export const usePostFeedbackCaller = (
-  category: number,
-  description: string,
+export const usePostNotifyLostCaller = (
   itemIds: number[],
   onSuccess: () => void
-): PostFeedbackCaller => {
+): PostNotifyLostCaller => {
   const [response, setResponse] = useState<any>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Idle);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
 
-  const request = usePostFeedbackRequest(
-    ChartId(),
-    category,
-    description,
-    itemIds
-  );
+  const request = usePostNotifyLostRequest(itemIds);
   const client = usePostClient(request);
 
   useEffect(() => {
