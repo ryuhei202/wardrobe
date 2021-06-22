@@ -150,12 +150,18 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
         className={classes.changeButton}
         onClick={() => setIsFeedbackDialogOpen(true)}
       >
-        アイテムを変更する
+        行方不明アイテムを報告する
       </Button>
       <FeedbackDialog
         data={{
           isOpen: isFeedbackDialogOpen,
-          itemIds: props.data.items.map((item) => item.itemId),
+          items: props.data.items.map((item) => {
+            return {
+              itemId: item.itemId,
+              locationName: item.locationName,
+              imagePath: item.itemImagePath,
+            };
+          }),
         }}
         callback={{
           onClose: () => setIsFeedbackDialogOpen(false),
