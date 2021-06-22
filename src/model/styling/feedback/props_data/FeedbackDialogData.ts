@@ -1,4 +1,8 @@
 export default interface FeedbackDialogData {
   readonly isOpen: boolean;
-  readonly itemIds: number[];
+  readonly items: {
+    readonly itemId: number;
+    readonly locationName: string;
+    readonly imagePath: string;
+  }[];
 }
