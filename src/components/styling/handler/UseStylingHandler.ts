@@ -42,23 +42,23 @@ export const useStylingHandler = (): StylingHandler => {
       onKarteFetched: (
         isItemRegistered: boolean,
         registeredItems: SelectedItem[],
-        rentableItemNum: number
+        defaultItemNum: number
       ) => {
         if (isItemRegistered) {
           // 選択済みのアイテム数がレンタル可能数より多い場合、選択済みアイテム数に合わせる
-          if (registeredItems.length >= rentableItemNum) {
+          if (registeredItems.length >= defaultItemNum) {
             setRentableItemNum(registeredItems.length);
           } else {
-            setRentableItemNum(rentableItemNum);
+            setRentableItemNum(defaultItemNum);
           }
           setSelectedItems(registeredItems);
-          if (registeredItems.length >= rentableItemNum) {
+          if (registeredItems.length >= defaultItemNum) {
             setCurrentIndex(registeredItems.length - 1);
           } else {
             setCurrentIndex(registeredItems.length);
           }
         } else {
-          setRentableItemNum(rentableItemNum);
+          setRentableItemNum(defaultItemNum);
         }
         setMainContentType(MainContentType.Browse);
       },

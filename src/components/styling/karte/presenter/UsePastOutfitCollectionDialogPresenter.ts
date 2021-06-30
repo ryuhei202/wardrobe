@@ -1,15 +1,15 @@
-import PastOutfitItemResponse from "../../../../model/api/response/styling/karte/PastOutfitItemResponse";
-import PastOutfitResponse from "../../../../model/api/response/styling/karte/PastOutfitResponse";
+import { InfoPastOutfitItemResponse } from "../../../../model/api/response/styling/karte/InfoPastOutfitItemResponse";
+import { InfoPastOutfitResponse } from "../../../../model/api/response/styling/karte/InfoPastOutfitResponse";
 
-export interface PastOutfitCollectionDialogPresenter {
+interface PastOutfitCollectionDialogPresenter {
   shipmentDate: (index: number) => string;
   coordinateFeedback: (index: number) => string[];
-  itemListPrimary: (item: PastOutfitItemResponse) => string;
-  itemListSecondary: (item: PastOutfitItemResponse) => string;
+  itemListPrimary: (item: InfoPastOutfitItemResponse) => string;
+  itemListSecondary: (item: InfoPastOutfitItemResponse) => string;
 }
 
 export const usePastOutfitCollectionDialogPresenter = (
-  data: PastOutfitResponse[]
+  data: InfoPastOutfitResponse[]
 ): PastOutfitCollectionDialogPresenter => {
   const shipmentDate = (index: number): string =>
     data[index].rentalStartedAt
@@ -20,11 +20,11 @@ export const usePastOutfitCollectionDialogPresenter = (
     return data[index].feedback.split("\n");
   };
 
-  const itemListPrimary = (item: PastOutfitItemResponse): string => {
+  const itemListPrimary = (item: InfoPastOutfitItemResponse): string => {
     return `${item.id}, ${item.categoryName}, ${item.colorName}`;
   };
 
-  const itemListSecondary = (item: PastOutfitItemResponse): string => {
+  const itemListSecondary = (item: InfoPastOutfitItemResponse): string => {
     let result = `${item.size}`;
     item.partSizes.forEach((partSize) => {
       result += `, ${partSize.name}: ${partSize.value ?? "未計測"}`;

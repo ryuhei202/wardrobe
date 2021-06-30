@@ -1,16 +1,16 @@
 import { Dialog } from "@material-ui/core";
 import React from "react";
 import { HostUrl } from "../../../model/HostUrl";
-import MemberImageCollectionDialogCallback from "./callback/MemberImageCollectionDialogCallback";
-import MemberImageCollectionDialogData from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
 import ReactImageGallery from "react-image-gallery";
+import { MemberImageCollectionDialogData } from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
+import { MemberImageCollectionDialogCallback } from "./callback/MemberImageCollectionDialogCallback";
 
 interface MemberImageCollectionDialogProps {
   data: MemberImageCollectionDialogData;
   callback: MemberImageCollectionDialogCallback;
 }
 
-const MemberImageCollectionDialog = (
+export const MemberImageCollectionDialog = (
   props: MemberImageCollectionDialogProps
 ) => {
   return (
@@ -32,5 +32,3 @@ const MemberImageCollectionDialog = (
     </Dialog>
   );
 };
-
-export default MemberImageCollectionDialog;
