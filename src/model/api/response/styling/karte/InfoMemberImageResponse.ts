@@ -1,6 +1,6 @@
 import ImagePathResponse from "../ImagePathResponse";
 
-export default interface MemberImageResponse {
+export interface InfoMemberImageResponse {
   readonly imagePath: ImagePathResponse;
   readonly comment: string;
   readonly createdAt: string;
