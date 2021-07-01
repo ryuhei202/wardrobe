@@ -1,6 +1,6 @@
-import MemberImageResponse from "../../../api/response/styling/karte/MemberImageResponse";
+import { InfoMemberImageResponse } from "../../../api/response/styling/karte/InfoMemberImageResponse";
 
-export default interface MemberImageCollectionDialogData {
+export interface MemberImageCollectionDialogData {
   readonly isOpen: boolean;
-  readonly imageResponses: MemberImageResponse[];
+  readonly imageResponses: InfoMemberImageResponse[];
 }

@@ -1,12 +1,8 @@
 import SelectedItem from "../../../../styling/SelectedItem";
-import BasicResponse from "./BasicResponse";
-import MemoResponse from "./MemoResponse";
-import SizeResponse from "./SizeResponse";
+import { InfoResponse } from "./InfoResponse";
 
-export default interface KarteResponse {
-  readonly basic: BasicResponse;
-  readonly size: SizeResponse;
-  readonly memo: MemoResponse;
-  readonly rentableItemNum: number;
+export interface KarteResponse {
+  readonly info: InfoResponse;
+  readonly defaultItemNum: number;
   readonly registeredItems: SelectedItem[];
 }

@@ -1,3 +1,3 @@
-export default interface PastOutfitCollectionDialogCallback {
+export interface PastOutfitCollectionDialogCallback {
   onClose: () => void;
 }

@@ -2,9 +2,9 @@ import { CircularProgress, Typography } from "@material-ui/core";
 import React from "react";
 import { useGetKarteCaller } from "../../../../model/styling/karte/api_caller/UseGetKarteCaller";
 import SelectedItem from "../../../../model/styling/SelectedItem";
-import Karte from "../Karte";
+import { Karte } from "../Karte";
 
-export interface KarteProvider {
+interface KarteProvider {
   karteComponent: () => JSX.Element;
 }
 
@@ -23,7 +23,7 @@ export const useKarteProvider = (
     } else if (apiCaller.errorResponse !== null) {
       return <Typography>{apiCaller.errorResponse.message}</Typography>;
     } else if (apiCaller.response !== null) {
-      return <Karte response={apiCaller.response} />;
+      return <Karte response={apiCaller.response.info} />;
     } else {
       return <></>;
     }
