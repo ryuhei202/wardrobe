@@ -2,12 +2,12 @@ import { CallStatus } from "./../../../api/shared/CallStatus";
 import { useGetClient } from "./../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
 import { useGetKarteRequest } from "../../../api/request/styling/karte/UseGetKarteRequest";
-import KarteResponse from "../../../api/response/styling/karte/KarteResponse";
 import ErrorResponse from "../../../api/response/shared/ErrorResponse";
 import { ChartId } from "../../../ChartId";
 import SelectedItem from "../../SelectedItem";
+import { KarteResponse } from "../../../api/response/styling/karte/KarteResponse";
 
-export interface GetKarteCaller {
+interface GetKarteCaller {
   isRunning: () => boolean;
   response: KarteResponse | null;
   errorResponse: ErrorResponse | null;
@@ -17,7 +17,7 @@ export const useGetKarteCaller = (
   onSuccess: (
     isItemRegistered: boolean,
     registeredItems: SelectedItem[],
-    rentableItemNum: number
+    defaultItemNum: number
   ) => void
 ): GetKarteCaller => {
   const [response, setResponse] = useState<KarteResponse | null>(null);
@@ -41,10 +41,10 @@ export const useGetKarteCaller = (
               onSuccess(
                 true,
                 response.registeredItems,
-                response.rentableItemNum
+                response.defaultItemNum
               );
             } else {
-              onSuccess(false, [], response.rentableItemNum);
+              onSuccess(false, [], response.defaultItemNum);
             }
           })
           .catch((error: ErrorResponse) => {

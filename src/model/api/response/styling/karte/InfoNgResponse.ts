@@ -1,4 +1,4 @@
-export default interface MemoNgResponse {
+export interface InfoNgResponse {
   readonly categoryName: string;
   readonly contentText: string;
   readonly createdAt: string;

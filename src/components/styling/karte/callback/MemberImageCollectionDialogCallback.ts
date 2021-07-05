@@ -1,3 +1,3 @@
-export default interface MemberImageCollectionDialogCallback {
+export interface MemberImageCollectionDialogCallback {
   onClose: () => void;
 }

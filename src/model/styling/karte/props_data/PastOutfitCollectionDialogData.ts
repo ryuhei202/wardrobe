@@ -1,6 +1,6 @@
-import PastOutfitResponse from "../../../api/response/styling/karte/PastOutfitResponse";
+import { InfoPastOutfitResponse } from "../../../api/response/styling/karte/InfoPastOutfitResponse";
 
-export default interface PastOutfitCollectionDialogData {
+export interface PastOutfitCollectionDialogData {
   readonly isOpen: boolean;
-  readonly pastOutfitResponses: PastOutfitResponse[];
+  readonly pastOutfitResponses: InfoPastOutfitResponse[];
 }

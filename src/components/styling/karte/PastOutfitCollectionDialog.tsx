@@ -11,9 +11,9 @@ import {
 } from "@material-ui/core";
 import React, { Fragment } from "react";
 import { HostUrl } from "../../../model/HostUrl";
+import { PastOutfitCollectionDialogData } from "../../../model/styling/karte/props_data/PastOutfitCollectionDialogData";
 import PopupImage from "../../shared/PopupImage";
-import PastOutfitCollectionDialogData from "../../../model/styling/karte/props_data/PastOutfitCollectionDialogData";
-import PastOutfitCollectionDialogCallback from "./callback/PastOutfitCollectionDialogCallback";
+import { PastOutfitCollectionDialogCallback } from "./callback/PastOutfitCollectionDialogCallback";
 import { usePastOutfitCollectionDialogPresenter } from "./presenter/UsePastOutfitCollectionDialogPresenter";
 
 interface PastOutfitCollectionDialogProps {
@@ -21,7 +21,9 @@ interface PastOutfitCollectionDialogProps {
   callback: PastOutfitCollectionDialogCallback;
 }
 
-const PastOutfitCollectionDialog = (props: PastOutfitCollectionDialogProps) => {
+export const PastOutfitCollectionDialog = (
+  props: PastOutfitCollectionDialogProps
+) => {
   const presenter = usePastOutfitCollectionDialogPresenter(
     props.data.pastOutfitResponses
   );
@@ -73,5 +75,3 @@ const PastOutfitCollectionDialog = (props: PastOutfitCollectionDialogProps) => {
     </Dialog>
   );
 };
-
-export default PastOutfitCollectionDialog;
