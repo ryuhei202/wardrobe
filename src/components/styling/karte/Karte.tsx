@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useKarteStyle } from "./style/UseKarteStyle";
 import {
   IconButton,
@@ -13,16 +13,14 @@ import {
   TableContainer,
   TableRow,
   Tooltip,
-  Typography,
 } from "@material-ui/core";
 import { ListAlt, PhotoLibrary } from "@material-ui/icons";
-import PopupImage from "../../shared/PopupImage";
-import { HostUrl } from "../../../model/HostUrl";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
 import { useKarteHandler } from "./handler/UseKarteHandler";
 import { useKartePresenter } from "./presenter/UseKartePresenter";
 import { PastOutfitCollectionDialog } from "./PastOutfitCollectionDialog";
 import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
+import { PastOutfitCollection } from "./PastOutfitCollection";
 
 interface KarteProps {
   response: InfoResponse;
@@ -55,7 +53,7 @@ export const Karte = (props: KarteProps) => {
       </ListItem>
       <ListItem>
         <ListItemText>
-          前回のコーデ：
+          過去のコーデ：
           <IconButton color="primary" onClick={handler.setPastOutfitDialogOpen}>
             <ListAlt />
           </IconButton>
@@ -63,32 +61,7 @@ export const Karte = (props: KarteProps) => {
             data={handler.pastOutfitDialogData()}
             callback={handler.pastOutfitDialogCallback()}
           />
-          <div>
-            {props.response.pastOutfits.length > 0
-              ? props.response.pastOutfits[0].items.map((item, index) => {
-                  return (
-                    <div className={classes.itemImage} key={index}>
-                      <PopupImage
-                        data={{
-                          originalImageUrl: HostUrl() + item.imagePath.large,
-                          popupImageUrl: HostUrl() + item.imagePath.original,
-                        }}
-                      />
-                    </div>
-                  );
-                })
-              : null}
-          </div>
-          <Paper variant="outlined">
-            <Typography variant="body2">
-              {presenter.lastCoordinate().map((word, index) => (
-                <Fragment key={index}>
-                  {word}
-                  <br></br>
-                </Fragment>
-              ))}
-            </Typography>
-          </Paper>
+          <PastOutfitCollection data={handler.pastOutfitCollectionData()} />
         </ListItemText>
       </ListItem>
       <ListItem>

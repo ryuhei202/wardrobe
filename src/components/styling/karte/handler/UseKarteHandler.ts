@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { InfoResponse } from "../../../../model/api/response/styling/karte/InfoResponse";
 import { MemberImageCollectionDialogData } from "../../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
+import { PastOutfitCollectionData } from "../../../../model/styling/karte/props_data/PastOutfitCollectionData";
 import { PastOutfitCollectionDialogData } from "../../../../model/styling/karte/props_data/PastOutfitCollectionDialogData";
 import { MemberImageCollectionDialogCallback } from "../callback/MemberImageCollectionDialogCallback";
 import { PastOutfitCollectionDialogCallback } from "../callback/PastOutfitCollectionDialogCallback";
@@ -12,6 +13,7 @@ interface KarteHandler {
   setPastOutfitDialogOpen: () => void;
   pastOutfitDialogData: () => PastOutfitCollectionDialogData;
   pastOutfitDialogCallback: () => PastOutfitCollectionDialogCallback;
+  pastOutfitCollectionData: () => PastOutfitCollectionData;
 }
 
 export const useKarteHandler = (response: InfoResponse): KarteHandler => {
@@ -56,6 +58,13 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     };
   };
 
+  const pastOutfitCollectionData = (): PastOutfitCollectionData => {
+    return {
+      pastOutfitResponses: response.pastOutfits,
+      displayOutfitNum: 2, //前回と前々回コーデ
+    };
+  };
+
   return {
     setMemberImageDialogOpen,
     memberImageDialogData,
@@ -63,5 +72,6 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     setPastOutfitDialogOpen,
     pastOutfitDialogData,
     pastOutfitDialogCallback,
+    pastOutfitCollectionData,
   };
 };
