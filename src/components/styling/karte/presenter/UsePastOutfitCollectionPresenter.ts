@@ -1,16 +1,16 @@
 import { InfoPastOutfitItemResponse } from "../../../../model/api/response/styling/karte/InfoPastOutfitItemResponse";
 import { InfoPastOutfitResponse } from "../../../../model/api/response/styling/karte/InfoPastOutfitResponse";
 
-interface PastOutfitCollectionDialogPresenter {
+interface PastOutfitCollectionPresenter {
   shipmentDate: (index: number) => string;
   coordinateFeedback: (index: number) => string[];
   itemListPrimary: (item: InfoPastOutfitItemResponse) => string;
   itemListSecondary: (item: InfoPastOutfitItemResponse) => string;
 }
 
-export const usePastOutfitCollectionDialogPresenter = (
+export const usePastOutfitCollectionPresenter = (
   data: InfoPastOutfitResponse[]
-): PastOutfitCollectionDialogPresenter => {
+): PastOutfitCollectionPresenter => {
   const shipmentDate = (index: number): string =>
     data[index].rentalStartedAt
       ? new Date(data[index].rentalStartedAt!).toLocaleDateString()
