@@ -138,20 +138,15 @@ export const useBrowseDetailHandler = (
   };
 
   const detailItemTableData = (): DetailItemTableData => {
-    if (selectedSizeIndex === null)
-      return {
-        columns: [],
-        rows: detail.unsizedItemRecords.map((item) => {
-          return {
-            itemId: item.itemId,
-            values: item.values,
-            isSelected: selectedItem?.itemId === item.itemId ?? false,
-          };
-        }),
-      };
+    const columns =
+      selectedSizeIndex === null ? [] : detail.sizes[selectedSizeIndex].columns;
+    const itemRecords =
+      selectedSizeIndex === null
+        ? detail.unsizedItemRecords
+        : detail.sizes[selectedSizeIndex].itemRecords;
     return {
-      columns: detail.sizes[selectedSizeIndex].columns,
-      rows: detail.sizes[selectedSizeIndex].itemRecords.map((item) => {
+      columns: columns,
+      rows: itemRecords.map((item) => {
         return {
           itemId: item.itemId,
           values: item.values,
