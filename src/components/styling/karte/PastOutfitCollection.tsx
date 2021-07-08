@@ -27,7 +27,7 @@ export const PastOutfitCollection = (props: PastOutfitCollectionProps) => {
       {props.data.pastOutfitResponses.map((outfit, index) => {
         if (
           props.data.displayOutfitNum !== undefined &&
-          props.data.displayOutfitNum === index
+          props.data.displayOutfitNum <= index
         ) {
           return <></>;
         }
