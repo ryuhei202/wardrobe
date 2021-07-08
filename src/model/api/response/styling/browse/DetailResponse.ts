@@ -1,6 +1,7 @@
 import ImagePathResponse from "../ImagePathResponse";
 import DetailColorResponse from "./DetailColorResponse";
 import DetailSizeResponse from "./DetailSizeResponse";
+import DetailSizeItemRecordResponse from "./DetailSizeItemRecordResponse";
 
 export default interface DetailResponse {
   readonly itemImagePath: ImagePathResponse;
@@ -10,4 +11,5 @@ export default interface DetailResponse {
   readonly color: DetailColorResponse;
   readonly sizes: DetailSizeResponse[];
   readonly outfitImagePaths: ImagePathResponse[];
+  readonly unsizedItemRecords: DetailSizeItemRecordResponse[];
 }

@@ -83,6 +83,16 @@ export const useBrowseDetailHandler = (
             locationName: itemRecord.locationName,
             categoryName: detail.categoryName,
           });
+        } else {
+          const unsizedItemRecords = detail.unsizedItemRecords[index];
+          setCurrentValidationErrors(unsizedItemRecords.validationErrors);
+          setSelectedItem({
+            itemId: unsizedItemRecords.itemId,
+            itemImagePath: detail.itemImagePath.thumb,
+            partSizes: createPartSizes([], unsizedItemRecords),
+            locationName: unsizedItemRecords.locationName,
+            categoryName: detail.categoryName,
+          });
         }
       },
     };
@@ -128,10 +138,15 @@ export const useBrowseDetailHandler = (
   };
 
   const detailItemTableData = (): DetailItemTableData => {
-    if (selectedSizeIndex === null) return { columns: [], rows: [] };
+    const columns =
+      selectedSizeIndex === null ? [] : detail.sizes[selectedSizeIndex].columns;
+    const itemRecords =
+      selectedSizeIndex === null
+        ? detail.unsizedItemRecords
+        : detail.sizes[selectedSizeIndex].itemRecords;
     return {
-      columns: detail.sizes[selectedSizeIndex].columns,
-      rows: detail.sizes[selectedSizeIndex].itemRecords.map((item) => {
+      columns: columns,
+      rows: itemRecords.map((item) => {
         return {
           itemId: item.itemId,
           values: item.values,

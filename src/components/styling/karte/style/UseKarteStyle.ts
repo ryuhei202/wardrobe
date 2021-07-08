@@ -12,10 +12,6 @@ export const useKarteStyle = makeStyles((theme: Theme) =>
     accordionDetails: {
       display: "block",
     },
-    itemImage: {
-      display: "inline-block",
-      width: "25%",
-    },
     memberImageCollectionImage: {
       top: "50%",
       position: "relative",
