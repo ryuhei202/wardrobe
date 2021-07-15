@@ -1,6 +1,7 @@
 import { InfoMemberImageResponse } from "./InfoMemberImageResponse";
 import { InfoNgResponse } from "./InfoNgResponse";
 import { InfoPastOutfitResponse } from "./InfoPastOutfitResponse";
+import { InfoPurchasedItemResponse } from "./InfoPurchasedItemRespons";
 
 export interface InfoResponse {
   readonly memberName: string;
@@ -9,4 +10,5 @@ export interface InfoResponse {
   readonly memberImages: InfoMemberImageResponse[];
   readonly pastOutfits: InfoPastOutfitResponse[];
   readonly ngs: InfoNgResponse[];
+  readonly purchasedItems: InfoPurchasedItemResponse[];
 }
