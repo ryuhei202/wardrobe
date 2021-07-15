@@ -3,6 +3,7 @@ import { InfoResponse } from "../../../../model/api/response/styling/karte/InfoR
 import { MemberImageCollectionDialogData } from "../../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
 import { PastOutfitCollectionData } from "../../../../model/styling/karte/props_data/PastOutfitCollectionData";
 import { PastOutfitCollectionDialogData } from "../../../../model/styling/karte/props_data/PastOutfitCollectionDialogData";
+import { PurchasedItemCollectionData } from "../../../../model/styling/karte/props_data/PurchasedItemCollectionData";
 import { MemberImageCollectionDialogCallback } from "../callback/MemberImageCollectionDialogCallback";
 import { PastOutfitCollectionDialogCallback } from "../callback/PastOutfitCollectionDialogCallback";
 
@@ -14,6 +15,7 @@ interface KarteHandler {
   pastOutfitDialogData: () => PastOutfitCollectionDialogData;
   pastOutfitDialogCallback: () => PastOutfitCollectionDialogCallback;
   pastOutfitCollectionData: () => PastOutfitCollectionData;
+  purchasedItemCollectionData: () => PurchasedItemCollectionData;
 }
 
 export const useKarteHandler = (response: InfoResponse): KarteHandler => {
@@ -65,6 +67,12 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     };
   };
 
+  const purchasedItemCollectionData = (): PurchasedItemCollectionData => {
+    return {
+      purchasedItemResponses: response.purchasedItems,
+    };
+  };
+
   return {
     setMemberImageDialogOpen,
     memberImageDialogData,
@@ -73,5 +81,6 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     pastOutfitDialogData,
     pastOutfitDialogCallback,
     pastOutfitCollectionData,
+    purchasedItemCollectionData,
   };
 };

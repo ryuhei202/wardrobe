@@ -21,6 +21,7 @@ import { useKartePresenter } from "./presenter/UseKartePresenter";
 import { PastOutfitCollectionDialog } from "./PastOutfitCollectionDialog";
 import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 import { PastOutfitCollection } from "./PastOutfitCollection";
+import { PurchasedItemCollection } from "./PurchasedItemCollection";
 
 interface KarteProps {
   response: InfoResponse;
@@ -85,6 +86,14 @@ export const Karte = (props: KarteProps) => {
               </TableBody>
             </Table>
           </TableContainer>
+        </ListItemText>
+      </ListItem>
+      <ListItem>
+        <ListItemText>
+          購入済アイテム：
+          <PurchasedItemCollection
+            data={handler.purchasedItemCollectionData()}
+          />
         </ListItemText>
       </ListItem>
     </List>

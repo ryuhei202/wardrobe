@@ -54,7 +54,7 @@ export const PastOutfitCollection = (props: PastOutfitCollectionProps) => {
                       <Avatar variant="rounded">
                         <PopupImage
                           data={{
-                            originalImageUrl: HostUrl() + item.imagePath.large,
+                            originalImageUrl: HostUrl() + item.imagePath.thumb,
                             popupImageUrl: HostUrl() + item.imagePath.original,
                           }}
                         ></PopupImage>
