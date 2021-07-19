@@ -15,7 +15,7 @@ import FilterCheckboxArray from "./FilterCheckboxArray";
 import FilterSizeArray from "./FilterSizeArray";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 import FilterGroupCollectionData from "../../../model/styling/browse/props_data/FilterGroupCollectionData";
-import FilterSliderArray from "./FilterSliderArray";
+import { FilterSliderArray } from "./FilterSliderArray";
 
 interface FilterGroupCollectionProps {
   data: FilterGroupCollectionData;

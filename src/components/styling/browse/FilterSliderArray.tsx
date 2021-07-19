@@ -1,7 +1,7 @@
 import { List, Slider, Typography } from "@material-ui/core";
 import React, { Fragment } from "react";
-import FilterSliderData from "../../../model/styling/browse/props_data/FilterSliderData";
-import FilterSliderArrayCallback from "./callback/FilterSliderArrayCallback";
+import { FilterSliderData } from "../../../model/styling/browse/props_data/FilterSliderData";
+import { FilterSliderArrayCallback } from "./callback/FilterSliderArrayCallback";
 import { useFilterSliderArrayHandler } from "./handler/useFilterSliderArrayHandler";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
@@ -10,7 +10,7 @@ interface FilterSliderArrayProps {
   callback: FilterSliderArrayCallback;
 }
 
-const FilterSliderArray = (props: FilterSliderArrayProps) => {
+export const FilterSliderArray = (props: FilterSliderArrayProps) => {
   const classes = useBrowseStyle();
   const handler = useFilterSliderArrayHandler(props.data, props.callback);
 
@@ -41,5 +41,3 @@ const FilterSliderArray = (props: FilterSliderArrayProps) => {
     </List>
   );
 };
-
-export default FilterSliderArray;

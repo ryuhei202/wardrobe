@@ -1,3 +1,3 @@
-export default interface FilterSliderArrayCallback {
+export interface FilterSliderArrayCallback {
   onChange: (index: number, value: number[]) => void;
 }
