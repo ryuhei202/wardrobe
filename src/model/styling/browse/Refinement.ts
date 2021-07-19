@@ -6,7 +6,7 @@ export default interface Refinement {
   readonly mediumCategoryId: number | null;
   readonly smallCategoryIds: number[];
   readonly sizeIds: number[];
-  readonly partSizes: ValueRefinement[];
+  readonly partSizes: number[];
   readonly colorIds: number[];
   readonly patternIds: number[];
   readonly logoIds: number[];

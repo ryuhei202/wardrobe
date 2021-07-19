@@ -14,7 +14,6 @@ interface BrowseProps {
 const Browse = (props: BrowseProps) => {
   const classes = useBrowseStyle();
   const [categoryId, setCategoryId] = useState<number | null>(null);
-  const [silhouetteId, setSilhouetteId] = useState<number | null>(null);
 
   let itemBrowse;
   if (categoryId !== null) {
@@ -22,7 +21,6 @@ const Browse = (props: BrowseProps) => {
       <ItemBrowseContainer
         callback={props.callback}
         categoryId={categoryId!!}
-        silhouetteId={silhouetteId}
         currentSelectedItemId={props.currentSelectedItemId}
       />
     );
@@ -41,23 +39,6 @@ const Browse = (props: BrowseProps) => {
           }}
         >
           {props.response.category.map((option, index) => (
-            <MenuItem key={index} value={option.id}>
-              {option.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl className={classes.categorySelection}>
-        <InputLabel id="silhouette-select-label">シルエット</InputLabel>
-        <Select
-          labelId="silhouette-select-label"
-          id="silhouette-select"
-          value={silhouetteId ?? ""}
-          onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
-            setSilhouetteId(event.target.value as number);
-          }}
-        >
-          {props.response.silhouette.map((option, index) => (
             <MenuItem key={index} value={option.id}>
               {option.name}
             </MenuItem>
