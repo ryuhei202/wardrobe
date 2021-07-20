@@ -1,4 +1,4 @@
-import ValueRefinement from "./ValueRefinement";
+import { ValueRefinement } from "./ValueRefinement";
 
 export default interface Refinement {
   readonly itemId: number | null;
@@ -6,7 +6,7 @@ export default interface Refinement {
   readonly mediumCategoryId: number | null;
   readonly smallCategoryIds: number[];
   readonly sizeIds: number[];
-  readonly partSizes: number[];
+  readonly partSizes: ValueRefinement[];
   readonly colorIds: number[];
   readonly patternIds: number[];
   readonly logoIds: number[];
