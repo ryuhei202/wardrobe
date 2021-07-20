@@ -1,6 +1,5 @@
 import SelectChoiceResponse from "./SelectChoiceResponse";
 
-export default interface SearchPrerequisiteResponse {
+export interface SearchPrerequisiteResponse {
   readonly category: SelectChoiceResponse[];
-  readonly silhouette: SelectChoiceResponse[];
 }
