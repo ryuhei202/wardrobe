@@ -1,10 +1,9 @@
 import FilterMediaResponse from "./FilterMediaResponse";
-import FilterRangeResponse from "./FilterRangeResponse";
 import FilterResponse from "./FilterResponse";
 import LargeCategoryChoiceResponse from "./LargeCategoryChoiceResponse";
-import FilterPartSizeResponse from "./FilterPartSizeResponse";
+import { FilterPartSizeResponse } from "./FilterPartSizeResponse";
 
-export default interface FilterChoiceResponse {
+export interface FilterChoiceResponse {
   readonly largeCategory: LargeCategoryChoiceResponse[];
   readonly size: FilterResponse[];
   readonly partSize: FilterPartSizeResponse[];

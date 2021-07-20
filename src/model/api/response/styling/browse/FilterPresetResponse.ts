@@ -1,6 +1,6 @@
-import FilterPresetValueResponse from "./FilterPresetValueResponse";
+import { FilterPresetValueResponse } from "./FilterPresetValueResponse";
 
-export default interface FilterPresetResponse {
+export interface FilterPresetResponse {
   readonly name: string;
   readonly values: FilterPresetValueResponse[];
 }

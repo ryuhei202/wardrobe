@@ -1,7 +1,7 @@
-import FilterPresetResponse from "./FilterPresetResponse";
-import FilterRangeResponse from "./FilterRangeResponse";
+import { FilterPresetResponse } from "./FilterPresetResponse";
+import { FilterRangeResponse } from "./FilterRangeResponse";
 
-export default interface FilterPartSizeResponse {
+export interface FilterPartSizeResponse {
   readonly presets: FilterPresetResponse[];
   readonly ranges: FilterRangeResponse[];
 }
