@@ -1,6 +1,5 @@
 import { indigo, pink } from "@material-ui/core/colors";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Block } from "@material-ui/icons";
 
 export const useBrowseStyle = makeStyles((theme: Theme) =>
   createStyles({
