@@ -93,5 +93,11 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     partSize: {
       display: "block",
     },
+    presetSelector: {
+      display: "block",
+    },
+    presetLabal: {
+      top: "-16px",
+    },
   })
 );
