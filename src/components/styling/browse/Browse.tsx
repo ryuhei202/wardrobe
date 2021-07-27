@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 import React, { useState } from "react";
-import SearchPrerequisiteResponse from "../../../model/api/response/styling/browse/SearchPrerequisiteResponse";
+import { SearchPrerequisiteResponse } from "../../../model/api/response/styling/browse/SearchPrerequisiteResponse";
 import ItemBrowseCallback from "./callback/ItemBrowseCallback";
 import ItemBrowseContainer from "./ItemBrowseContainer";
 import { useBrowseStyle } from "./style/UseBrowseStyle";

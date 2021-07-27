@@ -1,20 +1,21 @@
-import FilterRangeResponse from "../../../../model/api/response/styling/browse/FilterRangeResponse";
+import { useState } from "react";
+import { FilterPartSizeData } from "./../../../../model/styling/browse/props_data/FilterPartSizeData";
+import { FilterPartSizeCallback } from "./../callback/FilterPartSizeCallback";
+import { FilterPartSizeResponse } from "./../../../../model/api/response/styling/browse/FilterPartSizeResponse";
 import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
-import FilterSliderData from "../../../../model/styling/browse/props_data/FilterSliderData";
-import ValueRefinement from "../../../../model/styling/browse/ValueRefinement";
-import FilterSliderArrayCallback from "../callback/FilterSliderArrayCallback";
+import { ValueRefinement } from "../../../../model/styling/browse/ValueRefinement";
 
 export interface PartSizeRefinementHandler {
   partSizeCallback: (
-    choice: FilterRangeResponse[],
+    choice: FilterPartSizeResponse,
     currentValues: ValueRefinement[]
-  ) => FilterSliderArrayCallback;
+  ) => FilterPartSizeCallback;
   partSizeData: (
-    choice: FilterRangeResponse[],
+    choice: FilterPartSizeResponse,
     currentValues: ValueRefinement[]
-  ) => FilterSliderData[];
+  ) => FilterPartSizeData;
   appliedFilters: (
-    choice: FilterRangeResponse[],
+    choice: FilterPartSizeResponse,
     currentValues: ValueRefinement[]
   ) => AppliedFilterData[];
   deleteFilter: (currentValues: ValueRefinement[], index: number) => void;
@@ -23,52 +24,71 @@ export interface PartSizeRefinementHandler {
 export const usePartSizeRefinementHandler = (
   onChange: (newValues: ValueRefinement[]) => void
 ): PartSizeRefinementHandler => {
+  const [selectedPresetIndex, setSelectedPresetIndex] = useState<number | null>(
+    null
+  );
   const partSizeCallback = (
-    choice: FilterRangeResponse[],
+    choice: FilterPartSizeResponse,
     currentValues: ValueRefinement[]
-  ): FilterSliderArrayCallback => {
+  ): FilterPartSizeCallback => {
     return {
-      onChange: (index: number, value: number[]) => {
-        const currentIndex = currentValues.findIndex(
-          (filter) => filter.id === choice[index].id
-        );
-        const newPartSizes = [...currentValues];
-        const newValue = { id: choice[index].id, min: value[0], max: value[1] };
-        if (currentIndex === -1) {
-          newPartSizes.push(newValue);
-        } else {
-          newPartSizes.splice(currentIndex, 1, newValue);
-        }
-        onChange(newPartSizes);
+      onPresetChanged: (index: number) => {
+        setSelectedPresetIndex(index);
+        onChange(choice.presets[index].values);
+      },
+      filterSliderArrayCallback: {
+        onChange: (index: number, value: number[]) => {
+          const currentIndex = currentValues.findIndex(
+            (filter) => filter.id === choice.ranges[index].id
+          );
+          const newPartSizes = [...currentValues];
+          const newValue = {
+            id: choice.ranges[index].id,
+            min: value[0],
+            max: value[1],
+          };
+          if (currentIndex === -1) {
+            newPartSizes.push(newValue);
+          } else {
+            newPartSizes.splice(currentIndex, 1, newValue);
+          }
+          onChange(newPartSizes);
+        },
       },
     };
   };
 
   const partSizeData = (
-    choice: FilterRangeResponse[],
+    choice: FilterPartSizeResponse,
     currentValues: ValueRefinement[]
-  ): FilterSliderData[] => {
-    return choice.map((filter) => {
-      return {
-        key: filter.id,
-        name: filter.name,
-        range: [filter.min, filter.max],
-        selectedValue: [
-          currentValues.find((value) => value.id === filter.id)?.min ??
-            filter.min,
-          currentValues.find((value) => value.id === filter.id)?.max ??
-            filter.max,
-        ],
-      };
-    });
+  ): FilterPartSizeData => {
+    return {
+      selectedPresetIndex: selectedPresetIndex,
+      presets: choice.presets.map((preset) => {
+        return preset.name;
+      }),
+      sliders: choice.ranges.map((filter) => {
+        return {
+          key: filter.id,
+          name: filter.name,
+          range: [filter.min, filter.max],
+          selectedValue: [
+            currentValues.find((value) => value.id === filter.id)?.min ??
+              filter.min,
+            currentValues.find((value) => value.id === filter.id)?.max ??
+              filter.max,
+          ],
+        };
+      }),
+    };
   };
 
   const appliedFilters = (
-    choice: FilterRangeResponse[],
+    choice: FilterPartSizeResponse,
     currentValues: ValueRefinement[]
   ): AppliedFilterData[] => {
     return currentValues.map((valueRefinement) => {
-      let filter = choice.find((row) => row.id === valueRefinement.id);
+      let filter = choice.ranges.find((row) => row.id === valueRefinement.id);
       return {
         name: `${filter?.name} ${valueRefinement.min}~${valueRefinement.max}`,
       };

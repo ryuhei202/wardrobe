@@ -15,7 +15,7 @@ import FilterCheckboxArray from "./FilterCheckboxArray";
 import FilterSizeArray from "./FilterSizeArray";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 import FilterGroupCollectionData from "../../../model/styling/browse/props_data/FilterGroupCollectionData";
-import { FilterSliderArray } from "./FilterSliderArray";
+import { FilterPartSize } from "./FilterPartSize";
 
 interface FilterGroupCollectionProps {
   data: FilterGroupCollectionData;
@@ -67,8 +67,8 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
         >
           <Typography variant="body2">部位数値</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <FilterSliderArray
+        <AccordionDetails className={classes.partSize}>
+          <FilterPartSize
             data={props.data.partSizeData}
             callback={props.callback.partSizeCallback}
           />

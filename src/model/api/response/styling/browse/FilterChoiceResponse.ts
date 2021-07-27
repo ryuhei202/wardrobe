@@ -6,7 +6,7 @@ import { FilterPartSizeResponse } from "./FilterPartSizeResponse";
 export interface FilterChoiceResponse {
   readonly largeCategory: LargeCategoryChoiceResponse[];
   readonly size: FilterResponse[];
-  readonly partSize: FilterPartSizeResponse[];
+  readonly partSize: FilterPartSizeResponse;
   readonly color: FilterMediaResponse[];
   readonly pattern: FilterMediaResponse[];
   readonly logo: FilterMediaResponse[];

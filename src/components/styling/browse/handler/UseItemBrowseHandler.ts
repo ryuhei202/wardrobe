@@ -1,6 +1,6 @@
 import { useCategoryRefinementHandler } from "./UseCategoryRefinementHandler";
 import { useState } from "react";
-import FilterChoiceResponse from "../../../../model/api/response/styling/browse/FilterChoiceResponse";
+import { FilterChoiceResponse } from "../../../../model/api/response/styling/browse/FilterChoiceResponse";
 import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
 import FilterGroupCollectionData from "../../../../model/styling/browse/props_data/FilterGroupCollectionData";
 import Refinement from "../../../../model/styling/browse/Refinement";
@@ -17,7 +17,7 @@ import BrowseDetailCallback from "../callback/BrowseDetailCallback";
 import ItemBrowseCallback from "../callback/ItemBrowseCallback";
 import ItemBrowsePaginationCallback from "../callback/ItemBrowsePaginationCallback";
 import SelectedItem from "../../../../model/styling/SelectedItem";
-import ValueRefinement from "../../../../model/styling/browse/ValueRefinement";
+import { ValueRefinement } from "../../../../model/styling/browse/ValueRefinement";
 import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
 
