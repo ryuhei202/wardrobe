@@ -20,9 +20,7 @@ export const FilterPartSize = (props: FilterPartSizeProps) => {
     <>
       {props.data.presets.length >= 1 && (
         <FormControl className={classes.presetSelector}>
-          <InputLabel id="preset-select-label" className={classes.presetLabal}>
-            プリセット
-          </InputLabel>
+          <InputLabel id="preset-select-label">プリセット</InputLabel>
           <Select
             labelId="preset-select-label"
             value={props.data.selectedPresetIndex ?? ""}

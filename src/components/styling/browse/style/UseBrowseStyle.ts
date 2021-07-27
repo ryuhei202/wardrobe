@@ -94,10 +94,7 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       display: "block",
     },
     presetSelector: {
-      display: "block",
-    },
-    presetLabal: {
-      top: "-16px",
+      minWidth: "100%",
     },
   })
 );
