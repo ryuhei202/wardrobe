@@ -94,7 +94,8 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       display: "block",
     },
     presetSelector: {
-      minWidth: "100%",
+      width: "100%",
+      fontSize: "0.8rem",
     },
   })
 );
