@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { InfoResponse } from "../../../../model/api/response/styling/karte/InfoResponse";
 import { MemberImageCollectionDialogData } from "../../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
+import { NgMemoCollectionData } from "../../../../model/styling/karte/props_data/NgMemoCollectionData";
 import { PastOutfitCollectionData } from "../../../../model/styling/karte/props_data/PastOutfitCollectionData";
 import { PastOutfitCollectionDialogData } from "../../../../model/styling/karte/props_data/PastOutfitCollectionDialogData";
 import { PurchasedItemCollectionData } from "../../../../model/styling/karte/props_data/PurchasedItemCollectionData";
@@ -15,6 +16,7 @@ interface KarteHandler {
   pastOutfitDialogData: () => PastOutfitCollectionDialogData;
   pastOutfitDialogCallback: () => PastOutfitCollectionDialogCallback;
   pastOutfitCollectionData: () => PastOutfitCollectionData;
+  NgMemoCollectionData: () => NgMemoCollectionData;
   purchasedItemCollectionData: () => PurchasedItemCollectionData;
 }
 
@@ -67,6 +69,12 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     };
   };
 
+  const NgMemoCollectionData = (): NgMemoCollectionData => {
+    return {
+      NgMemoResponses: response.ngCategories,
+    };
+  };
+
   const purchasedItemCollectionData = (): PurchasedItemCollectionData => {
     return {
       purchasedItemResponses: response.purchasedItems,
@@ -81,6 +89,7 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     pastOutfitDialogData,
     pastOutfitDialogCallback,
     pastOutfitCollectionData,
+    NgMemoCollectionData,
     purchasedItemCollectionData,
   };
 };
