@@ -41,13 +41,9 @@ export const NgMemoCollection = (props: NgMemoCollectionProps) => {
                               <PopupImage
                                 data={{
                                   originalImageUrl:
-                                    ng.itemImagePath == null
-                                      ? "https://www.magazine.makeshop.jp/wp-content/uploads/2015/10/no-image2.png"
-                                      : HostUrl() + ng.itemImagePath.thumb,
+                                    HostUrl() + ng.itemImagePath.thumb,
                                   popupImageUrl:
-                                    ng.itemImagePath == null
-                                      ? "https://www.magazine.makeshop.jp/wp-content/uploads/2015/10/no-image2.png"
-                                      : HostUrl() + ng.itemImagePath.original,
+                                    HostUrl() + ng.itemImagePath.original,
                                 }}
                               ></PopupImage>
                             );
