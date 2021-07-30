@@ -23,7 +23,9 @@ export const NgMemoCollection = (props: NgMemoCollectionProps) => {
     <List dense>
       {props.data.NgMemoResponses.map((ng_category, index) => (
         <div>
-          <ListSubheader>{ng_category.categoryName}</ListSubheader>
+          <ListSubheader disableSticky={true}>
+            {ng_category.categoryName}
+          </ListSubheader>
           <ListItem key={index}>
             <List dense>
               {ng_category.ngs.map((ng, index) => (
