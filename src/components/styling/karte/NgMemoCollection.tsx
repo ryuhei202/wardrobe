@@ -5,20 +5,11 @@ import {
   ListItemAvatar,
   ListItemText,
   ListSubheader,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Tooltip,
-  Typography,
 } from "@material-ui/core";
 import React, { Fragment } from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import { NgMemoCollectionData } from "../../../model/styling/karte/props_data/NgMemoCollectionData";
 import PopupImage from "../../shared/PopupImage";
-import { useKartePresenter } from "./presenter/UseKartePresenter";
 import { UseNgMemoCollectionPresenter } from "./presenter/UseNgMemoCollectionPresenter";
 
 interface NgMemoCollectionProps {
@@ -31,30 +22,41 @@ export const NgMemoCollection = (props: NgMemoCollectionProps) => {
   return (
     <List dense>
       {props.data.NgMemoResponses.map((ng_category, index) => (
-        <ListItem key={index}>
+        <div>
           <ListSubheader>{ng_category.categoryName}</ListSubheader>
-          <List dense>
-            {ng_category.ngs.map((ng, index) => (
-              <ListItem key={index}>
-                {/* <ListItemAvatar>
-                    <Avatar variant="rounded">
-                      <PopupImage
-                        data={{
-                          originalImageUrl: HostUrl() + ng.imagePath.thumb,
-                          popupImageUrl: HostUrl() + ng.imagePath.original,
+          <ListItem key={index}>
+            <List dense>
+              {ng_category.ngs.map((ng, index) => (
+                <ListItem key={index}>
+                  {
+                    <ListItemAvatar>
+                      <Avatar variant="rounded">
+                        {() => {
+                          if (ng.itemImagePath == null) {
+                            <></>;
+                          } else {
+                            <PopupImage
+                              data={{
+                                originalImageUrl:
+                                  HostUrl() + ng.itemImagePath.thumb,
+                                popupImageUrl:
+                                  HostUrl() + ng.itemImagePath.original,
+                              }}
+                            ></PopupImage>;
+                          }
                         }}
-                      ></PopupImage>
-                    </Avatar>
-                  </ListItemAvatar> */}
-
-                <ListItemText
-                  primary={ng.contentText}
-                  secondary={presenter.itemListSecondary(ng)}
-                ></ListItemText>
-              </ListItem>
-            ))}
-          </List>
-        </ListItem>
+                      </Avatar>
+                    </ListItemAvatar>
+                  }
+                  <ListItemText
+                    primary={ng.contentText}
+                    secondary={presenter.itemListSecondary(ng)}
+                  ></ListItemText>
+                </ListItem>
+              ))}
+            </List>
+          </ListItem>
+        </div>
       ))}
     </List>
   );
