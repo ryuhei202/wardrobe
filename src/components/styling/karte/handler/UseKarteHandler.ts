@@ -16,7 +16,7 @@ interface KarteHandler {
   pastOutfitDialogData: () => PastOutfitCollectionDialogData;
   pastOutfitDialogCallback: () => PastOutfitCollectionDialogCallback;
   pastOutfitCollectionData: () => PastOutfitCollectionData;
-  NgMemoCollectionData: () => NgMemoCollectionData;
+  ngMemoCollectionData: () => NgMemoCollectionData;
   purchasedItemCollectionData: () => PurchasedItemCollectionData;
 }
 
@@ -69,9 +69,9 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     };
   };
 
-  const NgMemoCollectionData = (): NgMemoCollectionData => {
+  const ngMemoCollectionData = (): NgMemoCollectionData => {
     return {
-      NgMemoResponses: response.ngCategories,
+      ngMemoResponses: response.ngCategories,
     };
   };
 
@@ -89,7 +89,7 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     pastOutfitDialogData,
     pastOutfitDialogCallback,
     pastOutfitCollectionData,
-    NgMemoCollectionData,
+    ngMemoCollectionData,
     purchasedItemCollectionData,
   };
 };

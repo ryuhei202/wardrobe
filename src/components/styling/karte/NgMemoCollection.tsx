@@ -10,48 +10,42 @@ import React, { Fragment } from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import { NgMemoCollectionData } from "../../../model/styling/karte/props_data/NgMemoCollectionData";
 import PopupImage from "../../shared/PopupImage";
-import { UseNgMemoCollectionPresenter } from "./presenter/UseNgMemoCollectionPresenter";
+import { useNgMemoCollectionPresenter } from "./presenter/UseNgMemoCollectionPresenter";
 
 interface NgMemoCollectionProps {
   data: NgMemoCollectionData;
 }
 
 export const NgMemoCollection = (props: NgMemoCollectionProps) => {
-  const presenter = UseNgMemoCollectionPresenter(props.data.NgMemoResponses);
+  const presenter = useNgMemoCollectionPresenter(props.data.ngMemoResponses);
 
   return (
     <List dense>
-      {props.data.NgMemoResponses.map((ng_category, index) => (
-        <div>
+      {props.data.ngMemoResponses.map((ng_category, index) => (
+        <Fragment key={index}>
           <ListSubheader disableSticky={true}>
             {ng_category.categoryName}
           </ListSubheader>
-          <ListItem key={index}>
+          <ListItem>
             <List dense>
               {ng_category.ngs.map((ng, index) => (
                 <ListItem key={index}>
-                  {
-                    <ListItemAvatar>
-                      <Avatar variant="rounded">
-                        {(() => {
-                          if (ng.itemImagePath == null) {
-                            return <></>;
-                          } else {
-                            return (
-                              <PopupImage
-                                data={{
-                                  originalImageUrl:
-                                    HostUrl() + ng.itemImagePath.thumb,
-                                  popupImageUrl:
-                                    HostUrl() + ng.itemImagePath.original,
-                                }}
-                              ></PopupImage>
-                            );
-                          }
-                        })()}
-                      </Avatar>
-                    </ListItemAvatar>
-                  }
+                  <ListItemAvatar>
+                    <Avatar variant="rounded">
+                      {ng.itemImagePath == null ? (
+                        <></>
+                      ) : (
+                        <PopupImage
+                          data={{
+                            originalImageUrl:
+                              HostUrl() + ng.itemImagePath.thumb,
+                            popupImageUrl:
+                              HostUrl() + ng.itemImagePath.original,
+                          }}
+                        ></PopupImage>
+                      )}
+                    </Avatar>
+                  </ListItemAvatar>
                   <ListItemText
                     primary={ng.contentText}
                     secondary={presenter.itemListSecondary(ng)}
@@ -60,7 +54,7 @@ export const NgMemoCollection = (props: NgMemoCollectionProps) => {
               ))}
             </List>
           </ListItem>
-        </div>
+        </Fragment>
       ))}
     </List>
   );

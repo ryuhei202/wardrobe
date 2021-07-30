@@ -6,13 +6,6 @@ import {
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Tooltip,
 } from "@material-ui/core";
 import { ListAlt, PhotoLibrary } from "@material-ui/icons";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
@@ -69,7 +62,7 @@ export const Karte = (props: KarteProps) => {
       <ListItem>
         <ListItemText>
           NGメモ：
-          <NgMemoCollection data={handler.NgMemoCollectionData()} />
+          <NgMemoCollection data={handler.ngMemoCollectionData()} />
         </ListItemText>
       </ListItem>
       <ListItem>

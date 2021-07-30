@@ -6,7 +6,7 @@ interface NgMemoCollectionPresenter {
   itemListSecondary: (ng: NgResponse) => string;
 }
 
-export const UseNgMemoCollectionPresenter = (
+export const useNgMemoCollectionPresenter = (
   data: InfoNgCategoryResponse[]
 ): NgMemoCollectionPresenter => {
   const memoNgs = () => data;
