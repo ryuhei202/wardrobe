@@ -33,20 +33,26 @@ export const NgMemoCollection = (props: NgMemoCollectionProps) => {
                   {
                     <ListItemAvatar>
                       <Avatar variant="rounded">
-                        {() => {
+                        {(() => {
                           if (ng.itemImagePath == null) {
-                            <></>;
+                            return <></>;
                           } else {
-                            <PopupImage
-                              data={{
-                                originalImageUrl:
-                                  HostUrl() + ng.itemImagePath.thumb,
-                                popupImageUrl:
-                                  HostUrl() + ng.itemImagePath.original,
-                              }}
-                            ></PopupImage>;
+                            return (
+                              <PopupImage
+                                data={{
+                                  originalImageUrl:
+                                    ng.itemImagePath == null
+                                      ? "https://www.magazine.makeshop.jp/wp-content/uploads/2015/10/no-image2.png"
+                                      : HostUrl() + ng.itemImagePath.thumb,
+                                  popupImageUrl:
+                                    ng.itemImagePath == null
+                                      ? "https://www.magazine.makeshop.jp/wp-content/uploads/2015/10/no-image2.png"
+                                      : HostUrl() + ng.itemImagePath.original,
+                                }}
+                              ></PopupImage>
+                            );
                           }
-                        }}
+                        })()}
                       </Avatar>
                     </ListItemAvatar>
                   }
