@@ -1,4 +1,4 @@
-import ValueRefinement from "./ValueRefinement";
+import { ValueRefinement } from "./ValueRefinement";
 
 export default interface Refinement {
   readonly itemId: number | null;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import FilterSliderData from "../../../../model/styling/browse/props_data/FilterSliderData";
-import FilterSliderArrayCallback from "../callback/FilterSliderArrayCallback";
+import { FilterSliderData } from "../../../../model/styling/browse/props_data/FilterSliderData";
+import { FilterSliderArrayCallback } from "../callback/FilterSliderArrayCallback";
 
 export interface FilterSliderArrayHandler {
   value: (index: number) => number[];
