@@ -1,4 +1,4 @@
-export default interface FilterRangeResponse {
+export interface FilterRangeResponse {
   readonly id: number;
   readonly name: string;
   readonly min: number;
