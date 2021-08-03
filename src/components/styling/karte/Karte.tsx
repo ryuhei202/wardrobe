@@ -6,13 +6,6 @@ import {
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Tooltip,
 } from "@material-ui/core";
 import { ListAlt, PhotoLibrary } from "@material-ui/icons";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
@@ -22,6 +15,7 @@ import { PastOutfitCollectionDialog } from "./PastOutfitCollectionDialog";
 import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 import { PastOutfitCollection } from "./PastOutfitCollection";
 import { PurchasedItemCollection } from "./PurchasedItemCollection";
+import { NgMemoCollection } from "./NgMemoCollection";
 
 interface KarteProps {
   response: InfoResponse;
@@ -68,24 +62,7 @@ export const Karte = (props: KarteProps) => {
       <ListItem>
         <ListItemText>
           NGメモ：
-          <TableContainer component={Paper}>
-            <Table size="small">
-              <TableBody>
-                {presenter.memoNgs().map((row, index) => (
-                  <Tooltip
-                    title={presenter.ngTimestamp(index)}
-                    placement="right"
-                    key={index}
-                  >
-                    <TableRow>
-                      <TableCell>{row.categoryName}</TableCell>
-                      <TableCell>{row.contentText}</TableCell>
-                    </TableRow>
-                  </Tooltip>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <NgMemoCollection data={handler.ngMemoCollectionData()} />
         </ListItemText>
       </ListItem>
       <ListItem>
