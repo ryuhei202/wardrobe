@@ -10,6 +10,7 @@ yarn start
 
 ```bash
 cd path/to/project
+yarn install
 yarn build
 firebase deploy
 ```
@@ -26,6 +27,7 @@ https://github.com/http-party/http-server
 
 ```bash
 cd path/to/project
+yarn install
 yarn build
 cd build
 http-server -p 3001
