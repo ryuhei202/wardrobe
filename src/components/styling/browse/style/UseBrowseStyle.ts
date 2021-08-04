@@ -82,9 +82,5 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       minWidth: 120,
     },
-    presetSelector: {
-      width: "100%",
-      fontSize: "0.8rem",
-    },
   })
 );
