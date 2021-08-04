@@ -13,9 +13,9 @@ import FilterCategoryGroup from "./FilterCategoryGroup";
 import FilterMediaArray from "./FilterMediaArray";
 import FilterCheckboxArray from "./FilterCheckboxArray";
 import FilterSizeArray from "./FilterSizeArray";
-import { useBrowseStyle } from "./style/UseBrowseStyle";
 import FilterGroupCollectionData from "../../../model/styling/browse/props_data/FilterGroupCollectionData";
 import { FilterPartSize } from "./FilterPartSize";
+import { useFilterGroupCollectionStyle } from "./style/UseFilterGroupCollectionStyle";
 
 interface FilterGroupCollectionProps {
   data: FilterGroupCollectionData;
@@ -23,7 +23,7 @@ interface FilterGroupCollectionProps {
 }
 
 const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
-  const classes = useBrowseStyle();
+  const classes = useFilterGroupCollectionStyle();
 
   return (
     <div className={classes.filterPaper}>
