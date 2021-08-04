@@ -11,11 +11,6 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
       padding: theme.spacing(1, 1),
       width: 200,
     },
-    filterPaper: {
-      flexShrink: 0,
-      width: 200,
-      maxWidth: 200,
-    },
     appliedFilterContainer: {
       justifyContent: "flex-start",
       flexGrow: 1,
@@ -83,19 +78,9 @@ export const useBrowseStyle = makeStyles((theme: Theme) =>
     darkBlue: {
       backgroundColor: indigo[500],
     },
-    idSearch: {
-      marginTop: theme.spacing(1),
-    },
     categorySelection: {
       margin: theme.spacing(1),
       minWidth: 120,
-    },
-    partSize: {
-      display: "block",
-    },
-    presetSelector: {
-      width: "100%",
-      fontSize: "0.8rem",
     },
   })
 );

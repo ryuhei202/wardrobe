@@ -3,7 +3,7 @@ import React from "react";
 import { FilterPartSizeData } from "../../../model/styling/browse/props_data/FilterPartSizeData";
 import { FilterPartSizeCallback } from "./callback/FilterPartSizeCallback";
 import { FilterSliderArray } from "./FilterSliderArray";
-import { useBrowseStyle } from "./style/UseBrowseStyle";
+import { useFilterPartSizeStyle } from "./style/UseFilterPartSizeStyle";
 
 interface FilterPartSizeProps {
   data: FilterPartSizeData;
@@ -14,18 +14,18 @@ export const FilterPartSize = (props: FilterPartSizeProps) => {
   const handlePresetChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     props.callback.onPresetChanged(event.target.value as number);
   };
-  const classes = useBrowseStyle();
+  const classes = useFilterPartSizeStyle();
 
   return (
     <>
       {props.data.presets.length >= 1 && (
-        <FormControl className={classes.presetSelector}>
+        <FormControl className={classes.presetSelectFormControl}>
           <InputLabel id="preset-select-label">プリセット</InputLabel>
           <Select
             labelId="preset-select-label"
             value={props.data.selectedPresetIndex ?? ""}
             onChange={handlePresetChange}
-            className={classes.presetSelector}
+            className={classes.presetSelect}
           >
             {props.data.presets.map((preset, index) => (
               <MenuItem value={index} key={index}>
