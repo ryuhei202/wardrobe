@@ -8,4 +8,5 @@ export interface InfoPurchasedItemResponse {
   readonly categoryName: string;
   readonly colorName: string;
   readonly patternName: string;
+  readonly purchasedDate: string;
 }
