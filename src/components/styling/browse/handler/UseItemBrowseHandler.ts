@@ -20,6 +20,7 @@ import SelectedItem from "../../../../model/styling/SelectedItem";
 import { ValueRefinement } from "../../../../model/styling/browse/ValueRefinement";
 import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
+import { useNgRefinementHandler } from "./UseNgRefinementHandler";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -139,6 +140,15 @@ export const useItemBrowseHandler = (
     setCurrentRefinement(newRefinement);
   };
 
+  const onNgChanged = (newIds: number[]) => {
+    const newRefinement = {
+      ...currentRefinement,
+      optionIds: newIds,
+      pageNo: 1,
+    };
+    setCurrentRefinement(newRefinement);
+  };
+
   const onOptionChanged = (newIds: number[]) => {
     const newRefinement = {
       ...currentRefinement,
@@ -160,6 +170,7 @@ export const useItemBrowseHandler = (
   const patternHandler = usePatternRefinementHandler(onPatternChanged);
   const logoHandler = useLogoRefinementHandler(onLogoChanged);
   const dropSizeHandler = useDropSizeRefinementHandler(onDropSizeChanged);
+  const ngHandler = useNgRefinementHandler(onNgChanged);
   const optionHandler = useOptionRefinementHandler(onOptionChanged);
 
   const getAppliedFilterData = (
@@ -368,6 +379,10 @@ export const useItemBrowseHandler = (
         choice.filter.dropSize,
         currentRefinement.dropSizes
       ),
+      ngCallback: ngHandler.ngCallback(
+        choice.filter.ng,
+        currentRefinement.ngIds
+      ),
       optionCallback: optionHandler.optionCallback(
         choice.filter.option,
         currentRefinement.optionIds
@@ -452,6 +467,7 @@ export const useItemBrowseHandler = (
         choice.filter.dropSize,
         currentRefinement.dropSizes
       ),
+      ngData: ngHandler.ngData(choice.filter.ng, currentRefinement.ngIds),
       optionData: optionHandler.optionData(
         choice.filter.option,
         currentRefinement.optionIds
