@@ -3,27 +3,27 @@ import { InfoPurchasedItemResponse } from "./../../../../model/api/response/styl
 
 interface PurchasedItemCollectionPresenter {
   itemListText: (item: InfoPurchasedItemResponse) => string;
+  itemListPurchasedDate: (item: InfoPurchasedItemResponse) => string;
   itemListOriginalImageUrl: (item: InfoPurchasedItemResponse) => string;
   itemListPopupImageUrl: (item: InfoPurchasedItemResponse) => string;
 }
 
 export const usePurchasedItemCollectionPresenter = (): PurchasedItemCollectionPresenter => {
-  const itemListText = (item: InfoPurchasedItemResponse): string => {
-    return `${item.id} / ${item.brandName} / ${item.size} / ${item.categoryName} / ${item.colorName} / ${item.patternName}`;
-  };
+  const itemListText = (item: InfoPurchasedItemResponse): string =>
+    `${item.id} / ${item.brandName} / ${item.size} / ${item.categoryName} / ${item.colorName} / ${item.patternName}`;
 
-  const itemListOriginalImageUrl = (
-    item: InfoPurchasedItemResponse
-  ): string => {
-    return HostUrl() + item.imagePath.thumb;
-  };
+  const itemListPurchasedDate = (item: InfoPurchasedItemResponse): string =>
+    `購入日：${new Date(item.purchasedDate).toLocaleDateString()}`;
 
-  const itemListPopupImageUrl = (item: InfoPurchasedItemResponse): string => {
-    return HostUrl() + item.imagePath.original;
-  };
+  const itemListOriginalImageUrl = (item: InfoPurchasedItemResponse): string =>
+    item.imagePath.thumb;
+
+  const itemListPopupImageUrl = (item: InfoPurchasedItemResponse): string =>
+    HostUrl() + item.imagePath.original;
 
   return {
     itemListText,
+    itemListPurchasedDate,
     itemListOriginalImageUrl,
     itemListPopupImageUrl,
   };
