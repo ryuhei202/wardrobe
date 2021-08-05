@@ -143,7 +143,7 @@ export const useItemBrowseHandler = (
   const onNgChanged = (newIds: number[]) => {
     const newRefinement = {
       ...currentRefinement,
-      optionIds: newIds,
+      ngIds: newIds,
       pageNo: 1,
     };
     setCurrentRefinement(newRefinement);
@@ -221,6 +221,12 @@ export const useItemBrowseHandler = (
       currentRefinement.logoIds
     );
     if (appliedLogos.length) result = result.concat(appliedLogos);
+
+    const appliedNgs = ngHandler.appliedFilters(
+      choice.ng,
+      currentRefinement.ngIds
+    );
+    if (appliedNgs.length) result = result.concat(appliedNgs);
 
     const appliedOptions = optionHandler.appliedFilters(
       choice.option,
@@ -313,6 +319,13 @@ export const useItemBrowseHandler = (
         return;
       }
       currentIndex += currentRefinement.logoIds.length;
+    }
+    if (currentRefinement.ngIds.length > 0) {
+      if (currentRefinement.ngIds.length - 1 + currentIndex >= index) {
+        ngHandler.deleteFilter(currentRefinement.ngIds, index - currentIndex);
+        return;
+      }
+      currentIndex += currentRefinement.ngIds.length;
     }
     if (currentRefinement.optionIds.length > 0) {
       if (currentRefinement.optionIds.length - 1 + currentIndex >= index) {
