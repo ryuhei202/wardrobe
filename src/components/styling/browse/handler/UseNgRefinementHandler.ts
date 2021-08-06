@@ -39,8 +39,8 @@ export const useNgRefinementHandler = (
   ): FilterCheckboxArrayCallback => {
     return {
       onClick: (index: number) => {
-        const newOptions = newFilterArray(choice[index].id, currentIds);
-        onChange(newOptions);
+        const newNgs = newFilterArray(choice[index].id, currentIds);
+        onChange(newNgs);
       },
     };
   };
@@ -67,9 +67,9 @@ export const useNgRefinementHandler = (
   };
 
   const deleteFilter = (currentIds: number[], index: number) => {
-    let newSizes = [...currentIds];
-    newSizes.splice(index, 1);
-    onChange(newSizes);
+    let newNgs = [...currentIds];
+    newNgs.splice(index, 1);
+    onChange(newNgs);
   };
 
   return {

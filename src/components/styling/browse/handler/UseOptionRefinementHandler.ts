@@ -67,9 +67,9 @@ export const useOptionRefinementHandler = (
   };
 
   const deleteFilter = (currentIds: number[], index: number) => {
-    let newSizes = [...currentIds];
-    newSizes.splice(index, 1);
-    onChange(newSizes);
+    let newOptions = [...currentIds];
+    newOptions.splice(index, 1);
+    onChange(newOptions);
   };
 
   return {
