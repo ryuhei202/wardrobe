@@ -39,7 +39,8 @@ export const PurchasedItemCollection = (
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              secondary={presenter.itemListText(purchasedItem)}
+              primary={presenter.itemListText(purchasedItem)}
+              secondary={presenter.itemListPurchasedDate(purchasedItem)}
             ></ListItemText>
           </ListItem>
         );
