@@ -18,7 +18,8 @@ export const MemberImageCollectionDialog = (
       <ReactImageGallery
         showFullscreenButton={false}
         showPlayButton={false}
-        thumbnailPosition="left"
+        lazyLoad={true}
+        slideOnThumbnailOver={true}
         items={props.data.imageResponses.map((image) => {
           return {
             original: HostUrl() + image.imagePath.large,
