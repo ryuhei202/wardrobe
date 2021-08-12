@@ -1,13 +1,13 @@
 import { FormControl, Select, Toolbar, Typography } from "@material-ui/core";
 import React from "react";
 import { useItemBrowseHandler } from "./handler/UseItemBrowseHandler";
-import { useBrowseStyle } from "./style/UseBrowseStyle";
 import FilterGroupCollection from "./FilterGroupCollection";
 import AppliedFilterArray from "./AppliedFilterArray";
 import RefinementChoiceResponse from "../../../model/api/response/styling/browse/RefinementChoiceResponse";
 import { useBrowseIndexProvider } from "./provider/UseBrowseIndexProvider";
 import BrowseDetailContainer from "./BrowseDetailContainer";
 import ItemBrowseCallback from "./callback/ItemBrowseCallback";
+import { useItemBrowseStyle } from "./style/UserItemBrowseStyle";
 
 export interface ItemBrowseProps {
   response: RefinementChoiceResponse;
@@ -16,7 +16,7 @@ export interface ItemBrowseProps {
 }
 
 const ItemBrowse = (props: ItemBrowseProps) => {
-  const classes = useBrowseStyle();
+  const classes = useItemBrowseStyle();
 
   const handler = useItemBrowseHandler(props.response, props.callback);
   const provider = useBrowseIndexProvider(handler.currentRefinement);

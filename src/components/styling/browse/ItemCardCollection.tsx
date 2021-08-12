@@ -3,7 +3,7 @@ import ItemCardResponse from "../../../model/api/response/styling/browse/ItemCar
 import ItemCardCollectionCallback from "./callback/ItemCardCollectionCallback";
 import { useItemCardCollectionHandler } from "./handler/UseItemCardCollectionHandler";
 import ItemCard from "./ItemCard";
-import { useBrowseStyle } from "./style/UseBrowseStyle";
+import { useItemCardCollectionStyle } from "./style/UseItemCardCollectionStyle";
 
 interface ItemCardCollectionProps {
   response: ItemCardResponse[];
@@ -11,7 +11,7 @@ interface ItemCardCollectionProps {
 }
 
 const ItemCardCollection = (props: ItemCardCollectionProps) => {
-  const classes = useBrowseStyle();
+  const classes = useItemCardCollectionStyle();
   const handler = useItemCardCollectionHandler(props.response, props.callback);
 
   return (

@@ -11,7 +11,7 @@ import React from "react";
 import ItemCardData from "../../../model/styling/browse/props_data/ItemCardData";
 import ItemCardCallback from "./callback/ItemCardCallback";
 import { useItemCardPresenter } from "./presenter/UseItemCardPresenter";
-import { useBrowseStyle } from "./style/UseBrowseStyle";
+import { useItemCardStyle } from "./style/UserItemCardStyle";
 
 interface ItemCardProps {
   data: ItemCardData;
@@ -19,7 +19,7 @@ interface ItemCardProps {
 }
 
 const ItemCard = (props: ItemCardProps) => {
-  const classes = useBrowseStyle();
+  const classes = useItemCardStyle();
   const presenter = useItemCardPresenter(props.data);
 
   return (
