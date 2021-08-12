@@ -8,14 +8,14 @@ import {
 import React, { Fragment } from "react";
 import SelectedItem from "../../model/styling/SelectedItem";
 import { useSelectedItemArrayPresenter } from "./presenter/UseSelectedItemArrayPresenter";
-import { useStylingStyle } from "./style/UseStylingStyle";
+import { useSelectedItemArrayStyle } from "./style/UseSelectedItemArrayStyle";
 
 export interface SelectionConfirmProps {
   data: SelectedItem[];
 }
 
 const SelectedItemArray = (props: SelectionConfirmProps) => {
-  const classes = useStylingStyle();
+  const classes = useSelectedItemArrayStyle();
   const presenter = useSelectedItemArrayPresenter(props.data);
 
   return (

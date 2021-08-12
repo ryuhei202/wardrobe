@@ -26,7 +26,7 @@ import SelectionConfirmData from "../../model/styling/props_data/SelectionConfir
 import SelectionConfirmCallback from "./callback/SelectionConfirmCallback";
 import FeedbackDialog from "./feedback/FeedbackDialog";
 import SelectedItemArray from "./SelectedItemArray";
-import { useStylingStyle } from "./style/UseStylingStyle";
+import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
 
 export interface SelectionConfirmProps {
   data: SelectionConfirmData;
@@ -35,7 +35,7 @@ export interface SelectionConfirmProps {
 }
 
 const SelectionConfirm = (props: SelectionConfirmProps) => {
-  const classes = useStylingStyle();
+  const classes = useSelectionConfirmStyle();
   const [isFeedbackDialogOpen, setIsFeedbackDialogOpen] = useState(false);
   const [stylist, setStylist] = useState<number | null>(null);
   const apiCaller = usePostRegisterItemsCaller(
