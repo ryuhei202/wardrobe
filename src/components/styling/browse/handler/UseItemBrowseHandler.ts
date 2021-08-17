@@ -20,6 +20,7 @@ import SelectedItem from "../../../../model/styling/SelectedItem";
 import { ValueRefinement } from "../../../../model/styling/browse/ValueRefinement";
 import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
+import { useNgRefinementHandler } from "./UseNgRefinementHandler";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -139,6 +140,15 @@ export const useItemBrowseHandler = (
     setCurrentRefinement(newRefinement);
   };
 
+  const onNgChanged = (newIds: number[]) => {
+    const newRefinement = {
+      ...currentRefinement,
+      ngIds: newIds,
+      pageNo: 1,
+    };
+    setCurrentRefinement(newRefinement);
+  };
+
   const onOptionChanged = (newIds: number[]) => {
     const newRefinement = {
       ...currentRefinement,
@@ -160,6 +170,7 @@ export const useItemBrowseHandler = (
   const patternHandler = usePatternRefinementHandler(onPatternChanged);
   const logoHandler = useLogoRefinementHandler(onLogoChanged);
   const dropSizeHandler = useDropSizeRefinementHandler(onDropSizeChanged);
+  const ngHandler = useNgRefinementHandler(onNgChanged);
   const optionHandler = useOptionRefinementHandler(onOptionChanged);
 
   const getAppliedFilterData = (
@@ -210,6 +221,12 @@ export const useItemBrowseHandler = (
       currentRefinement.logoIds
     );
     if (appliedLogos.length) result = result.concat(appliedLogos);
+
+    const appliedNgs = ngHandler.appliedFilters(
+      choice.ng,
+      currentRefinement.ngIds
+    );
+    if (appliedNgs.length) result = result.concat(appliedNgs);
 
     const appliedOptions = optionHandler.appliedFilters(
       choice.option,
@@ -303,6 +320,13 @@ export const useItemBrowseHandler = (
       }
       currentIndex += currentRefinement.logoIds.length;
     }
+    if (currentRefinement.ngIds.length > 0) {
+      if (currentRefinement.ngIds.length - 1 + currentIndex >= index) {
+        ngHandler.deleteFilter(currentRefinement.ngIds, index - currentIndex);
+        return;
+      }
+      currentIndex += currentRefinement.ngIds.length;
+    }
     if (currentRefinement.optionIds.length > 0) {
       if (currentRefinement.optionIds.length - 1 + currentIndex >= index) {
         optionHandler.deleteFilter(
@@ -367,6 +391,10 @@ export const useItemBrowseHandler = (
       dropSizeCallback: dropSizeHandler.dropSizeCallback(
         choice.filter.dropSize,
         currentRefinement.dropSizes
+      ),
+      ngCallback: ngHandler.ngCallback(
+        choice.filter.ng,
+        currentRefinement.ngIds
       ),
       optionCallback: optionHandler.optionCallback(
         choice.filter.option,
@@ -452,6 +480,7 @@ export const useItemBrowseHandler = (
         choice.filter.dropSize,
         currentRefinement.dropSizes
       ),
+      ngData: ngHandler.ngData(choice.filter.ng, currentRefinement.ngIds),
       optionData: optionHandler.optionData(
         choice.filter.option,
         currentRefinement.optionIds

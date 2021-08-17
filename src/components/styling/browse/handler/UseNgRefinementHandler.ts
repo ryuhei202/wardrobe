@@ -3,12 +3,12 @@ import AppliedFilterData from "../../../../model/styling/browse/props_data/Appli
 import FilterCheckboxData from "../../../../model/styling/browse/props_data/FilterCheckboxData";
 import FilterCheckboxArrayCallback from "../callback/FilterCheckboxArrayCallback";
 
-export interface OptionRefinementHandler {
-  optionCallback: (
+export interface NgRefinementHandler {
+  ngCallback: (
     choice: FilterResponse[],
     currentIds: number[]
   ) => FilterCheckboxArrayCallback;
-  optionData: (
+  ngData: (
     choice: FilterResponse[],
     currentIds: number[]
   ) => FilterCheckboxData[];
@@ -19,9 +19,9 @@ export interface OptionRefinementHandler {
   deleteFilter: (currentIds: number[], index: number) => void;
 }
 
-export const useOptionRefinementHandler = (
+export const useNgRefinementHandler = (
   onChange: (newIds: number[]) => void
-): OptionRefinementHandler => {
+): NgRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
     const newArray = [...currentArray];
@@ -33,19 +33,19 @@ export const useOptionRefinementHandler = (
     return newArray;
   };
 
-  const optionCallback = (
+  const ngCallback = (
     choice: FilterResponse[],
     currentIds: number[]
   ): FilterCheckboxArrayCallback => {
     return {
       onClick: (index: number) => {
-        const newOptions = newFilterArray(choice[index].id, currentIds);
-        onChange(newOptions);
+        const newNgs = newFilterArray(choice[index].id, currentIds);
+        onChange(newNgs);
       },
     };
   };
 
-  const optionData = (
+  const ngData = (
     choice: FilterResponse[],
     currentIds: number[]
   ): FilterCheckboxData[] => {
@@ -67,14 +67,14 @@ export const useOptionRefinementHandler = (
   };
 
   const deleteFilter = (currentIds: number[], index: number) => {
-    let newOptions = [...currentIds];
-    newOptions.splice(index, 1);
-    onChange(newOptions);
+    let newNgs = [...currentIds];
+    newNgs.splice(index, 1);
+    onChange(newNgs);
   };
 
   return {
-    optionCallback,
-    optionData,
+    ngCallback,
+    ngData,
     appliedFilters,
     deleteFilter,
   };

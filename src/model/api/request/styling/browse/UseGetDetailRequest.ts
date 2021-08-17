@@ -16,7 +16,7 @@ export const useGetDetailRequest = (
     let filterParams: GetDetailFilterParams = {
       size: refinement.sizeIds,
       partSize: refinement.partSizes,
-      option: refinement.optionIds,
+      ng: refinement.ngIds,
     };
     if (refinement.itemId) filterParams.itemId = refinement.itemId;
 
