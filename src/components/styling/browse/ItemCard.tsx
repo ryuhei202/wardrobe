@@ -11,7 +11,7 @@ import React from "react";
 import ItemCardData from "../../../model/styling/browse/props_data/ItemCardData";
 import ItemCardCallback from "./callback/ItemCardCallback";
 import { useItemCardPresenter } from "./presenter/UseItemCardPresenter";
-import { useItemCardStyle } from "./style/UserItemCardStyle";
+import { useItemCardStyle } from "./style/UseItemCardStyle";
 
 interface ItemCardProps {
   data: ItemCardData;

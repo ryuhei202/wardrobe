@@ -7,7 +7,7 @@ import RefinementChoiceResponse from "../../../model/api/response/styling/browse
 import { useBrowseIndexProvider } from "./provider/UseBrowseIndexProvider";
 import BrowseDetailContainer from "./BrowseDetailContainer";
 import ItemBrowseCallback from "./callback/ItemBrowseCallback";
-import { useItemBrowseStyle } from "./style/UserItemBrowseStyle";
+import { useItemBrowseStyle } from "./style/UseItemBrowseStyle";
 
 export interface ItemBrowseProps {
   response: RefinementChoiceResponse;
