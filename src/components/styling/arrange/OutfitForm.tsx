@@ -16,7 +16,7 @@ import React, { Fragment } from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import OutfitFormData from "../../../model/styling/arrange/props_data/OutfitFormData";
 import OutfitFormCallback from "./callback/OutfitFormCallback";
-import { useArrangeStyle } from "./style/UseArrangeStyle";
+import { useOutfitFormStyle } from "./style/UseOutfitFormStyle";
 
 export interface OutfitFormProps {
   data: OutfitFormData;
@@ -24,7 +24,7 @@ export interface OutfitFormProps {
 }
 
 const OutfitForm = (props: OutfitFormProps) => {
-  const classes = useArrangeStyle();
+  const classes = useOutfitFormStyle();
 
   return (
     <>

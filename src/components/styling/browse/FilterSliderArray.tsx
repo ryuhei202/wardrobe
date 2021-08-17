@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { FilterSliderData } from "../../../model/styling/browse/props_data/FilterSliderData";
 import { FilterSliderArrayCallback } from "./callback/FilterSliderArrayCallback";
 import { useFilterSliderArrayHandler } from "./handler/useFilterSliderArrayHandler";
-import { useBrowseStyle } from "./style/UseBrowseStyle";
+import { useFilterSliderArrayStyle } from "./style/UseFilterSliderArrayStyle";
 
 interface FilterSliderArrayProps {
   data: FilterSliderData[];
@@ -11,7 +11,7 @@ interface FilterSliderArrayProps {
 }
 
 export const FilterSliderArray = (props: FilterSliderArrayProps) => {
-  const classes = useBrowseStyle();
+  const classes = useFilterSliderArrayStyle();
   const handler = useFilterSliderArrayHandler(props.data, props.callback);
 
   return (

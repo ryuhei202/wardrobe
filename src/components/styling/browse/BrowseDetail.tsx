@@ -10,7 +10,7 @@ import DetailSizeButtonArray from "./DetailSizeButtonArray";
 import { useBrowseDetailHandler } from "./handler/UseBrowseDetailHandler";
 import PostSelectDialog from "./PostSelectDialog";
 import { useBrowseDetailPresenter } from "./presenter/UseBrowseDetailPresenter";
-import { useBrowseStyle } from "./style/UseBrowseStyle";
+import { useBrowseDetailStyle } from "./style/UseBrowseDetailStyle";
 import ValidationDialog from "./ValidationDialog";
 
 interface BrowseDetailProps {
@@ -20,7 +20,7 @@ interface BrowseDetailProps {
 }
 
 const BrowseDetail = (props: BrowseDetailProps) => {
-  const classes = useBrowseStyle();
+  const classes = useBrowseDetailStyle();
   const handler = useBrowseDetailHandler(props.response, props.callback);
   const presenter = useBrowseDetailPresenter(props.response);
 
