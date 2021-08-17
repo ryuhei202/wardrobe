@@ -4,6 +4,7 @@ import { HostUrl } from "../../../model/HostUrl";
 import ReactImageGallery from "react-image-gallery";
 import { MemberImageCollectionDialogData } from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
 import { MemberImageCollectionDialogCallback } from "./callback/MemberImageCollectionDialogCallback";
+import { useStylingStyle } from "../style/UseStylingStyle";
 
 interface MemberImageCollectionDialogProps {
   data: MemberImageCollectionDialogData;
@@ -13,13 +14,14 @@ interface MemberImageCollectionDialogProps {
 export const MemberImageCollectionDialog = (
   props: MemberImageCollectionDialogProps
 ) => {
+  const classes = useStylingStyle();
   return (
     <Dialog onClose={props.callback.onClose} open={props.data.isOpen}>
       <ReactImageGallery
+        additionalClass={classes.imageGallery}
         showFullscreenButton={false}
         showPlayButton={false}
-        lazyLoad={true}
-        slideOnThumbnailOver={true}
+        thumbnailPosition="left"
         items={props.data.imageResponses.map((image) => {
           return {
             original: HostUrl() + image.imagePath.large,
