@@ -11,6 +11,7 @@ export default interface Refinement {
   readonly patternIds: number[];
   readonly logoIds: number[];
   readonly dropSizes: number[];
+  readonly ngIds: number[];
   readonly optionIds: number[];
   readonly sortId: number;
   readonly pageNo: number;

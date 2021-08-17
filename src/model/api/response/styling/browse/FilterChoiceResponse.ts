@@ -11,5 +11,6 @@ export interface FilterChoiceResponse {
   readonly pattern: FilterMediaResponse[];
   readonly logo: FilterMediaResponse[];
   readonly dropSize: FilterResponse[];
+  readonly ng: FilterResponse[];
   readonly option: FilterResponse[];
 }

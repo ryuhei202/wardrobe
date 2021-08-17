@@ -144,6 +144,22 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           aria-controls="filter7a-content"
           id="filter7a-header"
         >
+          <Typography variant="body2">NG</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FilterCheckboxArray
+            labelIdPrefix="option-checkbox-list-label-"
+            data={props.data.ngData}
+            callback={props.callback.ngCallback}
+          />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="filter7a-content"
+          id="filter7a-header"
+        >
           <Typography variant="body2">その他</Typography>
         </AccordionSummary>
         <AccordionDetails>
