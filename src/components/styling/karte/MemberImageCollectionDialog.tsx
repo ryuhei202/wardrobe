@@ -4,7 +4,7 @@ import { HostUrl } from "../../../model/HostUrl";
 import ReactImageGallery from "react-image-gallery";
 import { MemberImageCollectionDialogData } from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
 import { MemberImageCollectionDialogCallback } from "./callback/MemberImageCollectionDialogCallback";
-import { useStylingStyle } from "../style/UseStylingStyle";
+import { useMemberImageCollectionDialogStyle } from "../style/UseMemberImageCollectionDialogStyle";
 
 interface MemberImageCollectionDialogProps {
   data: MemberImageCollectionDialogData;
@@ -14,7 +14,7 @@ interface MemberImageCollectionDialogProps {
 export const MemberImageCollectionDialog = (
   props: MemberImageCollectionDialogProps
 ) => {
-  const classes = useStylingStyle();
+  const classes = useMemberImageCollectionDialogStyle();
   return (
     <Dialog onClose={props.callback.onClose} open={props.data.isOpen}>
       <ReactImageGallery

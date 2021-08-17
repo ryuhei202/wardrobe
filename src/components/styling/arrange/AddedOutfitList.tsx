@@ -11,7 +11,7 @@ import { Edit } from "@material-ui/icons";
 import React from "react";
 import AddedOutfitListData from "../../../model/styling/arrange/props_data/AddedOutfitListData";
 import AddedOutfitListCallback from "./callback/AddedOutfitListCallback";
-import { useArrangeStyle } from "./style/UseArrangeStyle";
+import { useAddedOutfitListStyle } from "./style/UseAddedOutfitListStyle";
 
 export interface AddedOutfitListProps {
   data: AddedOutfitListData;
@@ -19,7 +19,7 @@ export interface AddedOutfitListProps {
 }
 
 const AddedOutfitList = (props: AddedOutfitListProps) => {
-  const classes = useArrangeStyle();
+  const classes = useAddedOutfitListStyle();
 
   return (
     <Paper className={classes.registeredAdviceListContainer}>

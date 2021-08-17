@@ -16,7 +16,7 @@ export const usePurchasedItemCollectionPresenter = (): PurchasedItemCollectionPr
     `購入日：${new Date(item.purchasedDate).toLocaleDateString()}`;
 
   const itemListOriginalImageUrl = (item: InfoPurchasedItemResponse): string =>
-    item.imagePath.thumb;
+    HostUrl() + item.imagePath.thumb;
 
   const itemListPopupImageUrl = (item: InfoPurchasedItemResponse): string =>
     HostUrl() + item.imagePath.original;

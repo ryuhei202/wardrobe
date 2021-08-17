@@ -20,6 +20,7 @@ export const useGetIndexRequest = (
       pattern: refinement.patternIds,
       logo: refinement.logoIds,
       dropSize: refinement.dropSizes,
+      ng: refinement.ngIds,
       option: refinement.optionIds,
     };
     if (refinement.mediumCategoryId)

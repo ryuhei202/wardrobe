@@ -11,5 +11,6 @@ export default interface GetIndexFilterParams {
   pattern: number[];
   logo: number[];
   dropSize: number[];
+  ng: number[];
   option: number[];
 }
