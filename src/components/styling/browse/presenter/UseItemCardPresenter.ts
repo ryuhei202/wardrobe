@@ -3,7 +3,8 @@ import ItemCardData from "../../../../model/styling/browse/props_data/ItemCardDa
 
 export interface ItemCardPresenter {
   itemImageUrl: () => string;
-  colorImageUrl: () => string;
+  mainColorImageUrl: () => string;
+  subColorImageUrl: () => string;
 }
 
 export const useItemCardPresenter = (data: ItemCardData): ItemCardPresenter => {
@@ -11,9 +12,13 @@ export const useItemCardPresenter = (data: ItemCardData): ItemCardPresenter => {
     return `${HostUrl()}${data.imagePath}`;
   };
 
-  const colorImageUrl = (): string => {
-    return `${HostUrl()}${data.colorImagePath}`;
+  const mainColorImageUrl = (): string => {
+    return `${HostUrl()}${data.mainColorImagePath}`;
   };
 
-  return { itemImageUrl, colorImageUrl };
+  const subColorImageUrl = (): string => {
+    return `${HostUrl()}${data.subColorImagePath}`;
+  };
+
+  return { itemImageUrl, mainColorImageUrl, subColorImageUrl };
 };

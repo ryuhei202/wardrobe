@@ -35,7 +35,13 @@ const ItemCard = (props: ItemCardProps) => {
         <CardMedia className={classes.media} image={presenter.itemImageUrl()} />
         <CardContent>
           <img
-            src={presenter.colorImageUrl()}
+            src={presenter.mainColorImageUrl()}
+            width="30px"
+            height="auto"
+            alt=""
+          />
+          <img
+            src={presenter.subColorImageUrl()}
             width="30px"
             height="auto"
             alt=""
