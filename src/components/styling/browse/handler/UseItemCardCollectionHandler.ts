@@ -15,7 +15,8 @@ export const useItemCardCollectionHandler = (
   const itemCardArrayData = (): ItemCardData[] => {
     return itemCards.map((item) => {
       return {
-        colorImagePath: item.colorImagePath,
+        mainColorImagePath: item.mainColorImagePath,
+        subColorImagePath: item.subColorImagePath,
         seriesName: item.seriesName,
         categoryName: item.categoryName,
         brandName: item.brandName,
