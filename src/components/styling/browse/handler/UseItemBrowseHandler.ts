@@ -443,6 +443,7 @@ export const useItemBrowseHandler = (
       onSelectItem: (item: SelectedItem) => {
         callback.onSelectItem(item);
         setCurrentRefinement(choice.defaultRefinement);
+        partSizeHandler.initializePresetIndex();
         setSelectedPreregisteredItemId(null);
       },
     };
