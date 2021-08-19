@@ -19,6 +19,7 @@ export interface PartSizeRefinementHandler {
     currentValues: ValueRefinement[]
   ) => AppliedFilterData[];
   deleteFilter: (currentValues: ValueRefinement[], index: number) => void;
+  resetPresetIndex: () => void;
 }
 
 export const usePartSizeRefinementHandler = (
@@ -101,10 +102,13 @@ export const usePartSizeRefinementHandler = (
     onChange(newPartSizes);
   };
 
+  const resetPresetIndex = () => setSelectedPresetIndex(null);
+
   return {
     partSizeCallback,
     partSizeData,
     appliedFilters,
     deleteFilter,
+    resetPresetIndex,
   };
 };
