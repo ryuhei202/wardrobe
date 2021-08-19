@@ -8,7 +8,8 @@ export default interface DetailResponse {
   readonly seriesName: string | null;
   readonly categoryName: string;
   readonly brandName: string;
-  readonly color: DetailColorResponse;
+  readonly mainColor: DetailColorResponse;
+  readonly subColor: DetailColorResponse;
   readonly sizes: DetailSizeResponse[];
   readonly outfitImagePaths: ImagePathResponse[];
   readonly unsizedItemRecords: DetailSizeItemRecordResponse[];

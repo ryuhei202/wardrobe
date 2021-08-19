@@ -90,13 +90,27 @@ const BrowseDetail = (props: BrowseDetailProps) => {
             {presenter.brandName()}
           </Typography>
           <Typography variant="body1">
-            カラー：{presenter.colorName()}
+            メインカラー：{presenter.mainColorName()}
           </Typography>
           <div>
             <Box display="flex">
               <img
                 className={classes.colorImage}
-                src={presenter.colorImageUrl()}
+                src={presenter.mainColorImageUrl()}
+                width="60px"
+                height="auto"
+                alt=""
+              />
+            </Box>
+          </div>
+          <Typography variant="body1">
+            サブカラー：{presenter.subColorName()}
+          </Typography>
+          <div>
+            <Box display="flex">
+              <img
+                className={classes.colorImage}
+                src={presenter.subColorImageUrl()}
                 width="60px"
                 height="auto"
                 alt=""

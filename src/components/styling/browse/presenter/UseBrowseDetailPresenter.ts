@@ -9,8 +9,10 @@ export interface BrowseDetailPresenter {
   seriesName: () => string;
   categoryName: () => string;
   brandName: () => string;
-  colorName: () => string;
-  colorImageUrl: () => string;
+  mainColorName: () => string;
+  mainColorImageUrl: () => string;
+  subColorName: () => string;
+  subColorImageUrl: () => string;
 }
 
 export const useBrowseDetailPresenter = (
@@ -28,12 +30,20 @@ export const useBrowseDetailPresenter = (
     return response.brandName;
   };
 
-  const colorName = (): string => {
-    return response.color.name;
+  const mainColorName = (): string => {
+    return response.mainColor.name;
   };
 
-  const colorImageUrl = (): string => {
-    return `${HostUrl()}${response.color.imagePath}`;
+  const mainColorImageUrl = (): string => {
+    return `${HostUrl()}${response.mainColor.imagePath}`;
+  };
+
+  const subColorName = (): string => {
+    return response.subColor.name;
+  };
+
+  const subColorImageUrl = (): string => {
+    return `${HostUrl()}${response.subColor.imagePath}`;
   };
 
   const imageGalleryList = (): {
@@ -60,7 +70,9 @@ export const useBrowseDetailPresenter = (
     seriesName,
     categoryName,
     brandName,
-    colorName,
-    colorImageUrl,
+    mainColorName,
+    mainColorImageUrl,
+    subColorName,
+    subColorImageUrl,
   };
 };
