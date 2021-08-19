@@ -21,7 +21,7 @@ export const usePastOutfitCollectionPresenter = (
   };
 
   const itemListPrimary = (item: InfoPastOutfitItemResponse): string => {
-    return `${item.id}, ${item.categoryName}, ${item.colorName}`;
+    return `${item.id}, ${item.categoryName}, ${item.mainColorName}, ${item.subColorName}`;
   };
 
   const itemListSecondary = (item: InfoPastOutfitItemResponse): string => {
