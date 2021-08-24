@@ -422,7 +422,7 @@ export const useItemBrowseHandler = (
 
   const appliedFiltersCallback = (): AppliedFiltersCallback => {
     return {
-      onClear: () => setCurrentRefinement(choice.defaultRefinement),
+      onClear: () => resetRefinement(),
       onDelete: (index: number) => {
         deleteAppliedFilter(index);
       },
@@ -442,7 +442,7 @@ export const useItemBrowseHandler = (
       onClickBackButton: () => setSelectedPreregisteredItemId(null),
       onSelectItem: (item: SelectedItem) => {
         callback.onSelectItem(item);
-        setCurrentRefinement(choice.defaultRefinement);
+        resetRefinement();
         setSelectedPreregisteredItemId(null);
       },
     };
@@ -497,6 +497,11 @@ export const useItemBrowseHandler = (
 
   const sortSelection = (): string[] => {
     return choice.sort.map((sort) => sort.name);
+  };
+
+  const resetRefinement = () => {
+    setCurrentRefinement(choice.defaultRefinement);
+    partSizeHandler.resetPresetIndex();
   };
 
   return {

@@ -1,5 +1,4 @@
 import { FormControl, Select, Toolbar, Typography } from "@material-ui/core";
-import React from "react";
 import { useItemBrowseHandler } from "./handler/UseItemBrowseHandler";
 import FilterGroupCollection from "./FilterGroupCollection";
 import AppliedFilterArray from "./AppliedFilterArray";
