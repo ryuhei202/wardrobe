@@ -15,17 +15,15 @@ const ItemCardCollection = (props: ItemCardCollectionProps) => {
   const handler = useItemCardCollectionHandler(props.response, props.callback);
 
   return (
-    <>
-      <div className={classes.cardCollection}>
-        {handler.itemCardArrayData().map((itemCard, index) => (
-          <ItemCard
-            data={itemCard}
-            callback={handler.itemCardCallback(index)}
-            key={index}
-          />
-        ))}
-      </div>
-    </>
+    <div className={classes.cardCollection}>
+      {handler.itemCardArrayData().map((itemCard, index) => (
+        <ItemCard
+          data={itemCard}
+          callback={handler.itemCardCallback(index)}
+          key={index}
+        />
+      ))}
+    </div>
   );
 };
 
