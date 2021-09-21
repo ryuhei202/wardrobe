@@ -9,7 +9,7 @@ export interface ItemCardPresenter {
 
 export const useItemCardPresenter = (data: ItemCardData): ItemCardPresenter => {
   const itemImageUrl = (): string => {
-    return `${HostUrl()}${data.imagePath}`;
+    return data.imagePath;
   };
 
   const mainColorImageUrl = (): string => {

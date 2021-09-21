@@ -16,7 +16,7 @@ export const useSelectedItemArrayPresenter = (
   };
 
   const itemImageUrl = (index: number): string => {
-    return `${HostUrl()}${data[index].itemImagePath}`;
+    return data[index].itemImagePath;
   };
 
   const locationName = (index: number): string => {

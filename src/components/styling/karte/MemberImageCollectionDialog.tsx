@@ -24,8 +24,8 @@ export const MemberImageCollectionDialog = (
         thumbnailPosition="left"
         items={props.data.imageResponses.map((image) => {
           return {
-            original: HostUrl() + image.imagePath.large,
-            thumbnail: HostUrl() + image.imagePath.thumb,
+            original: image.imagePath.large,
+            thumbnail: image.imagePath.thumb,
             originalHeight: 650,
             description: image.comment,
             thumbnailLabel: image.createdAt,
