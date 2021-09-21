@@ -52,14 +52,14 @@ export const useBrowseDetailPresenter = (
   }[] => {
     let itemImage = [
       {
-        originalImagePath: `${HostUrl()}${response.itemImagePath.original}`,
-        thumbnailImagePath: `${HostUrl()}${response.itemImagePath.thumb}`,
+        originalImagePath: response.itemImagePath.original,
+        thumbnailImagePath: response.itemImagePath.thumb,
       },
     ];
     let outfitImages = response.outfitImagePaths.map((imagePath) => {
       return {
-        originalImagePath: `${HostUrl()}${imagePath.original}`,
-        thumbnailImagePath: `${HostUrl()}${imagePath.thumb}`,
+        originalImagePath: imagePath.original,
+        thumbnailImagePath: imagePath.thumb,
       };
     });
     return itemImage.concat(outfitImages);

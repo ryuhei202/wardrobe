@@ -55,7 +55,7 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
                   <ListItemIcon>
                     <Avatar
                       variant="square"
-                      src={`${HostUrl()}${item.imagePath}`}
+                      src={item.imagePath}
                       children={<Image />}
                     />
                   </ListItemIcon>

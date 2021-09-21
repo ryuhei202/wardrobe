@@ -51,7 +51,7 @@ const OutfitForm = (props: OutfitFormProps) => {
                   }
                   label={
                     <img
-                      src={HostUrl() + item.itemImagePath}
+                      src={item.itemImagePath}
                       width="40px"
                       height="auto"
                       alt=""
