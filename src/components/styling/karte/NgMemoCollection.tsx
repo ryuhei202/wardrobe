@@ -37,10 +37,8 @@ export const NgMemoCollection = (props: NgMemoCollectionProps) => {
                       ) : (
                         <PopupImage
                           data={{
-                            originalImageUrl:
-                              HostUrl() + ng.itemImagePath.thumb,
-                            popupImageUrl:
-                              HostUrl() + ng.itemImagePath.original,
+                            originalImageUrl: ng.itemImagePath.thumb,
+                            popupImageUrl: ng.itemImagePath.original,
                           }}
                         ></PopupImage>
                       )}

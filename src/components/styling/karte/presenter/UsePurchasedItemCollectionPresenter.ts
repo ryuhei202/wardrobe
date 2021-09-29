@@ -16,10 +16,10 @@ export const usePurchasedItemCollectionPresenter = (): PurchasedItemCollectionPr
     `購入日：${new Date(item.purchasedDate).toLocaleDateString()}`;
 
   const itemListOriginalImageUrl = (item: InfoPurchasedItemResponse): string =>
-    HostUrl() + item.imagePath.thumb;
+    item.imagePath.thumb;
 
   const itemListPopupImageUrl = (item: InfoPurchasedItemResponse): string =>
-    HostUrl() + item.imagePath.original;
+    item.imagePath.original;
 
   return {
     itemListText,
