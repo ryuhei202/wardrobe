@@ -19,7 +19,7 @@ export const useSelectionProgressPresenter = (
   };
 
   const itemImageUrl = (index: number): string => {
-    return `${HostUrl()}${data.items[index].itemImagePath}`;
+    return data.items[index].itemImagePath;
   };
 
   const labelText = (index: number): string => {
