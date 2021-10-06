@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { Fragment } from "react";
-import { HostUrl } from "../../../model/HostUrl";
 import { PastOutfitCollectionData } from "../../../model/styling/karte/props_data/PastOutfitCollectionData";
 import PopupImage from "../../shared/PopupImage";
 import { usePastOutfitCollectionPresenter } from "./presenter/UsePastOutfitCollectionPresenter";

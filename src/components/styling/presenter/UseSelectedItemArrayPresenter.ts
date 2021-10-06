@@ -1,4 +1,3 @@
-import { HostUrl } from "../../../model/HostUrl";
 import SelectedItem from "../../../model/styling/SelectedItem";
 
 export interface SelectedItemArrayPresenter {

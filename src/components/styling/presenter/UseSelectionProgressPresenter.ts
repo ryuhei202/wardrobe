@@ -1,4 +1,3 @@
-import { HostUrl } from "./../../../model/HostUrl";
 import SelectionProgressData from "../../../model/styling/props_data/SelectionProgressData";
 
 export interface SelectionProgressPresenter {
