@@ -13,7 +13,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { Fragment } from "react";
-import { HostUrl } from "../../../model/HostUrl";
 import OutfitFormData from "../../../model/styling/arrange/props_data/OutfitFormData";
 import OutfitFormCallback from "./callback/OutfitFormCallback";
 import { useOutfitFormStyle } from "./style/UseOutfitFormStyle";

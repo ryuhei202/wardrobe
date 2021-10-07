@@ -10,4 +10,6 @@ export interface InfoPastOutfitItemResponse {
   readonly size: string;
   readonly partSizes: PartSizeResponse[];
   readonly dropSize: string;
+  readonly rating: number | null;
+  readonly reviewText: string;
 }
