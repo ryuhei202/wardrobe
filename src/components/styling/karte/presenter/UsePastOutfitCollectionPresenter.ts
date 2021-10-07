@@ -6,6 +6,9 @@ interface PastOutfitCollectionPresenter {
   coordinateFeedback: (index: number) => string[];
   itemListPrimary: (item: InfoPastOutfitItemResponse) => string;
   itemListSecondary: (item: InfoPastOutfitItemResponse) => string;
+  isRated: (item: InfoPastOutfitItemResponse) => boolean;
+  rating: (item: InfoPastOutfitItemResponse) => number;
+  reviewText: (item: InfoPastOutfitItemResponse) => string;
 }
 
 export const usePastOutfitCollectionPresenter = (
@@ -33,10 +36,25 @@ export const usePastOutfitCollectionPresenter = (
     return result;
   };
 
+  const isRated = (item: InfoPastOutfitItemResponse): boolean => {
+    return item.rating !== null;
+  };
+
+  const rating = (item: InfoPastOutfitItemResponse): number => {
+    return item.rating ?? 0;
+  };
+
+  const reviewText = (item: InfoPastOutfitItemResponse): string => {
+    return item.reviewText;
+  };
+
   return {
     shipmentDate,
     coordinateFeedback,
     itemListPrimary,
     itemListSecondary,
+    isRated,
+    rating,
+    reviewText,
   };
 };
