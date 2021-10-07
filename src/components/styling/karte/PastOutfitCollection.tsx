@@ -1,14 +1,15 @@
 import {
   Avatar,
+  Divider,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
   Paper,
+  Rating,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { Fragment } from "react";
-import { HostUrl } from "../../../model/HostUrl";
 import { PastOutfitCollectionData } from "../../../model/styling/karte/props_data/PastOutfitCollectionData";
 import PopupImage from "../../shared/PopupImage";
 import { usePastOutfitCollectionPresenter } from "./presenter/UsePastOutfitCollectionPresenter";
@@ -49,7 +50,7 @@ export const PastOutfitCollection = (props: PastOutfitCollectionProps) => {
               </Paper>
               <List dense>
                 {outfit.items.map((item, index) => (
-                  <ListItem key={index}>
+                  <ListItem alignItems="flex-start" key={index}>
                     <ListItemAvatar>
                       <Avatar variant="rounded">
                         <PopupImage
@@ -62,7 +63,21 @@ export const PastOutfitCollection = (props: PastOutfitCollectionProps) => {
                     </ListItemAvatar>
                     <ListItemText
                       primary={presenter.itemListPrimary(item)}
-                      secondary={presenter.itemListSecondary(item)}
+                      secondary={
+                        <Fragment>
+                          {presenter.itemListSecondary(item)}
+                          {presenter.isRated(item) ? (
+                            <>
+                              <Divider />
+                              <Rating readOnly value={presenter.rating(item)} />
+                              <br />
+                              {presenter.reviewText(item)}
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </Fragment>
+                      }
                     ></ListItemText>
                   </ListItem>
                 ))}

@@ -17,7 +17,6 @@ import {
 } from "@material-ui/core";
 import { Image } from "@material-ui/icons";
 import React, { useState } from "react";
-import { HostUrl } from "../../../model/HostUrl";
 import { usePostNotifyLostCaller } from "../../../model/styling/feedback/api_caller/UsePostNotifyLostCaller";
 import FeedbackDialogData from "../../../model/styling/feedback/props_data/FeedbackDialogData";
 import FeedbackDialogCallback from "./callback/FeedbackDialogCallback";

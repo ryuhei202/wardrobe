@@ -1,4 +1,3 @@
-import { HostUrl } from "../../../../model/HostUrl";
 import { InfoPurchasedItemResponse } from "./../../../../model/api/response/styling/karte/InfoPurchasedItemRespons";
 
 interface PurchasedItemCollectionPresenter {

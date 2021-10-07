@@ -7,7 +7,6 @@ import {
   ListSubheader,
 } from "@material-ui/core";
 import React, { Fragment } from "react";
-import { HostUrl } from "../../../model/HostUrl";
 import { NgMemoCollectionData } from "../../../model/styling/karte/props_data/NgMemoCollectionData";
 import PopupImage from "../../shared/PopupImage";
 import { useNgMemoCollectionPresenter } from "./presenter/UseNgMemoCollectionPresenter";
