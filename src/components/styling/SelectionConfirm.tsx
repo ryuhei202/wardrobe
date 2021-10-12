@@ -130,8 +130,7 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
           <></>
         )}
       </Paper>
-      {/* TODO: コーデ登録機能の実装タイミングでコメントアウト解除 */}
-      {/* <Button
+      <Button
         variant="contained"
         color="primary"
         className={classes.changeButton}
@@ -143,7 +142,7 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
         onClick={() => apiCaller.prepare()}
       >
         確定
-      </Button> */}
+      </Button>
       <Button
         variant="contained"
         color="default"
