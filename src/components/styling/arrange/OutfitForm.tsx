@@ -113,7 +113,7 @@ const OutfitForm = (props: OutfitFormProps) => {
               </Select>
             </FormControl>
             <Typography variant="body1" display="inline">
-              {outfitAdvice.selectedAdvice
+              {outfitAdvice.selectedAdvice !== null
                 ? outfitAdvice.adviceChoice[outfitAdvice.selectedAdvice]
                     .description
                 : ""}
