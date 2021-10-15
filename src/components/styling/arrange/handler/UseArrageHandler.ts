@@ -42,7 +42,7 @@ export const useArrangeHandler = (
           return result;
         }, []),
         adviceIds: selectedOutfit.advices.reduce((result: number[], advice) => {
-          if (advice && advice.adviceIndex) {
+          if (advice !== undefined && advice.adviceIndex !== undefined) {
             result.push(
               responses[advice.categoryIndex].advice[advice.adviceIndex].id
             );
@@ -89,7 +89,8 @@ export const useArrangeHandler = (
             []
           ),
           advices: outfit.advices.map((selectedAdvice) =>
-            selectedAdvice && selectedAdvice.adviceIndex
+            selectedAdvice !== undefined &&
+            selectedAdvice.adviceIndex !== undefined
               ? responses[selectedAdvice.categoryIndex].advice[
                   selectedAdvice.adviceIndex
                 ].title
@@ -134,7 +135,8 @@ export const useArrangeHandler = (
                 return { title: advice.title, description: advice.description };
               })
             : [],
-          selectedAdvice: advice ? advice.adviceIndex ?? null : null,
+          selectedAdvice:
+            advice !== undefined ? advice.adviceIndex ?? null : null,
         };
       }),
     };
