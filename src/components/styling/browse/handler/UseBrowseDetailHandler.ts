@@ -78,7 +78,7 @@ export const useBrowseDetailHandler = (
           setCurrentValidationErrors(itemRecord.validationErrors);
           setSelectedItem({
             itemId: itemRecord.itemId,
-            itemImagePath: detail.itemImagePath.thumb,
+            itemImagePath: detail.itemImagePath.original,
             partSizes: createPartSizes(columns, itemRecord),
             locationName: itemRecord.locationName,
             categoryName: detail.categoryName,
@@ -88,7 +88,7 @@ export const useBrowseDetailHandler = (
           setCurrentValidationErrors(unsizedItemRecords.validationErrors);
           setSelectedItem({
             itemId: unsizedItemRecords.itemId,
-            itemImagePath: detail.itemImagePath.thumb,
+            itemImagePath: detail.itemImagePath.original,
             partSizes: createPartSizes([], unsizedItemRecords),
             locationName: unsizedItemRecords.locationName,
             categoryName: detail.categoryName,
