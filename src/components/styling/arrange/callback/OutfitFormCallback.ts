@@ -1,6 +1,5 @@
-export default interface OutfitFormCallback {
-  onSelectItem: (index: number) => void;
-  onSelectCategory: (selectIndex: number, categoryIndex: number) => void;
-  onSelectAdvice: (selectIndex: number, adviceIndex: number) => void;
+export interface OutfitFormCallback {
+  onSelectItem: (id: number) => void;
+  onSelectAdvice: (adviceId: number, index: number) => void;
   onClickAddOutfit: () => void;
 }
