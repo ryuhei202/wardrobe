@@ -30,7 +30,7 @@ export const PastOutfitCollection = (props: PastOutfitCollectionProps) => {
           props.data.displayOutfitNum !== undefined &&
           props.data.displayOutfitNum <= index
         ) {
-          return <></>;
+          return <div key={index}></div>;
         }
         return (
           <ListItem key={index}>
