@@ -1,19 +1,17 @@
+import { Outfit } from "./../../../../model/styling/arrange/Outfit";
 import { useState } from "react";
 import AdviceChoiceResponse from "../../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import {
   PostCreateOutfitCaller,
   usePostCreateOutfitCaller,
 } from "../../../../model/styling/arrange/api_caller/UsePostCreateOutfitCaller";
-import CreatingOutfit from "../../../../model/styling/arrange/CreatingOutfit";
 import AddedOutfitListData from "../../../../model/styling/arrange/props_data/AddedOutfitListData";
-import OutfitFormData from "../../../../model/styling/arrange/props_data/OutfitFormData";
-import SelectedOutfit from "../../../../model/styling/arrange/SelectedOutfit";
 import SelectedItem from "../../../../model/styling/SelectedItem";
 import AddedOutfitListCallback from "../callback/AddedOutfitListCallback";
-import OutfitFormCallback from "../callback/OutfitFormCallback";
+import { OutfitFormData } from "../../../../model/styling/arrange/props_data/OutfitFormData";
+import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 
 export interface ArrangeHandler {
-  selectedOutfits: SelectedOutfit[];
   editingOutfitIndex: number;
   createOutfitCaller: PostCreateOutfitCaller;
   onClickComplete: () => void;
@@ -28,41 +26,16 @@ export const useArrangeHandler = (
   responses: AdviceChoiceResponse[]
 ): ArrangeHandler => {
   const defaultOutfit = {
-    areItemsSelected: Array(items.length).fill(false),
-    advices: Array(4).fill(undefined),
+    itemIds: [],
+    adviceIds: [],
   };
 
-  const toCreatingOutfits = (
-    selectedOutfits: SelectedOutfit[]
-  ): CreatingOutfit[] => {
-    return selectedOutfits.map((selectedOutfit) => {
-      return {
-        itemIds: items.reduce((result: number[], item, index) => {
-          if (selectedOutfit.areItemsSelected[index]) result.push(item.itemId);
-          return result;
-        }, []),
-        adviceIds: selectedOutfit.advices.reduce((result: number[], advice) => {
-          if (advice !== undefined && advice.adviceIndex !== undefined) {
-            result.push(
-              responses[advice.categoryIndex].advice[advice.adviceIndex].id
-            );
-          }
-          return result;
-        }, []),
-      };
-    });
-  };
-
-  const [selectedOutfits, setSelectedOutfits] = useState<SelectedOutfit[]>([]);
+  const [outfits, setOutfits] = useState<Outfit[]>([]);
   const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(
-    selectedOutfits.length
+    outfits.length
   );
-  const [editingOutfit, setEditingOutfit] = useState<SelectedOutfit>(
-    defaultOutfit
-  );
-  const createOutfitCaller = usePostCreateOutfitCaller(
-    toCreatingOutfits(selectedOutfits)
-  );
+  const [editingOutfit, setEditingOutfit] = useState<Outfit>(defaultOutfit);
+  const createOutfitCaller = usePostCreateOutfitCaller(outfits);
 
   const onClickComplete = () => {
     createOutfitCaller.prepare();
@@ -70,32 +43,38 @@ export const useArrangeHandler = (
 
   const addedOutfitListData = (): AddedOutfitListData => {
     return {
-      outfitList: selectedOutfits.map((outfit) => {
+      outfitList: outfits.map((outfit) => {
         return {
-          items: outfit.areItemsSelected.reduce(
+          items: outfit.itemIds.reduce(
             (
-              result: { id: number; categoryName: string }[],
-              isItemSelected,
-              index
+              result: {
+                readonly id: number;
+                readonly categoryName: string;
+              }[],
+              itemId
             ) => {
-              if (isItemSelected) {
+              const item = items.find((item) => item.itemId === itemId);
+              if (item) {
                 result.push({
-                  id: items[index].itemId,
-                  categoryName: items[index].categoryName,
+                  id: item.itemId,
+                  categoryName: item.categoryName,
                 });
               }
               return result;
             },
             []
           ),
-          advices: outfit.advices.map((selectedAdvice) =>
-            selectedAdvice !== undefined &&
-            selectedAdvice.adviceIndex !== undefined
-              ? responses[selectedAdvice.categoryIndex].advice[
-                  selectedAdvice.adviceIndex
-                ].title
-              : ""
-          ),
+          advices: outfit.adviceIds.map((adviceId) => {
+            let adviceTitle = "";
+            responses.forEach((response) => {
+              response.advice.forEach((advice) => {
+                if (advice.id === adviceId) {
+                  adviceTitle = advice.title;
+                }
+              });
+            });
+            return adviceTitle;
+          }),
         };
       }),
       editingOutfit: editingOutfitIndex,
@@ -105,85 +84,69 @@ export const useArrangeHandler = (
   const addedOutfitListCallback = (): AddedOutfitListCallback => {
     return {
       onClickEdit: (index: number) => {
-        let outfit = selectedOutfits[index];
-        setEditingOutfit(outfit);
+        setEditingOutfit(outfits[index]);
         setEditingOutfitIndex(index);
       },
       onClickNew: () => {
         setEditingOutfit(defaultOutfit);
-        setEditingOutfitIndex(selectedOutfits.length);
+        setEditingOutfitIndex(outfits.length);
       },
     };
   };
 
   const outfitFormData = (): OutfitFormData => {
+    const adviceNum = editingOutfit.adviceIds.length;
+    let selectedAdviceIdArray: (number | null)[] = [...editingOutfit.adviceIds];
+    selectedAdviceIdArray.length = 4;
     return {
-      items: items.map((item, index) => {
+      items: items.map((item) => {
         return {
           itemId: item.itemId,
           itemImagePath: item.itemImagePath,
           categoryName: item.categoryName,
-          isSelected: editingOutfit.areItemsSelected[index],
+          isSelected: editingOutfit.itemIds.indexOf(item.itemId) >= 0,
         };
       }),
-      advices: editingOutfit.advices.map((advice) => {
-        return {
-          categoryChoice: responses.map((response) => response.name),
-          selectedCategory: advice ? advice.categoryIndex : null,
-          adviceChoice: advice
-            ? responses[advice.categoryIndex].advice.map((advice) => {
-                return { title: advice.title, description: advice.description };
-              })
-            : [],
-          selectedAdvice:
-            advice !== undefined ? advice.adviceIndex ?? null : null,
-        };
-      }),
+      selectedAdviceIds: selectedAdviceIdArray.fill(null, adviceNum),
     };
   };
 
   const outfitFormCallback = (): OutfitFormCallback => {
     return {
       onClickAddOutfit: () => {
-        let newSelectedOutfits = [...selectedOutfits];
-        if (editingOutfitIndex >= newSelectedOutfits.length) {
-          newSelectedOutfits.push(editingOutfit);
+        let newOutfits = [...outfits];
+        if (editingOutfitIndex >= newOutfits.length) {
+          newOutfits.push(editingOutfit);
         } else {
-          newSelectedOutfits[editingOutfitIndex] = editingOutfit;
+          newOutfits[editingOutfitIndex] = editingOutfit;
         }
-        setSelectedOutfits(newSelectedOutfits);
+        setOutfits(newOutfits);
         setEditingOutfit(defaultOutfit);
-        setEditingOutfitIndex(newSelectedOutfits.length);
+        setEditingOutfitIndex(newOutfits.length);
       },
-      onSelectCategory: (selectedIndex: number, categoryIndex: number) => {
-        let newSelectedAdvices = [...editingOutfit.advices];
-        newSelectedAdvices[selectedIndex] = {
-          categoryIndex: categoryIndex,
-          adviceIndex: undefined,
-        };
-        setEditingOutfit({ ...editingOutfit, advices: newSelectedAdvices });
+      onSelectAdvice: (adviceId: number, index: number) => {
+        let newAdviceIds = [...editingOutfit.adviceIds];
+        if (index > editingOutfit.adviceIds.length) {
+          newAdviceIds.push(adviceId);
+        } else {
+          newAdviceIds[index] = adviceId;
+        }
+        setEditingOutfit({ ...editingOutfit, adviceIds: newAdviceIds });
       },
-      onSelectAdvice: (selectedIndex: number, adviceIndex: number) => {
-        let newSelectedAdvices = [...editingOutfit.advices];
-        newSelectedAdvices[selectedIndex] = {
-          categoryIndex: editingOutfit.advices[selectedIndex].categoryIndex,
-          adviceIndex: adviceIndex,
-        };
-        setEditingOutfit({ ...editingOutfit, advices: newSelectedAdvices });
-      },
-      onSelectItem: (index: number) => {
-        let newAreItemsSelected = [...editingOutfit.areItemsSelected];
-        newAreItemsSelected[index] = !editingOutfit.areItemsSelected[index];
-        setEditingOutfit({
-          ...editingOutfit,
-          areItemsSelected: newAreItemsSelected,
-        });
+      onSelectItem: (id: number) => {
+        const newItemIds = [...editingOutfit.itemIds];
+        const itemIndex = newItemIds.indexOf(id);
+        if (itemIndex === -1) {
+          newItemIds.push(id);
+        } else {
+          newItemIds.splice(itemIndex, 1);
+        }
+        setEditingOutfit({ ...editingOutfit, itemIds: newItemIds });
       },
     };
   };
 
   return {
-    selectedOutfits,
     editingOutfitIndex,
     createOutfitCaller,
     onClickComplete,
