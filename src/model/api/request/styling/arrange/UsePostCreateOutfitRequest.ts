@@ -1,14 +1,14 @@
-import CreatingOutfit from "../../../../styling/arrange/CreatingOutfit";
+import { Outfit } from "./../../../../styling/arrange/Outfit";
 import PostRequest from "../../PostRequest";
 
 interface PostCreateOutfitParams {
   chartId: number;
-  outfits: { itemIds: number[]; adviceIds: number[] }[];
+  outfits: Outfit[];
 }
 
 export const usePostCreateOutfitRequest = (
   karteId: number,
-  outfits: CreatingOutfit[]
+  outfits: Outfit[]
 ): PostRequest => {
   const url = (): string => {
     return "styling/arranges/create_outfits";
