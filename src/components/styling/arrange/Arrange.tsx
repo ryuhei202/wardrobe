@@ -14,7 +14,7 @@ import ArrangeData from "../../../model/styling/arrange/props_data/ArrangeData";
 import AddedOutfitList from "./AddedOutfitList";
 import ArrangeCallback from "./callback/ArrangeCallback";
 import { useArrangeHandler } from "./handler/UseArrageHandler";
-import OutfitForm from "./OutfitForm";
+import { OutfitForm } from "./OutfitForm";
 import { useArrangeStyle } from "./style/UseArrangeStyle";
 
 export interface ArrangeProps {
@@ -23,7 +23,7 @@ export interface ArrangeProps {
   callback: ArrangeCallback;
 }
 
-const Arrange = (props: ArrangeProps) => {
+export const Arrange = (props: ArrangeProps) => {
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
 
@@ -51,6 +51,7 @@ const Arrange = (props: ArrangeProps) => {
       {handler.editingOutfitIndex >= 0 ? (
         <OutfitForm
           data={handler.outfitFormData()}
+          response={props.response}
           callback={handler.outfitFormCallback()}
         />
       ) : (
@@ -79,5 +80,3 @@ const Arrange = (props: ArrangeProps) => {
     </>
   );
 };
-
-export default Arrange;
