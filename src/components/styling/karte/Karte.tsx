@@ -10,7 +10,6 @@ import {
 import { ListAlt, PhotoLibrary } from "@mui/icons-material";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
 import { useKarteHandler } from "./handler/UseKarteHandler";
-import { useKartePresenter } from "./presenter/UseKartePresenter";
 import { PastOutfitCollectionDialog } from "./PastOutfitCollectionDialog";
 import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 import { PastOutfitCollection } from "./PastOutfitCollection";
@@ -24,14 +23,13 @@ interface KarteProps {
 export const Karte = (props: KarteProps) => {
   const classes = useKarteStyle();
   const handler = useKarteHandler(props.response);
-  const presenter = useKartePresenter(props.response);
 
   return (
     <List dense className={classes.drawerList}>
       <ListItem>
         <ListItemText
-          primary={presenter.memberInfoPrimaryText()}
-          secondary={presenter.memberInfoSecondaryText()}
+          primary={props.response.memberName}
+          secondary={`パートナーID:${props.response.tMemberId}, カルテID:${props.response.tChartId}`}
         />
         <ListItemSecondaryAction>
           <IconButton
