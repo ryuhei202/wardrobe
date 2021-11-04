@@ -1,9 +1,9 @@
 import { CircularProgress, Typography } from "@mui/material";
 import React from "react";
 import { useGetConfirmCaller } from "../../../model/styling/browse/api_caller/UseGetConfirmCaller";
-import SelectionConfirmData from "../../../model/styling/props_data/SelectionConfirmData";
-import SelectionConfirmCallback from "../callback/SelectionConfirmCallback";
-import SelectionConfirm from "../SelectionConfirm";
+import { SelectionConfirmData } from "../../../model/styling/props_data/SelectionConfirmData";
+import { SelectionConfirmCallback } from "../callback/SelectionConfirmCallback";
+import { SelectionConfirm } from "../SelectionConfirm";
 
 export interface ConfirmProvider {
   selectionConfirmComponent: (

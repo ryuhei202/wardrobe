@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse, AxiosInstance } from "axios";
 import applyCaseMiddleware from "axios-case-converter";
-import ErrorResponse from "../response/shared/ErrorResponse";
+import { ErrorResponse } from "../response/shared/ErrorResponse";
 
 export interface Client<T> {
   createApi(): AxiosInstance;

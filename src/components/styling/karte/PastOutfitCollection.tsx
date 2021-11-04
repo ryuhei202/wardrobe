@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import React, { Fragment } from "react";
 import { PastOutfitCollectionData } from "../../../model/styling/karte/props_data/PastOutfitCollectionData";
-import PopupImage from "../../shared/PopupImage";
+import { PopupImage } from "../../shared/PopupImage";
 import { usePastOutfitCollectionPresenter } from "./presenter/UsePastOutfitCollectionPresenter";
 
 interface PastOutfitCollectionProps {

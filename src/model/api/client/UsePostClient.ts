@@ -1,4 +1,4 @@
-import PostRequest from "../request/PostRequest";
+import { PostRequest } from "../request/PostRequest";
 import { baseUrl } from "../shared/BaseUrl";
 import { useClient } from "./UseClient";
 

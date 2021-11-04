@@ -8,8 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import ItemCardData from "../../../model/styling/browse/props_data/ItemCardData";
-import ItemCardCallback from "./callback/ItemCardCallback";
+import { ItemCardData } from "../../../model/styling/browse/props_data/ItemCardData";
+import { ItemCardCallback } from "./callback/ItemCardCallback";
 import { useItemCardPresenter } from "./presenter/UseItemCardPresenter";
 import { useItemCardStyle } from "./style/UseItemCardStyle";
 
@@ -18,7 +18,7 @@ interface ItemCardProps {
   callback: ItemCardCallback;
 }
 
-const ItemCard = (props: ItemCardProps) => {
+export const ItemCard = (props: ItemCardProps) => {
   const classes = useItemCardStyle();
   const presenter = useItemCardPresenter(props.data);
 
@@ -56,5 +56,3 @@ const ItemCard = (props: ItemCardProps) => {
     </Card>
   );
 };
-
-export default ItemCard;

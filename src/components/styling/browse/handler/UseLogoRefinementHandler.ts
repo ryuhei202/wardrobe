@@ -1,7 +1,7 @@
-import FilterMediaResponse from "../../../../model/api/response/styling/browse/FilterMediaResponse";
-import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
-import FilterMediaData from "../../../../model/styling/browse/props_data/FilterMediaData";
-import FilterMediaArrayCallback from "../callback/FilterMediaArrayCallback";
+import { FilterMediaResponse } from "../../../../model/api/response/styling/browse/FilterMediaResponse";
+import { AppliedFilterData } from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import { FilterMediaData } from "../../../../model/styling/browse/props_data/FilterMediaData";
+import { FilterMediaArrayCallback } from "../callback/FilterMediaArrayCallback";
 
 export interface LogoRefinementHandler {
   logoCallback: (

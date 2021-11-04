@@ -1,9 +1,9 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
-import Refinement from "../Refinement";
-import BrowseIndexResponse from "../../../api/response/styling/browse/BrowseIndexResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
+import { Refinement } from "../Refinement";
+import { BrowseIndexResponse } from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { useGetIndexRequest } from "../../../api/request/styling/browse/UseGetIndexRequest";
 import { ChartId } from "../../../ChartId";
 

@@ -1,5 +1,5 @@
 import { HostUrl } from "./../../../../model/HostUrl";
-import ItemCardData from "../../../../model/styling/browse/props_data/ItemCardData";
+import { ItemCardData } from "../../../../model/styling/browse/props_data/ItemCardData";
 
 export interface ItemCardPresenter {
   itemImageUrl: () => string;

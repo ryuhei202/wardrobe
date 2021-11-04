@@ -1,3 +1,3 @@
-export default interface DetailSizeButtonArrayCallback {
+export interface DetailSizeButtonArrayCallback {
   onSelect: (index: number) => void;
 }

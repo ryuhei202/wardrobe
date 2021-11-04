@@ -18,15 +18,15 @@ import {
 import { Image } from "@mui/icons-material";
 import React, { useState } from "react";
 import { usePostNotifyLostCaller } from "../../../model/styling/feedback/api_caller/UsePostNotifyLostCaller";
-import FeedbackDialogData from "../../../model/styling/feedback/props_data/FeedbackDialogData";
-import FeedbackDialogCallback from "./callback/FeedbackDialogCallback";
+import { FeedbackDialogData } from "../../../model/styling/feedback/props_data/FeedbackDialogData";
+import { FeedbackDialogCallback } from "./callback/FeedbackDialogCallback";
 
 export interface FeedbackDialogProps {
   data: FeedbackDialogData;
   callback: FeedbackDialogCallback;
 }
 
-const FeedbackDialog = (props: FeedbackDialogProps) => {
+export const FeedbackDialog = (props: FeedbackDialogProps) => {
   const [selectedItemIds, setSelectedItemIds] = useState<number[]>([]);
   const apiCaller = usePostNotifyLostCaller(
     selectedItemIds,
@@ -109,5 +109,3 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
     </>
   );
 };
-
-export default FeedbackDialog;

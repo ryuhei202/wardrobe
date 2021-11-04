@@ -1,4 +1,4 @@
-export default interface AppliedFiltersCallback {
+export interface AppliedFiltersCallback {
   onClear: () => void;
   onDelete: (index: number) => void;
 }

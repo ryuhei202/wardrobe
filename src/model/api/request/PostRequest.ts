@@ -1,4 +1,4 @@
-export default interface PostRequest {
+export interface PostRequest {
   url(): string;
   params(): { [key: string]: any };
 }

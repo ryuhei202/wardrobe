@@ -1,4 +1,4 @@
-export default interface PartSize {
+export interface PartSize {
   readonly name: string;
   readonly value: number;
 }

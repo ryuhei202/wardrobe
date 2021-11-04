@@ -1,7 +1,7 @@
-import FilterResponse from "../../../../model/api/response/styling/browse/FilterResponse";
-import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
-import FilterCheckboxData from "../../../../model/styling/browse/props_data/FilterCheckboxData";
-import FilterCheckboxArrayCallback from "../callback/FilterCheckboxArrayCallback";
+import { FilterResponse } from "../../../../model/api/response/styling/browse/FilterResponse";
+import { AppliedFilterData } from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import { FilterCheckboxData } from "../../../../model/styling/browse/props_data/FilterCheckboxData";
+import { FilterCheckboxArrayCallback } from "../callback/FilterCheckboxArrayCallback";
 
 export interface OptionRefinementHandler {
   optionCallback: (

@@ -1,4 +1,4 @@
-import ItemBrowseCallback from "./callback/ItemBrowseCallback";
+import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
 import { useCategoryChoiceProvider } from "./provider/UseCategoryChoiceProvider";
 
 export interface BrowseContainerProps {
@@ -6,7 +6,7 @@ export interface BrowseContainerProps {
   currentSelectedItemId: number | null;
 }
 
-const BrowseContainer = (props: BrowseContainerProps) => {
+export const BrowseContainer = (props: BrowseContainerProps) => {
   const categoryChoiceProvider = useCategoryChoiceProvider();
   return (
     <>
@@ -17,5 +17,3 @@ const BrowseContainer = (props: BrowseContainerProps) => {
     </>
   );
 };
-
-export default BrowseContainer;

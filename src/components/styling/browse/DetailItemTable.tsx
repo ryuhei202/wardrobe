@@ -8,15 +8,15 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import DetailItemTableData from "../../../model/styling/browse/props_data/DetailItemTableData";
-import DetailItemTableCallback from "./callback/DetailItemTableCallback";
+import { DetailItemTableData } from "../../../model/styling/browse/props_data/DetailItemTableData";
+import { DetailItemTableCallback } from "./callback/DetailItemTableCallback";
 
 interface DetailItemTableProps {
   data: DetailItemTableData;
   callback: DetailItemTableCallback;
 }
 
-const DetailItemTable = (props: DetailItemTableProps) => {
+export const DetailItemTable = (props: DetailItemTableProps) => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="item table">
@@ -46,5 +46,3 @@ const DetailItemTable = (props: DetailItemTableProps) => {
     </TableContainer>
   );
 };
-
-export default DetailItemTable;

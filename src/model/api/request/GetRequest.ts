@@ -1,4 +1,4 @@
-export default interface GetRequest {
+export interface GetRequest {
   url(): string;
   params?(): { [key: string]: any };
 }

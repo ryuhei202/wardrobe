@@ -1,7 +1,7 @@
-import FilterCheckboxData from "./FilterCheckboxData";
-import FilterListButtonData from "./FilterListButtonData";
+import { FilterCheckboxData } from "./FilterCheckboxData";
+import { FilterListButtonData } from "./FilterListButtonData";
 
-export default interface FilterCategoryGroupData {
+export interface FilterCategoryGroupData {
   readonly broaderCategoryData: FilterListButtonData[] | null;
   readonly smallCategoryData: FilterCheckboxData[];
 }

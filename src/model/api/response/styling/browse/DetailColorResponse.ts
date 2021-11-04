@@ -1,4 +1,4 @@
-export default interface DetailColorResponse {
+export interface DetailColorResponse {
   readonly name: string;
   readonly imagePath: string;
 }

@@ -1,6 +1,6 @@
-import PartSize from "./PartSize";
+import { PartSize } from "./PartSize";
 
-export default interface SelectedItem {
+export interface SelectedItem {
   readonly itemId: number;
   readonly itemImagePath: string;
   readonly partSizes: PartSize[];

@@ -1,5 +1,5 @@
-import GetRequest from "../../GetRequest";
-import GetRefinementChoiceParams from "./GetRefinementChoiceParams";
+import { GetRequest } from "../../GetRequest";
+import { GetRefinementChoiceParams } from "./GetRefinementChoiceParams";
 
 export const useGetRefinementChoiceRequest = (
   chartId: number,

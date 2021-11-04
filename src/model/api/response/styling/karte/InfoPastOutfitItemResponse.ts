@@ -1,5 +1,5 @@
 import { PartSizeResponse } from "./PartSizeResponse";
-import ImagePathResponse from "../ImagePathResponse";
+import { ImagePathResponse } from "../ImagePathResponse";
 
 export interface InfoPastOutfitItemResponse {
   readonly id: number;

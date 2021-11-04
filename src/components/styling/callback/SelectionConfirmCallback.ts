@@ -1,4 +1,4 @@
-export default interface SelectionConfirmCallback {
+export interface SelectionConfirmCallback {
   onCancelSelection: () => void;
   onConfirmSelection: () => void;
 }

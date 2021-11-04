@@ -1,6 +1,6 @@
-import ItemCardResponse from "./ItemCardResponse";
+import { ItemCardResponse } from "./ItemCardResponse";
 
-export default interface BrowseIndexResponse {
+export interface BrowseIndexResponse {
   readonly totalCount: number;
   readonly totalPageNum: number;
   readonly pageNo: number;

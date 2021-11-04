@@ -2,16 +2,16 @@ import { Box, Button, IconButton, Paper, Typography } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import React from "react";
 import ReactImageGallery from "react-image-gallery";
-import DetailResponse from "../../../model/api/response/styling/browse/DetailResponse";
+import { DetailResponse } from "../../../model/api/response/styling/browse/DetailResponse";
 import { DetailStatus } from "../../../model/styling/browse/DetailStatus";
-import BrowseDetailCallback from "./callback/BrowseDetailCallback";
-import DetailItemTable from "./DetailItemTable";
-import DetailSizeButtonArray from "./DetailSizeButtonArray";
+import { BrowseDetailCallback } from "./callback/BrowseDetailCallback";
+import { DetailItemTable } from "./DetailItemTable";
+import { DetailSizeButtonArray } from "./DetailSizeButtonArray";
 import { useBrowseDetailHandler } from "./handler/UseBrowseDetailHandler";
-import PostSelectDialog from "./PostSelectDialog";
+import { PostSelectDialog } from "./PostSelectDialog";
 import { useBrowseDetailPresenter } from "./presenter/UseBrowseDetailPresenter";
 import { useBrowseDetailStyle } from "./style/UseBrowseDetailStyle";
-import ValidationDialog from "./ValidationDialog";
+import { ValidationDialog } from "./ValidationDialog";
 
 interface BrowseDetailProps {
   response: DetailResponse;
@@ -19,7 +19,7 @@ interface BrowseDetailProps {
   previousSelectedItemId: number | null;
 }
 
-const BrowseDetail = (props: BrowseDetailProps) => {
+export const BrowseDetail = (props: BrowseDetailProps) => {
   const classes = useBrowseDetailStyle();
   const handler = useBrowseDetailHandler(props.response, props.callback);
   const presenter = useBrowseDetailPresenter(props.response);
@@ -154,5 +154,3 @@ const BrowseDetail = (props: BrowseDetailProps) => {
     </>
   );
 };
-
-export default BrowseDetail;

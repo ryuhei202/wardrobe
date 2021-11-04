@@ -1,4 +1,4 @@
-export default interface FeedbackDialogCallback {
+export interface FeedbackDialogCallback {
   onPostComplete: () => void;
   onClose: () => void;
 }

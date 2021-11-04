@@ -1,4 +1,4 @@
-export default interface AddedOutfitListData {
+export interface AddedOutfitListData {
   readonly outfitList: {
     readonly items: {
       readonly id: number;

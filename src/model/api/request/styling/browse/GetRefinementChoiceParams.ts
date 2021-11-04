@@ -1,4 +1,4 @@
-export default interface GetRefinementChoiceParams {
+export interface GetRefinementChoiceParams {
   chartId: number;
   categoryId: number;
 }

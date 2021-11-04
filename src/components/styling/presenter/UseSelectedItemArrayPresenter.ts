@@ -1,4 +1,4 @@
-import SelectedItem from "../../../model/styling/SelectedItem";
+import { SelectedItem } from "../../../model/styling/SelectedItem";
 
 export interface SelectedItemArrayPresenter {
   itemIdText: (index: number) => string;

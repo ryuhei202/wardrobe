@@ -1,8 +1,8 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
-import AdviceChoiceResponse from "../../../api/response/styling/arrange/AdviceChoiceResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
+import { AdviceChoiceResponse } from "../../../api/response/styling/arrange/AdviceChoiceResponse";
 import { ChartId } from "../../../ChartId";
 import { useGetAdviceChoiceRequest } from "../../../api/request/styling/arrange/UseGetAdviceChoiceRequest";
 

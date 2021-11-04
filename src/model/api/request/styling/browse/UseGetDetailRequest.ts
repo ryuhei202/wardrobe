@@ -1,7 +1,7 @@
-import Refinement from "../../../../styling/browse/Refinement";
-import GetRequest from "../../GetRequest";
-import GetDetailFilterParams from "./GetDetailFilterParams";
-import GetDetailParams from "./GetDetailParams";
+import { Refinement } from "../../../../styling/browse/Refinement";
+import { GetRequest } from "../../GetRequest";
+import { GetDetailFilterParams } from "./GetDetailFilterParams";
+import { GetDetailParams } from "./GetDetailParams";
 
 export const useGetDetailRequest = (
   karteId: number,

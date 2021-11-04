@@ -1,4 +1,4 @@
-import PutRequest from "../request/PutRequest";
+import { PutRequest } from "../request/PutRequest";
 import { baseUrl } from "../shared/BaseUrl";
 import { useClient } from "./UseClient";
 

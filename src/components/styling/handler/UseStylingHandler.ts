@@ -1,14 +1,14 @@
 import { useState } from "react";
-import ItemBrowseCallback from "../browse/callback/ItemBrowseCallback";
-import SelectedItem from "../../../model/styling/SelectedItem";
-import KarteContainerCallback from "../karte/callback/KarteContainerCallback";
-import SelectionConfirmData from "../../../model/styling/props_data/SelectionConfirmData";
-import SelectionConfirmCallback from "../callback/SelectionConfirmCallback";
-import ArrangeData from "../../../model/styling/arrange/props_data/ArrangeData";
-import ArrangeCallback from "../arrange/callback/ArrangeCallback";
+import { ItemBrowseCallback } from "../browse/callback/ItemBrowseCallback";
+import { SelectedItem } from "../../../model/styling/SelectedItem";
+import { KarteContainerCallback } from "../karte/callback/KarteContainerCallback";
+import { SelectionConfirmData } from "../../../model/styling/props_data/SelectionConfirmData";
+import { SelectionConfirmCallback } from "../callback/SelectionConfirmCallback";
+import { ArrangeData } from "../../../model/styling/arrange/props_data/ArrangeData";
+import { ArrangeCallback } from "../arrange/callback/ArrangeCallback";
 import { MainContentType } from "../../../model/styling/MainContentType";
-import SelectionProgressData from "../../../model/styling/props_data/SelectionProgressData";
-import SelectionProgressCallback from "../callback/SelectionProgressCallback";
+import { SelectionProgressData } from "../../../model/styling/props_data/SelectionProgressData";
+import { SelectionProgressCallback } from "../callback/SelectionProgressCallback";
 
 export interface StylingHandler {
   mainContentType: MainContentType | undefined;

@@ -1,4 +1,4 @@
-export default interface AddedOutfitListCallback {
+export interface AddedOutfitListCallback {
   onClickEdit: (index: number) => void;
   onClickNew: () => void;
 }

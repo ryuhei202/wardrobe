@@ -1,5 +1,5 @@
-import GetRequest from "../../GetRequest";
-import GetAdviceChoiceParams from "./GetAdviceChoiceParams";
+import { GetRequest } from "../../GetRequest";
+import { GetAdviceChoiceParams } from "./GetAdviceChoiceParams";
 
 export const useGetAdviceChoiceRequest = (karteId: number): GetRequest => {
   const url = (): string => {

@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import React from "react";
-import FilterCheckboxData from "../../../model/styling/browse/props_data/FilterCheckboxData";
-import FilterCheckboxArrayCallback from "./callback/FilterCheckboxArrayCallback";
+import { FilterCheckboxData } from "../../../model/styling/browse/props_data/FilterCheckboxData";
+import { FilterCheckboxArrayCallback } from "./callback/FilterCheckboxArrayCallback";
 
 interface FilterCheckboxArrayProps {
   labelIdPrefix: string;
@@ -17,7 +17,7 @@ interface FilterCheckboxArrayProps {
   callback: FilterCheckboxArrayCallback;
 }
 
-const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
+export const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
   let backButton;
   if (props.callback.onClickBackButton !== undefined) {
     backButton = (
@@ -62,5 +62,3 @@ const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
     </>
   );
 };
-
-export default FilterCheckboxArray;

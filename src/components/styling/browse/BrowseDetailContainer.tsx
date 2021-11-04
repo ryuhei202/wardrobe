@@ -1,5 +1,5 @@
-import Refinement from "../../../model/styling/browse/Refinement";
-import BrowseDetailCallback from "./callback/BrowseDetailCallback";
+import { Refinement } from "../../../model/styling/browse/Refinement";
+import { BrowseDetailCallback } from "./callback/BrowseDetailCallback";
 import { useBrowseDetailProvider } from "./provider/UseBrowseDetailProvider";
 
 export interface BrowseDetailContainerProps {
@@ -9,7 +9,7 @@ export interface BrowseDetailContainerProps {
   currentSelectedItemId: number | null;
 }
 
-const BrowseDetailContainer = (props: BrowseDetailContainerProps) => {
+export const BrowseDetailContainer = (props: BrowseDetailContainerProps) => {
   const browseDetailProvider = useBrowseDetailProvider(
     props.id,
     props.refinement
@@ -23,5 +23,3 @@ const BrowseDetailContainer = (props: BrowseDetailContainerProps) => {
     </>
   );
 };
-
-export default BrowseDetailContainer;

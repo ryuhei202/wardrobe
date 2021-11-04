@@ -1,3 +1,3 @@
-export default interface GetAdviceChoiceParams {
+export interface GetAdviceChoiceParams {
   chartId: number;
 }

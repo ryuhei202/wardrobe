@@ -1,7 +1,7 @@
-import Refinement from "../../../../styling/browse/Refinement";
-import GetRequest from "../../GetRequest";
-import GetIndexParams from "./GetIndexParams";
-import GetIndexFilterParams from "./GetIndexFilterParams";
+import { Refinement } from "../../../../styling/browse/Refinement";
+import { GetRequest } from "../../GetRequest";
+import { GetIndexParams } from "./GetIndexParams";
+import { GetIndexFilterParams } from "./GetIndexFilterParams";
 
 export const useGetIndexRequest = (
   karteId: number,

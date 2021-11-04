@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React, { Fragment } from "react";
 import { NgMemoCollectionData } from "../../../model/styling/karte/props_data/NgMemoCollectionData";
-import PopupImage from "../../shared/PopupImage";
+import { PopupImage } from "../../shared/PopupImage";
 import { useNgMemoCollectionPresenter } from "./presenter/UseNgMemoCollectionPresenter";
 
 interface NgMemoCollectionProps {

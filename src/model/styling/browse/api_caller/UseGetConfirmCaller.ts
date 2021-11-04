@@ -1,10 +1,10 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { ChartId } from "../../../ChartId";
 import { useGetConfirmRequest } from "../../../api/request/styling/browse/UseGetConfirmRequest";
-import ConfirmResponse from "../../../api/response/styling/browse/ConfirmResponse";
+import { ConfirmResponse } from "../../../api/response/styling/browse/ConfirmResponse";
 
 export interface GetConfirmCaller {
   isRunning: () => boolean;

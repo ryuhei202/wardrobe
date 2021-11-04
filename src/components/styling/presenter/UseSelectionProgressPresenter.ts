@@ -1,4 +1,4 @@
-import SelectionProgressData from "../../../model/styling/props_data/SelectionProgressData";
+import { SelectionProgressData } from "../../../model/styling/props_data/SelectionProgressData";
 
 export interface SelectionProgressPresenter {
   hasItemImage: (index: number) => boolean;

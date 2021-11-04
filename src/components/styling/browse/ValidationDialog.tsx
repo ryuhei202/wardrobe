@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { Error, Warning } from "@mui/icons-material";
 import React from "react";
-import ValidationError from "../../../model/styling/browse/ValidationError";
-import ValidationDialogCallback from "./callback/ValidationDialogCallback";
+import { ValidationError } from "../../../model/styling/browse/ValidationError";
+import { ValidationDialogCallback } from "./callback/ValidationDialogCallback";
 import { useValidationDialogPresenter } from "./presenter/UseValidationDialogPresenter";
 import { useValidationDialogStyle } from "./style/UseValidationDialogStyle";
 
@@ -23,7 +23,7 @@ export interface ValidationDialogProps {
   callback: ValidationDialogCallback;
 }
 
-const ValidationDialog = (props: ValidationDialogProps) => {
+export const ValidationDialog = (props: ValidationDialogProps) => {
   const classes = useValidationDialogStyle();
   const presenter = useValidationDialogPresenter(props.errors);
 
@@ -68,5 +68,3 @@ const ValidationDialog = (props: ValidationDialogProps) => {
     </Dialog>
   );
 };
-
-export default ValidationDialog;

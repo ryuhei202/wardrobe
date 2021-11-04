@@ -12,8 +12,8 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
-import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
-import SelectionProgressCallback from "./callback/SelectionProgressCallback";
+import { SelectionProgressData } from "../../model/styling/props_data/SelectionProgressData";
+import { SelectionProgressCallback } from "./callback/SelectionProgressCallback";
 import { useSelectionProgressPresenter } from "./presenter/UseSelectionProgressPresenter";
 import { useSelectionProgressStyle } from "./style/UseSelectionProgressStyle";
 
@@ -27,7 +27,7 @@ const initialState = {
   mouseY: null,
 };
 
-const SelectionProgress = (props: SelectionProgressProps) => {
+export const SelectionProgress = (props: SelectionProgressProps) => {
   const classes = useSelectionProgressStyle();
   const presenter = useSelectionProgressPresenter(props.data);
   const [position, setPosition] = useState<{
@@ -146,5 +146,3 @@ const SelectionProgress = (props: SelectionProgressProps) => {
     </div>
   );
 };
-
-export default SelectionProgress;

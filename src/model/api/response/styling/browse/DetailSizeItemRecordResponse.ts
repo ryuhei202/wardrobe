@@ -1,6 +1,6 @@
-import ValidationError from "../../../../styling/browse/ValidationError";
+import { ValidationError } from "../../../../styling/browse/ValidationError";
 
-export default interface DetailSizeItemRecordResponse {
+export interface DetailSizeItemRecordResponse {
   readonly itemId: number;
   readonly values: number[];
   readonly locationName: string;
