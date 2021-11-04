@@ -6,7 +6,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
 import DetailItemTableData from "../../../model/styling/browse/props_data/DetailItemTableData";
 import DetailItemTableCallback from "./callback/DetailItemTableCallback";

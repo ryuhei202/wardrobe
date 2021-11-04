@@ -1,4 +1,4 @@
-import { Dialog } from "@material-ui/core";
+import { Dialog } from "@mui/material";
 import React from "react";
 import ReactImageGallery from "react-image-gallery";
 import { MemberImageCollectionDialogData } from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";

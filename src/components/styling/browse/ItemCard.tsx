@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardMedia,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
 import ItemCardData from "../../../model/styling/browse/props_data/ItemCardData";
 import ItemCardCallback from "./callback/ItemCardCallback";

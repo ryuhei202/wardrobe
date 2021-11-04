@@ -1,4 +1,4 @@
-import { CircularProgress, Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@mui/material";
 import React from "react";
 import { useGetConfirmCaller } from "../../../model/styling/browse/api_caller/UseGetConfirmCaller";
 import SelectionConfirmData from "../../../model/styling/props_data/SelectionConfirmData";

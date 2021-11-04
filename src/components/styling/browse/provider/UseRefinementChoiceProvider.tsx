@@ -1,5 +1,5 @@
 import { useGetRefinementChoiceCaller } from "../../../../model/styling/browse/api_caller/UseGetRefinementChoiceCaller";
-import { CircularProgress, Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@mui/material";
 import ItemBrowse from "../ItemBrowse";
 import React from "react";
 import ItemBrowseCallback from "../callback/ItemBrowseCallback";

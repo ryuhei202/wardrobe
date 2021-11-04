@@ -1,12 +1,15 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { Theme } from "@mui/material/styles";
 
-export const useAppStyle = makeStyles((theme: Theme) =>
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
+
+export const useAppStyle = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
     },
     appBar: {
-      zIndex: theme.zIndex.drawer + 1,
+      zIndex: 10000,
     },
     drawer: {
       width: 360,
@@ -25,16 +28,12 @@ export const useAppStyle = makeStyles((theme: Theme) =>
     },
     browseContainer: {
       flexGrow: 1,
-      padding: theme.spacing(3),
     },
     coordePickButton: {
       float: "right",
     },
     title: {
       flexGrow: 1,
-    },
-    qrCodeContainer: {
-      padding: theme.spacing(3),
     },
   })
 );

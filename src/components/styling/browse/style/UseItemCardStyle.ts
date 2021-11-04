@@ -1,5 +1,8 @@
-import { pink } from "@material-ui/core/colors";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { pink } from "@mui/material/colors";
+import { Theme } from "@mui/material/styles";
+
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
 
 export const useItemCardStyle = makeStyles((theme: Theme) =>
   createStyles({

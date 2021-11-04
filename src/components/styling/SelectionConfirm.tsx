@@ -14,10 +14,11 @@ import {
   MenuItem,
   Paper,
   Select,
+  SelectChangeEvent,
   Typography,
-} from "@material-ui/core";
-import { ArrowBack } from "@material-ui/icons";
-import { Alert } from "@material-ui/lab";
+} from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
+import { Alert } from "@mui/material";
 import React, { Fragment, useState } from "react";
 import ConfirmResponse from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/styling/browse/ValidationErrorType";
@@ -46,7 +47,10 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
 
   return (
     <>
-      <IconButton onClick={() => props.callback.onCancelSelection()}>
+      <IconButton
+        onClick={() => props.callback.onCancelSelection()}
+        size="large"
+      >
         <ArrowBack />
       </IconButton>
       <Typography variant="h6" noWrap>
@@ -63,7 +67,7 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
             labelId="stylist-select-label"
             label="コーデ作成者"
             value={stylist ?? ""}
-            onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+            onChange={(event: SelectChangeEvent<string | number>) => {
               setStylist(event.target.value as number);
             }}
           >
@@ -145,7 +149,6 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
       </Button>
       <Button
         variant="contained"
-        color="default"
         className={classes.changeButton}
         onClick={() => setIsFeedbackDialogOpen(true)}
       >
@@ -167,11 +170,7 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
           onPostComplete: props.callback.onCancelSelection,
         }}
       />
-      <Dialog
-        open={apiCaller.isRunning()}
-        disableBackdropClick
-        disableEscapeKeyDown
-      >
+      <Dialog open={apiCaller.isRunning()} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
       <Dialog

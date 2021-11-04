@@ -5,7 +5,7 @@ import {
   ListItemAvatar,
   ListItemText,
   ListSubheader,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { Fragment } from "react";
 import { NgMemoCollectionData } from "../../../model/styling/karte/props_data/NgMemoCollectionData";
 import PopupImage from "../../shared/PopupImage";

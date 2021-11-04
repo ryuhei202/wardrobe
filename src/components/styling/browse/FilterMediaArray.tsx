@@ -1,4 +1,4 @@
-import { Checkbox, List, ListItem, ListItemIcon } from "@material-ui/core";
+import { Checkbox, List, ListItem, ListItemIcon } from "@mui/material";
 import React from "react";
 import { HostUrl } from "../../../model/HostUrl";
 import FilterMediaData from "../../../model/styling/browse/props_data/FilterMediaData";

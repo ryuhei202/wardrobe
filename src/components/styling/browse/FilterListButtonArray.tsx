@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@mui/material";
 import React from "react";
 import FilterListButtonData from "../../../model/styling/browse/props_data/FilterListButtonData";
 import FilterListButtonArrayCallback from "./callback/FilterListButtonArrayCallback";

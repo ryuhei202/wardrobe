@@ -6,8 +6,8 @@ import {
   ListItemText,
   ListSubheader,
   Paper,
-} from "@material-ui/core";
-import { Edit } from "@material-ui/icons";
+} from "@mui/material";
+import { Edit } from "@mui/icons-material";
 import React from "react";
 import AddedOutfitListData from "../../../model/styling/arrange/props_data/AddedOutfitListData";
 import AddedOutfitListCallback from "./callback/AddedOutfitListCallback";
@@ -40,6 +40,7 @@ const AddedOutfitList = (props: AddedOutfitListProps) => {
                 edge="end"
                 aria-label="edit"
                 onClick={() => props.callback.onClickEdit(index)}
+                size="large"
               >
                 <Edit />
               </IconButton>

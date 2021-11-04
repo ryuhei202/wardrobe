@@ -11,7 +11,7 @@ import {
   MenuItem,
   Select,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import AdviceChoiceResponse from "../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import { OutfitFormData } from "../../../model/styling/arrange/props_data/OutfitFormData";

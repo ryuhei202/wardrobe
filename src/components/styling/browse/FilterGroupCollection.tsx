@@ -5,8 +5,8 @@ import {
   List,
   TextField,
   Typography,
-} from "@material-ui/core";
-import { ExpandMore, Search } from "@material-ui/icons";
+} from "@mui/material";
+import { ExpandMore, Search } from "@mui/icons-material";
 import React from "react";
 import FilterGroupCollectionCallback from "./callback/FilterGroupCollectionCallback";
 import FilterCategoryGroup from "./FilterCategoryGroup";

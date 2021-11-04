@@ -1,4 +1,4 @@
-import { Drawer, Paper, Toolbar } from "@material-ui/core";
+import { Drawer, Paper, Toolbar } from "@mui/material";
 import React from "react";
 import ArrangeContainer from "./arrange/ArrangeContainer";
 import { useStylingHandler } from "./handler/UseStylingHandler";

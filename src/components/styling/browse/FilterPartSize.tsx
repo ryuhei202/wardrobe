@@ -1,4 +1,10 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import React from "react";
 import { FilterPartSizeData } from "../../../model/styling/browse/props_data/FilterPartSizeData";
 import { FilterPartSizeCallback } from "./callback/FilterPartSizeCallback";
@@ -11,7 +17,7 @@ interface FilterPartSizeProps {
 }
 
 export const FilterPartSize = (props: FilterPartSizeProps) => {
-  const handlePresetChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handlePresetChange = (event: SelectChangeEvent<number | string>) => {
     props.callback.onPresetChanged(event.target.value as number);
   };
   const classes = useFilterPartSizeStyle();
