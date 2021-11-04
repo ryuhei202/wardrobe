@@ -9,8 +9,8 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-} from "@material-ui/core";
-import { Error, Warning } from "@material-ui/icons";
+} from "@mui/material";
+import { Error, Warning } from "@mui/icons-material";
 import React from "react";
 import ValidationError from "../../../model/styling/browse/ValidationError";
 import ValidationDialogCallback from "./callback/ValidationDialogCallback";
@@ -28,7 +28,7 @@ const ValidationDialog = (props: ValidationDialogProps) => {
   const presenter = useValidationDialogPresenter(props.errors);
 
   return (
-    <Dialog open={props.isOpen} disableBackdropClick disableEscapeKeyDown>
+    <Dialog open={props.isOpen} disableEscapeKeyDown>
       <DialogTitle>コーデバリデーション</DialogTitle>
       <DialogContent>
         <List>
@@ -53,7 +53,6 @@ const ValidationDialog = (props: ValidationDialogProps) => {
       <DialogActions>
         <Button
           variant="contained"
-          color="default"
           onClick={props.callback.onClickSelectButton}
         >
           無視して選択

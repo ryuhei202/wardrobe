@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardMedia,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { Fragment } from "react";
 import SelectedItem from "../../model/styling/SelectedItem";
 import { useSelectedItemArrayPresenter } from "./presenter/UseSelectedItemArrayPresenter";

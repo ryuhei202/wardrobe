@@ -1,4 +1,4 @@
-import { List, Slider, Typography } from "@material-ui/core";
+import { List, Slider, Typography } from "@mui/material";
 import React, { Fragment } from "react";
 import { FilterSliderData } from "../../../model/styling/browse/props_data/FilterSliderData";
 import { FilterSliderArrayCallback } from "./callback/FilterSliderArrayCallback";

@@ -6,8 +6,8 @@ import {
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-} from "@material-ui/core";
-import { ListAlt, PhotoLibrary } from "@material-ui/icons";
+} from "@mui/material";
+import { ListAlt, PhotoLibrary } from "@mui/icons-material";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
 import { useKarteHandler } from "./handler/UseKarteHandler";
 import { useKartePresenter } from "./presenter/UseKartePresenter";
@@ -37,6 +37,7 @@ export const Karte = (props: KarteProps) => {
           <IconButton
             color="primary"
             onClick={handler.setMemberImageDialogOpen}
+            size="large"
           >
             <PhotoLibrary />
           </IconButton>
@@ -49,7 +50,11 @@ export const Karte = (props: KarteProps) => {
       <ListItem>
         <ListItemText>
           過去のコーデ：
-          <IconButton color="primary" onClick={handler.setPastOutfitDialogOpen}>
+          <IconButton
+            color="primary"
+            onClick={handler.setPastOutfitDialogOpen}
+            size="large"
+          >
             <ListAlt />
           </IconButton>
           <PastOutfitCollectionDialog

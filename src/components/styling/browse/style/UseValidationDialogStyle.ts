@@ -1,5 +1,8 @@
-import { orange, red } from "@material-ui/core/colors";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { orange, red } from "@mui/material/colors";
+import { Theme } from "@mui/material/styles";
+
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
 
 export const useValidationDialogStyle = makeStyles((theme: Theme) =>
   createStyles({

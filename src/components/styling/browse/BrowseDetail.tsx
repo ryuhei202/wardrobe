@@ -1,5 +1,5 @@
-import { Box, Button, IconButton, Paper, Typography } from "@material-ui/core";
-import { ArrowBack } from "@material-ui/icons";
+import { Box, Button, IconButton, Paper, Typography } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
 import React from "react";
 import ReactImageGallery from "react-image-gallery";
 import DetailResponse from "../../../model/api/response/styling/browse/DetailResponse";
@@ -56,7 +56,10 @@ const BrowseDetail = (props: BrowseDetailProps) => {
 
   return (
     <>
-      <IconButton onClick={() => props.callback.onClickBackButton()}>
+      <IconButton
+        onClick={() => props.callback.onClickBackButton()}
+        size="large"
+      >
         <ArrowBack />
       </IconButton>
       <Paper className={classes.itemInfo}>

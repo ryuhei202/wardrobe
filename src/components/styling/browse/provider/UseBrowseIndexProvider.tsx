@@ -1,9 +1,9 @@
-import { CircularProgress, Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@mui/material";
 import React from "react";
 import Refinement from "../../../../model/styling/browse/Refinement";
 import { useGetIndexCaller } from "../../../../model/styling/browse/api_caller/UseGetIndexCaller";
 import ItemCardCollection from "../ItemCardCollection";
-import { Pagination } from "@material-ui/lab";
+import { Pagination } from "@mui/material";
 import ItemCardCollectionCallback from "../callback/ItemCardCollectionCallback";
 import ItemBrowsePaginationCallback from "../callback/ItemBrowsePaginationCallback";
 

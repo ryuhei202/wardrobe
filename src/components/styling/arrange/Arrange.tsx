@@ -5,9 +5,9 @@ import {
   IconButton,
   Snackbar,
   Typography,
-} from "@material-ui/core";
-import { ArrowBack } from "@material-ui/icons";
-import { Alert } from "@material-ui/lab";
+} from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
+import { Alert } from "@mui/material";
 import React from "react";
 import AdviceChoiceResponse from "../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import ArrangeData from "../../../model/styling/arrange/props_data/ArrangeData";
@@ -29,7 +29,10 @@ export const Arrange = (props: ArrangeProps) => {
 
   return (
     <>
-      <IconButton onClick={() => props.callback.onClickBackButton()}>
+      <IconButton
+        onClick={() => props.callback.onClickBackButton()}
+        size="large"
+      >
         <ArrowBack />
       </IconButton>
       <br />
@@ -59,7 +62,6 @@ export const Arrange = (props: ArrangeProps) => {
       )}
       <Dialog
         open={handler.createOutfitCaller.isRunning()}
-        disableBackdropClick
         disableEscapeKeyDown
       >
         <CircularProgress />

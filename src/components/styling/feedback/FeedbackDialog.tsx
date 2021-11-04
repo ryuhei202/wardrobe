@@ -14,8 +14,8 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   Typography,
-} from "@material-ui/core";
-import { Image } from "@material-ui/icons";
+} from "@mui/material";
+import { Image } from "@mui/icons-material";
 import React, { useState } from "react";
 import { usePostNotifyLostCaller } from "../../../model/styling/feedback/api_caller/UsePostNotifyLostCaller";
 import FeedbackDialogData from "../../../model/styling/feedback/props_data/FeedbackDialogData";
@@ -94,11 +94,7 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog
-        open={apiCaller.isRunning()}
-        disableBackdropClick
-        disableEscapeKeyDown
-      >
+      <Dialog open={apiCaller.isRunning()} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
       <Dialog

@@ -1,4 +1,4 @@
-import { CircularProgress, Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@mui/material";
 import React from "react";
 import { useGetAdviceChoiceCaller } from "../../../../model/styling/arrange/api_caller/UseGetAdviceChoiceCaller";
 import ArrangeData from "../../../../model/styling/arrange/props_data/ArrangeData";

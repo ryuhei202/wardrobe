@@ -21,11 +21,12 @@ import { ValueRefinement } from "../../../../model/styling/browse/ValueRefinemen
 import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
 import { useNgRefinementHandler } from "./UseNgRefinementHandler";
+import { SelectChangeEvent } from "@mui/material";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
   selectedPreregisteredItemId: number | null;
-  onSortChanged: () => (event: React.ChangeEvent<{ value: unknown }>) => void;
+  onSortChanged: () => (event: SelectChangeEvent<string | number>) => void;
   paginationCallback: () => ItemBrowsePaginationCallback;
   filterGroupCollectionCallback: () => FilterGroupCollectionCallback;
   appliedFiltersCallback: () => AppliedFiltersCallback;
@@ -339,9 +340,7 @@ export const useItemBrowseHandler = (
     }
   };
 
-  const onSortChanged = () => (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
+  const onSortChanged = () => (event: SelectChangeEvent<string | number>) => {
     const index = parseInt(event.target.value as string);
     const newRefinement = {
       ...currentRefinement,

@@ -10,7 +10,7 @@ import {
   Stepper,
   Tooltip,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { Fragment, useState } from "react";
 import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
 import SelectionProgressCallback from "./callback/SelectionProgressCallback";
