@@ -1,4 +1,4 @@
-import { Theme } from "@mui/material/styles";
+import zIndex from "@mui/material/styles/zIndex";
 
 import createStyles from "@mui/styles/createStyles";
 import makeStyles from "@mui/styles/makeStyles";
@@ -9,7 +9,7 @@ export const useAppStyle = makeStyles(() =>
       display: "flex",
     },
     appBar: {
-      zIndex: 10000,
+      zIndex: zIndex.drawer + 1,
     },
     drawer: {
       width: 360,
