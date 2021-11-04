@@ -1,6 +1,6 @@
-import SelectedItem from "../SelectedItem";
+import { SelectedItem } from "../SelectedItem";
 
-export default interface SelectionProgressData {
+export interface SelectionProgressData {
   readonly rentableItemNum: number;
   readonly selectedIndex: number;
   readonly items: SelectedItem[];

@@ -1,6 +1,6 @@
-import GetDetailFilterParams from "./GetDetailFilterParams";
+import { GetDetailFilterParams } from "./GetDetailFilterParams";
 
-export default interface GetDetailParams {
+export interface GetDetailParams {
   chartId: number;
   preregisteredItemId: number;
   filter: GetDetailFilterParams;

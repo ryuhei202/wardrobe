@@ -1,6 +1,6 @@
-import FilterMediaResponse from "./FilterMediaResponse";
-import FilterResponse from "./FilterResponse";
-import LargeCategoryChoiceResponse from "./LargeCategoryChoiceResponse";
+import { FilterMediaResponse } from "./FilterMediaResponse";
+import { FilterResponse } from "./FilterResponse";
+import { LargeCategoryChoiceResponse } from "./LargeCategoryChoiceResponse";
 import { FilterPartSizeResponse } from "./FilterPartSizeResponse";
 
 export interface FilterChoiceResponse {

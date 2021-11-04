@@ -1,15 +1,15 @@
 import { Drawer, Paper, Toolbar } from "@mui/material";
 import React from "react";
-import ArrangeContainer from "./arrange/ArrangeContainer";
+import { ArrangeContainer } from "./arrange/ArrangeContainer";
 import { useStylingHandler } from "./handler/UseStylingHandler";
-import KarteContainer from "./karte/KarteContainer";
+import { KarteContainer } from "./karte/KarteContainer";
 import { useStylingStyle } from "./style/UseStylingStyle";
-import SelectionConfirmContainer from "./SelectionConfirmContainer";
+import { SelectionConfirmContainer } from "./SelectionConfirmContainer";
 import { MainContentType } from "../../model/styling/MainContentType";
-import BrowseContainer from "./browse/BrowseContainer";
-import SelectionProgress from "./SelectionProgress";
+import { BrowseContainer } from "./browse/BrowseContainer";
+import { SelectionProgress } from "./SelectionProgress";
 
-const Styling = () => {
+export const Styling = () => {
   const classes = useStylingStyle();
   const handler = useStylingHandler();
 
@@ -71,5 +71,3 @@ const Styling = () => {
     </>
   );
 };
-
-export default Styling;

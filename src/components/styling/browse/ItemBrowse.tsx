@@ -1,11 +1,11 @@
 import { FormControl, Select, Toolbar, Typography } from "@mui/material";
 import { useItemBrowseHandler } from "./handler/UseItemBrowseHandler";
-import FilterGroupCollection from "./FilterGroupCollection";
-import AppliedFilterArray from "./AppliedFilterArray";
-import RefinementChoiceResponse from "../../../model/api/response/styling/browse/RefinementChoiceResponse";
+import { FilterGroupCollection } from "./FilterGroupCollection";
+import { AppliedFilterArray } from "./AppliedFilterArray";
+import { RefinementChoiceResponse } from "../../../model/api/response/styling/browse/RefinementChoiceResponse";
 import { useBrowseIndexProvider } from "./provider/UseBrowseIndexProvider";
-import BrowseDetailContainer from "./BrowseDetailContainer";
-import ItemBrowseCallback from "./callback/ItemBrowseCallback";
+import { BrowseDetailContainer } from "./BrowseDetailContainer";
+import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
 import { useItemBrowseStyle } from "./style/UseItemBrowseStyle";
 
 export interface ItemBrowseProps {
@@ -14,7 +14,7 @@ export interface ItemBrowseProps {
   currentSelectedItemId: number | null;
 }
 
-const ItemBrowse = (props: ItemBrowseProps) => {
+export const ItemBrowse = (props: ItemBrowseProps) => {
   const classes = useItemBrowseStyle();
 
   const handler = useItemBrowseHandler(props.response, props.callback);
@@ -79,5 +79,3 @@ const ItemBrowse = (props: ItemBrowseProps) => {
     </>
   );
 };
-
-export default ItemBrowse;

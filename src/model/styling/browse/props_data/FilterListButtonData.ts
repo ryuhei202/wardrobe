@@ -1,3 +1,3 @@
-export default interface FilterListButtonData {
+export interface FilterListButtonData {
   readonly name: string;
 }

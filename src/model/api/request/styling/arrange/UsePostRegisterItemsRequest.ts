@@ -1,5 +1,5 @@
-import PostRequest from "../../PostRequest";
-import PostRegisterItemsParamsParams from "./PostRegisterItemsParams";
+import { PostRequest } from "../../PostRequest";
+import { PostRegisterItemsParamsParams } from "./PostRegisterItemsParams";
 
 export const useRegisterItemsRequest = (
   karteId: number,

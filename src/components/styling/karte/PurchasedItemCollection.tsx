@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { PurchasedItemCollectionData } from "../../../model/styling/karte/props_data/PurchasedItemCollectionData";
-import PopupImage from "../../shared/PopupImage";
+import { PopupImage } from "../../shared/PopupImage";
 import { usePurchasedItemCollectionPresenter } from "./presenter/UsePurchasedItemCollectionPresenter";
 
 interface PurchasedItemCollectionProps {

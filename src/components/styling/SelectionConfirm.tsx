@@ -20,13 +20,13 @@ import {
 import { ArrowBack } from "@mui/icons-material";
 import { Alert } from "@mui/material";
 import React, { Fragment, useState } from "react";
-import ConfirmResponse from "../../model/api/response/styling/browse/ConfirmResponse";
+import { ConfirmResponse } from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/styling/browse/ValidationErrorType";
 import { usePostRegisterItemsCaller } from "../../model/styling/arrange/api_caller/UsePostRegisterItemsCaller";
-import SelectionConfirmData from "../../model/styling/props_data/SelectionConfirmData";
-import SelectionConfirmCallback from "./callback/SelectionConfirmCallback";
-import FeedbackDialog from "./feedback/FeedbackDialog";
-import SelectedItemArray from "./SelectedItemArray";
+import { SelectionConfirmData } from "../../model/styling/props_data/SelectionConfirmData";
+import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
+import { FeedbackDialog } from "./feedback/FeedbackDialog";
+import { SelectedItemArray } from "./SelectedItemArray";
 import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
 
 export interface SelectionConfirmProps {
@@ -35,7 +35,7 @@ export interface SelectionConfirmProps {
   callback: SelectionConfirmCallback;
 }
 
-const SelectionConfirm = (props: SelectionConfirmProps) => {
+export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const classes = useSelectionConfirmStyle();
   const [isFeedbackDialogOpen, setIsFeedbackDialogOpen] = useState(false);
   const [stylist, setStylist] = useState<number | null>(null);
@@ -185,5 +185,3 @@ const SelectionConfirm = (props: SelectionConfirmProps) => {
     </>
   );
 };
-
-export default SelectionConfirm;

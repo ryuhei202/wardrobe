@@ -1,10 +1,10 @@
 import { FilterPartSizeData } from "./FilterPartSizeData";
-import FilterCategoryGroupData from "./FilterCategoryGroupData";
-import FilterCheckboxData from "./FilterCheckboxData";
-import FilterMediaData from "./FilterMediaData";
-import FilterSizeData from "./FilterSizeData";
+import { FilterCategoryGroupData } from "./FilterCategoryGroupData";
+import { FilterCheckboxData } from "./FilterCheckboxData";
+import { FilterMediaData } from "./FilterMediaData";
+import { FilterSizeData } from "./FilterSizeData";
 
-export default interface FilterGroupCollectionData {
+export interface FilterGroupCollectionData {
   readonly categoryData: FilterCategoryGroupData;
   readonly sizeData: FilterSizeData[];
   readonly partSizeData: FilterPartSizeData;

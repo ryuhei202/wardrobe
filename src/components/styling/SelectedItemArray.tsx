@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment } from "react";
-import SelectedItem from "../../model/styling/SelectedItem";
+import { SelectedItem } from "../../model/styling/SelectedItem";
 import { useSelectedItemArrayPresenter } from "./presenter/UseSelectedItemArrayPresenter";
 import { useSelectedItemArrayStyle } from "./style/UseSelectedItemArrayStyle";
 
@@ -14,7 +14,7 @@ export interface SelectionConfirmProps {
   data: SelectedItem[];
 }
 
-const SelectedItemArray = (props: SelectionConfirmProps) => {
+export const SelectedItemArray = (props: SelectionConfirmProps) => {
   const classes = useSelectedItemArrayStyle();
   const presenter = useSelectedItemArrayPresenter(props.data);
 
@@ -46,5 +46,3 @@ const SelectedItemArray = (props: SelectionConfirmProps) => {
     </div>
   );
 };
-
-export default SelectedItemArray;

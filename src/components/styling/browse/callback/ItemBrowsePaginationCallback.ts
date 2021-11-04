@@ -1,3 +1,3 @@
-export default interface ItemBrowsePaginationCallback {
+export interface ItemBrowsePaginationCallback {
   onPageChanged: (page: number) => void;
 }

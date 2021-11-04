@@ -1,3 +1,3 @@
-export default interface ItemCardCallback {
+export interface ItemCardCallback {
   onClick: () => void;
 }

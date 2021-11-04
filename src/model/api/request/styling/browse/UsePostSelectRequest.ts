@@ -1,4 +1,4 @@
-import PostRequest from "../../PostRequest";
+import { PostRequest } from "../../PostRequest";
 
 interface PostSelectParams {
   itemId: number;

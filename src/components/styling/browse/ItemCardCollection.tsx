@@ -1,8 +1,8 @@
 import React from "react";
-import ItemCardResponse from "../../../model/api/response/styling/browse/ItemCardResponse";
-import ItemCardCollectionCallback from "./callback/ItemCardCollectionCallback";
+import { ItemCardResponse } from "../../../model/api/response/styling/browse/ItemCardResponse";
+import { ItemCardCollectionCallback } from "./callback/ItemCardCollectionCallback";
 import { useItemCardCollectionHandler } from "./handler/UseItemCardCollectionHandler";
-import ItemCard from "./ItemCard";
+import { ItemCard } from "./ItemCard";
 import { useItemCardCollectionStyle } from "./style/UseItemCardCollectionStyle";
 
 interface ItemCardCollectionProps {
@@ -10,7 +10,7 @@ interface ItemCardCollectionProps {
   callback: ItemCardCollectionCallback;
 }
 
-const ItemCardCollection = (props: ItemCardCollectionProps) => {
+export const ItemCardCollection = (props: ItemCardCollectionProps) => {
   const classes = useItemCardCollectionStyle();
   const handler = useItemCardCollectionHandler(props.response, props.callback);
 
@@ -26,5 +26,3 @@ const ItemCardCollection = (props: ItemCardCollectionProps) => {
     </div>
   );
 };
-
-export default ItemCardCollection;

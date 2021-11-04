@@ -1,17 +1,17 @@
 import { useState } from "react";
-import DetailItemTableCallback from "../callback/DetailItemTableCallback";
-import DetailSizeButtonArrayCallback from "../callback/DetailSizeButtonArrayCallback";
-import DetailSizeButtonData from "../../../../model/styling/browse/props_data/DetailSizeButtonData";
-import DetailItemTableData from "../../../../model/styling/browse/props_data/DetailItemTableData";
-import DetailResponse from "../../../../model/api/response/styling/browse/DetailResponse";
-import BrowseDetailCallback from "../callback/BrowseDetailCallback";
-import SelectedItem from "../../../../model/styling/SelectedItem";
-import PartSize from "../../../../model/styling/PartSize";
-import DetailSizeItemRecordResponse from "../../../../model/api/response/styling/browse/DetailSizeItemRecordResponse";
-import ValidationDialogCallback from "../callback/ValidationDialogCallback";
-import ValidationError from "../../../../model/styling/browse/ValidationError";
+import { DetailItemTableCallback } from "../callback/DetailItemTableCallback";
+import { DetailSizeButtonArrayCallback } from "../callback/DetailSizeButtonArrayCallback";
+import { DetailSizeButtonData } from "../../../../model/styling/browse/props_data/DetailSizeButtonData";
+import { DetailItemTableData } from "../../../../model/styling/browse/props_data/DetailItemTableData";
+import { DetailResponse } from "../../../../model/api/response/styling/browse/DetailResponse";
+import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
+import { SelectedItem } from "../../../../model/styling/SelectedItem";
+import { PartSize } from "../../../../model/styling/PartSize";
+import { DetailSizeItemRecordResponse } from "../../../../model/api/response/styling/browse/DetailSizeItemRecordResponse";
+import { ValidationDialogCallback } from "../callback/ValidationDialogCallback";
+import { ValidationError } from "../../../../model/styling/browse/ValidationError";
 import { DetailStatus } from "../../../../model/styling/browse/DetailStatus";
-import PostSelectCallback from "../callback/PostSelectCallback";
+import { PostSelectCallback } from "../callback/PostSelectCallback";
 
 export interface BrowseDetailHandler {
   selectedItem: SelectedItem | null;

@@ -1,8 +1,8 @@
 import { CircularProgress, Typography } from "@mui/material";
 import React from "react";
-import ItemBrowseCallback from "../callback/ItemBrowseCallback";
+import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
 import { useGetCategoryChoiceCaller } from "../../../../model/styling/browse/api_caller/UseGetCategoryChoiceCaller";
-import Browse from "../Browse";
+import { Browse } from "../Browse";
 
 export interface CategoryChoiceProvider {
   browseComponent: (

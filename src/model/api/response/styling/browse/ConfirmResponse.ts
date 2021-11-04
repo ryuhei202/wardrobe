@@ -1,7 +1,7 @@
-import SelectChoiceResponse from "./SelectChoiceResponse";
-import ValidationError from "../../../../styling/browse/ValidationError";
+import { SelectChoiceResponse } from "./SelectChoiceResponse";
+import { ValidationError } from "../../../../styling/browse/ValidationError";
 
-export default interface ConfirmResponse {
+export interface ConfirmResponse {
   readonly validateErrors: ValidationError[];
   readonly stylistChoice: SelectChoiceResponse[];
   readonly misplacedItems: string[];

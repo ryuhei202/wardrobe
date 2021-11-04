@@ -7,8 +7,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { SearchPrerequisiteResponse } from "../../../model/api/response/styling/browse/SearchPrerequisiteResponse";
-import ItemBrowseCallback from "./callback/ItemBrowseCallback";
-import ItemBrowseContainer from "./ItemBrowseContainer";
+import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
+import { ItemBrowseContainer } from "./ItemBrowseContainer";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
 interface BrowseProps {
@@ -17,7 +17,7 @@ interface BrowseProps {
   currentSelectedItemId: number | null;
 }
 
-const Browse = (props: BrowseProps) => {
+export const Browse = (props: BrowseProps) => {
   const classes = useBrowseStyle();
   const [categoryId, setCategoryId] = useState<number | null>(null);
 
@@ -56,5 +56,3 @@ const Browse = (props: BrowseProps) => {
     </>
   );
 };
-
-export default Browse;

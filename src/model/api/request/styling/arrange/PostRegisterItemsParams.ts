@@ -1,4 +1,4 @@
-export default interface PostRegisterItemsParamsParams {
+export interface PostRegisterItemsParamsParams {
   chartId: number;
   adminId: number;
   itemIds: number[];

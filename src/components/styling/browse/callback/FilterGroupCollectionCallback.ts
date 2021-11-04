@@ -1,10 +1,10 @@
 import { FilterPartSizeCallback } from "./FilterPartSizeCallback";
-import FilterCategoryGroupCallback from "./FilterCategoryGroupCallback";
-import FilterCheckboxArrayCallback from "./FilterCheckboxArrayCallback";
-import FilterMediaArrayCallback from "./FilterMediaArrayCallback";
-import FilterSizeArrayCallback from "./FilterSizeArrayCallback";
+import { FilterCategoryGroupCallback } from "./FilterCategoryGroupCallback";
+import { FilterCheckboxArrayCallback } from "./FilterCheckboxArrayCallback";
+import { FilterMediaArrayCallback } from "./FilterMediaArrayCallback";
+import { FilterSizeArrayCallback } from "./FilterSizeArrayCallback";
 
-export default interface FilterGroupCollectionCallback {
+export interface FilterGroupCollectionCallback {
   categoryCallback: FilterCategoryGroupCallback;
   sizeCallback: FilterSizeArrayCallback;
   partSizeCallback: FilterPartSizeCallback;

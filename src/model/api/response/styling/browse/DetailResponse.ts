@@ -1,9 +1,9 @@
-import ImagePathResponse from "../ImagePathResponse";
-import DetailColorResponse from "./DetailColorResponse";
-import DetailSizeResponse from "./DetailSizeResponse";
-import DetailSizeItemRecordResponse from "./DetailSizeItemRecordResponse";
+import { ImagePathResponse } from "../ImagePathResponse";
+import { DetailColorResponse } from "./DetailColorResponse";
+import { DetailSizeResponse } from "./DetailSizeResponse";
+import { DetailSizeItemRecordResponse } from "./DetailSizeItemRecordResponse";
 
-export default interface DetailResponse {
+export interface DetailResponse {
   readonly itemImagePath: ImagePathResponse;
   readonly seriesName: string | null;
   readonly categoryName: string;

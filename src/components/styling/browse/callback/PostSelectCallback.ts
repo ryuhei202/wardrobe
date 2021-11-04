@@ -1,4 +1,4 @@
-export default interface PostSelectCallback {
+export interface PostSelectCallback {
   onSuccess: () => void;
   onFailure: () => void;
 }

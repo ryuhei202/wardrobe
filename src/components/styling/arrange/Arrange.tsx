@@ -9,10 +9,10 @@ import {
 import { ArrowBack } from "@mui/icons-material";
 import { Alert } from "@mui/material";
 import React from "react";
-import AdviceChoiceResponse from "../../../model/api/response/styling/arrange/AdviceChoiceResponse";
-import ArrangeData from "../../../model/styling/arrange/props_data/ArrangeData";
-import AddedOutfitList from "./AddedOutfitList";
-import ArrangeCallback from "./callback/ArrangeCallback";
+import { AdviceChoiceResponse } from "../../../model/api/response/styling/arrange/AdviceChoiceResponse";
+import { ArrangeData } from "../../../model/styling/arrange/props_data/ArrangeData";
+import { AddedOutfitList } from "./AddedOutfitList";
+import { ArrangeCallback } from "./callback/ArrangeCallback";
 import { useArrangeHandler } from "./handler/UseArrageHandler";
 import { OutfitForm } from "./OutfitForm";
 import { useArrangeStyle } from "./style/UseArrangeStyle";

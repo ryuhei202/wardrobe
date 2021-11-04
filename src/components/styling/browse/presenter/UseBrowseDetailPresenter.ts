@@ -1,5 +1,5 @@
 import { HostUrl } from "./../../../../model/HostUrl";
-import DetailResponse from "../../../../model/api/response/styling/browse/DetailResponse";
+import { DetailResponse } from "../../../../model/api/response/styling/browse/DetailResponse";
 
 export interface BrowseDetailPresenter {
   imageGalleryList: () => {

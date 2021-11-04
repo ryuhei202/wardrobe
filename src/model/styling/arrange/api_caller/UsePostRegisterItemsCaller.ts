@@ -1,6 +1,6 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useEffect, useState } from "react";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { ChartId } from "../../../ChartId";
 import { usePostClient } from "../../../api/client/UsePostClient";
 import { useRegisterItemsRequest } from "../../../api/request/styling/arrange/UsePostRegisterItemsRequest";

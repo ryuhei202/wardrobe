@@ -1,6 +1,6 @@
-import GetIndexFilterPartSizeParams from "./GetIndexFilterPartSizeParams";
+import { GetIndexFilterPartSizeParams } from "./GetIndexFilterPartSizeParams";
 
-export default interface GetDetailFilterParams {
+export interface GetDetailFilterParams {
   itemId?: number;
   size: number[];
   partSize: GetIndexFilterPartSizeParams[];

@@ -1,6 +1,6 @@
-import FilterResponse from "./FilterResponse";
+import { FilterResponse } from "./FilterResponse";
 
-export default interface MediumCategoryChoiceResponse {
+export interface MediumCategoryChoiceResponse {
   readonly id: number;
   readonly name: string;
   readonly smallCategory: FilterResponse[];

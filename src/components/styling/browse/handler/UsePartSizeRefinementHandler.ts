@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FilterPartSizeData } from "./../../../../model/styling/browse/props_data/FilterPartSizeData";
 import { FilterPartSizeCallback } from "./../callback/FilterPartSizeCallback";
 import { FilterPartSizeResponse } from "./../../../../model/api/response/styling/browse/FilterPartSizeResponse";
-import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import { AppliedFilterData } from "../../../../model/styling/browse/props_data/AppliedFilterData";
 import { ValueRefinement } from "../../../../model/styling/browse/ValueRefinement";
 
 export interface PartSizeRefinementHandler {

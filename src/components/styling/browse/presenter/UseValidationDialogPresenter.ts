@@ -1,5 +1,5 @@
 import { ValidationErrorType } from "../../../../model/styling/browse/ValidationErrorType";
-import ValidationError from "../../../../model/styling/browse/ValidationError";
+import { ValidationError } from "../../../../model/styling/browse/ValidationError";
 
 export interface ValidationDialogPresenter {
   contentList: () => {

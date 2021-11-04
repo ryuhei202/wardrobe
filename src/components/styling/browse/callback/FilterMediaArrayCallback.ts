@@ -1,3 +1,3 @@
-export default interface FilterMediaArrayCallback {
+export interface FilterMediaArrayCallback {
   onClick: (index: number) => void;
 }

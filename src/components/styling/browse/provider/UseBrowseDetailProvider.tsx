@@ -8,9 +8,9 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useGetDetailCaller } from "../../../../model/styling/browse/api_caller/UseGetDetailCaller";
-import Refinement from "../../../../model/styling/browse/Refinement";
-import BrowseDetail from "../BrowseDetail";
-import BrowseDetailCallback from "../callback/BrowseDetailCallback";
+import { Refinement } from "../../../../model/styling/browse/Refinement";
+import { BrowseDetail } from "../BrowseDetail";
+import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
 
 export interface BrowseDetailProvider {
   browseDetailComponent: (

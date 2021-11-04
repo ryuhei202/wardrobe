@@ -1,6 +1,6 @@
-import SelectedItem from "../../../../model/styling/SelectedItem";
+import { SelectedItem } from "../../../../model/styling/SelectedItem";
 
-export default interface KarteContainerCallback {
+export interface KarteContainerCallback {
   onKarteFetched: (
     isItemRegistered: boolean,
     registeredItems: SelectedItem[],

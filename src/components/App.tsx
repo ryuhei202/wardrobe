@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar/AppBar";
 import { Button, Dialog, Paper, Toolbar, Typography } from "@mui/material";
 import { theme } from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";
-import Styling from "./styling/Styling";
+import { Styling } from "./styling/Styling";
 import {
   ThemeProvider,
   Theme,
@@ -18,7 +18,7 @@ declare module "@mui/styles/defaultTheme" {
   interface DefaultTheme extends Theme {}
 }
 
-const App = () => {
+export const App = () => {
   const classes = useAppStyle();
   const [isQRCodeOpen, setIsQRCodeOpen] = useState(false);
 
@@ -55,5 +55,3 @@ const App = () => {
     </StyledEngineProvider>
   );
 };
-
-export default App;

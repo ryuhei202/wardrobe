@@ -1,5 +1,5 @@
-import GetRequest from "../../GetRequest";
-import GetConfirmParams from "./GetConfirmParams";
+import { GetRequest } from "../../GetRequest";
+import { GetConfirmParams } from "./GetConfirmParams";
 
 export const useGetConfirmRequest = (
   karteId: number,

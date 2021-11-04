@@ -1,4 +1,4 @@
-export default interface ItemCardData {
+export interface ItemCardData {
   readonly mainColorImagePath: string;
   readonly subColorImagePath: string;
   readonly seriesName: string;

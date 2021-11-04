@@ -1,6 +1,6 @@
-import DetailItemTableRowData from "./DetailItemTableRowData";
+import { DetailItemTableRowData } from "./DetailItemTableRowData";
 
-export default interface DetailItemTableData {
+export interface DetailItemTableData {
   readonly columns: string[];
   readonly rows: DetailItemTableRowData[];
 }
