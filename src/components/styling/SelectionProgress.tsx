@@ -74,16 +74,12 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
         title={
           <Typography variant="body2">
             {props.data.items.length > index
-              ? props.data.items[index].partSizes
-                  .map(
-                    (partSize) => `${partSize.name}: ${partSize.value ?? ""}`
-                  )
-                  .map((text, index) => (
-                    <Fragment key={index}>
-                      {text}
-                      <br />
-                    </Fragment>
-                  ))
+              ? props.data.items[index].partSizes.map((partSize, index) => (
+                  <Fragment key={index}>
+                    {`${partSize.name}: ${partSize.value ?? ""}`}
+                    <br />
+                  </Fragment>
+                ))
               : []}
           </Typography>
         }
