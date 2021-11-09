@@ -25,12 +25,7 @@ export interface ValidationDialogProps {
 
 export const ValidationDialog = (props: ValidationDialogProps) => {
   const classes = useValidationDialogStyle();
-  const contentList = props.errors.map((row) => {
-    return {
-      isRejected: row.errorType === ValidationErrorType.Rejected,
-      message: row.message,
-    };
-  });
+
   return (
     <Dialog open={props.isOpen} disableEscapeKeyDown>
       <DialogTitle>コーデバリデーション</DialogTitle>
