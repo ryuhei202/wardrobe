@@ -1,20 +1,13 @@
-import {
-  CircularProgress,
-  FormControl,
-  Pagination,
-  Select,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { FormControl, Select, Toolbar, Typography } from "@mui/material";
+import React from "react";
 import { useItemBrowseHandler } from "./handler/UseItemBrowseHandler";
 import { FilterGroupCollection } from "./FilterGroupCollection";
 import { AppliedFilterArray } from "./AppliedFilterArray";
 import { RefinementChoiceResponse } from "../../../model/api/response/styling/browse/RefinementChoiceResponse";
+import { useBrowseIndexProvider } from "./provider/UseBrowseIndexProvider";
 import { BrowseDetailContainer } from "./BrowseDetailContainer";
 import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
 import { useItemBrowseStyle } from "./style/UseItemBrowseStyle";
-import { useGetIndexCaller } from "../../../model/styling/browse/api_caller/UseGetIndexCaller";
-import { ItemCardCollection } from "./ItemCardCollection";
 
 export interface ItemBrowseProps {
   response: RefinementChoiceResponse;
@@ -24,8 +17,9 @@ export interface ItemBrowseProps {
 
 export const ItemBrowse = (props: ItemBrowseProps) => {
   const classes = useItemBrowseStyle();
+
   const handler = useItemBrowseHandler(props.response, props.callback);
-  const searchApiCaller = useGetIndexCaller(handler.currentRefinement);
+  const provider = useBrowseIndexProvider(handler.currentRefinement);
 
   if (handler.selectedPreregisteredItemId) {
     return (
@@ -45,11 +39,7 @@ export const ItemBrowse = (props: ItemBrowseProps) => {
       </Typography>
       <Toolbar className={classes.itemBrowseHeader}>
         <div className={classes.searchResult}>
-          <Typography paragraph={true}>
-            検索結果
-            <br />
-            {searchApiCaller.response?.totalCount ?? 0}件
-          </Typography>
+          {provider.totalItemCountComponent()}
         </div>
         <div className={classes.appliedFilterContainer}>
           <Typography>適用済みフィルター</Typography>
@@ -80,37 +70,12 @@ export const ItemBrowse = (props: ItemBrowseProps) => {
           data={handler.filterGroupCollectionData()}
           callback={handler.filterGroupCollectionCallback()}
         />
-        {() => {
-          if (searchApiCaller.isRunning()) {
-            return <CircularProgress />;
-          } else if (searchApiCaller.errorResponse) {
-            return (
-              <Typography>{searchApiCaller.errorResponse.message}</Typography>
-            );
-          } else if (searchApiCaller.response) {
-            return (
-              <ItemCardCollection
-                response={searchApiCaller.response.itemCard}
-                callback={handler.itemCardCollectionCallback()}
-              />
-            );
-          } else {
-            return <></>;
-          }
-        }}
+        {provider.itemCardCollectionComponent(
+          handler.itemCardCollectionCallback()
+        )}
       </div>
       <div className={classes.paginationContainer}>
-        {
-          <Pagination
-            page={searchApiCaller.response?.pageNo ?? 0}
-            count={searchApiCaller.response?.totalPageNum ?? 0}
-            color="secondary"
-            onChange={(_event: object, page: number) => {
-              window.scrollTo(0, 0);
-              handler.paginationCallback().onPageChanged(page);
-            }}
-          />
-        }
+        {provider.paginationComponent(handler.paginationCallback())}
       </div>
     </>
   );

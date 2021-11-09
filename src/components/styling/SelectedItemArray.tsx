@@ -15,13 +15,7 @@ export interface SelectionConfirmProps {
 
 export const SelectedItemArray = (props: SelectionConfirmProps) => {
   const classes = useSelectedItemArrayStyle();
-  const sizeText = (index: number): string[] => {
-    let textList = ["サイズ情報:"];
-    props.data[index].partSizes.forEach((partSize) =>
-      textList.push(`${partSize.name}: ${partSize.value ?? ""}`)
-    );
-    return textList;
-  };
+
   return (
     <div className={classes.selectedItemsContainer}>
       {props.data.map((selectedItem, index) => (
@@ -37,9 +31,11 @@ export const SelectedItemArray = (props: SelectionConfirmProps) => {
             </Typography>
             <br />
             <Typography variant="body2">
-              {sizeText(index).map((rowText, index) => (
+              サイズ情報:
+              <br />
+              {props.data[index].partSizes.map((partSize, index) => (
                 <Fragment key={index}>
-                  {rowText}
+                  {`${partSize.name}: ${partSize.value ?? ""}`}
                   <br />
                 </Fragment>
               ))}

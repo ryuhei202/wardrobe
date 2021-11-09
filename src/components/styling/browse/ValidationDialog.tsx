@@ -36,10 +36,10 @@ export const ValidationDialog = (props: ValidationDialogProps) => {
       <DialogTitle>コーデバリデーション</DialogTitle>
       <DialogContent>
         <List>
-          {contentList.map((content, index) => (
+          {props.errors.map((content, index) => (
             <ListItem key={index}>
               <ListItemAvatar>
-                {content.isRejected ? (
+                {content.errorType === ValidationErrorType.Rejected ? (
                   <Avatar className={classes.error}>
                     <Error />
                   </Avatar>
