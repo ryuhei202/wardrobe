@@ -19,7 +19,7 @@ import { useArrangeStyle } from "./style/UseArrangeStyle";
 
 export interface ArrangeProps {
   data: ArrangeData;
-  response: AdviceChoiceResponse[];
+  response: AdviceChoiceResponse;
   callback: ArrangeCallback;
 }
 
@@ -54,7 +54,7 @@ export const Arrange = (props: ArrangeProps) => {
       {handler.editingOutfitIndex >= 0 ? (
         <OutfitForm
           data={handler.outfitFormData()}
-          response={props.response}
+          response={props.response.adviceCategories}
           callback={handler.outfitFormCallback()}
         />
       ) : (

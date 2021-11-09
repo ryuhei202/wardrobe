@@ -23,14 +23,14 @@ export interface ArrangeHandler {
 
 export const useArrangeHandler = (
   items: SelectedItem[],
-  responses: AdviceChoiceResponse[]
+  responses: AdviceChoiceResponse
 ): ArrangeHandler => {
   const defaultOutfit = {
     itemIds: [],
     adviceIds: [],
   };
 
-  const [outfits, setOutfits] = useState<Outfit[]>([]);
+  const [outfits, setOutfits] = useState<Outfit[]>(responses.selectedOutfits);
   const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(
     outfits.length
   );
@@ -66,8 +66,8 @@ export const useArrangeHandler = (
           ),
           advices: outfit.adviceIds.map((adviceId) => {
             let adviceTitle = "";
-            responses.forEach((response) => {
-              response.advice.forEach((advice) => {
+            responses.adviceCategories.forEach((category) => {
+              category.advice.forEach((advice) => {
                 if (advice.id === adviceId) {
                   adviceTitle = advice.title;
                 }
