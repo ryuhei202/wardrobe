@@ -114,6 +114,9 @@ export const useArrangeHandler = (
   const outfitFormCallback = (): OutfitFormCallback => {
     return {
       onClickAddOutfit: () => {
+        //着こなしアドバイスは4つまでなので、フロントで超えないようにする
+        if (editingOutfitIndex > 3) return;
+
         let newOutfits = [...outfits];
         if (editingOutfitIndex >= newOutfits.length) {
           newOutfits.push(editingOutfit);
