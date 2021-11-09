@@ -9,9 +9,9 @@ import { DetailItemTable } from "./DetailItemTable";
 import { DetailSizeButtonArray } from "./DetailSizeButtonArray";
 import { useBrowseDetailHandler } from "./handler/UseBrowseDetailHandler";
 import { PostSelectDialog } from "./PostSelectDialog";
-import { useBrowseDetailPresenter } from "./presenter/UseBrowseDetailPresenter";
 import { useBrowseDetailStyle } from "./style/UseBrowseDetailStyle";
 import { ValidationDialog } from "./ValidationDialog";
+import { HostUrl } from "../../../model/HostUrl";
 
 interface BrowseDetailProps {
   response: DetailResponse;
@@ -22,8 +22,19 @@ interface BrowseDetailProps {
 export const BrowseDetail = (props: BrowseDetailProps) => {
   const classes = useBrowseDetailStyle();
   const handler = useBrowseDetailHandler(props.response, props.callback);
-  const presenter = useBrowseDetailPresenter(props.response);
 
+  let itemImage = [
+    {
+      originalImagePath: props.response.itemImagePath.original,
+      thumbnailImagePath: props.response.itemImagePath.thumb,
+    },
+  ];
+  let outfitImages = props.response.outfitImagePaths.map((imagePath) => {
+    return {
+      originalImagePath: imagePath.original,
+      thumbnailImagePath: imagePath.thumb,
+    };
+  });
   let dialog;
   if (handler.selectedItem) {
     switch (handler.detailStatus) {
@@ -68,7 +79,7 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
             showFullscreenButton={false}
             showPlayButton={false}
             showNav={false}
-            items={presenter.imageGalleryList().map((image) => {
+            items={itemImage.concat(outfitImages).map((image) => {
               return {
                 original: image.originalImagePath,
                 thumbnail: image.thumbnailImagePath,
@@ -84,22 +95,22 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
             variant="h5"
             color="textSecondary"
           >
-            {presenter.seriesName()}
+            {props.response.seriesName ?? ""}
           </Typography>
           <Typography className={classes.itemInfoText} variant="h4">
-            {presenter.categoryName()}
+            {props.response.categoryName}
           </Typography>
           <Typography className={classes.itemInfoText} variant="h3">
-            {presenter.brandName()}
+            {props.response.brandName}
           </Typography>
           <Typography variant="body1">
-            メインカラー：{presenter.mainColorName()}
+            メインカラー：{props.response.mainColor.name}
           </Typography>
           <div>
             <Box display="flex">
               <img
                 className={classes.colorImage}
-                src={presenter.mainColorImageUrl()}
+                src={HostUrl() + props.response.mainColor.imagePath}
                 width="60px"
                 height="auto"
                 alt=""
@@ -107,13 +118,13 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
             </Box>
           </div>
           <Typography variant="body1">
-            サブカラー：{presenter.subColorName()}
+            サブカラー：{props.response.subColor.name}
           </Typography>
           <div>
             <Box display="flex">
               <img
                 className={classes.colorImage}
-                src={presenter.subColorImageUrl()}
+                src={HostUrl() + props.response.subColor.imagePath}
                 width="60px"
                 height="auto"
                 alt=""

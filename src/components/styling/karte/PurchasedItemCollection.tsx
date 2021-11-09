@@ -8,7 +8,6 @@ import {
 import React from "react";
 import { PurchasedItemCollectionData } from "../../../model/styling/karte/props_data/PurchasedItemCollectionData";
 import { PopupImage } from "../../shared/PopupImage";
-import { usePurchasedItemCollectionPresenter } from "./presenter/UsePurchasedItemCollectionPresenter";
 
 interface PurchasedItemCollectionProps {
   data: PurchasedItemCollectionData;
@@ -17,8 +16,6 @@ interface PurchasedItemCollectionProps {
 export const PurchasedItemCollection = (
   props: PurchasedItemCollectionProps
 ) => {
-  const presenter = usePurchasedItemCollectionPresenter();
-
   return (
     <List dense>
       {props.data.purchasedItemResponses.map((purchasedItem, index) => {
@@ -28,19 +25,22 @@ export const PurchasedItemCollection = (
               <Avatar variant="rounded">
                 <PopupImage
                   data={{
-                    originalImageUrl: presenter.itemListOriginalImageUrl(
-                      purchasedItem
-                    ),
-                    popupImageUrl: presenter.itemListPopupImageUrl(
-                      purchasedItem
-                    ),
+                    originalImageUrl: purchasedItem.imagePath.thumb,
+                    popupImageUrl: purchasedItem.imagePath.original,
                   }}
                 ></PopupImage>
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary={presenter.itemListText(purchasedItem)}
-              secondary={presenter.itemListPurchasedDate(purchasedItem)}
+              primary={`${purchasedItem.id} / 
+                ${purchasedItem.brandName} / 
+                ${purchasedItem.size} / 
+                ${purchasedItem.categoryName} / 
+                ${purchasedItem.colorName} / 
+                ${purchasedItem.patternName}`}
+              secondary={`購入日：${new Date(
+                purchasedItem.purchasedDate
+              ).toLocaleDateString()}`}
             ></ListItemText>
           </ListItem>
         );

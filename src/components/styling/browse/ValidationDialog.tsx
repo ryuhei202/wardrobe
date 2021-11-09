@@ -14,8 +14,8 @@ import { Error, Warning } from "@mui/icons-material";
 import React from "react";
 import { ValidationError } from "../../../model/styling/browse/ValidationError";
 import { ValidationDialogCallback } from "./callback/ValidationDialogCallback";
-import { useValidationDialogPresenter } from "./presenter/UseValidationDialogPresenter";
 import { useValidationDialogStyle } from "./style/UseValidationDialogStyle";
+import { ValidationErrorType } from "../../../model/styling/browse/ValidationErrorType";
 
 export interface ValidationDialogProps {
   errors: ValidationError[];
@@ -25,17 +25,16 @@ export interface ValidationDialogProps {
 
 export const ValidationDialog = (props: ValidationDialogProps) => {
   const classes = useValidationDialogStyle();
-  const presenter = useValidationDialogPresenter(props.errors);
 
   return (
     <Dialog open={props.isOpen} disableEscapeKeyDown>
       <DialogTitle>コーデバリデーション</DialogTitle>
       <DialogContent>
         <List>
-          {presenter.contentList().map((content, index) => (
+          {props.errors.map((content, index) => (
             <ListItem key={index}>
               <ListItemAvatar>
-                {content.isRejected ? (
+                {content.errorType === ValidationErrorType.Rejected ? (
                   <Avatar className={classes.error}>
                     <Error />
                   </Avatar>

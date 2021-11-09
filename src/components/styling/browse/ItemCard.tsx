@@ -8,9 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { HostUrl } from "../../../model/HostUrl";
 import { ItemCardData } from "../../../model/styling/browse/props_data/ItemCardData";
 import { ItemCardCallback } from "./callback/ItemCardCallback";
-import { useItemCardPresenter } from "./presenter/UseItemCardPresenter";
 import { useItemCardStyle } from "./style/UseItemCardStyle";
 
 interface ItemCardProps {
@@ -20,7 +20,6 @@ interface ItemCardProps {
 
 export const ItemCard = (props: ItemCardProps) => {
   const classes = useItemCardStyle();
-  const presenter = useItemCardPresenter(props.data);
 
   return (
     <Card className={classes.card}>
@@ -32,16 +31,16 @@ export const ItemCard = (props: ItemCardProps) => {
         ) : (
           <></>
         )}
-        <CardMedia className={classes.media} image={presenter.itemImageUrl()} />
+        <CardMedia className={classes.media} image={props.data.imagePath} />
         <CardContent>
           <img
-            src={presenter.mainColorImageUrl()}
+            src={HostUrl() + props.data.mainColorImagePath}
             width="30px"
             height="auto"
             alt=""
           />
           <img
-            src={presenter.subColorImageUrl()}
+            src={HostUrl() + props.data.subColorImagePath}
             width="30px"
             height="auto"
             alt=""
