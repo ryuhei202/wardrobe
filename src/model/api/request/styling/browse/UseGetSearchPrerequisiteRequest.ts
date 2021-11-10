@@ -1,4 +1,4 @@
-import GetRequest from "../../GetRequest";
+import { GetRequest } from "../../GetRequest";
 
 export const useGetSearchPrerequisiteRequest = (): GetRequest => {
   const url = (): string => {

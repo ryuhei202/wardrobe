@@ -1,3 +1,3 @@
-export default interface ItemCardCollectionCallback {
+export interface ItemCardCollectionCallback {
   onSelect: (preregisteredItemId: number) => void;
 }

@@ -1,8 +1,8 @@
-import { Checkbox, List, ListItem, ListItemIcon } from "@material-ui/core";
+import { Checkbox, List, ListItem, ListItemIcon } from "@mui/material";
 import React from "react";
 import { HostUrl } from "../../../model/HostUrl";
-import FilterMediaData from "../../../model/styling/browse/props_data/FilterMediaData";
-import FilterMediaArrayCallback from "./callback/FilterMediaArrayCallback";
+import { FilterMediaData } from "../../../model/styling/browse/props_data/FilterMediaData";
+import { FilterMediaArrayCallback } from "./callback/FilterMediaArrayCallback";
 
 interface FilterMediaArrayProps {
   labelIdPrefix: string;
@@ -10,7 +10,7 @@ interface FilterMediaArrayProps {
   callback: FilterMediaArrayCallback;
 }
 
-const FilterMediaArray = (props: FilterMediaArrayProps) => {
+export const FilterMediaArray = (props: FilterMediaArrayProps) => {
   return (
     <List dense>
       {props.data.map((row, index) => {
@@ -45,5 +45,3 @@ const FilterMediaArray = (props: FilterMediaArrayProps) => {
     </List>
   );
 };
-
-export default FilterMediaArray;

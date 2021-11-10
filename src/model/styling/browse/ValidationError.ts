@@ -1,6 +1,6 @@
 import { ValidationErrorType } from "./ValidationErrorType";
 
-export default interface ValidationError {
+export interface ValidationError {
   readonly errorType: ValidationErrorType;
   readonly message: string;
 }

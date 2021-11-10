@@ -1,31 +1,32 @@
 import { useCategoryRefinementHandler } from "./UseCategoryRefinementHandler";
 import { useState } from "react";
 import { FilterChoiceResponse } from "../../../../model/api/response/styling/browse/FilterChoiceResponse";
-import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
-import FilterGroupCollectionData from "../../../../model/styling/browse/props_data/FilterGroupCollectionData";
-import Refinement from "../../../../model/styling/browse/Refinement";
-import AppliedFiltersCallback from "../callback/AppliedFiltersCallback";
-import FilterGroupCollectionCallback from "../callback/FilterGroupCollectionCallback";
+import { AppliedFilterData } from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import { FilterGroupCollectionData } from "../../../../model/styling/browse/props_data/FilterGroupCollectionData";
+import { Refinement } from "../../../../model/styling/browse/Refinement";
+import { AppliedFiltersCallback } from "../callback/AppliedFiltersCallback";
+import { FilterGroupCollectionCallback } from "../callback/FilterGroupCollectionCallback";
 import { useSizeRefinementHandler } from "./UseSizeRefinementHandler";
 import { useColorRefinementHandler } from "./UseColorRefinementHandler";
 import { usePatternRefinementHandler } from "./UsePatternRefinementHandler";
 import { useLogoRefinementHandler } from "./UseLogoRefinementHandler";
 import { useOptionRefinementHandler } from "./UseOptionRefinementHandler";
-import RefinementChoiceResponse from "../../../../model/api/response/styling/browse/RefinementChoiceResponse";
-import ItemCardCollectionCallback from "../callback/ItemCardCollectionCallback";
-import BrowseDetailCallback from "../callback/BrowseDetailCallback";
-import ItemBrowseCallback from "../callback/ItemBrowseCallback";
-import ItemBrowsePaginationCallback from "../callback/ItemBrowsePaginationCallback";
-import SelectedItem from "../../../../model/styling/SelectedItem";
+import { RefinementChoiceResponse } from "../../../../model/api/response/styling/browse/RefinementChoiceResponse";
+import { ItemCardCollectionCallback } from "../callback/ItemCardCollectionCallback";
+import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
+import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
+import { ItemBrowsePaginationCallback } from "../callback/ItemBrowsePaginationCallback";
+import { SelectedItem } from "../../../../model/styling/SelectedItem";
 import { ValueRefinement } from "../../../../model/styling/browse/ValueRefinement";
 import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
 import { useNgRefinementHandler } from "./UseNgRefinementHandler";
+import { SelectChangeEvent } from "@mui/material";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
   selectedPreregisteredItemId: number | null;
-  onSortChanged: () => (event: React.ChangeEvent<{ value: unknown }>) => void;
+  onSortChanged: () => (event: SelectChangeEvent<string | number>) => void;
   paginationCallback: () => ItemBrowsePaginationCallback;
   filterGroupCollectionCallback: () => FilterGroupCollectionCallback;
   appliedFiltersCallback: () => AppliedFiltersCallback;
@@ -339,9 +340,7 @@ export const useItemBrowseHandler = (
     }
   };
 
-  const onSortChanged = () => (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
+  const onSortChanged = () => (event: SelectChangeEvent<string | number>) => {
     const index = parseInt(event.target.value as string);
     const newRefinement = {
       ...currentRefinement,

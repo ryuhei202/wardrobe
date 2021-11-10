@@ -2,9 +2,9 @@ import { CallStatus } from "./../../../api/shared/CallStatus";
 import { useGetClient } from "./../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
 import { useGetKarteRequest } from "../../../api/request/styling/karte/UseGetKarteRequest";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { ChartId } from "../../../ChartId";
-import SelectedItem from "../../SelectedItem";
+import { SelectedItem } from "../../SelectedItem";
 import { KarteResponse } from "../../../api/response/styling/karte/KarteResponse";
 
 interface GetKarteCaller {

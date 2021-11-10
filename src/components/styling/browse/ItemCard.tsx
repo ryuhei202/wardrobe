@@ -6,11 +6,11 @@ import {
   CardHeader,
   CardMedia,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
-import ItemCardData from "../../../model/styling/browse/props_data/ItemCardData";
-import ItemCardCallback from "./callback/ItemCardCallback";
-import { useItemCardPresenter } from "./presenter/UseItemCardPresenter";
+import { HostUrl } from "../../../model/HostUrl";
+import { ItemCardData } from "../../../model/styling/browse/props_data/ItemCardData";
+import { ItemCardCallback } from "./callback/ItemCardCallback";
 import { useItemCardStyle } from "./style/UseItemCardStyle";
 
 interface ItemCardProps {
@@ -18,9 +18,8 @@ interface ItemCardProps {
   callback: ItemCardCallback;
 }
 
-const ItemCard = (props: ItemCardProps) => {
+export const ItemCard = (props: ItemCardProps) => {
   const classes = useItemCardStyle();
-  const presenter = useItemCardPresenter(props.data);
 
   return (
     <Card className={classes.card}>
@@ -32,16 +31,16 @@ const ItemCard = (props: ItemCardProps) => {
         ) : (
           <></>
         )}
-        <CardMedia className={classes.media} image={presenter.itemImageUrl()} />
+        <CardMedia className={classes.media} image={props.data.imagePath} />
         <CardContent>
           <img
-            src={presenter.mainColorImageUrl()}
+            src={HostUrl() + props.data.mainColorImagePath}
             width="30px"
             height="auto"
             alt=""
           />
           <img
-            src={presenter.subColorImageUrl()}
+            src={HostUrl() + props.data.subColorImagePath}
             width="30px"
             height="auto"
             alt=""
@@ -56,5 +55,3 @@ const ItemCard = (props: ItemCardProps) => {
     </Card>
   );
 };
-
-export default ItemCard;

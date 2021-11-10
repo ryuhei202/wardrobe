@@ -1,5 +1,5 @@
-import SelectedItem from "../../SelectedItem";
+import { SelectedItem } from "../../SelectedItem";
 
-export default interface ArrangeData {
+export interface ArrangeData {
   readonly items: SelectedItem[];
 }

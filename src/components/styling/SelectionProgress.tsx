@@ -10,11 +10,10 @@ import {
   Stepper,
   Tooltip,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { Fragment, useState } from "react";
-import SelectionProgressData from "../../model/styling/props_data/SelectionProgressData";
-import SelectionProgressCallback from "./callback/SelectionProgressCallback";
-import { useSelectionProgressPresenter } from "./presenter/UseSelectionProgressPresenter";
+import { SelectionProgressData } from "../../model/styling/props_data/SelectionProgressData";
+import { SelectionProgressCallback } from "./callback/SelectionProgressCallback";
 import { useSelectionProgressStyle } from "./style/UseSelectionProgressStyle";
 
 export interface SelectionProgressProps {
@@ -27,9 +26,8 @@ const initialState = {
   mouseY: null,
 };
 
-const SelectionProgress = (props: SelectionProgressProps) => {
+export const SelectionProgress = (props: SelectionProgressProps) => {
   const classes = useSelectionProgressStyle();
-  const presenter = useSelectionProgressPresenter(props.data);
   const [position, setPosition] = useState<{
     mouseX: null | Number;
     mouseY: null | number;
@@ -38,28 +36,36 @@ const SelectionProgress = (props: SelectionProgressProps) => {
   let steps = [];
   for (let index = 0; index < props.data.rentableItemNum; index++) {
     let stepLabel;
-    if (presenter.hasItemImage(index)) {
+    if (props.data.items.length > index) {
       stepLabel = (
         <StepLabel
           StepIconComponent={() => (
             <Box
               display="flex"
-              border={presenter.borderProp(index)}
+              border={props.data.selectedIndex === index ? 1 : 0}
               borderColor="primary.main"
             >
               <img
                 className={classes.stepperImage}
-                src={presenter.itemImageUrl(index)}
+                src={props.data.items[index].itemImagePath}
                 alt=""
               />
             </Box>
           )}
         >
-          {presenter.labelText(index)}
+          {props.data.items.length > index
+            ? props.data.items[index].itemId.toString()
+            : `アイテムNo.${index + 1}`}
         </StepLabel>
       );
     } else {
-      stepLabel = <StepLabel>{presenter.labelText(index)}</StepLabel>;
+      stepLabel = (
+        <StepLabel>
+          {props.data.items.length > index
+            ? props.data.items[index].itemId.toString()
+            : `アイテムNo.${index + 1}`}
+        </StepLabel>
+      );
     }
 
     steps.push(
@@ -67,17 +73,19 @@ const SelectionProgress = (props: SelectionProgressProps) => {
         key={index}
         title={
           <Typography variant="body2">
-            {presenter.tooltipText(index).map((text, index) => (
-              <Fragment key={index}>
-                {text}
-                <br />
-              </Fragment>
-            ))}
+            {props.data.items.length > index
+              ? props.data.items[index].partSizes.map((partSize, index) => (
+                  <Fragment key={index}>
+                    {`${partSize.name}: ${partSize.value ?? ""}`}
+                    <br />
+                  </Fragment>
+                ))
+              : []}
           </Typography>
         }
         placement="top-start"
       >
-        <Step disabled={presenter.isDisabled(index)}>
+        <Step disabled={props.data.items.length < index}>
           <StepButton
             className={classes.stepButton}
             onClick={() => props.callback.onSelect(index)}
@@ -90,7 +98,10 @@ const SelectionProgress = (props: SelectionProgressProps) => {
   }
 
   let completeButton;
-  if (presenter.isCompleteButtonAvailable()) {
+  if (
+    props.data.rentableItemNum !== 0 &&
+    props.data.rentableItemNum === props.data.items.length
+  ) {
     completeButton = (
       <Button
         variant="contained"
@@ -146,5 +157,3 @@ const SelectionProgress = (props: SelectionProgressProps) => {
     </div>
   );
 };
-
-export default SelectionProgress;

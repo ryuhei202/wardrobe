@@ -1,7 +1,7 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useEffect, useState } from "react";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
-import BrowseIndexResponse from "../../../api/response/styling/browse/BrowseIndexResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
+import { BrowseIndexResponse } from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { usePostClient } from "../../../api/client/UsePostClient";
 import { usePostNotifyLostRequest } from "../../../api/request/styling/feedback/UsePostNotifyLostRequest";
 

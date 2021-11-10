@@ -1,5 +1,5 @@
 import { Outfit } from "./../../../../styling/arrange/Outfit";
-import PostRequest from "../../PostRequest";
+import { PostRequest } from "../../PostRequest";
 
 interface PostCreateOutfitParams {
   chartId: number;

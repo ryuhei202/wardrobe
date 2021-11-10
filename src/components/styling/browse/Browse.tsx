@@ -1,8 +1,14 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import React, { useState } from "react";
 import { SearchPrerequisiteResponse } from "../../../model/api/response/styling/browse/SearchPrerequisiteResponse";
-import ItemBrowseCallback from "./callback/ItemBrowseCallback";
-import ItemBrowseContainer from "./ItemBrowseContainer";
+import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
+import { ItemBrowseContainer } from "./ItemBrowseContainer";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
 interface BrowseProps {
@@ -11,7 +17,7 @@ interface BrowseProps {
   currentSelectedItemId: number | null;
 }
 
-const Browse = (props: BrowseProps) => {
+export const Browse = (props: BrowseProps) => {
   const classes = useBrowseStyle();
   const [categoryId, setCategoryId] = useState<number | null>(null);
 
@@ -34,7 +40,7 @@ const Browse = (props: BrowseProps) => {
           labelId="category-select-label"
           id="category-select"
           value={categoryId ?? ""}
-          onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+          onChange={(event: SelectChangeEvent<string | number>) => {
             setCategoryId(event.target.value as number);
           }}
         >
@@ -50,5 +56,3 @@ const Browse = (props: BrowseProps) => {
     </>
   );
 };
-
-export default Browse;

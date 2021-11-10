@@ -1,14 +1,14 @@
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@mui/material";
 import React from "react";
-import FilterListButtonData from "../../../model/styling/browse/props_data/FilterListButtonData";
-import FilterListButtonArrayCallback from "./callback/FilterListButtonArrayCallback";
+import { FilterListButtonData } from "../../../model/styling/browse/props_data/FilterListButtonData";
+import { FilterListButtonArrayCallback } from "./callback/FilterListButtonArrayCallback";
 
 interface FilterListButtonArrayProps {
   data: FilterListButtonData[];
   callback: FilterListButtonArrayCallback;
 }
 
-const FilterListButtonArray = (props: FilterListButtonArrayProps) => {
+export const FilterListButtonArray = (props: FilterListButtonArrayProps) => {
   return (
     <List dense>
       {props.data.map((row, index) => (
@@ -23,5 +23,3 @@ const FilterListButtonArray = (props: FilterListButtonArrayProps) => {
     </List>
   );
 };
-
-export default FilterListButtonArray;

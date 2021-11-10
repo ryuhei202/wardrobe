@@ -1,7 +1,7 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useEffect, useState } from "react";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
-import BrowseIndexResponse from "../../../api/response/styling/browse/BrowseIndexResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
+import { BrowseIndexResponse } from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { ChartId } from "../../../ChartId";
 import { usePostClient } from "../../../api/client/UsePostClient";
 import { usePostSelectRequest } from "../../../api/request/styling/browse/UsePostSelectRequest";

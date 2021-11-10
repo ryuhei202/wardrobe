@@ -1,3 +1,3 @@
-export default interface AppliedFilterData {
+export interface AppliedFilterData {
   readonly name: string;
 }

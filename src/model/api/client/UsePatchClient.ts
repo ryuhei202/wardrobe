@@ -1,4 +1,4 @@
-import PatchRequest from "../request/PatchRequest";
+import { PatchRequest } from "../request/PatchRequest";
 import { baseUrl } from "../shared/BaseUrl";
 import { useClient } from "./UseClient";
 

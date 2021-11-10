@@ -1,4 +1,4 @@
-import GetRequest from "../../GetRequest";
+import { GetRequest } from "../../GetRequest";
 
 export const useGetKarteRequest = (karteId: number): GetRequest => {
   const url = (): string => {

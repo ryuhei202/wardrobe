@@ -1,7 +1,7 @@
-import { CircularProgress, Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@mui/material";
 import React from "react";
 import { useGetKarteCaller } from "../../../../model/styling/karte/api_caller/UseGetKarteCaller";
-import SelectedItem from "../../../../model/styling/SelectedItem";
+import { SelectedItem } from "../../../../model/styling/SelectedItem";
 import { Karte } from "../Karte";
 
 interface KarteProvider {

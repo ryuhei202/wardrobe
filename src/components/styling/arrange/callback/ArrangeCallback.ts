@@ -1,3 +1,3 @@
-export default interface ArrangeCallback {
+export interface ArrangeCallback {
   onClickBackButton: () => void;
 }

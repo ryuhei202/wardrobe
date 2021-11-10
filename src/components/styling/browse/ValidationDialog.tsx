@@ -9,13 +9,13 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-} from "@material-ui/core";
-import { Error, Warning } from "@material-ui/icons";
+} from "@mui/material";
+import { Error, Warning } from "@mui/icons-material";
 import React from "react";
-import ValidationError from "../../../model/styling/browse/ValidationError";
-import ValidationDialogCallback from "./callback/ValidationDialogCallback";
-import { useValidationDialogPresenter } from "./presenter/UseValidationDialogPresenter";
+import { ValidationError } from "../../../model/styling/browse/ValidationError";
+import { ValidationDialogCallback } from "./callback/ValidationDialogCallback";
 import { useValidationDialogStyle } from "./style/UseValidationDialogStyle";
+import { ValidationErrorType } from "../../../model/styling/browse/ValidationErrorType";
 
 export interface ValidationDialogProps {
   errors: ValidationError[];
@@ -23,19 +23,18 @@ export interface ValidationDialogProps {
   callback: ValidationDialogCallback;
 }
 
-const ValidationDialog = (props: ValidationDialogProps) => {
+export const ValidationDialog = (props: ValidationDialogProps) => {
   const classes = useValidationDialogStyle();
-  const presenter = useValidationDialogPresenter(props.errors);
 
   return (
-    <Dialog open={props.isOpen} disableBackdropClick disableEscapeKeyDown>
+    <Dialog open={props.isOpen} disableEscapeKeyDown>
       <DialogTitle>コーデバリデーション</DialogTitle>
       <DialogContent>
         <List>
-          {presenter.contentList().map((content, index) => (
+          {props.errors.map((content, index) => (
             <ListItem key={index}>
               <ListItemAvatar>
-                {content.isRejected ? (
+                {content.errorType === ValidationErrorType.Rejected ? (
                   <Avatar className={classes.error}>
                     <Error />
                   </Avatar>
@@ -53,7 +52,6 @@ const ValidationDialog = (props: ValidationDialogProps) => {
       <DialogActions>
         <Button
           variant="contained"
-          color="default"
           onClick={props.callback.onClickSelectButton}
         >
           無視して選択
@@ -69,5 +67,3 @@ const ValidationDialog = (props: ValidationDialogProps) => {
     </Dialog>
   );
 };
-
-export default ValidationDialog;

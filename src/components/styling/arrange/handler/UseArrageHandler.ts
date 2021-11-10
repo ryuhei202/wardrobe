@@ -1,13 +1,13 @@
 import { Outfit } from "./../../../../model/styling/arrange/Outfit";
 import { useState } from "react";
-import AdviceChoiceResponse from "../../../../model/api/response/styling/arrange/AdviceChoiceResponse";
+import { AdviceChoiceResponse } from "../../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import {
   PostCreateOutfitCaller,
   usePostCreateOutfitCaller,
 } from "../../../../model/styling/arrange/api_caller/UsePostCreateOutfitCaller";
-import AddedOutfitListData from "../../../../model/styling/arrange/props_data/AddedOutfitListData";
-import SelectedItem from "../../../../model/styling/SelectedItem";
-import AddedOutfitListCallback from "../callback/AddedOutfitListCallback";
+import { AddedOutfitListData } from "../../../../model/styling/arrange/props_data/AddedOutfitListData";
+import { SelectedItem } from "../../../../model/styling/SelectedItem";
+import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
 import { OutfitFormData } from "../../../../model/styling/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 

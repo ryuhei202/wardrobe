@@ -10,18 +10,23 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment } from "react";
+import { InfoPastOutfitItemResponse } from "../../../model/api/response/styling/karte/InfoPastOutfitItemResponse";
 import { PastOutfitCollectionData } from "../../../model/styling/karte/props_data/PastOutfitCollectionData";
-import PopupImage from "../../shared/PopupImage";
-import { usePastOutfitCollectionPresenter } from "./presenter/UsePastOutfitCollectionPresenter";
+import { PopupImage } from "../../shared/PopupImage";
 
 interface PastOutfitCollectionProps {
   data: PastOutfitCollectionData;
 }
 
 export const PastOutfitCollection = (props: PastOutfitCollectionProps) => {
-  const presenter = usePastOutfitCollectionPresenter(
-    props.data.pastOutfitResponses
-  );
+  const itemListSecondary = (item: InfoPastOutfitItemResponse): string => {
+    let result = `${item.size}`;
+    item.partSizes.forEach((partSize) => {
+      result += `, ${partSize.name}: ${partSize.value ?? "未計測"}`;
+    });
+    result += `, ドロップサイズ: ${item.dropSize}`;
+    return result;
+  };
 
   return (
     <List dense>
@@ -35,17 +40,24 @@ export const PastOutfitCollection = (props: PastOutfitCollectionProps) => {
         return (
           <ListItem key={index}>
             <ListItemText>
-              発送日：{presenter.shipmentDate(index)}
+              発送日：
+              {props.data.pastOutfitResponses[index].rentalStartedAt
+                ? new Date(
+                    props.data.pastOutfitResponses[index].rentalStartedAt!
+                  ).toLocaleDateString()
+                : ""}
               <br />
               コーデの評価：
               <Paper variant="outlined">
                 <Typography variant="body2">
-                  {presenter.coordinateFeedback(index).map((word, index) => (
-                    <Fragment key={index}>
-                      {word}
-                      <br></br>
-                    </Fragment>
-                  ))}
+                  {props.data.pastOutfitResponses[index].feedback
+                    .split("\n")
+                    .map((word, index) => (
+                      <Fragment key={index}>
+                        {word}
+                        <br></br>
+                      </Fragment>
+                    ))}
                 </Typography>
               </Paper>
               <List dense>
@@ -62,16 +74,16 @@ export const PastOutfitCollection = (props: PastOutfitCollectionProps) => {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={presenter.itemListPrimary(item)}
+                      primary={`${item.id}, ${item.categoryName}, ${item.mainColorName}, ${item.subColorName}`}
                       secondary={
                         <Fragment>
-                          {presenter.itemListSecondary(item)}
-                          {presenter.isRated(item) ? (
+                          {itemListSecondary(item)}
+                          {item.rating !== null ? (
                             <>
                               <Divider />
-                              <Rating readOnly value={presenter.rating(item)} />
+                              <Rating readOnly value={item.rating ?? 0} />
                               <br />
-                              {presenter.reviewText(item)}
+                              {item.reviewText}
                             </>
                           ) : (
                             <></>

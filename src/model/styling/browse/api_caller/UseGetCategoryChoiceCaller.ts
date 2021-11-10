@@ -1,7 +1,7 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { useGetSearchPrerequisiteRequest } from "../../../api/request/styling/browse/UseGetSearchPrerequisiteRequest";
 import { SearchPrerequisiteResponse } from "../../../api/response/styling/browse/SearchPrerequisiteResponse";
 

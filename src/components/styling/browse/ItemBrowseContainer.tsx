@@ -1,4 +1,4 @@
-import ItemBrowseCallback from "./callback/ItemBrowseCallback";
+import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
 import { useRefinementChoiceProvider } from "./provider/UseRefinementChoiceProvider";
 
 export interface ItemBrowseContainerProps {
@@ -7,7 +7,7 @@ export interface ItemBrowseContainerProps {
   currentSelectedItemId: number | null;
 }
 
-const ItemBrowseContainer = (props: ItemBrowseContainerProps) => {
+export const ItemBrowseContainer = (props: ItemBrowseContainerProps) => {
   const refinementChoiceProvider = useRefinementChoiceProvider(
     props.categoryId
   );
@@ -20,5 +20,3 @@ const ItemBrowseContainer = (props: ItemBrowseContainerProps) => {
     </>
   );
 };
-
-export default ItemBrowseContainer;

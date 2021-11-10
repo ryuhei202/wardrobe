@@ -1,3 +1,3 @@
-export default interface FilterSizeArrayCallback {
+export interface FilterSizeArrayCallback {
   onClick: (index: number) => void;
 }

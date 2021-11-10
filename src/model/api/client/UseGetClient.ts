@@ -1,5 +1,5 @@
 import qs from "qs";
-import GetRequest from "../request/GetRequest";
+import { GetRequest } from "../request/GetRequest";
 import { baseUrl } from "../shared/BaseUrl";
 import { useClient } from "./UseClient";
 

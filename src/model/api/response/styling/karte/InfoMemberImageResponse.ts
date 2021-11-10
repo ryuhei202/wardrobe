@@ -1,4 +1,4 @@
-import ImagePathResponse from "../ImagePathResponse";
+import { ImagePathResponse } from "../ImagePathResponse";
 
 export interface InfoMemberImageResponse {
   readonly imagePath: ImagePathResponse;

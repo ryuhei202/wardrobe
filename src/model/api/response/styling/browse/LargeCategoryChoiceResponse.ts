@@ -1,6 +1,6 @@
-import MediumCategoryChoiceResponse from "./MediumCategoryChoiceResponse";
+import { MediumCategoryChoiceResponse } from "./MediumCategoryChoiceResponse";
 
-export default interface LargeCategoryChoiceResponse {
+export interface LargeCategoryChoiceResponse {
   readonly id: number;
   readonly name: string;
   readonly mediumCategory: MediumCategoryChoiceResponse[];

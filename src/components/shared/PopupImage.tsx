@@ -1,12 +1,12 @@
-import { Dialog } from "@material-ui/core";
+import { Dialog } from "@mui/material";
 import { useState } from "react";
-import PopupImageData from "../../model/shared/props_data/PopupImageData";
+import { PopupImageData } from "../../model/shared/props_data/PopupImageData";
 
 interface PopupImageProps {
   data: PopupImageData;
 }
 
-const PopupImage = (props: PopupImageProps) => {
+export const PopupImage = (props: PopupImageProps) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   return (
@@ -29,5 +29,3 @@ const PopupImage = (props: PopupImageProps) => {
     </>
   );
 };
-
-export default PopupImage;

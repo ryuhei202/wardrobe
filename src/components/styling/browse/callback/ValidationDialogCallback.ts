@@ -1,4 +1,4 @@
-export default interface ValidationDialogCallback {
+export interface ValidationDialogCallback {
   onClickCancelButton: () => void;
   onClickSelectButton: () => void;
 }

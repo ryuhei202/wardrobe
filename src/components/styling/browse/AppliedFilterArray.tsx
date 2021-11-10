@@ -1,7 +1,7 @@
-import { Chip } from "@material-ui/core";
+import { Chip } from "@mui/material";
 import React from "react";
-import AppliedFilterData from "../../../model/styling/browse/props_data/AppliedFilterData";
-import AppliedFiltersCallback from "./callback/AppliedFiltersCallback";
+import { AppliedFilterData } from "../../../model/styling/browse/props_data/AppliedFilterData";
+import { AppliedFiltersCallback } from "./callback/AppliedFiltersCallback";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
 interface AppliedFilterArrayProps {
@@ -9,7 +9,7 @@ interface AppliedFilterArrayProps {
   callback: AppliedFiltersCallback;
 }
 
-const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
+export const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
   const classes = useBrowseStyle();
   return (
     <>
@@ -31,5 +31,3 @@ const AppliedFilterArray = (props: AppliedFilterArrayProps) => {
     </>
   );
 };
-
-export default AppliedFilterArray;

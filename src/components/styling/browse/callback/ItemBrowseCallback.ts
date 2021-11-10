@@ -1,5 +1,5 @@
-import SelectedItem from "../../../../model/styling/SelectedItem";
+import { SelectedItem } from "../../../../model/styling/SelectedItem";
 
-export default interface ItemBrowseCallback {
+export interface ItemBrowseCallback {
   onSelectItem: (item: SelectedItem) => void;
 }

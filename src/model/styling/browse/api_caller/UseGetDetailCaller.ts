@@ -1,11 +1,11 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
 import { useEffect, useState } from "react";
-import ErrorResponse from "../../../api/response/shared/ErrorResponse";
-import DetailResponse from "../../../api/response/styling/browse/DetailResponse";
+import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
+import { DetailResponse } from "../../../api/response/styling/browse/DetailResponse";
 import { useGetDetailRequest } from "../../../api/request/styling/browse/UseGetDetailRequest";
 import { ChartId } from "../../../ChartId";
-import Refinement from "../Refinement";
+import { Refinement } from "../Refinement";
 
 export interface GetDetailCaller {
   isRunning: () => boolean;

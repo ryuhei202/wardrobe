@@ -1,4 +1,4 @@
-export default interface FeedbackDialogData {
+export interface FeedbackDialogData {
   readonly isOpen: boolean;
   readonly items: {
     readonly itemId: number;

@@ -1,8 +1,8 @@
 import { useGetRefinementChoiceCaller } from "../../../../model/styling/browse/api_caller/UseGetRefinementChoiceCaller";
-import { CircularProgress, Typography } from "@material-ui/core";
-import ItemBrowse from "../ItemBrowse";
+import { CircularProgress, Typography } from "@mui/material";
+import { ItemBrowse } from "../ItemBrowse";
 import React from "react";
-import ItemBrowseCallback from "../callback/ItemBrowseCallback";
+import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
 
 export interface RefinementChoiceProvider {
   itemBrowseComponent: (

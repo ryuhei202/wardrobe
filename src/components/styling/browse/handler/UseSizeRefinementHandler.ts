@@ -1,7 +1,7 @@
-import FilterResponse from "../../../../model/api/response/styling/browse/FilterResponse";
-import AppliedFilterData from "../../../../model/styling/browse/props_data/AppliedFilterData";
-import FilterSizeData from "../../../../model/styling/browse/props_data/FilterSizeData";
-import FilterSizeArrayCallback from "../callback/FilterSizeArrayCallback";
+import { FilterResponse } from "../../../../model/api/response/styling/browse/FilterResponse";
+import { AppliedFilterData } from "../../../../model/styling/browse/props_data/AppliedFilterData";
+import { FilterSizeData } from "../../../../model/styling/browse/props_data/FilterSizeData";
+import { FilterSizeArrayCallback } from "../callback/FilterSizeArrayCallback";
 
 export interface SizeRefinementHandler {
   sizeCallback: (

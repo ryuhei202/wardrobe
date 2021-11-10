@@ -1,14 +1,14 @@
-import { Button, Radio } from "@material-ui/core";
+import { Button, Radio } from "@mui/material";
 import React from "react";
-import DetailSizeButtonData from "../../../model/styling/browse/props_data/DetailSizeButtonData";
-import DetailSizeButtonArrayCallback from "./callback/DetailSizeButtonArrayCallback";
+import { DetailSizeButtonData } from "../../../model/styling/browse/props_data/DetailSizeButtonData";
+import { DetailSizeButtonArrayCallback } from "./callback/DetailSizeButtonArrayCallback";
 
 interface DetailSizeButtonArrayProps {
   data: DetailSizeButtonData[];
   callback: DetailSizeButtonArrayCallback;
 }
 
-const DetailSizeButtonArray = (props: DetailSizeButtonArrayProps) => {
+export const DetailSizeButtonArray = (props: DetailSizeButtonArrayProps) => {
   return (
     <>
       {props.data.map((buttonData, index) => (
@@ -37,5 +37,3 @@ const DetailSizeButtonArray = (props: DetailSizeButtonArrayProps) => {
     </>
   );
 };
-
-export default DetailSizeButtonArray;

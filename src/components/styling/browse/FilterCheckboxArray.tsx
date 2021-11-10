@@ -5,11 +5,11 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from "@material-ui/core";
-import { ArrowBack } from "@material-ui/icons";
+} from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
 import React from "react";
-import FilterCheckboxData from "../../../model/styling/browse/props_data/FilterCheckboxData";
-import FilterCheckboxArrayCallback from "./callback/FilterCheckboxArrayCallback";
+import { FilterCheckboxData } from "../../../model/styling/browse/props_data/FilterCheckboxData";
+import { FilterCheckboxArrayCallback } from "./callback/FilterCheckboxArrayCallback";
 
 interface FilterCheckboxArrayProps {
   labelIdPrefix: string;
@@ -17,7 +17,7 @@ interface FilterCheckboxArrayProps {
   callback: FilterCheckboxArrayCallback;
 }
 
-const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
+export const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
   let backButton;
   if (props.callback.onClickBackButton !== undefined) {
     backButton = (
@@ -25,6 +25,7 @@ const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
         onClick={() => {
           props.callback.onClickBackButton!!();
         }}
+        size="large"
       >
         <ArrowBack />
       </IconButton>
@@ -61,5 +62,3 @@ const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
     </>
   );
 };
-
-export default FilterCheckboxArray;

@@ -1,4 +1,4 @@
-export default interface PatchRequest {
+export interface PatchRequest {
   url(): string;
   params(): FormData;
 }

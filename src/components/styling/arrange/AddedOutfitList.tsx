@@ -6,11 +6,11 @@ import {
   ListItemText,
   ListSubheader,
   Paper,
-} from "@material-ui/core";
-import { Edit } from "@material-ui/icons";
+} from "@mui/material";
+import { Edit } from "@mui/icons-material";
 import React from "react";
-import AddedOutfitListData from "../../../model/styling/arrange/props_data/AddedOutfitListData";
-import AddedOutfitListCallback from "./callback/AddedOutfitListCallback";
+import { AddedOutfitListData } from "../../../model/styling/arrange/props_data/AddedOutfitListData";
+import { AddedOutfitListCallback } from "./callback/AddedOutfitListCallback";
 import { useAddedOutfitListStyle } from "./style/UseAddedOutfitListStyle";
 
 export interface AddedOutfitListProps {
@@ -18,7 +18,7 @@ export interface AddedOutfitListProps {
   callback: AddedOutfitListCallback;
 }
 
-const AddedOutfitList = (props: AddedOutfitListProps) => {
+export const AddedOutfitList = (props: AddedOutfitListProps) => {
   const classes = useAddedOutfitListStyle();
 
   return (
@@ -40,6 +40,7 @@ const AddedOutfitList = (props: AddedOutfitListProps) => {
                 edge="end"
                 aria-label="edit"
                 onClick={() => props.callback.onClickEdit(index)}
+                size="large"
               >
                 <Edit />
               </IconButton>
@@ -57,5 +58,3 @@ const AddedOutfitList = (props: AddedOutfitListProps) => {
     </Paper>
   );
 };
-
-export default AddedOutfitList;

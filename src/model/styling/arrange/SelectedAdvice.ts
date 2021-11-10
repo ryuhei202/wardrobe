@@ -1,4 +1,4 @@
-export default interface SelectedAdviceIndex {
+export interface SelectedAdviceIndex {
   readonly categoryIndex: number;
   readonly adviceIndex?: number;
 }

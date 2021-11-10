@@ -5,19 +5,16 @@ import {
   ListItemAvatar,
   ListItemText,
   ListSubheader,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { Fragment } from "react";
 import { NgMemoCollectionData } from "../../../model/styling/karte/props_data/NgMemoCollectionData";
-import PopupImage from "../../shared/PopupImage";
-import { useNgMemoCollectionPresenter } from "./presenter/UseNgMemoCollectionPresenter";
+import { PopupImage } from "../../shared/PopupImage";
 
 interface NgMemoCollectionProps {
   data: NgMemoCollectionData;
 }
 
 export const NgMemoCollection = (props: NgMemoCollectionProps) => {
-  const presenter = useNgMemoCollectionPresenter(props.data.ngMemoResponses);
-
   return (
     <List dense>
       {props.data.ngMemoResponses.map((ng_category, index) => (
@@ -45,7 +42,11 @@ export const NgMemoCollection = (props: NgMemoCollectionProps) => {
                   </ListItemAvatar>
                   <ListItemText
                     primary={ng.contentText}
-                    secondary={presenter.itemListSecondary(ng)}
+                    secondary={`登録日：${new Date(
+                      ng.createdAt
+                    ).toLocaleDateString()} 更新日：${new Date(
+                      ng.updatedAt
+                    ).toLocaleDateString()}`}
                   ></ListItemText>
                 </ListItem>
               ))}

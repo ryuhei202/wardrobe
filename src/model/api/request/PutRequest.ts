@@ -1,4 +1,4 @@
-export default interface PutRequest {
+export interface PutRequest {
   url(): string;
   params(): FormData;
 }

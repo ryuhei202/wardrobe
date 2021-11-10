@@ -1,3 +1,3 @@
-export default interface FilterListButtonArrayCallback {
+export interface FilterListButtonArrayCallback {
   onClick: (index: number) => void;
 }

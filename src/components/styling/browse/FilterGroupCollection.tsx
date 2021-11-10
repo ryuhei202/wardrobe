@@ -5,15 +5,15 @@ import {
   List,
   TextField,
   Typography,
-} from "@material-ui/core";
-import { ExpandMore, Search } from "@material-ui/icons";
+} from "@mui/material";
+import { ExpandMore, Search } from "@mui/icons-material";
 import React from "react";
-import FilterGroupCollectionCallback from "./callback/FilterGroupCollectionCallback";
-import FilterCategoryGroup from "./FilterCategoryGroup";
-import FilterMediaArray from "./FilterMediaArray";
-import FilterCheckboxArray from "./FilterCheckboxArray";
-import FilterSizeArray from "./FilterSizeArray";
-import FilterGroupCollectionData from "../../../model/styling/browse/props_data/FilterGroupCollectionData";
+import { FilterGroupCollectionCallback } from "./callback/FilterGroupCollectionCallback";
+import { FilterCategoryGroup } from "./FilterCategoryGroup";
+import { FilterMediaArray } from "./FilterMediaArray";
+import { FilterCheckboxArray } from "./FilterCheckboxArray";
+import { FilterSizeArray } from "./FilterSizeArray";
+import { FilterGroupCollectionData } from "../../../model/styling/browse/props_data/FilterGroupCollectionData";
 import { FilterPartSize } from "./FilterPartSize";
 import { useFilterGroupCollectionStyle } from "./style/UseFilterGroupCollectionStyle";
 
@@ -22,7 +22,7 @@ interface FilterGroupCollectionProps {
   callback: FilterGroupCollectionCallback;
 }
 
-const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
+export const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
   const classes = useFilterGroupCollectionStyle();
 
   return (
@@ -185,5 +185,3 @@ const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
     </div>
   );
 };
-
-export default FilterGroupCollection;

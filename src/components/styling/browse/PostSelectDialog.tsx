@@ -4,10 +4,10 @@ import {
   DialogContent,
   DialogTitle,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import React from "react";
 import { usePostSelectCaller } from "../../../model/styling/browse/api_caller/UsePostSelectCaller";
-import PostSelectCallback from "./callback/PostSelectCallback";
+import { PostSelectCallback } from "./callback/PostSelectCallback";
 
 export interface PostSelectContainerProps {
   selectedItemId: number;
@@ -15,7 +15,7 @@ export interface PostSelectContainerProps {
   callback: PostSelectCallback;
 }
 
-const PostSelectDialog = (props: PostSelectContainerProps) => {
+export const PostSelectDialog = (props: PostSelectContainerProps) => {
   const apiCaller = usePostSelectCaller(
     props.selectedItemId,
     props.previousItemId,
@@ -24,11 +24,7 @@ const PostSelectDialog = (props: PostSelectContainerProps) => {
 
   return (
     <>
-      <Dialog
-        open={apiCaller.isRunning()}
-        disableBackdropClick
-        disableEscapeKeyDown
-      >
+      <Dialog open={apiCaller.isRunning()} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
       <Dialog
@@ -43,5 +39,3 @@ const PostSelectDialog = (props: PostSelectContainerProps) => {
     </>
   );
 };
-
-export default PostSelectDialog;

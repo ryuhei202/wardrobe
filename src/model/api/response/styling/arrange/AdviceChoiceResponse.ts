@@ -1,6 +1,6 @@
-import AdviceResponse from "./AdviceResponse";
+import { AdviceResponse } from "./AdviceResponse";
 
-export default interface AdviceChoiceResponse {
+export interface AdviceChoiceResponse {
   readonly name: string;
   readonly advice: AdviceResponse[];
 }

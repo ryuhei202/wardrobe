@@ -14,19 +14,19 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   Typography,
-} from "@material-ui/core";
-import { Image } from "@material-ui/icons";
+} from "@mui/material";
+import { Image } from "@mui/icons-material";
 import React, { useState } from "react";
 import { usePostNotifyLostCaller } from "../../../model/styling/feedback/api_caller/UsePostNotifyLostCaller";
-import FeedbackDialogData from "../../../model/styling/feedback/props_data/FeedbackDialogData";
-import FeedbackDialogCallback from "./callback/FeedbackDialogCallback";
+import { FeedbackDialogData } from "../../../model/styling/feedback/props_data/FeedbackDialogData";
+import { FeedbackDialogCallback } from "./callback/FeedbackDialogCallback";
 
 export interface FeedbackDialogProps {
   data: FeedbackDialogData;
   callback: FeedbackDialogCallback;
 }
 
-const FeedbackDialog = (props: FeedbackDialogProps) => {
+export const FeedbackDialog = (props: FeedbackDialogProps) => {
   const [selectedItemIds, setSelectedItemIds] = useState<number[]>([]);
   const apiCaller = usePostNotifyLostCaller(
     selectedItemIds,
@@ -94,11 +94,7 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog
-        open={apiCaller.isRunning()}
-        disableBackdropClick
-        disableEscapeKeyDown
-      >
+      <Dialog open={apiCaller.isRunning()} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
       <Dialog
@@ -113,5 +109,3 @@ const FeedbackDialog = (props: FeedbackDialogProps) => {
     </>
   );
 };
-
-export default FeedbackDialog;

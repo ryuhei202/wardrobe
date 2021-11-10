@@ -1,4 +1,4 @@
-export default interface FilterSizeData {
+export interface FilterSizeData {
   readonly name: string;
   readonly isSelected: boolean;
 }

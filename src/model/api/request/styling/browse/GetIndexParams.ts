@@ -1,6 +1,6 @@
-import GetIndexFilterParams from "./GetIndexFilterParams";
+import { GetIndexFilterParams } from "./GetIndexFilterParams";
 
-export default interface GetIndexParams {
+export interface GetIndexParams {
   chartId: number;
   sort: number;
   page_no: number;
