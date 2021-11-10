@@ -8,18 +8,18 @@ import { useGetAdviceChoiceRequest } from "../../../api/request/styling/arrange/
 
 export interface GetAdviceChoiceCaller {
   isRunning: () => boolean;
-  response: AdviceChoiceResponse[] | null;
+  response: AdviceChoiceResponse | null;
   errorResponse: ErrorResponse | null;
 }
 
 export const useGetAdviceChoiceCaller = (): GetAdviceChoiceCaller => {
-  const [response, setResponse] = useState<AdviceChoiceResponse[] | null>(null);
+  const [response, setResponse] = useState<AdviceChoiceResponse | null>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
   const request = useGetAdviceChoiceRequest(ChartId());
-  const client = useGetClient<AdviceChoiceResponse[]>(request);
+  const client = useGetClient<AdviceChoiceResponse>(request);
 
   useEffect(() => {
     if (callStatus === CallStatus.Preparing) {
