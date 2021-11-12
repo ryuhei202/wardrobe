@@ -13,7 +13,7 @@ import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 
 export interface ArrangeHandler {
   editingOutfitIndex: number;
-  frontErrorMessage: string | null;
+  upperLimitMessage: string | null;
   createOutfitCaller: PostCreateOutfitCaller;
   onClickComplete: () => void;
   addedOutfitListData: () => AddedOutfitListData;
@@ -36,7 +36,7 @@ export const useArrangeHandler = (
     outfits.length
   );
   const [editingOutfit, setEditingOutfit] = useState<Outfit>(defaultOutfit);
-  const [frontErrorMessage, setfrontErrorMessage] = useState<string | null>(
+  const [upperLimitMessage, setUpperLimitMessage] = useState<string | null>(
     null
   );
   const createOutfitCaller = usePostCreateOutfitCaller(outfits);
@@ -121,8 +121,8 @@ export const useArrangeHandler = (
         //着こなしアドバイスは4つまでなので、フロントで超えないようにする。
         //3秒後にメッセージを消す。
         if (editingOutfitIndex > 3) {
-          setfrontErrorMessage("着こなしアドバイスは最大4つまでです。");
-          setTimeout(() => setfrontErrorMessage(null), 3000);
+          setUpperLimitMessage("着こなしアドバイスは最大4つまでです。");
+          setTimeout(() => setUpperLimitMessage(null), 3000);
           return;
         }
         let newOutfits = [...outfits];
@@ -159,7 +159,7 @@ export const useArrangeHandler = (
 
   return {
     editingOutfitIndex,
-    frontErrorMessage,
+    upperLimitMessage,
     createOutfitCaller,
     onClickComplete,
     addedOutfitListData,

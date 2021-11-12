@@ -69,12 +69,12 @@ export const Arrange = (props: ArrangeProps) => {
       <Snackbar
         open={
           handler.createOutfitCaller.errorResponse !== null ||
-          handler.frontErrorMessage !== null
+          handler.upperLimitMessage !== null
         }
       >
         <Alert severity="error">
           {handler.createOutfitCaller.errorResponse?.message ?? ""}
-          {handler.frontErrorMessage}
+          {handler.upperLimitMessage}
         </Alert>
       </Snackbar>
       <Snackbar
