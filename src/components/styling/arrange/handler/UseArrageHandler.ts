@@ -1,5 +1,5 @@
 import { Outfit } from "./../../../../model/styling/arrange/Outfit";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AdviceChoiceResponse } from "../../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import {
   PostCreateOutfitCaller,
@@ -40,7 +40,7 @@ export const useArrangeHandler = (
     null
   );
   const [isPostComplete, setIsPostComplete] = useState(false);
-  const onPostComplete = () => setIsPostComplete(true);
+  const onPostComplete = useCallback(() => setIsPostComplete(true), []);
   const createOutfitCaller = usePostCreateOutfitCaller(outfits, onPostComplete);
   const onClickComplete = () => createOutfitCaller.prepare();
 
