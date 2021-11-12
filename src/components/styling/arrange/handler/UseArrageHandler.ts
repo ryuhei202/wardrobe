@@ -13,6 +13,7 @@ import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 
 export interface ArrangeHandler {
   editingOutfitIndex: number;
+  upperLimitMessage: string | null;
   createOutfitCaller: PostCreateOutfitCaller;
   onClickComplete: () => void;
   addedOutfitListData: () => AddedOutfitListData;
@@ -35,6 +36,9 @@ export const useArrangeHandler = (
     outfits.length
   );
   const [editingOutfit, setEditingOutfit] = useState<Outfit>(defaultOutfit);
+  const [upperLimitMessage, setUpperLimitMessage] = useState<string | null>(
+    null
+  );
   const createOutfitCaller = usePostCreateOutfitCaller(outfits);
 
   const onClickComplete = () => {
@@ -114,9 +118,13 @@ export const useArrangeHandler = (
   const outfitFormCallback = (): OutfitFormCallback => {
     return {
       onClickAddOutfit: () => {
-        //着こなしアドバイスは4つまでなので、フロントで超えないようにする
-        if (editingOutfitIndex > 3) return;
-
+        //着こなしアドバイスは4つまでなので、フロントで超えないようにする。
+        //3秒後にメッセージを消す。
+        if (editingOutfitIndex > 3) {
+          setUpperLimitMessage("着こなしアドバイスは最大4つまでです。");
+          setTimeout(() => setUpperLimitMessage(null), 3000);
+          return;
+        }
         let newOutfits = [...outfits];
         if (editingOutfitIndex >= newOutfits.length) {
           newOutfits.push(editingOutfit);
@@ -151,6 +159,7 @@ export const useArrangeHandler = (
 
   return {
     editingOutfitIndex,
+    upperLimitMessage,
     createOutfitCaller,
     onClickComplete,
     addedOutfitListData,

@@ -66,9 +66,15 @@ export const Arrange = (props: ArrangeProps) => {
       >
         <CircularProgress />
       </Dialog>
-      <Snackbar open={handler.createOutfitCaller.errorResponse !== null}>
+      <Snackbar
+        open={
+          handler.createOutfitCaller.errorResponse !== null ||
+          handler.upperLimitMessage !== null
+        }
+      >
         <Alert severity="error">
           {handler.createOutfitCaller.errorResponse?.message ?? ""}
+          {handler.upperLimitMessage}
         </Alert>
       </Snackbar>
       <Snackbar
