@@ -15,7 +15,6 @@ export interface ArrangeHandler {
   editingOutfitIndex: number;
   upperLimitMessage: string | null;
   createOutfitCaller: PostCreateOutfitCaller;
-  isPostComplete: boolean;
   onClickComplete: () => void;
   addedOutfitListData: () => AddedOutfitListData;
   addedOutfitListCallback: () => AddedOutfitListCallback;
@@ -177,7 +176,6 @@ export const useArrangeHandler = (
     editingOutfitIndex,
     upperLimitMessage,
     createOutfitCaller,
-    isPostComplete,
     onClickComplete,
     addedOutfitListData,
     addedOutfitListCallback,
