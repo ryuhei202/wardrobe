@@ -47,7 +47,7 @@ export const usePostCreateOutfitCaller = (
       setCallStatus(CallStatus.Running);
       fetch();
     }
-  }, [callStatus, client]);
+  }, [callStatus, client, onPostComplete]);
 
   const isRunning = (): boolean => {
     return callStatus === CallStatus.Running;
