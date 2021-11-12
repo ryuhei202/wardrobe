@@ -1,5 +1,5 @@
 import { Outfit } from "./../../../../model/styling/arrange/Outfit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AdviceChoiceResponse } from "../../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import {
   PostCreateOutfitCaller,
@@ -15,6 +15,7 @@ export interface ArrangeHandler {
   editingOutfitIndex: number;
   upperLimitMessage: string | null;
   createOutfitCaller: PostCreateOutfitCaller;
+  isPostComplete: boolean;
   onClickComplete: () => void;
   addedOutfitListData: () => AddedOutfitListData;
   addedOutfitListCallback: () => AddedOutfitListCallback;
@@ -39,10 +40,24 @@ export const useArrangeHandler = (
   const [upperLimitMessage, setUpperLimitMessage] = useState<string | null>(
     null
   );
-  const createOutfitCaller = usePostCreateOutfitCaller(outfits);
+  const [isPostComplete, setIsPostComplete] = useState(false);
+  const onPostComplete = () => setIsPostComplete(true);
+  const createOutfitCaller = usePostCreateOutfitCaller(outfits, onPostComplete);
+  const onClickComplete = () => createOutfitCaller.prepare();
 
-  const onClickComplete = () => {
-    createOutfitCaller.prepare();
+  useEffect(() => {
+    isPostComplete
+      ? window.removeEventListener("beforeunload", onUnload)
+      : window.addEventListener("beforeunload", onUnload);
+    return () => {
+      // アンマウント時にタブを閉じる時のアラートをするイベントを削除する。
+      window.removeEventListener("beforeunload", onUnload);
+    };
+  }, [isPostComplete]);
+
+  const onUnload = (e: any) => {
+    e.preventDefault();
+    e.returnValue = "";
   };
 
   const addedOutfitListData = (): AddedOutfitListData => {
@@ -134,6 +149,7 @@ export const useArrangeHandler = (
         setOutfits(newOutfits);
         setEditingOutfit(defaultOutfit);
         setEditingOutfitIndex(newOutfits.length);
+        setIsPostComplete(false);
       },
       onSelectAdvice: (adviceId: number, index: number) => {
         let newAdviceIds = [...editingOutfit.adviceIds];
@@ -161,6 +177,7 @@ export const useArrangeHandler = (
     editingOutfitIndex,
     upperLimitMessage,
     createOutfitCaller,
+    isPostComplete,
     onClickComplete,
     addedOutfitListData,
     addedOutfitListCallback,
