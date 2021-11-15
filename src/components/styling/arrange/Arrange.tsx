@@ -19,7 +19,7 @@ import { useArrangeStyle } from "./style/UseArrangeStyle";
 
 export interface ArrangeProps {
   data: ArrangeData;
-  response: AdviceChoiceResponse[];
+  response: AdviceChoiceResponse;
   callback: ArrangeCallback;
 }
 
@@ -54,7 +54,7 @@ export const Arrange = (props: ArrangeProps) => {
       {handler.editingOutfitIndex >= 0 ? (
         <OutfitForm
           data={handler.outfitFormData()}
-          response={props.response}
+          response={props.response.adviceCategories}
           callback={handler.outfitFormCallback()}
         />
       ) : (
@@ -66,9 +66,15 @@ export const Arrange = (props: ArrangeProps) => {
       >
         <CircularProgress />
       </Dialog>
-      <Snackbar open={handler.createOutfitCaller.errorResponse !== null}>
+      <Snackbar
+        open={
+          handler.createOutfitCaller.errorResponse !== null ||
+          handler.upperLimitMessage !== null
+        }
+      >
         <Alert severity="error">
           {handler.createOutfitCaller.errorResponse?.message ?? ""}
+          {handler.upperLimitMessage}
         </Alert>
       </Snackbar>
       <Snackbar

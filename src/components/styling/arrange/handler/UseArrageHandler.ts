@@ -13,6 +13,7 @@ import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 
 export interface ArrangeHandler {
   editingOutfitIndex: number;
+  upperLimitMessage: string | null;
   createOutfitCaller: PostCreateOutfitCaller;
   onClickComplete: () => void;
   addedOutfitListData: () => AddedOutfitListData;
@@ -23,18 +24,21 @@ export interface ArrangeHandler {
 
 export const useArrangeHandler = (
   items: SelectedItem[],
-  responses: AdviceChoiceResponse[]
+  responses: AdviceChoiceResponse
 ): ArrangeHandler => {
   const defaultOutfit = {
     itemIds: [],
     adviceIds: [],
   };
 
-  const [outfits, setOutfits] = useState<Outfit[]>([]);
+  const [outfits, setOutfits] = useState<Outfit[]>(responses.selectedOutfits);
   const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(
     outfits.length
   );
   const [editingOutfit, setEditingOutfit] = useState<Outfit>(defaultOutfit);
+  const [upperLimitMessage, setUpperLimitMessage] = useState<string | null>(
+    null
+  );
   const createOutfitCaller = usePostCreateOutfitCaller(outfits);
 
   const onClickComplete = () => {
@@ -66,8 +70,8 @@ export const useArrangeHandler = (
           ),
           advices: outfit.adviceIds.map((adviceId) => {
             let adviceTitle = "";
-            responses.forEach((response) => {
-              response.advice.forEach((advice) => {
+            responses.adviceCategories.forEach((category) => {
+              category.advice.forEach((advice) => {
                 if (advice.id === adviceId) {
                   adviceTitle = advice.title;
                 }
@@ -114,6 +118,13 @@ export const useArrangeHandler = (
   const outfitFormCallback = (): OutfitFormCallback => {
     return {
       onClickAddOutfit: () => {
+        //着こなしアドバイスは4つまでなので、フロントで超えないようにする。
+        //3秒後にメッセージを消す。
+        if (editingOutfitIndex > 3) {
+          setUpperLimitMessage("着こなしアドバイスは最大4つまでです。");
+          setTimeout(() => setUpperLimitMessage(null), 3000);
+          return;
+        }
         let newOutfits = [...outfits];
         if (editingOutfitIndex >= newOutfits.length) {
           newOutfits.push(editingOutfit);
@@ -148,6 +159,7 @@ export const useArrangeHandler = (
 
   return {
     editingOutfitIndex,
+    upperLimitMessage,
     createOutfitCaller,
     onClickComplete,
     addedOutfitListData,

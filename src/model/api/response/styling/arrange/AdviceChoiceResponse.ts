@@ -1,6 +1,7 @@
-import { AdviceResponse } from "./AdviceResponse";
+import { AdviceCategoryResponse } from "./AdviceCategoryResponse";
+import { Outfit } from "../../../../styling/arrange/Outfit";
 
 export interface AdviceChoiceResponse {
-  readonly name: string;
-  readonly advice: AdviceResponse[];
+  readonly adviceCategories: AdviceCategoryResponse[];
+  readonly selectedOutfits: Outfit[];
 }

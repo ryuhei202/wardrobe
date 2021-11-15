@@ -13,14 +13,14 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment, useCallback, useEffect, useState } from "react";
-import { AdviceChoiceResponse } from "../../../model/api/response/styling/arrange/AdviceChoiceResponse";
+import { AdviceCategoryResponse } from "../../../model/api/response/styling/arrange/AdviceCategoryResponse";
 import { OutfitFormData } from "../../../model/styling/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "./callback/OutfitFormCallback";
 import { useOutfitFormStyle } from "./style/UseOutfitFormStyle";
 
 export interface OutfitFormProps {
   data: OutfitFormData;
-  response: AdviceChoiceResponse[];
+  response: AdviceCategoryResponse[];
   callback: OutfitFormCallback;
 }
 
