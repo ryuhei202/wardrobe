@@ -62,7 +62,9 @@ export const useSizeRefinementHandler = (
     currentIds: number[]
   ): AppliedFilterData[] => {
     return currentIds.map((currentId) => {
-      return { name: choice.find((filter) => filter.id === currentId)!!.name };
+      return {
+        name: choice.find((filter) => filter.id === currentId)?.name ?? "",
+      };
     });
   };
 
