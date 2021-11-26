@@ -25,7 +25,6 @@ import { ValidationErrorType } from "../../model/styling/browse/ValidationErrorT
 import { usePostRegisterItemsCaller } from "../../model/styling/arrange/api_caller/UsePostRegisterItemsCaller";
 import { SelectionConfirmData } from "../../model/styling/props_data/SelectionConfirmData";
 import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
-import { FeedbackDialog } from "./feedback/FeedbackDialog";
 import { SelectedItemArray } from "./SelectedItemArray";
 import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
 
@@ -37,7 +36,6 @@ export interface SelectionConfirmProps {
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const classes = useSelectionConfirmStyle();
-  const [isFeedbackDialogOpen, setIsFeedbackDialogOpen] = useState(false);
   const [stylist, setStylist] = useState<number | null>(null);
   const apiCaller = usePostRegisterItemsCaller(
     stylist ?? 0,
@@ -147,29 +145,6 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
       >
         確定
       </Button>
-      <Button
-        variant="contained"
-        className={classes.changeButton}
-        onClick={() => setIsFeedbackDialogOpen(true)}
-      >
-        行方不明アイテムを報告する
-      </Button>
-      <FeedbackDialog
-        data={{
-          isOpen: isFeedbackDialogOpen,
-          items: props.data.items.map((item) => {
-            return {
-              itemId: item.itemId,
-              locationName: item.locationName,
-              imagePath: item.itemImagePath,
-            };
-          }),
-        }}
-        callback={{
-          onClose: () => setIsFeedbackDialogOpen(false),
-          onPostComplete: props.callback.onCancelSelection,
-        }}
-      />
       <Dialog open={apiCaller.isRunning()} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
