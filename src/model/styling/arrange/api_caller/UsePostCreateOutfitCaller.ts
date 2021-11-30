@@ -16,7 +16,8 @@ export interface PostCreateOutfitCaller {
 }
 
 export const usePostCreateOutfitCaller = (
-  outfits: Outfit[]
+  outfits: Outfit[],
+  onPostComplete: () => void
 ): PostCreateOutfitCaller => {
   const [response, setResponse] = useState<any>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Idle);
@@ -36,6 +37,7 @@ export const usePostCreateOutfitCaller = (
             setResponse(response);
             setErrorResponse(null);
             setCallStatus(CallStatus.Idle);
+            onPostComplete();
           })
           .catch((error: ErrorResponse) => {
             setErrorResponse(error);
@@ -45,7 +47,7 @@ export const usePostCreateOutfitCaller = (
       setCallStatus(CallStatus.Running);
       fetch();
     }
-  }, [callStatus, client]);
+  }, [callStatus, client, onPostComplete]);
 
   const isRunning = (): boolean => {
     return callStatus === CallStatus.Running;

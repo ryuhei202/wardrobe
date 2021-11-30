@@ -45,7 +45,7 @@ export const App = () => {
             </Toolbar>
           </AppBar>
           <Dialog open={isQRCodeOpen} onClose={() => setIsQRCodeOpen(false)}>
-            <Paper>
+            <Paper className={classes.qrCodeContainer}>
               <QRCode value={ChartId().toString()} size={300} />
             </Paper>
           </Dialog>
