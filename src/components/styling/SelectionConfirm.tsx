@@ -36,7 +36,9 @@ export interface SelectionConfirmProps {
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const classes = useSelectionConfirmStyle();
-  const [stylist, setStylist] = useState<number | null>(null);
+  const [stylist, setStylist] = useState<number | null>(
+    props.response.stylistInfo.selectedId
+  );
   const apiCaller = usePostRegisterItemsCaller(
     stylist ?? 0,
     props.data.items.map((item) => item.itemId),
@@ -69,7 +71,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
               setStylist(event.target.value as number);
             }}
           >
-            {props.response.stylistChoice.map((stylist) => (
+            {props.response.stylistInfo.selectChoice.map((stylist) => (
               <MenuItem key={stylist.id} value={stylist.id}>
                 {stylist.name}
               </MenuItem>
