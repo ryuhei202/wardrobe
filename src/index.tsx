@@ -18,7 +18,7 @@ const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React)!;
 
 ReactDOM.render(
   <React.StrictMode>
-    {process.env.NODE_ENV === "production" ? (
+    {ErrorBoundary ? (
       <ErrorBoundary>
         <App />
       </ErrorBoundary>
