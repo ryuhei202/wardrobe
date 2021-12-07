@@ -6,7 +6,7 @@ import { reportWebVitals } from "./reportWebVitals";
 import Bugsnag from "@bugsnag/js";
 import BugsnagPluginReact from "@bugsnag/plugin-react";
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.VERCEL_ENV === "production") {
   Bugsnag.start({
     apiKey: process.env.REACT_APP_BUGSNAG_API_KEY || "",
     plugins: [new BugsnagPluginReact()],
@@ -18,7 +18,7 @@ const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React)!;
 
 ReactDOM.render(
   <React.StrictMode>
-    {ErrorBoundary ? (
+    {process.env.VERCEL_ENV === "production" ? (
       <ErrorBoundary>
         <App />
       </ErrorBoundary>
