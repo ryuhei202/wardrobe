@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "production": "wardrobe-uwear",
+    "staging": "wardrobe-stg-uwear"
+  }
+}
