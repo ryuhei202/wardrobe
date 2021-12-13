@@ -25,7 +25,7 @@ pipelines:
       - step:
           name: build
           script:
-            - yarn install && yarn build:staging
+            - yarn install && yarn build
           artifacts:
             - build/**
       - step:
