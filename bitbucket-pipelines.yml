@@ -16,6 +16,11 @@ pipelines:
             - pipe: atlassian/firebase-deploy:1.3.0
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
+                MULTI_SITES_CONFIG: >
+                  [{
+                    "TARGET": "staging",
+                    "RESOURCE": "wardrobe-uwear-stg"
+                  }]
     master:
       - step:
           name: build
@@ -30,3 +35,8 @@ pipelines:
             - pipe: atlassian/firebase-deploy:1.3.0
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
+                MULTI_SITES_CONFIG: >
+                  [{
+                    "TARGET": "production",
+                    "RESOURCE": "wardrobe-uwear"
+                  }]
