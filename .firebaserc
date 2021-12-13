@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "wardrobe-uwear"
+  },
+  "targets": {
+    "wardrobe-uwear": {
+      "hosting": {
+        "staging": [
+          "wardrobe-uwear-stg"
+        ],
+        "production": [
+          "wardrobe-uwear"
+        ]
+      }
+    }
+  }
+}
