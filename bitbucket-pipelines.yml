@@ -16,7 +16,7 @@ pipelines:
             - pipe: atlassian/firebase-deploy:1.3.0
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
-                PROJECT_ID: 'wwardrobe-stg-uwear'
+                PROJECT_ID: 'wardrobe-stg-uwear'
                 DEBUG: 'true'
     master:
       - step:
