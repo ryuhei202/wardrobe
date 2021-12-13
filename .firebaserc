@@ -1,14 +1,6 @@
 {
-  "targets": {
-    "wardrobe-uwear": {
-      "hosting": {
-        "staging": [
-          "wardrobe-uwear-stg"
-        ],
-        "production": [
-          "wardrobe-uwear"
-        ]
-      }
-    }
+  "projects": {
+    "production": "wardrobe-uwear",
+    "staging": "wardrobe-stg-uwear"
   }
 }
