@@ -16,6 +16,7 @@ pipelines:
             - pipe: atlassian/firebase-deploy:1.3.0
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
+                PROJECT_ID: 'wardrobe-uwear-stg'
                 EXTRA_ARGS: '--only hosting'
                 MULTI_SITES_CONFIG: >
                   [{
@@ -37,6 +38,7 @@ pipelines:
             - pipe: atlassian/firebase-deploy:1.3.0
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
+                PROJECT_ID: 'wardrobe-uwear'
                 EXTRA_ARGS: '--only hosting'
                 MULTI_SITES_CONFIG: >
                   [{
