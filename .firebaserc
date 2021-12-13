@@ -1,7 +1,4 @@
 {
-  "projects": {
-    "default": "wardrobe-uwear"
-  },
   "targets": {
     "wardrobe-uwear": {
       "hosting": {
