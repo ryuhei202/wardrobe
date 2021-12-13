@@ -22,6 +22,7 @@ pipelines:
                     "TARGET": "staging",
                     "RESOURCE": "wardrobe-uwear-stg"
                   }]
+                DEBUG: 'true'
     master:
       - step:
           name: build
@@ -42,3 +43,4 @@ pipelines:
                     "TARGET": "production",
                     "RESOURCE": "wardrobe-uwear"
                   }]
+                DEBUG: 'true'
