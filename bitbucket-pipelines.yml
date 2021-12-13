@@ -16,13 +16,7 @@ pipelines:
             - pipe: atlassian/firebase-deploy:1.3.0
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
-                PROJECT_ID: 'wardrobe-uwear'
-                EXTRA_ARGS: '--only hosting'
-                MULTI_SITES_CONFIG: >
-                  [{
-                    "TARGET": "staging",
-                    "RESOURCE": "wardrobe-uwear-stg"
-                  }]
+                PROJECT_ID: 'wwardrobe-stg-uwear'
                 DEBUG: 'true'
     master:
       - step:
@@ -39,10 +33,4 @@ pipelines:
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: 'wardrobe-uwear'
-                EXTRA_ARGS: '--only hosting'
-                MULTI_SITES_CONFIG: >
-                  [{
-                    "TARGET": "production",
-                    "RESOURCE": "wardrobe-uwear"
-                  }]
                 DEBUG: 'true'
