@@ -42,7 +42,7 @@
     ]
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "build:staging": "REACT_APP_ENV=staging react-scripts build",
     "test": "react-scripts test",
