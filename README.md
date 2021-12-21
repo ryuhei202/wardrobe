@@ -1,35 +1,14 @@
-# ローカル
+# wardrobe
 
-```bash
-cd path/to/project
-yarn install
-yarn start
-```
+leeap スタイリング web アプリ
 
-# デプロイ
+## 実行可能コマンド
 
-```bash
-cd path/to/project
-yarn install
-yarn build
-firebase deploy
-```
+### `yarn install`
 
-# 本番ビルドのローカルチェック
+プロジェクトに必要なパッケージをインストール
 
-まずこちらをインストール
-※ローカルでホスティングサーバーを立てるために使うツール
+### `yarn start`
 
-https://github.com/http-party/http-server
-
-以下の流れで起動。
-※APIの向きは本番環境になっているので注意。
-
-```bash
-cd path/to/project
-yarn install
-yarn build
-cd build
-http-server -p 3001
-```
-
+development モードでアプリケーションを実行
+ブラウザで[http://localhost:3001](http://localhost:3001)を開いて確認

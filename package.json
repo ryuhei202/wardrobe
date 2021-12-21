@@ -42,13 +42,11 @@
     ]
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "build:staging": "REACT_APP_ENV=staging react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy:production": "firebase deploy --only hosting:production",
-    "deploy:staging": "firebase deploy --only hosting:staging"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "plugins": [
