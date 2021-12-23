@@ -12,6 +12,7 @@ import {
 import QRCode from "react-qr-code";
 import { ChartId } from "../model/ChartId";
 import { CropFree } from "@mui/icons-material";
+import { Route, Routes } from "react-router-dom";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -49,7 +50,9 @@ export const App = () => {
               <QRCode value={ChartId().toString()} size={300} />
             </Paper>
           </Dialog>
-          <Styling />
+          <Routes>
+            <Route path="/selecting" element={<Styling />} />
+          </Routes>
         </div>
       </ThemeProvider>
     </StyledEngineProvider>

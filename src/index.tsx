@@ -5,6 +5,7 @@ import { App } from "./components/App";
 import { reportWebVitals } from "./reportWebVitals";
 import Bugsnag from "@bugsnag/js";
 import BugsnagPluginReact from "@bugsnag/plugin-react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 if (process.env.NODE_ENV === "production") {
   Bugsnag.start({
@@ -18,13 +19,15 @@ const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React)!;
 
 ReactDOM.render(
   <React.StrictMode>
-    {process.env.NODE_ENV === "production" ? (
-      <ErrorBoundary>
+    <BrowserRouter>
+      {process.env.NODE_ENV === "production" ? (
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
+      ) : (
         <App />
-      </ErrorBoundary>
-    ) : (
-      <App />
-    )}
+      )}
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
