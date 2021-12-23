@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar/AppBar";
 import { Button, Dialog, Paper, Toolbar, Typography } from "@mui/material";
 import { theme } from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";
-import { Styling } from "./styling/Styling";
+import { Selecting } from "./selecting/Selecting";
 import {
   ThemeProvider,
   Theme,
@@ -51,7 +51,7 @@ export const App = () => {
             </Paper>
           </Dialog>
           <Routes>
-            <Route path="/selecting" element={<Styling />} />
+            <Route path="/selecting" element={<Selecting />} />
           </Routes>
         </div>
       </ThemeProvider>
