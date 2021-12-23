@@ -5,7 +5,7 @@ import { App } from "./components/App";
 import { reportWebVitals } from "./reportWebVitals";
 import Bugsnag from "@bugsnag/js";
 import BugsnagPluginReact from "@bugsnag/plugin-react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 if (process.env.NODE_ENV === "production") {
   Bugsnag.start({
