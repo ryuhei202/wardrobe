@@ -1,3 +1,4 @@
+import { KarteShowResponse } from "./../../../model/api/response/styling/karte/KarteShowResponse";
 import { useState } from "react";
 import { ItemBrowseCallback } from "../browse/callback/ItemBrowseCallback";
 import { SelectedItem } from "../../../model/selecting/SelectedItem";
@@ -13,7 +14,6 @@ import { SelectionProgressCallback } from "../callback/SelectionProgressCallback
 export interface SelectingHandler {
   mainContentType: MainContentType | undefined;
   selectionProgressData: () => SelectionProgressData;
-  karteContainerCallback: () => KarteContainerCallback;
   selectionProgressCallback: () => SelectionProgressCallback;
   itemBrowseCallback: () => ItemBrowseCallback;
   selectionConfirmData: () => SelectionConfirmData;
@@ -23,45 +23,25 @@ export interface SelectingHandler {
   currentSelectedItem: () => SelectedItem | null;
 }
 
-export const useSelectingHandler = (): SelectingHandler => {
-  const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([]);
+export const useSelectingHandler = (
+  response: KarteShowResponse | undefined
+): SelectingHandler => {
+  const [selectedItems, setSelectedItems] = useState<SelectedItem[]>(
+    response === undefined ? [] : response.registeredItems
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [mainContentType, setMainContentType] = useState<MainContentType>();
-  const [rentableItemNum, setRentableItemNum] = useState(0);
+  const [mainContentType, setMainContentType] = useState<MainContentType>(
+    MainContentType.Browse
+  );
+  const [rentableItemNum, setRentableItemNum] = useState(
+    response === undefined ? 0 : response.defaultItemNum
+  );
 
   const selectionProgressData = (): SelectionProgressData => {
     return {
       selectedIndex: currentIndex,
       items: selectedItems,
       rentableItemNum: rentableItemNum,
-    };
-  };
-
-  const karteContainerCallback = (): KarteContainerCallback => {
-    return {
-      onKarteFetched: (
-        isItemRegistered: boolean,
-        registeredItems: SelectedItem[],
-        defaultItemNum: number
-      ) => {
-        if (isItemRegistered) {
-          // 選択済みのアイテム数がレンタル可能数より多い場合、選択済みアイテム数に合わせる
-          if (registeredItems.length >= defaultItemNum) {
-            setRentableItemNum(registeredItems.length);
-          } else {
-            setRentableItemNum(defaultItemNum);
-          }
-          setSelectedItems(registeredItems);
-          if (registeredItems.length >= defaultItemNum) {
-            setCurrentIndex(registeredItems.length - 1);
-          } else {
-            setCurrentIndex(registeredItems.length);
-          }
-        } else {
-          setRentableItemNum(defaultItemNum);
-        }
-        setMainContentType(MainContentType.Browse);
-      },
     };
   };
 
@@ -131,7 +111,6 @@ export const useSelectingHandler = (): SelectingHandler => {
   return {
     mainContentType,
     selectionProgressData,
-    karteContainerCallback,
     selectionProgressCallback,
     itemBrowseCallback,
     selectionConfirmData,

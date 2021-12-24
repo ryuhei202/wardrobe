@@ -2,20 +2,21 @@ import { Drawer, Paper, Toolbar } from "@mui/material";
 import React from "react";
 import { ArrangeContainer } from "./arrange/ArrangeContainer";
 import { useSelectingHandler } from "./handler/UseSelectingHandler";
-import { KarteContainer } from "./karte/KarteContainer";
 import { useSelectingStyle } from "./style/UseSelectingStyle";
 import { SelectionConfirmContainer } from "./SelectionConfirmContainer";
 import { MainContentType } from "../../model/selecting/MainContentType";
 import { BrowseContainer } from "./browse/BrowseContainer";
 import { SelectionProgress } from "./SelectionProgress";
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
+import { Karte } from "./karte/Karte";
 
 type Props = {
   readonly response: KarteShowResponse | undefined;
 };
+
 export const Selecting = (props: Props) => {
   const classes = useSelectingStyle();
-  const handler = useSelectingHandler();
+  const handler = useSelectingHandler(props.response);
 
   let mainContent;
   switch (handler.mainContentType) {
@@ -59,7 +60,9 @@ export const Selecting = (props: Props) => {
       >
         <Toolbar />
         <div className={classes.karteContainer}>
-          <KarteContainer callback={handler.karteContainerCallback()} />
+          <>
+            karte.tsxを入れるけどpropsの値とか変えないとエラーが出るので一旦おいてないです
+          </>
         </div>
         <Paper variant="outlined" className={classes.progressContainer}>
           <SelectionProgress
