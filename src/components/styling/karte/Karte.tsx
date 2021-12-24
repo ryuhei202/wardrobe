@@ -15,6 +15,7 @@ import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 import { PastOutfitCollection } from "./PastOutfitCollection";
 import { PurchasedItemCollection } from "./PurchasedItemCollection";
 import { NgMemoCollection } from "./NgMemoCollection";
+import { MemberContainer } from "./MemberContainer";
 
 interface KarteProps {
   response: InfoResponse;
@@ -27,23 +28,7 @@ export const Karte = (props: KarteProps) => {
   return (
     <List dense className={classes.drawerList}>
       <ListItem>
-        <ListItemText
-          primary={props.response.memberName}
-          secondary={`パートナーID:${props.response.tMemberId}, カルテID:${props.response.tChartId}`}
-        />
-        <ListItemSecondaryAction>
-          <IconButton
-            color="primary"
-            onClick={handler.setMemberImageDialogOpen}
-            size="large"
-          >
-            <PhotoLibrary />
-          </IconButton>
-          <MemberImageCollectionDialog
-            data={handler.memberImageDialogData()}
-            callback={handler.memberImageDialogCallback()}
-          />
-        </ListItemSecondaryAction>
+        <MemberContainer />
       </ListItem>
       <ListItem>
         <ListItemText>
