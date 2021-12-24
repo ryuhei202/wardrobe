@@ -1,5 +1,5 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useMemberShow } from "../../../hooks/api/UseMemberShow";
+import { useMemberShow } from "../../hooks/api/UseMemberShow";
 import { Member } from "./Member";
 
 export const MemberContainer = () => {

@@ -11,11 +11,10 @@ import { ListAlt, PhotoLibrary } from "@mui/icons-material";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
 import { useKarteHandler } from "./handler/UseKarteHandler";
 import { PastOutfitCollectionDialog } from "./PastOutfitCollectionDialog";
-import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 import { PastOutfitCollection } from "./PastOutfitCollection";
 import { PurchasedItemCollection } from "./PurchasedItemCollection";
 import { NgMemoCollection } from "./NgMemoCollection";
-import { MemberContainer } from "./MemberContainer";
+import { MemberContainer } from "../../member/MemberContainer";
 
 interface KarteProps {
   response: InfoResponse;

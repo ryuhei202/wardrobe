@@ -5,10 +5,10 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useContext } from "react";
-import { MemberShowResponse } from "../../../model/api/response/styling/member/MemberShowResponse";
-import { ChartIdContext } from "../../App";
+import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
+import { ChartIdContext } from "../App";
 import { useMemberHandler } from "./handler/UseMemberHandler";
-import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
+import { MemberImageCollectionDialog } from "../styling/karte/MemberImageCollectionDialog";
 
 type Props = {
   readonly response: MemberShowResponse | undefined;

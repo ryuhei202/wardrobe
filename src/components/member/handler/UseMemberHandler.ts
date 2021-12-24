@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { MemberShowResponse } from "../../../../model/api/response/styling/member/MemberShowResponse";
-import { MemberImageCollectionDialogData } from "../../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
-import { MemberImageCollectionDialogCallback } from "../callback/MemberImageCollectionDialogCallback";
+import { MemberShowResponse } from "../../../model/api/response/styling/member/MemberShowResponse";
+import { MemberImageCollectionDialogData } from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
+import { MemberImageCollectionDialogCallback } from "../../styling/karte/callback/MemberImageCollectionDialogCallback";
 
 type MemberHandler = {
   setMemberImageDialogOpen: () => void;
