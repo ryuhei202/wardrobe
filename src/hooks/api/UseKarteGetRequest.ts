@@ -1,3 +1,4 @@
+import { AxiosClient } from "./../../model/api/shared/AxiosClient";
 import axios, { AxiosResponse } from "axios";
 import applyCaseMiddleware from "axios-case-converter";
 import { useContext } from "react";
@@ -14,9 +15,9 @@ export const useKarteGetRequest = <T>(
 } => {
   const chartId = useContext(ChartIdContext);
   const { data, isLoading, error } = useQuery<T, Error>(`karte/${path}`, () =>
-    applyCaseMiddleware(axios.create())
-      .get(`${baseUrl()}/styling/kartes/${chartId}/${path}`)
-      .then((r) => r.data)
+    AxiosClient.get(`${baseUrl()}/styling/kartes/${chartId}/${path}`).then(
+      (r) => r.data
+    )
   );
 
   return {
