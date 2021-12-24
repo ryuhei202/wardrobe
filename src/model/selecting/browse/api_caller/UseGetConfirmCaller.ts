@@ -1,10 +1,10 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
-import { ChartId } from "../../../ChartId";
 import { useGetConfirmRequest } from "../../../api/request/styling/browse/UseGetConfirmRequest";
 import { ConfirmResponse } from "../../../api/response/styling/browse/ConfirmResponse";
+import { ChartIdContext } from "../../../../components/App";
 
 export interface GetConfirmCaller {
   isRunning: () => boolean;
@@ -13,12 +13,13 @@ export interface GetConfirmCaller {
 }
 
 export const useGetConfirmCaller = (itemIds: number[]): GetConfirmCaller => {
+  const chartId = useContext(ChartIdContext);
   const [response, setResponse] = useState<ConfirmResponse | null>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetConfirmRequest(ChartId(), itemIds);
+  const request = useGetConfirmRequest(chartId, itemIds);
   const client = useGetClient<ConfirmResponse>(request);
 
   useEffect(() => {

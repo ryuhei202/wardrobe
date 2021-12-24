@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar/AppBar";
 import { Button, Dialog, Paper, Toolbar, Typography } from "@mui/material";
 import { theme } from "./style/Theme";
@@ -9,7 +9,6 @@ import {
   StyledEngineProvider,
 } from "@mui/material/styles";
 import QRCode from "react-qr-code";
-import { ChartId } from "../model/ChartId";
 import { CropFree } from "@mui/icons-material";
 import { Route, Routes } from "react-router-dom";
 import qs from "qs";
@@ -61,7 +60,7 @@ export const App = () => {
                   onClose={() => setIsQRCodeOpen(false)}
                 >
                   <Paper className={classes.qrCodeContainer}>
-                    <QRCode value={ChartId().toString()} size={300} />
+                    <QRCode value={String(chartId)} size={300} />
                   </Paper>
                 </Dialog>
                 <Routes>

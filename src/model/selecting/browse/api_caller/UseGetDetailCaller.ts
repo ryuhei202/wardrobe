@@ -1,11 +1,11 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { DetailResponse } from "../../../api/response/styling/browse/DetailResponse";
 import { useGetDetailRequest } from "../../../api/request/styling/browse/UseGetDetailRequest";
-import { ChartId } from "../../../ChartId";
 import { Refinement } from "../Refinement";
+import { ChartIdContext } from "../../../../components/App";
 
 export interface GetDetailCaller {
   isRunning: () => boolean;
@@ -17,16 +17,13 @@ export const useGetDetailCaller = (
   preregisteredItemId: number,
   refinement: Refinement
 ): GetDetailCaller => {
+  const chartId = useContext(ChartIdContext);
   const [response, setResponse] = useState<DetailResponse | null>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetDetailRequest(
-    ChartId(),
-    preregisteredItemId,
-    refinement
-  );
+  const request = useGetDetailRequest(chartId, preregisteredItemId, refinement);
   const client = useGetClient<DetailResponse>(request);
 
   useEffect(() => {

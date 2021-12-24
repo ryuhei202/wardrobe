@@ -1,10 +1,10 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { BrowseIndexResponse } from "../../../api/response/styling/browse/BrowseIndexResponse";
-import { ChartId } from "../../../ChartId";
 import { usePostClient } from "../../../api/client/UsePostClient";
 import { usePostSelectRequest } from "../../../api/request/styling/browse/UsePostSelectRequest";
+import { ChartIdContext } from "../../../../components/App";
 
 export interface PostSelectCaller {
   isRunning: () => boolean;
@@ -18,13 +18,14 @@ export const usePostSelectCaller = (
   previousItemId: number | null,
   onSuccess: () => void
 ): PostSelectCaller => {
+  const chartId = useContext(ChartIdContext);
   const [response, setResponse] = useState<any>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
 
-  const request = usePostSelectRequest(ChartId(), itemId, previousItemId);
+  const request = usePostSelectRequest(chartId, itemId, previousItemId);
   const client = usePostClient(request);
 
   useEffect(() => {

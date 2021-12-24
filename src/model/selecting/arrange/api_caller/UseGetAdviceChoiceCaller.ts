@@ -1,10 +1,10 @@
 import { CallStatus } from "../../../api/shared/CallStatus";
 import { useGetClient } from "../../../api/client/UseGetClient";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { AdviceChoiceResponse } from "../../../api/response/styling/arrange/AdviceChoiceResponse";
-import { ChartId } from "../../../ChartId";
 import { useGetAdviceChoiceRequest } from "../../../api/request/styling/arrange/UseGetAdviceChoiceRequest";
+import { ChartIdContext } from "../../../../components/App";
 
 export interface GetAdviceChoiceCaller {
   isRunning: () => boolean;
@@ -13,12 +13,13 @@ export interface GetAdviceChoiceCaller {
 }
 
 export const useGetAdviceChoiceCaller = (): GetAdviceChoiceCaller => {
+  const chartId = useContext(ChartIdContext);
   const [response, setResponse] = useState<AdviceChoiceResponse | null>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Preparing);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetAdviceChoiceRequest(ChartId());
+  const request = useGetAdviceChoiceRequest(chartId);
   const client = useGetClient<AdviceChoiceResponse>(request);
 
   useEffect(() => {

@@ -1,11 +1,11 @@
 import { Outfit } from "../Outfit";
 import { CallStatus } from "../../../api/shared/CallStatus";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { BrowseIndexResponse } from "../../../api/response/styling/browse/BrowseIndexResponse";
-import { ChartId } from "../../../ChartId";
 import { usePostClient } from "../../../api/client/UsePostClient";
 import { usePostCreateOutfitRequest } from "../../../api/request/styling/arrange/UsePostCreateOutfitRequest";
+import { ChartIdContext } from "../../../../components/App";
 
 export interface PostCreateOutfitCaller {
   isRunning: () => boolean;
@@ -19,13 +19,14 @@ export const usePostCreateOutfitCaller = (
   outfits: Outfit[],
   onPostComplete: () => void
 ): PostCreateOutfitCaller => {
+  const chartId = useContext(ChartIdContext);
   const [response, setResponse] = useState<any>(null);
   const [callStatus, setCallStatus] = useState(CallStatus.Idle);
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
 
-  const request = usePostCreateOutfitRequest(ChartId(), outfits);
+  const request = usePostCreateOutfitRequest(chartId, outfits);
   const client = usePostClient(request);
 
   useEffect(() => {
