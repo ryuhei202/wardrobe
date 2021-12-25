@@ -95,7 +95,9 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
             variant="h5"
             color="textSecondary"
           >
-            {props.response.seriesName ?? ""}
+            {`${props.response.seriesName ?? ""}, ${
+              props.response.seriesFeature ?? ""
+            }`}
           </Typography>
           <Typography className={classes.itemInfoText} variant="h4">
             {props.response.categoryName}
