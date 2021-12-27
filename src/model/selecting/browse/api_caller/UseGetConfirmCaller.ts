@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { useGetConfirmRequest } from "../../../api/request/styling/browse/UseGetConfirmRequest";
 import { ConfirmResponse } from "../../../api/response/styling/browse/ConfirmResponse";
-import { ChartIdContext } from "../../../../hooks/contexts/ChartIdContext";
+import { ChartIdContext } from "../../../../contexts/ChartIdContext";
 
 export interface GetConfirmCaller {
   isRunning: () => boolean;

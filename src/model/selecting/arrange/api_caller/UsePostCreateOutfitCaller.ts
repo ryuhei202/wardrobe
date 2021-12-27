@@ -5,7 +5,7 @@ import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { BrowseIndexResponse } from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { usePostClient } from "../../../api/client/UsePostClient";
 import { usePostCreateOutfitRequest } from "../../../api/request/styling/arrange/UsePostCreateOutfitRequest";
-import { ChartIdContext } from "../../../../hooks/contexts/ChartIdContext";
+import { ChartIdContext } from "../../../../contexts/ChartIdContext";
 
 export interface PostCreateOutfitCaller {
   isRunning: () => boolean;

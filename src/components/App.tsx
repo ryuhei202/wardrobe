@@ -14,7 +14,7 @@ import { Route, Routes } from "react-router-dom";
 import qs from "qs";
 import { SelectingContainer } from "./selecting/SelectingContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ChartIdContext } from "../hooks/contexts/ChartIdContext";
+import { ChartIdContext } from "../contexts/ChartIdContext";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

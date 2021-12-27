@@ -2,7 +2,7 @@ import { axiosClient } from "./../../model/api/shared/AxiosClient";
 import { useContext } from "react";
 import { useQuery } from "react-query";
 import { baseUrl } from "../../model/api/shared/BaseUrl";
-import { ChartIdContext } from "../contexts/ChartIdContext";
+import { ChartIdContext } from "../../contexts/ChartIdContext";
 
 export const useKarteGetRequest = <T>(
   path: string

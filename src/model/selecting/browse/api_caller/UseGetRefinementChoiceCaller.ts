@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { RefinementChoiceResponse } from "../../../api/response/styling/browse/RefinementChoiceResponse";
 import { useGetRefinementChoiceRequest } from "../../../api/request/styling/browse/UseGetRefinementChoiceRequest";
-import { ChartIdContext } from "../../../../hooks/contexts/ChartIdContext";
+import { ChartIdContext } from "../../../../contexts/ChartIdContext";
 
 export interface GetRefinementChoiceCaller {
   isRunning: () => boolean;

@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { AdviceChoiceResponse } from "../../../api/response/styling/arrange/AdviceChoiceResponse";
 import { useGetAdviceChoiceRequest } from "../../../api/request/styling/arrange/UseGetAdviceChoiceRequest";
-import { ChartIdContext } from "../../../../hooks/contexts/ChartIdContext";
+import { ChartIdContext } from "../../../../contexts/ChartIdContext";
 
 export interface GetAdviceChoiceCaller {
   isRunning: () => boolean;

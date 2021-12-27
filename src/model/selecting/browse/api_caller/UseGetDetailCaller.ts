@@ -5,7 +5,7 @@ import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { DetailResponse } from "../../../api/response/styling/browse/DetailResponse";
 import { useGetDetailRequest } from "../../../api/request/styling/browse/UseGetDetailRequest";
 import { Refinement } from "../Refinement";
-import { ChartIdContext } from "../../../../hooks/contexts/ChartIdContext";
+import { ChartIdContext } from "../../../../contexts/ChartIdContext";
 
 export interface GetDetailCaller {
   isRunning: () => boolean;
