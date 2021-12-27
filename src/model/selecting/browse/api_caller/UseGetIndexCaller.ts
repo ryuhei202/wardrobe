@@ -5,7 +5,7 @@ import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { Refinement } from "../Refinement";
 import { BrowseIndexResponse } from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { useGetIndexRequest } from "../../../api/request/styling/browse/UseGetIndexRequest";
-import { ChartIdContext } from "../../../../components/App";
+import { ChartIdContext } from "../../../../hooks/contexts/ChartIdContext";
 
 export interface GetIndexCaller {
   isRunning: () => boolean;

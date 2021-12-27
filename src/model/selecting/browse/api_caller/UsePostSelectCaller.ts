@@ -4,7 +4,7 @@ import { ErrorResponse } from "../../../api/response/shared/ErrorResponse";
 import { BrowseIndexResponse } from "../../../api/response/styling/browse/BrowseIndexResponse";
 import { usePostClient } from "../../../api/client/UsePostClient";
 import { usePostSelectRequest } from "../../../api/request/styling/browse/UsePostSelectRequest";
-import { ChartIdContext } from "../../../../components/App";
+import { ChartIdContext } from "../../../../hooks/contexts/ChartIdContext";
 
 export interface PostSelectCaller {
   isRunning: () => boolean;
