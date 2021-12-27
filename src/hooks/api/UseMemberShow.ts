@@ -2,19 +2,15 @@ import { MemberShowResponse } from "../../model/api/response/styling/member/Memb
 import { useMemberGetRequest } from "./UseMemberGetRequest";
 
 type MemberShow = {
-  readonly data: MemberShowResponse | undefined;
-  readonly isLoading: boolean;
+  readonly data?: MemberShowResponse;
   readonly error: Error | null;
 };
 
 export const useMemberShow = (): MemberShow => {
-  const { data, isLoading, error } = useMemberGetRequest<MemberShowResponse>(
-    ""
-  );
+  const { data, error } = useMemberGetRequest<MemberShowResponse>("");
 
   return {
     data,
-    isLoading,
     error,
   };
 };

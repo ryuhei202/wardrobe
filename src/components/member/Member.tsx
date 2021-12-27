@@ -6,21 +6,22 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
-import { ChartIdContext } from "../App";
 import { useMemberHandler } from "./handler/UseMemberHandler";
-import { MemberImageCollectionDialog } from "../styling/karte/MemberImageCollectionDialog";
+import { ChartIdContext } from "../../contexts/ChartIdContext";
+import { MemberImageCollectionDialog } from "../selecting/karte/MemberImageCollectionDialog";
 
 type Props = {
-  readonly response: MemberShowResponse | undefined;
+  readonly response: MemberShowResponse;
 };
 export const Member = (props: Props) => {
   const chartId = useContext(ChartIdContext);
   const handler = useMemberHandler(props.response);
+
   return (
     <>
       <ListItemText
-        primary={props.response?.memberName}
-        secondary={`パートナーID:${props.response?.tMemberId}, カルテID:${chartId}`}
+        primary={props.response.memberName}
+        secondary={`パートナーID:${props.response.tMemberId}, カルテID:${chartId}`}
       />
       <ListItemSecondaryAction>
         <IconButton

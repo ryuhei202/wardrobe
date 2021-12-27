@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MemberShowResponse } from "../../../model/api/response/styling/member/MemberShowResponse";
-import { MemberImageCollectionDialogData } from "../../../model/styling/karte/props_data/MemberImageCollectionDialogData";
-import { MemberImageCollectionDialogCallback } from "../../styling/karte/callback/MemberImageCollectionDialogCallback";
+import { MemberImageCollectionDialogData } from "../../../model/selecting/karte/props_data/MemberImageCollectionDialogData";
+import { MemberImageCollectionDialogCallback } from "../../selecting/karte/callback/MemberImageCollectionDialogCallback";
 
 type MemberHandler = {
   setMemberImageDialogOpen: () => void;
@@ -9,7 +9,7 @@ type MemberHandler = {
   memberImageDialogCallback: () => MemberImageCollectionDialogCallback;
 };
 export const useMemberHandler = (
-  response: MemberShowResponse | undefined
+  response: MemberShowResponse
 ): MemberHandler => {
   const [isMemberImageDialogOpen, setIsMemberImageDialogOpen] = useState(false);
 
@@ -18,10 +18,9 @@ export const useMemberHandler = (
   };
 
   const memberImageDialogData = (): MemberImageCollectionDialogData => {
-    const imageResponses = response === undefined ? [] : response.memberImages;
     return {
       isOpen: isMemberImageDialogOpen,
-      imageResponses: imageResponses,
+      imageResponses: response.memberImages,
     };
   };
 

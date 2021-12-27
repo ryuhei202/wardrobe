@@ -1,13 +1,6 @@
-import React from "react";
 import { useKarteStyle } from "./style/UseKarteStyle";
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-} from "@mui/material";
-import { ListAlt, PhotoLibrary } from "@mui/icons-material";
+import { IconButton, List, ListItem, ListItemText } from "@mui/material";
+import { ListAlt } from "@mui/icons-material";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
 import { useKarteHandler } from "./handler/UseKarteHandler";
 import { PastOutfitCollectionDialog } from "./PastOutfitCollectionDialog";
