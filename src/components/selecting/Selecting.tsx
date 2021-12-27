@@ -8,7 +8,7 @@ import { MainContentType } from "../../model/selecting/MainContentType";
 import { BrowseContainer } from "./browse/BrowseContainer";
 import { SelectionProgress } from "./SelectionProgress";
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
-import { Karte } from "./karte/Karte";
+import { DrawerContents } from "./karte/DrawerContents";
 
 type Props = {
   readonly response: KarteShowResponse;
