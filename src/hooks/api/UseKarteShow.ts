@@ -2,17 +2,15 @@ import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteS
 import { useKarteGetRequest } from "./UseKarteGetRequest";
 
 type KarteShow = {
-  readonly data: KarteShowResponse | undefined;
-  readonly isLoading: boolean;
+  readonly data?: KarteShowResponse;
   readonly error: Error | null;
 };
 
 export const useKarteShow = (): KarteShow => {
-  const { data, isLoading, error } = useKarteGetRequest<KarteShowResponse>("");
+  const { data, error } = useKarteGetRequest<KarteShowResponse>("");
 
   return {
     data,
-    isLoading,
     error,
   };
 };

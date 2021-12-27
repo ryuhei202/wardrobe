@@ -24,17 +24,17 @@ export interface SelectingHandler {
 }
 
 export const useSelectingHandler = (
-  response: KarteShowResponse | undefined
+  response: KarteShowResponse
 ): SelectingHandler => {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>(
-    response === undefined ? [] : response.registeredItems
+    response.registeredItems
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mainContentType, setMainContentType] = useState<MainContentType>(
     MainContentType.Browse
   );
   const [rentableItemNum, setRentableItemNum] = useState(
-    response === undefined ? 0 : response.defaultItemNum
+    response.defaultItemNum
   );
 
   const selectionProgressData = (): SelectionProgressData => {

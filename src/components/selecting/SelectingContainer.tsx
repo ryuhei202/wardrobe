@@ -3,9 +3,9 @@ import { useKarteShow } from "../../hooks/api/UseKarteShow";
 import { Selecting } from "./Selecting";
 
 export const SelectingContainer = () => {
-  const { data, isLoading, error } = useKarteShow();
+  const { data, error } = useKarteShow();
 
-  if (isLoading) return <CircularProgress />;
+  if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
   return <Selecting response={data} />;
 };

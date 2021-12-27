@@ -11,7 +11,7 @@ import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteS
 import { Karte } from "./karte/Karte";
 
 type Props = {
-  readonly response: KarteShowResponse | undefined;
+  readonly response: KarteShowResponse;
 };
 
 export const Selecting = (props: Props) => {
@@ -60,9 +60,8 @@ export const Selecting = (props: Props) => {
       >
         <Toolbar />
         <div className={classes.karteContainer}>
-          <>
-            karte.tsxを入れるけどpropsの値とか変えないとエラーが出るので一旦おいてないです
-          </>
+          {/* TODO: karte.tsxを入れるけどpropsの値とか変えないとエラーが出るので一旦おいてないです */}
+          <></>
         </div>
         <Paper variant="outlined" className={classes.progressContainer}>
           <SelectionProgress
