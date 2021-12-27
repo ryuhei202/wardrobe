@@ -1,7 +1,7 @@
-import { PartSizeResponse } from "./PartSizeResponse";
 import { ImagePathResponse } from "../ImagePathResponse";
+import { PartSizeResponse } from "./PartSizeResponse";
 
-export interface InfoPastOutfitItemResponse {
+export interface KartesItemResponse {
   readonly id: number;
   readonly imagePath: ImagePathResponse;
   readonly categoryName: string;
