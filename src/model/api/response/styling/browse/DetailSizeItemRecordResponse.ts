@@ -1,4 +1,4 @@
-import { ValidationError } from "../../../../styling/browse/ValidationError";
+import { ValidationError } from "../../../../selecting/browse/ValidationError";
 
 export interface DetailSizeItemRecordResponse {
   readonly itemId: number;
