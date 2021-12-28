@@ -2,27 +2,19 @@ import { useState } from "react";
 import { InfoResponse } from "../../../../model/api/response/styling/karte/InfoResponse";
 import { MemberImageCollectionDialogData } from "../../../../model/selecting/karte/props_data/MemberImageCollectionDialogData";
 import { NgMemoCollectionData } from "../../../../model/selecting/karte/props_data/NgMemoCollectionData";
-import { PastOutfitCollectionData } from "../../../../model/selecting/karte/props_data/PastOutfitCollectionData";
-import { PastOutfitCollectionDialogData } from "../../../../model/selecting/karte/props_data/PastOutfitCollectionDialogData";
 import { PurchasedItemCollectionData } from "../../../../model/selecting/karte/props_data/PurchasedItemCollectionData";
 import { MemberImageCollectionDialogCallback } from "../callback/MemberImageCollectionDialogCallback";
-import { PastOutfitCollectionDialogCallback } from "../callback/PastOutfitCollectionDialogCallback";
 
 interface KarteHandler {
   setMemberImageDialogOpen: () => void;
   memberImageDialogData: () => MemberImageCollectionDialogData;
   memberImageDialogCallback: () => MemberImageCollectionDialogCallback;
-  setPastOutfitDialogOpen: () => void;
-  pastOutfitDialogData: () => PastOutfitCollectionDialogData;
-  pastOutfitDialogCallback: () => PastOutfitCollectionDialogCallback;
-  pastOutfitCollectionData: () => PastOutfitCollectionData;
   ngMemoCollectionData: () => NgMemoCollectionData;
   purchasedItemCollectionData: () => PurchasedItemCollectionData;
 }
 
 export const useKarteHandler = (response: InfoResponse): KarteHandler => {
   const [isMemberImageDialogOpen, setIsMemberImageDialogOpen] = useState(false);
-  const [isPastOutfitDialogOpen, setIsPastOutfitDialogOpen] = useState(false);
 
   const setMemberImageDialogOpen = () => {
     setIsMemberImageDialogOpen(true);
@@ -43,32 +35,6 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     };
   };
 
-  const setPastOutfitDialogOpen = () => {
-    setIsPastOutfitDialogOpen(true);
-  };
-
-  const pastOutfitDialogData = (): PastOutfitCollectionDialogData => {
-    return {
-      isOpen: isPastOutfitDialogOpen,
-      pastOutfitResponses: response.pastOutfits,
-    };
-  };
-
-  const pastOutfitDialogCallback = (): PastOutfitCollectionDialogCallback => {
-    return {
-      onClose: () => {
-        setIsPastOutfitDialogOpen(false);
-      },
-    };
-  };
-
-  const pastOutfitCollectionData = (): PastOutfitCollectionData => {
-    return {
-      pastOutfitResponses: response.pastOutfits,
-      displayOutfitNum: 2, //前回と前々回コーデ
-    };
-  };
-
   const ngMemoCollectionData = (): NgMemoCollectionData => {
     return {
       ngMemoResponses: response.ngCategories,
@@ -85,10 +51,6 @@ export const useKarteHandler = (response: InfoResponse): KarteHandler => {
     setMemberImageDialogOpen,
     memberImageDialogData,
     memberImageDialogCallback,
-    setPastOutfitDialogOpen,
-    pastOutfitDialogData,
-    pastOutfitDialogCallback,
-    pastOutfitCollectionData,
     ngMemoCollectionData,
     purchasedItemCollectionData,
   };

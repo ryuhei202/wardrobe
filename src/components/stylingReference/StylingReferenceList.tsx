@@ -6,10 +6,10 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
-import { LatestStylingReferenceShowResponse } from "../../model/api/response/styling/latestStylingReference/LatestStylingReferenceShowResponse";
+import { StylingReferenceResponse } from "../../model/api/response/styling/StylingReferenceResponse";
 
 type Props = {
-  readonly response: LatestStylingReferenceShowResponse[];
+  readonly response: StylingReferenceResponse[];
 };
 
 export const StylingReferenceList = (props: Props) => {

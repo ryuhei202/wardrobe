@@ -1,21 +1,21 @@
-import { useKarteStyle } from "./style/UseKarteStyle";
-import { IconButton, List, ListItem, ListItemText } from "@mui/material";
-import { ListAlt } from "@mui/icons-material";
+import React from "react";
+import { List, ListItem, ListItemText } from "@mui/material";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
 import { useKarteHandler } from "./handler/UseKarteHandler";
-import { PastOutfitCollectionDialog } from "./PastOutfitCollectionDialog";
-import { PastOutfitCollection } from "./PastOutfitCollection";
 import { PurchasedItemCollection } from "./PurchasedItemCollection";
 import { NgMemoCollection } from "./NgMemoCollection";
+import { useDrawerContentsStyle } from "./style/UseDrawerContentsStyle";
+import { KartesContainer } from "../../karte/KartesContainer";
 import { MemberContainer } from "../../member/MemberContainer";
 import { LatestStylingReferenceContainer } from "../../stylingReference/LatestStylingReferenceContainer";
 
-interface KarteProps {
+interface Props {
   response: InfoResponse;
 }
 
-export const Karte = (props: KarteProps) => {
-  const classes = useKarteStyle();
+export const DrawerContents = (props: Props) => {
+  const classes = useDrawerContentsStyle();
+  // TODO: ハンドラはAPIを分けたら最終的に削除するので、名前Karteのまま
   const handler = useKarteHandler(props.response);
 
   return (
@@ -27,21 +27,7 @@ export const Karte = (props: KarteProps) => {
         <LatestStylingReferenceContainer />
       </ListItem>
       <ListItem>
-        <ListItemText>
-          過去のコーデ：
-          <IconButton
-            color="primary"
-            onClick={handler.setPastOutfitDialogOpen}
-            size="large"
-          >
-            <ListAlt />
-          </IconButton>
-          <PastOutfitCollectionDialog
-            data={handler.pastOutfitDialogData()}
-            callback={handler.pastOutfitDialogCallback()}
-          />
-          <PastOutfitCollection data={handler.pastOutfitCollectionData()} />
-        </ListItemText>
+        <KartesContainer />
       </ListItem>
       <ListItem>
         <ListItemText>
