@@ -1,19 +1,14 @@
 import React from "react";
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-} from "@mui/material";
-import { ListAlt, PhotoLibrary } from "@mui/icons-material";
+import { List, ListItem, ListItemText } from "@mui/material";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
 import { useKarteHandler } from "./handler/UseKarteHandler";
-import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 import { PurchasedItemCollection } from "./PurchasedItemCollection";
 import { NgMemoCollection } from "./NgMemoCollection";
 import { useDrawerContentsStyle } from "./style/UseDrawerContentsStyle";
 import { KartesContainer } from "../../karte/KartesContainer";
+import { MemberContainer } from "../../member/MemberContainer";
+import { LatestStylingReferenceContainer } from "../../stylingReference/LatestStylingReferenceContainer";
+
 interface Props {
   response: InfoResponse;
 }
@@ -26,23 +21,10 @@ export const DrawerContents = (props: Props) => {
   return (
     <List dense className={classes.drawerList}>
       <ListItem>
-        <ListItemText
-          primary={props.response.memberName}
-          secondary={`パートナーID:${props.response.tMemberId}, カルテID:${props.response.tChartId}`}
-        />
-        <ListItemSecondaryAction>
-          <IconButton
-            color="primary"
-            onClick={handler.setMemberImageDialogOpen}
-            size="large"
-          >
-            <PhotoLibrary />
-          </IconButton>
-          <MemberImageCollectionDialog
-            data={handler.memberImageDialogData()}
-            callback={handler.memberImageDialogCallback()}
-          />
-        </ListItemSecondaryAction>
+        <MemberContainer />
+      </ListItem>
+      <ListItem>
+        <LatestStylingReferenceContainer />
       </ListItem>
       <ListItem>
         <KartesContainer />
