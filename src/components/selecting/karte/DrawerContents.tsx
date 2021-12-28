@@ -8,6 +8,7 @@ import { useDrawerContentsStyle } from "./style/UseDrawerContentsStyle";
 import { KartesContainer } from "../../karte/KartesContainer";
 import { MemberContainer } from "../../member/MemberContainer";
 import { LatestStylingReferenceContainer } from "../../stylingReference/LatestStylingReferenceContainer";
+import { NgMemoCollectionContainer } from "../../ngMemoCollection/NgMemoCollectionContainer";
 
 interface Props {
   response: InfoResponse;
@@ -30,10 +31,7 @@ export const DrawerContents = (props: Props) => {
         <KartesContainer />
       </ListItem>
       <ListItem>
-        <ListItemText>
-          NGメモ：
-          <NgMemoCollection data={handler.ngMemoCollectionData()} />
-        </ListItemText>
+        <NgMemoCollectionContainer />
       </ListItem>
       <ListItem>
         <ListItemText>
