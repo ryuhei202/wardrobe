@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { PurchasedItemIndexResponse } from "../../../model/api/response/styling/purchaseItem/PurchasedItemIndexResponse";
-import { PurchasedItemCollectionData } from "../../../model/selecting/karte/props_data/PurchasedItemCollectionData";
 import { PopupImage } from "../../shared/PopupImage";
 
 interface PurchasedItemCollectionProps {
