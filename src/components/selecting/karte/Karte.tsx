@@ -8,6 +8,7 @@ import { PastOutfitCollection } from "./PastOutfitCollection";
 import { PurchasedItemCollection } from "./PurchasedItemCollection";
 import { NgMemoCollection } from "./NgMemoCollection";
 import { MemberContainer } from "../../member/MemberContainer";
+import { LatestStylingReferenceContainer } from "../../stylingReference/LatestStylingReferenceContainer";
 
 interface KarteProps {
   response: InfoResponse;
@@ -21,6 +22,9 @@ export const Karte = (props: KarteProps) => {
     <List dense className={classes.drawerList}>
       <ListItem>
         <MemberContainer />
+      </ListItem>
+      <ListItem>
+        <LatestStylingReferenceContainer />
       </ListItem>
       <ListItem>
         <ListItemText>
