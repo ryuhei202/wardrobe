@@ -2,12 +2,12 @@ import React from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { InfoResponse } from "../../../model/api/response/styling/karte/InfoResponse";
 import { useKarteHandler } from "./handler/UseKarteHandler";
-import { PurchasedItemCollection } from "./PurchasedItemCollection";
 import { NgMemoCollection } from "./NgMemoCollection";
 import { useDrawerContentsStyle } from "./style/UseDrawerContentsStyle";
 import { KartesContainer } from "../../karte/KartesContainer";
 import { MemberContainer } from "../../member/MemberContainer";
 import { LatestStylingReferenceContainer } from "../../stylingReference/LatestStylingReferenceContainer";
+import { PurchasedItemsContainer } from "../../purchasedItem/PurchasedItemsContainer";
 
 interface Props {
   response: InfoResponse;
@@ -36,12 +36,7 @@ export const DrawerContents = (props: Props) => {
         </ListItemText>
       </ListItem>
       <ListItem>
-        <ListItemText>
-          購入済アイテム：
-          <PurchasedItemCollection
-            data={handler.purchasedItemCollectionData()}
-          />
-        </ListItemText>
+        <PurchasedItemsContainer />
       </ListItem>
     </List>
   );
