@@ -11,7 +11,6 @@ import {
 import QRCode from "react-qr-code";
 import { CropFree } from "@mui/icons-material";
 import { Route, Routes } from "react-router-dom";
-import qs from "qs";
 import { SelectingContainer } from "./selecting/SelectingContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ChartIdContext } from "../contexts/ChartIdContext";
