@@ -60,7 +60,7 @@ export const Selecting = (props: Props) => {
       >
         <Toolbar />
         <div className={classes.karteContainer}>
-          {/* TODO: karte.tsxを入れるけどpropsの値とか変えないとエラーが出るので一旦おいてないです */}
+          <DrawerContents />
           <></>
         </div>
         <Paper variant="outlined" className={classes.progressContainer}>
