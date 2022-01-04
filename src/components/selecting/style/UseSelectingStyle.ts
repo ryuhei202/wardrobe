@@ -6,11 +6,11 @@ import makeStyles from "@mui/styles/makeStyles";
 export const useSelectingStyle = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      width: 480,
+      width: 540,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: 480,
+      width: 540,
     },
     drawerHeader: {
       display: "flex",

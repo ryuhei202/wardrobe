@@ -7,12 +7,14 @@ import {
   TableRow,
 } from "@mui/material";
 import { StylingReferenceResponse } from "../../model/api/response/styling/StylingReferenceResponse";
+import { useStylingReferenceListStyle } from "./style/UseStylingReferenceStyle";
 
 type Props = {
   readonly response: StylingReferenceResponse[];
 };
 
 export const StylingReferenceList = (props: Props) => {
+  const classes = useStylingReferenceListStyle();
   return (
     <>
       <TableContainer component={Paper}>
@@ -24,7 +26,11 @@ export const StylingReferenceList = (props: Props) => {
           <TableBody>
             {props.response.map((stylingReference) => (
               <TableRow key={stylingReference.id}>
-                <TableCell component="th" scope="row">
+                <TableCell
+                  component="th"
+                  scope="row"
+                  className={classes.stylingReferenceTableHead}
+                >
                   {stylingReference.categoryName}
                 </TableCell>
                 <TableCell component="th" scope="row">
