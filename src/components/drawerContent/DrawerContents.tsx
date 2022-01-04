@@ -5,6 +5,7 @@ import { KartesContainer } from "../karte/KartesContainer";
 import { MemberContainer } from "../member/MemberContainer";
 import { LatestStylingReferenceContainer } from "../stylingReference/LatestStylingReferenceContainer";
 import { PurchasedItemsContainer } from "../purchasedItem/PurchasedItemsContainer";
+import { NgMemosContainer } from "../ng/NgMemoCollectionContainer";
 
 export const DrawerContents = () => {
   const classes = useDrawerContentsStyle();
@@ -20,7 +21,9 @@ export const DrawerContents = () => {
       <ListItem>
         <KartesContainer />
       </ListItem>
-      <ListItem></ListItem>
+      <ListItem>
+        <NgMemosContainer />
+      </ListItem>
       <ListItem>
         <PurchasedItemsContainer />
       </ListItem>
