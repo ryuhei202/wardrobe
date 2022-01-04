@@ -8,7 +8,7 @@ import { MainContentType } from "../../model/selecting/MainContentType";
 import { BrowseContainer } from "./browse/BrowseContainer";
 import { SelectionProgress } from "./SelectionProgress";
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
-import { DrawerContents } from "./karte/DrawerContents";
+import { DrawerContents } from "../drawerContent/DrawerContents";
 
 type Props = {
   readonly response: KarteShowResponse;
@@ -59,9 +59,8 @@ export const Selecting = (props: Props) => {
         }}
       >
         <Toolbar />
-        <div className={classes.karteContainer}>
+        <div className={classes.drawerContents}>
           <DrawerContents />
-          <></>
         </div>
         <Paper variant="outlined" className={classes.progressContainer}>
           <SelectionProgress

@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
 import { useMemberHandler } from "./handler/UseMemberHandler";
 import { ChartIdContext } from "../../contexts/ChartIdContext";
-import { MemberImageCollectionDialog } from "../selecting/karte/MemberImageCollectionDialog";
+import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 
 type Props = {
   readonly response: MemberShowResponse;

@@ -6,7 +6,7 @@ import {
   ListItemText,
   Rating,
 } from "@mui/material";
-import { KartesItemResponse } from "../../model/api/response/styling/karte/KartesItemResponse";
+import { KartesItemResponse } from "../../model/api/response/styling/karte/KarteItemResponse";
 import { PopupImage } from "../shared/PopupImage";
 
 type Props = {

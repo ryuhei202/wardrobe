@@ -1,9 +1,9 @@
 import { Dialog } from "@mui/material";
 import React from "react";
 import ReactImageGallery from "react-image-gallery";
-import { MemberImageCollectionDialogData } from "../../../model/selecting/karte/props_data/MemberImageCollectionDialogData";
+import { MemberImageCollectionDialogData } from "../../model/selecting/karte/props_data/MemberImageCollectionDialogData";
 import { MemberImageCollectionDialogCallback } from "./callback/MemberImageCollectionDialogCallback";
-import { useMemberImageCollectionDialogStyle } from "../style/UseMemberImageCollectionDialogStyle";
+import { useMemberImageCollectionDialogStyle } from "./style/UseMemberImageCollectionDialogStyle";
 
 interface MemberImageCollectionDialogProps {
   data: MemberImageCollectionDialogData;

@@ -19,7 +19,7 @@ export const useSelectingStyle = makeStyles((theme: Theme) =>
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
     },
-    karteContainer: {
+    drawerContents: {
       overflow: "auto",
     },
     progressContainer: {

@@ -1,6 +1,6 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { usePurchasedItemsIndex } from "../../hooks/api/UsePurchasedItemsIndex";
-import { PurchasedItemCollection } from "../selecting/karte/PurchasedItemCollection";
+import { PurchasedItemCollection } from "./PurchasedItemCollection";
 
 export const PurchasedItemsContainer = () => {
   const { data, error } = usePurchasedItemsIndex();

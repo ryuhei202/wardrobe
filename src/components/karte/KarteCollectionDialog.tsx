@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle } from "@mui/material";
 import React from "react";
 import { KarteCollectionDialogData } from "../../model/selecting/karte/props_data/KarteCollectionDialogData";
-import { KarteCollectionDialogCallback } from "../selecting/karte/callback/PastOutfitCollectionDialogCallback";
+import { KarteCollectionDialogCallback } from "./callback/PastOutfitCollectionDialogCallback";
 import { KarteCollection } from "./KarteCollection";
 
 interface Props {

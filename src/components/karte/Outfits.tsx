@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { KartesOutfitResponse } from "../../model/api/response/styling/karte/KartesOutfitResponse";
+import { KartesOutfitResponse } from "../../model/api/response/styling/karte/KarteOutfitResponse";
 
 type Props = {
   readonly data: KartesOutfitResponse[];

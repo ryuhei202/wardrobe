@@ -6,8 +6,8 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
-import { PurchasedItemIndexResponse } from "../../../model/api/response/styling/purchaseItem/PurchasedItemIndexResponse";
-import { PopupImage } from "../../shared/PopupImage";
+import { PurchasedItemIndexResponse } from "../../model/api/response/styling/purchaseItem/PurchasedItemIndexResponse";
+import { PopupImage } from "../shared/PopupImage";
 
 interface PurchasedItemCollectionProps {
   data: PurchasedItemIndexResponse[];

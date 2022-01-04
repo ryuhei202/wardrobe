@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { KarteIndexResponse } from "../../../model/api/response/styling/karte/KarteIndexResponse";
 import { KarteCollectionDialogData } from "../../../model/selecting/karte/props_data/KarteCollectionDialogData";
-import { KarteCollectionDialogCallback } from "../../selecting/karte/callback/PastOutfitCollectionDialogCallback";
+import { KarteCollectionDialogCallback } from "../callback/PastOutfitCollectionDialogCallback";
 
 type KarteCollectionHandler = {
   readonly setPastOutfitDialogOpen: () => void;
