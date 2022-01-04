@@ -20,8 +20,8 @@ export const Member = (props: Props) => {
   return (
     <>
       <ListItemText
-        primary={props.response.memberName}
-        secondary={`パートナーID:${props.response.tMemberId}, カルテID:${chartId}`}
+        primary={props.response.name}
+        secondary={`パートナーID:${props.response.id}, カルテID:${chartId}`}
       />
       <ListItemSecondaryAction>
         <IconButton
