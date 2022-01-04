@@ -1,7 +1,7 @@
 import { InfoMemberImageResponse } from "../karte/InfoMemberImageResponse";
 
 export interface MemberShowResponse {
-  readonly memberName: string;
-  readonly tMemberId: number;
+  readonly id: number;
+  readonly name: string;
   readonly memberImages: InfoMemberImageResponse[];
 }

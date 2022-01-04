@@ -1,12 +1,12 @@
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
 import { useKarteGetRequest } from "./UseKarteGetRequest";
 
-type KarteShow = {
+type KartesShow = {
   readonly data?: KarteShowResponse;
   readonly error: Error | null;
 };
 
-export const useKarteShow = (): KarteShow => {
+export const useKartesShow = (): KartesShow => {
   const { data, error } = useKarteGetRequest<KarteShowResponse>("");
 
   return {
