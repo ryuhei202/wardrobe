@@ -24,7 +24,13 @@ declare module "@mui/styles/defaultTheme" {
 export const App = () => {
   const classes = useAppStyle();
   const [isQRCodeOpen, setIsQRCodeOpen] = useState(false);
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
     <StyledEngineProvider injectFirst>
