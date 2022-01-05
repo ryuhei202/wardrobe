@@ -1,5 +1,5 @@
 import { AdviceCategoryResponse } from "./AdviceCategoryResponse";
-import { Outfit } from "../../../../styling/arrange/Outfit";
+import { Outfit } from "../../../../selecting/arrange/Outfit";
 
 export interface AdviceChoiceResponse {
   readonly adviceCategories: AdviceCategoryResponse[];

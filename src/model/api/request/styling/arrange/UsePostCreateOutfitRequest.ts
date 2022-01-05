@@ -1,4 +1,4 @@
-import { Outfit } from "./../../../../styling/arrange/Outfit";
+import { Outfit } from "../../../../selecting/arrange/Outfit";
 import { PostRequest } from "../../PostRequest";
 
 interface PostCreateOutfitParams {
