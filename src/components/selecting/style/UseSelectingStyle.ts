@@ -6,11 +6,11 @@ import makeStyles from "@mui/styles/makeStyles";
 export const useSelectingStyle = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      width: 480,
+      width: 540,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: 480,
+      width: 540,
     },
     drawerHeader: {
       display: "flex",
@@ -19,7 +19,7 @@ export const useSelectingStyle = makeStyles((theme: Theme) =>
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
     },
-    karteContainer: {
+    drawerContents: {
       overflow: "auto",
     },
     progressContainer: {

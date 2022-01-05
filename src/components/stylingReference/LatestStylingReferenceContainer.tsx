@@ -1,9 +1,9 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useLatestStylingReferenceShow } from "../../hooks/api/UseLatestStylingReferenceShow";
+import { useLatestStylingReferencesShow } from "../../hooks/api/UseLatestStylingReferencesShow";
 import { StylingReferenceList } from "./StylingReferenceList";
 
 export const LatestStylingReferenceContainer = () => {
-  const { data, error } = useLatestStylingReferenceShow();
+  const { data, error } = useLatestStylingReferencesShow();
 
   if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;

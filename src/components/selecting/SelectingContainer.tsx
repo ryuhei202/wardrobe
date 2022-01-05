@@ -1,9 +1,9 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useKarteShow } from "../../hooks/api/UseKarteShow";
+import { useKartesShow } from "../../hooks/api/UseKartesShow";
 import { Selecting } from "./Selecting";
 
 export const SelectingContainer = () => {
-  const { data, error } = useKarteShow();
+  const { data, error } = useKartesShow();
 
   if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;

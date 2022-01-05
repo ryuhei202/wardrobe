@@ -1,7 +1,7 @@
 import { ImagePathResponse } from "../ImagePathResponse";
-import { PartSizeResponse } from "./PartSizeResponse";
+import { PartSizeResponse } from "./KartePartSizeResponse";
 
-export interface KartesItemResponse {
+export interface KarteItemResponse {
   readonly id: number;
   readonly imagePath: ImagePathResponse;
   readonly categoryName: string;

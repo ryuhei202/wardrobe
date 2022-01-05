@@ -7,11 +7,11 @@ import {
   ListSubheader,
 } from "@mui/material";
 import React, { Fragment } from "react";
-import { NgsIndexResponse } from "../../model/api/response/styling/ng/NgsIndexResponse";
+import { NgIndexResponse } from "../../model/api/response/styling/ng/NgIndexResponse";
 import { PopupImage } from "../shared/PopupImage";
 
 type Props = {
-  readonly response: NgsIndexResponse[];
+  readonly response: NgIndexResponse[];
 };
 
 export const NgMemoCollection = (props: Props) => {

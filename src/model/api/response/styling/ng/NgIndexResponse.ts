@@ -1,6 +1,6 @@
 import { NgResponse } from "./NgResponse";
 
-export interface NgsIndexResponse {
+export interface NgIndexResponse {
   readonly categoryName: string;
   readonly ngs: NgResponse[];
 }

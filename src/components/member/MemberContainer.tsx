@@ -1,9 +1,9 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useMemberShow } from "../../hooks/api/UseMemberShow";
+import { useMembersShow } from "../../hooks/api/UseMembersShow";
 import { Member } from "./Member";
 
 export const MemberContainer = () => {
-  const { data, error } = useMemberShow();
+  const { data, error } = useMembersShow();
 
   if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;

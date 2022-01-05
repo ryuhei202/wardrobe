@@ -1,12 +1,12 @@
 import { StylingReferenceResponse } from "../../model/api/response/styling/StylingReferenceResponse";
 import { useMemberGetRequest } from "./UseMemberGetRequest";
 
-type LatestStylingReferenceShow = {
+type LatestStylingReferencesShow = {
   readonly data?: StylingReferenceResponse[];
   readonly error: Error | null;
 };
 
-export const useLatestStylingReferenceShow = (): LatestStylingReferenceShow => {
+export const useLatestStylingReferencesShow = (): LatestStylingReferencesShow => {
   const { data, error } = useMemberGetRequest<StylingReferenceResponse[]>(
     "latest_styling_references"
   );

@@ -6,11 +6,11 @@ import {
   ListItemText,
   Rating,
 } from "@mui/material";
-import { KartesItemResponse } from "../../model/api/response/styling/karte/KartesItemResponse";
+import { KarteItemResponse } from "../../model/api/response/styling/karte/KarteItemResponse";
 import { PopupImage } from "../shared/PopupImage";
 
 type Props = {
-  readonly data: KartesItemResponse[];
+  readonly data: KarteItemResponse[];
 };
 export const Items = (props: Props) => {
   return (

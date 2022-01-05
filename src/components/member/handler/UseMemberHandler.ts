@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MemberShowResponse } from "../../../model/api/response/styling/member/MemberShowResponse";
-import { MemberImageCollectionDialogData } from "../../../model/selecting/karte/props_data/MemberImageCollectionDialogData";
-import { MemberImageCollectionDialogCallback } from "../../selecting/karte/callback/MemberImageCollectionDialogCallback";
+import { MemberImageCollectionDialogData } from "../../../model/selecting/member/props_data/MemberImageCollectionDialogData";
+import { MemberImageCollectionDialogCallback } from "../callback/MemberImageCollectionDialogCallback";
 
 type MemberHandler = {
   setMemberImageDialogOpen: () => void;

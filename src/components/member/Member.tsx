@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
 import { useMemberHandler } from "./handler/UseMemberHandler";
 import { ChartIdContext } from "../../contexts/ChartIdContext";
-import { MemberImageCollectionDialog } from "../selecting/karte/MemberImageCollectionDialog";
+import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 
 type Props = {
   readonly response: MemberShowResponse;
@@ -20,8 +20,8 @@ export const Member = (props: Props) => {
   return (
     <>
       <ListItemText
-        primary={props.response.memberName}
-        secondary={`パートナーID:${props.response.tMemberId}, カルテID:${chartId}`}
+        primary={props.response.name}
+        secondary={`パートナーID:${props.response.id}, カルテID:${chartId}`}
       />
       <ListItemSecondaryAction>
         <IconButton

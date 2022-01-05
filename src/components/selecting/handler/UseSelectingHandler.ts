@@ -2,7 +2,6 @@ import { KarteShowResponse } from "./../../../model/api/response/styling/karte/K
 import { useState } from "react";
 import { ItemBrowseCallback } from "../browse/callback/ItemBrowseCallback";
 import { SelectedItem } from "../../../model/selecting/SelectedItem";
-import { KarteContainerCallback } from "../karte/callback/KarteContainerCallback";
 import { SelectionConfirmData } from "../../../model/selecting/props_data/SelectionConfirmData";
 import { SelectionConfirmCallback } from "../callback/SelectionConfirmCallback";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
@@ -29,12 +28,18 @@ export const useSelectingHandler = (
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>(
     response.registeredItems
   );
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(
+    response.registeredItems.length >= response.defaultItemNum
+      ? response.registeredItems.length - 1
+      : response.registeredItems.length
+  );
   const [mainContentType, setMainContentType] = useState<MainContentType>(
     MainContentType.Browse
   );
-  const [rentableItemNum, setRentableItemNum] = useState(
-    response.defaultItemNum
+  const [rentableItemNum, setRentableItemNum] = useState<number>(
+    response.registeredItems.length >= response.defaultItemNum
+      ? response.registeredItems.length
+      : response.defaultItemNum
   );
 
   const selectionProgressData = (): SelectionProgressData => {
