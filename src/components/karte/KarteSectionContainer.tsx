@@ -1,11 +1,11 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { useKartesIndex } from "../../hooks/api/UseKartesIndex";
-import { KarteCollection } from "./KarteCollection";
+import { KarteSection } from "./KarteSection";
 
-export const KartesContainer = () => {
+export const KarteSectionContainer = () => {
   const { data, error } = useKartesIndex();
 
   if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
-  return <KarteCollection response={data} />;
+  return <KarteSection response={data} />;
 };
