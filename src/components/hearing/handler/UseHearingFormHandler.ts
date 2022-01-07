@@ -32,17 +32,10 @@ export const useHearingFormHandler = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
     id: number
   ) => {
-    let newReferenceTexts;
-    if (event.target.value) {
-      newReferenceTexts = [
-        ...referenceTexts.filter((reference) => reference.categoryId !== id),
-        { categoryId: id, text: event.target.value },
-      ];
-    } else {
-      newReferenceTexts = [
-        ...referenceTexts.filter((reference) => reference.categoryId !== id),
-      ];
-    }
+    const newReferenceTexts = [
+      ...referenceTexts.filter((reference) => reference.categoryId !== id),
+      { categoryId: id, text: event.target.value },
+    ];
     setReferenceTexts(newReferenceTexts);
   };
 
