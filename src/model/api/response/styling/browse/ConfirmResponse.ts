@@ -1,5 +1,5 @@
 import { SelectChoiceResponse } from "./SelectChoiceResponse";
-import { ValidationError } from "../../../../styling/browse/ValidationError";
+import { ValidationError } from "../../../../selecting/browse/ValidationError";
 
 export interface ConfirmResponse {
   readonly validateErrors: ValidationError[];

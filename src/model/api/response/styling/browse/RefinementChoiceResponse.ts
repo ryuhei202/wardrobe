@@ -1,4 +1,4 @@
-import { Refinement } from "../../../../styling/browse/Refinement";
+import { Refinement } from "../../../../selecting/browse/Refinement";
 import { FilterChoiceResponse } from "./FilterChoiceResponse";
 import { FilterResponse } from "./FilterResponse";
 
