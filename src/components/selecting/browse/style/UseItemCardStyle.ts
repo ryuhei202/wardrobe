@@ -18,5 +18,8 @@ export const useItemCardStyle = makeStyles((theme: Theme) =>
       height: 300,
       width: 200,
     },
+    seriesFeatureChip: {
+      float: "right",
+    },
   })
 );

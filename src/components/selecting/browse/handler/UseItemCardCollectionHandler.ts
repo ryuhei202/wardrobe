@@ -17,7 +17,8 @@ export const useItemCardCollectionHandler = (
       return {
         mainColorImagePath: item.mainColorImagePath,
         subColorImagePath: item.subColorImagePath,
-        seriesName: item.seriesName,
+        seriesName: item.seriesName ?? "",
+        seriesFeature: item.seriesFeature ?? "",
         categoryName: item.categoryName,
         brandName: item.brandName,
         imagePath: item.imagePath,

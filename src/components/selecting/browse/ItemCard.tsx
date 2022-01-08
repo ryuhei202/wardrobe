@@ -5,6 +5,7 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
+  Chip,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -44,6 +45,10 @@ export const ItemCard = (props: ItemCardProps) => {
             width="30px"
             height="auto"
             alt=""
+          />
+          <Chip
+            label={props.data.seriesFeature}
+            className={classes.seriesFeatureChip}
           />
           <Typography variant="body1">{props.data.seriesName}</Typography>
           <Typography variant="body2" color="textSecondary">
