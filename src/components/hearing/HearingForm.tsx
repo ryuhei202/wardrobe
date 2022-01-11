@@ -47,6 +47,7 @@ export const HearingForm = (props: Props) => {
       >
         {handler.ACTIVE_CATEGORIES.map((category) => (
           <TextField
+            key={category.id}
             fullWidth
             id="outlined-multiline-static"
             label={category.title}
