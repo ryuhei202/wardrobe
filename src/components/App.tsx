@@ -14,6 +14,7 @@ import { Route, Routes } from "react-router-dom";
 import { SelectingContainer } from "./selecting/SelectingContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ChartIdContext } from "../contexts/ChartIdContext";
+import { Hearing } from "./hearing/Hearing";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -61,6 +62,7 @@ export const App = () => {
             </Dialog>
             <Routes>
               <Route path="/selecting" element={<SelectingContainer />} />
+              <Route path="/hearing" element={<Hearing />} />
             </Routes>
           </div>
         </QueryClientProvider>
