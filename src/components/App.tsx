@@ -13,7 +13,6 @@ import { CropFree } from "@mui/icons-material";
 import { Route, Routes } from "react-router-dom";
 import { SelectingContainer } from "./selecting/SelectingContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ChartIdContext } from "../contexts/ChartIdContext";
 import { Hearing } from "./hearing/Hearing";
 import { ChartId } from "../model/chartId";
 
