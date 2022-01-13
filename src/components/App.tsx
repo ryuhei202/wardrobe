@@ -15,6 +15,7 @@ import { SelectingContainer } from "./selecting/SelectingContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ChartIdContext } from "../contexts/ChartIdContext";
 import { Hearing } from "./hearing/Hearing";
+import { ChartId } from "../model/chartId";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -57,7 +58,7 @@ export const App = () => {
             </AppBar>
             <Dialog open={isQRCodeOpen} onClose={() => setIsQRCodeOpen(false)}>
               <Paper className={classes.qrCodeContainer}>
-                <QRCode value={ChartIdContext.toString()} size={300} />
+                <QRCode value={ChartId().toString()} size={300} />
               </Paper>
             </Dialog>
             <Routes>
