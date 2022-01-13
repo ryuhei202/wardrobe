@@ -6,6 +6,7 @@ import { DetailSizeItemRecordResponse } from "./DetailSizeItemRecordResponse";
 export interface DetailResponse {
   readonly itemImagePath: ImagePathResponse;
   readonly seriesName: string | null;
+  readonly seriesFeature: string | null;
   readonly categoryName: string;
   readonly brandName: string;
   readonly mainColor: DetailColorResponse;
