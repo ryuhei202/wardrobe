@@ -6,4 +6,6 @@ export interface SelectedItem {
   readonly partSizes: PartSize[];
   readonly locationName: string;
   readonly categoryName: string;
+  readonly mainColorName: string;
+  readonly subColorName: string;
 }

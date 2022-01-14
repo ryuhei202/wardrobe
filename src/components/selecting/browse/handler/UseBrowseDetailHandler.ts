@@ -82,6 +82,8 @@ export const useBrowseDetailHandler = (
             partSizes: createPartSizes(columns, itemRecord),
             locationName: itemRecord.locationName,
             categoryName: detail.categoryName,
+            mainColorName: detail.mainColor.name,
+            subColorName: detail.subColor.name,
           });
         } else {
           const unsizedItemRecords = detail.unsizedItemRecords[index];
@@ -92,6 +94,8 @@ export const useBrowseDetailHandler = (
             partSizes: createPartSizes([], unsizedItemRecords),
             locationName: unsizedItemRecords.locationName,
             categoryName: detail.categoryName,
+            mainColorName: detail.mainColor.name,
+            subColorName: detail.subColor.name,
           });
         }
       },
