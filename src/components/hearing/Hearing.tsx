@@ -1,6 +1,6 @@
 import { Drawer, Toolbar } from "@mui/material";
 import { DrawerContents } from "../drawerContent/DrawerContents";
-import { HearingFormContainer } from "./HearingFormContainer";
+import { MainContents } from "./MainContents";
 import { useHearingStyle } from "./style/UseHearingStyle";
 
 export const Hearing = () => {
@@ -21,7 +21,7 @@ export const Hearing = () => {
       </Drawer>
       <div className={classes.hearingMainContainer}>
         <Toolbar />
-        <HearingFormContainer />
+        <MainContents />
       </div>
     </>
   );
