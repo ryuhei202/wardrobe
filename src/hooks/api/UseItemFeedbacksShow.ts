@@ -2,13 +2,16 @@ import { ItemFeedbackShowResponse } from "../../model/api/response/styling/itemF
 import { useKarteGetRequest } from "./UseKarteGetRequest";
 
 type ItemFeedbacksShow = {
-  readonly data?: ItemFeedbackShowResponse;
+  readonly data?: ItemFeedbackShowResponse[];
   readonly error: Error | null;
 };
 
-export const useItemFeedbacksShow = (): ItemFeedbacksShow => {
-  const { data, error } = useKarteGetRequest<ItemFeedbackShowResponse>(
-    "item_feedbacks"
+export const useItemFeedbacksShow = (chartId?: number): ItemFeedbacksShow => {
+  // カルテIDを受け取ったタイミングでuseQueryを実行する
+  const { data, error } = useKarteGetRequest<ItemFeedbackShowResponse[]>(
+    "item_feedbacks",
+    chartId,
+    chartId === undefined ? false : true
   );
 
   return {
