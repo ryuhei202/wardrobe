@@ -1,30 +1,29 @@
 import { AxiosResponse } from "axios";
-import { useState } from "react";
-import { UseMutateFunction } from "react-query";
+import { UseMutateFunction, useQueryClient } from "react-query";
 import { ItemFeedbackShowResponse } from "../../../model/api/response/styling/itemFeedback/ItemFeedbackShowResponse";
 import { FeedbackFormCallback } from "../callback/FeedbackFormCallback";
 
 type FeedbackFormHandler = {
-  readonly textFeedback: string;
-  readonly isEditing: boolean;
-  readonly changeText: (
+  readonly handleChangeText: (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
-  readonly onUnload: (e: any) => void;
-  readonly onKeyDown: (
-    event: React.KeyboardEvent<HTMLDivElement>,
-    mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>
-  ) => void;
+  readonly handleUnload: (e: any) => void;
+  readonly handleCaller: () => void;
+  readonly handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 
 export const useFeedbackFormHandler = (
   data: ItemFeedbackShowResponse,
-  callback: FeedbackFormCallback
+  callback: FeedbackFormCallback,
+  setTextFeedback: React.Dispatch<React.SetStateAction<string>>,
+  isEditing: boolean,
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>,
+  mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>,
+  isLoading: boolean
 ): FeedbackFormHandler => {
-  const [textFeedback, setTextFeedback] = useState<string>(data.textFeedback);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
-  const changeText = (
+  const handleChangeText = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setTextFeedback(event.target.value);
@@ -35,34 +34,36 @@ export const useFeedbackFormHandler = (
     if (data.textFeedback === null && event.target.value === "")
       setIsEditing(false);
   };
-  const onUnload = (e: any) => {
+
+  const handleUnload = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
   };
 
-  const onKeyDown = (
-    event: React.KeyboardEvent<HTMLDivElement>,
-    mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>
-  ) => {
-    if (event.altKey && event.key === "Enter" && isEditing) {
-      mutate(undefined, {
-        onSuccess: () => {
-          setIsEditing(false);
-          callback.onSuccess();
-        },
-        onError: () => {
-          setIsEditing(true);
-          callback.onFailure();
-        },
-      });
+  const handleCaller = () => {
+    mutate(undefined, {
+      onSuccess: () => {
+        queryClient.invalidateQueries("karte/item_feedbacks");
+        queryClient.invalidateQueries("member/kartes");
+        setIsEditing(false);
+        callback.onSuccess();
+      },
+      onError: () => {
+        setIsEditing(true);
+        callback.onFailure();
+      },
+    });
+  };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.altKey && event.key === "Enter" && isEditing && !isLoading) {
+      handleCaller();
     }
   };
 
   return {
-    textFeedback,
-    isEditing,
-    changeText,
-    onUnload,
-    onKeyDown,
+    handleChangeText,
+    handleUnload,
+    handleCaller,
+    handleKeyDown,
   };
 };

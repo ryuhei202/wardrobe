@@ -12,8 +12,8 @@ export const useFeedbackFormStyle = makeStyles((theme: Theme) =>
     },
     editIcon: {
       position: "absolute",
-      bottom: 16,
-      right: 3,
+      bottom: 18,
+      left: 544,
     },
     feedbackTextField: {
       width: 445,
