@@ -40,6 +40,14 @@ export const SelectedItemArray = (props: SelectionConfirmProps) => {
                 </Fragment>
               ))}
             </Typography>
+            <br />
+            <Typography variant="body2">
+              カテゴリー: {props.data[index].categoryName}
+              <br />
+              メインカラー: {props.data[index].mainColorName}
+              <br />
+              サブカラー: {props.data[index].subColorName}
+            </Typography>
           </CardContent>
         </Card>
       ))}
