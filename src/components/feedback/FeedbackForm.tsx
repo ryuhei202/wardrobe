@@ -1,19 +1,85 @@
-import { TextField } from "@mui/material";
+import { Box, IconButton, TextField, Tooltip } from "@mui/material";
 import { ItemFeedbackShowResponse } from "../../model/api/response/styling/itemFeedback/ItemFeedbackShowResponse";
+import { useFeedbackFormHandler } from "./handler/UseFeedbackFormHandler";
+import { useFeedbackFormStyle } from "./style/UseFeedbackFormStyle";
+import SendIcon from "@mui/icons-material/Send";
+import { useEffect, useState } from "react";
+import { useItemFeedbacksUpdate } from "../../hooks/api/UseItemFeedbacksUpdate";
+import { FeedbackFormCallback } from "./callback/FeedbackFormCallback";
 
 type Props = {
   readonly data: ItemFeedbackShowResponse;
+  readonly callback: FeedbackFormCallback;
 };
 export const FeedbackForm = (props: Props) => {
+  const [textFeedback, setTextFeedback] = useState<string>(
+    props.data.textFeedback
+  );
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const classes = useFeedbackFormStyle();
+  const { mutate, isLoading } = useItemFeedbacksUpdate(
+    props.data.chartItemId,
+    textFeedback
+  );
+  const {
+    handleChangeText,
+    handleUnload,
+    handleCaller,
+    handleKeyDown,
+  } = useFeedbackFormHandler(
+    props.data,
+    props.callback,
+    setTextFeedback,
+    isEditing,
+    setIsEditing,
+    mutate,
+    isLoading
+  );
+
+  useEffect(() => {
+    isEditing
+      ? window.addEventListener("beforeunload", handleUnload)
+      : window.removeEventListener("beforeunload", handleUnload);
+    return () => {
+      // アンマウント時にタブを閉じる時のアラートをするイベントを削除する。
+      window.removeEventListener("beforeunload", handleUnload);
+    };
+  }, [isEditing, handleUnload]);
+
   return (
-    // TODO: 別タスクで実装
-    <TextField
-      key={props.data.chartItemId}
-      fullWidth
-      id="outlined-multiline-static"
-      multiline
-      rows={8}
-      defaultValue={"テスト"}
-    />
+    <Box sx={{ m: 1, width: "600px", position: "relative" }}>
+      <img
+        src={props.data.imagePath.large}
+        className={classes.itemImage}
+        alt=""
+      />
+      <TextField
+        className={classes.feedbackTextField}
+        id={`outlined-multiline-static-${props.data.chartItemId}`}
+        multiline
+        rows={8}
+        defaultValue={props.data.textFeedback}
+        onChange={handleChangeText}
+        onKeyDown={handleKeyDown}
+      />
+      <Tooltip
+        title={
+          <div style={{ textAlign: "center" }}>
+            更新する
+            <br /> alt(option) + Enter
+          </div>
+        }
+        followCursor
+      >
+        <IconButton
+          onClick={handleCaller}
+          disabled={!isEditing}
+          color="primary"
+          className={classes.editIcon}
+        >
+          <SendIcon />
+        </IconButton>
+      </Tooltip>
+    </Box>
   );
 };

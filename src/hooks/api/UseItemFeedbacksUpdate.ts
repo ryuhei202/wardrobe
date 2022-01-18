@@ -7,12 +7,13 @@ export const useItemFeedbacksUpdate = (
   textFeedback: string
 ): {
   mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>;
+  isSuccess: boolean;
   isLoading: boolean;
 } => {
   const params = { textFeedback };
-  const { mutate, isLoading } = usePatchRequest(
+  const { mutate, isSuccess, isLoading } = usePatchRequest(
     `item_feedbacks/${chartItemId}`,
     params
   );
-  return { mutate, isLoading };
+  return { mutate, isSuccess, isLoading };
 };

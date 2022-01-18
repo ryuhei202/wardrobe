@@ -11,7 +11,7 @@ export const useItemFeedbacksShow = (chartId?: number): ItemFeedbacksShow => {
   const { data, error } = useKarteGetRequest<ItemFeedbackShowResponse[]>(
     "item_feedbacks",
     chartId,
-    chartId === undefined ? false : true
+    chartId !== undefined
   );
 
   return {

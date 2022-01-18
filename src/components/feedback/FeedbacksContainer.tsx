@@ -12,7 +12,8 @@ export const FeedbacksContainer = () => {
   const { data: feedbacks, error: feedbacksError } = useItemFeedbacksShow(
     latestKartes?.chartId
   );
-
+  if (latestKartes?.chartId === null)
+    return <Typography>カルテが存在しません。</Typography>;
   if (!feedbacks) return <CircularProgress />;
   if (latestKartesError)
     return <Typography>{latestKartesError.message}</Typography>;
