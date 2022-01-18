@@ -19,7 +19,7 @@ export const useGetAdviceChoiceCaller = (): GetAdviceChoiceCaller => {
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetAdviceChoiceRequest(chartId);
+  const request = useGetAdviceChoiceRequest(chartId ?? 0);
   const client = useGetClient<AdviceChoiceResponse>(request);
 
   useEffect(() => {

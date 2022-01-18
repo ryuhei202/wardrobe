@@ -26,7 +26,7 @@ export const usePostCreateOutfitCaller = (
     null
   );
 
-  const request = usePostCreateOutfitRequest(chartId, outfits);
+  const request = usePostCreateOutfitRequest(chartId ?? 0, outfits);
   const client = usePostClient(request);
 
   useEffect(() => {

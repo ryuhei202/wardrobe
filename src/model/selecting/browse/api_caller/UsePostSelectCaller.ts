@@ -25,7 +25,7 @@ export const usePostSelectCaller = (
     null
   );
 
-  const request = usePostSelectRequest(chartId, itemId, previousItemId);
+  const request = usePostSelectRequest(chartId ?? 0, itemId, previousItemId);
   const client = usePostClient(request);
 
   useEffect(() => {

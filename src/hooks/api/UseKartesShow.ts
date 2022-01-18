@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { ChartIdContext } from "../../contexts/ChartIdContext";
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
 import { useKarteGetRequest } from "./UseKarteGetRequest";
 
@@ -7,7 +9,8 @@ type KartesShow = {
 };
 
 export const useKartesShow = (): KartesShow => {
-  const { data, error } = useKarteGetRequest<KarteShowResponse>("");
+  const chartId = useContext(ChartIdContext);
+  const { data, error } = useKarteGetRequest<KarteShowResponse>("", chartId);
 
   return {
     data,
