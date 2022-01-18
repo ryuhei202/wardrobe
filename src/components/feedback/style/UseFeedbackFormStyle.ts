@@ -10,5 +10,13 @@ export const useFeedbackFormStyle = makeStyles((theme: Theme) =>
       marginRight: 5,
       borderRadius: "3%",
     },
+    editIcon: {
+      position: "absolute",
+      bottom: 16,
+      right: 3,
+    },
+    feedbackTextField: {
+      width: 445,
+    },
   })
 );

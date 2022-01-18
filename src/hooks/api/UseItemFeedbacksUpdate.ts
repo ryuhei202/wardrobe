@@ -1,18 +1,30 @@
 import { usePatchRequest } from "./UsePatchRequest";
 import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
+import { UseMutateAsyncFunction, useQueryClient } from "react-query";
 
 export const useItemFeedbacksUpdate = (
   chartItemId: number,
   textFeedback: string
 ): {
-  mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>;
-  isLoading: boolean;
+  mutateAsync: UseMutateAsyncFunction<
+    AxiosResponse<any>,
+    unknown,
+    void,
+    unknown
+  >;
+  isSuccess: boolean;
 } => {
+  const queryClient = useQueryClient();
   const params = { textFeedback };
-  const { mutate, isLoading } = usePatchRequest(
+  const onSuccess = {
+    onSuccess: () => {
+      queryClient.invalidateQueries("karte/item_feedbacks");
+    },
+  };
+  const { mutateAsync, isSuccess } = usePatchRequest(
     `item_feedbacks/${chartItemId}`,
-    params
+    params,
+    onSuccess
   );
-  return { mutate, isLoading };
+  return { mutateAsync, isSuccess };
 };

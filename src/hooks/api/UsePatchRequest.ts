@@ -1,18 +1,26 @@
 import { baseUrl } from "./../../model/api/shared/BaseUrl";
 import { axiosClient } from "./../../model/api/shared/AxiosClient";
 import { AxiosResponse } from "axios";
-import { UseMutateFunction, useMutation, useQueryClient } from "react-query";
+import { UseMutateAsyncFunction, useMutation } from "react-query";
 
 export const usePatchRequest = (
   path: string,
-  params: {}
+  params: {},
+  nextRequest: {} = {}
 ): {
-  mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>;
+  mutateAsync: UseMutateAsyncFunction<
+    AxiosResponse<any>,
+    unknown,
+    void,
+    unknown
+  >;
   isLoading: boolean;
+  isSuccess: boolean;
 } => {
-  const { mutate, isLoading } = useMutation(() =>
-    axiosClient.patch(`${baseUrl()}/styling/${path}`, params)
+  const { mutateAsync, isLoading, isSuccess } = useMutation(
+    () => axiosClient.patch(`${baseUrl()}/styling/${path}`, params),
+    nextRequest
   );
 
-  return { mutate, isLoading };
+  return { mutateAsync, isLoading, isSuccess };
 };
