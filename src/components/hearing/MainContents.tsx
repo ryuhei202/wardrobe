@@ -5,9 +5,9 @@ import { HearingFormContainer } from "./HearingFormContainer";
 export const MainContents = () => {
   return (
     <>
-      <HearingFormContainer />
-      <Divider style={{ margin: 20 }} />
       <FeedbacksContainer />
+      <Divider style={{ margin: 20 }} />
+      <HearingFormContainer />
     </>
   );
 };
