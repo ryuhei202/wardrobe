@@ -13,26 +13,11 @@ type Props = {
 };
 export const FeedbackForm = (props: Props) => {
   const classes = useFeedbackFormStyle();
-  const handler = useFeedbackFormHandler(props.data);
-  const { mutateAsync } = useItemFeedbacksUpdate(
+  const handler = useFeedbackFormHandler(props.data, props.callback);
+  const { mutate } = useItemFeedbacksUpdate(
     props.data.chartItemId,
     handler.textFeedback
   );
-
-  useEffect(() => {
-    window.document.onkeydown = async (event) => {
-      if (event.altKey && event.key === "Enter") {
-        try {
-          await mutateAsync();
-          handler.onSuccessUpdate(true);
-          props.callback.onSuccess();
-        } catch (error) {
-          handler.onSuccessUpdate(false);
-          props.callback.onFailure();
-        }
-      }
-    };
-  });
 
   useEffect(() => {
     handler.isEditing
@@ -58,6 +43,7 @@ export const FeedbackForm = (props: Props) => {
         rows={8}
         defaultValue={props.data.textFeedback}
         onChange={(event) => handler.changeText(event)}
+        onKeyDown={(event) => handler.onKeyDown(event, mutate)}
       />
       {handler.isEditing && <EditIcon className={classes.editIcon} />}
     </Box>

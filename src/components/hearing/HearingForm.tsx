@@ -1,5 +1,4 @@
-import { Box, Button, TextField, Tooltip } from "@mui/material";
-import { useEffect } from "react";
+import { Box, Button, TextField } from "@mui/material";
 import { useLatestStylingReferencesUpdate } from "../../hooks/api/UseLatestStylingReferencesUpdate";
 import { StylingReferenceText } from "../../model/hearing/StylingReferenceText";
 import { useHearingFormHandler } from "./handler/UseHearingFormHandler";
@@ -14,28 +13,17 @@ export const HearingForm = (props: Props) => {
   const { mutate, isLoading } = useLatestStylingReferencesUpdate(
     handler.referenceTexts
   );
-
-  useEffect(() => {
-    window.document.onkeydown = (event) => {
-      if (event.altKey && event.key === "Enter") {
-        mutate();
-      }
-    };
-  });
-
   return (
     <>
-      <Tooltip title="Alt + Enter" followCursor>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.completeButton}
-          onClick={() => mutate()}
-          disabled={isLoading}
-        >
-          ヒアリングを保存する
-        </Button>
-      </Tooltip>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.completeButton}
+        onClick={() => mutate()}
+        disabled={isLoading}
+      >
+        ヒアリングを保存する
+      </Button>
 
       <Box
         component="form"

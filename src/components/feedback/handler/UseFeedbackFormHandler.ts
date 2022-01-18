@@ -1,5 +1,8 @@
+import { AxiosResponse } from "axios";
 import { useState } from "react";
+import { UseMutateFunction } from "react-query";
 import { ItemFeedbackShowResponse } from "../../../model/api/response/styling/itemFeedback/ItemFeedbackShowResponse";
+import { FeedbackFormCallback } from "../callback/FeedbackFormCallback";
 
 type FeedbackFormHandler = {
   readonly textFeedback: string;
@@ -7,12 +10,16 @@ type FeedbackFormHandler = {
   readonly changeText: (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
-  readonly onSuccessUpdate: (isSuccess: boolean) => void;
   readonly onUnload: (e: any) => void;
+  readonly onKeyDown: (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>
+  ) => void;
 };
 
 export const useFeedbackFormHandler = (
-  data: ItemFeedbackShowResponse
+  data: ItemFeedbackShowResponse,
+  callback: FeedbackFormCallback
 ): FeedbackFormHandler => {
   const [textFeedback, setTextFeedback] = useState<string>(data.textFeedback);
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -28,21 +35,34 @@ export const useFeedbackFormHandler = (
     if (data.textFeedback === null && event.target.value === "")
       setIsEditing(false);
   };
-
-  const onSuccessUpdate = (isSuccess: boolean) => {
-    setIsEditing(!isSuccess);
-  };
-
   const onUnload = (e: any) => {
     e.preventDefault();
     e.returnValue = "";
+  };
+
+  const onKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>
+  ) => {
+    if (event.altKey && event.key === "Enter" && isEditing) {
+      mutate(undefined, {
+        onSuccess: () => {
+          setIsEditing(false);
+          callback.onSuccess();
+        },
+        onError: () => {
+          setIsEditing(true);
+          callback.onFailure();
+        },
+      });
+    }
   };
 
   return {
     textFeedback,
     isEditing,
     changeText,
-    onSuccessUpdate,
     onUnload,
+    onKeyDown,
   };
 };
