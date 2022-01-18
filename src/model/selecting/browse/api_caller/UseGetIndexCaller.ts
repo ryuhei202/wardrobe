@@ -25,7 +25,7 @@ export const useGetIndexCaller = (refinement: Refinement): GetIndexCaller => {
     setCallStatus(CallStatus.Preparing);
   }, [refinement]);
 
-  const request = useGetIndexRequest(chartId, refinement);
+  const request = useGetIndexRequest(chartId ?? 0, refinement);
   const client = useGetClient<BrowseIndexResponse>(request);
 
   useEffect(() => {
