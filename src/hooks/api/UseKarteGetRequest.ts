@@ -4,7 +4,7 @@ import { baseUrl } from "../../model/api/shared/BaseUrl";
 
 export const useKarteGetRequest = <T>(
   path: string,
-  chartId: number | undefined = undefined,
+  chartId?: number,
   isEnabled: boolean = true
 ): {
   data: T | undefined;
