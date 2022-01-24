@@ -15,7 +15,7 @@ export const useHearingFormHandler = (
 ): HearingFormHandler => {
   //現在ヒアリングしているカテゴリ
   const ACTIVE_CATEGORIES = [
-    { id: 1, title: "意識する相手(補足)" },
+    { id: 2, title: "意識する相手(補足)" },
     { id: 7, title: "コーデイメージ" },
     { id: 8, title: "その他" },
   ];
