@@ -23,7 +23,7 @@ export const usePostRegisterItemsCaller = (
     null
   );
 
-  const request = useRegisterItemsRequest(chartId, adminId, itemIds);
+  const request = useRegisterItemsRequest(chartId ?? 0, adminId, itemIds);
   const client = usePostClient(request);
 
   useEffect(() => {

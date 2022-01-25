@@ -19,7 +19,7 @@ export const useGetConfirmCaller = (itemIds: number[]): GetConfirmCaller => {
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetConfirmRequest(chartId, itemIds);
+  const request = useGetConfirmRequest(chartId ?? 0, itemIds);
   const client = useGetClient<ConfirmResponse>(request);
 
   useEffect(() => {

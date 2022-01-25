@@ -28,7 +28,7 @@ export const useGetRefinementChoiceCaller = (
     setCallStatus(CallStatus.Preparing);
   }, [categoryId]);
 
-  const request = useGetRefinementChoiceRequest(chartId, categoryId);
+  const request = useGetRefinementChoiceRequest(chartId ?? 0, categoryId);
   const client = useGetClient<RefinementChoiceResponse>(request);
 
   useEffect(() => {
