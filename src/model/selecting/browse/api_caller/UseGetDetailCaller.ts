@@ -23,7 +23,11 @@ export const useGetDetailCaller = (
   const [errorResponse, setErrorResponse] = useState<ErrorResponse | null>(
     null
   );
-  const request = useGetDetailRequest(chartId, preregisteredItemId, refinement);
+  const request = useGetDetailRequest(
+    chartId ?? 0,
+    preregisteredItemId,
+    refinement
+  );
   const client = useGetClient<DetailResponse>(request);
 
   useEffect(() => {
