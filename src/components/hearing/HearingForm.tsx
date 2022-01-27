@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from "@mui/material";
-import { useLatestStylingReferenceTextsUpdate } from "../../hooks/api/UseLatestStylingReferenceTextsUpdate";
+import { useLatestStylingReferencesUpdate } from "../../hooks/api/UseLatestStylingReferencesUpdate";
 import { StylingReferenceText } from "../../model/hearing/StylingReferenceText";
 import { useHearingFormHandler } from "./handler/UseHearingFormHandler";
 import { useHearingFormStyle } from "./style/UseHearingFormStyle";
@@ -10,7 +10,7 @@ type Props = {
 export const HearingForm = (props: Props) => {
   const classes = useHearingFormStyle();
   const handler = useHearingFormHandler(props.response);
-  const { mutate, isLoading } = useLatestStylingReferenceTextsUpdate(
+  const { mutate, isLoading } = useLatestStylingReferencesUpdate(
     handler.referenceTexts
   );
   return (
