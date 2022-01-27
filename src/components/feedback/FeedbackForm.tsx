@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useItemFeedbacksUpdate } from "../../hooks/api/UseItemFeedbacksUpdate";
 import { FeedbackFormCallback } from "./callback/FeedbackFormCallback";
 import { SendButton } from "../shared/SendButton";
-import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 
 type Props = {
   readonly data: ItemFeedbackShowResponse;
@@ -24,6 +23,7 @@ export const FeedbackForm = (props: Props) => {
   );
   const {
     handleChangeText,
+    handleUnload,
     handleCaller,
     handleKeyDown,
   } = useFeedbackFormHandler(
@@ -37,8 +37,14 @@ export const FeedbackForm = (props: Props) => {
   );
 
   useEffect(() => {
-    alertClosedWindow(isEditing);
-  }, [isEditing]);
+    isEditing
+      ? window.addEventListener("beforeunload", handleUnload)
+      : window.removeEventListener("beforeunload", handleUnload);
+    return () => {
+      // アンマウント時にタブを閉じる時のアラートをするイベントを削除する。
+      window.removeEventListener("beforeunload", handleUnload);
+    };
+  }, [isEditing, handleUnload]);
 
   return (
     <Box sx={{ m: 1, width: "600px", position: "relative" }}>

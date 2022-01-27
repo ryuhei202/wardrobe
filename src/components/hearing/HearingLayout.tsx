@@ -35,7 +35,6 @@ export const HearingLayout = ({ response }: Props) => {
       >
         {ACTIVE_CATEGORIES.map((category) => (
           <HearingForm
-            key={category.id}
             category={category}
             callback={hearingFormCallback()}
             initialText={

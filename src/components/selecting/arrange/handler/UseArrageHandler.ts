@@ -1,4 +1,3 @@
-import { alertClosedWindow } from "./../../../../service/shared/alertClosedWindow";
 import { Outfit } from "../../../../model/selecting/arrange/Outfit";
 import { useCallback, useEffect, useState } from "react";
 import { AdviceChoiceResponse } from "../../../../model/api/response/styling/arrange/AdviceChoiceResponse";
@@ -46,8 +45,19 @@ export const useArrangeHandler = (
   const onClickComplete = () => createOutfitCaller.prepare();
 
   useEffect(() => {
-    alertClosedWindow(isPostComplete);
+    isPostComplete
+      ? window.removeEventListener("beforeunload", onUnload)
+      : window.addEventListener("beforeunload", onUnload);
+    return () => {
+      // アンマウント時にタブを閉じる時のアラートをするイベントを削除する。
+      window.removeEventListener("beforeunload", onUnload);
+    };
   }, [isPostComplete]);
+
+  const onUnload = (e: any) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
 
   const addedOutfitListData = (): AddedOutfitListData => {
     return {

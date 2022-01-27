@@ -1,7 +1,6 @@
 import { Box, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLatestStylingReferenceTextsUpdate } from "../../hooks/api/UseLatestStylingReferenceTextsUpdate";
-import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { SendButton } from "../shared/SendButton";
 import { HearingFormCallback } from "./callback/HearingFormCallback";
 import { useHearingFormHandler } from "./handler/useHearingFormHandler";
@@ -33,11 +32,6 @@ export const HearingForm = ({ category, callback, initialText }: Props) => {
     mutate,
     isLoading
   );
-
-  useEffect(() => {
-    alertClosedWindow(isEditing);
-  }, [isEditing]);
-
   return (
     <Box sx={{ m: 1, width: "600px", position: "relative" }}>
       <TextField
