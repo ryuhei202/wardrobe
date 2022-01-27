@@ -1,9 +1,9 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { useLatestStylingReferencesShow } from "../../hooks/api/UseLatestStylingReferencesShow";
 import { StylingReferenceText } from "../../model/hearing/StylingReferenceText";
-import { HearingLayout } from "./HearingLayout";
+import { HearingForm } from "./HearingForm";
 
-export const HearingLayoutContainer = () => {
+export const HearingFormContainer = () => {
   const { data, error } = useLatestStylingReferencesShow();
   let referenceTexts: StylingReferenceText[] = [];
   if (data) {
@@ -18,5 +18,5 @@ export const HearingLayoutContainer = () => {
   if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
 
-  return <HearingLayout response={referenceTexts} />;
+  return <HearingForm response={referenceTexts} />;
 };

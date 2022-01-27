@@ -1,54 +1,47 @@
-import { AxiosResponse } from "axios";
-import { UseMutateFunction, useQueryClient } from "react-query";
+import { useState } from "react";
+import { StylingReferenceText } from "../../../model/hearing/StylingReferenceText";
 
 type HearingFormHandler = {
-  readonly handleChangeText: (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  readonly ACTIVE_CATEGORIES: { id: number; title: string }[];
+  readonly referenceTexts: StylingReferenceText[];
+  readonly changeText: (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    categoryId: number
   ) => void;
-  readonly handleCaller: () => void;
-  readonly handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
+
 export const useHearingFormHandler = (
-  initialText: string,
-  setReferenceText: React.Dispatch<React.SetStateAction<string>>,
-  isEditing: boolean,
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>,
-  mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>,
-  isLoading: boolean
+  response: StylingReferenceText[]
 ): HearingFormHandler => {
-  const queryClient = useQueryClient();
+  //現在ヒアリングしているカテゴリ
+  const ACTIVE_CATEGORIES = [
+    { id: 1, title: "意識する相手(補足)" },
+    { id: 7, title: "コーデイメージ" },
+    { id: 8, title: "その他" },
+  ];
 
-  const handleChangeText = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  const [referenceTexts, setReferenceTexts] = useState<StylingReferenceText[]>(
+    response.filter((referenceText) =>
+      ACTIVE_CATEGORIES.map((category) => category["id"]).includes(
+        referenceText.categoryId
+      )
+    )
+  );
+
+  const changeText = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    id: number
   ) => {
-    setReferenceText(event.target.value);
-    initialText !== event.target.value
-      ? setIsEditing(true)
-      : setIsEditing(false);
-  };
-
-  const handleCaller = () => {
-    mutate(undefined, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("member/latest_styling_references");
-        setIsEditing(false);
-        //callback.onSuccess();
-      },
-      onError: () => {
-        setIsEditing(true);
-        //callback.onFailure();
-      },
-    });
-  };
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.altKey && event.key === "Enter" && isEditing && !isLoading) {
-      handleCaller();
-    }
+    const newReferenceTexts = [
+      ...referenceTexts.filter((reference) => reference.categoryId !== id),
+      { categoryId: id, text: event.target.value },
+    ];
+    setReferenceTexts(newReferenceTexts);
   };
 
   return {
-    handleChangeText,
-    handleCaller,
-    handleKeyDown,
+    ACTIVE_CATEGORIES,
+    referenceTexts,
+    changeText,
   };
 };
