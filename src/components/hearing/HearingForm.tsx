@@ -1,6 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useLatestStylingReferenceTextsUpdate } from "../../hooks/api/UseLatestStylingReferenceTextsUpdate";
+import { useLatestStylingReferenceTextUpdate } from "../../hooks/api/UseLatestStylingReferenceTextUpdate";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { SendButton } from "../shared/SendButton";
 import { HearingFormCallback } from "./callback/HearingFormCallback";
@@ -15,7 +15,7 @@ export const HearingForm = ({ category, callback, initialText }: Props) => {
   const [referenceText, setReferenceText] = useState<string>(initialText);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const { mutate, isLoading } = useLatestStylingReferenceTextsUpdate(
+  const { mutate, isLoading } = useLatestStylingReferenceTextUpdate(
     category.id,
     referenceText
   );

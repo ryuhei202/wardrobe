@@ -1,10 +1,10 @@
-import { MemberIdContext } from "./../../contexts/MemberIdContext";
+import { MemberIdContext } from "../../contexts/MemberIdContext";
 import { useContext } from "react";
 import { usePatchRequest } from "./UsePatchRequest";
 import { UseMutateFunction } from "react-query";
 import { AxiosResponse } from "axios";
 
-export const useLatestStylingReferenceTextsUpdate = (
+export const useLatestStylingReferenceTextUpdate = (
   categoryId: number,
   text: string
 ): {
