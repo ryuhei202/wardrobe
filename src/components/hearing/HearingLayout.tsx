@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Alert, Box, Snackbar, Typography } from "@mui/material";
 import { StylingReferenceText } from "../../model/hearing/StylingReferenceText";
+import { useHearingLayoutHandler } from "./handler/useHearingLayoutHandler";
 import { HearingForm } from "./HearingForm";
 
 type Props = {
@@ -12,6 +13,12 @@ export const HearingLayout = ({ response }: Props) => {
     { id: 7, title: "コーデイメージ" },
     { id: 8, title: "その他" },
   ];
+  const {
+    severity,
+    isSnackBarOpen,
+    snackBarText,
+    hearingFormCallback,
+  } = useHearingLayoutHandler();
   return (
     <>
       <Typography variant="body1" fontWeight="bold" m={2}>
@@ -30,11 +37,15 @@ export const HearingLayout = ({ response }: Props) => {
           <HearingForm
             key={category.id}
             category={category}
+            callback={hearingFormCallback()}
             initialText={
               response.find((r) => category.id === r.categoryId)?.text ?? ""
             }
           />
         ))}
+        <Snackbar open={isSnackBarOpen}>
+          <Alert severity={severity}>{snackBarText}</Alert>
+        </Snackbar>
       </Box>
     </>
   );
