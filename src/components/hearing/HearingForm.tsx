@@ -2,15 +2,13 @@ import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 import { useLatestStylingReferenceTextsUpdate } from "../../hooks/api/UseLatestStylingReferenceTextsUpdate";
 import { SendButton } from "../shared/SendButton";
-import { HearingFormCallback } from "./callback/HearingFormCallback";
 import { useHearingFormHandler } from "./handler/useHearingFormHandler";
 
 type Props = {
   readonly category: { id: number; title: string };
-  readonly callback: HearingFormCallback;
   readonly initialText: string;
 };
-export const HearingForm = ({ category, callback, initialText }: Props) => {
+export const HearingForm = ({ category, initialText }: Props) => {
   const [referenceText, setReferenceText] = useState<string>(initialText);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
@@ -24,7 +22,6 @@ export const HearingForm = ({ category, callback, initialText }: Props) => {
     handleCaller,
     handleKeyDown,
   } = useHearingFormHandler(
-    callback,
     initialText,
     setReferenceText,
     isEditing,

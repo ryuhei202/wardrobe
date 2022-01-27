@@ -1,6 +1,5 @@
 import { AxiosResponse } from "axios";
 import { UseMutateFunction, useQueryClient } from "react-query";
-import { HearingFormCallback } from "../callback/HearingFormCallback";
 
 type HearingFormHandler = {
   readonly handleChangeText: (
@@ -10,7 +9,6 @@ type HearingFormHandler = {
   readonly handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 export const useHearingFormHandler = (
-  callback: HearingFormCallback,
   initialText: string,
   setReferenceText: React.Dispatch<React.SetStateAction<string>>,
   isEditing: boolean,
@@ -34,11 +32,11 @@ export const useHearingFormHandler = (
       onSuccess: () => {
         queryClient.invalidateQueries("member/latest_styling_references");
         setIsEditing(false);
-        callback.onSuccess();
+        //callback.onSuccess();
       },
       onError: () => {
         setIsEditing(true);
-        callback.onFailure();
+        //callback.onFailure();
       },
     });
   };

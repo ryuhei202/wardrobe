@@ -4,9 +4,9 @@ import SendIcon from "@mui/icons-material/Send";
 type Props = {
   readonly onClick: () => void;
   readonly disabled?: boolean;
-  readonly style?: React.CSSProperties;
+  readonly className?: string;
 };
-export const SendButton = ({ onClick, disabled, style }: Props) => {
+export const SendButton = ({ onClick, disabled, className }: Props) => {
   return (
     <Tooltip
       title={
@@ -21,7 +21,7 @@ export const SendButton = ({ onClick, disabled, style }: Props) => {
         onClick={onClick}
         disabled={disabled}
         color="primary"
-        style={style}
+        className={className}
       >
         <SendIcon />
       </IconButton>

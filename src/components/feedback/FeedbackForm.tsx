@@ -65,7 +65,7 @@ export const FeedbackForm = (props: Props) => {
       <SendButton
         onClick={handleCaller}
         disabled={!isEditing}
-        style={{ position: "absolute", bottom: 18, left: 544 }}
+        className={classes.editIcon}
       />
     </Box>
   );
