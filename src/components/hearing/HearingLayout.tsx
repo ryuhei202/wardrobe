@@ -28,6 +28,7 @@ export const HearingLayout = ({ response }: Props) => {
       >
         {ACTIVE_CATEGORIES.map((category) => (
           <HearingForm
+            key={category.id}
             category={category}
             initialText={
               response.find((r) => category.id === r.categoryId)?.text ?? ""
