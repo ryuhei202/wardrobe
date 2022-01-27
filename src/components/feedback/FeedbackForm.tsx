@@ -1,11 +1,11 @@
-import { Box, IconButton, TextField, Tooltip } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { ItemFeedbackShowResponse } from "../../model/api/response/styling/itemFeedback/ItemFeedbackShowResponse";
 import { useFeedbackFormHandler } from "./handler/UseFeedbackFormHandler";
 import { useFeedbackFormStyle } from "./style/UseFeedbackFormStyle";
-import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState } from "react";
 import { useItemFeedbacksUpdate } from "../../hooks/api/UseItemFeedbacksUpdate";
 import { FeedbackFormCallback } from "./callback/FeedbackFormCallback";
+import { SendButton } from "../shared/SendButton";
 
 type Props = {
   readonly data: ItemFeedbackShowResponse;
@@ -62,24 +62,11 @@ export const FeedbackForm = (props: Props) => {
         onChange={handleChangeText}
         onKeyDown={handleKeyDown}
       />
-      <Tooltip
-        title={
-          <div style={{ textAlign: "center" }}>
-            更新する
-            <br /> alt(option) + Enter
-          </div>
-        }
-        followCursor
-      >
-        <IconButton
-          onClick={handleCaller}
-          disabled={!isEditing}
-          color="primary"
-          className={classes.editIcon}
-        >
-          <SendIcon />
-        </IconButton>
-      </Tooltip>
+      <SendButton
+        onClick={handleCaller}
+        disabled={!isEditing}
+        className={classes.editIcon}
+      />
     </Box>
   );
 };
