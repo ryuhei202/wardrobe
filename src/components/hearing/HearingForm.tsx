@@ -4,7 +4,7 @@ import { useLatestStylingReferenceTextUpdate } from "../../hooks/api/UseLatestSt
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { SendButton } from "../shared/SendButton";
 import { HearingFormCallback } from "./callback/HearingFormCallback";
-import { useHearingFormHandler } from "./handler/useHearingFormHandler";
+import { useHearingFormHandler } from "./handler/UseHearingFormHandler";
 
 type Props = {
   readonly category: { id: number; title: string };

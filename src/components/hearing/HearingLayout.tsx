@@ -1,7 +1,7 @@
 import { Alert, Box, Snackbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { StylingReferenceText } from "../../model/hearing/StylingReferenceText";
-import { useHearingLayoutHandler } from "./handler/useHearingLayoutHandler";
+import { useHearingLayoutHandler } from "./handler/UseHearingLayoutHandler";
 import { HearingForm } from "./HearingForm";
 
 type Props = {
