@@ -15,7 +15,6 @@ import { SelectingContainer } from "./selecting/SelectingContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hearing } from "./hearing/Hearing";
 import { ChartIdContext } from "../contexts/ChartIdContext";
-import Bugsnag from "@bugsnag/js";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -33,7 +32,6 @@ export const App = () => {
       },
     },
   });
-  Bugsnag.notify("エラー通知テスト");
 
   return (
     <StyledEngineProvider injectFirst>
