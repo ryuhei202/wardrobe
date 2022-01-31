@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FeedbackFormCallback } from "../callback/FeedbackFormCallback";
 
 type FeedbacksHandler = {
