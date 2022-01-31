@@ -7,7 +7,6 @@ type FeedbackFormHandler = {
   readonly handleChangeText: (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
-  readonly handleUnload: (e: any) => void;
   readonly handleCaller: () => void;
   readonly handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
@@ -35,11 +34,6 @@ export const useFeedbackFormHandler = (
       setIsEditing(false);
   };
 
-  const handleUnload = (e: any) => {
-    e.preventDefault();
-    e.returnValue = "";
-  };
-
   const handleCaller = () => {
     mutate(undefined, {
       onSuccess: () => {
@@ -62,7 +56,6 @@ export const useFeedbackFormHandler = (
 
   return {
     handleChangeText,
-    handleUnload,
     handleCaller,
     handleKeyDown,
   };
