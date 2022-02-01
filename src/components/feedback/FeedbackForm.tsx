@@ -1,11 +1,12 @@
-import { Box, IconButton, TextField, Tooltip } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { ItemFeedbackShowResponse } from "../../model/api/response/styling/itemFeedback/ItemFeedbackShowResponse";
 import { useFeedbackFormHandler } from "./handler/UseFeedbackFormHandler";
 import { useFeedbackFormStyle } from "./style/UseFeedbackFormStyle";
-import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useState } from "react";
 import { useItemFeedbacksUpdate } from "../../hooks/api/UseItemFeedbacksUpdate";
 import { FeedbackFormCallback } from "./callback/FeedbackFormCallback";
+import { SendButton } from "../shared/SendButton";
+import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 
 type Props = {
   readonly data: ItemFeedbackShowResponse;
@@ -23,7 +24,6 @@ export const FeedbackForm = (props: Props) => {
   );
   const {
     handleChangeText,
-    handleUnload,
     handleCaller,
     handleKeyDown,
   } = useFeedbackFormHandler(
@@ -37,14 +37,8 @@ export const FeedbackForm = (props: Props) => {
   );
 
   useEffect(() => {
-    isEditing
-      ? window.addEventListener("beforeunload", handleUnload)
-      : window.removeEventListener("beforeunload", handleUnload);
-    return () => {
-      // アンマウント時にタブを閉じる時のアラートをするイベントを削除する。
-      window.removeEventListener("beforeunload", handleUnload);
-    };
-  }, [isEditing, handleUnload]);
+    alertClosedWindow(isEditing);
+  }, [isEditing]);
 
   return (
     <Box sx={{ m: 1, width: "600px", position: "relative" }}>
@@ -62,24 +56,11 @@ export const FeedbackForm = (props: Props) => {
         onChange={handleChangeText}
         onKeyDown={handleKeyDown}
       />
-      <Tooltip
-        title={
-          <div style={{ textAlign: "center" }}>
-            更新する
-            <br /> alt(option) + Enter
-          </div>
-        }
-        followCursor
-      >
-        <IconButton
-          onClick={handleCaller}
-          disabled={!isEditing}
-          color="primary"
-          className={classes.editIcon}
-        >
-          <SendIcon />
-        </IconButton>
-      </Tooltip>
+      <SendButton
+        onClick={handleCaller}
+        disabled={!isEditing}
+        style={{ position: "absolute", bottom: 18, left: 544 }}
+      />
     </Box>
   );
 };
