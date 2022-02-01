@@ -2,7 +2,7 @@ import { List, Slider, Typography } from "@mui/material";
 import React, { Fragment } from "react";
 import { FilterSliderData } from "../../../model/selecting/browse/props_data/FilterSliderData";
 import { FilterSliderArrayCallback } from "./callback/FilterSliderArrayCallback";
-import { useFilterSliderArrayHandler } from "./handler/useFilterSliderArrayHandler";
+import { useFilterSliderArrayHandler } from "./handler/UseFilterSliderArrayHandler";
 import { useFilterSliderArrayStyle } from "./style/UseFilterSliderArrayStyle";
 
 interface FilterSliderArrayProps {
