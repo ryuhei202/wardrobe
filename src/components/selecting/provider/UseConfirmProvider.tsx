@@ -1,39 +1,31 @@
 import { CircularProgress, Typography } from "@mui/material";
 import React from "react";
-import { useGetConfirmCaller } from "../../../model/selecting/browse/api_caller/UseGetConfirmCaller";
+import { useBrowsesConfirm } from "../../../hooks/api/UseBrowsesConfirm";
 import { SelectionConfirmData } from "../../../model/selecting/props_data/SelectionConfirmData";
 import { SelectionConfirmCallback } from "../callback/SelectionConfirmCallback";
 import { SelectionConfirm } from "../SelectionConfirm";
 
 export interface ConfirmProvider {
   selectionConfirmComponent: (
-    data: SelectionConfirmData,
+    response: SelectionConfirmData,
     callback: SelectionConfirmCallback
   ) => JSX.Element;
 }
 
 export const useConfirmProvider = (itemIds: number[]): ConfirmProvider => {
-  const apiCaller = useGetConfirmCaller(itemIds);
+  const { data, error, isFetching } = useBrowsesConfirm(itemIds);
 
   const selectionConfirmComponent = (
-    data: SelectionConfirmData,
+    response: SelectionConfirmData,
     callback: SelectionConfirmCallback
   ): JSX.Element => {
-    if (apiCaller.isRunning()) {
-      return <CircularProgress />;
-    } else if (apiCaller.errorResponse) {
-      return <Typography>{apiCaller.errorResponse.message}</Typography>;
-    } else if (apiCaller.response) {
+    if (!data || isFetching) return <CircularProgress />;
+    if (error) return <Typography>{error.message}</Typography>;
+    if (data)
       return (
-        <SelectionConfirm
-          data={data}
-          response={apiCaller.response}
-          callback={callback}
-        />
+        <SelectionConfirm data={response} response={data} callback={callback} />
       );
-    } else {
-      return <></>;
-    }
+    return <></>;
   };
 
   return {

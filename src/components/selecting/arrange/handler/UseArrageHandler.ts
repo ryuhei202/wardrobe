@@ -2,10 +2,6 @@ import { alertClosedWindow } from "./../../../../service/shared/alertClosedWindo
 import { Outfit } from "../../../../model/selecting/arrange/Outfit";
 import { useCallback, useEffect, useState } from "react";
 import { AdviceChoiceResponse } from "../../../../model/api/response/styling/arrange/AdviceChoiceResponse";
-import {
-  PostCreateOutfitCaller,
-  usePostCreateOutfitCaller,
-} from "../../../../model/selecting/arrange/api_caller/UsePostCreateOutfitCaller";
 import { AddedOutfitListData } from "../../../../model/selecting/arrange/props_data/AddedOutfitListData";
 import { SelectedItem } from "../../../../model/selecting/SelectedItem";
 import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
@@ -13,14 +9,14 @@ import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/O
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 
 export interface ArrangeHandler {
+  outfits: Outfit[];
   editingOutfitIndex: number;
   upperLimitMessage: string | null;
-  createOutfitCaller: PostCreateOutfitCaller;
-  onClickComplete: () => void;
   addedOutfitListData: () => AddedOutfitListData;
   addedOutfitListCallback: () => AddedOutfitListCallback;
   outfitFormData: () => OutfitFormData;
   outfitFormCallback: () => OutfitFormCallback;
+  onPostComplete: () => void;
 }
 
 export const useArrangeHandler = (
@@ -42,8 +38,6 @@ export const useArrangeHandler = (
   );
   const [isPostComplete, setIsPostComplete] = useState(false);
   const onPostComplete = useCallback(() => setIsPostComplete(true), []);
-  const createOutfitCaller = usePostCreateOutfitCaller(outfits, onPostComplete);
-  const onClickComplete = () => createOutfitCaller.prepare();
 
   useEffect(() => {
     alertClosedWindow(isPostComplete);
@@ -163,13 +157,13 @@ export const useArrangeHandler = (
   };
 
   return {
+    outfits,
     editingOutfitIndex,
     upperLimitMessage,
-    createOutfitCaller,
-    onClickComplete,
     addedOutfitListData,
     addedOutfitListCallback,
     outfitFormData,
     outfitFormCallback,
+    onPostComplete,
   };
 };

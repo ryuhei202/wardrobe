@@ -16,6 +16,7 @@ import { ArrangeCallback } from "./callback/ArrangeCallback";
 import { useArrangeHandler } from "./handler/UseArrageHandler";
 import { OutfitForm } from "./OutfitForm";
 import { useArrangeStyle } from "./style/UseArrangeStyle";
+import { useArrangesCreateOutfits } from "../../../hooks/api/UseArrangesCreateOutfits";
 
 export interface ArrangeProps {
   data: ArrangeData;
@@ -26,6 +27,9 @@ export interface ArrangeProps {
 export const Arrange = (props: ArrangeProps) => {
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
+  const { mutate, error, isLoading, isSuccess } = useArrangesCreateOutfits(
+    handler.outfits
+  );
 
   return (
     <>
@@ -43,7 +47,13 @@ export const Arrange = (props: ArrangeProps) => {
         variant="contained"
         color="primary"
         className={classes.completeButton}
-        onClick={() => handler.onClickComplete()}
+        onClick={() =>
+          mutate(undefined, {
+            onSuccess: () => {
+              handler.onPostComplete();
+            },
+          })
+        }
       >
         登録を完了する
       </Button>
@@ -60,27 +70,16 @@ export const Arrange = (props: ArrangeProps) => {
       ) : (
         <></>
       )}
-      <Dialog
-        open={handler.createOutfitCaller.isRunning()}
-        disableEscapeKeyDown
-      >
+      <Dialog open={isLoading} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
-      <Snackbar
-        open={
-          handler.createOutfitCaller.errorResponse !== null ||
-          handler.upperLimitMessage !== null
-        }
-      >
+      <Snackbar open={error !== null || handler.upperLimitMessage !== null}>
         <Alert severity="error">
-          {handler.createOutfitCaller.errorResponse?.message ?? ""}
+          {error?.message ?? ""}
           {handler.upperLimitMessage}
         </Alert>
       </Snackbar>
-      <Snackbar
-        open={handler.createOutfitCaller.response !== null}
-        autoHideDuration={6000}
-      >
+      <Snackbar open={isSuccess} autoHideDuration={6000}>
         <Alert severity="success">
           着こなしアドバイスの登録を完了しました！
         </Alert>

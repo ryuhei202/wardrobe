@@ -11,7 +11,7 @@ import { useColorRefinementHandler } from "./UseColorRefinementHandler";
 import { usePatternRefinementHandler } from "./UsePatternRefinementHandler";
 import { useLogoRefinementHandler } from "./UseLogoRefinementHandler";
 import { useOptionRefinementHandler } from "./UseOptionRefinementHandler";
-import { RefinementChoiceResponse } from "../../../../model/api/response/styling/browse/RefinementChoiceResponse";
+import { BrowseRefinementChoiceResponse } from "../../../../model/api/response/styling/browse/BrowseRefinementChoiceResponse";
 import { ItemCardCollectionCallback } from "../callback/ItemCardCollectionCallback";
 import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
 import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
@@ -39,7 +39,7 @@ export interface ItemBrowseHandler {
 }
 
 export const useItemBrowseHandler = (
-  choice: RefinementChoiceResponse,
+  choice: BrowseRefinementChoiceResponse,
   callback: ItemBrowseCallback
 ): ItemBrowseHandler => {
   const [currentRefinement, setCurrentRefinement] = useState<Refinement>(

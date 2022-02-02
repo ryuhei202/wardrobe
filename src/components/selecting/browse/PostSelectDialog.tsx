@@ -5,8 +5,8 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { usePostSelectCaller } from "../../../model/selecting/browse/api_caller/UsePostSelectCaller";
+import React, { useEffect } from "react";
+import { useBrowsesSelect } from "../../../hooks/api/UseBrowsesSelect";
 import { PostSelectCallback } from "./callback/PostSelectCallback";
 
 export interface PostSelectContainerProps {
@@ -16,24 +16,26 @@ export interface PostSelectContainerProps {
 }
 
 export const PostSelectDialog = (props: PostSelectContainerProps) => {
-  const apiCaller = usePostSelectCaller(
+  const { mutate, error, isLoading } = useBrowsesSelect(
     props.selectedItemId,
-    props.previousItemId,
-    props.callback.onSuccess
+    props.previousItemId
   );
-
+  useEffect(() => {
+    mutate(undefined, {
+      onSuccess: () => {
+        props.callback.onSuccess();
+      },
+    });
+  }, [mutate, props.callback]);
   return (
     <>
-      <Dialog open={apiCaller.isRunning()} disableEscapeKeyDown>
+      <Dialog open={isLoading} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
-      <Dialog
-        open={apiCaller.errorResponse !== null}
-        onClose={props.callback.onFailure}
-      >
+      <Dialog open={error !== null} onClose={props.callback.onFailure}>
         <DialogTitle>エラー</DialogTitle>
         <DialogContent>
-          <Typography>{apiCaller.errorResponse?.message ?? ""}</Typography>
+          <Typography>{error?.message ?? ""}</Typography>
         </DialogContent>
       </Dialog>
     </>

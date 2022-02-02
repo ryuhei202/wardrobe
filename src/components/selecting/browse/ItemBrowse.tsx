@@ -3,14 +3,14 @@ import React from "react";
 import { useItemBrowseHandler } from "./handler/UseItemBrowseHandler";
 import { FilterGroupCollection } from "./FilterGroupCollection";
 import { AppliedFilterArray } from "./AppliedFilterArray";
-import { RefinementChoiceResponse } from "../../../model/api/response/styling/browse/RefinementChoiceResponse";
+import { BrowseRefinementChoiceResponse } from "../../../model/api/response/styling/browse/BrowseRefinementChoiceResponse";
 import { useBrowseIndexProvider } from "./provider/UseBrowseIndexProvider";
 import { BrowseDetailContainer } from "./BrowseDetailContainer";
 import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
 import { useItemBrowseStyle } from "./style/UseItemBrowseStyle";
 
 export interface ItemBrowseProps {
-  response: RefinementChoiceResponse;
+  response: BrowseRefinementChoiceResponse;
   callback: ItemBrowseCallback;
   currentSelectedItemId: number | null;
 }
