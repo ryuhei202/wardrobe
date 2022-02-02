@@ -15,11 +15,15 @@ export const usePostRequest = (
   error: Error | null;
   isLoading: boolean;
   isSuccess: boolean;
+  isIdle: boolean;
 } => {
-  const { mutate, error, isLoading, isSuccess } = useMutation<any, Error>(
+  const { mutate, error, isLoading, isSuccess, isIdle } = useMutation<
+    any,
+    Error
+  >(
     () => axiosClient.post(`${baseUrl()}/styling/${path}`, params),
     afterMutation
   );
 
-  return { mutate, error, isLoading, isSuccess };
+  return { mutate, error, isLoading, isSuccess, isIdle };
 };

@@ -16,17 +16,20 @@ export interface PostSelectContainerProps {
 }
 
 export const PostSelectDialog = (props: PostSelectContainerProps) => {
-  const { mutate, error, isLoading } = useBrowsesSelect(
+  const { mutate, error, isLoading, isIdle } = useBrowsesSelect(
     props.selectedItemId,
     props.previousItemId
   );
   useEffect(() => {
-    mutate(undefined, {
-      onSuccess: () => {
-        props.callback.onSuccess();
-      },
-    });
-  }, [mutate, props.callback]);
+    if (isIdle) {
+      mutate(undefined, {
+        onSuccess: () => {
+          props.callback.onSuccess();
+        },
+      });
+    }
+  }, [mutate, isIdle, props.callback]);
+
   return (
     <>
       <Dialog open={isLoading} disableEscapeKeyDown>

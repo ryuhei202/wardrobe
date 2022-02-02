@@ -16,6 +16,7 @@ export const useBrowsesSelect = (
   mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
   error: Error | null;
   isLoading: boolean;
+  isIdle: boolean;
 } => {
   const chartId = useContext(ChartIdContext) ?? 0;
   const params = (): PostSelectParams => {
@@ -29,8 +30,8 @@ export const useBrowsesSelect = (
     return params;
   };
 
-  const { mutate, error, isLoading } = usePostRequest(
-    "/browses/select",
+  const { mutate, error, isLoading, isIdle } = usePostRequest(
+    "browses/select",
     params()
   );
 
@@ -38,5 +39,6 @@ export const useBrowsesSelect = (
     mutate,
     error,
     isLoading,
+    isIdle,
   };
 };
