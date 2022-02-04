@@ -1,6 +1,6 @@
 import { CircularProgress, Typography } from "@mui/material";
 import React from "react";
-import { useGetAdviceChoiceCaller } from "../../../../model/selecting/arrange/api_caller/UseGetAdviceChoiceCaller";
+import { useArrangesAdviceChoice } from "../../../../hooks/api/UseArrangesAdviceChoice";
 import { ArrangeData } from "../../../../model/selecting/arrange/props_data/ArrangeData";
 import { Arrange } from "../Arrange";
 import { ArrangeCallback } from "../callback/ArrangeCallback";
@@ -13,27 +13,18 @@ export interface AdviceChoiceProvider {
 }
 
 export const useAdviceChoiceProvider = (): AdviceChoiceProvider => {
-  const apiCaller = useGetAdviceChoiceCaller();
+  const { data: response, error, isFetching } = useArrangesAdviceChoice();
 
   const arrangeComponent = (
     data: ArrangeData,
     callback: ArrangeCallback
   ): JSX.Element => {
-    if (apiCaller.isRunning()) {
-      return <CircularProgress />;
-    } else if (apiCaller.errorResponse) {
-      return <Typography>{apiCaller.errorResponse.message}</Typography>;
-    } else if (apiCaller.response) {
-      return (
-        <Arrange
-          data={data}
-          response={apiCaller.response}
-          callback={callback}
-        />
-      );
-    } else {
-      return <></>;
+    if (!response || isFetching) return <CircularProgress />;
+    if (error) return <Typography>{error.message}</Typography>;
+    if (response) {
+      return <Arrange data={data} response={response} callback={callback} />;
     }
+    return <></>;
   };
 
   return {

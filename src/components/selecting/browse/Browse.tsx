@@ -6,13 +6,13 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import React, { useState } from "react";
-import { SearchPrerequisiteResponse } from "../../../model/api/response/styling/browse/SearchPrerequisiteResponse";
+import { BrowseSearchPrerequisiteResponse } from "../../../model/api/response/styling/browse/BrowseSearchPrerequisiteResponse";
 import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
 import { ItemBrowseContainer } from "./ItemBrowseContainer";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
 interface BrowseProps {
-  response: SearchPrerequisiteResponse;
+  response: BrowseSearchPrerequisiteResponse;
   callback: ItemBrowseCallback;
   currentSelectedItemId: number | null;
 }
