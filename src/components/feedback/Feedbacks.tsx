@@ -1,4 +1,4 @@
-import { Alert, Box, Snackbar, Typography } from "@mui/material";
+import { Alert, Box, Snackbar } from "@mui/material";
 import { useState } from "react";
 import { ItemFeedbackShowResponse } from "../../model/api/response/styling/itemFeedback/ItemFeedbackShowResponse";
 import { FeedbackForm } from "./FeedbackForm";
@@ -23,12 +23,6 @@ export const Feedbacks = (props: Props) => {
 
   return (
     <>
-      <Typography variant="body1" fontWeight="bold" m={2}>
-        フィードバック
-      </Typography>
-      <Typography variant="body2" m={3}>
-        ※Alt(Option) + Enterで保存
-      </Typography>
       <Box
         component="form"
         sx={{

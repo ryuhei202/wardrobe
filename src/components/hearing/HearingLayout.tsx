@@ -1,4 +1,4 @@
-import { Alert, Box, Snackbar, Typography } from "@mui/material";
+import { Alert, Box, Snackbar } from "@mui/material";
 import { useState } from "react";
 import { StylingReferenceText } from "../../model/hearing/StylingReferenceText";
 import { useHearingLayoutHandler } from "./handler/UseHearingLayoutHandler";
@@ -19,7 +19,6 @@ export const HearingLayout = ({ response }: Props) => {
   const ACTIVE_CATEGORIES = [
     { id: 1, title: "意識する相手(補足)" },
     { id: 7, title: "コーデイメージ" },
-    { id: 8, title: "その他" },
   ];
   const { hearingFormCallback } = useHearingLayoutHandler(
     setSeverity,
@@ -29,9 +28,6 @@ export const HearingLayout = ({ response }: Props) => {
 
   return (
     <>
-      <Typography variant="body1" fontWeight="bold" m={2}>
-        ヒアリング
-      </Typography>
       <Box
         component="form"
         sx={{
