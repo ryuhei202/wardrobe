@@ -11,16 +11,16 @@ if (process.env.NODE_ENV === "production") {
   Bugsnag.start({
     apiKey: process.env.REACT_APP_BUGSNAG_API_KEY || "",
     plugins: [new BugsnagPluginReact()],
-    enabledReleaseStages: ["production"],
-    releaseStage: process.env.NODE_ENV,
+    enabledReleaseStages: ["production", "staging"],
+    releaseStage: process.env.REACT_APP_ENV,
   });
 }
-const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React)!;
+const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React);
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      {process.env.NODE_ENV === "production" ? (
+      {ErrorBoundary ? (
         <ErrorBoundary>
           <App />
         </ErrorBoundary>
