@@ -39,6 +39,9 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const [stylist, setStylist] = useState<number | null>(
     props.response.stylistInfo.selectedId
   );
+  const [selectedCreateTriggerId, setSelectedCreateTriggerId] = useState<
+    number | null
+  >(props.response.createTrigger?.selectedId ?? null);
 
   const { mutate, error, isLoading } = useArrangesRegisterItems(
     stylist ?? 0,
@@ -78,6 +81,25 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
             ))}
           </Select>
         </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <InputLabel id="createTriggerInput">作成トリガー</InputLabel>
+          <Select
+            labelId="createTriggerInput"
+            label="作成トリガー"
+            value={selectedCreateTriggerId ?? ""}
+            onChange={(event: SelectChangeEvent<string | number>) => {
+              setSelectedCreateTriggerId(event.target.value as number);
+            }}
+          >
+            {props.response.createTrigger?.selectChoices.map((choices) => (
+              <MenuItem key={choices.id} value={choices.id}>
+                {choices.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         {props.response.validateErrors.length > 0 ? (
           <Paper>
             <List
