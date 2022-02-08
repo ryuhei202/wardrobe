@@ -1,5 +1,5 @@
 import { SelectChoiceResponse } from "./SelectChoiceResponse";
 
-export interface SearchPrerequisiteResponse {
+export interface BrowseSearchPrerequisiteResponse {
   readonly category: SelectChoiceResponse[];
 }

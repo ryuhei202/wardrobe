@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useGetDetailCaller } from "../../../../model/selecting/browse/api_caller/UseGetDetailCaller";
+import { useBrowsesDetail } from "../../../../hooks/api/UseBrowsesDetail";
 import { Refinement } from "../../../../model/selecting/browse/Refinement";
 import { BrowseDetail } from "../BrowseDetail";
 import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
@@ -23,38 +23,41 @@ export const useBrowseDetailProvider = (
   preregisteredItemId: number,
   refinement: Refinement
 ): BrowseDetailProvider => {
-  const detailApiCaller = useGetDetailCaller(preregisteredItemId, refinement);
-
+  const { data, error, isFetching } = useBrowsesDetail(
+    preregisteredItemId,
+    refinement
+  );
   const browseDetailComponent = (
     callback: BrowseDetailCallback,
     previousSelectedItemId: number | null
   ): JSX.Element => {
-    if (detailApiCaller.isRunning()) {
+    if (!data || isFetching) {
       return (
         <Backdrop open={true}>
           <CircularProgress />
         </Backdrop>
       );
-    } else if (detailApiCaller.errorResponse) {
+    }
+    if (error) {
       return (
         <Dialog open={true} onClose={() => callback.onClickBackButton()}>
           <DialogTitle>エラー</DialogTitle>
           <DialogContent>
-            <Typography>{detailApiCaller.errorResponse.message}</Typography>
+            <Typography>{error.message}</Typography>
           </DialogContent>
         </Dialog>
       );
-    } else if (detailApiCaller.response) {
+    }
+    if (data) {
       return (
         <BrowseDetail
           previousSelectedItemId={previousSelectedItemId}
-          response={detailApiCaller.response}
+          response={data}
           callback={callback}
         />
       );
-    } else {
-      return <></>;
     }
+    return <></>;
   };
 
   return {
