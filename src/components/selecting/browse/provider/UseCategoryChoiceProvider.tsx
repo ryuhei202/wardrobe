@@ -1,8 +1,7 @@
 import { CircularProgress, Typography } from "@mui/material";
-import React from "react";
 import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
-import { useGetCategoryChoiceCaller } from "../../../../model/selecting/browse/api_caller/UseGetCategoryChoiceCaller";
 import { Browse } from "../Browse";
+import { useBrowsesSearchPrerequisite } from "../../../../hooks/api/UseBrowsesSearchPrerequisite";
 
 export interface CategoryChoiceProvider {
   browseComponent: (
@@ -12,20 +11,20 @@ export interface CategoryChoiceProvider {
 }
 
 export const useCategoryChoiceProvider = (): CategoryChoiceProvider => {
-  const choiceApiCaller = useGetCategoryChoiceCaller();
+  const { data, error } = useBrowsesSearchPrerequisite();
 
   const browseComponent = (
     callback: ItemBrowseCallback,
     currentSelectedItemId: number | null
   ): JSX.Element => {
-    if (choiceApiCaller.isRunning()) {
+    if (!data) {
       return <CircularProgress />;
-    } else if (choiceApiCaller.errorResponse) {
-      return <Typography>{choiceApiCaller.errorResponse.message}</Typography>;
-    } else if (choiceApiCaller.response) {
+    } else if (error) {
+      return <Typography>{error.message}</Typography>;
+    } else if (data) {
       return (
         <Browse
-          response={choiceApiCaller.response}
+          response={data}
           callback={callback}
           currentSelectedItemId={currentSelectedItemId}
         />

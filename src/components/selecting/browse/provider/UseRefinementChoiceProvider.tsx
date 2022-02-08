@@ -1,8 +1,8 @@
-import { useGetRefinementChoiceCaller } from "../../../../model/selecting/browse/api_caller/UseGetRefinementChoiceCaller";
 import { CircularProgress, Typography } from "@mui/material";
 import { ItemBrowse } from "../ItemBrowse";
-import React from "react";
+import React, { useEffect } from "react";
 import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
+import { useBrowsesRefinementChoice } from "../../../../hooks/api/UseBrowsesRefinementChoice";
 
 export interface RefinementChoiceProvider {
   itemBrowseComponent: (
@@ -14,27 +14,30 @@ export interface RefinementChoiceProvider {
 export const useRefinementChoiceProvider = (
   categoryId: number
 ): RefinementChoiceProvider => {
-  const choiceApiCaller = useGetRefinementChoiceCaller(categoryId);
+  const { data, error, refetch, isFetching } = useBrowsesRefinementChoice(
+    categoryId
+  );
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, categoryId]);
 
   const itemBrowseComponent = (
     callback: ItemBrowseCallback,
     currentSelectedItemId: number | null
   ): JSX.Element => {
-    if (choiceApiCaller.isRunning()) {
-      return <CircularProgress />;
-    } else if (choiceApiCaller.errorResponse) {
-      return <Typography>{choiceApiCaller.errorResponse.message}</Typography>;
-    } else if (choiceApiCaller.response) {
+    if (!data || isFetching) return <CircularProgress />;
+    if (error) return <Typography>{error.message}</Typography>;
+    if (data) {
       return (
         <ItemBrowse
-          response={choiceApiCaller.response}
+          response={data}
           callback={callback}
           currentSelectedItemId={currentSelectedItemId}
         />
       );
-    } else {
-      return <></>;
     }
+    return <></>;
   };
 
   return {

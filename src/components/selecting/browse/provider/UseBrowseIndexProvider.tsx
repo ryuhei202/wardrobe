@@ -1,11 +1,11 @@
 import { CircularProgress, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Refinement } from "../../../../model/selecting/browse/Refinement";
-import { useGetIndexCaller } from "../../../../model/selecting/browse/api_caller/UseGetIndexCaller";
 import { ItemCardCollection } from "../ItemCardCollection";
 import { Pagination } from "@mui/material";
 import { ItemCardCollectionCallback } from "../callback/ItemCardCollectionCallback";
 import { ItemBrowsePaginationCallback } from "../callback/ItemBrowsePaginationCallback";
+import { useBrowsesIndex } from "../../../../hooks/api/UseBrowsesIndex";
 
 export interface BrowseIndexProvider {
   totalItemCountComponent: () => JSX.Element;
@@ -18,10 +18,14 @@ export interface BrowseIndexProvider {
 export const useBrowseIndexProvider = (
   refinement: Refinement
 ): BrowseIndexProvider => {
-  const searchApiCaller = useGetIndexCaller(refinement);
+  const { data, error, refetch, isFetching } = useBrowsesIndex(refinement);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, refinement]);
 
   const totalItemCountComponent = (): JSX.Element => {
-    const totalCount = searchApiCaller.response?.totalCount ?? 0;
+    const totalCount = data?.totalCount ?? 0;
     return (
       <Typography paragraph={true}>
         検索結果
@@ -34,16 +38,13 @@ export const useBrowseIndexProvider = (
   const itemCardCollectionComponent = (
     callback: ItemCardCollectionCallback
   ): JSX.Element => {
-    if (searchApiCaller.isRunning()) {
+    if (!data || isFetching) {
       return <CircularProgress />;
-    } else if (searchApiCaller.errorResponse) {
-      return <Typography>{searchApiCaller.errorResponse.message}</Typography>;
-    } else if (searchApiCaller.response) {
+    } else if (error) {
+      return <Typography>{error.message}</Typography>;
+    } else if (data) {
       return (
-        <ItemCardCollection
-          response={searchApiCaller.response.itemCard}
-          callback={callback}
-        />
+        <ItemCardCollection response={data.itemCard} callback={callback} />
       );
     } else {
       return <></>;
@@ -53,8 +54,8 @@ export const useBrowseIndexProvider = (
   const paginationComponent = (
     callback: ItemBrowsePaginationCallback
   ): JSX.Element => {
-    const currentPage = searchApiCaller.response?.pageNo ?? 0;
-    const totalPageNum = searchApiCaller.response?.totalPageNum ?? 0;
+    const currentPage = data?.pageNo ?? 0;
+    const totalPageNum = data?.totalPageNum ?? 0;
     return (
       <Pagination
         page={currentPage}

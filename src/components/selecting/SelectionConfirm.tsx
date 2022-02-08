@@ -22,11 +22,11 @@ import { Alert } from "@mui/material";
 import React, { Fragment, useState } from "react";
 import { ConfirmResponse } from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/selecting/browse/ValidationErrorType";
-import { usePostRegisterItemsCaller } from "../../model/selecting/arrange/api_caller/UsePostRegisterItemsCaller";
 import { SelectionConfirmData } from "../../model/selecting/props_data/SelectionConfirmData";
 import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
 import { SelectedItemArray } from "./SelectedItemArray";
 import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
+import { useArrangesRegisterItems } from "../../hooks/api/UseArrangesRegisterItems";
 
 export interface SelectionConfirmProps {
   data: SelectionConfirmData;
@@ -39,10 +39,10 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const [stylist, setStylist] = useState<number | null>(
     props.response.stylistInfo.selectedId
   );
-  const apiCaller = usePostRegisterItemsCaller(
+
+  const { mutate, error, isLoading } = useArrangesRegisterItems(
     stylist ?? 0,
-    props.data.items.map((item) => item.itemId),
-    props.callback.onConfirmSelection
+    props.data.items.map((item) => item.itemId)
   );
 
   return (
@@ -143,20 +143,23 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
             (error) => error.errorType === ValidationErrorType.Rejected
           ).length > 0 || stylist === null
         }
-        onClick={() => apiCaller.prepare()}
+        onClick={() =>
+          mutate(undefined, {
+            onSuccess: () => {
+              props.callback.onConfirmSelection();
+            },
+          })
+        }
       >
         確定
       </Button>
-      <Dialog open={apiCaller.isRunning()} disableEscapeKeyDown>
+      <Dialog open={isLoading} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
-      <Dialog
-        open={apiCaller.errorResponse !== null}
-        onClose={apiCaller.clearErrorResponse}
-      >
+      <Dialog open={error !== null}>
         <DialogTitle>エラー</DialogTitle>
         <DialogContent>
-          <Typography>{apiCaller.errorResponse?.message ?? ""}</Typography>
+          <Typography>{error?.message ?? ""}</Typography>
         </DialogContent>
       </Dialog>
     </>
