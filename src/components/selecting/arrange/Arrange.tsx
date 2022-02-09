@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { Alert } from "@mui/material";
-import React from "react";
 import { AdviceChoiceResponse } from "../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
 import { AddedOutfitList } from "./AddedOutfitList";
@@ -27,7 +26,7 @@ export interface ArrangeProps {
 export const Arrange = (props: ArrangeProps) => {
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
-  const { mutate, error, isLoading, isSuccess } = useArrangesCreateOutfits(
+  const { mutate, isLoading, isSuccess } = useArrangesCreateOutfits(
     handler.outfits
   );
 
@@ -73,12 +72,6 @@ export const Arrange = (props: ArrangeProps) => {
       <Dialog open={isLoading} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
-      <Snackbar open={error !== null || handler.upperLimitMessage !== null}>
-        <Alert severity="error">
-          {error?.message ?? ""}
-          {handler.upperLimitMessage}
-        </Alert>
-      </Snackbar>
       <Snackbar open={isSuccess} autoHideDuration={6000}>
         <Alert severity="success">
           着こなしアドバイスの登録を完了しました！
