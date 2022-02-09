@@ -2,18 +2,23 @@ import React from "react";
 import { List, ListItem } from "@mui/material";
 import { useDrawerContentsStyle } from "./style/UseDrawerContentsStyle";
 import { KarteSectionContainer } from "../karte/KarteSectionContainer";
-import { MemberContainer } from "../member/MemberContainer";
 import { LatestStylingReferenceContainer } from "../stylingReference/LatestStylingReferenceContainer";
 import { PurchasedItemsContainer } from "../purchasedItem/PurchasedItemsContainer";
 import { NgMemosContainer } from "../ng/NgMemoCollectionContainer";
+import { Member } from "../member/Member";
+import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
 
-export const DrawerContents = () => {
+type Props = {
+  readonly memberShowResponse: MemberShowResponse;
+};
+
+export const DrawerContents = (props: Props) => {
   const classes = useDrawerContentsStyle();
 
   return (
     <List dense className={classes.drawerList}>
       <ListItem>
-        <MemberContainer />
+        <Member response={props.memberShowResponse} />
       </ListItem>
       <ListItem>
         <LatestStylingReferenceContainer />

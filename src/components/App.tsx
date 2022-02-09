@@ -14,7 +14,7 @@ import { Route, Routes } from "react-router-dom";
 import { SelectingContainer } from "./selecting/SelectingContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hearing } from "./hearing/Hearing";
-import { ChartIdContext } from "../contexts/ChartIdContext";
+import { ChartIdContext, ContextProvider } from "./provider/ContextProvider";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -24,7 +24,7 @@ declare module "@mui/styles/defaultTheme" {
 export const App = () => {
   const classes = useAppStyle();
   const [isQRCodeOpen, setIsQRCodeOpen] = useState(false);
-  const chartId = useContext(ChartIdContext);
+  const { state: chartId } = useContext(ChartIdContext);
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -37,35 +37,40 @@ export const App = () => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-          <div className={classes.root}>
-            <AppBar position="fixed" className={classes.appBar}>
-              <Toolbar>
-                <Typography variant="h6" noWrap className={classes.title}>
-                  WARDROBE
-                </Typography>
-                <span className={classes.coordePickButton}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    disableElevation
-                    startIcon={<CropFree />}
-                    onClick={() => setIsQRCodeOpen(true)}
-                  >
-                    コーデピック
-                  </Button>
-                </span>
-              </Toolbar>
-            </AppBar>
-            <Dialog open={isQRCodeOpen} onClose={() => setIsQRCodeOpen(false)}>
-              <Paper className={classes.qrCodeContainer}>
-                <QRCode value={chartId?.toString() ?? ""} size={300} />
-              </Paper>
-            </Dialog>
-            <Routes>
-              <Route path="/selecting" element={<SelectingContainer />} />
-              <Route path="/hearing" element={<Hearing />} />
-            </Routes>
-          </div>
+          <ContextProvider>
+            <div className={classes.root}>
+              <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                  <Typography variant="h6" noWrap className={classes.title}>
+                    WARDROBE
+                  </Typography>
+                  <span className={classes.coordePickButton}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disableElevation
+                      startIcon={<CropFree />}
+                      onClick={() => setIsQRCodeOpen(true)}
+                    >
+                      コーデピック
+                    </Button>
+                  </span>
+                </Toolbar>
+              </AppBar>
+              <Dialog
+                open={isQRCodeOpen}
+                onClose={() => setIsQRCodeOpen(false)}
+              >
+                <Paper className={classes.qrCodeContainer}>
+                  <QRCode value={chartId?.toString() ?? ""} size={300} />
+                </Paper>
+              </Dialog>
+              <Routes>
+                <Route path="/selecting" element={<SelectingContainer />} />
+                <Route path="/hearing" element={<Hearing />} />
+              </Routes>
+            </div>
+          </ContextProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </StyledEngineProvider>

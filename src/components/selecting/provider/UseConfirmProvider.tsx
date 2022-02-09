@@ -1,7 +1,8 @@
 import { CircularProgress, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useBrowsesConfirm } from "../../../hooks/api/UseBrowsesConfirm";
 import { SelectionConfirmData } from "../../../model/selecting/props_data/SelectionConfirmData";
+import { ChartIdContext } from "../../provider/ContextProvider";
 import { SelectionConfirmCallback } from "../callback/SelectionConfirmCallback";
 import { SelectionConfirm } from "../SelectionConfirm";
 
@@ -13,7 +14,11 @@ export interface ConfirmProvider {
 }
 
 export const useConfirmProvider = (itemIds: number[]): ConfirmProvider => {
-  const { data, error, isFetching } = useBrowsesConfirm(itemIds);
+  const { state: chartId } = useContext(ChartIdContext);
+  const { data, error, isFetching } = useBrowsesConfirm({
+    itemIds,
+    chartId: chartId!,
+  });
 
   const selectionConfirmComponent = (
     response: SelectionConfirmData,

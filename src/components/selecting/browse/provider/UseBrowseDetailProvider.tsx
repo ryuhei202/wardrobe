@@ -6,9 +6,10 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useBrowsesDetail } from "../../../../hooks/api/UseBrowsesDetail";
 import { Refinement } from "../../../../model/selecting/browse/Refinement";
+import { ChartIdContext } from "../../../provider/ContextProvider";
 import { BrowseDetail } from "../BrowseDetail";
 import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
 
@@ -23,10 +24,12 @@ export const useBrowseDetailProvider = (
   preregisteredItemId: number,
   refinement: Refinement
 ): BrowseDetailProvider => {
-  const { data, error, isFetching } = useBrowsesDetail(
+  const { state: chartId } = useContext(ChartIdContext);
+  const { data, error, isFetching } = useBrowsesDetail({
+    chartId: chartId!,
     preregisteredItemId,
-    refinement
-  );
+    refinement,
+  });
   const browseDetailComponent = (
     callback: BrowseDetailCallback,
     previousSelectedItemId: number | null

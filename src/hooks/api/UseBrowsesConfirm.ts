@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { ChartIdContext } from "../../contexts/ChartIdContext";
 import { GetConfirmParams } from "../../model/api/request/styling/browse/GetConfirmParams";
 import { ConfirmResponse } from "../../model/api/response/styling/browse/ConfirmResponse";
 import { useGetRequest } from "./UseGetRequest";
@@ -10,8 +8,10 @@ type BrowsesConfirm = {
   readonly isFetching: boolean;
 };
 
-export const useBrowsesConfirm = (itemIds: number[]): BrowsesConfirm => {
-  const chartId = useContext(ChartIdContext) ?? 0;
+export const useBrowsesConfirm = ({
+  chartId,
+  itemIds,
+}: GetConfirmParams): BrowsesConfirm => {
   const params = (): GetConfirmParams => {
     return {
       chartId: chartId,
