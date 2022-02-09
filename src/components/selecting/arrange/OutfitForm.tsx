@@ -12,7 +12,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { AdviceCategoryResponse } from "../../../model/api/response/styling/arrange/AdviceCategoryResponse";
 import { OutfitFormData } from "../../../model/selecting/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "./callback/OutfitFormCallback";
@@ -26,6 +26,9 @@ export interface OutfitFormProps {
 
 export const OutfitForm = (props: OutfitFormProps) => {
   const classes = useOutfitFormStyle();
+  // TODO ↓の行をコメントアウトして、もう一つ下の行を削除する
+  // const { state: member } = useContext(MemberContext);
+  const member = { isMarriagePlan: true };
 
   const getSelectedCategories = useCallback((): (number | null)[] => {
     return props.data.selectedAdviceIds.map((id) => {
@@ -50,6 +53,28 @@ export const OutfitForm = (props: OutfitFormProps) => {
 
   return (
     <>
+      {member.isMarriagePlan ? (
+        <FormControl margin="normal" style={{ width: 120 }}>
+          <InputLabel id="formal-level-select-label">
+            フォーマルレベル
+          </InputLabel>
+          <Select
+            labelId="formal-level-select-label"
+            id="formal-level-select"
+            value={props.data.formalLevel}
+            label="フォーマルレベル"
+            onChange={(event) => {
+              props.callback.onSelectFormalLevel(event.target.value as number);
+            }}
+          >
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+          </Select>
+        </FormControl>
+      ) : (
+        <></>
+      )}
       <List>
         {props.data.items.map((item) => {
           const labelId = `color-checkbox-list-label-${item.itemId}`;
@@ -98,13 +123,14 @@ export const OutfitForm = (props: OutfitFormProps) => {
           return (
             <Fragment key={index}>
               <FormControl className={classes.formControl}>
-                <InputLabel id={`demo-simple-select-label-${index}`}>
+                <InputLabel id={`category-select-label-${index}`}>
                   カテゴリ
                 </InputLabel>
                 <Select
-                  labelId={`demo-simple-select-label-${index}`}
-                  id={`demo-simple-select-${index}`}
+                  labelId={`category-select-label-${index}`}
+                  id={`category-select-${index}`}
                   value={selectedCategories[index] ?? ""}
+                  label="カテゴリ"
                   onChange={(event) => {
                     let newSelectedCategories = [...selectedCategories];
                     newSelectedCategories[index] = event.target.value as number;
@@ -119,12 +145,12 @@ export const OutfitForm = (props: OutfitFormProps) => {
                 </Select>
               </FormControl>
               <FormControl className={classes.adviceFormControl}>
-                <InputLabel id={`simple-select-label-${index}`}>
+                <InputLabel id={`advice-select-label-${index}`}>
                   アドバイス
                 </InputLabel>
                 <Select
-                  labelId={`simple-select-label-${index}`}
-                  id={`simple-select-${index}`}
+                  labelId={`advice-select-label-${index}`}
+                  id={`advice-select-${index}`}
                   value={selectedAdviceId ?? ""}
                   label="アドバイス"
                   onChange={(event) => {
