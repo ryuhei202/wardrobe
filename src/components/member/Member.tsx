@@ -6,15 +6,15 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
+import { ChartIdContext } from "../context/provider/ContextProvider";
 import { useMemberHandler } from "./handler/UseMemberHandler";
-import { ChartIdContext } from "../../contexts/ChartIdContext";
 import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 
 type Props = {
   readonly response: MemberShowResponse;
 };
 export const Member = (props: Props) => {
-  const chartId = useContext(ChartIdContext);
+  const chartId = useContext(ChartIdContext).state;
   const handler = useMemberHandler(props.response);
 
   return (
