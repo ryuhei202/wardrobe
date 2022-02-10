@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import { TMembersShow } from "../../hooks/api/UseMembersShow";
+import { TMembersShow } from "../../../hooks/api/UseMembersShow";
 
 type TContext<T> = {
   state: T;
