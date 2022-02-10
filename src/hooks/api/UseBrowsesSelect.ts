@@ -1,5 +1,3 @@
-import { ChartIdContext } from "./../../contexts/ChartIdContext";
-import { useContext } from "react";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { usePostRequest } from "./UsePostRequest";
@@ -9,16 +7,23 @@ interface PostSelectParams {
   chartId: number;
   previousItemId?: number;
 }
-export const useBrowsesSelect = (
-  itemId: number,
-  previousItemId: number | null
-): {
+
+type TBrowsesSelectArg = {
+  chartId: number;
+  itemId: number;
+  previousItemId: number | null;
+};
+
+export const useBrowsesSelect = ({
+  chartId,
+  itemId,
+  previousItemId,
+}: TBrowsesSelectArg): {
   mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
   error: Error | null;
   isLoading: boolean;
   isIdle: boolean;
 } => {
-  const chartId = useContext(ChartIdContext) ?? 0;
   const params = (): PostSelectParams => {
     var params: PostSelectParams = {
       itemId: itemId,
