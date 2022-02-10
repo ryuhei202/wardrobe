@@ -1,8 +1,7 @@
 import { CircularProgress, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 import { useArrangesAdviceChoice } from "../../../../hooks/api/UseArrangesAdviceChoice";
 import { ArrangeData } from "../../../../model/selecting/arrange/props_data/ArrangeData";
-import { ChartIdContext } from "../../../provider/ContextProvider";
 import { Arrange } from "../Arrange";
 import { ArrangeCallback } from "../callback/ArrangeCallback";
 
@@ -14,10 +13,7 @@ export interface AdviceChoiceProvider {
 }
 
 export const useAdviceChoiceProvider = (): AdviceChoiceProvider => {
-  const { state: chartId } = useContext(ChartIdContext);
-  const { data: response, error, isFetching } = useArrangesAdviceChoice(
-    chartId!
-  );
+  const { data: response, error, isFetching } = useArrangesAdviceChoice();
 
   const arrangeComponent = (
     data: ArrangeData,

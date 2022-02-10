@@ -1,4 +1,6 @@
 import { Refinement } from "./../../model/selecting/browse/Refinement";
+import { useContext } from "react";
+import { ChartIdContext } from "../../contexts/ChartIdContext";
 import { GetIndexFilterParams } from "../../model/api/request/styling/browse/GetIndexFilterParams";
 import { GetIndexParams } from "../../model/api/request/styling/browse/GetIndexParams";
 import { BrowseIndexResponse } from "../../model/api/response/styling/browse/BrowseIndexResponse";
@@ -18,10 +20,9 @@ type BrowsesIndex = {
   readonly isFetching: boolean;
 };
 
-export const useBrowsesIndex = (
-  refinement: Refinement,
-  chartId: number
-): BrowsesIndex => {
+export const useBrowsesIndex = (refinement: Refinement): BrowsesIndex => {
+  const chartId = useContext(ChartIdContext) ?? 0;
+
   const params = (): GetIndexParams => {
     var filterParams: GetIndexFilterParams = {
       smallCategory: refinement.smallCategoryIds,

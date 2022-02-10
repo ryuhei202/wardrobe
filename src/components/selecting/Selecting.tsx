@@ -9,16 +9,14 @@ import { BrowseContainer } from "./browse/BrowseContainer";
 import { SelectionProgress } from "./SelectionProgress";
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
 import { DrawerContents } from "../drawerContent/DrawerContents";
-import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
 
 type Props = {
-  readonly karteShowResponse: KarteShowResponse;
-  readonly memberShowResponse: MemberShowResponse;
+  readonly response: KarteShowResponse;
 };
 
 export const Selecting = (props: Props) => {
   const classes = useSelectingStyle();
-  const handler = useSelectingHandler(props.karteShowResponse);
+  const handler = useSelectingHandler(props.response);
 
   let mainContent;
   switch (handler.mainContentType) {
@@ -62,7 +60,7 @@ export const Selecting = (props: Props) => {
       >
         <Toolbar />
         <div className={classes.drawerContents}>
-          <DrawerContents memberShowResponse={props.memberShowResponse} />
+          <DrawerContents />
         </div>
         <Paper variant="outlined" className={classes.progressContainer}>
           <SelectionProgress

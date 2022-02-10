@@ -6,8 +6,8 @@ type MembersShow = {
   readonly error: Error | null;
 };
 
-export const useMembersShow = (memberId: number): MembersShow => {
-  const { data, error } = useMemberGetRequest<MemberShowResponse>(memberId, "");
+export const useMembersShow = (): MembersShow => {
+  const { data, error } = useMemberGetRequest<MemberShowResponse>("");
 
   return {
     data,

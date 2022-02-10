@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { ChartIdContext } from "../../contexts/ChartIdContext";
 import { GetDetailFilterParams } from "../../model/api/request/styling/browse/GetDetailFilterParams";
 import { GetDetailParams } from "../../model/api/request/styling/browse/GetDetailParams";
 import { DetailResponse } from "../../model/api/response/styling/browse/DetailResponse";
@@ -10,15 +12,11 @@ type BrowsesDetail = {
   readonly isFetching: boolean;
 };
 
-export const useBrowsesDetail = ({
-  chartId,
-  preregisteredItemId,
-  refinement,
-}: {
-  chartId: number;
-  preregisteredItemId: number;
-  refinement: Refinement;
-}): BrowsesDetail => {
+export const useBrowsesDetail = (
+  preregisteredItemId: number,
+  refinement: Refinement
+): BrowsesDetail => {
+  const chartId = useContext(ChartIdContext) ?? 0;
   const params = (): GetDetailParams => {
     let filterParams: GetDetailFilterParams = {
       size: refinement.sizeIds,

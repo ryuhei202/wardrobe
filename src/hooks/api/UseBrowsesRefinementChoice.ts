@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import {
   QueryObserverResult,
   RefetchOptions,
   RefetchQueryFilters,
 } from "react-query";
+import { ChartIdContext } from "../../contexts/ChartIdContext";
 import { BrowseRefinementChoiceResponse } from "../../model/api/response/styling/browse/BrowseRefinementChoiceResponse";
 import { useGetRequest } from "./UseGetRequest";
 
@@ -16,9 +18,9 @@ type BrowsesRefinementChoice = {
 };
 
 export const useBrowsesRefinementChoice = (
-  chartId: number,
   categoryId: number
 ): BrowsesRefinementChoice => {
+  const chartId = useContext(ChartIdContext);
   const params = {
     categoryId,
     chartId,

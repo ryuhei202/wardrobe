@@ -5,9 +5,8 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useBrowsesSelect } from "../../../hooks/api/UseBrowsesSelect";
-import { ChartIdContext } from "../../provider/ContextProvider";
 import { PostSelectCallback } from "./callback/PostSelectCallback";
 
 export interface PostSelectContainerProps {
@@ -17,12 +16,10 @@ export interface PostSelectContainerProps {
 }
 
 export const PostSelectDialog = (props: PostSelectContainerProps) => {
-  const { state: chartId } = useContext(ChartIdContext);
-  const { mutate, error, isLoading, isIdle } = useBrowsesSelect({
-    itemId: props.selectedItemId,
-    previousItemId: props.previousItemId,
-    chartId: chartId!,
-  });
+  const { mutate, error, isLoading, isIdle } = useBrowsesSelect(
+    props.selectedItemId,
+    props.previousItemId
+  );
   useEffect(() => {
     if (isIdle) {
       mutate(undefined, {
