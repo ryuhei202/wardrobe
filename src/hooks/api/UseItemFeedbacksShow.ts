@@ -6,13 +6,19 @@ type ItemFeedbacksShow = {
   readonly error: Error | null;
 };
 
-export const useItemFeedbacksShow = (chartId?: number): ItemFeedbacksShow => {
+type TItemFeedbacksShowArg = {
+  chartId?: number;
+};
+
+export const useItemFeedbacksShow = ({
+  chartId,
+}: TItemFeedbacksShowArg): ItemFeedbacksShow => {
   // カルテIDを受け取ったタイミングでuseQueryを実行する
-  const { data, error } = useKarteGetRequest<ItemFeedbackShowResponse[]>(
-    "item_feedbacks",
+  const { data, error } = useKarteGetRequest<ItemFeedbackShowResponse[]>({
+    path: "item_feedbacks",
     chartId,
-    chartId !== undefined
-  );
+    isEnabled: chartId !== undefined,
+  });
 
   return {
     data,

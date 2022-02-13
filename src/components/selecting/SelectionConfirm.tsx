@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { Alert } from "@mui/material";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { ConfirmResponse } from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/selecting/browse/ValidationErrorType";
 import { SelectionConfirmData } from "../../model/selecting/props_data/SelectionConfirmData";
@@ -27,6 +27,7 @@ import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
 import { SelectedItemArray } from "./SelectedItemArray";
 import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
 import { useArrangesRegisterItems } from "../../hooks/api/UseArrangesRegisterItems";
+import { ChartIdContext } from "../context/provider/ContextProvider";
 
 export interface SelectionConfirmProps {
   data: SelectionConfirmData;
@@ -35,6 +36,7 @@ export interface SelectionConfirmProps {
 }
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
+  const { state: chartId } = useContext(ChartIdContext);
   const classes = useSelectionConfirmStyle();
   const [stylist, setStylist] = useState<number | null>(
     props.response.stylistInfo.selectedId
@@ -43,10 +45,11 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
     number | null
   >(props.response.createTrigger?.selectedId ?? null);
 
-  const { mutate, error, isLoading } = useArrangesRegisterItems(
-    stylist ?? 0,
-    props.data.items.map((item) => item.itemId)
-  );
+  const { mutate, error, isLoading } = useArrangesRegisterItems({
+    adminId: stylist ?? 0,
+    itemIds: props.data.items.map((item) => item.itemId),
+    chartId: chartId!,
+  });
 
   return (
     <>

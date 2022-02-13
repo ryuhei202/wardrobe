@@ -1,11 +1,12 @@
 import { CircularProgress, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Refinement } from "../../../../model/selecting/browse/Refinement";
 import { ItemCardCollection } from "../ItemCardCollection";
 import { Pagination } from "@mui/material";
 import { ItemCardCollectionCallback } from "../callback/ItemCardCollectionCallback";
 import { ItemBrowsePaginationCallback } from "../callback/ItemBrowsePaginationCallback";
 import { useBrowsesIndex } from "../../../../hooks/api/UseBrowsesIndex";
+import { MemberIdContext } from "../../../context/provider/ContextProvider";
 
 export interface BrowseIndexProvider {
   totalItemCountComponent: () => JSX.Element;
@@ -18,7 +19,10 @@ export interface BrowseIndexProvider {
 export const useBrowseIndexProvider = (
   refinement: Refinement
 ): BrowseIndexProvider => {
-  const { data, error, refetch, isFetching } = useBrowsesIndex(refinement);
+  const { data, error, refetch, isFetching } = useBrowsesIndex({
+    refinement,
+    chartId: useContext(MemberIdContext).state!,
+  });
 
   useEffect(() => {
     refetch();

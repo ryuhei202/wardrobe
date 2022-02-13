@@ -1,17 +1,19 @@
 import { CircularProgress, Typography } from "@mui/material";
+import { useContext } from "react";
 import { useItemFeedbacksShow } from "../../hooks/api/UseItemFeedbacksShow";
 import { useLatestKartesShow } from "../../hooks/api/UseLatestKartesShow";
+import { MemberIdContext } from "../context/provider/ContextProvider";
 import { Feedbacks } from "./Feedbacks";
 
 export const FeedbacksContainer = () => {
-  const {
-    data: latestKartes,
-    error: latestKartesError,
-  } = useLatestKartesShow();
+  const memberId = useContext(MemberIdContext).state;
+  const { data: latestKartes, error: latestKartesError } = useLatestKartesShow({
+    memberId: memberId!,
+  });
+  const { data: feedbacks, error: feedbacksError } = useItemFeedbacksShow({
+    chartId: latestKartes?.chartId,
+  });
 
-  const { data: feedbacks, error: feedbacksError } = useItemFeedbacksShow(
-    latestKartes?.chartId
-  );
   if (latestKartes?.chartId === null)
     return <Typography>カルテが存在しません。</Typography>;
   if (!feedbacks) return <CircularProgress />;
