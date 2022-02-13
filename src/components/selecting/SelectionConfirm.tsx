@@ -27,7 +27,10 @@ import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
 import { SelectedItemArray } from "./SelectedItemArray";
 import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
 import { useArrangesRegisterItems } from "../../hooks/api/UseArrangesRegisterItems";
-import { ChartIdContext } from "../context/provider/ContextProvider";
+import {
+  ChartIdContext,
+  MemberShowContext,
+} from "../context/provider/ContextProvider";
 
 export interface SelectionConfirmProps {
   data: SelectionConfirmData;
@@ -37,6 +40,8 @@ export interface SelectionConfirmProps {
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const { state: chartId } = useContext(ChartIdContext);
+  const isMarriagePlan = useContext(MemberShowContext).state!.data
+    ?.isMarriagePlan;
   const classes = useSelectionConfirmStyle();
   const [stylist, setStylist] = useState<number | null>(
     props.response.stylistInfo.selectedId
@@ -49,6 +54,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
     adminId: stylist ?? 0,
     itemIds: props.data.items.map((item) => item.itemId),
     chartId: chartId!,
+    createTriggerId: selectedCreateTriggerId ?? undefined,
   });
 
   return (
@@ -85,23 +91,27 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
           </Select>
         </FormControl>
 
-        <FormControl className={classes.formControl}>
-          <InputLabel id="createTriggerInput">作成トリガー</InputLabel>
-          <Select
-            labelId="createTriggerInput"
-            label="作成トリガー"
-            value={selectedCreateTriggerId ?? ""}
-            onChange={(event: SelectChangeEvent<string | number>) => {
-              setSelectedCreateTriggerId(event.target.value as number);
-            }}
-          >
-            {props.response.createTrigger?.selectChoices.map((choices) => (
-              <MenuItem key={choices.id} value={choices.id}>
-                {choices.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        {isMarriagePlan ? (
+          <FormControl className={classes.formControl}>
+            <InputLabel id="createTriggerInput">作成トリガー</InputLabel>
+            <Select
+              labelId="createTriggerInput"
+              label="作成トリガー"
+              value={selectedCreateTriggerId ?? ""}
+              onChange={(event: SelectChangeEvent<string | number>) => {
+                setSelectedCreateTriggerId(event.target.value as number);
+              }}
+            >
+              {props.response.createTrigger?.selectChoices.map((choice) => (
+                <MenuItem key={choice.id} value={choice.id}>
+                  {choice.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        ) : (
+          <></>
+        )}
 
         {props.response.validateErrors.length > 0 ? (
           <Paper>

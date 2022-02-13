@@ -9,6 +9,7 @@ export const useArrangesRegisterItems = ({
   adminId,
   chartId,
   itemIds,
+  createTriggerId,
 }: TArrangesRegisterItemsArg): {
   mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
   error: Error | null;
@@ -16,9 +17,10 @@ export const useArrangesRegisterItems = ({
 } => {
   const params = (): PostRegisterItemsParamsParams => {
     return {
-      chartId: chartId,
-      adminId: adminId,
-      itemIds: itemIds,
+      chartId,
+      adminId,
+      itemIds,
+      createTriggerId,
     };
   };
 
