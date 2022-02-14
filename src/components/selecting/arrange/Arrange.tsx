@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import { Alert } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { AdviceChoiceResponse } from "../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
 import { AddedOutfitList } from "./AddedOutfitList";
@@ -17,6 +17,7 @@ import { useArrangeHandler } from "./handler/UseArrageHandler";
 import { OutfitForm } from "./OutfitForm";
 import { useArrangeStyle } from "./style/UseArrangeStyle";
 import { useArrangesCreateOutfits } from "../../../hooks/api/UseArrangesCreateOutfits";
+import { ChartIdContext } from "../../context/provider/ContextProvider";
 
 export interface ArrangeProps {
   data: ArrangeData;
@@ -25,11 +26,13 @@ export interface ArrangeProps {
 }
 
 export const Arrange = (props: ArrangeProps) => {
+  const { state: chartId } = useContext(ChartIdContext);
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
-  const { mutate, error, isLoading, isSuccess } = useArrangesCreateOutfits(
-    handler.outfits
-  );
+  const { mutate, error, isLoading, isSuccess } = useArrangesCreateOutfits({
+    outfits: handler.outfits,
+    chartId: chartId!,
+  });
 
   return (
     <>

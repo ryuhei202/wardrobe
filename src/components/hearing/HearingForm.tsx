@@ -1,7 +1,8 @@
 import { Box, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLatestStylingReferenceTextUpdate } from "../../hooks/api/UseLatestStylingReferenceTextUpdate";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
+import { MemberIdContext } from "../context/provider/ContextProvider";
 import { SendButton } from "../shared/SendButton";
 import { HearingFormCallback } from "./callback/HearingFormCallback";
 import { useHearingFormHandler } from "./handler/UseHearingFormHandler";
@@ -15,10 +16,11 @@ export const HearingForm = ({ category, callback, initialText }: Props) => {
   const [referenceText, setReferenceText] = useState<string>(initialText);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const { mutate, isLoading } = useLatestStylingReferenceTextUpdate(
-    category.id,
-    referenceText
-  );
+  const { mutate, isLoading } = useLatestStylingReferenceTextUpdate({
+    categoryId: category.id,
+    text: referenceText,
+    memberId: useContext(MemberIdContext).state!,
+  });
 
   const {
     handleChangeText,
