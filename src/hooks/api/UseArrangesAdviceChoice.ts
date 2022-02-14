@@ -1,10 +1,8 @@
-import { useContext } from "react";
 import {
   QueryObserverResult,
   RefetchOptions,
   RefetchQueryFilters,
 } from "react-query";
-import { ChartIdContext } from "../../contexts/ChartIdContext";
 import { AdviceChoiceResponse } from "../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import { useGetRequest } from "./UseGetRequest";
 
@@ -17,8 +15,13 @@ type ArrangesAdviceChoice = {
   readonly isFetching: boolean;
 };
 
-export const useArrangesAdviceChoice = (): ArrangesAdviceChoice => {
-  const chartId = useContext(ChartIdContext) ?? 0;
+type TArrangesAdviceChoiceArg = {
+  chartId: number;
+};
+
+export const useArrangesAdviceChoice = ({
+  chartId,
+}: TArrangesAdviceChoiceArg): ArrangesAdviceChoice => {
   const {
     data,
     error,
