@@ -57,6 +57,13 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
     createTriggerId: selectedCreateTriggerId ?? undefined,
   });
 
+  const isValidSubmit =
+    props.response.validateErrors.filter(
+      (error) => error.errorType === ValidationErrorType.Rejected
+    ).length === 0 &&
+    stylist !== null &&
+    (!isMarriagePlan || selectedCreateTriggerId !== null);
+
   return (
     <>
       <IconButton
@@ -173,11 +180,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
         variant="contained"
         color="primary"
         className={classes.changeButton}
-        disabled={
-          props.response.validateErrors.filter(
-            (error) => error.errorType === ValidationErrorType.Rejected
-          ).length > 0 || stylist === null
-        }
+        disabled={!isValidSubmit}
         onClick={() =>
           mutate(undefined, {
             onSuccess: () => {
