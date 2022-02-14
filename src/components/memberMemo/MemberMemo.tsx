@@ -2,6 +2,8 @@ import { Alert, Box, Snackbar } from "@mui/material";
 import React, { useState } from "react";
 import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
 import { MemberMemoShowResponse } from "../../model/api/response/styling/member_memo/MemberMemoShowResponse";
+import { MemberIdContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { MemberMemoForm } from "./MemberMemoForm";
 
 type Props = {
@@ -14,7 +16,11 @@ export const MemberMemo = ({ response }: Props) => {
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
-  const { mutate, isLoading } = useMemberMemoUpdate({ memo, memoNext });
+  const { mutate, isLoading } = useMemberMemoUpdate({
+    memo,
+    memoNext,
+    memberId: useContextDefinedState(MemberIdContext),
+  });
 
   const handlePost = () => {
     mutate(undefined, {

@@ -6,10 +6,17 @@ type LatestKartesShow = {
   readonly error: Error | null;
 };
 
-export const useLatestKartesShow = (): LatestKartesShow => {
-  const { data, error } = useMemberGetRequest<LatestKarteShowResponse>(
-    "latest_kartes"
-  );
+type TLatestKartesShowArg = {
+  memberId: number;
+};
+
+export const useLatestKartesShow = ({
+  memberId,
+}: TLatestKartesShowArg): LatestKartesShow => {
+  const { data, error } = useMemberGetRequest<LatestKarteShowResponse>({
+    memberId,
+    path: "latest_kartes",
+  });
 
   return {
     data,

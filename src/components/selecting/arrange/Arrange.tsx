@@ -1,4 +1,6 @@
+import { ArrowBack } from "@mui/icons-material";
 import {
+  Alert,
   Button,
   CircularProgress,
   Dialog,
@@ -6,16 +8,17 @@ import {
   Snackbar,
   Typography,
 } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
-import { Alert } from "@mui/material";
+import React from "react";
+import { useArrangesCreateOutfits } from "../../../hooks/api/UseArrangesCreateOutfits";
 import { AdviceChoiceResponse } from "../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
+import { ChartIdContext } from "../../context/provider/ContextProvider";
+import { useContextDefinedState } from "../../context/UseContextDefinedState";
 import { AddedOutfitList } from "./AddedOutfitList";
 import { ArrangeCallback } from "./callback/ArrangeCallback";
 import { useArrangeHandler } from "./handler/UseArrageHandler";
 import { OutfitForm } from "./OutfitForm";
 import { useArrangeStyle } from "./style/UseArrangeStyle";
-import { useArrangesCreateOutfits } from "../../../hooks/api/UseArrangesCreateOutfits";
 
 export interface ArrangeProps {
   data: ArrangeData;
@@ -24,11 +27,13 @@ export interface ArrangeProps {
 }
 
 export const Arrange = (props: ArrangeProps) => {
+  const chartId = useContextDefinedState(ChartIdContext);
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
-  const { mutate, isLoading, isSuccess } = useArrangesCreateOutfits(
-    handler.outfits
-  );
+  const { mutate, isLoading, isSuccess } = useArrangesCreateOutfits({
+    outfits: handler.outfits,
+    chartId,
+  });
 
   return (
     <>

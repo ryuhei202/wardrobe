@@ -1,20 +1,14 @@
 import { CircularProgress, Typography } from "@mui/material";
-import React from "react";
-import { useMembersShow } from "../../hooks/api/UseMembersShow";
+import { MemberShowContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { Member } from "./Member";
 
-export const IsMarriagePlanContext = React.createContext<boolean | undefined>(
-  undefined
-);
-
 export const MemberContainer = () => {
-  const { data, error } = useMembersShow();
+  const memberShow = useContextDefinedState(MemberShowContext);
 
-  if (!data) return <CircularProgress />;
-  if (error) return <Typography>{error.message}</Typography>;
-  return (
-    <IsMarriagePlanContext.Provider value={data.isMarriagePlan}>
-      <Member response={data} />
-    </IsMarriagePlanContext.Provider>
-  );
+  if (!memberShow.data) return <CircularProgress />;
+  if (memberShow.error)
+    return <Typography>{memberShow.error.message}</Typography>;
+
+  return <Member response={memberShow.data} />;
 };

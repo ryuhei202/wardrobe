@@ -8,4 +8,8 @@ export interface ConfirmResponse {
     selectedId: number | null;
   };
   readonly misplacedItems: string[];
+  readonly createTrigger: {
+    selectedId: number;
+    selectChoices: SelectChoiceResponse[];
+  } | null;
 }
