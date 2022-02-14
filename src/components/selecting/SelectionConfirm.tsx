@@ -55,7 +55,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
     adminId: stylist ?? 0,
     itemIds: props.data.items.map((item) => item.itemId),
     chartId,
-    createTriggerId: selectedCreateTriggerId ?? undefined,
+    createTrigger: selectedCreateTriggerId ?? undefined,
   });
 
   const isValidSubmit =
