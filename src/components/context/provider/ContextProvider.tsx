@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from "react";
 import { TMembersShow } from "../../../hooks/api/UseMembersShow";
 
-type TContext<T> = {
+export type TContext<T> = {
   state: T;
   setter: React.Dispatch<T>;
 };
