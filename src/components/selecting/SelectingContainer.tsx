@@ -7,12 +7,15 @@ import {
   MemberIdContext,
   MemberShowContext,
 } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { Selecting } from "./Selecting";
 
 export const SelectingContainer = () => {
-  const chartId = useContext(ChartIdContext).state!;
-  const memberId = useContext(MemberIdContext).state!;
-  const setMemberShowContext = useContext(MemberShowContext).setter;
+  const chartId = useContextDefinedState(ChartIdContext);
+  const memberId = useContextDefinedState(MemberIdContext);
+  const { state: memberShowState, setter: setMemberShowContext } = useContext(
+    MemberShowContext
+  );
 
   const { data: karteShowData, error: karteShowError } = useKartesShow({
     chartId,
@@ -23,10 +26,16 @@ export const SelectingContainer = () => {
   });
 
   useEffect(() => {
-    setMemberShowContext(memberShowRes);
-  }, [memberShowRes.data?.id, setMemberShowContext]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (
+      memberShowState === null ||
+      memberShowRes.data?.id !== memberShowState?.data?.id
+    ) {
+      setMemberShowContext(memberShowRes);
+    }
+  }, [memberShowRes, memberShowState, setMemberShowContext]);
 
-  if (!karteShowData) return <CircularProgress sx={{ m: "auto" }} />;
+  if (!karteShowData || memberShowState === null)
+    return <CircularProgress sx={{ m: "auto" }} />;
   if (karteShowError)
     return <Typography sx={{ m: "auto" }}>{karteShowError.message}</Typography>;
 

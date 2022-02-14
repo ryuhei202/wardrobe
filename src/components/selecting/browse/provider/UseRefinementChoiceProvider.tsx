@@ -1,9 +1,10 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { ItemBrowse } from "../ItemBrowse";
-import React, { useContext, useEffect } from "react";
-import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
+import React, { useEffect } from "react";
 import { useBrowsesRefinementChoice } from "../../../../hooks/api/UseBrowsesRefinementChoice";
 import { ChartIdContext } from "../../../context/provider/ContextProvider";
+import { useContextDefinedState } from "../../../context/UseContextDefinedState";
+import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
+import { ItemBrowse } from "../ItemBrowse";
 
 export interface RefinementChoiceProvider {
   itemBrowseComponent: (
@@ -17,7 +18,7 @@ export const useRefinementChoiceProvider = (
 ): RefinementChoiceProvider => {
   const { data, error, refetch, isFetching } = useBrowsesRefinementChoice({
     categoryId,
-    chartId: useContext(ChartIdContext).state!,
+    chartId: useContextDefinedState(ChartIdContext),
   });
 
   useEffect(() => {

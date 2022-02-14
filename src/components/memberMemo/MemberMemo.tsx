@@ -1,8 +1,9 @@
 import { Alert, Box, Snackbar } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
 import { MemberMemoShowResponse } from "../../model/api/response/styling/member_memo/MemberMemoShowResponse";
 import { MemberIdContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { MemberMemoForm } from "./MemberMemoForm";
 
 type Props = {
@@ -18,7 +19,7 @@ export const MemberMemo = ({ response }: Props) => {
   const { mutate, isLoading } = useMemberMemoUpdate({
     memo,
     memoNext,
-    memberId: useContext(MemberIdContext).state!,
+    memberId: useContextDefinedState(MemberIdContext),
   });
 
   const handlePost = () => {

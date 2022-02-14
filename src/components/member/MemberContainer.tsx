@@ -1,10 +1,10 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useContext } from "react";
 import { MemberShowContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { Member } from "./Member";
 
 export const MemberContainer = () => {
-  const memberShow = useContext(MemberShowContext).state!;
+  const memberShow = useContextDefinedState(MemberShowContext);
 
   if (!memberShow.data) return <CircularProgress />;
   if (memberShow.error)
