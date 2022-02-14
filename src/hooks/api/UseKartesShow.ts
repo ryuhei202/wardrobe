@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { ChartIdContext } from "../../contexts/ChartIdContext";
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
 import { useKarteGetRequest } from "./UseKarteGetRequest";
 
@@ -8,9 +6,15 @@ type KartesShow = {
   readonly error: Error | null;
 };
 
-export const useKartesShow = (): KartesShow => {
-  const chartId = useContext(ChartIdContext);
-  const { data, error } = useKarteGetRequest<KarteShowResponse>("", chartId);
+type TKartesShowArg = {
+  chartId: number;
+};
+
+export const useKartesShow = ({ chartId }: TKartesShowArg): KartesShow => {
+  const { data, error } = useKarteGetRequest<KarteShowResponse>({
+    path: "",
+    chartId,
+  });
 
   return {
     data,

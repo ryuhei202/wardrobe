@@ -1,5 +1,3 @@
-import { ChartIdContext } from "./../../contexts/ChartIdContext";
-import { useContext } from "react";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { usePostRequest } from "./UsePostRequest";
@@ -9,15 +7,18 @@ type PostCreateOutfitParams = {
   chartId: number;
   outfits: Outfit[];
 };
-export const useArrangesCreateOutfits = (
-  outfits: Outfit[]
-): {
+
+type TArrangesCreateOutfitsArg = PostCreateOutfitParams;
+
+export const useArrangesCreateOutfits = ({
+  outfits,
+  chartId,
+}: TArrangesCreateOutfitsArg): {
   mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
   error: Error | null;
   isLoading: boolean;
   isSuccess: boolean;
 } => {
-  const chartId = useContext(ChartIdContext) ?? 0;
   const params = (): PostCreateOutfitParams => {
     return {
       chartId: chartId,

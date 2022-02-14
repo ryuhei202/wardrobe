@@ -4,4 +4,5 @@ export interface MemberShowResponse {
   readonly id: number;
   readonly name: string;
   readonly memberImages: MemberImageResponse[];
+  readonly isMarriagePlan: boolean;
 }

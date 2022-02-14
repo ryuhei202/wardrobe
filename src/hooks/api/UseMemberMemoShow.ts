@@ -6,10 +6,17 @@ type MemberMemoShow = {
   readonly error: Error | null;
 };
 
-export const useMemberMemoShow = (): MemberMemoShow => {
-  const { data, error } = useMemberGetRequest<MemberMemoShowResponse>(
-    "member_memo"
-  );
+type TMemberMemoShowArg = {
+  memberId: number;
+};
+
+export const useMemberMemoShow = ({
+  memberId,
+}: TMemberMemoShowArg): MemberMemoShow => {
+  const { data, error } = useMemberGetRequest<MemberMemoShowResponse>({
+    memberId,
+    path: "member_memo",
+  });
 
   return {
     data,
