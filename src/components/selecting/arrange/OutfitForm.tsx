@@ -3,6 +3,7 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  Grid,
   InputLabel,
   List,
   ListItem,
@@ -122,57 +123,63 @@ export const OutfitForm = (props: OutfitFormProps) => {
               : null;
           return (
             <Fragment key={index}>
-              <FormControl className={classes.formControl}>
-                <InputLabel id={`category-select-label-${index}`}>
-                  カテゴリ
-                </InputLabel>
-                <Select
-                  labelId={`category-select-label-${index}`}
-                  id={`category-select-${index}`}
-                  value={selectedCategories[index] ?? ""}
-                  label="カテゴリ"
-                  onChange={(event) => {
-                    let newSelectedCategories = [...selectedCategories];
-                    newSelectedCategories[index] = event.target.value as number;
-                    setSelectedCategories(newSelectedCategories);
-                  }}
-                >
-                  {props.response.map((response, categoryIndex) => (
-                    <MenuItem key={categoryIndex} value={categoryIndex}>
-                      {response.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl className={classes.adviceFormControl}>
-                <InputLabel id={`advice-select-label-${index}`}>
-                  アドバイス
-                </InputLabel>
-                <Select
-                  labelId={`advice-select-label-${index}`}
-                  id={`advice-select-${index}`}
-                  value={selectedAdviceId ?? ""}
-                  label="アドバイス"
-                  onChange={(event) => {
-                    props.callback.onSelectAdvice(
-                      event.target.value as number,
-                      index
-                    );
-                  }}
-                >
-                  {selectedCategory?.advice.map((advice) => (
-                    <MenuItem key={advice.id} value={advice.id}>
-                      {advice.title}
-                    </MenuItem>
-                  )) ?? null}
-                </Select>
-              </FormControl>
-              <Typography variant="body1" display="inline">
+              <Grid container spacing={2}>
+                <Grid item xs={3} xl={2}>
+                  <FormControl fullWidth className={classes.formControl}>
+                    <InputLabel id={`category-select-label-${index}`}>
+                      カテゴリ
+                    </InputLabel>
+                    <Select
+                      labelId={`category-select-label-${index}`}
+                      id={`category-select-${index}`}
+                      value={selectedCategories[index] ?? ""}
+                      label="カテゴリ"
+                      onChange={(event) => {
+                        let newSelectedCategories = [...selectedCategories];
+                        newSelectedCategories[index] = event.target
+                          .value as number;
+                        setSelectedCategories(newSelectedCategories);
+                      }}
+                    >
+                      {props.response.map((response, categoryIndex) => (
+                        <MenuItem key={categoryIndex} value={categoryIndex}>
+                          {response.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={6} xl={4}>
+                  <FormControl fullWidth className={classes.adviceFormControl}>
+                    <InputLabel id={`advice-select-label-${index}`}>
+                      アドバイス
+                    </InputLabel>
+                    <Select
+                      labelId={`advice-select-label-${index}`}
+                      id={`advice-select-${index}`}
+                      value={selectedAdviceId ?? ""}
+                      label="アドバイス"
+                      onChange={(event) => {
+                        props.callback.onSelectAdvice(
+                          event.target.value as number,
+                          index
+                        );
+                      }}
+                    >
+                      {selectedCategory?.advice.map((advice) => (
+                        <MenuItem key={advice.id} value={advice.id}>
+                          {advice.title}
+                        </MenuItem>
+                      )) ?? null}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Typography variant="body1" marginBottom={2}>
                 {selectedCategory?.advice.find(
                   (advice) => advice.id === selectedAdviceId
                 )?.description ?? ""}
               </Typography>
-              <br />
             </Fragment>
           );
         })}
