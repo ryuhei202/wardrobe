@@ -16,6 +16,8 @@ import {
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { AdviceCategoryResponse } from "../../../model/api/response/styling/arrange/AdviceCategoryResponse";
 import { OutfitFormData } from "../../../model/selecting/arrange/props_data/OutfitFormData";
+import { MemberShowContext } from "../../context/provider/ContextProvider";
+import { useContextDefinedState } from "../../context/UseContextDefinedState";
 import { OutfitFormCallback } from "./callback/OutfitFormCallback";
 import { useOutfitFormStyle } from "./style/UseOutfitFormStyle";
 
@@ -27,9 +29,8 @@ export interface OutfitFormProps {
 
 export const OutfitForm = (props: OutfitFormProps) => {
   const classes = useOutfitFormStyle();
-  // TODO ↓の行をコメントアウトして、もう一つ下の行を削除する
-  // const { state: member } = useContext(MemberContext);
-  const member = { isMarriagePlan: true };
+  const memberShow = useContextDefinedState(MemberShowContext);
+  const isMarriagePlan = memberShow.data?.isMarriagePlan ?? false;
 
   const getSelectedCategories = useCallback((): (number | null)[] => {
     return props.data.selectedAdviceIds.map((id) => {
@@ -54,7 +55,7 @@ export const OutfitForm = (props: OutfitFormProps) => {
 
   return (
     <>
-      {member.isMarriagePlan ? (
+      {isMarriagePlan ? (
         <FormControl margin="normal" style={{ width: 120 }}>
           <InputLabel id="formal-level-select-label">
             フォーマルレベル
