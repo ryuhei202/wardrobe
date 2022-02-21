@@ -1,4 +1,6 @@
+import { ArrowBack } from "@mui/icons-material";
 import {
+  Alert,
   Button,
   CircularProgress,
   Dialog,
@@ -17,20 +19,19 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
-import { Alert } from "@mui/material";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useState } from "react";
+import { useArrangesRegisterItems } from "../../hooks/api/UseArrangesRegisterItems";
 import { ConfirmResponse } from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/selecting/browse/ValidationErrorType";
 import { SelectionConfirmData } from "../../model/selecting/props_data/SelectionConfirmData";
-import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
-import { SelectedItemArray } from "./SelectedItemArray";
-import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
-import { useArrangesRegisterItems } from "../../hooks/api/UseArrangesRegisterItems";
 import {
   ChartIdContext,
   MemberShowContext,
 } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
+import { SelectedItemArray } from "./SelectedItemArray";
+import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
 
 export interface SelectionConfirmProps {
   data: SelectionConfirmData;
@@ -39,8 +40,8 @@ export interface SelectionConfirmProps {
 }
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
-  const { state: chartId } = useContext(ChartIdContext);
-  const isMarriagePlan = useContext(MemberShowContext).state!.data
+  const chartId = useContextDefinedState(ChartIdContext);
+  const isMarriagePlan = useContextDefinedState(MemberShowContext).data
     ?.isMarriagePlan;
   const classes = useSelectionConfirmStyle();
   const [stylist, setStylist] = useState<number | null>(
@@ -53,7 +54,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const { mutate, error, isLoading } = useArrangesRegisterItems({
     adminId: stylist ?? 0,
     itemIds: props.data.items.map((item) => item.itemId),
-    chartId: chartId!,
+    chartId,
     createTriggerId: selectedCreateTriggerId ?? undefined,
   });
 

@@ -1,12 +1,13 @@
 import { CircularProgress, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 import { useMemberMemoShow } from "../../hooks/api/UseMemberMemoShow";
 import { MemberIdContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { MemberMemo } from "./MemberMemo";
 
 export const MemberMemoContainer = () => {
   const { data, error } = useMemberMemoShow({
-    memberId: useContext(MemberIdContext).state!,
+    memberId: useContextDefinedState(MemberIdContext),
   });
 
   if (!data) return <CircularProgress />;

@@ -21,7 +21,9 @@ export const Member = (props: Props) => {
     <>
       <ListItemText
         primary={props.response.name}
-        secondary={`パートナーID:${props.response.id}, カルテID:${chartId}`}
+        secondary={`パートナーID:${props.response.id}, ${
+          chartId !== null ? "カルテID:" + chartId : ""
+        }`}
       />
       <ListItemSecondaryAction>
         <IconButton

@@ -1,13 +1,13 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useContext } from "react";
 import { useLatestStylingReferencesShow } from "../../hooks/api/UseLatestStylingReferencesShow";
 import { StylingReferenceText } from "../../model/hearing/StylingReferenceText";
 import { MemberIdContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { HearingLayout } from "./HearingLayout";
 
 export const HearingLayoutContainer = () => {
   const { data, error } = useLatestStylingReferencesShow({
-    memberId: useContext(MemberIdContext).state!,
+    memberId: useContextDefinedState(MemberIdContext),
   });
   let referenceTexts: StylingReferenceText[] = [];
   if (data) {

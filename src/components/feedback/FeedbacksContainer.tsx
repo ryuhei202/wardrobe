@@ -1,14 +1,14 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useContext } from "react";
 import { useItemFeedbacksShow } from "../../hooks/api/UseItemFeedbacksShow";
 import { useLatestKartesShow } from "../../hooks/api/UseLatestKartesShow";
 import { MemberIdContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { Feedbacks } from "./Feedbacks";
 
 export const FeedbacksContainer = () => {
-  const memberId = useContext(MemberIdContext).state;
+  const memberId = useContextDefinedState(MemberIdContext);
   const { data: latestKartes, error: latestKartesError } = useLatestKartesShow({
-    memberId: memberId!,
+    memberId,
   });
   const { data: feedbacks, error: feedbacksError } = useItemFeedbacksShow({
     chartId: latestKartes?.chartId,

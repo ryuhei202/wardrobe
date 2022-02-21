@@ -1,12 +1,12 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useContext } from "react";
 import { useNgsIndex } from "../../hooks/api/UseNgsIndex";
 import { MemberIdContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { NgMemoCollection } from "./NgMemoCollection";
 
 export const NgMemosContainer = () => {
   const { data, error } = useNgsIndex({
-    memberId: useContext(MemberIdContext).state!,
+    memberId: useContextDefinedState(MemberIdContext),
   });
 
   if (!data) return <CircularProgress />;
