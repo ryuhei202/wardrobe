@@ -6,4 +6,5 @@ export interface OutfitFormData {
     readonly isSelected: boolean;
   }[];
   readonly selectedAdviceIds: (number | null)[];
+  readonly formalLevel: number;
 }

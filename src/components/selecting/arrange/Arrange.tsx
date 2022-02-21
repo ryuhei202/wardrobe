@@ -30,7 +30,7 @@ export const Arrange = (props: ArrangeProps) => {
   const chartId = useContextDefinedState(ChartIdContext);
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
-  const { mutate, error, isLoading, isSuccess } = useArrangesCreateOutfits({
+  const { mutate, isLoading, isSuccess } = useArrangesCreateOutfits({
     outfits: handler.outfits,
     chartId,
   });
@@ -77,12 +77,6 @@ export const Arrange = (props: ArrangeProps) => {
       <Dialog open={isLoading} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
-      <Snackbar open={error !== null || handler.upperLimitMessage !== null}>
-        <Alert severity="error">
-          {error?.message ?? ""}
-          {handler.upperLimitMessage}
-        </Alert>
-      </Snackbar>
       <Snackbar open={isSuccess} autoHideDuration={6000}>
         <Alert severity="success">
           着こなしアドバイスの登録を完了しました！

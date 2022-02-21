@@ -11,7 +11,6 @@ import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 export interface ArrangeHandler {
   outfits: Outfit[];
   editingOutfitIndex: number;
-  upperLimitMessage: string | null;
   addedOutfitListData: () => AddedOutfitListData;
   addedOutfitListCallback: () => AddedOutfitListCallback;
   outfitFormData: () => OutfitFormData;
@@ -26,6 +25,7 @@ export const useArrangeHandler = (
   const defaultOutfit = {
     itemIds: [],
     adviceIds: [],
+    formalLevel: 0,
   };
 
   const [outfits, setOutfits] = useState<Outfit[]>(responses.selectedOutfits);
@@ -33,9 +33,6 @@ export const useArrangeHandler = (
     outfits.length
   );
   const [editingOutfit, setEditingOutfit] = useState<Outfit>(defaultOutfit);
-  const [upperLimitMessage, setUpperLimitMessage] = useState<string | null>(
-    null
-  );
   const [isPostComplete, setIsPostComplete] = useState(false);
   const onPostComplete = useCallback(() => setIsPostComplete(true), []);
 
@@ -50,8 +47,8 @@ export const useArrangeHandler = (
           items: outfit.itemIds.reduce(
             (
               result: {
-                readonly id: number;
-                readonly categoryName: string;
+                id: number;
+                categoryName: string;
               }[],
               itemId
             ) => {
@@ -97,9 +94,8 @@ export const useArrangeHandler = (
   };
 
   const outfitFormData = (): OutfitFormData => {
-    const adviceNum = editingOutfit.adviceIds.length;
     let selectedAdviceIdArray: (number | null)[] = [...editingOutfit.adviceIds];
-    selectedAdviceIdArray.length = 4;
+    selectedAdviceIdArray.push(null);
     return {
       items: items.map((item) => {
         return {
@@ -109,20 +105,14 @@ export const useArrangeHandler = (
           isSelected: editingOutfit.itemIds.indexOf(item.itemId) >= 0,
         };
       }),
-      selectedAdviceIds: selectedAdviceIdArray.fill(null, adviceNum),
+      selectedAdviceIds: selectedAdviceIdArray,
+      formalLevel: editingOutfit.formalLevel,
     };
   };
 
   const outfitFormCallback = (): OutfitFormCallback => {
     return {
       onClickAddOutfit: () => {
-        //着こなしアドバイスは4つまでなので、フロントで超えないようにする。
-        //3秒後にメッセージを消す。
-        if (editingOutfitIndex > 3) {
-          setUpperLimitMessage("着こなしアドバイスは最大4つまでです。");
-          setTimeout(() => setUpperLimitMessage(null), 3000);
-          return;
-        }
         let newOutfits = [...outfits];
         if (editingOutfitIndex >= newOutfits.length) {
           newOutfits.push(editingOutfit);
@@ -153,13 +143,15 @@ export const useArrangeHandler = (
         }
         setEditingOutfit({ ...editingOutfit, itemIds: newItemIds });
       },
+      onSelectFormalLevel: (value: number) => {
+        setEditingOutfit({ ...editingOutfit, formalLevel: value });
+      },
     };
   };
 
   return {
     outfits,
     editingOutfitIndex,
-    upperLimitMessage,
     addedOutfitListData,
     addedOutfitListCallback,
     outfitFormData,

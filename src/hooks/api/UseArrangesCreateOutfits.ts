@@ -26,6 +26,7 @@ export const useArrangesCreateOutfits = ({
         return {
           itemIds: outfit.itemIds,
           adviceIds: outfit.adviceIds,
+          formalLevel: outfit.formalLevel,
         };
       }),
     };
