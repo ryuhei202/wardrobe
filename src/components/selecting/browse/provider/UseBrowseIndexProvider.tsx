@@ -2,7 +2,7 @@ import { CircularProgress, Pagination, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useBrowsesIndex } from "../../../../hooks/api/UseBrowsesIndex";
 import { Refinement } from "../../../../model/selecting/browse/Refinement";
-import { MemberIdContext } from "../../../context/provider/ContextProvider";
+import { ChartIdContext } from "../../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../../context/UseContextDefinedState";
 import { ItemBrowsePaginationCallback } from "../callback/ItemBrowsePaginationCallback";
 import { ItemCardCollectionCallback } from "../callback/ItemCardCollectionCallback";
@@ -21,7 +21,7 @@ export const useBrowseIndexProvider = (
 ): BrowseIndexProvider => {
   const { data, error, refetch, isFetching } = useBrowsesIndex({
     refinement,
-    chartId: useContextDefinedState(MemberIdContext),
+    chartId: useContextDefinedState(ChartIdContext),
   });
 
   useEffect(() => {
