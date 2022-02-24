@@ -9,6 +9,8 @@ import {
 import React from "react";
 import { useBrowsesDetail } from "../../../../hooks/api/UseBrowsesDetail";
 import { Refinement } from "../../../../model/selecting/browse/Refinement";
+import { ChartIdContext } from "../../../context/provider/ContextProvider";
+import { useContextDefinedState } from "../../../context/UseContextDefinedState";
 import { BrowseDetail } from "../BrowseDetail";
 import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
 
@@ -23,10 +25,12 @@ export const useBrowseDetailProvider = (
   preregisteredItemId: number,
   refinement: Refinement
 ): BrowseDetailProvider => {
-  const { data, error, isFetching } = useBrowsesDetail(
+  const chartId = useContextDefinedState(ChartIdContext);
+  const { data, error, isFetching } = useBrowsesDetail({
+    chartId,
     preregisteredItemId,
-    refinement
-  );
+    refinement,
+  });
   const browseDetailComponent = (
     callback: BrowseDetailCallback,
     previousSelectedItemId: number | null

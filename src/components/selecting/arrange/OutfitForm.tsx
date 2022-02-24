@@ -3,6 +3,7 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
+  Grid,
   InputLabel,
   List,
   ListItem,
@@ -12,9 +13,11 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { AdviceCategoryResponse } from "../../../model/api/response/styling/arrange/AdviceCategoryResponse";
 import { OutfitFormData } from "../../../model/selecting/arrange/props_data/OutfitFormData";
+import { MemberShowContext } from "../../context/provider/ContextProvider";
+import { useContextDefinedState } from "../../context/UseContextDefinedState";
 import { OutfitFormCallback } from "./callback/OutfitFormCallback";
 import { useOutfitFormStyle } from "./style/UseOutfitFormStyle";
 
@@ -26,6 +29,8 @@ export interface OutfitFormProps {
 
 export const OutfitForm = (props: OutfitFormProps) => {
   const classes = useOutfitFormStyle();
+  const memberShow = useContextDefinedState(MemberShowContext);
+  const isMarriagePlan = memberShow.data?.isMarriagePlan ?? false;
 
   const getSelectedCategories = useCallback((): (number | null)[] => {
     return props.data.selectedAdviceIds.map((id) => {
@@ -50,6 +55,28 @@ export const OutfitForm = (props: OutfitFormProps) => {
 
   return (
     <>
+      {isMarriagePlan ? (
+        <FormControl margin="normal" style={{ width: 120 }}>
+          <InputLabel id="formal-level-select-label">
+            フォーマルレベル
+          </InputLabel>
+          <Select
+            labelId="formal-level-select-label"
+            id="formal-level-select"
+            value={props.data.formalLevel}
+            label="フォーマルレベル"
+            onChange={(event) => {
+              props.callback.onSelectFormalLevel(event.target.value as number);
+            }}
+          >
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+          </Select>
+        </FormControl>
+      ) : (
+        <></>
+      )}
       <List>
         {props.data.items.map((item) => {
           const labelId = `color-checkbox-list-label-${item.itemId}`;
@@ -97,56 +124,63 @@ export const OutfitForm = (props: OutfitFormProps) => {
               : null;
           return (
             <Fragment key={index}>
-              <FormControl className={classes.formControl}>
-                <InputLabel id={`demo-simple-select-label-${index}`}>
-                  カテゴリ
-                </InputLabel>
-                <Select
-                  labelId={`demo-simple-select-label-${index}`}
-                  id={`demo-simple-select-${index}`}
-                  value={selectedCategories[index] ?? ""}
-                  onChange={(event) => {
-                    let newSelectedCategories = [...selectedCategories];
-                    newSelectedCategories[index] = event.target.value as number;
-                    setSelectedCategories(newSelectedCategories);
-                  }}
-                >
-                  {props.response.map((response, categoryIndex) => (
-                    <MenuItem key={categoryIndex} value={categoryIndex}>
-                      {response.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl className={classes.adviceFormControl}>
-                <InputLabel id={`simple-select-label-${index}`}>
-                  アドバイス
-                </InputLabel>
-                <Select
-                  labelId={`simple-select-label-${index}`}
-                  id={`simple-select-${index}`}
-                  value={selectedAdviceId ?? ""}
-                  label="アドバイス"
-                  onChange={(event) => {
-                    props.callback.onSelectAdvice(
-                      event.target.value as number,
-                      index
-                    );
-                  }}
-                >
-                  {selectedCategory?.advice.map((advice) => (
-                    <MenuItem key={advice.id} value={advice.id}>
-                      {advice.title}
-                    </MenuItem>
-                  )) ?? null}
-                </Select>
-              </FormControl>
-              <Typography variant="body1" display="inline">
+              <Grid container spacing={2}>
+                <Grid item xs={3} xl={2}>
+                  <FormControl fullWidth className={classes.formControl}>
+                    <InputLabel id={`category-select-label-${index}`}>
+                      カテゴリ
+                    </InputLabel>
+                    <Select
+                      labelId={`category-select-label-${index}`}
+                      id={`category-select-${index}`}
+                      value={selectedCategories[index] ?? ""}
+                      label="カテゴリ"
+                      onChange={(event) => {
+                        let newSelectedCategories = [...selectedCategories];
+                        newSelectedCategories[index] = event.target
+                          .value as number;
+                        setSelectedCategories(newSelectedCategories);
+                      }}
+                    >
+                      {props.response.map((response, categoryIndex) => (
+                        <MenuItem key={categoryIndex} value={categoryIndex}>
+                          {response.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={6} xl={4}>
+                  <FormControl fullWidth className={classes.adviceFormControl}>
+                    <InputLabel id={`advice-select-label-${index}`}>
+                      アドバイス
+                    </InputLabel>
+                    <Select
+                      labelId={`advice-select-label-${index}`}
+                      id={`advice-select-${index}`}
+                      value={selectedAdviceId ?? ""}
+                      label="アドバイス"
+                      onChange={(event) => {
+                        props.callback.onSelectAdvice(
+                          event.target.value as number,
+                          index
+                        );
+                      }}
+                    >
+                      {selectedCategory?.advice.map((advice) => (
+                        <MenuItem key={advice.id} value={advice.id}>
+                          {advice.title}
+                        </MenuItem>
+                      )) ?? null}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Typography variant="body1" marginBottom={2}>
                 {selectedCategory?.advice.find(
                   (advice) => advice.id === selectedAdviceId
                 )?.description ?? ""}
               </Typography>
-              <br />
             </Fragment>
           );
         })}

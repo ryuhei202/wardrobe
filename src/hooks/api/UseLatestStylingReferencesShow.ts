@@ -6,10 +6,17 @@ type LatestStylingReferencesShow = {
   readonly error: Error | null;
 };
 
-export const useLatestStylingReferencesShow = (): LatestStylingReferencesShow => {
-  const { data, error } = useMemberGetRequest<StylingReferenceResponse[]>(
-    "latest_styling_references"
-  );
+type TLatestStylingReferencesShowArg = {
+  memberId: number;
+};
+
+export const useLatestStylingReferencesShow = ({
+  memberId,
+}: TLatestStylingReferencesShowArg): LatestStylingReferencesShow => {
+  const { data, error } = useMemberGetRequest<StylingReferenceResponse[]>({
+    memberId,
+    path: "latest_styling_references",
+  });
 
   return {
     data,

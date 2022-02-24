@@ -1,13 +1,20 @@
 import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
 import { useMemberGetRequest } from "./UseMemberGetRequest";
 
-type MembersShow = {
+export type TMembersShow = {
   readonly data?: MemberShowResponse;
   readonly error: Error | null;
 };
 
-export const useMembersShow = (): MembersShow => {
-  const { data, error } = useMemberGetRequest<MemberShowResponse>("");
+type TMembersShowArg = {
+  memberId: number;
+};
+
+export const useMembersShow = ({ memberId }: TMembersShowArg): TMembersShow => {
+  const { data, error } = useMemberGetRequest<MemberShowResponse>({
+    memberId,
+    path: "",
+  });
 
   return {
     data,

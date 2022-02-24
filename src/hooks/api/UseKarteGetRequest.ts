@@ -2,11 +2,17 @@ import { axiosClient } from "./../../model/api/shared/AxiosClient";
 import { useQuery } from "react-query";
 import { baseUrl } from "../../model/api/shared/BaseUrl";
 
-export const useKarteGetRequest = <T>(
-  path: string,
-  chartId?: number,
-  isEnabled: boolean = true
-): {
+type TKarteGetRequestArg = {
+  path: string;
+  chartId?: number;
+  isEnabled?: boolean;
+};
+
+export const useKarteGetRequest = <T>({
+  path,
+  chartId,
+  isEnabled = true,
+}: TKarteGetRequestArg): {
   data: T | undefined;
   error: Error | null;
 } => {

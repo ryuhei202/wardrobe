@@ -6,8 +6,15 @@ type KartesIndex = {
   readonly error: Error | null;
 };
 
-export const useKartesIndex = (): KartesIndex => {
-  const { data, error } = useMemberGetRequest<KarteIndexResponse[]>("kartes");
+type TKartesIndexArg = {
+  memberId: number;
+};
+
+export const useKartesIndex = ({ memberId }: TKartesIndexArg): KartesIndex => {
+  const { data, error } = useMemberGetRequest<KarteIndexResponse[]>({
+    path: "kartes",
+    memberId,
+  });
 
   return {
     data,

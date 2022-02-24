@@ -1,4 +1,6 @@
+import { ArrowBack } from "@mui/icons-material";
 import {
+  Alert,
   Button,
   CircularProgress,
   Dialog,
@@ -17,16 +19,19 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
-import { Alert } from "@mui/material";
 import React, { Fragment, useState } from "react";
+import { useArrangesRegisterItems } from "../../hooks/api/UseArrangesRegisterItems";
 import { ConfirmResponse } from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/selecting/browse/ValidationErrorType";
 import { SelectionConfirmData } from "../../model/selecting/props_data/SelectionConfirmData";
+import {
+  ChartIdContext,
+  MemberShowContext,
+} from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
 import { SelectedItemArray } from "./SelectedItemArray";
 import { useSelectionConfirmStyle } from "./style/UseSelectionConfirmStyle";
-import { useArrangesRegisterItems } from "../../hooks/api/UseArrangesRegisterItems";
 
 export interface SelectionConfirmProps {
   data: SelectionConfirmData;
@@ -35,15 +40,30 @@ export interface SelectionConfirmProps {
 }
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
+  const chartId = useContextDefinedState(ChartIdContext);
+  const isMarriagePlan = useContextDefinedState(MemberShowContext).data
+    ?.isMarriagePlan;
   const classes = useSelectionConfirmStyle();
   const [stylist, setStylist] = useState<number | null>(
     props.response.stylistInfo.selectedId
   );
+  const [selectedCreateTriggerId, setSelectedCreateTriggerId] = useState<
+    number | null
+  >(props.response.createTrigger?.selectedId ?? null);
 
-  const { mutate, error, isLoading } = useArrangesRegisterItems(
-    stylist ?? 0,
-    props.data.items.map((item) => item.itemId)
-  );
+  const { mutate, error, isLoading } = useArrangesRegisterItems({
+    adminId: stylist ?? 0,
+    itemIds: props.data.items.map((item) => item.itemId),
+    chartId,
+    createTrigger: selectedCreateTriggerId ?? undefined,
+  });
+
+  const isValidSubmit =
+    props.response.validateErrors.filter(
+      (error) => error.errorType === ValidationErrorType.Rejected
+    ).length === 0 &&
+    stylist !== null &&
+    (!isMarriagePlan || selectedCreateTriggerId !== null);
 
   return (
     <>
@@ -78,6 +98,29 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
             ))}
           </Select>
         </FormControl>
+
+        {isMarriagePlan ? (
+          <FormControl className={classes.formControl}>
+            <InputLabel id="createTriggerInput">作成トリガー</InputLabel>
+            <Select
+              labelId="createTriggerInput"
+              label="作成トリガー"
+              value={selectedCreateTriggerId ?? ""}
+              onChange={(event: SelectChangeEvent<string | number>) => {
+                setSelectedCreateTriggerId(event.target.value as number);
+              }}
+            >
+              {props.response.createTrigger?.selectChoices.map((choice) => (
+                <MenuItem key={choice.id} value={choice.id}>
+                  {choice.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        ) : (
+          <></>
+        )}
+
         {props.response.validateErrors.length > 0 ? (
           <Paper>
             <List
@@ -138,11 +181,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
         variant="contained"
         color="primary"
         className={classes.changeButton}
-        disabled={
-          props.response.validateErrors.filter(
-            (error) => error.errorType === ValidationErrorType.Rejected
-          ).length > 0 || stylist === null
-        }
+        disabled={!isValidSubmit}
         onClick={() =>
           mutate(undefined, {
             onSuccess: () => {

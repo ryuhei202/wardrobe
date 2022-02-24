@@ -10,13 +10,11 @@ import { SelectionProgress } from "./SelectionProgress";
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
 import { DrawerContents } from "../drawerContent/DrawerContents";
 
-type Props = {
-  readonly response: KarteShowResponse;
-};
+type Props = { readonly karteShowResponse: KarteShowResponse };
 
 export const Selecting = (props: Props) => {
   const classes = useSelectingStyle();
-  const handler = useSelectingHandler(props.response);
+  const handler = useSelectingHandler(props.karteShowResponse);
 
   let mainContent;
   switch (handler.mainContentType) {
