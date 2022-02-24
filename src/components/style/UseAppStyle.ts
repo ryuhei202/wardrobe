@@ -7,6 +7,7 @@ export const useAppStyle = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
+      minHeight: "100vh",
     },
     appBar: {
       zIndex: zIndex.drawer + 1,

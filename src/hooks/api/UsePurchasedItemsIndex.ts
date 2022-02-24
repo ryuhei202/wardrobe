@@ -5,10 +5,18 @@ type PurchasedItemsIndex = {
   readonly data?: PurchasedItemIndexResponse[];
   readonly error: Error | null;
 };
-export const usePurchasedItemsIndex = (): PurchasedItemsIndex => {
-  const { data, error } = useMemberGetRequest<PurchasedItemIndexResponse[]>(
-    "purchased_items"
-  );
+
+type TPurchasedItemsIndexArg = {
+  memberId: number;
+};
+
+export const usePurchasedItemsIndex = ({
+  memberId,
+}: TPurchasedItemsIndexArg): PurchasedItemsIndex => {
+  const { data, error } = useMemberGetRequest<PurchasedItemIndexResponse[]>({
+    path: "purchased_items",
+    memberId,
+  });
 
   return {
     data,

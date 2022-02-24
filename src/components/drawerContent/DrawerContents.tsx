@@ -1,4 +1,3 @@
-import React from "react";
 import { List, ListItem } from "@mui/material";
 import { useDrawerContentsStyle } from "./style/UseDrawerContentsStyle";
 import { KarteSectionContainer } from "../karte/KarteSectionContainer";
