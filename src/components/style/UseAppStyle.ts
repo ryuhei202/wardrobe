@@ -36,8 +36,5 @@ export const useAppStyle = makeStyles(() =>
     title: {
       flexGrow: 1,
     },
-    qrCodeContainer: {
-      padding: "25px",
-    },
   })
 );
