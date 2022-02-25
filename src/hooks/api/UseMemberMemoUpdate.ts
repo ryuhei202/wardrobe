@@ -7,11 +7,26 @@ type MemberMemoUpdate = {
   readonly isLoading: boolean;
 };
 
-export const useMemberMemoUpdate = (params: {
+type TMemberMemoUpdateParams = {
   memo?: string;
   memoNext?: string;
-}): MemberMemoUpdate => {
-  const { mutate, isLoading } = useMemberPutRequest("member_memo", params);
+};
+
+type TMemberMemoUpdateArg = {
+  memberId: number;
+} & TMemberMemoUpdateParams;
+
+export const useMemberMemoUpdate = ({
+  memberId,
+  memo,
+  memoNext,
+}: TMemberMemoUpdateArg): MemberMemoUpdate => {
+  const params: TMemberMemoUpdateParams = { memo, memoNext };
+  const { mutate, isLoading } = useMemberPutRequest({
+    memberId,
+    params,
+    path: "member_memo",
+  });
 
   return { mutate, isLoading };
 };
