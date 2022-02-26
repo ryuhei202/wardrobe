@@ -98,10 +98,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
   }
 
   let completeButton;
-  if (
-    props.data.rentableItemNum !== 0 &&
-    props.data.rentableItemNum === props.data.items.length
-  ) {
+  if (props.data.rentableItemNum !== 0) {
     completeButton = (
       <Button
         variant="contained"
