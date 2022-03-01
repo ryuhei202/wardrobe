@@ -34,6 +34,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
   }>(initialState);
 
   let steps = [];
+
   for (let index = 0; index < props.data.rentableItemNum; index++) {
     let stepLabel;
     if (props.data.items.length > index) {
