@@ -25,8 +25,8 @@ export const useConfirmProvider = (itemIds: number[]): ConfirmProvider => {
     response: SelectionConfirmData,
     callback: SelectionConfirmCallback
   ): JSX.Element => {
-    if (!data || isFetching) return <CircularProgress />;
     if (error) return <Typography>{error.message}</Typography>;
+    if (!data || isFetching) return <CircularProgress />;
     if (data)
       return (
         <SelectionConfirm data={response} response={data} callback={callback} />
