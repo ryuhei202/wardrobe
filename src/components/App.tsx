@@ -30,6 +30,7 @@ export const App = () => {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
+        retry: false,
       },
     },
   });
