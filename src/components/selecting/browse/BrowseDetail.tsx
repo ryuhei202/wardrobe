@@ -25,13 +25,13 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
 
   let itemImage = [
     {
-      originalImagePath: props.response.itemImagePath.original,
+      largeImagePath: props.response.itemImagePath.large,
       thumbnailImagePath: props.response.itemImagePath.thumb,
     },
   ];
   let outfitImages = props.response.outfitImagePaths.map((imagePath) => {
     return {
-      originalImagePath: imagePath.original,
+      largeImagePath: imagePath.large,
       thumbnailImagePath: imagePath.thumb,
     };
   });
@@ -81,7 +81,7 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
             showNav={false}
             items={itemImage.concat(outfitImages).map((image) => {
               return {
-                original: image.originalImagePath,
+                original: image.largeImagePath,
                 thumbnail: image.thumbnailImagePath,
                 originalWidth: 400,
                 originalHeight: 600,
