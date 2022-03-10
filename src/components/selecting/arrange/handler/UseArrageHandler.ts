@@ -100,7 +100,7 @@ export const useArrangeHandler = (
       items: items.map((item) => {
         return {
           itemId: item.itemId,
-          itemImagePath: item.itemImagePath,
+          itemImagePath: item.itemImagePath.thumb,
           categoryName: item.categoryName,
           isSelected: editingOutfit.itemIds.indexOf(item.itemId) >= 0,
         };

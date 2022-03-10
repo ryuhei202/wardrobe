@@ -28,7 +28,7 @@ export const PurchasedItemCollection = (
                   <PopupImage
                     data={{
                       originalImageUrl: purchasedItem.imagePath.thumb,
-                      popupImageUrl: purchasedItem.imagePath.original,
+                      popupImageUrl: purchasedItem.imagePath.large,
                     }}
                   ></PopupImage>
                 </Avatar>

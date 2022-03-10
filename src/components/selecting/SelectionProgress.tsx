@@ -47,7 +47,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
             >
               <img
                 className={classes.stepperImage}
-                src={props.data.items[index].itemImagePath}
+                src={props.data.items[index].itemImagePath.thumb}
                 alt=""
               />
             </Box>
