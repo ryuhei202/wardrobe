@@ -25,13 +25,13 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
 
   let itemImage = [
     {
-      originalImagePath: props.response.itemImagePath.original,
+      originalImagePath: props.response.itemImagePath.large,
       thumbnailImagePath: props.response.itemImagePath.thumb,
     },
   ];
   let outfitImages = props.response.outfitImagePaths.map((imagePath) => {
     return {
-      originalImagePath: imagePath.original,
+      originalImagePath: imagePath.large,
       thumbnailImagePath: imagePath.thumb,
     };
   });

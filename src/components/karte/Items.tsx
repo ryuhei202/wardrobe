@@ -34,7 +34,7 @@ export const Items = (props: Props) => {
                   <PopupImage
                     data={{
                       originalImageUrl: item.imagePath.thumb,
-                      popupImageUrl: item.imagePath.original,
+                      popupImageUrl: item.imagePath.large,
                     }}
                   ></PopupImage>
                 </Avatar>

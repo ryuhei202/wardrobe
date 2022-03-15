@@ -23,7 +23,10 @@ export const SelectedItemArray = (props: SelectionConfirmProps) => {
           <CardHeader subheader={`ID: ${props.data[index].itemId}`} />
           <CardMedia
             className={classes.selectedItemCardMedia}
-            image={props.data[index].itemImagePath}
+            image={
+              props.data[index].itemImagePath.largeThumb ??
+              props.data[index].itemImagePath.large
+            }
           />
           <CardContent>
             <Typography variant="subtitle1">
