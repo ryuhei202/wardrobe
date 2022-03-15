@@ -1,8 +1,9 @@
+import { ImagePathResponse } from "../api/response/styling/ImagePathResponse";
 import { PartSize } from "./PartSize";
 
 export interface SelectedItem {
   readonly itemId: number;
-  readonly itemImagePath: string;
+  readonly itemImagePath: ImagePathResponse;
   readonly partSizes: PartSize[];
   readonly locationName: string;
   readonly categoryName: string;
