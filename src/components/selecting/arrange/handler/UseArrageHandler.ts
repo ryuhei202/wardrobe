@@ -86,6 +86,18 @@ export const useArrangeHandler = (
         setEditingOutfit(outfits[index]);
         setEditingOutfitIndex(index);
       },
+      onClickDelete: (index: number) => {
+        const newOutfits = [...outfits];
+        newOutfits.splice(index, 1);
+        setOutfits(newOutfits);
+        if (editingOutfitIndex === index) {
+          setEditingOutfit(defaultOutfit);
+          setEditingOutfitIndex(newOutfits.length);
+        } else if (editingOutfitIndex > index) {
+          setEditingOutfit(editingOutfit);
+          setEditingOutfitIndex(editingOutfitIndex - 1);
+        }
+      },
       onClickNew: () => {
         setEditingOutfit(defaultOutfit);
         setEditingOutfitIndex(outfits.length);
