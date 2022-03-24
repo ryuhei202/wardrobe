@@ -158,6 +158,11 @@ export const useArrangeHandler = (
       onSelectFormalLevel: (value: number) => {
         setEditingOutfit({ ...editingOutfit, formalLevel: value });
       },
+      onClickDeleteAdvice: (index: number) => {
+        const newAdviceIds = [...editingOutfit.adviceIds];
+        newAdviceIds.splice(index, 1);
+        setEditingOutfit({ ...editingOutfit, adviceIds: newAdviceIds });
+      },
     };
   };
 
