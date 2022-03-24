@@ -1,4 +1,6 @@
 import {
+  Avatar,
+  Grid,
   IconButton,
   List,
   ListItem,
@@ -34,10 +36,32 @@ export const AddedOutfitList = (props: AddedOutfitListProps) => {
             onClick={() => props.callback.onClickEdit(index)}
           >
             <ListItemText
-              primary={outfit.items
-                .map((item) => `${item.id}: ${item.categoryName}`)
-                .join(", ")}
-              secondary={outfit.advices.join("・")}
+              primary={
+                <>
+                  {outfit.items.map((item) => (
+                    <Grid
+                      container
+                      alignItems="center"
+                      direction="row"
+                      style={{ marginBottom: 2 }}
+                    >
+                      <Avatar variant="rounded" src={item.imagePath} />
+                      {item.id}: {item.categoryName}
+                      <br />
+                    </Grid>
+                  ))}
+                </>
+              }
+              secondary={
+                <>
+                  {outfit.advices.map((advice) => (
+                    <>
+                      {advice}
+                      <br />
+                    </>
+                  ))}
+                </>
+              }
             />
             <ListItemSecondaryAction>
               <IconButton

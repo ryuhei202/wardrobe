@@ -49,6 +49,7 @@ export const useArrangeHandler = (
               result: {
                 id: number;
                 categoryName: string;
+                imagePath: string;
               }[],
               itemId
             ) => {
@@ -57,6 +58,7 @@ export const useArrangeHandler = (
                 result.push({
                   id: item.itemId,
                   categoryName: item.categoryName,
+                  imagePath: item.itemImagePath.thumb,
                 });
               }
               return result;
