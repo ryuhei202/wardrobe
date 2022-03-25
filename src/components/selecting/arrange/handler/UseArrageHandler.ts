@@ -49,6 +49,7 @@ export const useArrangeHandler = (
               result: {
                 id: number;
                 categoryName: string;
+                imagePath: string;
               }[],
               itemId
             ) => {
@@ -57,6 +58,7 @@ export const useArrangeHandler = (
                 result.push({
                   id: item.itemId,
                   categoryName: item.categoryName,
+                  imagePath: item.itemImagePath.thumb,
                 });
               }
               return result;
@@ -85,6 +87,18 @@ export const useArrangeHandler = (
       onClickEdit: (index: number) => {
         setEditingOutfit(outfits[index]);
         setEditingOutfitIndex(index);
+      },
+      onClickDelete: (index: number) => {
+        const newOutfits = [...outfits];
+        newOutfits.splice(index, 1);
+        setOutfits(newOutfits);
+        if (editingOutfitIndex === index) {
+          setEditingOutfit(defaultOutfit);
+          setEditingOutfitIndex(newOutfits.length);
+        } else if (editingOutfitIndex > index) {
+          setEditingOutfit(editingOutfit);
+          setEditingOutfitIndex(editingOutfitIndex - 1);
+        }
       },
       onClickNew: () => {
         setEditingOutfit(defaultOutfit);
@@ -145,6 +159,11 @@ export const useArrangeHandler = (
       },
       onSelectFormalLevel: (value: number) => {
         setEditingOutfit({ ...editingOutfit, formalLevel: value });
+      },
+      onClickDeleteAdvice: (index: number) => {
+        const newAdviceIds = [...editingOutfit.adviceIds];
+        newAdviceIds.splice(index, 1);
+        setEditingOutfit({ ...editingOutfit, adviceIds: newAdviceIds });
       },
     };
   };

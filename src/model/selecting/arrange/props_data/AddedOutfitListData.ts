@@ -3,6 +3,7 @@ export interface AddedOutfitListData {
     readonly items: {
       readonly id: number;
       readonly categoryName: string;
+      readonly imagePath: string;
     }[];
     readonly advices: string[];
   }[];
