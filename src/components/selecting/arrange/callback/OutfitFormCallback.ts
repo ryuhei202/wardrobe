@@ -3,4 +3,5 @@ export interface OutfitFormCallback {
   onSelectAdvice: (adviceId: number, index: number) => void;
   onSelectFormalLevel: (value: number) => void;
   onClickAddOutfit: () => void;
+  onClickDeleteAdvice: (index: number) => void;
 }
