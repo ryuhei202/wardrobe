@@ -1,7 +1,7 @@
-export const alertClosedWindow = (isClosing: boolean) => {
-  isClosing
-    ? window.addEventListener("beforeunload", onUnload)
-    : window.removeEventListener("beforeunload", onUnload);
+export const alertClosedWindow = (isClosable: boolean) => {
+  isClosable
+    ? window.removeEventListener("beforeunload", onUnload)
+    : window.addEventListener("beforeunload", onUnload);
   return () => {
     // アンマウント時にタブを閉じる時のアラートをするイベントを削除する。
     window.removeEventListener("beforeunload", onUnload);

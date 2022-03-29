@@ -1,9 +1,11 @@
+import { Delete } from "@mui/icons-material";
 import {
   Button,
   Checkbox,
   FormControl,
   FormControlLabel,
   Grid,
+  IconButton,
   InputLabel,
   List,
   ListItem,
@@ -174,6 +176,13 @@ export const OutfitForm = (props: OutfitFormProps) => {
                       )) ?? null}
                     </Select>
                   </FormControl>
+                </Grid>
+                <Grid item xs>
+                  <IconButton
+                    onClick={() => props.callback.onClickDeleteAdvice(index)}
+                  >
+                    <Delete />
+                  </IconButton>
                 </Grid>
               </Grid>
               <Typography variant="body1" marginBottom={2}>
