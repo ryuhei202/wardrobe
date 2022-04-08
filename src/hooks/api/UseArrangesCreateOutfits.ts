@@ -1,17 +1,17 @@
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { usePostRequest } from "./UsePostRequest";
-import { Outfit } from "../../model/selecting/arrange/Outfit";
+import { Coordinate } from "../../model/selecting/arrange/Coordinate";
 
 type PostCreateOutfitParams = {
   chartId: number;
-  outfits: Outfit[];
+  coordinates: Coordinate[];
 };
 
 type TArrangesCreateOutfitsArg = PostCreateOutfitParams;
 
 export const useArrangesCreateOutfits = ({
-  outfits,
+  coordinates,
   chartId,
 }: TArrangesCreateOutfitsArg): {
   mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
@@ -22,11 +22,12 @@ export const useArrangesCreateOutfits = ({
   const params = (): PostCreateOutfitParams => {
     return {
       chartId: chartId,
-      outfits: outfits.map((outfit) => {
+      coordinates: coordinates.map((coordinate) => {
         return {
-          itemIds: outfit.itemIds,
-          adviceIds: outfit.adviceIds,
-          formalLevel: outfit.formalLevel,
+          id: coordinate.id,
+          itemIds: coordinate.itemIds,
+          adviceIds: coordinate.adviceIds,
+          formalLevel: coordinate.formalLevel,
         };
       }),
     };
