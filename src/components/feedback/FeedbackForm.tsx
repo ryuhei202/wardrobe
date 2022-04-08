@@ -22,22 +22,19 @@ export const FeedbackForm = (props: Props) => {
     props.data.chartItemId,
     textFeedback
   );
-  const {
-    handleChangeText,
-    handleCaller,
-    handleKeyDown,
-  } = useFeedbackFormHandler(
-    props.data,
-    props.callback,
-    setTextFeedback,
-    isEditing,
-    setIsEditing,
-    mutate,
-    isLoading
-  );
+  const { handleChangeText, handleCaller, handleKeyDown } =
+    useFeedbackFormHandler(
+      props.data,
+      props.callback,
+      setTextFeedback,
+      isEditing,
+      setIsEditing,
+      mutate,
+      isLoading
+    );
 
   useEffect(() => {
-    alertClosedWindow(isEditing);
+    alertClosedWindow(!isEditing);
   }, [isEditing]);
 
   return (

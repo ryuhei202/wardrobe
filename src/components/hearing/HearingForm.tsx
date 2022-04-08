@@ -23,22 +23,19 @@ export const HearingForm = ({ category, callback, initialText }: Props) => {
     memberId: useContextDefinedState(MemberIdContext),
   });
 
-  const {
-    handleChangeText,
-    handleCaller,
-    handleKeyDown,
-  } = useHearingFormHandler(
-    callback,
-    initialText,
-    setReferenceText,
-    isEditing,
-    setIsEditing,
-    mutate,
-    isLoading
-  );
+  const { handleChangeText, handleCaller, handleKeyDown } =
+    useHearingFormHandler(
+      callback,
+      initialText,
+      setReferenceText,
+      isEditing,
+      setIsEditing,
+      mutate,
+      isLoading
+    );
 
   useEffect(() => {
-    alertClosedWindow(isEditing);
+    alertClosedWindow(!isEditing);
   }, [isEditing]);
 
   return (
