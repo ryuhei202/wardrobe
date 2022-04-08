@@ -1,14 +1,16 @@
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
-import { usePostRequest } from "./UsePostRequest";
 import { Coordinate } from "../../model/selecting/arrange/Coordinate";
+import { usePatchRequest } from "./UsePatchRequest";
 
 type PostCreateOutfitParams = {
-  chartId: number;
   coordinates: Coordinate[];
 };
 
-type TArrangesCreateOutfitsArg = PostCreateOutfitParams;
+type TArrangesCreateOutfitsArg = {
+  chartId: number;
+  coordinates: Coordinate[];
+};
 
 export const useArrangesCreateOutfits = ({
   coordinates,
@@ -21,7 +23,6 @@ export const useArrangesCreateOutfits = ({
 } => {
   const params = (): PostCreateOutfitParams => {
     return {
-      chartId: chartId,
       coordinates: coordinates.map((coordinate) => {
         return {
           id: coordinate.id,
@@ -33,8 +34,8 @@ export const useArrangesCreateOutfits = ({
     };
   };
 
-  const { mutate, error, isLoading, isSuccess } = usePostRequest(
-    "arranges/create_outfits",
+  const { mutate, error, isLoading, isSuccess } = usePatchRequest(
+    `kartes/${chartId}/coordinate`,
     params()
   );
 
