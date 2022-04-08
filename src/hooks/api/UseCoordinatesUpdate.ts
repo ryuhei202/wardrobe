@@ -12,7 +12,7 @@ type TArrangesCreateOutfitsArg = {
   coordinates: Coordinate[];
 };
 
-export const useArrangesCreateOutfits = ({
+export const useCoordinatesUpdate = ({
   coordinates,
   chartId,
 }: TArrangesCreateOutfitsArg): {
