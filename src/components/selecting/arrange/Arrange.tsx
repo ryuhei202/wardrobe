@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useArrangesCreateOutfits } from "../../../hooks/api/UseArrangesCreateOutfits";
+import { useCoordinatesUpdate } from "../../../hooks/api/UseCoordinatesUpdate";
 import { CoordinateShowResponse } from "../../../model/api/response/styling/coordinate/CoordinateShowResponse";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
 import { ChartIdContext } from "../../context/provider/ContextProvider";
@@ -30,7 +30,7 @@ export const Arrange = (props: ArrangeProps) => {
   const chartId = useContextDefinedState(ChartIdContext);
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
-  const { mutate, isLoading, isSuccess } = useArrangesCreateOutfits({
+  const { mutate, isLoading, isSuccess } = useCoordinatesUpdate({
     coordinates: handler.coordinates,
     chartId,
   });
