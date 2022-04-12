@@ -2,7 +2,7 @@ image: node:16.8.0
 
 pipelines:
   branches:
-    staging:
+    development:
       - step:
           name: Build
           script:
