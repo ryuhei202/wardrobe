@@ -34,7 +34,7 @@ export const FeedbackForm = (props: Props) => {
     );
 
   useEffect(() => {
-    alertClosedWindow(!isEditing);
+    alertClosedWindow(isEditing);
   }, [isEditing]);
 
   return (
