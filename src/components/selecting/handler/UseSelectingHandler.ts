@@ -34,7 +34,9 @@ export const useSelectingHandler = (
       : response.registeredItems.length
   );
   const [mainContentType, setMainContentType] = useState<MainContentType>(
-    MainContentType.Browse
+    response.registeredItems.length >= response.defaultItemNum
+      ? MainContentType.Confirm
+      : MainContentType.Browse
   );
   const [rentableItemNum, setRentableItemNum] = useState<number>(
     response.registeredItems.length >= response.defaultItemNum

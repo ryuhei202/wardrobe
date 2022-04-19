@@ -35,7 +35,7 @@ export const HearingForm = ({ category, callback, initialText }: Props) => {
     );
 
   useEffect(() => {
-    alertClosedWindow(!isEditing);
+    alertClosedWindow(isEditing);
   }, [isEditing]);
 
   return (
