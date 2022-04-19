@@ -1,5 +1,5 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useCoordinatesShow } from "../../../../hooks/api/UseCoordinatesShow";
+import { useArrangesAdviceChoice } from "../../../../hooks/api/UseArrangesAdviceChoice";
 import { ArrangeData } from "../../../../model/selecting/arrange/props_data/ArrangeData";
 import { ChartIdContext } from "../../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../../context/UseContextDefinedState";
@@ -14,11 +14,7 @@ export interface AdviceChoiceProvider {
 }
 
 export const useAdviceChoiceProvider = (): AdviceChoiceProvider => {
-  const {
-    data: response,
-    error,
-    isFetching,
-  } = useCoordinatesShow({
+  const { data: response, error, isFetching } = useArrangesAdviceChoice({
     chartId: useContextDefinedState(ChartIdContext),
   });
 

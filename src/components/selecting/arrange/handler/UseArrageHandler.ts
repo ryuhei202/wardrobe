@@ -1,7 +1,7 @@
-import { CoordinateShowResponse } from "./../../../../model/api/response/styling/coordinate/CoordinateShowResponse";
 import { alertClosedWindow } from "./../../../../service/shared/alertClosedWindow";
-import { Coordinate } from "../../../../model/selecting/arrange/Coordinate";
+import { Outfit } from "../../../../model/selecting/arrange/Outfit";
 import { useCallback, useEffect, useState } from "react";
+import { AdviceChoiceResponse } from "../../../../model/api/response/styling/arrange/AdviceChoiceResponse";
 import { AddedOutfitListData } from "../../../../model/selecting/arrange/props_data/AddedOutfitListData";
 import { SelectedItem } from "../../../../model/selecting/SelectedItem";
 import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
@@ -9,7 +9,7 @@ import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/O
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 
 export interface ArrangeHandler {
-  coordinates: Coordinate[];
+  outfits: Outfit[];
   editingOutfitIndex: number;
   addedOutfitListData: () => AddedOutfitListData;
   addedOutfitListCallback: () => AddedOutfitListCallback;
@@ -20,23 +20,19 @@ export interface ArrangeHandler {
 
 export const useArrangeHandler = (
   items: SelectedItem[],
-  responses: CoordinateShowResponse
+  responses: AdviceChoiceResponse
 ): ArrangeHandler => {
-  const defaultCoordinate = {
-    id: null,
+  const defaultOutfit = {
     itemIds: [],
     adviceIds: [],
     formalLevel: 0,
   };
 
-  const [coordinates, setCoordinates] = useState<Coordinate[]>(
-    responses.selectedCoordinates
-  );
+  const [outfits, setOutfits] = useState<Outfit[]>(responses.selectedOutfits);
   const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(
-    coordinates.length
+    outfits.length
   );
-  const [editingOutfit, setEditingOutfit] =
-    useState<Coordinate>(defaultCoordinate);
+  const [editingOutfit, setEditingOutfit] = useState<Outfit>(defaultOutfit);
   const [isPostComplete, setIsPostComplete] = useState(false);
   const onPostComplete = useCallback(() => setIsPostComplete(true), []);
 
@@ -46,9 +42,9 @@ export const useArrangeHandler = (
 
   const addedOutfitListData = (): AddedOutfitListData => {
     return {
-      outfitList: coordinates.map((coordinate) => {
+      outfitList: outfits.map((outfit) => {
         return {
-          items: coordinate.itemIds.reduce(
+          items: outfit.itemIds.reduce(
             (
               result: {
                 id: number;
@@ -69,7 +65,7 @@ export const useArrangeHandler = (
             },
             []
           ),
-          advices: coordinate.adviceIds.map((adviceId) => {
+          advices: outfit.adviceIds.map((adviceId) => {
             let adviceTitle = "";
             responses.adviceCategories.forEach((category) => {
               category.advice.forEach((advice) => {
@@ -89,15 +85,15 @@ export const useArrangeHandler = (
   const addedOutfitListCallback = (): AddedOutfitListCallback => {
     return {
       onClickEdit: (index: number) => {
-        setEditingOutfit(coordinates[index]);
+        setEditingOutfit(outfits[index]);
         setEditingOutfitIndex(index);
       },
       onClickDelete: (index: number) => {
-        const newOutfits = [...coordinates];
+        const newOutfits = [...outfits];
         newOutfits.splice(index, 1);
-        setCoordinates(newOutfits);
+        setOutfits(newOutfits);
         if (editingOutfitIndex === index) {
-          setEditingOutfit(defaultCoordinate);
+          setEditingOutfit(defaultOutfit);
           setEditingOutfitIndex(newOutfits.length);
         } else if (editingOutfitIndex > index) {
           setEditingOutfit(editingOutfit);
@@ -105,8 +101,8 @@ export const useArrangeHandler = (
         }
       },
       onClickNew: () => {
-        setEditingOutfit(defaultCoordinate);
-        setEditingOutfitIndex(coordinates.length);
+        setEditingOutfit(defaultOutfit);
+        setEditingOutfitIndex(outfits.length);
       },
     };
   };
@@ -131,14 +127,14 @@ export const useArrangeHandler = (
   const outfitFormCallback = (): OutfitFormCallback => {
     return {
       onClickAddOutfit: () => {
-        let newOutfits = [...coordinates];
+        let newOutfits = [...outfits];
         if (editingOutfitIndex >= newOutfits.length) {
           newOutfits.push(editingOutfit);
         } else {
           newOutfits[editingOutfitIndex] = editingOutfit;
         }
-        setCoordinates(newOutfits);
-        setEditingOutfit(defaultCoordinate);
+        setOutfits(newOutfits);
+        setEditingOutfit(defaultOutfit);
         setEditingOutfitIndex(newOutfits.length);
         setIsPostComplete(false);
       },
@@ -173,7 +169,7 @@ export const useArrangeHandler = (
   };
 
   return {
-    coordinates,
+    outfits,
     editingOutfitIndex,
     addedOutfitListData,
     addedOutfitListCallback,

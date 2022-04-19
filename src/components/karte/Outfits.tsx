@@ -1,8 +1,8 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { KarteCoordinateResponse } from "../../model/api/response/styling/karte/KarteCoordinateResponse";
+import { KarteOutfitResponse } from "../../model/api/response/styling/karte/KarteOutfitResponse";
 
 type Props = {
-  readonly data: KarteCoordinateResponse[];
+  readonly data: KarteOutfitResponse[];
 };
 export const Outfits = (props: Props) => {
   return (

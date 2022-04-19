@@ -11,15 +11,14 @@ export const usePatchRequest = (
     onError: () => Promise<unknown> | void;
   } = { onSuccess: () => {}, onError: () => {} }
 ): {
-  mutate: UseMutateFunction<AxiosResponse<any>, Error, void, unknown>;
-  error: Error | null;
+  mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>;
   isLoading: boolean;
   isSuccess: boolean;
 } => {
-  const { mutate, error, isLoading, isSuccess } = useMutation<any, Error>(
+  const { mutate, isLoading, isSuccess } = useMutation(
     () => axiosClient.patch(`${baseUrl()}/styling/${path}`, params),
     afterMutation
   );
 
-  return { mutate, error, isLoading, isSuccess };
+  return { mutate, isLoading, isSuccess };
 };
