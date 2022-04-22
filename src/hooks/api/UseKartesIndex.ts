@@ -18,14 +18,10 @@ export const useKartesIndex = ({
   memberId,
   limit,
 }: TKartesIndexArg): KartesIndex => {
-  const params = (): TKartesIndexParams => {
-    return { limit };
-  };
-  const { data, error } = useMemberGetRequest<KarteIndexResponse[]>({
-    path: "kartes",
-    memberId,
-    params: params(),
-  });
+  const { data, error } = useMemberGetRequest<
+    KarteIndexResponse[],
+    TKartesIndexParams
+  >("kartes", memberId, { limit });
 
   return {
     data,
