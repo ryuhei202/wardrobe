@@ -11,10 +11,10 @@ type TNgsIndexArg = {
 };
 
 export const useNgsIndex = ({ memberId }: TNgsIndexArg): NgsIndex => {
-  const { data, error } = useMemberGetRequest<NgIndexResponse[]>({
-    path: "ngs",
-    memberId,
-  });
+  const { data, error } = useMemberGetRequest<NgIndexResponse[], undefined>(
+    "ngs",
+    memberId
+  );
 
   return {
     data,

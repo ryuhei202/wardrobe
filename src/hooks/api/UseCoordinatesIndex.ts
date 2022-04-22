@@ -6,7 +6,7 @@ import {
 import { CoordinateIndexResponse } from "../../model/api/response/styling/coordinate/CoordinateIndexResponse";
 import { useGetRequest } from "./UseGetRequest";
 
-type CoordinatesShow = {
+type CoordinatesIndex = {
   readonly data?: CoordinateIndexResponse;
   readonly error: Error | null;
   readonly refetch: <TPageData>(
@@ -15,13 +15,13 @@ type CoordinatesShow = {
   readonly isFetching: boolean;
 };
 
-type TCoordinatesShowArg = {
+type TCoordinatesIndexArg = {
   chartId: number;
 };
 
 export const useCoordinatesIndex = ({
   chartId,
-}: TCoordinatesShowArg): CoordinatesShow => {
+}: TCoordinatesIndexArg): CoordinatesIndex => {
   const { data, error, refetch, isFetching } =
     useGetRequest<CoordinateIndexResponse>(`kartes/${chartId}/coordinates`);
 

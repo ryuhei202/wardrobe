@@ -13,10 +13,10 @@ type TPurchasedItemsIndexArg = {
 export const usePurchasedItemsIndex = ({
   memberId,
 }: TPurchasedItemsIndexArg): PurchasedItemsIndex => {
-  const { data, error } = useMemberGetRequest<PurchasedItemIndexResponse[]>({
-    path: "purchased_items",
-    memberId,
-  });
+  const { data, error } = useMemberGetRequest<
+    PurchasedItemIndexResponse[],
+    undefined
+  >("purchased_items", memberId);
 
   return {
     data,
