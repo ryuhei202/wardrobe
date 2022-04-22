@@ -18,7 +18,7 @@ export const DrawerContents = () => {
         <LatestStylingReferenceContainer />
       </ListItem>
       <ListItem>
-        <KarteSection />;
+        <KarteSection />
       </ListItem>
       <ListItem>
         <NgMemosContainer />
