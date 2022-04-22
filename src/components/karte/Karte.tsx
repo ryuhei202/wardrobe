@@ -1,56 +1,24 @@
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Switch,
-  Typography,
-} from "@mui/material";
-import { Fragment } from "react";
+import { ListItem, ListItemText } from "@mui/material";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
-import { StylingReferenceList } from "../stylingReference/StylingReferenceList";
+import { CoordinateContainer } from "../coordinate/CoordinateContainer";
 import { useKarteHandler } from "./handler/UseKarteHandler";
-import { Outfits } from "./Outfits";
-
-type Props = {
+type TProps = {
   readonly data: KarteIndexResponse;
   readonly index: number;
 };
 
-export const Karte = (props: Props) => {
+export const Karte = ({ data, index }: TProps) => {
   const handler = useKarteHandler();
 
   return (
-    <ListItem key={props.index}>
+    <ListItem key={index}>
       <ListItemText>
         発送日：
-        {props.data.rentalStartedAt
-          ? new Date(props.data.rentalStartedAt!).toLocaleDateString()
+        {data.rentalStartedAt
+          ? new Date(data.rentalStartedAt!).toLocaleDateString()
           : ""}
         <br />
-        ヒアリング情報：
-        <StylingReferenceList response={props.data.stylingReferences} />
-        <br />
-        コーデの評価：
-        <Paper variant="outlined">
-          <Typography variant="body2">
-            {props.data.feedback.split("\n").map((word, index) => (
-              <Fragment key={index}>
-                {word}
-                <br></br>
-              </Fragment>
-            ))}
-          </Typography>
-        </Paper>
-        <List dense>
-          <Switch
-            checked={handler.isChecked}
-            onChange={handler.onChangeItemCollection}
-            inputProps={{ "aria-label": "controlled" }}
-          />
-          アイテム単位
-          <Outfits data={props.data.coordinates} />
-        </List>
+        <CoordinateContainer chartId={data.id} />
       </ListItemText>
     </ListItem>
   );
