@@ -10,7 +10,6 @@ import { Fragment } from "react";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
 import { StylingReferenceList } from "../stylingReference/StylingReferenceList";
 import { useKarteHandler } from "./handler/UseKarteHandler";
-import { Items } from "./Items";
 import { Outfits } from "./Outfits";
 
 type Props = {
@@ -50,11 +49,7 @@ export const Karte = (props: Props) => {
             inputProps={{ "aria-label": "controlled" }}
           />
           アイテム単位
-          {handler.isChecked ? (
-            <Items data={props.data.items} />
-          ) : (
-            <Outfits data={props.data.coordinates} />
-          )}
+          <Outfits data={props.data.coordinates} />
         </List>
       </ListItemText>
     </ListItem>
