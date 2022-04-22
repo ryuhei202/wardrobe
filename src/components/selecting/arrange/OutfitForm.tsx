@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment, useCallback, useEffect, useState } from "react";
-import { AdviceCategoryResponse } from "../../../model/api/response/styling/arrange/AdviceCategoryResponse";
+import { CoordinateAdviceCategoryResponse } from "../../../model/api/response/styling/coordinate/CoordinateAdviceCategoryResponse";
 import { OutfitFormData } from "../../../model/selecting/arrange/props_data/OutfitFormData";
 import { MemberShowContext } from "../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../context/UseContextDefinedState";
@@ -25,7 +25,7 @@ import { useOutfitFormStyle } from "./style/UseOutfitFormStyle";
 
 export interface OutfitFormProps {
   data: OutfitFormData;
-  response: AdviceCategoryResponse[];
+  response: CoordinateAdviceCategoryResponse[];
   callback: OutfitFormCallback;
 }
 
