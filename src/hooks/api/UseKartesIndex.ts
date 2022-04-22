@@ -8,13 +8,20 @@ type KartesIndex = {
 
 type TKartesIndexArg = {
   memberId: number;
+  limit?: number;
+};
+type TKartesIndexParams = {
+  limit?: number;
 };
 
-export const useKartesIndex = ({ memberId }: TKartesIndexArg): KartesIndex => {
-  const { data, error } = useMemberGetRequest<KarteIndexResponse[]>({
-    path: "kartes",
-    memberId,
-  });
+export const useKartesIndex = ({
+  memberId,
+  limit,
+}: TKartesIndexArg): KartesIndex => {
+  const { data, error } = useMemberGetRequest<
+    KarteIndexResponse[],
+    TKartesIndexParams
+  >("kartes", memberId, { limit });
 
   return {
     data,
