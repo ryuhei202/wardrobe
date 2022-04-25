@@ -65,6 +65,7 @@ export const useLineMessageUrlHandler = ({
     if (event.altKey && event.key === "Enter" && isEditing && !isLoading) {
       handleCaller();
     }
+    if (event.key === "Enter") event.preventDefault();
   };
   return {
     handleChangeText,

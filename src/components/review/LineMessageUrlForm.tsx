@@ -39,11 +39,12 @@ export const LineMessageUrlForm = ({
   useEffect(() => {
     alertClosedWindow(isEditing);
   }, [isEditing]);
+
   return (
     <Box sx={{ m: 1, width: "100%", position: "relative" }}>
       <TextField
         style={{ width: "100%", position: "relative" }}
-        id={`line-message-url-form`}
+        id={`line-message-url-form-${coordinateId}`}
         defaultValue={lineMessageUrlText}
         onChange={handleChangeText}
         onKeyDown={handleKeyDown}
