@@ -15,7 +15,7 @@ export const CoordinateContainer = ({ chartId }: TProps) => {
   return (
     <>
       {data.selectedCoordinates.map((coordinate, index) => (
-        <CoordinateListItem coordinate={coordinate} />
+        <CoordinateListItem coordinate={coordinate} index={index} />
       ))}
     </>
   );
