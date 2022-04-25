@@ -1,6 +1,15 @@
-import { Divider, List, ListItem } from "@mui/material";
+import {
+  Avatar,
+  Divider,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import { Coordinate } from "../../model/api/response/styling/coordinate/Coordinate";
 import { ReviewContainer } from "../review/ReviewContainer";
+import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
   coordinate: Coordinate;
@@ -9,14 +18,31 @@ type TProps = {
 export const SelectedCoordinate = ({ coordinate }: TProps) => {
   return (
     <>
+      <Typography>コーデID: {coordinate.id}</Typography>
       <ListItem key={coordinate.id}>
         <List dense>
           {coordinate.items.map((item) => (
-            <ListItem key={item.id}></ListItem>
+            <ListItem key={item.id}>
+              <ListItemAvatar>
+                <Avatar variant="rounded">
+                  <PopupImage
+                    data={{
+                      originalImageUrl: item.imagePath.thumb,
+                      popupImageUrl: item.imagePath.large,
+                    }}
+                  />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={`${item.id}: ${item.categoryName}、${item.mainColorName}(${item.subColorName})`}
+                secondary={`${item.partSizes
+                  .filter((partSize) => partSize.value !== null)
+                  .map((partSize) => `${partSize.name}(${partSize.value})`)}`}
+              />
+            </ListItem>
           ))}
         </List>
         <Divider variant="middle" />
-        <ReviewContainer coordinateId={coordinate.id} />
       </ListItem>
     </>
   );
