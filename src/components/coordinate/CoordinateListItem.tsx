@@ -43,11 +43,6 @@ export const CoordinateListItem = ({ coordinate }: TProps) => {
           ))}
         </List>
       </ListItem>
-      <List dense>
-        <Typography variant="body2" style={{ marginLeft: 20 }}>
-          アドバイス
-        </Typography>
-      </List>
       <Divider variant="middle" />
       <SelectedReviewContainer coordinateId={coordinate.id} />
     </>
