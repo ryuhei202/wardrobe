@@ -8,14 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Coordinate } from "../../model/api/response/styling/coordinate/Coordinate";
-import { ReviewContainer } from "../review/ReviewContainer";
 import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
   coordinate: Coordinate;
 };
 
-export const SelectedCoordinate = ({ coordinate }: TProps) => {
+export const CoordinateListItem = ({ coordinate }: TProps) => {
   return (
     <>
       <Typography>コーデID: {coordinate.id}</Typography>

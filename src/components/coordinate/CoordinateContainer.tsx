@@ -1,6 +1,6 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { useCoordinatesIndex } from "../../hooks/api/UseCoordinatesIndex";
-import { SelectedCoordinate } from "./SelectedCoordinate";
+import { CoordinateListItem } from "./CoordinateListItem";
 
 type TProps = {
   chartId: number;
@@ -15,7 +15,7 @@ export const CoordinateContainer = ({ chartId }: TProps) => {
   return (
     <>
       {data.selectedCoordinates.map((coordinate) => (
-        <SelectedCoordinate coordinate={coordinate} />
+        <CoordinateListItem coordinate={coordinate} />
       ))}
     </>
   );
