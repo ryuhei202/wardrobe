@@ -1,4 +1,5 @@
 import { Box, TextField } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useEffect, useState } from "react";
 import { useReviewsUpdate } from "../../hooks/api/UseReviewsUpdate";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
@@ -44,9 +45,9 @@ export const LineMessageUrlForm = ({
   }, [isEditing]);
 
   return (
-    <Box sx={{ m: 1, width: "100%", position: "relative" }}>
+    <Box sx={{ m: 1, width: "94%", position: "relative" }}>
       <TextField
-        style={{ width: "100%", position: "relative" }}
+        style={{ width: "94%", position: "relative" }}
         id={`line-message-url-form-${coordinateId}`}
         defaultValue={lineMessageUrlText}
         onChange={handleChangeText}
@@ -55,7 +56,18 @@ export const LineMessageUrlForm = ({
       <SendButton
         onClick={handleCaller}
         disabled={!isEditing}
-        style={{ position: "absolute", bottom: 8, left: 430 }}
+        style={{ position: "absolute", bottom: 8, right: 25 }}
+      />
+      <ClearIcon
+        style={{
+          position: "absolute",
+          width: 20,
+          bottom: 15,
+          right: -15,
+          color: "gray",
+          cursor: "pointer",
+        }}
+        onClick={() => setIsUrlEditing(false)}
       />
     </Box>
   );

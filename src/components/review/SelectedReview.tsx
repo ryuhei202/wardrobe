@@ -33,27 +33,34 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
   });
 
   return (
-    <>
-      <Typography>レビュー</Typography>
+    <div style={{ marginLeft: 20, marginBottom: 20 }}>
+      <Typography variant="body2" style={{ fontWeight: "bold" }}>
+        レビュー
+      </Typography>
       {data.review === null ? (
-        <b>レビュー未回答</b>
+        <span style={{ marginLeft: 20 }}>レビュー未回答</span>
       ) : (
         <List dense>
-          <ListItem>
+          <ListItem divider>
             <ListItemText primary="評価" />
-            <ListItemText primary={data.review?.selectedOption} />
+            <ListItemText
+              primary={data.review?.selectedOption}
+              style={{ width: "80%" }}
+            />
           </ListItem>
-          <ListItem>
+          <ListItem divider>
             <ListItemText primary="理由" />
             <ListItemText
-              primary={data.review?.reasons.map((reason) => (
-                <span> / {reason} </span>
-              ))}
+              primary={data.review?.reasons.join("/")}
+              style={{ width: "80%" }}
             />
           </ListItem>
           <ListItem>
             <ListItemText primary="テキスト" />
-            <ListItemText primary={data.review?.text} />
+            <ListItemText
+              primary={data.review?.text}
+              style={{ width: "80%" }}
+            />
           </ListItem>
           <ListItem>
             <ListItemText primary="URL" />
@@ -73,7 +80,7 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
                 </a>
                 <EditIcon
                   onClick={() => setIsUrlEditing(true)}
-                  style={{ position: "absolute", right: 20 }}
+                  style={{ position: "absolute", right: 15, cursor: "pointer" }}
                 />
               </>
             )}
@@ -87,6 +94,6 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
           </Box>
         </List>
       )}
-    </>
+    </div>
   );
 };

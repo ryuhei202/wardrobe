@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Divider,
   List,
   ListItem,
@@ -13,12 +14,22 @@ import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
   coordinate: Coordinate;
+  index: number;
 };
 
-export const CoordinateListItem = ({ coordinate }: TProps) => {
+export const CoordinateListItem = ({ coordinate, index }: TProps) => {
   return (
-    <>
-      <Typography variant="body2">コーデID: {coordinate.id}</Typography>
+    <Box
+      sx={{
+        marginBottom: 3,
+      }}
+    >
+      <Typography
+        variant="body2"
+        style={{ fontWeight: "bold", marginLeft: 20 }}
+      >
+        コーデ{index + 1}
+      </Typography>
       <ListItem key={coordinate.id}>
         <List dense>
           {coordinate.items.map((item) => (
@@ -43,8 +54,18 @@ export const CoordinateListItem = ({ coordinate }: TProps) => {
           ))}
         </List>
       </ListItem>
-      <Divider variant="middle" />
+      <List dense style={{ marginLeft: 20 }}>
+        <Typography variant="body2" style={{ fontWeight: "bold" }}>
+          アドバイス
+        </Typography>
+        {coordinate.advices.map((advice, index) => (
+          <p style={{ lineHeight: 0.5, marginLeft: 20 }}>
+            {index + 1}. {advice.title}
+          </p>
+        ))}
+      </List>
       <SelectedReviewContainer coordinateId={coordinate.id} />
-    </>
+      <Divider variant="middle" />
+    </Box>
   );
 };
