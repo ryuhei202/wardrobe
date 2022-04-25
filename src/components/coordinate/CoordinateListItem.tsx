@@ -18,7 +18,7 @@ type TProps = {
 export const CoordinateListItem = ({ coordinate }: TProps) => {
   return (
     <>
-      <Typography>コーデID: {coordinate.id}</Typography>
+      <Typography variant="body2">コーデID: {coordinate.id}</Typography>
       <ListItem key={coordinate.id}>
         <List dense>
           {coordinate.items.map((item) => (
@@ -43,6 +43,11 @@ export const CoordinateListItem = ({ coordinate }: TProps) => {
           ))}
         </List>
       </ListItem>
+      <List dense>
+        <Typography variant="body2" style={{ marginLeft: 20 }}>
+          アドバイス
+        </Typography>
+      </List>
       <Divider variant="middle" />
       <SelectedReviewContainer coordinateId={coordinate.id} />
     </>

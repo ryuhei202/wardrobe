@@ -10,11 +10,13 @@ type TProps = {
   readonly callback: SelectedReviewFormCallback;
   readonly lineMessageUrl?: string | null;
   readonly coordinateId: number;
+  readonly setIsUrlEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export const LineMessageUrlForm = ({
   callback,
   lineMessageUrl,
   coordinateId,
+  setIsUrlEditing,
 }: TProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [lineMessageUrlText, setLineMessageUrlText] = useState<string>(
@@ -29,6 +31,7 @@ export const LineMessageUrlForm = ({
       setLineMessageUrlText,
       isEditing,
       setIsEditing,
+      setIsUrlEditing,
       mutate,
       isLoading,
       callback,

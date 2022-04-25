@@ -14,6 +14,7 @@ type LineMessageUrlHandlerArgs = {
   readonly setLineMessageUrlText: React.Dispatch<React.SetStateAction<string>>;
   readonly isEditing: boolean;
   readonly setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly setIsUrlEditing: React.Dispatch<React.SetStateAction<boolean>>;
   readonly mutate: UseMutateFunction<
     AxiosResponse<any>,
     unknown,
@@ -29,6 +30,7 @@ export const useLineMessageUrlHandler = ({
   setLineMessageUrlText,
   isEditing,
   setIsEditing,
+  setIsUrlEditing,
   mutate,
   isLoading,
   callback,
@@ -53,6 +55,7 @@ export const useLineMessageUrlHandler = ({
         queryClient.invalidateQueries(`coordinates/${coordinateId}/review`);
         setIsEditing(false);
         callback.onSuccess();
+        setIsUrlEditing(false);
       },
       onError: () => {
         setIsEditing(true);

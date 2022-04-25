@@ -1,4 +1,4 @@
-import { ListItem, ListItemText } from "@mui/material";
+import { ListItem, ListItemText, Typography } from "@mui/material";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
 import { CoordinateContainer } from "../coordinate/CoordinateContainer";
 
@@ -11,10 +11,13 @@ export const Karte = ({ data, index }: TProps) => {
   return (
     <ListItem key={index}>
       <ListItemText>
-        発送日：
-        {data.rentalStartedAt
-          ? new Date(data.rentalStartedAt!).toLocaleDateString()
-          : ""}
+        <Typography variant="h6">カルテID: {data.id}</Typography>
+        <Typography variant="body1">
+          発送日：
+          {data.rentalStartedAt
+            ? new Date(data.rentalStartedAt!).toLocaleDateString()
+            : ""}
+        </Typography>
         <br />
         <CoordinateContainer chartId={data.id} />
       </ListItemText>
