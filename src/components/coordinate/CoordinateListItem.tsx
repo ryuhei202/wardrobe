@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Coordinate } from "../../model/api/response/styling/coordinate/Coordinate";
+import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
@@ -41,8 +42,9 @@ export const CoordinateListItem = ({ coordinate }: TProps) => {
             </ListItem>
           ))}
         </List>
-        <Divider variant="middle" />
       </ListItem>
+      <Divider variant="middle" />
+      <SelectedReviewContainer coordinateId={coordinate.id} />
     </>
   );
 };
