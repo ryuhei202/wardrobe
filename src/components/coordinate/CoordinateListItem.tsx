@@ -43,6 +43,14 @@ export const CoordinateListItem = ({ coordinate }: TProps) => {
         </List>
         <Divider variant="middle" />
       </ListItem>
+      <List dense style={{ marginLeft: 20 }}>
+        <Typography variant="body2">アドバイス</Typography>
+        {coordinate.advices.map((advice, index) => (
+          <p>
+            {index + 1}. {advice.title}
+          </p>
+        ))}
+      </List>
     </>
   );
 };
