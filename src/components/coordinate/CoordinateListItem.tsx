@@ -11,13 +11,14 @@ import { Coordinate } from "../../model/api/response/styling/coordinate/Coordina
 import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
-  coordinate: Coordinate;
+  readonly coordinate: Coordinate;
+  readonly index: number;
 };
 
-export const CoordinateListItem = ({ coordinate }: TProps) => {
+export const CoordinateListItem = ({ coordinate, index }: TProps) => {
   return (
     <>
-      <Typography>コーデID: {coordinate.id}</Typography>
+      <Typography variant="body2">コーデ{index + 1}</Typography>
       <ListItem key={coordinate.id}>
         <List dense>
           {coordinate.items.map((item) => (
