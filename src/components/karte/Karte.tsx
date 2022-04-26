@@ -53,7 +53,7 @@ export const Karte = (props: Props) => {
           {handler.isChecked ? (
             <Items data={props.data.items} />
           ) : (
-            <Outfits data={props.data.outfits} />
+            <Outfits data={props.data.coordinates} />
           )}
         </List>
       </ListItemText>
