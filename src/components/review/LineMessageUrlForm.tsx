@@ -27,7 +27,7 @@ export const LineMessageUrlForm = ({
     coordinateId,
     lineMessageUrl: lineMessageUrlText,
   });
-  const { handleChangeText, handleCaller, handleKeyDown } =
+  const { handleChangeText, handleSendClickButton, handleKeyDown } =
     useLineMessageUrlHandler({
       setLineMessageUrlText,
       isEditing,
@@ -54,7 +54,7 @@ export const LineMessageUrlForm = ({
         onKeyDown={handleKeyDown}
       />
       <SendButton
-        onClick={handleCaller}
+        onClick={handleSendClickButton}
         disabled={!isEditing}
         style={{ position: "absolute", bottom: 8, right: 25 }}
       />

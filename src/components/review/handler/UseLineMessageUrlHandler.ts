@@ -6,7 +6,7 @@ type LineMessageUrlFormHandler = {
   readonly handleChangeText: (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
-  readonly handleCaller: () => void;
+  readonly handleSendClickButton: () => void;
   readonly handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 };
 
@@ -49,7 +49,7 @@ export const useLineMessageUrlHandler = ({
       setIsEditing(false);
   };
 
-  const handleCaller = () => {
+  const handleSendClickButton = () => {
     mutate(undefined, {
       onSuccess: () => {
         queryClient.invalidateQueries(`coordinates/${coordinateId}/review`);
@@ -66,13 +66,13 @@ export const useLineMessageUrlHandler = ({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.altKey && event.key === "Enter" && isEditing && !isLoading) {
-      handleCaller();
+      handleSendClickButton();
     }
     if (event.key === "Enter") event.preventDefault();
   };
   return {
     handleChangeText,
-    handleCaller,
+    handleSendClickButton,
     handleKeyDown,
   };
 };
