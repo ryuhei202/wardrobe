@@ -13,8 +13,8 @@ import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
-  coordinate: Coordinate;
-  index: number;
+  readonly coordinate: Coordinate;
+  readonly index: number;
 };
 
 export const CoordinateListItem = ({ coordinate, index }: TProps) => {

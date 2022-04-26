@@ -12,8 +12,8 @@ export const Karte = ({ data, index }: TProps) => {
     <ListItem key={index}>
       <ListItemText>
         <Typography variant="h6">カルテID: {data.id}</Typography>
-        <Typography variant="body1">
-          発送日：
+        <Typography variant="body2" style={{ color: "gray" }}>
+          発送日:{" "}
           {data.rentalStartedAt
             ? new Date(data.rentalStartedAt!).toLocaleDateString()
             : ""}
