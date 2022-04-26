@@ -3,7 +3,6 @@ import { useKartesIndex } from "../../hooks/api/UseKartesIndex";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { KarteCollection } from "./KarteCollection";
-import { KarteSection } from "./KarteSection";
 
 export const KarteCollectionContainer = () => {
   const KARTE_NUM = 2;
