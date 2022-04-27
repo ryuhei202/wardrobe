@@ -25,7 +25,7 @@ pipelines:
               variables:
                 SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
                 SENTRY_ORG: $SENTRY_ORG
-                SENTRY_PROJECT: $SENTRY_ORG
+                SENTRY_PROJECT: $SENTRY_PROJECT
                 # ENVIRONMENT: '<string>' # Optional.
                 # FINALIZE: '<boolean>' # Optional.
                 # DEBUG: '<boolean>' # Optional.
