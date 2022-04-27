@@ -1,7 +1,7 @@
 import SentryPlugin from "@sentry/webpack-plugin";
 
 module.exports = {
-  devtool: "hidden-source-map",
+  devtool: "source-map",
   plugins: [
     new SentryPlugin({
       org: process.env.SENTRY_ORG,
