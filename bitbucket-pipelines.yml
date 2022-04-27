@@ -6,7 +6,7 @@ pipelines:
       - step:
           name: Build
           script:
-            - yarn install && yarn build:staging
+            - yarn install && yarn build:without:sourcemap
           artifacts:
             - build/**
       - step:
@@ -18,6 +18,12 @@ pipelines:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: "staging"
                 DEBUG: "true"
+      - step:
+          name: Build
+          script:
+            - yarn install && yarn build:staging
+          artifacts:
+            - build/**
       - step:
           name: Set Up Sentry
           script:
