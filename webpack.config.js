@@ -8,7 +8,7 @@ module.exports = {
       project: process.env.SENTRY_PROJECT,
       authToken: process.env.SENTRY_AUTH_TOKEN,
       release: process.env.SENTRY_RELEASE,
-      include: "./dist",
+      include: "./src",
     }),
   ],
 };
