@@ -1,31 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-// import { App } from "./components/App";
+import { App } from "./components/App";
 import { reportWebVitals } from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 
 Sentry.init({
-  dsn: "https://b4f86b4f452545ddaaf64d1c905015fe@o1202316.ingest.sentry.io/6327651",
+  dsn: process.env.SENTRY_DSN,
   integrations: [new BrowserTracing()],
   tracesSampleRate: 0,
-  // environment: "development",
+  environment: process.env.NODE_ENV,
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Sentry.ErrorBoundary>
-        {/* <App /> */}
-        <button
-          onClick={() => {
-            throw new Error("エラーーーーーーーーーーーー");
-          }}
-        >
-          エラー
-        </button>
+        <App />
       </Sentry.ErrorBoundary>
     </BrowserRouter>
   </React.StrictMode>,

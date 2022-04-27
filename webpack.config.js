@@ -4,8 +4,8 @@ module.exports = {
   devtool: "source-map",
   plugins: [
     new SentryPlugin({
-      org: "kiizankiizan",
-      project: "wardrobe",
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
       authToken: process.env.SENTRY_AUTH_TOKEN,
       release: process.env.SENTRY_RELEASE,
       include: "./dist",
