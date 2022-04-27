@@ -6,7 +6,23 @@ pipelines:
       - step:
           name: Build
           script:
-            - yarn install && yarn build:without:sourcemap
+            - yarn install && yarn build:staging
+          artifacts:
+            - build/**
+      - step:
+          name: Set up Sentry
+          script:
+            - pipe: sentryio/sentry-new-release:0.3.0
+              variables:
+                SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
+                SENTRY_ORG: $SENTRY_ORG
+                SENTRY_PROJECT: $SENTRY_PROJECT
+                ENVIRONMENT: "staging"
+                DEBUG: "true"
+      - step:
+          name: Delete source map
+          script:
+            - cd build/static/js && find . -name "*.map" -exec rm {} \;
           artifacts:
             - build/**
       - step:
@@ -17,22 +33,6 @@ pipelines:
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: "staging"
-                DEBUG: "true"
-      - step:
-          name: Build
-          script:
-            - yarn install && yarn build:staging
-          artifacts:
-            - build/**
-      - step:
-          name: Set Up Sentry
-          script:
-            - pipe: sentryio/sentry-new-release:0.3.0
-              variables:
-                SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
-                SENTRY_ORG: $SENTRY_ORG
-                SENTRY_PROJECT: $SENTRY_PROJECT
-                ENVIRONMENT: "staging"
                 DEBUG: "true"
     master:
       - step:
