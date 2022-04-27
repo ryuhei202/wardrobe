@@ -20,12 +20,6 @@ pipelines:
                 ENVIRONMENT: "staging"
                 DEBUG: "true"
       - step:
-          name: Delete source map
-          script:
-            - cd build/static/js && find . -name "*.map" -exec rm {} \;
-          artifacts:
-            - build/**
-      - step:
           name: Deploy to Firebase
           deployment: staging
           script:
