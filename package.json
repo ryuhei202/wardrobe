@@ -11,6 +11,8 @@
     "@mui/lab": "^5.0.0-alpha.53",
     "@mui/material": "^5.0.6",
     "@mui/styles": "^5.0.2",
+    "@sentry/react": "^6.19.6",
+    "@sentry/tracing": "^6.19.6",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -76,6 +78,7 @@
     ]
   },
   "devDependencies": {
+    "@sentry/webpack-plugin": "^1.18.8",
     "husky": "^7.0.0"
   }
 }
