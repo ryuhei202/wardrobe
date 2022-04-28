@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Divider,
   List,
   ListItem,
@@ -8,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Coordinate } from "../../model/api/response/styling/coordinate/Coordinate";
+import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
@@ -17,8 +19,17 @@ type TProps = {
 
 export const CoordinateListItem = ({ coordinate, index }: TProps) => {
   return (
-    <>
-      <Typography variant="body2">コーデ{index + 1}</Typography>
+    <Box
+      sx={{
+        marginBottom: 3,
+      }}
+    >
+      <Typography
+        variant="body2"
+        style={{ fontWeight: "bold", marginLeft: 20 }}
+      >
+        コーデ{index + 1}
+      </Typography>
       <ListItem key={coordinate.id}>
         <List dense>
           {coordinate.items.map((item) => (
@@ -42,16 +53,19 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
             </ListItem>
           ))}
         </List>
-        <Divider variant="middle" />
       </ListItem>
       <List dense style={{ marginLeft: 20 }}>
-        <Typography variant="body2">アドバイス</Typography>
+        <Typography variant="body2" style={{ fontWeight: "bold" }}>
+          アドバイス
+        </Typography>
         {coordinate.advices.map((advice, index) => (
-          <p>
+          <p style={{ lineHeight: 0.5, marginLeft: 20 }}>
             {index + 1}. {advice.title}
           </p>
         ))}
       </List>
-    </>
+      <SelectedReviewContainer coordinateId={coordinate.id} />
+      <Divider variant="middle" />
+    </Box>
   );
 };

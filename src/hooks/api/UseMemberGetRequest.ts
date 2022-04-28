@@ -10,12 +10,14 @@ export const useMemberGetRequest = <T, U>(
   data?: T;
   error: Error | null;
 } => {
-  const { data, error } = useQuery<T, Error>(`member/${path}`, () =>
-    axiosClient
-      .get(`${baseUrl()}/styling/members/${memberId}/${path}`, {
-        params,
-      })
-      .then((r) => r.data)
+  const { data, error } = useQuery<T, Error>(
+    [`member/${path}`, { params }],
+    () =>
+      axiosClient
+        .get(`${baseUrl()}/styling/members/${memberId}/${path}`, {
+          params,
+        })
+        .then((r) => r.data)
   );
 
   return {
