@@ -78,7 +78,8 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
           <ReactImageGallery
             showFullscreenButton={false}
             showPlayButton={false}
-            showNav={false}
+            slideDuration={50}
+            showBullets={true}
             items={itemImage.concat(outfitImages).map((image) => {
               return {
                 original: image.originalImagePath,
