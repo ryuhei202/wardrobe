@@ -2,6 +2,7 @@ import { ImagePathResponse } from "../ImagePathResponse";
 import { DetailColorResponse } from "./DetailColorResponse";
 import { DetailSizeResponse } from "./DetailSizeResponse";
 import { DetailSizeItemRecordResponse } from "./DetailSizeItemRecordResponse";
+import { WearingImage } from "./DetailWearingImageResponse";
 
 export interface DetailResponse {
   readonly itemImagePath: ImagePathResponse;
@@ -12,6 +13,6 @@ export interface DetailResponse {
   readonly mainColor: DetailColorResponse;
   readonly subColor: DetailColorResponse;
   readonly sizes: DetailSizeResponse[];
-  readonly outfitImagePaths: ImagePathResponse[];
+  readonly wearingImages: WearingImage[];
   readonly unsizedItemRecords: DetailSizeItemRecordResponse[];
 }

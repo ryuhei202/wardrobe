@@ -19,22 +19,36 @@ interface BrowseDetailProps {
   previousSelectedItemId: number | null;
 }
 
+type itemImageGallery = {
+  originalImagePath: string;
+  thumbnailImagePath: string;
+  itemSize?: string;
+  height?: number;
+};
+
 export const BrowseDetail = (props: BrowseDetailProps) => {
   const classes = useBrowseDetailStyle();
   const handler = useBrowseDetailHandler(props.response, props.callback);
 
-  let itemImage = [
+  let itemImage: itemImageGallery[] = [
     {
       originalImagePath: props.response.itemImagePath.large,
       thumbnailImagePath: props.response.itemImagePath.thumb,
+      itemSize: undefined,
+      height: undefined,
     },
   ];
-  let outfitImages = props.response.outfitImagePaths.map((imagePath) => {
-    return {
-      originalImagePath: imagePath.large,
-      thumbnailImagePath: imagePath.thumb,
-    };
-  });
+
+  let wearingImages: itemImageGallery[] = props.response.wearingImages.map(
+    (wearingImage) => {
+      return {
+        originalImagePath: wearingImage.imagePath.large,
+        thumbnailImagePath: wearingImage.imagePath.thumb,
+        itemSize: wearingImage.itemSize,
+        height: wearingImage.height,
+      };
+    }
+  );
   let dialog;
   if (handler.selectedItem) {
     switch (handler.detailStatus) {
@@ -79,12 +93,16 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
             showFullscreenButton={false}
             showPlayButton={false}
             showNav={false}
-            items={itemImage.concat(outfitImages).map((image) => {
+            items={itemImage.concat(wearingImages).map((image) => {
               return {
                 original: image.originalImagePath,
                 thumbnail: image.thumbnailImagePath,
                 originalWidth: 400,
                 originalHeight: 600,
+                description:
+                  image.itemSize && image.height
+                    ? `H${image.height} 着用サイズ${image.itemSize}`
+                    : undefined,
               };
             })}
           />
