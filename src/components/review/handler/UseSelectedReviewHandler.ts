@@ -7,14 +7,14 @@ type SelectedReviewHanlderArgs = {
 };
 
 type SelectedReviewHandler = {
-  readonly SelectedReviewFormCallback: () => SelectedReviewFormCallback;
+  readonly selectedReviewFormCallback: () => SelectedReviewFormCallback;
 };
 export const useSelectedReviewHandler = ({
   setSeverity,
   setIsSnackBarOpen,
   setSnackBarText,
 }: SelectedReviewHanlderArgs): SelectedReviewHandler => {
-  const SelectedReviewFormCallback = (): SelectedReviewFormCallback => {
+  const selectedReviewFormCallback = (): SelectedReviewFormCallback => {
     return {
       onSuccess: () => {
         setSeverity("success");
@@ -29,6 +29,6 @@ export const useSelectedReviewHandler = ({
     };
   };
   return {
-    SelectedReviewFormCallback,
+    selectedReviewFormCallback,
   };
 };

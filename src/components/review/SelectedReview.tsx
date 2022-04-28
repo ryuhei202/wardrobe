@@ -26,7 +26,7 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
     undefined
   );
   const [isUrlEditing, setIsUrlEditing] = useState<boolean>(false);
-  const { SelectedReviewFormCallback } = useSelectedReviewHandler({
+  const { selectedReviewFormCallback } = useSelectedReviewHandler({
     setSeverity,
     setIsSnackBarOpen,
     setSnackBarText,
@@ -68,7 +68,7 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
           <Box component="form">
             {isUrlEditing ? (
               <LineMessageUrlForm
-                callback={SelectedReviewFormCallback()}
+                callback={selectedReviewFormCallback()}
                 lineMessageUrl={data.review?.lineMessageUrl}
                 coordinateId={coordinateId}
                 setIsUrlEditing={setIsUrlEditing}
