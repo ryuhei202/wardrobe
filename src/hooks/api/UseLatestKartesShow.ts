@@ -13,10 +13,10 @@ type TLatestKartesShowArg = {
 export const useLatestKartesShow = ({
   memberId,
 }: TLatestKartesShowArg): LatestKartesShow => {
-  const { data, error } = useMemberGetRequest<LatestKarteShowResponse>({
-    memberId,
-    path: "latest_kartes",
-  });
+  const { data, error } = useMemberGetRequest<
+    LatestKarteShowResponse,
+    undefined
+  >("latest_kartes", memberId);
 
   return {
     data,
