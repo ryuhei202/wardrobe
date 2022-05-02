@@ -5,7 +5,7 @@ import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { KarteCollection } from "./KarteCollection";
 
 export const KarteCollectionContainer = () => {
-  const KARTE_NUM = 2;
+  const KARTE_NUM = 1;
   const { data, error } = useKartesIndex({
     memberId: useContextDefinedState(MemberIdContext),
     limit: KARTE_NUM,
