@@ -75,7 +75,11 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
               />
             ) : (
               <>
-                <a href={data.review?.lineMessageUrl ?? ""} target="_blank">
+                <a
+                  href={data.review?.lineMessageUrl ?? ""}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {data.review?.lineMessageUrl ?? ""}
                 </a>
                 <EditIcon
