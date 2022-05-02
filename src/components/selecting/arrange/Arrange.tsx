@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useCoordinatesUpdate } from "../../../hooks/api/UseCoordinatesUpdate";
-import { CoordinateShowResponse } from "../../../model/api/response/styling/coordinate/CoordinateShowResponse";
+import { useCoordinatesBulkUpdate } from "../../../hooks/api/UseCoordinatesBulkUpdate";
+import { CoordinateIndexResponse } from "../../../model/api/response/styling/coordinate/CoordinateIndexResponse";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
 import { ChartIdContext } from "../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../context/UseContextDefinedState";
@@ -22,7 +22,7 @@ import { useArrangeStyle } from "./style/UseArrangeStyle";
 
 export interface ArrangeProps {
   data: ArrangeData;
-  response: CoordinateShowResponse;
+  response: CoordinateIndexResponse;
   callback: ArrangeCallback;
 }
 
@@ -30,7 +30,7 @@ export const Arrange = (props: ArrangeProps) => {
   const chartId = useContextDefinedState(ChartIdContext);
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
-  const { mutate, isLoading, isSuccess } = useCoordinatesUpdate({
+  const { mutate, isLoading, isSuccess } = useCoordinatesBulkUpdate({
     coordinates: handler.coordinates,
     chartId,
   });

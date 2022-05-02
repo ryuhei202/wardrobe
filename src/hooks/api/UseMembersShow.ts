@@ -11,10 +11,10 @@ type TMembersShowArg = {
 };
 
 export const useMembersShow = ({ memberId }: TMembersShowArg): TMembersShow => {
-  const { data, error } = useMemberGetRequest<MemberShowResponse>({
-    memberId,
-    path: "",
-  });
+  const { data, error } = useMemberGetRequest<MemberShowResponse, undefined>(
+    "",
+    memberId
+  );
 
   return {
     data,

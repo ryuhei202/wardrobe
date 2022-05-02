@@ -2,14 +2,15 @@ import { CircularProgress, Typography } from "@mui/material";
 import { useKartesIndex } from "../../hooks/api/UseKartesIndex";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { KarteSection } from "./KarteSection";
+import { KarteCollection } from "./KarteCollection";
 
-export const KarteSectionContainer = () => {
+export const KarteCollectionContainer = () => {
+  const KARTE_NUM = 2;
   const { data, error } = useKartesIndex({
     memberId: useContextDefinedState(MemberIdContext),
+    limit: KARTE_NUM,
   });
-
   if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
-  return <KarteSection response={data} />;
+  return <KarteCollection response={data} />;
 };
