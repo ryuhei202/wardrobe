@@ -1,4 +1,4 @@
-import { Alert, Box, Snackbar } from "@mui/material";
+import { Alert, Box, Snackbar, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
 import { MemberMemoShowResponse } from "../../model/api/response/styling/member_memo/MemberMemoShowResponse";
@@ -49,6 +49,9 @@ export const MemberMemo = ({ response }: Props) => {
         noValidate
         autoComplete="off"
       >
+        <Box sx={{ m: 1, position: "relative" }}>
+          <Typography>{response.lineSurveyNext}</Typography>
+        </Box>
         <MemberMemoForm
           label="次回コーデに関して"
           value={memoNext}

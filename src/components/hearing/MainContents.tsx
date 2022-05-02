@@ -5,8 +5,8 @@ import { MemberMemoContainer } from "../memberMemo/MemberMemoContainer";
 import { HearingLayoutContainer } from "./HearingLayoutContainer";
 
 const TABS = [
-  { label: "フィードバック", content: <FeedbacksContainer /> },
-  { label: "ヒアリング", content: <HearingLayoutContainer /> },
+  // TODO: 必要になったらコメントアウト { label: "フィードバック", content: <FeedbacksContainer /> },
+  // TODO: 必要になったらコメントアウト { label: "ヒアリング", content: <HearingLayoutContainer /> },
   { label: "メモ", content: <MemberMemoContainer /> },
 ];
 
