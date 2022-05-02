@@ -1,8 +1,6 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { FeedbacksContainer } from "../feedback/FeedbacksContainer";
 import { MemberMemoContainer } from "../memberMemo/MemberMemoContainer";
-import { HearingLayoutContainer } from "./HearingLayoutContainer";
 
 const TABS = [
   // TODO: 必要になったらコメントアウト { label: "フィードバック", content: <FeedbacksContainer /> },
