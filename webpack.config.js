@@ -4,9 +4,9 @@ module.exports = {
   devtool: "source-map",
   plugins: [
     new SentryPlugin({
-      org: process.env.SENTRY_ORG,
-      project: process.env.SENTRY_PROJECT,
-      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: process.env.REACT_APP_SENTRY_ORG,
+      project: process.env.REACT_APP_SENTRY_PROJECT,
+      authToken: process.env.REACT_APP_SENTRY_AUTH_TOKEN,
       include: ".",
     }),
   ],
