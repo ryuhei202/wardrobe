@@ -21,11 +21,6 @@ ReactDOM.render(
         <App />
         <button
           onClick={() => {
-            console.log(String(process.env.REACT_APP_HOST_URL));
-            console.log(String(process.env.REACT_APP_SENTRY_DSN));
-            console.log(String(process.env.REACT_APP_SENTRY_ORG));
-            console.log(String(process.env.REACT_APP_SENTRY_PROJECT));
-            console.log(String(process.env.REACT_APP_SENTRY_AUTH_TOKEN));
             throw new Error("えらあああ");
           }}
         >
