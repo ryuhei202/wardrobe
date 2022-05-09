@@ -19,13 +19,6 @@ ReactDOM.render(
     <BrowserRouter>
       <Sentry.ErrorBoundary>
         <App />
-        <button
-          onClick={() => {
-            throw new Error("えらあああ");
-          }}
-        >
-          エラー
-        </button>
       </Sentry.ErrorBoundary>
     </BrowserRouter>
   </React.StrictMode>,
