@@ -46,7 +46,7 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
               </ListItemAvatar>
               <ListItemText
                 primary={`${item.id}: ${item.categoryName}、${item.mainColorName}(${item.subColorName})`}
-                secondary={`${item.partSizes
+                secondary={`サイズ:${item.size}, ${item.partSizes
                   .filter((partSize) => partSize.value !== null)
                   .map((partSize) => `${partSize.name}(${partSize.value})`)}`}
               />
