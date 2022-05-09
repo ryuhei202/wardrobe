@@ -28,7 +28,7 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
         variant="body2"
         style={{ fontWeight: "bold", marginLeft: 20 }}
       >
-        コーデ{index + 1}
+        コーデパターン{index + 1}
       </Typography>
       <ListItem key={coordinate.id}>
         <List dense>
