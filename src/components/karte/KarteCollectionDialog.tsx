@@ -2,17 +2,17 @@ import { Dialog, DialogTitle } from "@mui/material";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
 import { KarteCollection } from "./KarteCollection";
 
-type Props = {
-  isOpen: boolean;
+type TProps = {
   response: KarteIndexResponse[];
-  onClose: () => void;
+  isOpen: boolean;
+  setter: React.Dispatch<boolean>;
 };
 
-export const KarteCollectionDialog = (props: Props) => {
+export const KarteCollectionDialog = ({ response, isOpen, setter }: TProps) => {
   return (
-    <Dialog onClose={props.onClose} open={props.isOpen}>
+    <Dialog onClose={() => setter(false)} open={isOpen}>
       <DialogTitle>過去コーデ一覧</DialogTitle>
-      <KarteCollection response={props.response} />
+      <KarteCollection response={response} />
     </Dialog>
   );
 };

@@ -1,18 +1,18 @@
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
-import { Coordinate } from "../../model/selecting/arrange/Coordinate";
+import { CoordinateBulkUpdateRequest } from "../../model/api/request/styling/coordinate/CoordinateBulkUpdateRequest";
 import { usePatchRequest } from "./UsePatchRequest";
 
 type PostCreateOutfitParams = {
-  coordinates: Coordinate[];
+  coordinates: CoordinateBulkUpdateRequest[];
 };
 
 type TArrangesCreateOutfitsArg = {
   chartId: number;
-  coordinates: Coordinate[];
+  coordinates: CoordinateBulkUpdateRequest[];
 };
 
-export const useCoordinatesUpdate = ({
+export const useCoordinatesBulkUpdate = ({
   coordinates,
   chartId,
 }: TArrangesCreateOutfitsArg): {
@@ -22,20 +22,11 @@ export const useCoordinatesUpdate = ({
   isSuccess: boolean;
 } => {
   const params = (): PostCreateOutfitParams => {
-    return {
-      coordinates: coordinates.map((coordinate) => {
-        return {
-          id: coordinate.id,
-          itemIds: coordinate.itemIds,
-          adviceIds: coordinate.adviceIds,
-          formalLevel: coordinate.formalLevel,
-        };
-      }),
-    };
+    return { coordinates };
   };
 
   const { mutate, error, isLoading, isSuccess } = usePatchRequest(
-    `kartes/${chartId}/coordinate`,
+    `kartes/${chartId}/coordinates/bulk_update`,
     params()
   );
 

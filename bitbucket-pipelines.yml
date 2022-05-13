@@ -18,6 +18,16 @@ pipelines:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: "staging"
                 DEBUG: "true"
+      - step:
+          name: Set up Sentry
+          script:
+            - pipe: sentryio/sentry-new-release:0.3.0
+              variables:
+                SENTRY_AUTH_TOKEN: $REACT_APP_SENTRY_AUTH_TOKEN
+                SENTRY_ORG: $REACT_APP_SENTRY_ORG
+                SENTRY_PROJECT: $REACT_APP_SENTRY_PROJECT
+                ENVIRONMENT: "staging"
+                DEBUG: "true"
     master:
       - step:
           name: Build
@@ -33,4 +43,14 @@ pipelines:
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: "production"
+                DEBUG: "true"
+      - step:
+          name: Set Up Sentry
+          script:
+            - pipe: sentryio/sentry-new-release:0.3.0
+              variables:
+                SENTRY_AUTH_TOKEN: $REACT_APP_SENTRY_AUTH_TOKEN
+                SENTRY_ORG: $REACT_APP_SENTRY_ORG
+                SENTRY_PROJECT: $REACT_APP_SENTRY_PROJECT
+                ENVIRONMENT: "production"
                 DEBUG: "true"

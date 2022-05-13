@@ -1,15 +1,15 @@
-import { CoordinateShowResponse } from "./../../../../model/api/response/styling/coordinate/CoordinateShowResponse";
+import { CoordinateBulkUpdateRequest } from "./../../../../model/api/request/styling/coordinate/CoordinateBulkUpdateRequest";
 import { alertClosedWindow } from "./../../../../service/shared/alertClosedWindow";
-import { Coordinate } from "../../../../model/selecting/arrange/Coordinate";
 import { useCallback, useEffect, useState } from "react";
 import { AddedOutfitListData } from "../../../../model/selecting/arrange/props_data/AddedOutfitListData";
 import { SelectedItem } from "../../../../model/selecting/SelectedItem";
 import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
 import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
+import { CoordinateIndexResponse } from "../../../../model/api/response/styling/coordinate/CoordinateIndexResponse";
 
 export interface ArrangeHandler {
-  coordinates: Coordinate[];
+  coordinates: CoordinateBulkUpdateRequest[];
   editingOutfitIndex: number;
   addedOutfitListData: () => AddedOutfitListData;
   addedOutfitListCallback: () => AddedOutfitListCallback;
@@ -20,7 +20,7 @@ export interface ArrangeHandler {
 
 export const useArrangeHandler = (
   items: SelectedItem[],
-  responses: CoordinateShowResponse
+  responses: CoordinateIndexResponse
 ): ArrangeHandler => {
   const defaultCoordinate = {
     id: null,
@@ -29,14 +29,23 @@ export const useArrangeHandler = (
     formalLevel: 0,
   };
 
-  const [coordinates, setCoordinates] = useState<Coordinate[]>(
-    responses.selectedCoordinates
-  );
+  const formattedCoordinates = (): CoordinateBulkUpdateRequest[] => {
+    return responses.selectedCoordinates.map((coordinate) => {
+      return {
+        id: coordinate.id,
+        itemIds: coordinate.items.map((item) => item.id),
+        adviceIds: coordinate.advices.map((advice) => advice.id),
+        formalLevel: coordinate.formalLevel,
+      };
+    });
+  };
+  const [coordinates, setCoordinates] =
+    useState<CoordinateBulkUpdateRequest[]>(formattedCoordinates);
   const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(
     coordinates.length
   );
   const [editingOutfit, setEditingOutfit] =
-    useState<Coordinate>(defaultCoordinate);
+    useState<CoordinateBulkUpdateRequest>(defaultCoordinate);
   const [isPostComplete, setIsPostComplete] = useState(false);
   const onPostComplete = useCallback(() => setIsPostComplete(true), []);
 

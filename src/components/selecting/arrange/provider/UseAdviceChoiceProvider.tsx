@@ -1,5 +1,5 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useCoordinatesShow } from "../../../../hooks/api/UseCoordinatesShow";
+import { useCoordinatesIndex } from "../../../../hooks/api/UseCoordinatesIndex";
 import { ArrangeData } from "../../../../model/selecting/arrange/props_data/ArrangeData";
 import { ChartIdContext } from "../../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../../context/UseContextDefinedState";
@@ -18,7 +18,7 @@ export const useAdviceChoiceProvider = (): AdviceChoiceProvider => {
     data: response,
     error,
     isFetching,
-  } = useCoordinatesShow({
+  } = useCoordinatesIndex({
     chartId: useContextDefinedState(ChartIdContext),
   });
 

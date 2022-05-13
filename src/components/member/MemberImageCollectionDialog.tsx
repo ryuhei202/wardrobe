@@ -20,6 +20,7 @@ export const MemberImageCollectionDialog = (
         additionalClass={classes.imageGallery}
         showFullscreenButton={false}
         showPlayButton={false}
+        slideDuration={50}
         thumbnailPosition="left"
         items={props.data.imageResponses.map((image) => {
           return {

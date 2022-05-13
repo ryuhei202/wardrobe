@@ -3,30 +3,23 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import { App } from "./components/App";
 import { reportWebVitals } from "./reportWebVitals";
-import Bugsnag from "@bugsnag/js";
-import BugsnagPluginReact from "@bugsnag/plugin-react";
 import { BrowserRouter } from "react-router-dom";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 
-if (process.env.NODE_ENV === "production") {
-  Bugsnag.start({
-    apiKey: process.env.REACT_APP_BUGSNAG_API_KEY || "",
-    plugins: [new BugsnagPluginReact()],
-    enabledReleaseStages: ["production", "staging"],
-    releaseStage: process.env.REACT_APP_ENV,
-  });
-}
-const ErrorBoundary = Bugsnag.getPlugin("react")?.createErrorBoundary(React);
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_DSN,
+  integrations: [new BrowserTracing()],
+  tracesSampleRate: 0,
+  environment: process.env.REACT_APP_ENV,
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      {ErrorBoundary ? (
-        <ErrorBoundary>
-          <App />
-        </ErrorBoundary>
-      ) : (
+      <Sentry.ErrorBoundary>
         <App />
-      )}
+      </Sentry.ErrorBoundary>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

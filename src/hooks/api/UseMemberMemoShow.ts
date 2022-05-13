@@ -13,10 +13,10 @@ type TMemberMemoShowArg = {
 export const useMemberMemoShow = ({
   memberId,
 }: TMemberMemoShowArg): MemberMemoShow => {
-  const { data, error } = useMemberGetRequest<MemberMemoShowResponse>({
-    memberId,
-    path: "member_memo",
-  });
+  const { data, error } = useMemberGetRequest<
+    MemberMemoShowResponse,
+    undefined
+  >("member_memo", memberId);
 
   return {
     data,

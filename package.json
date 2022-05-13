@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bugsnag/js": "^7.14.1",
-    "@bugsnag/plugin-react": "^7.14.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.5",
     "@mui/lab": "^5.0.0-alpha.53",
     "@mui/material": "^5.0.6",
     "@mui/styles": "^5.0.2",
+    "@sentry/react": "^6.19.6",
+    "@sentry/tracing": "^6.19.6",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -44,7 +44,7 @@
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
-    "build": "react-scripts build",
+    "build": "REACT_APP_ENV=production react-scripts build",
     "build:staging": "REACT_APP_ENV=staging react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -76,6 +76,7 @@
     ]
   },
   "devDependencies": {
+    "@sentry/webpack-plugin": "^1.18.8",
     "husky": "^7.0.0"
   }
 }
