@@ -65,15 +65,10 @@ export const MemberMemo = ({ response }: Props) => {
         noValidate
         autoComplete="off"
       >
-        <Box>
+        <div>
           <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
             次回コーデに関して
           </Typography>
-          <Box sx={{ m: 1, position: "relative" }}>
-            <Typography variant="subtitle2">
-              自動ヒアリング: {response.lineSurveyNext || "未回答"}
-            </Typography>
-          </Box>
           <MemberMemoForm
             label="次回コーデに関して"
             value={memoNext}
@@ -81,6 +76,11 @@ export const MemberMemo = ({ response }: Props) => {
             onChange={setMemoNext}
             onPost={handlePost}
           />
+          <Box sx={{ m: 1, position: "relative" }}>
+            <Typography variant="subtitle2">
+              自動ヒアリング: {response.lineSurveyNext || "未回答"}
+            </Typography>
+          </Box>
           <FormControlLabel
             value="end"
             control={
@@ -106,15 +106,21 @@ export const MemberMemo = ({ response }: Props) => {
             }
             labelPlacement="end"
           />
-        </Box>
-        <MemberMemoForm
-          label="その他メモ"
-          value={memo}
-          disabled={response.memo === memo || isLoading}
-          onChange={setMemo}
-          onPost={handlePost}
-        />
+        </div>
+        <div>
+          <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+            その他メモ
+          </Typography>
+          <MemberMemoForm
+            label="その他メモ"
+            value={memo}
+            disabled={response.memo === memo || isLoading}
+            onChange={setMemo}
+            onPost={handlePost}
+          />
+        </div>
       </Box>
+
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={5000}
