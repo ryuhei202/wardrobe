@@ -1,8 +1,8 @@
-import { TNextHearingCoorde } from "./NextHearingCoorde";
+import { TNextCoordeHearing } from "./NextCoordeHearing";
 
 export interface MemberMemoShowResponse {
   readonly memo: string;
   readonly memoNext: string;
   readonly lineSurveyNext: string | null;
-  readonly nextHearingCoorde: TNextHearingCoorde;
+  readonly nextCoordeHearing: TNextCoordeHearing;
 }
