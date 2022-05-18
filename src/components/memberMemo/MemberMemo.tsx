@@ -65,10 +65,14 @@ export const MemberMemo = ({ response }: Props) => {
         noValidate
         autoComplete="off"
       >
-        <div>
+        <Box>
+          <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+            次回コーデに関して
+          </Typography>
           <Box sx={{ m: 1, position: "relative" }}>
-            自動ヒアリング:{" "}
-            <Typography>{response.lineSurveyNext ?? "未回答"}</Typography>
+            <Typography variant="subtitle2">
+              自動ヒアリング: {response.lineSurveyNext || "未回答"}
+            </Typography>
           </Box>
           <MemberMemoForm
             label="次回コーデに関して"
@@ -90,17 +94,19 @@ export const MemberMemo = ({ response }: Props) => {
                   );
                   handlePost();
                 }}
-                inputProps={{ "aria-label": "controlled" }}
+                size="small"
               />
             }
             label={
-              nextCoordeHearing
-                ? "次回ヒアリング完了済み"
-                : "次回ヒアリング未完了"
+              <Typography variant="subtitle2">
+                {nextCoordeHearing
+                  ? "次回ヒアリング完了済み"
+                  : "次回ヒアリング未完了"}
+              </Typography>
             }
             labelPlacement="end"
           />
-        </div>
+        </Box>
         <MemberMemoForm
           label="その他メモ"
           value={memo}
