@@ -8,6 +8,14 @@ type TProps = {
 };
 
 export const Karte = ({ data, index }: TProps) => {
+  const memoNext = data.memoNext?.split("\n").map((memo) => {
+    return (
+      <>
+        {memo}
+        <br />
+      </>
+    );
+  });
   return (
     <ListItem key={index}>
       <ListItemText>
@@ -20,6 +28,16 @@ export const Karte = ({ data, index }: TProps) => {
         </Typography>
         <br />
         <CoordinateContainer chartId={data.id} />
+        <div style={{ marginLeft: 20 }}>
+          <Typography variant="body2" style={{ fontWeight: "bold" }}>
+            次回コーデに関して
+          </Typography>
+          <Typography
+            style={{ fontSize: 11, fontWeight: "550", paddingLeft: 10 }}
+          >
+            {memoNext ?? "未回答"}
+          </Typography>
+        </div>
       </ListItemText>
     </ListItem>
   );
