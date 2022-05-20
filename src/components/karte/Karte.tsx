@@ -8,14 +8,6 @@ type TProps = {
 };
 
 export const Karte = ({ data, index }: TProps) => {
-  const memoNext = data.memoNext?.split("\n").map((memo) => {
-    return (
-      <>
-        {memo}
-        <br />
-      </>
-    );
-  });
   return (
     <ListItem key={index}>
       <ListItemText>
@@ -33,9 +25,14 @@ export const Karte = ({ data, index }: TProps) => {
             次回コーデに関して
           </Typography>
           <Typography
-            style={{ fontSize: 11, fontWeight: "550", paddingLeft: 10 }}
+            style={{
+              fontSize: 11,
+              fontWeight: "600",
+              paddingLeft: 10,
+              whiteSpace: "pre-wrap",
+            }}
           >
-            {memoNext ?? "未回答"}
+            {data.memoNext ?? "未回答"}
           </Typography>
         </div>
       </ListItemText>
