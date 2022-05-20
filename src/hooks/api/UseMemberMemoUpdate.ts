@@ -1,6 +1,7 @@
 import { useMemberPutRequest } from "./UseMemberPutRequest";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
+import { TNextCoordeHearing } from "../../model/api/response/styling/member_memo/NextCoordeHearing";
 
 type MemberMemoUpdate = {
   readonly mutate: UseMutateFunction<AxiosResponse>;
@@ -10,6 +11,7 @@ type MemberMemoUpdate = {
 type TMemberMemoUpdateParams = {
   memo?: string;
   memoNext?: string;
+  nextCoordeHearing: TNextCoordeHearing;
 };
 
 type TMemberMemoUpdateArg = {
@@ -20,8 +22,9 @@ export const useMemberMemoUpdate = ({
   memberId,
   memo,
   memoNext,
+  nextCoordeHearing,
 }: TMemberMemoUpdateArg): MemberMemoUpdate => {
-  const params: TMemberMemoUpdateParams = { memo, memoNext };
+  const params: TMemberMemoUpdateParams = { memo, memoNext, nextCoordeHearing };
   const { mutate, isLoading } = useMemberPutRequest({
     memberId,
     params,
