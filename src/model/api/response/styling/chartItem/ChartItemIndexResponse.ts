@@ -1,8 +1,5 @@
-import { ImagePathResponse } from "./../ImagePathResponse";
+import { ChartItem } from "./ChartItem";
 
 export type ChartItemIndexResposne = {
-  readonly id: number;
-  readonly imagePaths: ImagePathResponse;
-  readonly cateMediumId: number;
-  readonly cateSmallId: number;
+  readonly chartItems: ChartItem[];
 };
