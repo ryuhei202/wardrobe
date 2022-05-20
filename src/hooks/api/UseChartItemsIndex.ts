@@ -14,7 +14,7 @@ export const useChartItemsIndex = ({
   chartId,
 }: TChartItemsIndexArg): TChartItemsIndex => {
   const { data, error } = useKarteGetRequest<ChartItemIndexResponse>({
-    path: "item_feedbacks",
+    path: "chart_items",
     chartId,
     isEnabled: chartId !== undefined,
   });
