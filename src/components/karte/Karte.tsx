@@ -20,6 +20,21 @@ export const Karte = ({ data, index }: TProps) => {
         </Typography>
         <br />
         <CoordinateContainer chartId={data.id} />
+        <div style={{ marginLeft: 20 }}>
+          <Typography variant="body2" style={{ fontWeight: "bold" }}>
+            次回コーデに関して
+          </Typography>
+          <Typography
+            style={{
+              fontSize: 11,
+              fontWeight: "600",
+              paddingLeft: 10,
+              whiteSpace: "pre-wrap",
+            }}
+          >
+            {data.memoNext ?? "未回答"}
+          </Typography>
+        </div>
       </ListItemText>
     </ListItem>
   );
