@@ -1,5 +1,5 @@
 import { ChartItem } from "./ChartItem";
 
-export type ChartItemIndexResposne = {
+export type ChartItemIndexResponse = {
   readonly chartItems: ChartItem[];
 };
