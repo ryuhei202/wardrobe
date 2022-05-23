@@ -10,6 +10,7 @@ import {
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
 import { SizeNg } from "../../model/api/request/styling/ng/SizeNg";
 import { NgNewResponse } from "../../model/api/response/styling/ng/NgNewResponse";
+import { NG_CATEGORY } from "../../model/selecting/ng/NgCategory";
 import { CategoryNgDetailForm } from "./CategoryNgDetailForm";
 import { SizeNgDetailForm } from "./SizeNgDetailForm";
 
@@ -34,12 +35,9 @@ export const NgDetailForm = ({
   onCategoryNgChanged,
   onTextChanged,
 }: TProps) => {
-  const SIZE_NG = 1;
-  const ITEM_CATEGORY_NG = 2;
-
   let ngFormContents;
   switch (ngCategoryId) {
-    case SIZE_NG:
+    case NG_CATEGORY.SIZE_NG:
       ngFormContents = (
         <SizeNgDetailForm
           ngData={ngData}
@@ -48,7 +46,7 @@ export const NgDetailForm = ({
         />
       );
       break;
-    case ITEM_CATEGORY_NG:
+    case NG_CATEGORY.ITEM_CATEGORY_NG:
       ngFormContents = (
         <CategoryNgDetailForm
           ngData={ngData}

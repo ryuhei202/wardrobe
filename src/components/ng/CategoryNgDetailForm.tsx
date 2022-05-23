@@ -39,6 +39,7 @@ export const CategoryNgDetailForm = ({
             onCategoryNgChanged({
               ...itemCategoryNg,
               cateMediumId: event.target.value as number,
+              cateSmallId: undefined,
             })
           }
         >

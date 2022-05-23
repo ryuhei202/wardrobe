@@ -10,9 +10,10 @@ import { ChartItemIndexResponse } from "../../model/api/response/styling/chartIt
 
 type TProps = {
   readonly chartItemsData: ChartItemIndexResponse;
+  readonly onChange: (chartItemId: number) => void;
 };
 
-export const NgChartItemForm = ({ chartItemsData }: TProps) => {
+export const NgChartItemForm = ({ chartItemsData, onChange }: TProps) => {
   return (
     <Box
       sx={{
@@ -28,6 +29,7 @@ export const NgChartItemForm = ({ chartItemsData }: TProps) => {
           {chartItemsData.chartItems.map((chartItem) => (
             <FormControlLabel
               value={chartItem.id}
+              onChange={() => onChange(chartItem.id)}
               control={<Radio />}
               label={<img src={chartItem.imagePaths.thumb ?? undefined} />}
               labelPlacement="bottom"

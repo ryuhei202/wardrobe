@@ -16,6 +16,7 @@ import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryN
 import { SizeNg } from "../../model/api/request/styling/ng/SizeNg";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
 import { NgCategoryIndexResponse } from "../../model/api/response/styling/ngCategory/NgCategoryIndexResponse";
+import { NG_CATEGORY } from "../../model/selecting/ng/NgCategory";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { NgChartItemForm } from "./NgChartItemForm";
@@ -37,6 +38,7 @@ export const CreateNgMemoDialog = ({
     undefined
   );
   const [freeText, setFreetext] = useState<string>("");
+  const [chartItemId, setChartItemId] = useState<number | undefined>(undefined);
   const [targetChartId, setTargetChartId] = useState<number | undefined>(
     undefined
   );
@@ -44,6 +46,7 @@ export const CreateNgMemoDialog = ({
     ItemCategoryNg | undefined
   >(undefined);
   const [sizeNg, setSizeNg] = useState<SizeNg | undefined>(undefined);
+
   const { data: chartItemsData, error: chartItemsError } = useChartItemsIndex({
     chartId: targetChartId,
   });
@@ -54,11 +57,32 @@ export const CreateNgMemoDialog = ({
 
   const handleChangeNgCategory = (value: number) => {
     setNgCategoryId(value);
-    value == 2
+    value == NG_CATEGORY.ITEM_CATEGORY_NG
       ? setItemCategoryNg({ isOnlyJacketPlan: false })
       : setItemCategoryNg(undefined);
     setSizeNg(undefined);
   };
+
+  const isValidAboutChart =
+    targetChartId !== undefined ? chartItemId === undefined : false;
+  const isValidAboutNgCategoryId = (): boolean => {
+    switch (ngCategoryId) {
+      case undefined:
+        return true;
+      case NG_CATEGORY.SIZE_NG:
+        const isValidItemPart = sizeNg?.itemPart
+          ? sizeNg?.itemPartSize === undefined &&
+            sizeNg?.inequalitySign === undefined
+          : false;
+        return sizeNg?.cateMediumId === undefined || isValidItemPart;
+      case NG_CATEGORY.ITEM_CATEGORY_NG:
+        return itemCategoryNg?.cateSmallId === undefined;
+      default:
+        return false;
+    }
+  };
+  const isDisabled: boolean = isValidAboutNgCategoryId() || isValidAboutChart;
+
   return (
     <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>新規NGメモ追加</DialogTitle>
@@ -76,9 +100,10 @@ export const CreateNgMemoDialog = ({
             <InputLabel>対象カルテ</InputLabel>
             <Select
               style={{ width: 400 }}
-              onChange={(event) =>
-                setTargetChartId(event.target.value as number | undefined)
-              }
+              onChange={(event) => {
+                setTargetChartId(event.target.value as number | undefined);
+                setChartItemId(undefined);
+              }}
             >
               <MenuItem value={undefined}>対象カルテなし</MenuItem>
               {karteData.map((karte) => (
@@ -113,7 +138,10 @@ export const CreateNgMemoDialog = ({
           </FormControl>
         </Box>
         {chartItemsData && targetChartId && (
-          <NgChartItemForm chartItemsData={chartItemsData} />
+          <NgChartItemForm
+            chartItemsData={chartItemsData}
+            onChange={(chartItemId: number) => setChartItemId(chartItemId)}
+          />
         )}
         {ngData && ngCategoryId && (
           <NgDetailForm
@@ -138,7 +166,7 @@ export const CreateNgMemoDialog = ({
             textAlign: "right",
           }}
         >
-          <Button color="secondary" variant="contained">
+          <Button color="secondary" variant="contained" disabled={isDisabled}>
             登録
           </Button>
         </Box>

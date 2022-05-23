@@ -70,10 +70,13 @@ export const SizeNgDetailForm = ({
             onChange={(event) =>
               onSizeNgChanged({
                 ...sizeNg,
-                itemPart: event.target.value as number,
+                itemPart: event.target.value as number | undefined,
+                itemPartSize: undefined,
+                inequalitySign: undefined,
               })
             }
           >
+            <MenuItem value={undefined}>入力しない</MenuItem>
             {ngData.itemParts?.map((itemPart) => (
               <MenuItem value={itemPart.id}>{itemPart.name}</MenuItem>
             ))}
@@ -82,7 +85,9 @@ export const SizeNgDetailForm = ({
         <TextField
           label="サイズ"
           type="number"
+          disabled={sizeNg?.itemPart === undefined}
           style={{ width: 150 }}
+          value={sizeNg?.itemPartSize ?? ""}
           onChange={(event) =>
             onSizeNgChanged({
               ...sizeNg,
@@ -96,13 +101,16 @@ export const SizeNgDetailForm = ({
           {/* 以上、以下の時にwardrobeで出るのか出ないのか戸惑う時があるので、明記してくれたら嬉しい */}
           <Select
             style={{ width: 120 }}
+            disabled={sizeNg?.itemPart === undefined}
+            value={sizeNg?.inequalitySign ?? ""}
             onChange={(event) =>
               onSizeNgChanged({
                 ...sizeNg,
-                inequalitySign: event.target.value as number,
+                inequalitySign: event.target.value as number | undefined,
               })
             }
           >
+            <MenuItem value={undefined}></MenuItem>
             <MenuItem value={OR_OVER}>以上</MenuItem>
             <MenuItem value={OR_UNDER}>以下</MenuItem>
           </Select>
