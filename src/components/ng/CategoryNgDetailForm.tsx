@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
+import { ChartItem } from "../../model/api/response/styling/chartItem/ChartItem";
 import { NgNewResponse } from "../../model/api/response/styling/ng/NgNewResponse";
 
 type TProps = {
@@ -35,6 +36,7 @@ export const CategoryNgDetailForm = ({
         <InputLabel>中カテゴリ一覧</InputLabel>
         <Select
           style={{ width: 400 }}
+          value={itemCategoryNg?.cateMediumId ?? ""}
           onChange={(event) =>
             onCategoryNgChanged({
               ...itemCategoryNg,
@@ -43,6 +45,7 @@ export const CategoryNgDetailForm = ({
             })
           }
         >
+          <MenuItem value=""></MenuItem>
           {ngData.itemMediumCategories?.map((mediumCategory) => (
             <MenuItem value={mediumCategory.id}>{mediumCategory.name}</MenuItem>
           ))}
@@ -62,6 +65,7 @@ export const CategoryNgDetailForm = ({
         <InputLabel>小カテゴリ一覧</InputLabel>
         <Select
           style={{ width: 400 }}
+          value={itemCategoryNg?.cateSmallId ?? ""}
           onChange={(event) =>
             onCategoryNgChanged({
               ...itemCategoryNg,
@@ -69,6 +73,7 @@ export const CategoryNgDetailForm = ({
             })
           }
         >
+          <MenuItem value=""></MenuItem>
           {ngData.itemMediumCategories
             ?.find((c) => c.id === itemCategoryNg.cateMediumId)
             ?.itemSmallCategories?.map((smallCategory) => (

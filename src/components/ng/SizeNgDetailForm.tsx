@@ -39,6 +39,7 @@ export const SizeNgDetailForm = ({
           <InputLabel>中カテゴリ一覧</InputLabel>
           <Select
             style={{ width: 400 }}
+            value={sizeNg?.cateMediumId ?? ""}
             onChange={(event) =>
               onSizeNgChanged({
                 ...sizeNg,
@@ -46,6 +47,7 @@ export const SizeNgDetailForm = ({
               })
             }
           >
+            <MenuItem value={undefined}></MenuItem>
             {ngData.itemMediumCategories?.map((mediumCategory) => (
               <MenuItem value={mediumCategory.id}>
                 {mediumCategory.name}
@@ -76,7 +78,7 @@ export const SizeNgDetailForm = ({
               })
             }
           >
-            <MenuItem value={undefined}>入力しない</MenuItem>
+            <MenuItem value="">入力しない</MenuItem>
             {ngData.itemParts?.map((itemPart) => (
               <MenuItem value={itemPart.id}>{itemPart.name}</MenuItem>
             ))}
@@ -110,7 +112,7 @@ export const SizeNgDetailForm = ({
               })
             }
           >
-            <MenuItem value={undefined}></MenuItem>
+            <MenuItem value=""></MenuItem>
             <MenuItem value={OR_OVER}>以上</MenuItem>
             <MenuItem value={OR_UNDER}>以下</MenuItem>
           </Select>

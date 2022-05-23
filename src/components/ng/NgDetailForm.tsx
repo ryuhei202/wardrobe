@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
 import { SizeNg } from "../../model/api/request/styling/ng/SizeNg";
+import { ChartItem } from "../../model/api/response/styling/chartItem/ChartItem";
 import { NgNewResponse } from "../../model/api/response/styling/ng/NgNewResponse";
 import { NG_CATEGORY } from "../../model/selecting/ng/NgCategory";
 import { CategoryNgDetailForm } from "./CategoryNgDetailForm";

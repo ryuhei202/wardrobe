@@ -81,9 +81,21 @@ export const CreateNgMemoDialog = ({
       : setItemCategoryNg(undefined);
     setSizeNg(undefined);
   };
-  useEffect(() => {
-    return setChartItemId(undefined);
-  });
+  const handleChangeChartItem = (chartItemId: number) => {
+    setChartItemId(chartItemId);
+    const selectedChartItem = chartItemsData?.chartItems?.find(
+      (chartItem) => chartItem.id === chartItemId
+    );
+    if (ngCategoryId === NG_CATEGORY.SIZE_NG) {
+      setSizeNg({ cateMediumId: selectedChartItem?.cateMediumId });
+    } else if (ngCategoryId === NG_CATEGORY.ITEM_CATEGORY_NG) {
+      setItemCategoryNg({
+        cateMediumId: selectedChartItem?.cateMediumId,
+        cateSmallId: selectedChartItem?.cateSmallId,
+        isOnlyJacketPlan: false,
+      });
+    }
+  };
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
@@ -142,7 +154,9 @@ export const CreateNgMemoDialog = ({
         {chartItemsData && targetChartId && (
           <NgChartItemForm
             chartItemsData={chartItemsData}
-            onChange={(chartItemId: number) => setChartItemId(chartItemId)}
+            onChange={(chartItemId: number) =>
+              handleChangeChartItem(chartItemId)
+            }
           />
         )}
         {ngData && ngCategoryId && (
