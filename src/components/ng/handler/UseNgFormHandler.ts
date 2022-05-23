@@ -90,7 +90,7 @@ export const useNgFormHandler = ({
 
   const handleChangeNgCategory = (value: number) => {
     setNgCategoryId(value);
-    value == NG_CATEGORY.ITEM_CATEGORY_NG
+    value === NG_CATEGORY.ITEM_CATEGORY_NG
       ? setItemCategoryNg({ isOnlyJacketPlan: false })
       : setItemCategoryNg(undefined);
     setSizeNg(undefined);
@@ -126,6 +126,7 @@ export const useNgFormHandler = ({
       },
     });
   };
+
   return {
     handleChangeNgCategory,
     handleChangeChartItem,
