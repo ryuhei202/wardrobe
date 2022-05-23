@@ -40,7 +40,7 @@ export const NgMemoCollection = (props: Props) => {
         </Box>
         <CreateNgMemoDialogContainer
           isOpen={isOpenNgMemoDialog}
-          onClose={() => setIsOpenNgMemoDialog(!isOpenNgMemoDialog)}
+          onClose={() => setIsOpenNgMemoDialog(false)}
         />
         <List dense>
           {props.response.map((ng_category, index) => (

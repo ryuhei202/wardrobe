@@ -20,7 +20,7 @@ export const useKarteGetRequest = <T>({
     isEnabled = false;
   }
   const { data, error } = useQuery<T, Error>(
-    `karte/${path}`,
+    `${chartId}/${path}`,
     () =>
       axiosClient
         .get(`${baseUrl()}/styling/kartes/${chartId}/${path}`)
