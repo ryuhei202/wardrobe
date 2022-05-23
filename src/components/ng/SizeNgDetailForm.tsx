@@ -30,11 +30,7 @@ export const SizeNgDetailForm = ({
       sizeNg?.inequalitySign === undefined
     )
       return;
-    if (sizeNg?.inequalitySign === OR_OVER) {
-      return `${sizeNg.itemPartSize + 1}cmから表示される`;
-    } else if (sizeNg?.inequalitySign === OR_UNDER) {
-      return `${sizeNg.itemPartSize - 1}cmから表示される`;
-    }
+    return `${sizeNg.itemPartSize}は含みます`;
   };
   return (
     <>
