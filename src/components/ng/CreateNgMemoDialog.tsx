@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Dialog,
@@ -7,10 +8,13 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
 import { useChartItemsIndex } from "../../hooks/api/UseChartItemsIndex";
+import { useNgsCreate } from "../../hooks/api/UseNgsCreate";
 import { useNgsNew } from "../../hooks/api/UseNgsNew";
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
 import { SizeNg } from "../../model/api/request/styling/ng/SizeNg";
@@ -35,9 +39,7 @@ export const CreateNgMemoDialog = ({
   isOpen,
   onClose,
 }: TProps) => {
-  const [ngCategoryId, setNgCategoryId] = useState<number | undefined>(
-    undefined
-  );
+  const [ngCategoryId, setNgCategoryId] = useState<number>(NG_CATEGORY.SIZE_NG);
   const [freeText, setFreetext] = useState<string>("");
   const [chartItemId, setChartItemId] = useState<number | undefined>(undefined);
   const [targetChartId, setTargetChartId] = useState<number | undefined>(
@@ -48,17 +50,44 @@ export const CreateNgMemoDialog = ({
   >(undefined);
   const [sizeNg, setSizeNg] = useState<SizeNg | undefined>(undefined);
 
-  const { data: chartItemsData, error: chartItemsError } = useChartItemsIndex({
+  const [severity, setSeverity] = useState<"success" | "error" | undefined>(
+    undefined
+  );
+  const [isSnackBarOpen, setIsSnackBarOpen] = useState<boolean>(false);
+  const [snackBarText, setSnackBarText] = useState<string | undefined>(
+    undefined
+  );
+
+  const { data: chartItemsData } = useChartItemsIndex({
     chartId: targetChartId,
+    onError: () => {
+      setSeverity("error");
+      setIsSnackBarOpen(true);
+      setSnackBarText("NGメモを保存しました！");
+    },
   });
-  const { data: ngData, error: ngError } = useNgsNew({
+  const { data: ngData } = useNgsNew({
     memberId: useContextDefinedState(MemberIdContext),
     ngCategoryId,
+    onError: () => {
+      setSeverity("error");
+      setIsSnackBarOpen(true);
+      setSnackBarText("NGメモの保存に失敗しました");
+    },
+  });
+
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useNgsCreate({
+    ngCategoryId,
+    freeText,
+    chartItemId,
+    itemCategoryNg,
+    sizeNg,
   });
 
   /* ダイアログを閉じる処理ではcomponentは破棄されないのでstateが初期化されない */
   useEffect(() => {
-    setNgCategoryId(undefined);
+    setNgCategoryId(NG_CATEGORY.SIZE_NG);
     setFreetext("");
     setChartItemId(undefined);
     setTargetChartId(undefined);
@@ -96,97 +125,128 @@ export const CreateNgMemoDialog = ({
       });
     }
   };
+  const handleClickSubmit = () => {
+    mutate(undefined, {
+      onSuccess: () => {
+        queryClient.invalidateQueries("member/ngs");
+        setSeverity("success");
+        setIsSnackBarOpen(true);
+        setSnackBarText("NGメモを保存しました！");
+        onClose();
+      },
+      onError: () => {
+        setSeverity("error");
+        setIsSnackBarOpen(true);
+        setSnackBarText("NGメモの保存に失敗しました");
+      },
+    });
+  };
 
   return (
-    <Dialog open={isOpen} onClose={onClose}>
-      <DialogTitle>新規NGメモ追加</DialogTitle>
-      <div style={{ width: 600, textAlign: "center" }}>
-        <Box
-          sx={{
-            width: 400,
-            marginBottom: 4,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <Typography align="left">対象カルテ</Typography>
-          <FormControl style={{ textAlign: "center" }}>
-            <InputLabel>対象カルテ</InputLabel>
-            <Select
-              style={{ width: 400 }}
-              onChange={(event) => {
-                setTargetChartId(event.target.value as number | undefined);
-                setChartItemId(undefined);
-              }}
-            >
-              <MenuItem value={undefined}>対象カルテなし</MenuItem>
-              {karteData.map((karte) => (
-                <MenuItem value={karte.id}>{`${karte.id} ${
-                  karte.rentalStartedAt ?? "未"
-                }発送`}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box
-          sx={{
-            width: 400,
-            marginBottom: 4,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <Typography align="left">NGの種類</Typography>
-          <FormControl>
-            <InputLabel>NGの種類</InputLabel>
-            <Select
-              style={{ width: 400 }}
-              onChange={(event) =>
-                handleChangeNgCategory(event.target.value as number)
+    <>
+      <Dialog open={isOpen} onClose={onClose}>
+        <DialogTitle>新規NGメモ追加</DialogTitle>
+        <div style={{ width: 600, textAlign: "center" }}>
+          <Box
+            sx={{
+              width: 400,
+              marginBottom: 2,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <Typography align="left">対象カルテ</Typography>
+            <FormControl style={{ textAlign: "center" }}>
+              <InputLabel>対象カルテ</InputLabel>
+              <Select
+                style={{ width: 400 }}
+                onChange={(event) => {
+                  setTargetChartId(event.target.value as number | undefined);
+                  setChartItemId(undefined);
+                }}
+              >
+                <MenuItem value={undefined}>対象カルテなし</MenuItem>
+                {karteData.map((karte) => (
+                  <MenuItem value={karte.id}>{`${karte.id} ${
+                    karte.rentalStartedAt ?? "未"
+                  }発送`}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box
+            sx={{
+              width: 400,
+              marginBottom: 2,
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <Typography align="left">NGの種類</Typography>
+            <FormControl>
+              <InputLabel>NGの種類</InputLabel>
+              <Select
+                style={{ width: 400 }}
+                value={ngCategoryId}
+                onChange={(event) =>
+                  handleChangeNgCategory(event.target.value as number)
+                }
+              >
+                {ngCategoryData.ngCategories.map((ngCategory) => (
+                  <MenuItem value={ngCategory.id}>{ngCategory.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          {chartItemsData && targetChartId && (
+            <NgChartItemForm
+              chartItemsData={chartItemsData}
+              onChange={(chartItemId: number) =>
+                handleChangeChartItem(chartItemId)
               }
+            />
+          )}
+          {ngData && ngCategoryId && (
+            <NgDetailForm
+              ngCategoryId={ngCategoryId}
+              ngData={ngData}
+              sizeNg={sizeNg}
+              itemCategoryNg={itemCategoryNg}
+              freeText={freeText}
+              onSizeNgChanged={(sizeNg) => setSizeNg(sizeNg)}
+              onCategoryNgChanged={(itemCategoryNg) =>
+                setItemCategoryNg(itemCategoryNg)
+              }
+              onTextChanged={(freeText) => setFreetext(freeText)}
+            />
+          )}
+          <Box
+            sx={{
+              width: 400,
+              marginBottom: 4,
+              marginLeft: "auto",
+              marginRight: "auto",
+              textAlign: "right",
+            }}
+          >
+            <Button
+              color="secondary"
+              variant="contained"
+              disabled={isDisabled || isLoading}
+              onClick={() => handleClickSubmit()}
             >
-              {ngCategoryData.ngCategories.map((ngCategory) => (
-                <MenuItem value={ngCategory.id}>{ngCategory.name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        {chartItemsData && targetChartId && (
-          <NgChartItemForm
-            chartItemsData={chartItemsData}
-            onChange={(chartItemId: number) =>
-              handleChangeChartItem(chartItemId)
-            }
-          />
-        )}
-        {ngData && ngCategoryId && (
-          <NgDetailForm
-            ngCategoryId={ngCategoryId}
-            ngData={ngData}
-            sizeNg={sizeNg}
-            itemCategoryNg={itemCategoryNg}
-            freeText={freeText}
-            onSizeNgChanged={(sizeNg) => setSizeNg(sizeNg)}
-            onCategoryNgChanged={(itemCategoryNg) =>
-              setItemCategoryNg(itemCategoryNg)
-            }
-            onTextChanged={(freeText) => setFreetext(freeText)}
-          />
-        )}
-        <Box
-          sx={{
-            width: 400,
-            marginBottom: 4,
-            marginLeft: "auto",
-            marginRight: "auto",
-            textAlign: "right",
-          }}
-        >
-          <Button color="secondary" variant="contained" disabled={isDisabled}>
-            登録
-          </Button>
-        </Box>
-      </div>
-    </Dialog>
+              登録
+            </Button>
+          </Box>
+        </div>
+      </Dialog>
+      <Snackbar
+        open={isSnackBarOpen}
+        autoHideDuration={5000}
+        onClose={() => setIsSnackBarOpen(false)}
+      >
+        <Alert severity={severity}>{snackBarText}</Alert>
+      </Snackbar>
+    </>
   );
 };

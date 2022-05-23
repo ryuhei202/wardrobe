@@ -9,17 +9,23 @@ type TNgsNew = {
 type TNgsNewArg = {
   memberId: number;
   ngCategoryId?: number;
+  onError: () => Promise<unknown> | void;
 };
 type TNgsNewParams = {
   ngCategoryId?: number;
 };
 
-export const useNgsNew = ({ memberId, ngCategoryId }: TNgsNewArg): TNgsNew => {
+export const useNgsNew = ({
+  memberId,
+  ngCategoryId,
+  onError,
+}: TNgsNewArg): TNgsNew => {
   const { data, error } = useMemberGetRequest<NgNewResponse, TNgsNewParams>(
     "ngs/new",
     memberId,
     { ngCategoryId },
-    ngCategoryId !== undefined
+    ngCategoryId !== undefined,
+    onError
   );
 
   return {

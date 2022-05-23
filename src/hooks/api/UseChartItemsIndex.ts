@@ -8,14 +8,17 @@ type TChartItemsIndex = {
 
 type TChartItemsIndexArg = {
   chartId?: number;
+  onError: () => Promise<unknown> | void;
 };
 
 export const useChartItemsIndex = ({
   chartId,
+  onError,
 }: TChartItemsIndexArg): TChartItemsIndex => {
   const { data, error } = useKarteGetRequest<ChartItemIndexResponse>({
     path: "chart_items",
     chartId,
+    onError,
     isEnabled: chartId !== undefined,
   });
 

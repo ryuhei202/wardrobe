@@ -6,7 +6,8 @@ export const useMemberGetRequest = <T, U>(
   path: string,
   memberId: number,
   params?: U,
-  isEnabled = true
+  isEnabled = true,
+  onError?: () => Promise<unknown> | void
 ): {
   data?: T;
   error: Error | null;
@@ -24,6 +25,7 @@ export const useMemberGetRequest = <T, U>(
         .then((r) => r.data),
     {
       enabled: isEnabled,
+      onError,
     }
   );
 

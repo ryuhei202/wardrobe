@@ -1,5 +1,7 @@
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
+import { MemberIdContext } from "../../components/context/provider/ContextProvider";
+import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { NgCreateRequest } from "../../model/api/request/styling/ng/NgCreateRequest";
 import { usePostRequest } from "./UsePostRequest";
 
@@ -24,8 +26,11 @@ export const useNgsCreate = ({
     itemCategoryNg,
     sizeNg,
   };
-
-  const { mutate, error, isLoading, isIdle } = usePostRequest("ngs", params);
+  const memberId = useContextDefinedState(MemberIdContext);
+  const { mutate, error, isLoading, isIdle } = usePostRequest(
+    `members/${memberId}/ngs`,
+    params
+  );
 
   return {
     mutate,
