@@ -12,18 +12,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useQueryClient } from "react-query";
-import { useChartItemsIndex } from "../../hooks/api/UseChartItemsIndex";
-import { useNgsCreate } from "../../hooks/api/UseNgsCreate";
-import { useNgsNew } from "../../hooks/api/UseNgsNew";
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
 import { SizeNg } from "../../model/api/request/styling/ng/SizeNg";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
 import { NgCategoryIndexResponse } from "../../model/api/response/styling/ngCategory/NgCategoryIndexResponse";
 import { NG_CATEGORY } from "../../model/selecting/ng/NgCategory";
-import { MemberIdContext } from "../context/provider/ContextProvider";
-import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { getFormValidateHandler } from "./handler/getFormValidateHandler";
+import { useNgFormHandler } from "./handler/UseNgFormHandler";
 import { NgChartItemForm } from "./NgChartItemForm";
 import { NgDetailForm } from "./NgDetailForm";
 
@@ -50,41 +45,6 @@ export const CreateNgMemoDialog = ({
   >(undefined);
   const [sizeNg, setSizeNg] = useState<SizeNg | undefined>(undefined);
 
-  const [severity, setSeverity] = useState<"success" | "error" | undefined>(
-    undefined
-  );
-  const [isSnackBarOpen, setIsSnackBarOpen] = useState<boolean>(false);
-  const [snackBarText, setSnackBarText] = useState<string | undefined>(
-    undefined
-  );
-
-  const { data: chartItemsData } = useChartItemsIndex({
-    chartId: targetChartId,
-    onError: () => {
-      setSeverity("error");
-      setIsSnackBarOpen(true);
-      setSnackBarText("NGメモを保存しました！");
-    },
-  });
-  const { data: ngData } = useNgsNew({
-    memberId: useContextDefinedState(MemberIdContext),
-    ngCategoryId,
-    onError: () => {
-      setSeverity("error");
-      setIsSnackBarOpen(true);
-      setSnackBarText("NGメモの保存に失敗しました");
-    },
-  });
-
-  const queryClient = useQueryClient();
-  const { mutate, isLoading } = useNgsCreate({
-    ngCategoryId,
-    freeText,
-    chartItemId,
-    itemCategoryNg,
-    sizeNg,
-  });
-
   /* ダイアログを閉じる処理ではcomponentは破棄されないのでstateが初期化されない */
   useEffect(() => {
     setNgCategoryId(NG_CATEGORY.SIZE_NG);
@@ -95,6 +55,31 @@ export const CreateNgMemoDialog = ({
     setSizeNg(undefined);
   }, [isOpen]);
 
+  const {
+    handleChangeNgCategory,
+    handleChangeChartItem,
+    handleClickSubmit,
+    chartItemsData,
+    ngData,
+    isLoading,
+    severity,
+    isSnackBarOpen,
+    snackBarText,
+    setIsSnackBarOpen,
+  } = useNgFormHandler({
+    targetChartId,
+    ngCategoryId,
+    freeText,
+    chartItemId,
+    itemCategoryNg,
+    sizeNg,
+    onClose,
+    setNgCategoryId,
+    setItemCategoryNg,
+    setSizeNg,
+    setChartItemId,
+  });
+
   const { isDisabled } = getFormValidateHandler({
     targetChartId,
     chartItemId,
@@ -102,45 +87,6 @@ export const CreateNgMemoDialog = ({
     sizeNg,
     itemCategoryNg,
   });
-
-  const handleChangeNgCategory = (value: number) => {
-    setNgCategoryId(value);
-    value == NG_CATEGORY.ITEM_CATEGORY_NG
-      ? setItemCategoryNg({ isOnlyJacketPlan: false })
-      : setItemCategoryNg(undefined);
-    setSizeNg(undefined);
-  };
-  const handleChangeChartItem = (chartItemId: number) => {
-    setChartItemId(chartItemId);
-    const selectedChartItem = chartItemsData?.chartItems?.find(
-      (chartItem) => chartItem.id === chartItemId
-    );
-    if (ngCategoryId === NG_CATEGORY.SIZE_NG) {
-      setSizeNg({ cateMediumId: selectedChartItem?.cateMediumId });
-    } else if (ngCategoryId === NG_CATEGORY.ITEM_CATEGORY_NG) {
-      setItemCategoryNg({
-        cateMediumId: selectedChartItem?.cateMediumId,
-        cateSmallId: selectedChartItem?.cateSmallId,
-        isOnlyJacketPlan: false,
-      });
-    }
-  };
-  const handleClickSubmit = () => {
-    mutate(undefined, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("member/ngs");
-        setSeverity("success");
-        setIsSnackBarOpen(true);
-        setSnackBarText("NGメモを保存しました！");
-        onClose();
-      },
-      onError: () => {
-        setSeverity("error");
-        setIsSnackBarOpen(true);
-        setSnackBarText("NGメモの保存に失敗しました");
-      },
-    });
-  };
 
   return (
     <>
