@@ -21,6 +21,9 @@ export const SizeNgDetailForm = ({
   sizeNg,
   onSizeNgChanged,
 }: TProps) => {
+  const OR_OVER = 1;
+  const OR_UNDER = 2;
+
   return (
     <>
       <Box
@@ -100,8 +103,8 @@ export const SizeNgDetailForm = ({
               })
             }
           >
-            <MenuItem value={1}>以上</MenuItem>
-            <MenuItem value={2}>以下</MenuItem>
+            <MenuItem value={OR_OVER}>以上</MenuItem>
+            <MenuItem value={OR_UNDER}>以下</MenuItem>
           </Select>
         </FormControl>
       </Box>

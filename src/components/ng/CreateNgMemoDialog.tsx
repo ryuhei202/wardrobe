@@ -1,16 +1,12 @@
-import { Image } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Dialog,
   DialogTitle,
   FormControl,
-  FormControlLabel,
   InputLabel,
   MenuItem,
-  Radio,
-  RadioGroup,
   Select,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
@@ -40,6 +36,7 @@ export const CreateNgMemoDialog = ({
   const [ngCategoryId, setNgCategoryId] = useState<number | undefined>(
     undefined
   );
+  const [freeText, setFreetext] = useState<string>("");
   const [targetChartId, setTargetChartId] = useState<number | undefined>(
     undefined
   );
@@ -57,7 +54,9 @@ export const CreateNgMemoDialog = ({
 
   const handleChangeNgCategory = (value: number) => {
     setNgCategoryId(value);
-    setItemCategoryNg(undefined);
+    value == 2
+      ? setItemCategoryNg({ isOnlyJacketPlan: false })
+      : setItemCategoryNg(undefined);
     setSizeNg(undefined);
   };
   return (
@@ -116,18 +115,33 @@ export const CreateNgMemoDialog = ({
         {chartItemsData && targetChartId && (
           <NgChartItemForm chartItemsData={chartItemsData} />
         )}
-        {ngData && (
+        {ngData && ngCategoryId && (
           <NgDetailForm
             ngCategoryId={ngCategoryId}
             ngData={ngData}
             sizeNg={sizeNg}
             itemCategoryNg={itemCategoryNg}
+            freeText={freeText}
             onSizeNgChanged={(sizeNg) => setSizeNg(sizeNg)}
             onCategoryNgChanged={(itemCategoryNg) =>
               setItemCategoryNg(itemCategoryNg)
             }
+            onTextChanged={(freeText) => setFreetext(freeText)}
           />
         )}
+        <Box
+          sx={{
+            width: 400,
+            marginBottom: 4,
+            marginLeft: "auto",
+            marginRight: "auto",
+            textAlign: "right",
+          }}
+        >
+          <Button color="secondary" variant="contained">
+            登録
+          </Button>
+        </Box>
       </div>
     </Dialog>
   );
