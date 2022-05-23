@@ -9,7 +9,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useChartItemsIndex } from "../../hooks/api/UseChartItemsIndex";
 import { useNgsNew } from "../../hooks/api/UseNgsNew";
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
@@ -19,6 +19,7 @@ import { NgCategoryIndexResponse } from "../../model/api/response/styling/ngCate
 import { NG_CATEGORY } from "../../model/selecting/ng/NgCategory";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { getFormValidateHandler } from "./handler/getFormValidateHandler";
 import { NgChartItemForm } from "./NgChartItemForm";
 import { NgDetailForm } from "./NgDetailForm";
 
@@ -55,6 +56,24 @@ export const CreateNgMemoDialog = ({
     ngCategoryId,
   });
 
+  /* ダイアログを閉じる処理ではcomponentは破棄されないのでstateが初期化されない */
+  useEffect(() => {
+    setNgCategoryId(undefined);
+    setFreetext("");
+    setChartItemId(undefined);
+    setTargetChartId(undefined);
+    setItemCategoryNg(undefined);
+    setSizeNg(undefined);
+  }, [isOpen]);
+
+  const { isDisabled } = getFormValidateHandler({
+    targetChartId,
+    chartItemId,
+    ngCategoryId,
+    sizeNg,
+    itemCategoryNg,
+  });
+
   const handleChangeNgCategory = (value: number) => {
     setNgCategoryId(value);
     value == NG_CATEGORY.ITEM_CATEGORY_NG
@@ -62,26 +81,9 @@ export const CreateNgMemoDialog = ({
       : setItemCategoryNg(undefined);
     setSizeNg(undefined);
   };
-
-  const isValidAboutChart =
-    targetChartId !== undefined ? chartItemId === undefined : false;
-  const isValidAboutNgCategoryId = (): boolean => {
-    switch (ngCategoryId) {
-      case undefined:
-        return true;
-      case NG_CATEGORY.SIZE_NG:
-        const isValidItemPart = sizeNg?.itemPart
-          ? sizeNg?.itemPartSize === undefined &&
-            sizeNg?.inequalitySign === undefined
-          : false;
-        return sizeNg?.cateMediumId === undefined || isValidItemPart;
-      case NG_CATEGORY.ITEM_CATEGORY_NG:
-        return itemCategoryNg?.cateSmallId === undefined;
-      default:
-        return false;
-    }
-  };
-  const isDisabled: boolean = isValidAboutNgCategoryId() || isValidAboutChart;
+  useEffect(() => {
+    return setChartItemId(undefined);
+  });
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
