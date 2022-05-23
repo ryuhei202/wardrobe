@@ -24,6 +24,18 @@ export const SizeNgDetailForm = ({
   const OR_OVER = 1;
   const OR_UNDER = 2;
 
+  const helperText = (): string | undefined => {
+    if (
+      sizeNg?.itemPartSize === undefined ||
+      sizeNg?.inequalitySign === undefined
+    )
+      return;
+    if (sizeNg?.inequalitySign === OR_OVER) {
+      return `${sizeNg.itemPartSize + 1}cmから表示される`;
+    } else if (sizeNg?.inequalitySign === OR_UNDER) {
+      return `${sizeNg.itemPartSize - 1}cmから表示される`;
+    }
+  };
   return (
     <>
       <Box
@@ -35,7 +47,7 @@ export const SizeNgDetailForm = ({
         }}
       >
         <Typography align="left">中カテゴリ一覧</Typography>
-        <FormControl>
+        <FormControl error={sizeNg?.cateMediumId === undefined}>
           <InputLabel>中カテゴリ一覧</InputLabel>
           <Select
             style={{ width: 400 }}
@@ -72,7 +84,9 @@ export const SizeNgDetailForm = ({
             onChange={(event) =>
               onSizeNgChanged({
                 ...sizeNg,
-                itemPart: event.target.value as number | undefined,
+                itemPart: (event.target.value || undefined) as
+                  | number
+                  | undefined,
                 itemPartSize: undefined,
                 inequalitySign: undefined,
               })
@@ -85,10 +99,14 @@ export const SizeNgDetailForm = ({
           </Select>
         </FormControl>
         <TextField
+          error={
+            sizeNg?.itemPart !== undefined && sizeNg?.itemPartSize === undefined
+          }
           label="サイズ"
           type="number"
+          helperText={helperText()}
           disabled={sizeNg?.itemPart === undefined}
-          style={{ width: 150 }}
+          style={{ width: 150, marginLeft: 5 }}
           value={sizeNg?.itemPartSize ?? ""}
           onChange={(event) =>
             onSizeNgChanged({
@@ -97,8 +115,13 @@ export const SizeNgDetailForm = ({
             })
           }
         />
-        cm
-        <FormControl>
+        <span style={{ verticalAlign: "bottom" }}>cm</span>
+        <FormControl
+          error={
+            sizeNg?.itemPart !== undefined &&
+            sizeNg?.inequalitySign === undefined
+          }
+        >
           <InputLabel>選択してください</InputLabel>
           {/* 以上、以下の時にwardrobeで出るのか出ないのか戸惑う時があるので、明記してくれたら嬉しい */}
           <Select

@@ -27,7 +27,7 @@ export const getFormValidateHandler = ({
         return true;
       case NG_CATEGORY.SIZE_NG:
         const isValidItemPart = sizeNg?.itemPart
-          ? sizeNg?.itemPartSize === undefined &&
+          ? sizeNg?.itemPartSize === undefined ||
             sizeNg?.inequalitySign === undefined
           : false;
         return sizeNg?.cateMediumId === undefined || isValidItemPart;

@@ -5,6 +5,7 @@ import {
   Dialog,
   DialogTitle,
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -129,7 +130,7 @@ export const CreateNgMemoDialog = ({
             }}
           >
             <Typography align="left">NGの種類</Typography>
-            <FormControl>
+            <FormControl error={ngCategoryId === undefined}>
               <InputLabel>NGの種類</InputLabel>
               <Select
                 style={{ width: 400 }}
