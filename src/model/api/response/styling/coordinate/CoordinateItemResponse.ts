@@ -7,6 +7,8 @@ export interface CoordinateItemResponse {
   readonly categoryName: string;
   readonly mainColorName: string;
   readonly subColorName: string;
+  readonly brandName: string;
+  readonly patternName: string;
   readonly size: string;
   readonly partSizes: PartSizeResponse[];
   readonly dropSize: string;
