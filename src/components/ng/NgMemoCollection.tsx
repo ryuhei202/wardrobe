@@ -1,7 +1,9 @@
 import { Delete } from "@mui/icons-material";
+import { AddCircle } from "@mui/icons-material";
 import {
   Alert,
   Avatar,
+  Box,
   IconButton,
   List,
   ListItem,
@@ -9,12 +11,14 @@ import {
   ListItemText,
   ListSubheader,
   Snackbar,
+  Typography,
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useNgsDestroy } from "../../hooks/api/UseNgsDestroy";
 import { NgIndexResponse } from "../../model/api/response/styling/ng/NgIndexResponse";
 import { PopupImage } from "../shared/PopupImage";
+import { CreateNgMemoDialogContainer } from "./CreateNgMemoDialogContainer";
 
 type Props = {
   readonly response: NgIndexResponse[];
@@ -27,6 +31,7 @@ export const NgMemoCollection = (props: Props) => {
   const [snackBarText, setSnackBarText] = useState<string | undefined>(
     undefined
   );
+  const [isOpenNgMemoDialog, setIsOpenNgMemoDialog] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const { mutate } = useNgsDestroy();
 
@@ -49,7 +54,23 @@ export const NgMemoCollection = (props: Props) => {
   return (
     <>
       <ListItemText style={{ width: "100%" }}>
-        NGメモ：
+        <Box
+          sx={{ display: "flex", justifyContent: "space-between", height: 30 }}
+        >
+          <Typography variant="body2">NGメモ：</Typography>
+          <IconButton
+            color="secondary"
+            size="large"
+            style={{ marginRight: 20 }}
+            onClick={() => setIsOpenNgMemoDialog(true)}
+          >
+            <AddCircle />
+          </IconButton>
+        </Box>
+        <CreateNgMemoDialogContainer
+          isOpen={isOpenNgMemoDialog}
+          onClose={() => setIsOpenNgMemoDialog(false)}
+        />
         <List dense style={{ width: "100%" }}>
           {props.response.map((ng_category, index) => (
             <Fragment key={index}>

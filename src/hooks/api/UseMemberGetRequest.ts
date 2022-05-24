@@ -5,11 +5,16 @@ import { baseUrl } from "../../model/api/shared/BaseUrl";
 export const useMemberGetRequest = <T, U>(
   path: string,
   memberId: number,
-  params?: U
+  params?: U,
+  isEnabled = true,
+  onError?: () => Promise<unknown> | void
 ): {
   data?: T;
   error: Error | null;
 } => {
+  if (memberId === undefined) {
+    isEnabled = false;
+  }
   const { data, error } = useQuery<T, Error>(
     [`member/${path}`, { params }],
     () =>
@@ -17,7 +22,11 @@ export const useMemberGetRequest = <T, U>(
         .get(`${baseUrl()}/styling/members/${memberId}/${path}`, {
           params,
         })
-        .then((r) => r.data)
+        .then((r) => r.data),
+    {
+      enabled: isEnabled,
+      onError,
+    }
   );
 
   return {

@@ -1,6 +1,6 @@
 export type SizeNg = {
   readonly cateMediumId?: number;
   readonly itemPart?: number;
-  readonly itemPartsize?: number;
+  readonly itemPartSize?: number;
   readonly inequalitySign?: number;
 };
