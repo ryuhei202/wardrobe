@@ -1,24 +1,47 @@
+import { AddCircle } from "@mui/icons-material";
 import {
   Avatar,
+  Box,
+  IconButton,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
   ListSubheader,
+  Typography,
 } from "@mui/material";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { NgIndexResponse } from "../../model/api/response/styling/ng/NgIndexResponse";
 import { PopupImage } from "../shared/PopupImage";
+import { CreateNgMemoDialogContainer } from "./CreateNgMemoDialogContainer";
 
 type Props = {
   readonly response: NgIndexResponse[];
 };
 
 export const NgMemoCollection = (props: Props) => {
+  const [isOpenNgMemoDialog, setIsOpenNgMemoDialog] = useState<boolean>(false);
+
   return (
     <>
       <ListItemText>
-        NGメモ：
+        <Box
+          sx={{ display: "flex", justifyContent: "space-between", height: 30 }}
+        >
+          <Typography variant="body2">NGメモ：</Typography>
+          <IconButton
+            color="secondary"
+            size="large"
+            style={{ marginRight: 20 }}
+            onClick={() => setIsOpenNgMemoDialog(true)}
+          >
+            <AddCircle />
+          </IconButton>
+        </Box>
+        <CreateNgMemoDialogContainer
+          isOpen={isOpenNgMemoDialog}
+          onClose={() => setIsOpenNgMemoDialog(false)}
+        />
         <List dense>
           {props.response.map((ng_category, index) => (
             <Fragment key={index}>
