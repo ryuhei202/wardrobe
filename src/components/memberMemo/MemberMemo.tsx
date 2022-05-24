@@ -1,7 +1,18 @@
-import { Alert, Box, Snackbar, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  FormControlLabel,
+  Snackbar,
+  Switch,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
 import { MemberMemoShowResponse } from "../../model/api/response/styling/member_memo/MemberMemoShowResponse";
+import {
+  NEXT_COORDE_HEARING,
+  TNextCoordeHearing,
+} from "../../model/api/response/styling/member_memo/NextCoordeHearing";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { MemberMemoForm } from "./MemberMemoForm";
@@ -13,12 +24,17 @@ type Props = {
 export const MemberMemo = ({ response }: Props) => {
   const [memo, setMemo] = useState(response.memo);
   const [memoNext, setMemoNext] = useState(response.memoNext);
+  const [nextCoordeHearing, setNextCoordeHearing] =
+    useState<TNextCoordeHearing>(response.nextCoordeHearing);
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useMemberMemoUpdate({
     memo,
     memoNext,
+    nextCoordeHearing: nextCoordeHearing
+      ? NEXT_COORDE_HEARING.HEARING
+      : NEXT_COORDE_HEARING.HEARING_END,
     memberId: useContextDefinedState(MemberIdContext),
   });
 
@@ -49,24 +65,62 @@ export const MemberMemo = ({ response }: Props) => {
         noValidate
         autoComplete="off"
       >
-        <Box sx={{ m: 1, position: "relative" }}>
-          <Typography>{response.lineSurveyNext}</Typography>
-        </Box>
-        <MemberMemoForm
-          label="次回コーデに関して"
-          value={memoNext}
-          disabled={response.memoNext === memoNext || isLoading}
-          onChange={setMemoNext}
-          onPost={handlePost}
-        />
-        <MemberMemoForm
-          label="その他メモ"
-          value={memo}
-          disabled={response.memo === memo || isLoading}
-          onChange={setMemo}
-          onPost={handlePost}
-        />
+        <div>
+          <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+            次回コーデに関して
+          </Typography>
+          <MemberMemoForm
+            label="次回コーデに関して"
+            value={memoNext}
+            disabled={response.memoNext === memoNext || isLoading}
+            onChange={setMemoNext}
+            onPost={handlePost}
+          />
+          <Box sx={{ m: 1, position: "relative" }}>
+            <Typography variant="subtitle2">
+              自動ヒアリング: {response.lineSurveyNext || "未回答"}
+            </Typography>
+          </Box>
+          <FormControlLabel
+            value="end"
+            control={
+              <Switch
+                checked={!!nextCoordeHearing}
+                onChange={() => {
+                  setNextCoordeHearing(
+                    nextCoordeHearing
+                      ? NEXT_COORDE_HEARING.HEARING
+                      : NEXT_COORDE_HEARING.HEARING_END
+                  );
+                  handlePost();
+                }}
+                size="small"
+              />
+            }
+            label={
+              <Typography variant="subtitle2">
+                {nextCoordeHearing
+                  ? "次回ヒアリング完了済み"
+                  : "次回ヒアリング未完了"}
+              </Typography>
+            }
+            labelPlacement="end"
+          />
+        </div>
+        <div>
+          <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+            その他メモ
+          </Typography>
+          <MemberMemoForm
+            label="その他メモ"
+            value={memo}
+            disabled={response.memo === memo || isLoading}
+            onChange={setMemo}
+            onPost={handlePost}
+          />
+        </div>
       </Box>
+
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={5000}
