@@ -1,29 +1,23 @@
 import { baseUrl } from "./../../model/api/shared/BaseUrl";
 import { axiosClient } from "./../../model/api/shared/AxiosClient";
-import { AxiosResponse } from "axios";
-import { UseMutateFunction, useMutation } from "react-query";
+import { useMutation } from "react-query";
 
-export const useDeleteRequest = (
+export const useDeleteRequest = <T>(
   path: string,
-  params?: {},
+  params?: T,
   afterMutation: {
     onSuccess: () => Promise<unknown> | void;
     onError: () => Promise<unknown> | void;
   } = { onSuccess: () => {}, onError: () => {} }
-): {
-  mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
-  error: Error | null;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isIdle: boolean;
-} => {
-  const { mutate, error, isLoading, isSuccess, isIdle } = useMutation<
-    any,
-    Error
-  >(
-    () => axiosClient.delete(`${baseUrl()}/styling/${path}`, { data: params }),
+) => {
+  const { mutate, error, isLoading } = useMutation<any, Error, number | string>(
+    path,
+    (id) =>
+      axiosClient.delete(`${baseUrl()}/styling/${path}/${id}`, {
+        data: params,
+      }),
     afterMutation
   );
 
-  return { mutate, error, isLoading, isSuccess, isIdle };
+  return { mutate, error, isLoading };
 };

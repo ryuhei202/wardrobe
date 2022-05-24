@@ -31,7 +31,9 @@ export const NgChartItemForm = ({ chartItemsData, onChange }: TProps) => {
               value={chartItem.id}
               onChange={() => onChange(chartItem.id)}
               control={<Radio />}
-              label={<img src={chartItem.imagePaths.thumb ?? undefined} />}
+              label={
+                <img src={chartItem.imagePaths.thumb ?? undefined} alt="" />
+              }
               labelPlacement="bottom"
             />
           ))}

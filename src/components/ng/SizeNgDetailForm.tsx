@@ -30,7 +30,7 @@ export const SizeNgDetailForm = ({
       sizeNg?.inequalitySign === undefined
     )
       return;
-    return `${sizeNg.itemPartSize}は含みます`;
+    return `${sizeNg.itemPartSize}はNGに含みます`;
   };
   return (
     <>

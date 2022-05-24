@@ -1,5 +1,5 @@
 import { axiosClient } from "./../../model/api/shared/AxiosClient";
-import { useQuery, UseQueryOptions } from "react-query";
+import { useQuery } from "react-query";
 import { baseUrl } from "../../model/api/shared/BaseUrl";
 
 type TKarteGetRequestArg = {
