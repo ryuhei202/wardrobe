@@ -4,6 +4,7 @@ import {
   Alert,
   Avatar,
   Box,
+  Button,
   IconButton,
   List,
   ListItem,
@@ -17,6 +18,7 @@ import React, { Fragment, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useNgsDestroy } from "../../hooks/api/UseNgsDestroy";
 import { NgIndexResponse } from "../../model/api/response/styling/ng/NgIndexResponse";
+import { KarteDialogContainer } from "../karte/KarteDialogContainer";
 import { PopupImage } from "../shared/PopupImage";
 import { CreateNgMemoDialogContainer } from "./CreateNgMemoDialogContainer";
 
@@ -32,6 +34,7 @@ export const NgMemoCollection = (props: Props) => {
     undefined
   );
   const [isOpenNgMemoDialog, setIsOpenNgMemoDialog] = useState<boolean>(false);
+  const [selectedChartId, setSelectedChartId] = useState<number | null>(null);
   const queryClient = useQueryClient();
   const { mutate } = useNgsDestroy();
 
@@ -71,6 +74,11 @@ export const NgMemoCollection = (props: Props) => {
           isOpen={isOpenNgMemoDialog}
           onClose={() => setIsOpenNgMemoDialog(false)}
         />
+        <KarteDialogContainer
+          isOpen={selectedChartId !== null}
+          onClose={() => setSelectedChartId(null)}
+          chartId={selectedChartId as number}
+        />
         <List dense style={{ width: "100%" }}>
           {props.response.map((ng_category, index) => (
             <Fragment key={index}>
@@ -103,6 +111,15 @@ export const NgMemoCollection = (props: Props) => {
                           ng.updatedAt
                         ).toLocaleDateString()}`}
                       ></ListItemText>
+                      {ng.chartId && (
+                        <Button
+                          color="primary"
+                          variant="outlined"
+                          onClick={() => setSelectedChartId(ng.chartId)}
+                        >
+                          カルテ
+                        </Button>
+                      )}
                       <IconButton
                         edge="end"
                         aria-label="remove"

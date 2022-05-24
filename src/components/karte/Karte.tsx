@@ -3,23 +3,25 @@ import { KarteIndexResponse } from "../../model/api/response/styling/karte/Karte
 import { CoordinateContainer } from "../coordinate/CoordinateContainer";
 
 type TProps = {
-  readonly data: KarteIndexResponse;
+  readonly id: number;
+  readonly rentalStartedAt: string | null;
+  readonly memoNext: string | null;
   readonly index: number;
 };
 
-export const Karte = ({ data, index }: TProps) => {
+export const Karte = ({ id, rentalStartedAt, memoNext, index }: TProps) => {
   return (
     <ListItem key={index}>
       <ListItemText>
-        <Typography variant="h6">カルテID: {data.id}</Typography>
+        <Typography variant="h6">カルテID: {id}</Typography>
         <Typography variant="body2" style={{ color: "gray" }}>
           発送日:
-          {data.rentalStartedAt
-            ? new Date(data.rentalStartedAt!).toLocaleDateString()
+          {rentalStartedAt
+            ? new Date(rentalStartedAt!).toLocaleDateString()
             : ""}
         </Typography>
         <br />
-        <CoordinateContainer chartId={data.id} />
+        <CoordinateContainer chartId={id} />
         <div style={{ marginLeft: 20 }}>
           <Typography variant="body2" style={{ fontWeight: "bold" }}>
             次回コーデに関して
@@ -32,7 +34,7 @@ export const Karte = ({ data, index }: TProps) => {
               whiteSpace: "pre-wrap",
             }}
           >
-            {data.memoNext ?? "未回答"}
+            {memoNext ?? "未回答"}
           </Typography>
         </div>
       </ListItemText>

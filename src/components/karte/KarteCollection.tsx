@@ -10,7 +10,13 @@ export const KarteCollection = (props: Props) => {
   return (
     <List dense>
       {props.response.map((karte, index) => (
-        <Karte key={index} data={karte} index={index} />
+        <Karte
+          key={index}
+          id={karte.id}
+          rentalStartedAt={karte.rentalStartedAt}
+          memoNext={karte.memoNext}
+          index={index}
+        />
       ))}
     </List>
   );
