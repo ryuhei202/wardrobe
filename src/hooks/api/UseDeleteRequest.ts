@@ -4,15 +4,15 @@ import { useMutation } from "react-query";
 
 export const useDeleteRequest = <T>(
   path: string,
-  params?: {},
+  params?: T,
   afterMutation: {
     onSuccess: () => Promise<unknown> | void;
     onError: () => Promise<unknown> | void;
   } = { onSuccess: () => {}, onError: () => {} }
 ) => {
-  const { mutate, error, isLoading } = useMutation<any, Error, T>(
+  const { mutate, error, isLoading } = useMutation<any, Error, number | string>(
     path,
-    (id: T) =>
+    (id) =>
       axiosClient.delete(`${baseUrl()}/styling/${path}/${id}`, {
         data: params,
       }),
