@@ -34,7 +34,9 @@ export const NgMemoCollection = (props: Props) => {
     undefined
   );
   const [isOpenNgMemoDialog, setIsOpenNgMemoDialog] = useState<boolean>(false);
-  const [selectedChartId, setSelectedChartId] = useState<number | null>(null);
+  const [selectedChartId, setSelectedChartId] = useState<number | undefined>(
+    undefined
+  );
   const queryClient = useQueryClient();
   const { mutate } = useNgsDestroy();
 
@@ -75,9 +77,9 @@ export const NgMemoCollection = (props: Props) => {
           onClose={() => setIsOpenNgMemoDialog(false)}
         />
         <KarteDialogContainer
-          isOpen={selectedChartId !== null}
-          onClose={() => setSelectedChartId(null)}
-          chartId={selectedChartId as number}
+          isOpen={selectedChartId !== undefined}
+          onClose={() => setSelectedChartId(undefined)}
+          chartId={selectedChartId}
         />
         <List dense style={{ width: "100%" }}>
           {props.response.map((ng_category, index) => (
@@ -116,6 +118,7 @@ export const NgMemoCollection = (props: Props) => {
                           color="primary"
                           variant="outlined"
                           onClick={() => setSelectedChartId(ng.chartId)}
+                          style={{ width: 60, fontSize: 10 }}
                         >
                           カルテ
                         </Button>
