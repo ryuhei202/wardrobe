@@ -1,5 +1,4 @@
 import { ListItem, ListItemText, Typography } from "@mui/material";
-import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
 import { CoordinateContainer } from "../coordinate/CoordinateContainer";
 
 type TProps = {
