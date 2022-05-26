@@ -101,9 +101,13 @@ export const CreateNgMemoDialog = ({
               marginRight: "auto",
             }}
           >
-            <Typography align="left">対象カルテ</Typography>
+            <Typography align="left" style={{ paddingBottom: 5 }}>
+              対象カルテ
+            </Typography>
             <FormControl style={{ textAlign: "center" }}>
-              <InputLabel>対象カルテ</InputLabel>
+              <InputLabel>
+                {targetChartId === undefined ? "任意" : ""}
+              </InputLabel>
               <Select
                 style={{ width: 400 }}
                 onChange={(event) => {
@@ -128,9 +132,13 @@ export const CreateNgMemoDialog = ({
               marginRight: "auto",
             }}
           >
-            <Typography align="left">NGの種類</Typography>
+            <Typography align="left" style={{ paddingBottom: 5 }}>
+              NGの種類
+            </Typography>
             <FormControl error={ngCategoryId === undefined}>
-              <InputLabel>NGの種類</InputLabel>
+              <InputLabel>
+                {ngCategoryId === undefined ? "必須" : ""}
+              </InputLabel>
               <Select
                 style={{ width: 400 }}
                 value={ngCategoryId}
