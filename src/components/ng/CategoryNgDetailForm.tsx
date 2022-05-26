@@ -30,23 +30,29 @@ export const CategoryNgDetailForm = ({
         marginRight: "auto",
       }}
     >
-      <Typography align="left">中カテゴリ一覧</Typography>
-      <FormControl>
-        <InputLabel>中カテゴリ一覧</InputLabel>
+      <Typography align="left" style={{ paddingBottom: 5 }}>
+        中カテゴリー一覧
+      </Typography>
+      <FormControl error={itemCategoryNg?.cateMediumId === undefined}>
+        <InputLabel>
+          {itemCategoryNg?.cateMediumId === undefined ? "必須" : ""}
+        </InputLabel>
         <Select
           style={{ width: 400 }}
           value={itemCategoryNg?.cateMediumId ?? ""}
           onChange={(event) =>
             onCategoryNgChanged({
               ...itemCategoryNg,
-              cateMediumId: event.target.value as number,
+              cateMediumId: event.target.value as number | undefined,
               cateSmallId: undefined,
             })
           }
         >
-          <MenuItem value=""></MenuItem>
+          <MenuItem value={undefined}></MenuItem>
           {ngData.itemMediumCategories?.map((mediumCategory) => (
-            <MenuItem value={mediumCategory.id}>{mediumCategory.name}</MenuItem>
+            <MenuItem key={mediumCategory.id} value={mediumCategory.id}>
+              {mediumCategory.name}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>
@@ -59,24 +65,30 @@ export const CategoryNgDetailForm = ({
         marginRight: "auto",
       }}
     >
-      <Typography align="left">小カテゴリ一覧</Typography>
+      <Typography align="left" style={{ paddingBottom: 5 }}>
+        小カテゴリー一覧
+      </Typography>
       <FormControl>
-        <InputLabel>小カテゴリ一覧</InputLabel>
+        <InputLabel>
+          {itemCategoryNg?.cateSmallId === undefined ? "任意" : ""}
+        </InputLabel>
         <Select
           style={{ width: 400 }}
           value={itemCategoryNg?.cateSmallId ?? ""}
-          onChange={(event) =>
+          onChange={(event) => {
             onCategoryNgChanged({
               ...itemCategoryNg,
-              cateSmallId: event.target.value as number,
-            })
-          }
+              cateSmallId: event.target.value as number | undefined,
+            });
+          }}
         >
-          <MenuItem value=""></MenuItem>
+          <MenuItem value={undefined}>選択しない</MenuItem>
           {ngData.itemMediumCategories
             ?.find((c) => c.id === itemCategoryNg.cateMediumId)
             ?.itemSmallCategories?.map((smallCategory) => (
-              <MenuItem value={smallCategory.id}>{smallCategory.name}</MenuItem>
+              <MenuItem key={smallCategory.id} value={smallCategory.id}>
+                {smallCategory.name}
+              </MenuItem>
             ))}
         </Select>
       </FormControl>

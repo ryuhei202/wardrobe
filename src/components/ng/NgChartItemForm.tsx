@@ -28,6 +28,7 @@ export const NgChartItemForm = ({ chartItemsData, onChange }: TProps) => {
         <RadioGroup row>
           {chartItemsData.chartItems.map((chartItem) => (
             <FormControlLabel
+              key={chartItem.id}
               value={chartItem.id}
               onChange={() => onChange(chartItem.id)}
               control={<Radio />}

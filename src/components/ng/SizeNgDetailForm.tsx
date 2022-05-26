@@ -42,9 +42,13 @@ export const SizeNgDetailForm = ({
           marginRight: "auto",
         }}
       >
-        <Typography align="left">中カテゴリ一覧</Typography>
+        <Typography align="left" style={{ paddingBottom: 5 }}>
+          中カテゴリー一覧
+        </Typography>
         <FormControl error={sizeNg?.cateMediumId === undefined}>
-          <InputLabel>中カテゴリ一覧</InputLabel>
+          <InputLabel>
+            {sizeNg?.cateMediumId === undefined ? "必須" : ""}
+          </InputLabel>
           <Select
             style={{ width: 400 }}
             value={sizeNg?.cateMediumId ?? ""}
@@ -57,7 +61,7 @@ export const SizeNgDetailForm = ({
           >
             <MenuItem value={undefined}></MenuItem>
             {ngData.itemMediumCategories?.map((mediumCategory) => (
-              <MenuItem value={mediumCategory.id}>
+              <MenuItem key={mediumCategory.id} value={mediumCategory.id}>
                 {mediumCategory.name}
               </MenuItem>
             ))}
@@ -72,25 +76,29 @@ export const SizeNgDetailForm = ({
           marginRight: "auto",
         }}
       >
-        <Typography align="left">部位一覧</Typography>
+        <Typography align="left" style={{ paddingBottom: 5 }}>
+          部位一覧
+        </Typography>
         <FormControl>
-          <InputLabel>部位一覧</InputLabel>
+          <InputLabel>
+            {sizeNg?.itemPart === undefined ? "任意" : ""}
+          </InputLabel>
           <Select
             style={{ width: 100 }}
             onChange={(event) =>
               onSizeNgChanged({
                 ...sizeNg,
-                itemPart: (event.target.value || undefined) as
-                  | number
-                  | undefined,
+                itemPart: event.target.value as number | undefined,
                 itemPartSize: undefined,
                 inequalitySign: undefined,
               })
             }
           >
-            <MenuItem value="">入力しない</MenuItem>
+            <MenuItem value={undefined}></MenuItem>
             {ngData.itemParts?.map((itemPart) => (
-              <MenuItem value={itemPart.id}>{itemPart.name}</MenuItem>
+              <MenuItem key={itemPart.id} value={itemPart.id}>
+                {itemPart.name}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -118,8 +126,12 @@ export const SizeNgDetailForm = ({
             sizeNg?.inequalitySign === undefined
           }
         >
-          <InputLabel>選択してください</InputLabel>
-          {/* 以上、以下の時にwardrobeで出るのか出ないのか戸惑う時があるので、明記してくれたら嬉しい */}
+          <InputLabel>
+            {sizeNg?.itemPart !== undefined &&
+            sizeNg?.inequalitySign === undefined
+              ? "必須"
+              : ""}
+          </InputLabel>
           <Select
             style={{ width: 120 }}
             disabled={sizeNg?.itemPart === undefined}
@@ -131,9 +143,13 @@ export const SizeNgDetailForm = ({
               })
             }
           >
-            <MenuItem value=""></MenuItem>
-            <MenuItem value={OR_OVER}>以上</MenuItem>
-            <MenuItem value={OR_UNDER}>以下</MenuItem>
+            <MenuItem key={0} value={undefined}></MenuItem>
+            <MenuItem key={OR_OVER} value={OR_OVER}>
+              以上
+            </MenuItem>
+            <MenuItem key={OR_UNDER} value={OR_UNDER}>
+              以下
+            </MenuItem>
           </Select>
         </FormControl>
       </Box>
