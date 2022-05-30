@@ -2,8 +2,8 @@ export interface UpdateSizes {
   height?: number;
   weight?: number;
   size_tops_admin?: number;
-  size_jacket_admin?: string;
-  size_drop_size_admin?: string;
+  size_jacket_admin?: number;
+  size_drop_size_admin?: number;
   shoulder?: number;
   shoulder_jacket?: number;
   bust?: number;
