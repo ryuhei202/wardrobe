@@ -2,26 +2,22 @@ import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 
 import { useMemberPutRequest } from "./UseMemberPutRequest";
-import { UpdateSizes } from "../../model/api/request/styling/member_size/UpdateSizes";
+import { MemberSizeUpdateParams } from "../../model/api/request/styling/member_size/MemberSizeUpdateParams";
 
 type TMemberSizesUpdate = {
   readonly mutate: UseMutateFunction<AxiosResponse>;
   readonly isLoading: boolean;
 };
 
-type TMemberSizesUpdateParams = {
-  sizes: UpdateSizes;
-};
-
 type TMemberSizesUpdateArg = {
   memberId: number;
-} & TMemberSizesUpdateParams;
+  params: MemberSizeUpdateParams;
+};
 
 export const UseMemberSizesUpdate = ({
   memberId,
-  sizes,
+  params,
 }: TMemberSizesUpdateArg): TMemberSizesUpdate => {
-  const params: TMemberSizesUpdateParams = { sizes };
   const { mutate, isLoading } = useMemberPutRequest({
     memberId,
     params,
