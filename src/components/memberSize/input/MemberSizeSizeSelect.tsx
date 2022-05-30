@@ -7,7 +7,6 @@ type TProps = {
   children: ReactNode;
   value: number;
   onChange: (value: number) => void;
-  adornment?: "cm" | "kg";
   className?: string;
   style?: React.CSSProperties;
 };
@@ -17,7 +16,6 @@ export const MemberSizeSizeSelect = ({
   children,
   value,
   onChange,
-  adornment,
   className,
   style,
 }: TProps) => {
