@@ -1,8 +1,8 @@
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 
-import { useMemberPutRequest } from "./UseMemberPutRequest";
 import { MemberSizeUpdateParams } from "../../model/api/request/styling/member_size/MemberSizeUpdateParams";
+import { UseMemberPatchRequest } from "./UseMemberPatchRequest";
 
 type TMemberSizesUpdate = {
   readonly mutate: UseMutateFunction<AxiosResponse>;
@@ -18,7 +18,7 @@ export const UseMemberSizesUpdate = ({
   memberId,
   params,
 }: TMemberSizesUpdateArg): TMemberSizesUpdate => {
-  const { mutate, isLoading } = useMemberPutRequest({
+  const { mutate, isLoading } = UseMemberPatchRequest({
     memberId,
     params,
     path: "size",
