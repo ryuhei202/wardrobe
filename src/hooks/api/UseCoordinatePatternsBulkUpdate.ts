@@ -8,13 +8,13 @@ type PostCreateOutfitParams = {
 };
 
 type TArrangesCreateOutfitsArg = {
-  chartId: number;
+  coordinateId: number;
   coordinates: CoordinateBulkUpdateRequest[];
 };
 
-export const useCoordinatesBulkUpdate = ({
+export const useCoordinatePatternsBulkUpdate = ({
   coordinates,
-  chartId,
+  coordinateId,
 }: TArrangesCreateOutfitsArg): {
   mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
   error: Error | null;
@@ -26,7 +26,7 @@ export const useCoordinatesBulkUpdate = ({
   };
 
   const { mutate, error, isLoading, isSuccess } = usePatchRequest(
-    `kartes/${chartId}/coordinates/bulk_update`,
+    `coordinates/${coordinateId}/coordinate_patterns/bulk_update`,
     params()
   );
 

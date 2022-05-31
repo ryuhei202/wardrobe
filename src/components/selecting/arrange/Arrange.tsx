@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useCoordinatesBulkUpdate } from "../../../hooks/api/UseCoordinatesBulkUpdate";
+import { useCoordinatePatternsBulkUpdate } from "../../../hooks/api/UseCoordinatePatternsBulkUpdate";
 import { CoordinatePatternIndexResponse } from "../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
 import { ChartIdContext } from "../../context/provider/ContextProvider";
@@ -30,9 +30,9 @@ export const Arrange = (props: ArrangeProps) => {
   const chartId = useContextDefinedState(ChartIdContext);
   const classes = useArrangeStyle();
   const handler = useArrangeHandler(props.data.items, props.response);
-  const { mutate, isLoading, isSuccess } = useCoordinatesBulkUpdate({
+  const { mutate, isLoading, isSuccess } = useCoordinatePatternsBulkUpdate({
     coordinates: handler.coordinates,
-    chartId,
+    coordinateId: 11111111, // TODO: 別タスクで実装するため、コンパイルエラーが出ないように一旦仮置きの数字を置いておく
   });
 
   return (
