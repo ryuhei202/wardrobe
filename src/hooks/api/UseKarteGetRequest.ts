@@ -6,11 +6,13 @@ type TKarteGetRequestArg = {
   path: string;
   chartId?: number;
   isEnabled?: boolean;
+  onError?: () => Promise<unknown> | void;
 };
 
 export const useKarteGetRequest = <T>({
   path,
   chartId,
+  onError,
   isEnabled = true,
 }: TKarteGetRequestArg): {
   data: T | undefined;
@@ -20,13 +22,14 @@ export const useKarteGetRequest = <T>({
     isEnabled = false;
   }
   const { data, error } = useQuery<T, Error>(
-    `karte/${path}`,
+    `${chartId}/${path}`,
     () =>
       axiosClient
         .get(`${baseUrl()}/styling/kartes/${chartId}/${path}`)
         .then((r) => r.data),
     {
       enabled: isEnabled,
+      onError,
     }
   );
 

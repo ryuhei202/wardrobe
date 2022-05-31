@@ -45,10 +45,20 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={`${item.id}: ${item.categoryName}、${item.mainColorName}(${item.subColorName})`}
-                secondary={`サイズ:${item.size}, ${item.partSizes
-                  .filter((partSize) => partSize.value !== null)
-                  .map((partSize) => `${partSize.name}(${partSize.value})`)}`}
+                primary={
+                  <Typography style={{ fontSize: 12 }}>
+                    {`${item.id} / ${item.brandName} / ${item.categoryName} / ${item.mainColorName}(${item.subColorName}) / ${item.patternName}`}
+                  </Typography>
+                }
+                secondary={
+                  <Typography style={{ fontSize: 12, color: "gray" }}>
+                    {`${item.size}, ${item.partSizes
+                      .filter((partSize) => partSize.value !== null)
+                      .map(
+                        (partSize) => `${partSize.name}(${partSize.value})`
+                      )}, Drop(${item.dropSize})`}
+                  </Typography>
+                }
               />
             </ListItem>
           ))}
