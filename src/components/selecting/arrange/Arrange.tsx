@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useCoordinatesBulkUpdate } from "../../../hooks/api/UseCoordinatesBulkUpdate";
-import { CoordinateIndexResponse } from "../../../model/api/response/styling/coordinate/CoordinateIndexResponse";
+import { CoordinatePatternIndexResponse } from "../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
 import { ChartIdContext } from "../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../context/UseContextDefinedState";
@@ -22,7 +22,7 @@ import { useArrangeStyle } from "./style/UseArrangeStyle";
 
 export interface ArrangeProps {
   data: ArrangeData;
-  response: CoordinateIndexResponse;
+  response: CoordinatePatternIndexResponse;
   callback: ArrangeCallback;
 }
 

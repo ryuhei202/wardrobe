@@ -1,5 +1,5 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useCoordinatesIndex } from "../../../../hooks/api/UseCoordinatesIndex";
+import { useCoordinatePatternsIndex } from "../../../../hooks/api/UseCoordinatePatternsIndex";
 import { ArrangeData } from "../../../../model/selecting/arrange/props_data/ArrangeData";
 import { ChartIdContext } from "../../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../../context/UseContextDefinedState";
@@ -18,8 +18,8 @@ export const useAdviceChoiceProvider = (): AdviceChoiceProvider => {
     data: response,
     error,
     isFetching,
-  } = useCoordinatesIndex({
-    chartId: useContextDefinedState(ChartIdContext),
+  } = useCoordinatePatternsIndex({
+    coordinateId: 111111111, // 別タスクで実装するため、コンパイルエラーが出ないように一旦仮置きの数字を置いておく
   });
 
   const arrangeComponent = (

@@ -6,7 +6,7 @@ import { SelectedItem } from "../../../../model/selecting/SelectedItem";
 import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
 import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
-import { CoordinateIndexResponse } from "../../../../model/api/response/styling/coordinate/CoordinateIndexResponse";
+import { CoordinatePatternIndexResponse } from "../../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
 
 export interface ArrangeHandler {
   coordinates: CoordinateBulkUpdateRequest[];
@@ -20,7 +20,7 @@ export interface ArrangeHandler {
 
 export const useArrangeHandler = (
   items: SelectedItem[],
-  responses: CoordinateIndexResponse
+  responses: CoordinatePatternIndexResponse
 ): ArrangeHandler => {
   const defaultCoordinate = {
     id: null,

@@ -1,5 +1,5 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useCoordinatesIndex } from "../../hooks/api/UseCoordinatesIndex";
+import { useCoordinatePatternsIndex } from "../../hooks/api/UseCoordinatePatternsIndex";
 import { CoordinateListItem } from "./CoordinateListItem";
 
 type TProps = {
@@ -7,8 +7,8 @@ type TProps = {
 };
 
 export const CoordinateContainer = ({ chartId }: TProps) => {
-  const { data, error } = useCoordinatesIndex({
-    chartId,
+  const { data, error } = useCoordinatePatternsIndex({
+    coordinateId: 111111111, // 別タスクで実装するため、コンパイルエラーが出ないように一旦仮置きの数字を置いておく
   });
   if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
