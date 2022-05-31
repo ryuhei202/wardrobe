@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Divider,
   List,
   ListItem,
   ListItemAvatar,
@@ -10,7 +9,6 @@ import {
 } from "@mui/material";
 import { Coordinate } from "../../model/api/response/styling/coordinatePattern/Coordinate";
 import { PartSizeResponse } from "../../model/api/response/styling/karte/KartePartSizeResponse";
-import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
@@ -29,7 +27,7 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
         variant="body2"
         style={{ fontWeight: "bold", marginLeft: 20 }}
       >
-        コーデパターン{index + 1}
+        パターン{index + 1}
       </Typography>
       <ListItem key={coordinate.id}>
         <List dense>
@@ -77,8 +75,6 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
           </p>
         ))}
       </List>
-      <SelectedReviewContainer coordinateId={coordinate.id} />
-      <Divider variant="middle" />
     </Box>
   );
 };
