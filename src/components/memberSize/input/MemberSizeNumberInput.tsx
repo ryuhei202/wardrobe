@@ -1,6 +1,7 @@
 import { InputAdornment, TextField } from "@mui/material";
 import { styled } from "@mui/styles";
 import React, { ChangeEvent, ChangeEventHandler } from "react";
+import { SIZE_CHANGED_BG_COLOR } from "./SizeChangedBgColor";
 
 type TProps = {
   changed: boolean;
@@ -26,7 +27,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     },
   },
   "&.changed .MuiInputBase-root": {
-    backgroundColor: "rgb(255 213 223)",
+    backgroundColor: SIZE_CHANGED_BG_COLOR,
   },
 }));
 
