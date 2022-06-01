@@ -1,6 +1,4 @@
 import { usePatchRequest } from "./UsePatchRequest";
-import { UseMutateFunction } from "react-query";
-import { AxiosResponse } from "axios";
 
 type TReviewsUpdateArg = {
   readonly coordinateId: number;
@@ -9,11 +7,7 @@ type TReviewsUpdateArg = {
 export const useReviewsUpdate = ({
   coordinateId,
   lineMessageUrl,
-}: TReviewsUpdateArg): {
-  mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>;
-  isSuccess: boolean;
-  isLoading: boolean;
-} => {
+}: TReviewsUpdateArg) => {
   const { mutate, isSuccess, isLoading } = usePatchRequest(
     `coordinates/${coordinateId}/review`,
     { lineMessageUrl }
