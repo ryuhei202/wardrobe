@@ -1,20 +1,20 @@
 export interface UpdateSizes {
-  height?: number;
-  weight?: number;
-  size_tops_admin?: number;
-  size_jacket_admin?: number;
-  size_drop_size_admin?: number;
-  shoulder?: number;
-  shoulder_jacket?: number;
-  bust?: number;
-  bust_jacket?: number;
-  length_top?: number;
-  length_top_jacket?: number;
-  length_arm?: number;
-  length_arm_jacket?: number;
-  waist?: number;
-  hip?: number;
-  round_leg?: number;
-  length_leg?: number;
-  round_calf?: number;
+  height?: number | null;
+  weight?: number | null;
+  sizeTopsAdmin?: number | null;
+  sizeJacketAdmin?: number | null;
+  sizeDropSizeAdmin?: number | null;
+  shoulder?: number | null;
+  shoulderJacket?: number | null;
+  bust?: number | null;
+  bustJacket?: number | null;
+  lengthTop?: number | null;
+  lengthTopJacket?: number | null;
+  lengthArm?: number | null;
+  lengthArmJacket?: number | null;
+  waist?: number | null;
+  hip?: number | null;
+  roundLeg?: number | null;
+  lengthLeg?: number | null;
+  roundCalf?: number | null;
 }
