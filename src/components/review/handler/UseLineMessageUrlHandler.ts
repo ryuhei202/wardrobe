@@ -16,9 +16,12 @@ type LineMessageUrlHandlerArgs = {
   readonly setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   readonly setIsUrlEditing: React.Dispatch<React.SetStateAction<boolean>>;
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any>,
+    AxiosResponse<any, any>,
     unknown,
-    void,
+    | {
+        lineMessageUrl: string;
+      }
+    | undefined,
     unknown
   >;
   readonly isLoading: boolean;
