@@ -8,7 +8,8 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { Coordinate } from "../../model/api/response/styling/coordinate/Coordinate";
+import { Coordinate } from "../../model/api/response/styling/coordinatePattern/Coordinate";
+import { PartSizeResponse } from "../../model/api/response/styling/karte/KartePartSizeResponse";
 import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 import { PopupImage } from "../shared/PopupImage";
 
@@ -53,7 +54,9 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
                 secondary={
                   <Typography style={{ fontSize: 12, color: "gray" }}>
                     {`${item.size}, ${item.partSizes
-                      .filter((partSize) => partSize.value !== null)
+                      .filter(
+                        (partSize: PartSizeResponse) => partSize.value !== null
+                      )
                       .map(
                         (partSize) => `${partSize.name}(${partSize.value})`
                       )}, Drop(${item.dropSize})`}

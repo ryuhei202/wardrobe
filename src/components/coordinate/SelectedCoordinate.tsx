@@ -1,5 +1,5 @@
 import { Divider, List, ListItem } from "@mui/material";
-import { Coordinate } from "../../model/api/response/styling/coordinate/Coordinate";
+import { Coordinate } from "../../model/api/response/styling/coordinatePattern/Coordinate";
 import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 
 type TProps = {
