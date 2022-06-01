@@ -20,7 +20,7 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
   return (
     <Box
       sx={{
-        marginBottom: 3,
+        marginBottom: 1,
       }}
     >
       <Typography
@@ -65,8 +65,11 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
           ))}
         </List>
       </ListItem>
-      <List dense style={{ marginLeft: 20 }}>
-        <Typography variant="body2" style={{ fontWeight: "bold" }}>
+      <List dense style={{ marginLeft: 35 }}>
+        <Typography
+          variant="body2"
+          style={{ fontSize: 13, fontWeight: "bold" }}
+        >
           アドバイス
         </Typography>
         {coordinate.advices.map((advice, index) => (

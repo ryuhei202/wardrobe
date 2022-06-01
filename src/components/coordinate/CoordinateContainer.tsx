@@ -24,8 +24,8 @@ export const CoordinateContainer = ({ chartId }: TProps) => {
           >
             コーデ{index + 1}
           </Typography>
-          <CoordinatePatternContainer coordinate={coordinate} />
           <SelectedReviewContainer coordinateId={coordinate.id} />
+          <CoordinatePatternContainer coordinate={coordinate} />
           <Divider variant="middle" />
         </Fragment>
       ))}
