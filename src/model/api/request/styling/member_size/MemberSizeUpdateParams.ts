@@ -1,6 +1,5 @@
 import { UpdateSizes } from "./UpdateSizes";
 
-export interface MemberSizeUpdateRequest {
-  member_id: number;
+export interface MemberSizeUpdateParams {
   sizes: UpdateSizes;
 }
