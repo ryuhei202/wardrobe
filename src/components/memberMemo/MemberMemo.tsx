@@ -6,7 +6,7 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
 import { MemberMemoShowResponse } from "../../model/api/response/styling/member_memo/MemberMemoShowResponse";
@@ -38,7 +38,7 @@ export const MemberMemo = ({ response }: Props) => {
     memberId: useContextDefinedState(MemberIdContext),
   });
 
-  const handlePost = () => {
+  const handlePost = useCallback(() => {
     mutate(undefined, {
       onSuccess: () => {
         queryClient.invalidateQueries(`member/member_memo`);
@@ -53,11 +53,11 @@ export const MemberMemo = ({ response }: Props) => {
         setIsSnackBarOpen(true);
       },
     });
-  };
+  }, [queryClient, mutate]);
 
   useEffect(() => {
     if (response.nextCoordeHearing !== nextCoordeHearing) handlePost();
-  }, [nextCoordeHearing]);
+  }, [nextCoordeHearing, response.nextCoordeHearing, handlePost]);
 
   return (
     <>
