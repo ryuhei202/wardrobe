@@ -6,7 +6,8 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
 import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
 import { MemberMemoShowResponse } from "../../model/api/response/styling/member_memo/MemberMemoShowResponse";
 import {
@@ -29,18 +30,18 @@ export const MemberMemo = ({ response }: Props) => {
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
+  const queryClient = useQueryClient();
   const { mutate, isLoading } = useMemberMemoUpdate({
     memo,
     memoNext,
-    nextCoordeHearing: nextCoordeHearing
-      ? NEXT_COORDE_HEARING.HEARING
-      : NEXT_COORDE_HEARING.HEARING_END,
+    nextCoordeHearing,
     memberId: useContextDefinedState(MemberIdContext),
   });
 
   const handlePost = () => {
     mutate(undefined, {
       onSuccess: () => {
+        queryClient.invalidateQueries(`member/member_memo`);
         setSeverity("success");
         setSnackBarText("ヒアリングの変更を保存しました");
       },
@@ -53,6 +54,10 @@ export const MemberMemo = ({ response }: Props) => {
       },
     });
   };
+
+  useEffect(() => {
+    if (response.nextCoordeHearing !== nextCoordeHearing) handlePost();
+  }, [nextCoordeHearing]);
 
   return (
     <>
@@ -88,11 +93,10 @@ export const MemberMemo = ({ response }: Props) => {
                 checked={!!nextCoordeHearing}
                 onChange={() => {
                   setNextCoordeHearing(
-                    nextCoordeHearing
+                    !!nextCoordeHearing
                       ? NEXT_COORDE_HEARING.HEARING
                       : NEXT_COORDE_HEARING.HEARING_END
                   );
-                  handlePost();
                 }}
                 size="small"
               />
