@@ -24,7 +24,7 @@ export const useCoordinatePatternsIndex = ({
 }: TCoordinatePatternsIndexArg): CoordinatePatternsIndex => {
   const { data, error, refetch, isFetching } =
     useGetRequest<CoordinatePatternIndexResponse>(
-      `/coordinates/${coordinateId}/coordinate_patterns`
+      `coordinates/${coordinateId}/coordinate_patterns`
     );
 
   return {
