@@ -3,5 +3,5 @@ import { CoordinateAdviceCategoryResponse } from "./CoordinateAdviceCategoryResp
 
 export interface CoordinatePatternIndexResponse {
   readonly adviceCategories: CoordinateAdviceCategoryResponse[];
-  readonly selectedCoordinates: Coordinate[];
+  readonly selectedCoordinatePatterns: Coordinate[];
 }

@@ -30,7 +30,7 @@ export const useArrangeHandler = (
   };
 
   const formattedCoordinates = (): CoordinateBulkUpdateRequest[] => {
-    return responses.selectedCoordinates.map((coordinate) => {
+    return responses.selectedCoordinatePatterns.map((coordinate) => {
       return {
         id: coordinate.id,
         itemIds: coordinate.items.map((item) => item.id),

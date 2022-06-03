@@ -1,21 +1,33 @@
-import { CircularProgress, Typography } from "@mui/material";
-import { useCoordinatePatternsIndex } from "../../hooks/api/UseCoordinatePatternsIndex";
-import { CoordinateListItem } from "./CoordinateListItem";
+import { CircularProgress, Divider, Typography } from "@mui/material";
+import { Fragment } from "react";
+import { useCoordinatesIndex } from "../../hooks/api/UseCoordinatesIndex";
+import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatternContainer";
+import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 
 type TProps = {
   chartId: number;
 };
 
 export const CoordinateContainer = ({ chartId }: TProps) => {
-  const { data, error } = useCoordinatePatternsIndex({
-    coordinateId: 111111111, // TODO: 別タスクで実装するため、コンパイルエラーが出ないように一旦仮置きの数字を置いておく
+  const { data, error } = useCoordinatesIndex({
+    chartId,
   });
   if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
   return (
     <>
-      {data.selectedCoordinates.map((coordinate, index) => (
-        <CoordinateListItem coordinate={coordinate} index={index} />
+      {data.coordinates.map((coordinate, index) => (
+        <Fragment key={index}>
+          <Typography
+            variant="body1"
+            style={{ fontWeight: "bold", marginLeft: 10 }}
+          >
+            コーデ{index + 1}
+          </Typography>
+          <SelectedReviewContainer coordinateId={coordinate.id} />
+          <CoordinatePatternContainer coordinate={coordinate} />
+          <Divider variant="middle" />
+        </Fragment>
       ))}
     </>
   );
