@@ -1,87 +1,15 @@
-import { ArrowBack } from "@mui/icons-material";
-import {
-  Alert,
-  Button,
-  CircularProgress,
-  Dialog,
-  IconButton,
-  Snackbar,
-  Typography,
-} from "@mui/material";
-import React from "react";
-import { useCoordinatePatternsBulkUpdate } from "../../../hooks/api/UseCoordinatePatternsBulkUpdate";
-import { CoordinatePatternIndexResponse } from "../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
-import { ChartIdContext } from "../../context/provider/ContextProvider";
-import { useContextDefinedState } from "../../context/UseContextDefinedState";
-import { AddedOutfitList } from "./AddedOutfitList";
-import { ArrangeCallback } from "./callback/ArrangeCallback";
-import { useArrangeHandler } from "./handler/UseArrageHandler";
-import { OutfitForm } from "./OutfitForm";
-import { useArrangeStyle } from "./style/UseArrangeStyle";
+import { useAdviceChoiceProvider } from "./provider/UseAdviceChoiceProvider";
 
-export interface ArrangeProps {
+type TProps = {
   data: ArrangeData;
-  response: CoordinatePatternIndexResponse;
-  callback: ArrangeCallback;
-}
+  coordinateId: number;
+};
 
-export const Arrange = (props: ArrangeProps) => {
-  const chartId = useContextDefinedState(ChartIdContext);
-  const classes = useArrangeStyle();
-  const handler = useArrangeHandler(props.data.items, props.response);
-  const { mutate, isLoading, isSuccess } = useCoordinatePatternsBulkUpdate({
-    coordinates: handler.coordinates,
-    coordinateId: 11111111, // TODO: 別タスクで実装するため、コンパイルエラーが出ないように一旦仮置きの数字を置いておく
+export const Arrange = ({ data, coordinateId }: TProps) => {
+  const adviceChoiceProvider = useAdviceChoiceProvider({
+    coordinateId: coordinateId,
   });
 
-  return (
-    <>
-      <IconButton
-        onClick={() => props.callback.onClickBackButton()}
-        size="large"
-      >
-        <ArrowBack />
-      </IconButton>
-      <br />
-      <Typography display="inline" variant="h6" paragraph>
-        着こなしアドバイス
-      </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.completeButton}
-        onClick={() =>
-          mutate(undefined, {
-            onSuccess: () => {
-              handler.onPostComplete();
-            },
-          })
-        }
-      >
-        登録を完了する
-      </Button>
-      <AddedOutfitList
-        data={handler.addedOutfitListData()}
-        callback={handler.addedOutfitListCallback()}
-      />
-      {handler.editingOutfitIndex >= 0 ? (
-        <OutfitForm
-          data={handler.outfitFormData()}
-          response={props.response.adviceCategories}
-          callback={handler.outfitFormCallback()}
-        />
-      ) : (
-        <></>
-      )}
-      <Dialog open={isLoading} disableEscapeKeyDown>
-        <CircularProgress />
-      </Dialog>
-      <Snackbar open={isSuccess} autoHideDuration={6000}>
-        <Alert severity="success">
-          着こなしアドバイスの登録を完了しました！
-        </Alert>
-      </Snackbar>
-    </>
-  );
+  return <>{adviceChoiceProvider.arrangePatternComponent(data)}</>;
 };

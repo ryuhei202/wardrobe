@@ -14,8 +14,8 @@ export const CoordinateContainer = ({ chartId }: TProps) => {
   if (error) return <Typography>{error.message}</Typography>;
   return (
     <>
-      {data.selectedCoordinates.map((coordinate, index) => (
-        <CoordinateListItem coordinate={coordinate} index={index} />
+      {data.selectedCoordinatePatterns.map((coordinate, index) => (
+        <CoordinateListItem coordinatePattern={coordinate} index={index} />
       ))}
     </>
   );

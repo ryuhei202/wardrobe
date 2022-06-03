@@ -4,16 +4,16 @@ import { CoordinateBulkUpdateRequest } from "../../model/api/request/styling/coo
 import { usePatchRequest } from "./UsePatchRequest";
 
 type PostCreateOutfitParams = {
-  coordinates: CoordinateBulkUpdateRequest[];
+  coordinatePatterns: CoordinateBulkUpdateRequest[];
 };
 
 type TArrangesCreateOutfitsArg = {
   coordinateId: number;
-  coordinates: CoordinateBulkUpdateRequest[];
+  coordinatePatterns: CoordinateBulkUpdateRequest[];
 };
 
 export const useCoordinatePatternsBulkUpdate = ({
-  coordinates,
+  coordinatePatterns,
   coordinateId,
 }: TArrangesCreateOutfitsArg): {
   mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
@@ -22,7 +22,7 @@ export const useCoordinatePatternsBulkUpdate = ({
   isSuccess: boolean;
 } => {
   const params = (): PostCreateOutfitParams => {
-    return { coordinates };
+    return { coordinatePatterns };
   };
 
   const { mutate, error, isLoading, isSuccess } = usePatchRequest(
