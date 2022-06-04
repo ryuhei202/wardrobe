@@ -1,4 +1,4 @@
 #!/bin/sh
 
 branch_name=$(git branch | grep "*" | awk '{print $2}')
-sed -i "1s/^/<$branch_name> \n/" $1
+sed -i "s/$/ <$branch_name>/" $1
