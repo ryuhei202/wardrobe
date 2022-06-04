@@ -1,4 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-branch_name=$(git branch | grep "*" | awk '{print $2}')
-sed -i "s/$/ <$branch_name>/" $1
+readonly COMMIT_MSG_FILE=$1
+readonly COMMIT_SOURCE=$2
+
+case "${COMMIT_SOURCE}" in
+  commit) # use -c/-C/--amend
+    : # 何もしない
+  ;;
+  *)
+    branch_name=$(git name-rev --name-only HEAD)
+    perl -p -i.bak -e "s/$/ ${branch_name}/" $COMMIT_MSG_FILE
+  ;;
+esac
