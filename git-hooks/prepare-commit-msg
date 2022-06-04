@@ -1,4 +1,4 @@
 #!/bin/sh
 
 branch_name=$(git branch | grep "*" | awk '{print $2}')
-perl -i.bak -ne "s/$/ <${branch_name}>/g" $1
+perl -p -i.bak -e "s/$/ <${branch_name}>/g" $1
