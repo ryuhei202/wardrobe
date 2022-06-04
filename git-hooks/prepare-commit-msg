@@ -1,14 +1,11 @@
-#!/bin/bash
+#!/bin/sh
+exec ruby -x "$0" "$@"
 
-readonly COMMIT_MSG_FILE=$1
-readonly COMMIT_SOURCE=$2
+#!ruby
+current_branch = `git branch | grep '*'`.chomp.sub('* ', '')
+commit_msgs = File.readlines(ARGV[0])
 
-case "${COMMIT_SOURCE}" in
-  commit) # use -c/-C/--amend
-    : # 何もしない
-  ;;
-  *)
-    branch_name=$(git name-rev --name-only HEAD)
-    perl -p -i.bak -e "s/$/ ${branch_name}/" $COMMIT_MSG_FILE
-  ;;
-esac
+open(ARGV[0], 'w') {|file|
+   file.print commit_msgs[0].chomp
+   file.puts " <#{current_branch}>"
+}
