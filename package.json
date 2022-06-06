@@ -69,6 +69,6 @@
   },
   "devDependencies": {
     "@sentry/webpack-plugin": "^1.18.8",
-    "husky": "^7.0.0"
+    "husky": "^8.0.1"
   }
 }
