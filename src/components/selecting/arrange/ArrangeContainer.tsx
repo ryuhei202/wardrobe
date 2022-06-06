@@ -25,9 +25,9 @@ export const ArrangeContainer = ({ data, callback }: ArrangeContainerProps) => {
     isFetching,
   } = useCoordinatesIndex({ chartId });
 
-  const [value, setValue] = useState<string>("0");
-  const handleChange = (event: SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+  const [selectedTabIndex, setSelectedTabIndex] = useState<string>("0");
+  const handleChange = (event: SyntheticEvent, newTabIndex: string) => {
+    setSelectedTabIndex(newTabIndex);
   };
 
   if (!response || isFetching) return <CircularProgress />;
@@ -47,7 +47,7 @@ export const ArrangeContainer = ({ data, callback }: ArrangeContainerProps) => {
           display: "flex",
         }}
       >
-        <TabContext value={value}>
+        <TabContext value={selectedTabIndex}>
           <Box sx={{ width: "10%" }}>
             <TabList onChange={handleChange} orientation="vertical">
               {response.coordinates.map((_, index) => (
