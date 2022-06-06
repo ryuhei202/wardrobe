@@ -10,7 +10,7 @@ type TMemberSizesShowArg = {
   memberId: number;
 };
 
-export const UseMemberSizesShow = ({
+export const useMemberSizesShow = ({
   memberId,
 }: TMemberSizesShowArg): TMemberSizesShow => {
   const { data, error } = useMemberGetRequest<

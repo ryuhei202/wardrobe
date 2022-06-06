@@ -15,12 +15,7 @@ type TArrangesCreateOutfitsArg = {
 export const useCoordinatesBulkUpdate = ({
   coordinates,
   chartId,
-}: TArrangesCreateOutfitsArg): {
-  mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
-  error: Error | null;
-  isLoading: boolean;
-  isSuccess: boolean;
-} => {
+}: TArrangesCreateOutfitsArg) => {
   const params = (): PostCreateOutfitParams => {
     return { coordinates };
   };

@@ -1,37 +1,23 @@
-import { AxiosResponse } from "axios";
-import { useMutation, useQueryClient, UseMutateFunction } from "react-query";
-import { axiosClient } from "../../model/api/shared/AxiosClient";
+import { useQueryClient } from "react-query";
 
-import { baseUrl } from "../../model/api/shared/BaseUrl";
+import { usePatchRequest } from "./UsePatchRequest";
 
-type TMemberPatchRequestArg = {
+type TMemberPatchRequestArg<T> = {
   path: string;
-  params: {};
   memberId: number;
+  params?: T;
 };
 
-export const UseMemberPatchRequest = ({
+export const useMemberPatchRequest = <TParams = {}>({
   path,
-  params,
   memberId,
-}: TMemberPatchRequestArg): {
-  mutate: UseMutateFunction<AxiosResponse<any>, unknown, void, unknown>;
-  isLoading: boolean;
-} => {
+  params,
+}: TMemberPatchRequestArg<TParams>) => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = useMutation(
-    () =>
-      axiosClient.patch(
-        `${baseUrl()}/styling/members/${memberId}/${path}`,
-        params
-      ),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(`member/${path}`);
-      },
-    }
-  );
-
-  return { mutate, isLoading };
+  return usePatchRequest<TParams>(`members/${memberId}/${path}`, params, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(`member/${path}`);
+    },
+  });
 };
