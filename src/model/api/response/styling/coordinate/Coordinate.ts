@@ -1,9 +1,3 @@
-import { CoordinateAdviceResponse } from "./CoordinateAdviceResponse";
-import { CoordinateItemResponse } from "./CoordinateItemResponse";
-
-export interface Coordinate {
+export type Coordinate = {
   readonly id: number;
-  readonly items: CoordinateItemResponse[];
-  readonly advices: CoordinateAdviceResponse[];
-  readonly formalLevel: number;
-}
+};
