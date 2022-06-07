@@ -60,29 +60,30 @@ export const MemberMemo = ({ response }: Props) => {
         component="form"
         sx={{
           display: "flex",
+          flexDirection: "column",
           flexWrap: "wrap",
         }}
         noValidate
         autoComplete="off"
       >
         <div>
-          <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+          <Typography variant="subtitle2" style={{ fontWeight: "bold" }}>
             次回コーデに関して
           </Typography>
+          <Box>
+            <Typography variant="caption">
+              自動ヒアリング: {response.lineSurveyNext || "未回答"}
+            </Typography>
+          </Box>
           <MemberMemoForm
-            label="次回コーデに関して"
             value={memoNext}
             disabled={response.memoNext === memoNext || isLoading}
             onChange={setMemoNext}
             onPost={handlePost}
           />
-          <Box sx={{ m: 1, position: "relative" }}>
-            <Typography variant="subtitle2">
-              自動ヒアリング: {response.lineSurveyNext || "未回答"}
-            </Typography>
-          </Box>
           <FormControlLabel
             value="end"
+            style={{ marginLeft: 0 }}
             control={
               <Switch
                 checked={!!nextCoordeHearing}
@@ -98,7 +99,7 @@ export const MemberMemo = ({ response }: Props) => {
               />
             }
             label={
-              <Typography variant="subtitle2">
+              <Typography variant="subtitle2" fontWeight="bold">
                 {nextCoordeHearing
                   ? "次回ヒアリング完了済み"
                   : "次回ヒアリング未完了"}
@@ -107,12 +108,11 @@ export const MemberMemo = ({ response }: Props) => {
             labelPlacement="end"
           />
         </div>
-        <div>
-          <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+        <div style={{ marginTop: "2rem" }}>
+          <Typography variant="subtitle2" style={{ fontWeight: "bold" }}>
             その他メモ
           </Typography>
           <MemberMemoForm
-            label="その他メモ"
             value={memo}
             disabled={response.memo === memo || isLoading}
             onChange={setMemo}
