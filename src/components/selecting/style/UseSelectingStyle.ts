@@ -12,13 +12,6 @@ export const useSelectingStyle = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: 540,
     },
-    drawerHeader: {
-      display: "flex",
-      alignItems: "center",
-      padding: theme.spacing(3),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-    },
     drawerContents: {
       overflow: "auto",
     },
