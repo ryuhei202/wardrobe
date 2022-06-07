@@ -1,5 +1,3 @@
-import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
 import { CoordinateBulkUpdateRequest } from "../../model/api/request/styling/coordinate/CoordinateBulkUpdateRequest";
 import { usePatchRequest } from "./UsePatchRequest";
 
