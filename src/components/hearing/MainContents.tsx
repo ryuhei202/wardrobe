@@ -27,10 +27,10 @@ export const MainContents = () => {
         ※Alt(Option) + Enterで保存
       </Typography>
       <Grid container spacing={4}>
-        <Grid item md={12} lg={5} xl={6}>
+        <Grid item md={12} lg={6} xl={6}>
           <MemberMemoContainer />
         </Grid>
-        <Grid item md={12} lg={7} xl={6}>
+        <Grid item md={12} lg={6} xl={6}>
           <Typography variant="subtitle2" style={{ fontWeight: "bold" }}>
             サイズ情報
           </Typography>

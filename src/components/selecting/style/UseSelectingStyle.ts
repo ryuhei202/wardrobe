@@ -6,11 +6,11 @@ import makeStyles from "@mui/styles/makeStyles";
 export const useSelectingStyle = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      width: 540,
+      width: 420,
       flexShrink: 0,
     },
     drawerPaper: {
-      width: 540,
+      width: 420,
     },
     drawerContents: {
       overflow: "auto",
