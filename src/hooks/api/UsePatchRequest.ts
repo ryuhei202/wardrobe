@@ -1,23 +1,19 @@
 import { baseUrl } from "./../../model/api/shared/BaseUrl";
 import { axiosClient } from "./../../model/api/shared/AxiosClient";
-import { AxiosResponse } from "axios";
-import { UseMutateFunction, useMutation } from "react-query";
+import { useMutation } from "react-query";
 
-export const usePatchRequest = (
+export const usePatchRequest = <TParams = {}>(
   path: string,
-  params: {},
+  params?: TParams,
   afterMutation: {
-    onSuccess: () => Promise<unknown> | void;
-    onError: () => Promise<unknown> | void;
+    onSuccess?: () => Promise<unknown> | void;
+    onError?: () => Promise<unknown> | void;
   } = { onSuccess: () => {}, onError: () => {} }
-): {
-  mutate: UseMutateFunction<AxiosResponse<any>, Error, void, unknown>;
-  error: Error | null;
-  isLoading: boolean;
-  isSuccess: boolean;
-} => {
-  const { mutate, error, isLoading, isSuccess } = useMutation<any, Error>(
-    () => axiosClient.patch(`${baseUrl()}/styling/${path}`, params),
+) => {
+  const { mutate, error, isLoading, isSuccess } = useMutation(
+    path,
+    (lateParams?: TParams) =>
+      axiosClient.patch(`${baseUrl()}/styling/${path}`, lateParams ?? params),
     afterMutation
   );
 
