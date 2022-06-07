@@ -3,7 +3,6 @@ import {
   Box,
   FormControlLabel,
   Snackbar,
-  Stack,
   Switch,
   Typography,
 } from "@mui/material";

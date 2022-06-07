@@ -1,5 +1,5 @@
 import { MenuItem, Select } from "@mui/material";
-import React, { ReactNode } from "react";
+import React from "react";
 import { SIZE_CHANGED_BG_COLOR } from "./SizeChangedBgColor";
 
 type TProps = {

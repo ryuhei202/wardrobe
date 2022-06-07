@@ -33,7 +33,9 @@ export const memberSizeTablePresenter = ({
     partName: TMemberPartSizesKey,
     sizeName: TMemberPartSizeEditableKey
   ) => {
-    return fetchedSizes[partName][sizeName] != editingSizes[partName][sizeName];
+    return (
+      fetchedSizes[partName][sizeName] !== editingSizes[partName][sizeName]
+    );
   };
 
   const createRowData = ({

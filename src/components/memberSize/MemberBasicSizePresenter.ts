@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactElement, ReactPropTypes } from "react";
+import { ComponentProps } from "react";
 import { MemberSizeSizeChoiceResponse } from "../../model/api/response/styling/member_size/MemberSizeSizeChoiceResponse";
 import {
   TMemberBasicSizes,
@@ -35,7 +35,7 @@ export const memberBasicSizePresenter = ({
   handleChangeSize,
 }: TArgs): TState => {
   const isChangedSize = (sizeName: TMemberBasicSizesEditableKey) => {
-    return fetchedSizes[sizeName] != editingSizes[sizeName];
+    return fetchedSizes[sizeName] !== editingSizes[sizeName];
   };
 
   const bmi = editingSizes.bmi;
