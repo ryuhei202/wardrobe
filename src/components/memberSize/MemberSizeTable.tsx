@@ -96,7 +96,7 @@ export const MemberSizeTable = ({
                   />
                 ) : null}
               </StyledTableCell>
-              <StyledTableCell>{rowData.refarenceSize}</StyledTableCell>
+              <StyledTableCell>{rowData.referenceSize}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

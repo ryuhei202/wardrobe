@@ -21,7 +21,7 @@ type TRowData = {
   name: string;
   size: ComponentProps<typeof MemberSizeNumberInput>;
   jacketSize: ComponentProps<typeof MemberSizeNumberInput> | null;
-  refarenceSize: string;
+  referenceSize: string;
 };
 
 export const memberSizeTablePresenter = ({
@@ -58,7 +58,7 @@ export const memberSizeTablePresenter = ({
               onChange: (v) => handleChange(partName, "jacketSize", v),
             }
           : null,
-      refarenceSize: `${partSize.refarenceSize}cm`,
+      referenceSize: `${partSize.referenceSize}cm`,
     };
   };
 

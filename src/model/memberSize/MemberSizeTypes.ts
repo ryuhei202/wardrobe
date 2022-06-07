@@ -45,7 +45,7 @@ export type TMemberPartSizes = {
 export type TMemberPartSize = {
   label: string;
   size: number | null;
-  refarenceSize: number;
+  referenceSize: number;
   jacketSize?: number | null;
 };
 
