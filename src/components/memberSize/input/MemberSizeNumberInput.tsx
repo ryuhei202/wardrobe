@@ -17,6 +17,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-root": {
     borderRadius: theme.shape.borderRadius,
     backgroundColor: "white",
+    paddingRight: theme.spacing(1),
 
     "& .MuiInputBase-input": {
       height: "0.6em",
@@ -71,7 +72,7 @@ export const MemberSizeNumberInput = ({
       onKeyDown={handleKeyDown}
       InputProps={{
         endAdornment: (
-          <InputAdornment position="start">{adornment ?? "cm"}</InputAdornment>
+          <InputAdornment position="end">{adornment ?? "cm"}</InputAdornment>
         ),
       }}
     />
