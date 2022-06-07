@@ -1,7 +1,7 @@
-import { Coordinate } from "./Coordinate";
+import { CoordinatePattern } from "./CoordinatePattern";
 import { CoordinateAdviceCategoryResponse } from "./CoordinateAdviceCategoryResponse";
 
 export interface CoordinatePatternIndexResponse {
   readonly adviceCategories: CoordinateAdviceCategoryResponse[];
-  readonly selectedCoordinatePatterns: Coordinate[];
+  readonly selectedCoordinatePatterns: CoordinatePattern[];
 }

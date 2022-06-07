@@ -1,40 +1,43 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { useCoordinatePatternsIndex } from "../../../../hooks/api/UseCoordinatePatternsIndex";
 import { ArrangeData } from "../../../../model/selecting/arrange/props_data/ArrangeData";
-import { ChartIdContext } from "../../../context/provider/ContextProvider";
-import { useContextDefinedState } from "../../../context/UseContextDefinedState";
-import { Arrange } from "../Arrange";
-import { ArrangeCallback } from "../callback/ArrangeCallback";
+import { ArrangePattern } from "../ArrangePattern";
 
 export interface AdviceChoiceProvider {
-  arrangeComponent: (
-    data: ArrangeData,
-    callback: ArrangeCallback
-  ) => JSX.Element;
+  arrangePatternComponent: (data: ArrangeData) => JSX.Element;
 }
 
-export const useAdviceChoiceProvider = (): AdviceChoiceProvider => {
+export interface TProps {
+  coordinateId: number;
+}
+
+export const useAdviceChoiceProvider = ({
+  coordinateId,
+}: TProps): AdviceChoiceProvider => {
   const {
     data: response,
     error,
     isFetching,
   } = useCoordinatePatternsIndex({
-    coordinateId: 111111111, // 別タスクで実装するため、コンパイルエラーが出ないように一旦仮置きの数字を置いておく
+    coordinateId: coordinateId,
   });
 
-  const arrangeComponent = (
-    data: ArrangeData,
-    callback: ArrangeCallback
-  ): JSX.Element => {
+  const arrangePatternComponent = (data: ArrangeData): JSX.Element => {
     if (!response || isFetching) return <CircularProgress />;
     if (error) return <Typography>{error.message}</Typography>;
     if (response) {
-      return <Arrange data={data} response={response} callback={callback} />;
+      return (
+        <ArrangePattern
+          data={data}
+          coordinateId={coordinateId}
+          response={response}
+        />
+      );
     }
     return <></>;
   };
 
   return {
-    arrangeComponent,
+    arrangePatternComponent,
   };
 };

@@ -7,16 +7,16 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { Coordinate } from "../../model/api/response/styling/coordinatePattern/Coordinate";
+import { CoordinatePattern } from "../../model/api/response/styling/coordinatePattern/CoordinatePattern";
 import { PartSizeResponse } from "../../model/api/response/styling/karte/KartePartSizeResponse";
 import { PopupImage } from "../shared/PopupImage";
 
 type TProps = {
-  readonly coordinate: Coordinate;
+  readonly coordinatePattern: CoordinatePattern;
   readonly index: number;
 };
 
-export const CoordinateListItem = ({ coordinate, index }: TProps) => {
+export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
   return (
     <Box
       sx={{
@@ -29,9 +29,9 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
       >
         パターン{index + 1}
       </Typography>
-      <ListItem key={coordinate.id}>
+      <ListItem key={coordinatePattern.id}>
         <List dense>
-          {coordinate.items.map((item) => (
+          {coordinatePattern.items.map((item) => (
             <ListItem key={item.id}>
               <ListItemAvatar>
                 <Avatar variant="rounded">
@@ -72,7 +72,7 @@ export const CoordinateListItem = ({ coordinate, index }: TProps) => {
         >
           アドバイス
         </Typography>
-        {coordinate.advices.map((advice, index) => (
+        {coordinatePattern.advices.map((advice, index) => (
           <p style={{ lineHeight: 0.5, marginLeft: 20 }}>
             {index + 1}. {advice.title}
           </p>

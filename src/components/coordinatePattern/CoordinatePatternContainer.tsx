@@ -15,7 +15,7 @@ export const CoordinatePatternContainer = ({ coordinate }: TProps) => {
   return (
     <>
       {data.selectedCoordinatePatterns.map((coordinate, index) => (
-        <CoordinateListItem coordinate={coordinate} index={index} />
+        <CoordinateListItem coordinatePattern={coordinate} index={index} />
       ))}
     </>
   );
