@@ -21,7 +21,6 @@ export const KarteSection = () => {
         isOpen={isPastOutfitDialogOpen}
         setter={setIsPastOutfitDialogOpen}
       />
-      {/* 最新２つのカルテを表示 */}
       <KarteCollectionContainer />
     </ListItemText>
   );

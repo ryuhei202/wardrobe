@@ -1,14 +1,14 @@
-import { CoordinateBulkUpdateRequest } from "./../../../../model/api/request/styling/coordinate/CoordinateBulkUpdateRequest";
-import { alertClosedWindow } from "./../../../../service/shared/alertClosedWindow";
+import { CoordinateBulkUpdateRequest } from "../../../../model/api/request/styling/coordinate/CoordinateBulkUpdateRequest";
+import { alertClosedWindow } from "../../../../service/shared/alertClosedWindow";
 import { useCallback, useEffect, useState } from "react";
 import { AddedOutfitListData } from "../../../../model/selecting/arrange/props_data/AddedOutfitListData";
 import { SelectedItem } from "../../../../model/selecting/SelectedItem";
 import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
 import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
-import { CoordinateIndexResponse } from "../../../../model/api/response/styling/coordinate/CoordinateIndexResponse";
+import { CoordinatePatternIndexResponse } from "../../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
 
-export interface ArrangeHandler {
+export interface ArrangePatternHandler {
   coordinates: CoordinateBulkUpdateRequest[];
   editingOutfitIndex: number;
   addedOutfitListData: () => AddedOutfitListData;
@@ -18,10 +18,10 @@ export interface ArrangeHandler {
   onPostComplete: () => void;
 }
 
-export const useArrangeHandler = (
+export const useArrangePatternHandler = (
   items: SelectedItem[],
-  responses: CoordinateIndexResponse
-): ArrangeHandler => {
+  responses: CoordinatePatternIndexResponse
+): ArrangePatternHandler => {
   const defaultCoordinate = {
     id: null,
     itemIds: [],
@@ -30,12 +30,12 @@ export const useArrangeHandler = (
   };
 
   const formattedCoordinates = (): CoordinateBulkUpdateRequest[] => {
-    return responses.selectedCoordinates.map((coordinate) => {
+    return responses.selectedCoordinatePatterns.map((coordinatePattern) => {
       return {
-        id: coordinate.id,
-        itemIds: coordinate.items.map((item) => item.id),
-        adviceIds: coordinate.advices.map((advice) => advice.id),
-        formalLevel: coordinate.formalLevel,
+        id: coordinatePattern.id,
+        itemIds: coordinatePattern.items.map((item) => item.id),
+        adviceIds: coordinatePattern.advices.map((advice) => advice.id),
+        formalLevel: coordinatePattern.formalLevel,
       };
     });
   };

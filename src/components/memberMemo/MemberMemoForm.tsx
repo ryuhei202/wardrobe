@@ -3,11 +3,11 @@ import React from "react";
 import { SendButton } from "../shared/SendButton";
 
 type Props = {
-  readonly label: string;
   readonly value: string;
   readonly disabled: boolean;
   readonly onChange: (text: string) => void;
   readonly onPost: () => void;
+  readonly label?: string;
 };
 
 export const MemberMemoForm = ({
@@ -18,7 +18,7 @@ export const MemberMemoForm = ({
   onPost,
 }: Props) => {
   return (
-    <Box sx={{ m: 1, width: "600px", position: "relative" }}>
+    <Box sx={{ my: 1, position: "relative" }}>
       <TextField
         label={label}
         multiline
@@ -30,12 +30,13 @@ export const MemberMemoForm = ({
             onPost();
           }
         }}
-        style={{ width: 600 }}
+        style={{ width: "100%" }}
+        inputProps={{ style: { fontSize: ".8rem" } }}
       />
       <SendButton
         onClick={onPost}
         disabled={disabled}
-        style={{ position: "absolute", bottom: 18, left: 544 }}
+        style={{ position: "absolute", bottom: 16, right: 16 }}
       />
     </Box>
   );

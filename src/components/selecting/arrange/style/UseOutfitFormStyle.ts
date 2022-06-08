@@ -10,8 +10,8 @@ export const useOutfitFormStyle = makeStyles((theme: Theme) =>
       minWidth: 360,
     },
     registerButton: {
+      margin: "0 0 0 auto",
       marginTop: theme.spacing(2),
-      float: "right",
     },
     formControl: {
       margin: theme.spacing(1),
