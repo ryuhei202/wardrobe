@@ -30,7 +30,7 @@ export const getFormValidateHandler = ({
           ? sizeNg?.itemPartSize === undefined ||
             sizeNg?.inequalitySign === undefined
           : false;
-        return sizeNg?.cateMediumId === undefined || isValidItemPart;
+        return isValidItemPart;
       case NG_CATEGORY.ITEM_CATEGORY_NG:
         return itemCategoryNg?.cateMediumId === undefined;
       default:
