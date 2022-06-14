@@ -12,3 +12,12 @@ leeap スタイリング web アプリ
 
 development モードでアプリケーションを実行
 ブラウザで[http://localhost:3001](http://localhost:3001)を開いて確認
+
+### git-hooks
+
+以下のコマンドで.git/hooks を更新
+
+```
+cp git-hooks/* .git/hooks/
+chmod +x .git/hooks/*
+```
