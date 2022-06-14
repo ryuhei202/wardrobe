@@ -15,7 +15,7 @@ development モードでアプリケーションを実行
 
 ### git-hooks
 
-以下のコマンドで.git/hooks を更新
+以下のコマンドで.git/hooks を更新し、コミットメッセージにブランチ名をつけるようにする
 
 ```
 cp git-hooks/* .git/hooks/
