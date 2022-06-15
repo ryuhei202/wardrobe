@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment, useCallback, useEffect, useState } from "react";
-import { CoordinateAdviceCategoryResponse } from "../../../model/api/response/styling/coordinate/CoordinateAdviceCategoryResponse";
+import { CoordinateAdviceCategoryResponse } from "../../../model/api/response/styling/coordinatePattern/CoordinateAdviceCategoryResponse";
 import { OutfitFormData } from "../../../model/selecting/arrange/props_data/OutfitFormData";
 import { MemberShowContext } from "../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../context/UseContextDefinedState";

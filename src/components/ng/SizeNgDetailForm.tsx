@@ -45,9 +45,9 @@ export const SizeNgDetailForm = ({
         <Typography align="left" style={{ paddingBottom: 5 }}>
           中カテゴリー一覧
         </Typography>
-        <FormControl error={sizeNg?.cateMediumId === undefined}>
+        <FormControl>
           <InputLabel>
-            {sizeNg?.cateMediumId === undefined ? "必須" : ""}
+            {sizeNg?.cateMediumId === undefined ? "任意" : ""}
           </InputLabel>
           <Select
             style={{ width: 400 }}

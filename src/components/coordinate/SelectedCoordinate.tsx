@@ -1,22 +1,22 @@
 import { Divider, List, ListItem } from "@mui/material";
-import { Coordinate } from "../../model/api/response/styling/coordinate/Coordinate";
+import { CoordinatePattern } from "../../model/api/response/styling/coordinatePattern/CoordinatePattern";
 import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 
 type TProps = {
-  coordinate: Coordinate;
+  coordinatePattern: CoordinatePattern;
 };
 
-export const SelectedCoordinate = ({ coordinate }: TProps) => {
+export const SelectedCoordinate = ({ coordinatePattern }: TProps) => {
   return (
     <>
-      <ListItem key={coordinate.id}>
+      <ListItem key={coordinatePattern.id}>
         <List dense>
-          {coordinate.items.map((item) => (
+          {coordinatePattern.items.map((item) => (
             <ListItem key={item.id}></ListItem>
           ))}
         </List>
         <Divider variant="middle" />
-        <SelectedReviewContainer coordinateId={coordinate.id} />
+        <SelectedReviewContainer coordinateId={coordinatePattern.id} />
       </ListItem>
     </>
   );

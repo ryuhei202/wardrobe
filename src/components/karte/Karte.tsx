@@ -1,4 +1,4 @@
-import { ListItem, ListItemText, Typography } from "@mui/material";
+import { ListItem, ListItemText, Paper, Typography } from "@mui/material";
 import { CoordinateContainer } from "../coordinate/CoordinateContainer";
 
 type TProps = {
@@ -20,8 +20,7 @@ export const Karte = ({ id, rentalStartedAt, memoNext, index }: TProps) => {
             : ""}
         </Typography>
         <br />
-        <CoordinateContainer chartId={id} />
-        <div style={{ marginLeft: 20 }}>
+        <Paper variant="outlined">
           <Typography variant="body2" style={{ fontWeight: "bold" }}>
             次回コーデに関して
           </Typography>
@@ -35,7 +34,9 @@ export const Karte = ({ id, rentalStartedAt, memoNext, index }: TProps) => {
           >
             {memoNext ?? "未回答"}
           </Typography>
-        </div>
+        </Paper>
+        <br />
+        <CoordinateContainer chartId={id} />
       </ListItemText>
     </ListItem>
   );

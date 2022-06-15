@@ -4,29 +4,34 @@ import { CoordinateBulkUpdateRequest } from "../../model/api/request/styling/coo
 import { usePatchRequest } from "./UsePatchRequest";
 
 type PostCreateOutfitParams = {
-  coordinates: CoordinateBulkUpdateRequest[];
+  coordinatePatterns: CoordinateBulkUpdateRequest[];
 };
 
 type TArrangesCreateOutfitsArg = {
-  chartId: number;
-  coordinates: CoordinateBulkUpdateRequest[];
+  coordinateId: number;
+  coordinatePatterns: CoordinateBulkUpdateRequest[];
 };
 
-export const useCoordinatesBulkUpdate = ({
-  coordinates,
-  chartId,
+export const useCoordinatePatternsBulkUpdate = ({
+  coordinatePatterns,
+  coordinateId,
 }: TArrangesCreateOutfitsArg): {
-  mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
-  error: Error | null;
+  mutate: UseMutateFunction<
+    AxiosResponse<any, any>,
+    unknown,
+    PostCreateOutfitParams | undefined,
+    unknown
+  >;
+  error: unknown;
   isLoading: boolean;
   isSuccess: boolean;
 } => {
   const params = (): PostCreateOutfitParams => {
-    return { coordinates };
+    return { coordinatePatterns };
   };
 
   const { mutate, error, isLoading, isSuccess } = usePatchRequest(
-    `kartes/${chartId}/coordinates/bulk_update`,
+    `coordinates/${coordinateId}/coordinate_patterns/bulk_update`,
     params()
   );
 
