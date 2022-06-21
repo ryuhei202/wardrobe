@@ -9,8 +9,8 @@ type MemberMemoUpdate = {
 };
 
 type TMemberMemoUpdateParams = {
-  memo?: string;
-  memoNext?: string;
+  memo: string;
+  memoNext: string;
   nextCoordeHearing: TNextCoordeHearing;
 };
 
