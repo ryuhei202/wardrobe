@@ -8,16 +8,20 @@ type TMemberPatchRequestArg<T> = {
   params?: T;
 };
 
-export const useMemberPatchRequest = <TParams = {}>({
+export const useMemberPatchRequest = <TParams = {}, TError = unknown>({
   path,
   memberId,
   params,
 }: TMemberPatchRequestArg<TParams>) => {
   const queryClient = useQueryClient();
 
-  return usePatchRequest<TParams>(`members/${memberId}/${path}`, params, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(`member/${path}`);
-    },
-  });
+  return usePatchRequest<TParams, TError>(
+    `members/${memberId}/${path}`,
+    params,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(`member/${path}`);
+      },
+    }
+  );
 };
