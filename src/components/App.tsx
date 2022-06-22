@@ -17,6 +17,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
+import { AdminShowContextSetter } from "./context/AdminShowContextSetter";
 import { HearingContextSetter } from "./context/HearingContextSetter";
 import { ContextProvider } from "./context/provider/ContextProvider";
 import { SelectingContextSetter } from "./context/SelectingContextSetter";
@@ -96,24 +97,32 @@ export const App = () => {
                 open={isQRCodeOpen}
                 onClose={() => setIsQRCodeOpen(false)}
               />
-              <Routes>
-                <Route
-                  path="/selecting"
-                  element={
-                    <SelectingContextSetter>
-                      <SelectingContainer />
-                    </SelectingContextSetter>
-                  }
-                ></Route>
-                <Route
-                  path="/hearing"
-                  element={
-                    <HearingContextSetter>
-                      <HearingContainer />
-                    </HearingContextSetter>
-                  }
-                />
-              </Routes>
+              {user !== null ? (
+                <AdminShowContextSetter email={user.email!}>
+                  <Routes>
+                    <Route
+                      path="/selecting"
+                      element={
+                        <SelectingContextSetter>
+                          <SelectingContainer />
+                        </SelectingContextSetter>
+                      }
+                    ></Route>
+                    <Route
+                      path="/hearing"
+                      element={
+                        <HearingContextSetter>
+                          <HearingContainer />
+                        </HearingContextSetter>
+                      }
+                    />
+                  </Routes>
+                </AdminShowContextSetter>
+              ) : (
+                <Button style={{ margin: "auto" }} onClick={signIn}>
+                  ログインする
+                </Button>
+              )}
             </div>
           </ContextProvider>
         </QueryClientProvider>
