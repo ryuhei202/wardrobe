@@ -1,5 +1,13 @@
 import { CropFree } from "@mui/icons-material";
-import { Button, Toolbar, Typography } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import AppBar from "@mui/material/AppBar/AppBar";
 import {
   StyledEngineProvider,
@@ -36,6 +44,7 @@ export const App = () => {
   const classes = useAppStyle();
   const [isQRCodeOpen, setIsQRCodeOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -91,6 +100,45 @@ export const App = () => {
                       コーデピック
                     </Button>
                   </span>
+                  {user !== null && (
+                    <div>
+                      <IconButton
+                        size="small"
+                        aria-label="account of current user"
+                        aria-controls="profile-menu-appbar"
+                        aria-haspopup="true"
+                        onClick={() => setIsMenuOpen(true)}
+                        color="inherit"
+                      >
+                        <Avatar
+                          src={user.photoURL ?? undefined}
+                          alt={user.displayName ?? undefined}
+                        ></Avatar>
+                      </IconButton>
+                      <Menu
+                        id="profile-menu-appbar"
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        open={isMenuOpen}
+                        onClose={() => setIsMenuOpen(false)}
+                      >
+                        <MenuItem
+                          onClick={() => {
+                            setIsMenuOpen(false);
+                            signOut(getAuth());
+                          }}
+                        >
+                          ログアウト
+                        </MenuItem>
+                      </Menu>
+                    </div>
+                  )}
                 </Toolbar>
               </AppBar>
               <CordePickQRDialog
