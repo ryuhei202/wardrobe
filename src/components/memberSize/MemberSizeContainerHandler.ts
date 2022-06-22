@@ -1,18 +1,11 @@
-import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
-import { MemberSizeUpdateParams } from "../../model/api/request/styling/member_size/MemberSizeUpdateParams";
+import { useMemberSizesUpdate } from "../../hooks/api/UseMemberSizesUpdate";
 import { convertMemberSizeToParams } from "../../model/memberSize/convertMemberSizeToParams";
 import { TMemberSizes } from "../../model/memberSize/MemberSizeTypes";
 
 type TArgs = {
   fetchedSizes: TMemberSizes;
   editingSizes: TMemberSizes;
-  mutateSizes: UseMutateFunction<
-    AxiosResponse<any, any>,
-    unknown,
-    MemberSizeUpdateParams | undefined,
-    unknown
-  >;
+  mutateSizes: ReturnType<typeof useMemberSizesUpdate>["mutate"];
   isChangedSizes: boolean;
   setSnackBarState: (state: {
     isOpen: boolean;
@@ -44,11 +37,11 @@ export const memberSizeContainerHandler = ({
           text: "サイズを更新しました。",
         });
       },
-      onError: () => {
+      onError: (e) => {
         setSnackBarState({
           isOpen: true,
           severity: "error",
-          text: "サイズの更新に失敗しました。",
+          text: "サイズの更新に失敗しました。" + e.response?.data.message,
         });
       },
     });
