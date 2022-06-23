@@ -17,7 +17,7 @@ Sentry.init({
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCL5RvilRnIB_8HU98K9nUKcUlRv5NVFKI",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "wardrobe-uwear.firebaseapp.com",
   projectId: "wardrobe-uwear",
 };
