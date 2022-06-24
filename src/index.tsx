@@ -6,6 +6,7 @@ import { reportWebVitals } from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
+import { initializeApp } from "firebase/app";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -13,6 +14,14 @@ Sentry.init({
   tracesSampleRate: 0,
   environment: process.env.REACT_APP_ENV,
 });
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: "wardrobe-uwear.firebaseapp.com",
+  projectId: "wardrobe-uwear",
+};
+initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
