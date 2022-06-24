@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from "react";
+import { TAdminShowResponse } from "../../../hooks/api/UseAdminShow";
 import { TMembersShow } from "../../../hooks/api/UseMembersShow";
 
 export type TContext<T> = {
@@ -23,6 +24,13 @@ export const MemberShowContext = React.createContext<
   setter: () => {},
 });
 
+export const AdminShowContext = React.createContext<
+  TContext<null | TAdminShowResponse>
+>({
+  state: null,
+  setter: () => {},
+});
+
 type TProps = {
   children: ReactNode;
 };
@@ -31,6 +39,7 @@ export const ContextProvider = ({ children }: TProps) => {
   const [chartId, setChartId] = useState<null | number>(null);
   const [memberId, setMemberId] = useState<null | number>(null);
   const [memberShow, setMemberShow] = useState<null | TMembersShow>(null);
+  const [adminShow, setAdminShow] = useState<null | TAdminShowResponse>(null);
 
   return (
     <MemberShowContext.Provider
@@ -40,7 +49,11 @@ export const ContextProvider = ({ children }: TProps) => {
         value={{ state: memberId, setter: setMemberId }}
       >
         <ChartIdContext.Provider value={{ state: chartId, setter: setChartId }}>
-          {children}
+          <AdminShowContext.Provider
+            value={{ state: adminShow, setter: setAdminShow }}
+          >
+            {children}
+          </AdminShowContext.Provider>
         </ChartIdContext.Provider>
       </MemberIdContext.Provider>
     </MemberShowContext.Provider>
