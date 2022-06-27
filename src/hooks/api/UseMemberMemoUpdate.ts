@@ -11,7 +11,7 @@ type MemberMemoUpdate = {
 type TMemberMemoUpdateParams = {
   memo: string;
   memoNext: string;
-  nextCoordeHearing: TNextCoordeHearing;
+  nextCoordeHearing?: TNextCoordeHearing;
 };
 
 type TMemberMemoUpdateArg = {

@@ -21,6 +21,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 
     "& .MuiInputBase-input": {
       height: "0.6em",
+      paddingLeft: theme.spacing(1),
 
       "&::-webkit-inner-spin-button": {
         WebkitAppearance: "none",
@@ -72,7 +73,9 @@ export const MemberSizeNumberInput = ({
       onKeyDown={handleKeyDown}
       InputProps={{
         endAdornment: (
-          <InputAdornment position="end">{adornment ?? "cm"}</InputAdornment>
+          <InputAdornment position="end" style={{ margin: 0 }}>
+            {adornment ?? "cm"}
+          </InputAdornment>
         ),
       }}
     />

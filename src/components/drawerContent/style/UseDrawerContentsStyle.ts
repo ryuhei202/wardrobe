@@ -8,5 +8,8 @@ export const useDrawerContentsStyle = makeStyles((theme: Theme) =>
     drawerList: {
       maxWidth: 540,
     },
+    leftDrawerList: {
+      maxWidth: 360,
+    },
   })
 );
