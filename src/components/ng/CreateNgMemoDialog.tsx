@@ -125,7 +125,7 @@ export const CreateNgMemoDialog = ({
                   setTargetChartId(event.target.value as number | undefined);
                   setChartItemId(undefined);
                 }}
-                value={targetChartId}
+                defaultValue={targetChartId}
               >
                 <MenuItem value={undefined}>対象カルテなし</MenuItem>
                 {karteData.map((karte) => (

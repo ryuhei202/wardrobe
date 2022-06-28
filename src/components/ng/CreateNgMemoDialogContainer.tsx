@@ -19,7 +19,7 @@ export const CreateNgMemoDialogContainer = ({
   onClose,
   editingNgId,
 }: TProps) => {
-  const KARTE_NUM = 20;
+  const KARTE_NUM = 1000;
   const { data: ngCategoryData, error: ngCategoryError } =
     useNgCategoriesIndex();
   const { data: karteData, error: karteError } = useKartesIndex({
