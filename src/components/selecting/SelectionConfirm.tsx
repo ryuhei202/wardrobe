@@ -48,11 +48,11 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const adminShow = useContextDefinedState(AdminShowContext);
   const [adminId, setAdminId] = useState<number | undefined>(
     props.response.stylistInfo.selectedId ??
-      props.response.stylistInfo.selectChoice
+      (props.response.stylistInfo.selectChoice
         .map((choice) => choice.id)
         .indexOf(adminShow.id) !== -1
-      ? adminShow.id
-      : undefined
+        ? adminShow.id
+        : undefined)
   );
   const [selectedCreateTriggerId, setSelectedCreateTriggerId] = useState<
     number | null
