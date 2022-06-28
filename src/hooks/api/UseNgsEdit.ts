@@ -7,12 +7,13 @@ type TNgsEdit = {
 };
 
 type TNgsEditArg = {
-  ngId: number;
+  ngId?: number;
 };
 
 export const useNgsEdit = ({ ngId }: TNgsEditArg): TNgsEdit => {
   const { data, error } = useGetRequest<NgEditResponse>(
     `ngs/${ngId}/edit`,
+    {},
     ngId !== undefined
   );
 

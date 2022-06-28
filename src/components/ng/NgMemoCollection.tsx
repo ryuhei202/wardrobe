@@ -1,4 +1,4 @@
-import { Delete } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 import { AddCircle } from "@mui/icons-material";
 import {
   Alert,
@@ -37,6 +37,7 @@ export const NgMemoCollection = (props: Props) => {
   const [selectedChartId, setSelectedChartId] = useState<number | undefined>(
     undefined
   );
+  const [editingNgId, setEditingNgId] = useState<number>();
   const queryClient = useQueryClient();
   const { mutate } = useNgsDestroy();
 
@@ -67,7 +68,10 @@ export const NgMemoCollection = (props: Props) => {
             color="secondary"
             size="large"
             style={{ marginRight: 20 }}
-            onClick={() => setIsOpenNgMemoDialog(true)}
+            onClick={() => {
+              setIsOpenNgMemoDialog(true);
+              setEditingNgId(undefined);
+            }}
           >
             <AddCircle />
           </IconButton>
@@ -75,6 +79,7 @@ export const NgMemoCollection = (props: Props) => {
         <CreateNgMemoDialogContainer
           isOpen={isOpenNgMemoDialog}
           onClose={() => setIsOpenNgMemoDialog(false)}
+          editingNgId={editingNgId}
         />
         <KarteDialogContainer
           isOpen={selectedChartId !== undefined}
@@ -133,6 +138,15 @@ export const NgMemoCollection = (props: Props) => {
                         }}
                       >
                         <Delete />
+                      </IconButton>
+                      <IconButton
+                        edge="end"
+                        onClick={() => {
+                          setIsOpenNgMemoDialog(true);
+                          setEditingNgId(ng.id);
+                        }}
+                      >
+                        <Edit />
                       </IconButton>
                     </ListItem>
                   ))}

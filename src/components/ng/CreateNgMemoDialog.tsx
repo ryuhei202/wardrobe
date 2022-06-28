@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
 import { SizeNg } from "../../model/api/request/styling/ng/SizeNg";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
+import { NgEditConvertResponse } from "../../model/api/response/styling/ng/NgEditConvertResponse";
 import { NgCategoryIndexResponse } from "../../model/api/response/styling/ngCategory/NgCategoryIndexResponse";
 import { NG_CATEGORY } from "../../model/selecting/ng/NgCategory";
 import { getFormValidateHandler } from "./handler/getFormValidateHandler";
@@ -25,6 +26,7 @@ import { NgDetailForm } from "./NgDetailForm";
 type TProps = {
   readonly ngCategoryData: NgCategoryIndexResponse;
   readonly karteData: KarteIndexResponse[];
+  readonly ngEditData?: NgEditConvertResponse;
   readonly isOpen: boolean;
   readonly onClose: () => void;
 };
@@ -33,26 +35,35 @@ export const CreateNgMemoDialog = ({
   karteData,
   isOpen,
   onClose,
+  ngEditData,
 }: TProps) => {
-  const [ngCategoryId, setNgCategoryId] = useState<number>(NG_CATEGORY.SIZE_NG);
-  const [freeText, setFreetext] = useState<string>("");
-  const [chartItemId, setChartItemId] = useState<number | undefined>(undefined);
+  const [ngCategoryId, setNgCategoryId] = useState<number>(
+    ngEditData ? ngEditData.ngCategoryId : NG_CATEGORY.SIZE_NG
+  );
+  const [freeText, setFreetext] = useState<string>(
+    ngEditData ? ngEditData.freeText : ""
+  );
+  const [chartItemId, setChartItemId] = useState<number | undefined>(
+    ngEditData ? ngEditData.chartItemId ?? undefined : undefined
+  );
   const [targetChartId, setTargetChartId] = useState<number | undefined>(
-    undefined
+    ngEditData ? ngEditData.chartId ?? undefined : undefined
   );
   const [itemCategoryNg, setItemCategoryNg] = useState<
     ItemCategoryNg | undefined
-  >(undefined);
-  const [sizeNg, setSizeNg] = useState<SizeNg | undefined>(undefined);
+  >(ngEditData ? ngEditData.itemCategoryNg : undefined);
+  const [sizeNg, setSizeNg] = useState<SizeNg | undefined>(
+    ngEditData ? ngEditData.sizeNg : undefined
+  );
 
   /* ダイアログを閉じる処理ではcomponentは破棄されないのでstateが初期化されない */
   useEffect(() => {
-    setNgCategoryId(NG_CATEGORY.SIZE_NG);
-    setFreetext("");
-    setChartItemId(undefined);
-    setTargetChartId(undefined);
-    setItemCategoryNg(undefined);
-    setSizeNg(undefined);
+    setNgCategoryId(ngEditData ? ngEditData.ngCategoryId : NG_CATEGORY.SIZE_NG);
+    setFreetext(ngEditData ? ngEditData.freeText : "");
+    setChartItemId(ngEditData ? ngEditData.chartItemId : undefined);
+    setTargetChartId(ngEditData ? ngEditData.chartId : undefined);
+    setItemCategoryNg(ngEditData ? ngEditData.itemCategoryNg : undefined);
+    setSizeNg(ngEditData ? ngEditData.sizeNg : undefined);
   }, [isOpen]);
 
   const {
@@ -114,6 +125,7 @@ export const CreateNgMemoDialog = ({
                   setTargetChartId(event.target.value as number | undefined);
                   setChartItemId(undefined);
                 }}
+                value={targetChartId}
               >
                 <MenuItem value={undefined}>対象カルテなし</MenuItem>
                 {karteData.map((karte) => (
@@ -155,6 +167,7 @@ export const CreateNgMemoDialog = ({
           {chartItemsData && targetChartId && (
             <NgChartItemForm
               chartItemsData={chartItemsData}
+              chartItemId={chartItemId}
               onChange={(chartItemId: number) =>
                 handleChangeChartItem(chartItemId)
               }
