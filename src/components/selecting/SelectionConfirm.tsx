@@ -25,6 +25,7 @@ import { ConfirmResponse } from "../../model/api/response/styling/browse/Confirm
 import { ValidationErrorType } from "../../model/selecting/browse/ValidationErrorType";
 import { SelectionConfirmData } from "../../model/selecting/props_data/SelectionConfirmData";
 import {
+  AdminShowContext,
   ChartIdContext,
   MemberShowContext,
 } from "../context/provider/ContextProvider";
@@ -41,18 +42,24 @@ export interface SelectionConfirmProps {
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const chartId = useContextDefinedState(ChartIdContext);
-  const isMarriagePlan = useContextDefinedState(MemberShowContext).data
-    ?.isMarriagePlan;
+  const isMarriagePlan =
+    useContextDefinedState(MemberShowContext).data?.isMarriagePlan;
   const classes = useSelectionConfirmStyle();
-  const [stylist, setStylist] = useState<number | null>(
-    props.response.stylistInfo.selectedId
+  const adminShow = useContextDefinedState(AdminShowContext);
+  const [adminId, setAdminId] = useState<number | undefined>(
+    props.response.stylistInfo.selectedId ??
+      props.response.stylistInfo.selectChoice
+        .map((choice) => choice.id)
+        .indexOf(adminShow.id) !== -1
+      ? adminShow.id
+      : undefined
   );
   const [selectedCreateTriggerId, setSelectedCreateTriggerId] = useState<
     number | null
   >(props.response.createTrigger?.selectedId ?? null);
 
   const { mutate, error, isLoading } = useArrangesRegisterItems({
-    adminId: stylist ?? 0,
+    adminId: adminId ?? 0,
     itemIds: props.data.items.map((item) => item.itemId),
     chartId,
     createTrigger: selectedCreateTriggerId ?? undefined,
@@ -62,7 +69,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
     props.response.validateErrors.filter(
       (error) => error.errorType === ValidationErrorType.Rejected
     ).length === 0 &&
-    stylist !== null &&
+    adminId !== undefined &&
     (!isMarriagePlan || selectedCreateTriggerId !== null);
 
   return (
@@ -86,9 +93,9 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
           <Select
             labelId="stylist-select-label"
             label="コーデ作成者"
-            value={stylist ?? ""}
+            value={adminId ?? ""}
             onChange={(event: SelectChangeEvent<string | number>) => {
-              setStylist(event.target.value as number);
+              setAdminId(event.target.value as number);
             }}
           >
             {props.response.stylistInfo.selectChoice.map((stylist) => (

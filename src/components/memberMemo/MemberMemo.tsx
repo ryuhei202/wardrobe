@@ -14,6 +14,7 @@ import {
   NEXT_COORDE_HEARING,
   TNextCoordeHearing,
 } from "../../model/api/response/styling/member_memo/NextCoordeHearing";
+import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { MemberMemoForm } from "./MemberMemoForm";
@@ -37,6 +38,8 @@ export const MemberMemo = ({ response }: Props) => {
     nextCoordeHearing,
     memberId: useContextDefinedState(MemberIdContext),
   });
+  const isChangedMemos =
+    memo !== response.memo || memoNext !== response.memoNext;
 
   const handlePost = useCallback(() => {
     mutate(undefined, {
@@ -58,6 +61,10 @@ export const MemberMemo = ({ response }: Props) => {
   useEffect(() => {
     if (response.nextCoordeHearing !== nextCoordeHearing) handlePost();
   }, [nextCoordeHearing, response.nextCoordeHearing, handlePost]);
+
+  useEffect(() => {
+    alertClosedWindow(!isChangedMemos);
+  }, [isChangedMemos]);
 
   return (
     <>

@@ -23,6 +23,7 @@
     "axios": "^0.27.2",
     "axios-case-converter": "^0.9.0",
     "env-cmd": "^10.1.0",
+    "firebase": "^9.8.3",
     "lint-staged": "^13.0.0",
     "prettier": "^2.2.1",
     "qs": "^6.9.4",
@@ -43,8 +44,8 @@
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
-    "build": "REACT_APP_ENV=production react-scripts build",
-    "build:staging": "REACT_APP_ENV=staging react-scripts build",
+    "build": "react-scripts build",
+    "build:staging": "env-cmd -f .env.staging react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install"
