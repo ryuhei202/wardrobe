@@ -64,15 +64,17 @@ export const CreateNgMemoDialog = ({
     setTargetChartId(ngEditData ? ngEditData.chartId : undefined);
     setItemCategoryNg(ngEditData ? ngEditData.itemCategoryNg : undefined);
     setSizeNg(ngEditData ? ngEditData.sizeNg : undefined);
-  }, [isOpen]);
+  }, [isOpen, ngEditData]);
 
   const {
     handleChangeNgCategory,
     handleChangeChartItem,
     handleClickSubmit,
+    handleClickUpdate,
     chartItemsData,
     ngData,
-    isLoading,
+    isCreateLoading,
+    isUpdateLoading,
     severity,
     isSnackBarOpen,
     snackBarText,
@@ -84,6 +86,7 @@ export const CreateNgMemoDialog = ({
     chartItemId,
     itemCategoryNg,
     sizeNg,
+    ngEditData,
     onClose,
     setNgCategoryId,
     setItemCategoryNg,
@@ -102,7 +105,9 @@ export const CreateNgMemoDialog = ({
   return (
     <>
       <Dialog open={isOpen} onClose={onClose}>
-        <DialogTitle>新規NGメモ追加</DialogTitle>
+        <DialogTitle>
+          {ngEditData ? "NGメモ編集" : "新規NGメモ追加"}
+        </DialogTitle>
         <div style={{ width: 600, textAlign: "center" }}>
           <Box
             sx={{
@@ -196,14 +201,25 @@ export const CreateNgMemoDialog = ({
               textAlign: "right",
             }}
           >
-            <Button
-              color="secondary"
-              variant="contained"
-              disabled={isDisabled || isLoading}
-              onClick={() => handleClickSubmit()}
-            >
-              登録
-            </Button>
+            {ngEditData ? (
+              <Button
+                color="secondary"
+                variant="contained"
+                disabled={isDisabled || isUpdateLoading}
+                onClick={() => handleClickUpdate()}
+              >
+                更新
+              </Button>
+            ) : (
+              <Button
+                color="secondary"
+                variant="contained"
+                disabled={isDisabled || isCreateLoading}
+                onClick={() => handleClickSubmit()}
+              >
+                登録
+              </Button>
+            )}
           </Box>
         </div>
       </Dialog>
