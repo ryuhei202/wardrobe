@@ -20,7 +20,7 @@ import { useNgsDestroy } from "../../hooks/api/UseNgsDestroy";
 import { NgIndexResponse } from "../../model/api/response/styling/ng/NgIndexResponse";
 import { KarteDialogContainer } from "../karte/KarteDialogContainer";
 import { PopupImage } from "../shared/PopupImage";
-import { CreateNgMemoDialogContainer } from "./CreateNgMemoDialogContainer";
+import { NgMemoDialogContainer } from "./NgMemoDialogContainer";
 
 type Props = {
   readonly response: NgIndexResponse[];
@@ -76,7 +76,7 @@ export const NgMemoCollection = (props: Props) => {
             <AddCircle />
           </IconButton>
         </Box>
-        <CreateNgMemoDialogContainer
+        <NgMemoDialogContainer
           isOpen={isOpenNgMemoDialog}
           onClose={() => setIsOpenNgMemoDialog(false)}
           editingNgId={editingNgId}

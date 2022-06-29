@@ -6,7 +6,7 @@ import { NgEditConvertResponse } from "../../model/api/response/styling/ng/NgEdi
 import { NgEditResponse } from "../../model/api/response/styling/ng/NgEditResponse";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { CreateNgMemoDialog } from "./CreateNgMemoDialog";
+import { NgMemoDialog } from "./NgMemoDialog";
 
 type TProps = {
   readonly isOpen: boolean;
@@ -14,7 +14,7 @@ type TProps = {
   readonly editingNgId?: number;
 };
 
-export const CreateNgMemoDialogContainer = ({
+export const NgMemoDialogContainer = ({
   isOpen,
   onClose,
   editingNgId,
@@ -64,7 +64,7 @@ export const CreateNgMemoDialogContainer = ({
   };
 
   return (
-    <CreateNgMemoDialog
+    <NgMemoDialog
       ngCategoryData={ngCategoryData}
       karteData={karteData}
       ngEditData={convertNgEditData(ngEditData)}

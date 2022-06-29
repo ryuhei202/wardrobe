@@ -30,7 +30,7 @@ type TProps = {
   readonly isOpen: boolean;
   readonly onClose: () => void;
 };
-export const CreateNgMemoDialog = ({
+export const NgMemoDialog = ({
   ngCategoryData,
   karteData,
   isOpen,
@@ -44,10 +44,10 @@ export const CreateNgMemoDialog = ({
     ngEditData ? ngEditData.freeText : ""
   );
   const [chartItemId, setChartItemId] = useState<number | undefined>(
-    ngEditData ? ngEditData.chartItemId ?? undefined : undefined
+    ngEditData ? ngEditData.chartItemId : undefined
   );
   const [targetChartId, setTargetChartId] = useState<number | undefined>(
-    ngEditData ? ngEditData.chartId ?? undefined : undefined
+    ngEditData ? ngEditData.chartId : undefined
   );
   const [itemCategoryNg, setItemCategoryNg] = useState<
     ItemCategoryNg | undefined
