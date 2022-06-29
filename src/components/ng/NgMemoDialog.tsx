@@ -11,7 +11,7 @@ import {
   Snackbar,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
 import { SizeNg } from "../../model/api/request/styling/ng/SizeNg";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
@@ -55,16 +55,6 @@ export const NgMemoDialog = ({
   const [sizeNg, setSizeNg] = useState<SizeNg | undefined>(
     ngEditData ? ngEditData.sizeNg : undefined
   );
-
-  /* ダイアログを閉じる処理ではcomponentは破棄されないのでstateが初期化されない */
-  useEffect(() => {
-    setNgCategoryId(ngEditData ? ngEditData.ngCategoryId : NG_CATEGORY.SIZE_NG);
-    setFreetext(ngEditData ? ngEditData.freeText : "");
-    setChartItemId(ngEditData ? ngEditData.chartItemId : undefined);
-    setTargetChartId(ngEditData ? ngEditData.chartId : undefined);
-    setItemCategoryNg(ngEditData ? ngEditData.itemCategoryNg : undefined);
-    setSizeNg(ngEditData ? ngEditData.sizeNg : undefined);
-  }, [isOpen, ngEditData]);
 
   const {
     handleChangeNgCategory,

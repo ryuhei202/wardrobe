@@ -65,6 +65,7 @@ export const NgMemoDialogContainer = ({
 
   return (
     <NgMemoDialog
+      key={Math.floor(Math.random() * (100000 - 1)) + 1}
       ngCategoryData={ngCategoryData}
       karteData={karteData}
       ngEditData={convertNgEditData(ngEditData)}
