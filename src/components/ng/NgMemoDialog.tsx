@@ -11,10 +11,11 @@ import {
   Snackbar,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ItemCategoryNg } from "../../model/api/request/styling/ng/ItemCategoryNg";
 import { SizeNg } from "../../model/api/request/styling/ng/SizeNg";
 import { KarteIndexResponse } from "../../model/api/response/styling/karte/KarteIndexResponse";
+import { NgEditConvertResponse } from "../../model/api/response/styling/ng/NgEditConvertResponse";
 import { NgCategoryIndexResponse } from "../../model/api/response/styling/ngCategory/NgCategoryIndexResponse";
 import { NG_CATEGORY } from "../../model/selecting/ng/NgCategory";
 import { getFormValidateHandler } from "./handler/getFormValidateHandler";
@@ -25,43 +26,45 @@ import { NgDetailForm } from "./NgDetailForm";
 type TProps = {
   readonly ngCategoryData: NgCategoryIndexResponse;
   readonly karteData: KarteIndexResponse[];
+  readonly ngEditData?: NgEditConvertResponse;
   readonly isOpen: boolean;
   readonly onClose: () => void;
 };
-export const CreateNgMemoDialog = ({
+export const NgMemoDialog = ({
   ngCategoryData,
   karteData,
   isOpen,
   onClose,
+  ngEditData,
 }: TProps) => {
-  const [ngCategoryId, setNgCategoryId] = useState<number>(NG_CATEGORY.SIZE_NG);
-  const [freeText, setFreetext] = useState<string>("");
-  const [chartItemId, setChartItemId] = useState<number | undefined>(undefined);
+  const [ngCategoryId, setNgCategoryId] = useState<number>(
+    ngEditData ? ngEditData.ngCategoryId : NG_CATEGORY.SIZE_NG
+  );
+  const [freeText, setFreetext] = useState<string>(
+    ngEditData ? ngEditData.freeText : ""
+  );
+  const [chartItemId, setChartItemId] = useState<number | undefined>(
+    ngEditData ? ngEditData.chartItemId : undefined
+  );
   const [targetChartId, setTargetChartId] = useState<number | undefined>(
-    undefined
+    ngEditData ? ngEditData.chartId : undefined
   );
   const [itemCategoryNg, setItemCategoryNg] = useState<
     ItemCategoryNg | undefined
-  >(undefined);
-  const [sizeNg, setSizeNg] = useState<SizeNg | undefined>(undefined);
-
-  /* ダイアログを閉じる処理ではcomponentは破棄されないのでstateが初期化されない */
-  useEffect(() => {
-    setNgCategoryId(NG_CATEGORY.SIZE_NG);
-    setFreetext("");
-    setChartItemId(undefined);
-    setTargetChartId(undefined);
-    setItemCategoryNg(undefined);
-    setSizeNg(undefined);
-  }, [isOpen]);
+  >(ngEditData ? ngEditData.itemCategoryNg : undefined);
+  const [sizeNg, setSizeNg] = useState<SizeNg | undefined>(
+    ngEditData ? ngEditData.sizeNg : undefined
+  );
 
   const {
     handleChangeNgCategory,
     handleChangeChartItem,
     handleClickSubmit,
+    handleClickUpdate,
     chartItemsData,
     ngData,
-    isLoading,
+    isCreateLoading,
+    isUpdateLoading,
     severity,
     isSnackBarOpen,
     snackBarText,
@@ -73,6 +76,7 @@ export const CreateNgMemoDialog = ({
     chartItemId,
     itemCategoryNg,
     sizeNg,
+    ngEditData,
     onClose,
     setNgCategoryId,
     setItemCategoryNg,
@@ -91,7 +95,9 @@ export const CreateNgMemoDialog = ({
   return (
     <>
       <Dialog open={isOpen} onClose={onClose}>
-        <DialogTitle>新規NGメモ追加</DialogTitle>
+        <DialogTitle>
+          {ngEditData ? "NGメモ編集" : "新規NGメモ追加"}
+        </DialogTitle>
         <div style={{ width: 600, textAlign: "center" }}>
           <Box
             sx={{
@@ -114,6 +120,7 @@ export const CreateNgMemoDialog = ({
                   setTargetChartId(event.target.value as number | undefined);
                   setChartItemId(undefined);
                 }}
+                defaultValue={targetChartId}
               >
                 <MenuItem value={undefined}>対象カルテなし</MenuItem>
                 {karteData.map((karte) => (
@@ -155,6 +162,7 @@ export const CreateNgMemoDialog = ({
           {chartItemsData && targetChartId && (
             <NgChartItemForm
               chartItemsData={chartItemsData}
+              chartItemId={chartItemId}
               onChange={(chartItemId: number) =>
                 handleChangeChartItem(chartItemId)
               }
@@ -183,14 +191,25 @@ export const CreateNgMemoDialog = ({
               textAlign: "right",
             }}
           >
-            <Button
-              color="secondary"
-              variant="contained"
-              disabled={isDisabled || isLoading}
-              onClick={() => handleClickSubmit()}
-            >
-              登録
-            </Button>
+            {ngEditData ? (
+              <Button
+                color="secondary"
+                variant="contained"
+                disabled={isDisabled || isUpdateLoading}
+                onClick={() => handleClickUpdate()}
+              >
+                更新
+              </Button>
+            ) : (
+              <Button
+                color="secondary"
+                variant="contained"
+                disabled={isDisabled || isCreateLoading}
+                onClick={() => handleClickSubmit()}
+              >
+                登録
+              </Button>
+            )}
           </Box>
         </div>
       </Dialog>
