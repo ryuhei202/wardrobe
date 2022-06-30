@@ -7,7 +7,7 @@ import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { theme } from "../style/Theme";
-import { MemberMemoForm } from "./MemberMemoForm";
+import { MemoForm } from "../shared/MemoForm";
 
 type Props = {
   readonly response: MemberMemoShowResponse;
@@ -53,7 +53,7 @@ export const MemberMemo = ({ response }: Props) => {
     <>
       <div>
         <Typography variant="body2">パートナーメモ</Typography>
-        <MemberMemoForm
+        <MemoForm
           value={memo}
           disabled={response.memo === memo || isLoading}
           onChange={setMemo}
@@ -62,7 +62,7 @@ export const MemberMemo = ({ response }: Props) => {
       </div>
       <div style={{ marginTop: theme.spacing(2) }}>
         <Typography variant="body2">次回コーデに関して</Typography>
-        <MemberMemoForm
+        <MemoForm
           value={memoNext}
           disabled={response.memoNext === memoNext || isLoading}
           onChange={setMemoNext}

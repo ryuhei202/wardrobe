@@ -17,7 +17,7 @@ import {
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { MemberMemoForm } from "./MemberMemoForm";
+import { MemoForm } from "../shared/MemoForm";
 
 type Props = {
   readonly response: MemberMemoShowResponse;
@@ -87,7 +87,7 @@ export const OldMemberMemo = ({ response }: Props) => {
               自動ヒアリング: {response.lineSurveyNext || "未回答"}
             </Typography>
           </Box>
-          <MemberMemoForm
+          <MemoForm
             value={memoNext}
             disabled={response.memoNext === memoNext || isLoading}
             onChange={setMemoNext}
@@ -123,7 +123,7 @@ export const OldMemberMemo = ({ response }: Props) => {
           <Typography variant="subtitle2" style={{ fontWeight: "bold" }}>
             その他メモ
           </Typography>
-          <MemberMemoForm
+          <MemoForm
             value={memo}
             disabled={response.memo === memo || isLoading}
             onChange={setMemo}

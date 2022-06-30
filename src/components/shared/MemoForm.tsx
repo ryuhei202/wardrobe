@@ -1,6 +1,6 @@
 import { Box, TextField } from "@mui/material";
 import React from "react";
-import { SendButton } from "../shared/SendButton";
+import { SendButton } from "./SendButton";
 
 type Props = {
   readonly value: string;
@@ -10,7 +10,7 @@ type Props = {
   readonly label?: string;
 };
 
-export const MemberMemoForm = ({
+export const MemoForm = ({
   label,
   value,
   disabled,
