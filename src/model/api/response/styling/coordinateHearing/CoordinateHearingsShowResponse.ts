@@ -1,8 +1,8 @@
 export interface CoordinateHearingsShowResponse {
-  readonly hearing_category: string;
-  readonly hearing_questions: {
+  readonly hearingCategory: string;
+  readonly hearingQuestions: {
     readonly title: string;
-    readonly answer: {
+    readonly answers: {
       readonly name: string;
       readonly text: string | null;
     }[];
