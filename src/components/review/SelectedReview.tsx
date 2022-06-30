@@ -33,7 +33,7 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
   });
 
   return (
-    <div style={{ marginLeft: 20, marginBottom: 20 }}>
+    <>
       <Typography variant="body2" style={{ fontWeight: "bold" }}>
         レビュー
       </Typography>
@@ -98,6 +98,6 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
           </Box>
         </List>
       )}
-    </div>
+    </>
   );
 };
