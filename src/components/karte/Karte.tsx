@@ -1,5 +1,5 @@
 import { ListItem, ListItemText, Paper, Typography } from "@mui/material";
-import { CoordinateContainer } from "../coordinate/CoordinateContainer";
+import { OldCoordinateContainer } from "../coordinate/OldCoordinateContainer";
 
 type TProps = {
   readonly id: number;
@@ -36,7 +36,7 @@ export const Karte = ({ id, rentalStartedAt, memoNext, index }: TProps) => {
           </Typography>
         </Paper>
         <br />
-        <CoordinateContainer chartId={id} />
+        <OldCoordinateContainer chartId={id} />
       </ListItemText>
     </ListItem>
   );
