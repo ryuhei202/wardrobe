@@ -55,6 +55,9 @@ export const CoordinateTopsRatio = ({
 
   return (
     <>
+      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+        トップス枚数
+      </Typography>
       {isJacketRequested !== undefined && (
         <FormControlLabel
           control={

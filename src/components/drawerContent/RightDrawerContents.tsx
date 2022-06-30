@@ -1,5 +1,4 @@
 import { List, ListItem, Typography } from "@mui/material";
-import { useDrawerContentsStyle } from "./style/UseDrawerContentsStyle";
 import { Coordinate } from "../coordinate/Coordinate";
 import { PastChartsSection } from "../chart/PastChartsSection";
 
@@ -8,10 +7,13 @@ type TProps = {
 };
 
 export const RightDrawerContents = ({ coordinateId }: TProps) => {
-  const classes = useDrawerContentsStyle();
-
   return (
-    <List dense className={classes.leftDrawerList}>
+    <List
+      dense
+      style={{
+        maxWidth: 360,
+      }}
+    >
       {coordinateId && (
         <>
           <Typography>コーデ情報</Typography>

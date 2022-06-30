@@ -34,7 +34,7 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
 
   return (
     <>
-      <Typography variant="body2" style={{ fontWeight: "bold" }}>
+      <Typography variant="body1" style={{ fontWeight: "bold" }}>
         レビュー
       </Typography>
       {data.review === null ? (

@@ -29,7 +29,9 @@ export const CoordinateMemo = ({
 
   return (
     <>
-      <Typography variant="body2">コーデメモ</Typography>
+      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+        コーデメモ
+      </Typography>
       <MemoForm
         value={memo}
         disabled={response.memo === memo || isLoading}
