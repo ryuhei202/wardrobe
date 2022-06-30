@@ -10,7 +10,7 @@ export const MemberMemoFetcher = () => {
     memberId: useContextDefinedState(MemberIdContext),
   });
 
-  if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
   return <MemberMemo response={data} />;
 };

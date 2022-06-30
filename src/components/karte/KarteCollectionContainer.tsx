@@ -10,7 +10,8 @@ export const KarteCollectionContainer = () => {
     memberId: useContextDefinedState(MemberIdContext),
     limit: KARTE_NUM,
   });
-  if (!data) return <CircularProgress />;
+
   if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
   return <KarteCollection response={data} />;
 };

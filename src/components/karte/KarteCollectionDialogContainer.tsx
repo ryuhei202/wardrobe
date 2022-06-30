@@ -14,8 +14,9 @@ export const KarteCollectionDialogContainer = ({ isOpen, setter }: TProps) => {
     memberId: useContextDefinedState(MemberIdContext),
     limit: KARTE_NUM,
   });
-  if (!data) return <CircularProgress />;
+
   if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
   return (
     <KarteCollectionDialog response={data} isOpen={isOpen} setter={setter} />
   );

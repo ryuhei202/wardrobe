@@ -9,7 +9,7 @@ export const LatestStylingReferenceContainer = () => {
     memberId: useContextDefinedState(MemberIdContext),
   });
 
-  if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
   return <StylingReferenceList response={data} />;
 };
