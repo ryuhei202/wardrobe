@@ -25,7 +25,9 @@ import {
 import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
+import { ChartPageContainer } from "../pages/chart/ChartPageContainer";
 import { AdminShowContextSetter } from "./context/AdminShowContextSetter";
+import { ChartPageContextSetter } from "./context/ChartPageContextSetter";
 import { HearingContextSetter } from "./context/HearingContextSetter";
 import { ContextProvider } from "./context/provider/ContextProvider";
 import { SelectingContextSetter } from "./context/SelectingContextSetter";
@@ -162,6 +164,14 @@ export const App = () => {
                         <HearingContextSetter>
                           <HearingContainer />
                         </HearingContextSetter>
+                      }
+                    />
+                    <Route
+                      path="/chart"
+                      element={
+                        <ChartPageContextSetter>
+                          <ChartPageContainer />
+                        </ChartPageContextSetter>
                       }
                     />
                   </Routes>
