@@ -9,7 +9,6 @@ type TProps = {
 export const CoordinateHearingFetcher = ({ coordinateId }: TProps) => {
   const { data, error } = useCoordinateHearingsShow({ coordinateId });
 
-  console.log(data);
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
   return <CoordinateHearing hearings={data} />;
