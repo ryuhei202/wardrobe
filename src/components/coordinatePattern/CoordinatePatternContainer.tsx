@@ -6,9 +6,7 @@ type TProps = {
   readonly coordinateId: number;
 };
 export const CoordinatePatternContainer = ({ coordinateId }: TProps) => {
-  const { data, error } = useCoordinatePatternsIndex({
-    coordinateId: coordinateId,
-  });
+  const { data, error } = useCoordinatePatternsIndex({ coordinateId });
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
