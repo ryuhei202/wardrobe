@@ -17,16 +17,15 @@ type TCoordinateMemosUpdateParams = {
 
 type TCoordinateMemosUpdateArg = {
   coordinateId: number;
-} & TCoordinateMemosUpdateParams;
+};
 
 export const useCoordinateMemosUpdate = ({
   coordinateId,
-  memo,
 }: TCoordinateMemosUpdateArg): CoordinateMemosUpdate => {
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateMemosUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/coordinate_memos`, { memo });
+  >(`coordinates/${coordinateId}/coordinate_memos`);
 
   return { mutate, isLoading };
 };

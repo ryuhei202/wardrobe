@@ -10,8 +10,9 @@ export const CoordinatePatternContainer = ({ coordinate }: TProps) => {
   const { data, error } = useCoordinatePatternsIndex({
     coordinateId: coordinate.id,
   });
-  if (!data) return <CircularProgress />;
+
   if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
   return (
     <>
       {data.selectedCoordinatePatterns.map((coordinate, index) => (

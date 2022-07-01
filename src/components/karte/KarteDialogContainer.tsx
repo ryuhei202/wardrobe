@@ -11,7 +11,8 @@ type TProps = {
 export const KarteDialogContainer = ({ isOpen, onClose, chartId }: TProps) => {
   const { data, error } = useKartesShow({ chartId });
   if (chartId === undefined) return <></>;
-  if (!data) return <CircularProgress />;
+
   if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
   return <KarteDialog isOpen={isOpen} onClose={onClose} data={data} />;
 };
