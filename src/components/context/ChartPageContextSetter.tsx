@@ -11,7 +11,6 @@ type TProps = {
 export const ChartPageContextSetter = ({ children }: TProps) => {
   const chartId = useContext(ChartIdContext).state;
   const memberId = useContext(MemberIdContext).state;
-  console.log(!(memberId && chartId));
 
   return (
     <ChartIdContextSetter>
