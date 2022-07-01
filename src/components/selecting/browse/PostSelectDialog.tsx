@@ -7,7 +7,10 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import { useBrowsesSelect } from "../../../hooks/api/UseBrowsesSelect";
-import { ChartIdContext } from "../../context/provider/ContextProvider";
+import {
+  ChartIdContext,
+  CoordinateIdContext,
+} from "../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../context/UseContextDefinedState";
 import { PostSelectCallback } from "./callback/PostSelectCallback";
 
@@ -19,9 +22,11 @@ export interface PostSelectContainerProps {
 
 export const PostSelectDialog = (props: PostSelectContainerProps) => {
   const chartId = useContextDefinedState(ChartIdContext);
+  const coordinateId = useContextDefinedState(CoordinateIdContext);
   const { mutate, error, isLoading, isIdle } = useBrowsesSelect({
     itemId: props.selectedItemId,
     previousItemId: props.previousItemId,
+    coordinateId,
     chartId,
   });
   useEffect(() => {

@@ -5,18 +5,21 @@ import { usePostRequest } from "./UsePostRequest";
 interface PostSelectParams {
   itemId: number;
   chartId: number;
+  coordinateId: number;
   previousItemId?: number;
 }
 
 type TBrowsesSelectArg = {
   chartId: number;
   itemId: number;
+  coordinateId: number;
   previousItemId: number | null;
 };
 
 export const useBrowsesSelect = ({
   chartId,
   itemId,
+  coordinateId,
   previousItemId,
 }: TBrowsesSelectArg): {
   mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
@@ -28,6 +31,7 @@ export const useBrowsesSelect = ({
     var params: PostSelectParams = {
       itemId: itemId,
       chartId: chartId,
+      coordinateId,
     };
     if (previousItemId) {
       params.previousItemId = previousItemId;
