@@ -33,8 +33,14 @@ export const useAppStyle = makeStyles(() =>
     chartPickButton: {
       float: "right",
     },
-    title: {
+    chartShowButton: {},
+    coordinatesDropDownMenu: {
       flexGrow: 1,
+    },
+    title: {
+      marginRight: "40px",
+      fontWeight: "bold",
+      letterSpacing: 1,
     },
   })
 );

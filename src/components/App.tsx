@@ -38,6 +38,8 @@ import { SelectingContainer } from "./selecting/SelectingContainer";
 import { theme } from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";
 import { ChartPickButton } from "./header/ChartPickButton";
+import { ChartShowButton } from "./header/ChartShowButton";
+import { CoordinatesDropDownMenu } from "./header/CoordinatesDropDownMenu";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -93,6 +95,8 @@ export const App = () => {
                   <Typography variant="h6" noWrap className={classes.title}>
                     WARDROBE
                   </Typography>
+                  <ChartShowButton />
+                  <CoordinatesDropDownMenu />
                   <ChartPickButton onClick={() => setIsQRCodeOpen(true)} />
                   {user !== null && (
                     <div>
