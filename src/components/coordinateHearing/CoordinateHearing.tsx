@@ -11,7 +11,7 @@ export const CoordinateHearing = ({ hearings }: TProps) => {
     <Box>
       <Typography
         variant="h6"
-        style={{ fontWeight: "bold", padding: "15px 0" }}
+        style={{ fontWeight: "bold", padding: "10px 0" }}
       >
         ヒアリング
       </Typography>

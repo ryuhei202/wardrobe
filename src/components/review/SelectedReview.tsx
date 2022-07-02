@@ -34,70 +34,79 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
 
   return (
     <>
-      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+      <Typography
+        variant="h6"
+        style={{ fontWeight: "bold", padding: "10px 0" }}
+      >
         レビュー
       </Typography>
-      {data.review === null ? (
-        <span style={{ marginLeft: 20 }}>レビュー未回答</span>
-      ) : (
-        <List dense>
-          <ListItem divider>
-            <ListItemText primary="評価" />
-            <ListItemText
-              primary={data.review?.selectedOption}
-              style={{ width: "80%" }}
-            />
-          </ListItem>
-          <ListItem divider>
-            <ListItemText primary="理由" />
-            <ListItemText
-              primary={data.review?.reasons.join("/")}
-              style={{ width: "80%" }}
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="テキスト" />
-            <ListItemText
-              primary={data.review?.text}
-              style={{ width: "80%" }}
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="URL" />
-          </ListItem>
-          <Box component="form">
-            {isUrlEditing ? (
-              <LineMessageUrlForm
-                callback={selectedReviewFormCallback()}
-                lineMessageUrl={data.review?.lineMessageUrl}
-                coordinateId={coordinateId}
-                setIsUrlEditing={setIsUrlEditing}
+      <Box sx={{ margin: "0 1em 3em" }}>
+        {data.review === null ? (
+          <Typography variant="body1">レビュー未回答</Typography>
+        ) : (
+          <List dense>
+            <ListItem divider>
+              <ListItemText primary="評価" />
+              <ListItemText
+                primary={data.review?.selectedOption}
+                style={{ width: "80%" }}
               />
-            ) : (
-              <>
-                <a
-                  href={data.review?.lineMessageUrl ?? ""}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {data.review?.lineMessageUrl ?? ""}
-                </a>
-                <EditIcon
-                  onClick={() => setIsUrlEditing(true)}
-                  style={{ position: "absolute", right: 15, cursor: "pointer" }}
+            </ListItem>
+            <ListItem divider>
+              <ListItemText primary="理由" />
+              <ListItemText
+                primary={data.review?.reasons.join("/")}
+                style={{ width: "80%" }}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="テキスト" />
+              <ListItemText
+                primary={data.review?.text}
+                style={{ width: "80%" }}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="URL" />
+            </ListItem>
+            <Box component="form">
+              {isUrlEditing ? (
+                <LineMessageUrlForm
+                  callback={selectedReviewFormCallback()}
+                  lineMessageUrl={data.review?.lineMessageUrl}
+                  coordinateId={coordinateId}
+                  setIsUrlEditing={setIsUrlEditing}
                 />
-              </>
-            )}
-            <Snackbar
-              open={isSnackBarOpen}
-              autoHideDuration={5000}
-              onClose={() => setIsSnackBarOpen(false)}
-            >
-              <Alert severity={severity}>{snackBarText}</Alert>
-            </Snackbar>
-          </Box>
-        </List>
-      )}
+              ) : (
+                <>
+                  <a
+                    href={data.review?.lineMessageUrl ?? ""}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {data.review?.lineMessageUrl ?? ""}
+                  </a>
+                  <EditIcon
+                    onClick={() => setIsUrlEditing(true)}
+                    style={{
+                      position: "absolute",
+                      right: 15,
+                      cursor: "pointer",
+                    }}
+                  />
+                </>
+              )}
+              <Snackbar
+                open={isSnackBarOpen}
+                autoHideDuration={5000}
+                onClose={() => setIsSnackBarOpen(false)}
+              >
+                <Alert severity={severity}>{snackBarText}</Alert>
+              </Snackbar>
+            </Box>
+          </List>
+        )}
+      </Box>
     </>
   );
 };

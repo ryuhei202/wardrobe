@@ -1,4 +1,5 @@
 import { Alert, Snackbar, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useCoordinateMemosUpdate } from "../../hooks/api/UseCoordinateMemosUpdate";
 import { CoordinateMemosShowResponse } from "../../model/api/response/styling/coordinateMemo/CoordinateMemosShowResponse";
@@ -29,34 +30,39 @@ export const CoordinateMemo = ({
 
   return (
     <>
-      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+      <Typography
+        variant="h6"
+        style={{ fontWeight: "bold", padding: "10px 0" }}
+      >
         コーデメモ
       </Typography>
-      <MemoForm
-        value={memo}
-        disabled={response.memo === memo || isLoading}
-        onChange={setMemo}
-        onPost={() => {
-          mutate(
-            { memo },
-            {
-              onSuccess: () => {
-                onUpdateComplete().then(() => {
-                  setSeverity("success");
-                  setSnackBarText("コーデメモの変更を保存しました");
-                });
-              },
-              onError: () => {
-                setSeverity("error");
-                setSnackBarText("コーデメモの変更に失敗しました");
-              },
-              onSettled: () => {
-                setIsSnackBarOpen(true);
-              },
-            }
-          );
-        }}
-      />
+      <Box style={{ margin: "0 1em" }}>
+        <MemoForm
+          value={memo}
+          disabled={response.memo === memo || isLoading}
+          onChange={setMemo}
+          onPost={() => {
+            mutate(
+              { memo },
+              {
+                onSuccess: () => {
+                  onUpdateComplete().then(() => {
+                    setSeverity("success");
+                    setSnackBarText("コーデメモの変更を保存しました");
+                  });
+                },
+                onError: () => {
+                  setSeverity("error");
+                  setSnackBarText("コーデメモの変更に失敗しました");
+                },
+                onSettled: () => {
+                  setIsSnackBarOpen(true);
+                },
+              }
+            );
+          }}
+        />
+      </Box>
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={5000}
