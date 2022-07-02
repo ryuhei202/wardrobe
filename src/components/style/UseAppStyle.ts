@@ -30,7 +30,7 @@ export const useAppStyle = makeStyles(() =>
     browseContainer: {
       flexGrow: 1,
     },
-    coordePickButton: {
+    chartPickButton: {
       float: "right",
     },
     title: {

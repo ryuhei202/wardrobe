@@ -1,4 +1,3 @@
-import { CropFree } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -33,11 +32,12 @@ import { CoordinatePageContextSetter } from "./context/CoordinatePageContextSett
 import { HearingContextSetter } from "./context/HearingContextSetter";
 import { ContextProvider } from "./context/provider/ContextProvider";
 import { SelectingContextSetter } from "./context/SelectingContextSetter";
-import { CordePickQRDialog } from "./cordePick/CordePickQRDialog";
+import { ChartPickQRDialog } from "./chartPick/ChartPickQRDialog";
 import { HearingContainer } from "./hearing/HearingContainer";
 import { SelectingContainer } from "./selecting/SelectingContainer";
 import { theme } from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";
+import { ChartPickButton } from "./header/ChartPickButton";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -93,17 +93,7 @@ export const App = () => {
                   <Typography variant="h6" noWrap className={classes.title}>
                     WARDROBE
                   </Typography>
-                  <span className={classes.coordePickButton}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      disableElevation
-                      startIcon={<CropFree />}
-                      onClick={() => setIsQRCodeOpen(true)}
-                    >
-                      コーデピック
-                    </Button>
-                  </span>
+                  <ChartPickButton onClick={() => setIsQRCodeOpen(true)} />
                   {user !== null && (
                     <div>
                       <IconButton
@@ -145,7 +135,7 @@ export const App = () => {
                   )}
                 </Toolbar>
               </AppBar>
-              <CordePickQRDialog
+              <ChartPickQRDialog
                 open={isQRCodeOpen}
                 onClose={() => setIsQRCodeOpen(false)}
               />
