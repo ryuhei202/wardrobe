@@ -6,15 +6,13 @@ import {
   ChartIdContext,
   MemberIdContext,
 } from "../context/provider/ContextProvider";
-import { useAppStyle } from "../style/UseAppStyle";
 
 export const ChartShowButton = () => {
-  const classes = useAppStyle();
   const memberId = useContext(MemberIdContext).state;
   const chartId = useContext(ChartIdContext).state;
 
   return (
-    <div className={classes.chartShowButton}>
+    <>
       <Button
         variant="contained"
         color="primary"
@@ -29,6 +27,6 @@ export const ChartShowButton = () => {
       >
         カルテ
       </Button>
-    </div>
+    </>
   );
 };

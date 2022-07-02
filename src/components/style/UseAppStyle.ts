@@ -33,7 +33,6 @@ export const useAppStyle = makeStyles(() =>
     chartPickButton: {
       float: "right",
     },
-    chartShowButton: {},
     coordinatesDropDownMenu: {
       flexGrow: 1,
     },
