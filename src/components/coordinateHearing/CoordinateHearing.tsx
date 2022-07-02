@@ -1,11 +1,4 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Fragment } from "react";
 import { CoordinateHearingsShowResponse } from "../../model/api/response/styling/coordinateHearing/CoordinateHearingsShowResponse";
 
@@ -15,39 +8,42 @@ type TProps = {
 
 export const CoordinateHearing = ({ hearings }: TProps) => {
   return (
-    <>
-      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+    <Box>
+      <Typography
+        variant="h6"
+        style={{ fontWeight: "bold", padding: "15px 0" }}
+      >
         ヒアリング
       </Typography>
       {hearings.map((hearing) => (
-        <Fragment key={hearing.hearingCategory}>
-          <Typography variant="body2">{hearing.hearingCategory}</Typography>
-          <TableContainer>
-            <Table
-              style={{ backgroundColor: "#f5f5f5" }}
-              sx={{ minWidth: 200 }}
-              size="small"
-            >
-              <TableBody>
-                {hearing.hearingQuestions.map((question) => (
-                  <TableRow key={question.title}>
-                    <TableCell scope="row">{question.title}</TableCell>
-                    <TableCell component="th" scope="row">
-                      {question.answers
-                        .map((answer) => {
-                          if (answer.text)
-                            return `${answer.name}(${answer.text})`;
-                          return answer.name;
-                        })
-                        .join("、")}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Fragment>
+        <Box sx={{ marginBottom: "1em" }}>
+          <Fragment key={hearing.hearingCategory}>
+            <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+              {hearing.hearingCategory}
+            </Typography>
+            {hearing.hearingQuestions.map((question) => (
+              <Box
+                sx={{
+                  margin: "0 1em",
+                  backgroundColor: "#F5F5F5",
+                  padding: "0.5em 1em",
+                }}
+              >
+                <Typography variant="body1">{question.title}</Typography>
+                <Typography variant="body1" style={{ margin: "0" }}>
+                  →
+                  {question.answers
+                    .map((answer) => {
+                      if (answer.text) return `${answer.name}(${answer.text})`;
+                      return answer.name;
+                    })
+                    .join("、")}
+                </Typography>
+              </Box>
+            ))}
+          </Fragment>
+        </Box>
       ))}
-    </>
+    </Box>
   );
 };
