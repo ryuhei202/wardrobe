@@ -8,14 +8,13 @@ import {
   MemberShowContext,
 } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { Selecting } from "./Selecting";
+import { OldSelecting } from "./OldSelecting";
 
 export const SelectingContainer = () => {
   const chartId = useContextDefinedState(ChartIdContext);
   const memberId = useContextDefinedState(MemberIdContext);
-  const { state: memberShowState, setter: setMemberShowContext } = useContext(
-    MemberShowContext
-  );
+  const { state: memberShowState, setter: setMemberShowContext } =
+    useContext(MemberShowContext);
 
   const { data: karteShowData, error: karteShowError } = useKartesShow({
     chartId,
@@ -39,5 +38,5 @@ export const SelectingContainer = () => {
   if (karteShowError)
     return <Typography sx={{ m: "auto" }}>{karteShowError.message}</Typography>;
 
-  return <Selecting karteShowResponse={karteShowData} />;
+  return <OldSelecting karteShowResponse={karteShowData} />;
 };

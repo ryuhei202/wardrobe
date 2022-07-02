@@ -15,7 +15,7 @@ export const useSelectingStyle = makeStyles((theme: Theme) =>
     drawerContents: {
       overflow: "auto",
     },
-    progressContainer: {
+    oldProgressContainer: {
       marginTop: "auto",
     },
     browseContainer: {
