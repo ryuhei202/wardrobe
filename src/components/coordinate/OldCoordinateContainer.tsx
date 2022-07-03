@@ -1,13 +1,14 @@
 import { CircularProgress, Divider, Typography } from "@mui/material";
 import { Fragment } from "react";
 import { useCoordinatesIndex } from "../../hooks/api/UseCoordinatesIndex";
-import { Coordinate } from "./Coordinate";
+import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatternContainer";
+import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 
 type TProps = {
   chartId: number;
 };
 
-export const CoordinateContainer = ({ chartId }: TProps) => {
+export const OldCoordinateContainer = ({ chartId }: TProps) => {
   const { data, error } = useCoordinatesIndex({
     chartId,
   });
@@ -21,7 +22,8 @@ export const CoordinateContainer = ({ chartId }: TProps) => {
           <Typography variant="body1" style={{ fontWeight: "bold" }}>
             コーデ{index + 1}
           </Typography>
-          <Coordinate coordinateId={coordinate.id} />
+          <SelectedReviewContainer coordinateId={coordinate.id} />
+          <CoordinatePatternContainer coordinateId={coordinate.id} />
           <Divider variant="fullWidth" />
         </Fragment>
       ))}
