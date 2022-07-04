@@ -16,9 +16,12 @@ type TProps = {
 export const CoordinateHearing = ({ hearings }: TProps) => {
   return (
     <>
+      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+        ヒアリング
+      </Typography>
       {hearings.map((hearing) => (
         <Fragment key={hearing.hearingCategory}>
-          <Typography>{hearing.hearingCategory}</Typography>
+          <Typography variant="body2">{hearing.hearingCategory}</Typography>
           <TableContainer>
             <Table
               style={{ backgroundColor: "#f5f5f5" }}

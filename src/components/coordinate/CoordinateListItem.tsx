@@ -19,7 +19,9 @@ type TProps = {
 export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
   return (
     <Box>
-      <Typography variant="body2">パターン{index + 1}</Typography>
+      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+        パターン{index + 1}
+      </Typography>
       <ListItem key={coordinatePattern.id}>
         <List dense>
           {coordinatePattern.items.map((item) => (
@@ -57,12 +59,7 @@ export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
         </List>
       </ListItem>
       <List dense>
-        <Typography
-          variant="body2"
-          style={{ fontSize: 13, fontWeight: "bold" }}
-        >
-          アドバイス
-        </Typography>
+        <Typography variant="body2">アドバイス</Typography>
         {coordinatePattern.advices.map((advice, index) => (
           <p style={{ lineHeight: 0.5 }}>
             {index + 1}. {advice.title}

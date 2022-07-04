@@ -1,4 +1,4 @@
-import { ListItem, ListItemText, Paper, Typography } from "@mui/material";
+import { ListItem, ListItemText, Typography } from "@mui/material";
 import { CoordinateContainer } from "../coordinate/CoordinateContainer";
 
 type TProps = {

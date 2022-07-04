@@ -6,11 +6,15 @@ import makeStyles from "@mui/styles/makeStyles";
 export const useHearingStyle = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
-      width: 420,
+      width: 360,
       flexShrink: 0,
     },
+    rightDrawer: {
+      width: 360,
+      flexGrow: 1,
+    },
     drawerPaper: {
-      width: 420,
+      width: 360,
     },
     drawerContents: {
       overflow: "auto",
