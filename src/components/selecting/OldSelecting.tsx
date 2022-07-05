@@ -1,5 +1,4 @@
 import { Drawer, Paper, Toolbar } from "@mui/material";
-import React from "react";
 import { ArrangeContainer } from "./arrange/ArrangeContainer";
 import { useSelectingHandler } from "./handler/UseSelectingHandler";
 import { useSelectingStyle } from "./style/UseSelectingStyle";
@@ -12,7 +11,7 @@ import { DrawerContents } from "../drawerContent/DrawerContents";
 
 type Props = { readonly karteShowResponse: KarteShowResponse };
 
-export const Selecting = (props: Props) => {
+export const OldSelecting = (props: Props) => {
   const classes = useSelectingStyle();
   const handler = useSelectingHandler(props.karteShowResponse);
 
@@ -60,7 +59,7 @@ export const Selecting = (props: Props) => {
         <div className={classes.drawerContents}>
           <DrawerContents />
         </div>
-        <Paper variant="outlined" className={classes.progressContainer}>
+        <Paper variant="outlined" className={classes.oldProgressContainer}>
           <SelectionProgress
             data={handler.selectionProgressData()}
             callback={handler.selectionProgressCallback()}

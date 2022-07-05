@@ -1,16 +1,16 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
-import { useKartesShow } from "../../hooks/api/UseKartesShow";
-import { useMembersShow } from "../../hooks/api/UseMembersShow";
 import {
   ChartIdContext,
   MemberIdContext,
   MemberShowContext,
-} from "../context/provider/ContextProvider";
-import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { OldSelecting } from "./OldSelecting";
+} from "../../components/context/provider/ContextProvider";
+import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
+import { useKartesShow } from "../../hooks/api/UseKartesShow";
+import { useMembersShow } from "../../hooks/api/UseMembersShow";
+import { CoordinatePage } from "./CoordinatePage";
 
-export const SelectingContainer = () => {
+export const CoordinatePageContainer = () => {
   const chartId = useContextDefinedState(ChartIdContext);
   const memberId = useContextDefinedState(MemberIdContext);
   const { state: memberShowState, setter: setMemberShowContext } =
@@ -38,5 +38,5 @@ export const SelectingContainer = () => {
   if (karteShowError)
     return <Typography sx={{ m: "auto" }}>{karteShowError.message}</Typography>;
 
-  return <OldSelecting karteShowResponse={karteShowData} />;
+  return <CoordinatePage />;
 };
