@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { ChartIdContext } from "../context/provider/ContextProvider";
 import { QRCodeDialog } from "../shared/QRCodeDialog";
 
-type TCordePickQRDialogProps = {
+type TChartPickQRDialogProps = {
   open: boolean;
   onClose: () => void;
 };
 
-export const CordePickQRDialog = (props: TCordePickQRDialogProps) => {
+export const ChartPickQRDialog = (props: TChartPickQRDialogProps) => {
   const chartId = useContext(ChartIdContext).state;
 
   return (

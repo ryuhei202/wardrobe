@@ -30,11 +30,16 @@ export const useAppStyle = makeStyles(() =>
     browseContainer: {
       flexGrow: 1,
     },
-    coordePickButton: {
+    chartPickButton: {
       float: "right",
     },
-    title: {
+    coordinatesDropDownMenu: {
       flexGrow: 1,
+    },
+    title: {
+      marginRight: "40px",
+      fontWeight: "bold",
+      letterSpacing: 1,
     },
   })
 );

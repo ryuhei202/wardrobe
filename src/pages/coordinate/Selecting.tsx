@@ -1,4 +1,4 @@
-import { AppBar, BottomNavigation, Box, Paper, Toolbar } from "@mui/material";
+import { Paper, Toolbar } from "@mui/material";
 import { ArrangeContainer } from "../../components/selecting/arrange/ArrangeContainer";
 import { BrowseContainer } from "../../components/selecting/browse/BrowseContainer";
 import { useSelectingHandler } from "../../components/selecting/handler/UseSelectingHandler";
@@ -18,27 +18,20 @@ export const Selecting = (props: Props) => {
   switch (handler.mainContentType) {
     case MainContentType.Browse: {
       mainContent = (
-        <>
+        <div className={classes.selecting}>
           <BrowseContainer
             callback={handler.itemBrowseCallback()}
             currentSelectedItemId={
               handler.currentSelectedItem()?.itemId ?? null
             }
           />
-          <Paper
-            style={{
-              position: "fixed",
-              bottom: 0,
-              left: "360px",
-              right: "360px",
-            }}
-          >
+          <Paper className={classes.selectionProgress}>
             <SelectionProgress
               data={handler.selectionProgressData()}
               callback={handler.selectionProgressCallback()}
             />
           </Paper>
-        </>
+        </div>
       );
       break;
     }

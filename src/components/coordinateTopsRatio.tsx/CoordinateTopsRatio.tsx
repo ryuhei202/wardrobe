@@ -1,5 +1,6 @@
 import {
   Alert,
+  Box,
   Button,
   FormControlLabel,
   Snackbar,
@@ -55,84 +56,101 @@ export const CoordinateTopsRatio = ({
 
   return (
     <>
-      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+      <Typography
+        variant="h6"
+        style={{ fontWeight: "bold", padding: "10px 0" }}
+      >
         トップス枚数
       </Typography>
-      {isJacketRequested !== undefined && (
-        <FormControlLabel
-          control={
-            <Switch
-              checked={isJacketRequested}
-              onChange={(event) => {
-                setIsJacketRequested(event.target.checked);
-              }}
-            />
-          }
-          label="ジャケットを含める"
-        />
-      )}
-      <Typography>
-        トップス合計枚数：
-        {isJacketRequested
-          ? response.jacketOption?.topsNum ?? "指定無し"
-          : response.topsNum ?? "指定無し"}
-      </Typography>
-      <TextField
-        type="number"
-        label="半袖枚数"
-        helperText={!validateTopsNum() ? "不適切な入力値です" : undefined}
-        error={!validateTopsNum()}
-        value={shortSleeveNum}
-        required
-        onChange={(event) => {
-          const value = Number(event.target.value);
-          setShortSleeveNum(isNaN(value) ? null : value);
-        }}
-      />
-      <TextField
-        type="number"
-        label="長袖枚数"
-        helperText={!validateTopsNum() ? "不適切な入力値です" : undefined}
-        error={!validateTopsNum()}
-        value={longSleeveNum}
-        required
-        onChange={(event) => {
-          const value = Number(event.target.value);
-          setLongSleeveNum(isNaN(value) ? null : value);
-        }}
-      />
-      <Button
-        variant="contained"
-        color="secondary"
-        disabled={!isChanged || !validateTopsNum() || isLoading}
-        disableElevation
-        onClick={() => {
-          mutate(undefined, {
-            onSuccess: () => {
-              onUpdateComplete().then(() => {
-                setSeverity("success");
-                setSnackBarText("コーデメモの変更を保存しました");
+      <Box sx={{ margin: "0 1em" }}>
+        {isJacketRequested !== undefined && (
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isJacketRequested}
+                onChange={(event) => {
+                  setIsJacketRequested(event.target.checked);
+                }}
+              />
+            }
+            label="ジャケットを含める"
+          />
+        )}
+        <Typography sx={{ margin: "0.5em 0" }}>
+          トップス合計枚数：
+          {isJacketRequested
+            ? response.jacketOption?.topsNum ?? "指定無し"
+            : response.topsNum ?? "指定無し"}
+        </Typography>
+        <Box
+          sx={{
+            margin: "1em",
+            display: "flex",
+            gap: "0 3em",
+            justifyContent: "space-between",
+          }}
+        >
+          <TextField
+            type="number"
+            label="半袖枚数"
+            helperText={!validateTopsNum() ? "不適切な入力値です" : undefined}
+            error={!validateTopsNum()}
+            value={shortSleeveNum}
+            required
+            onChange={(event) => {
+              const value = Number(event.target.value);
+              setShortSleeveNum(isNaN(value) ? null : value);
+            }}
+            style={{ width: "100%" }}
+          />
+          <TextField
+            type="number"
+            label="長袖枚数"
+            helperText={!validateTopsNum() ? "不適切な入力値です" : undefined}
+            error={!validateTopsNum()}
+            value={longSleeveNum}
+            required
+            onChange={(event) => {
+              const value = Number(event.target.value);
+              setLongSleeveNum(isNaN(value) ? null : value);
+            }}
+            style={{ width: "100%" }}
+          />
+          <Button
+            variant="contained"
+            color="secondary"
+            disabled={!isChanged || !validateTopsNum() || isLoading}
+            disableElevation
+            onClick={() => {
+              mutate(undefined, {
+                onSuccess: () => {
+                  onUpdateComplete().then(() => {
+                    setSeverity("success");
+                    setSnackBarText("コーデメモの変更を保存しました");
+                  });
+                },
+                onError: () => {
+                  setSeverity("error");
+                  setSnackBarText("トップス枚数の変更に失敗しました");
+                },
+                onSettled: () => {
+                  setIsSnackBarOpen(true);
+                },
               });
-            },
-            onError: () => {
-              setSeverity("error");
-              setSnackBarText("トップス枚数の変更に失敗しました");
-            },
-            onSettled: () => {
-              setIsSnackBarOpen(true);
-            },
-          });
-        }}
-      >
-        更新
-      </Button>
-      <Snackbar
-        open={isSnackBarOpen}
-        autoHideDuration={5000}
-        onClose={() => setIsSnackBarOpen(false)}
-      >
-        <Alert severity={severity}>{snackBarText}</Alert>
-      </Snackbar>
+            }}
+            style={{ width: "100%" }}
+          >
+            更新
+          </Button>
+        </Box>
+        <Snackbar
+          open={isSnackBarOpen}
+          autoHideDuration={5000}
+          onClose={() => setIsSnackBarOpen(false)}
+        >
+          <Alert severity={severity}>{snackBarText}</Alert>
+        </Snackbar>
+      </Box>
     </>
   );
 };
