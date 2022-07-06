@@ -1,3 +1,3 @@
 export interface CoordinateStylistCommentsShowResponse {
-  readonly text: string;
+  readonly text: string | null;
 }

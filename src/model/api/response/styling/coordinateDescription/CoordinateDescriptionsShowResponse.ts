@@ -1,3 +1,3 @@
 export interface CoordinateDescriptionsShowResponse {
-  readonly text: string;
+  readonly text: string | null;
 }
