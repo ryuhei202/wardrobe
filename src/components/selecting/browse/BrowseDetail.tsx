@@ -99,8 +99,8 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
               return {
                 original: image.originalImagePath,
                 thumbnail: image.thumbnailImagePath,
-                originalWidth: 400,
-                originalHeight: 600,
+                originalWidth: 300,
+                originalHeight: 450,
                 description:
                   image.itemSize && image.height
                     ? `H${image.height} 着用サイズ${image.itemSize}`
