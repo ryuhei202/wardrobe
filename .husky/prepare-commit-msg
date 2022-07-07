@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+branch_name=$(git branch | grep "*" | awk '{print $2}')
+sed -i.bak "s|$| <$branch_name>|" $1

@@ -93,6 +93,7 @@ export const SizeNgDetailForm = ({
                 inequalitySign: undefined,
               })
             }
+            value={sizeNg?.itemPart ?? undefined}
           >
             <MenuItem value={undefined}></MenuItem>
             {ngData.itemParts?.map((itemPart) => (

@@ -20,7 +20,7 @@ export const Member = (props: Props) => {
   return (
     <>
       <ListItemText
-        primary={props.response.name}
+        primary={`${props.response.name}(${props.response.age}), ${props.response.pref}`}
         secondary={`パートナーID:${props.response.id}, ${
           chartId !== null ? "カルテID:" + chartId : ""
         }`}
