@@ -1,6 +1,5 @@
 import { TItem } from "./../../../model/selecting/TItem";
 import { CoordinateItemsIndexResponse } from "./../../../model/api/response/styling/coordinateItem/CoordinateItemsIndexResponse";
-import { KarteShowResponse } from "./../../../model/api/response/styling/karte/KarteShowResponse";
 import { useState } from "react";
 import { ItemBrowseCallback } from "../browse/callback/ItemBrowseCallback";
 import { SelectionConfirmData } from "../../../model/selecting/props_data/SelectionConfirmData";
@@ -24,29 +23,26 @@ export interface SelectingHandler {
 }
 
 export const useSelectingHandler = (
-  karteShowResponse: KarteShowResponse,
+  defaultItemNum: number,
   coordinateItemsIndexResponse: CoordinateItemsIndexResponse
 ): SelectingHandler => {
   const [selectedItems, setSelectedItems] = useState<TItem[]>(
     coordinateItemsIndexResponse.coordinateItems
   );
   const [currentIndex, setCurrentIndex] = useState<number>(
-    coordinateItemsIndexResponse.coordinateItems.length >=
-      karteShowResponse.defaultItemNum
+    coordinateItemsIndexResponse.coordinateItems.length >= defaultItemNum
       ? coordinateItemsIndexResponse.coordinateItems.length - 1
       : coordinateItemsIndexResponse.coordinateItems.length
   );
   const [mainContentType, setMainContentType] = useState<MainContentType>(
-    coordinateItemsIndexResponse.coordinateItems.length >=
-      karteShowResponse.defaultItemNum
+    coordinateItemsIndexResponse.coordinateItems.length >= defaultItemNum
       ? MainContentType.Confirm
       : MainContentType.Browse
   );
   const [rentableItemNum, setRentableItemNum] = useState<number>(
-    coordinateItemsIndexResponse.coordinateItems.length >=
-      karteShowResponse.defaultItemNum
+    coordinateItemsIndexResponse.coordinateItems.length >= defaultItemNum
       ? coordinateItemsIndexResponse.coordinateItems.length
-      : karteShowResponse.defaultItemNum
+      : defaultItemNum
   );
 
   const selectionProgressData = (): SelectionProgressData => {

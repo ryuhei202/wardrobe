@@ -6,21 +6,20 @@ import { SelectionConfirmContainer } from "../../components/selecting/SelectionC
 import { SelectionProgress } from "../../components/selecting/SelectionProgress";
 import { useSelectingStyle } from "../../components/selecting/style/UseSelectingStyle";
 import { CoordinateItemsIndexResponse } from "../../model/api/response/styling/coordinateItem/CoordinateItemsIndexResponse";
-import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
 import { MainContentType } from "../../model/selecting/MainContentType";
 
 type Props = {
-  readonly karteShowResponse: KarteShowResponse;
+  readonly defaultItemNum: number;
   readonly coordinateItemsIndexResponse: CoordinateItemsIndexResponse;
 };
 
 export const Selecting = ({
-  karteShowResponse,
+  defaultItemNum,
   coordinateItemsIndexResponse,
 }: Props) => {
   const classes = useSelectingStyle();
   const handler = useSelectingHandler(
-    karteShowResponse,
+    defaultItemNum,
     coordinateItemsIndexResponse
   );
 
