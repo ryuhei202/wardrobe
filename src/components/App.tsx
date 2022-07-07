@@ -29,17 +29,12 @@ import { CoordinatePageContainer } from "../pages/coordinate/CoordinatePageConta
 import { AdminShowContextSetter } from "./context/AdminShowContextSetter";
 import { ChartPageContextSetter } from "./context/ChartPageContextSetter";
 import { CoordinatePageContextSetter } from "./context/CoordinatePageContextSetter";
-import { HearingContextSetter } from "./context/HearingContextSetter";
 import { ContextProvider } from "./context/provider/ContextProvider";
-import { SelectingContextSetter } from "./context/SelectingContextSetter";
 import { ChartPickQRDialog } from "./chartPick/ChartPickQRDialog";
-import { HearingContainer } from "./hearing/HearingContainer";
-import { SelectingContainer } from "./selecting/SelectingContainer";
 import { theme } from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";
 import { ChartPickButton } from "./header/ChartPickButton";
 import { ChartShowButton } from "./header/ChartShowButton";
-import { CoordinatesDropDownMenu } from "./header/CoordinatesDropDownMenu";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -96,7 +91,6 @@ export const App = () => {
                     WARDROBE
                   </Typography>
                   <ChartShowButton />
-                  <CoordinatesDropDownMenu />
                   <ChartPickButton onClick={() => setIsQRCodeOpen(true)} />
                   {user !== null && (
                     <div>
@@ -146,22 +140,6 @@ export const App = () => {
               {user !== null ? (
                 <AdminShowContextSetter email={user.email!}>
                   <Routes>
-                    <Route
-                      path="/selecting"
-                      element={
-                        <SelectingContextSetter>
-                          <SelectingContainer />
-                        </SelectingContextSetter>
-                      }
-                    ></Route>
-                    <Route
-                      path="/hearing"
-                      element={
-                        <HearingContextSetter>
-                          <HearingContainer />
-                        </HearingContextSetter>
-                      }
-                    />
                     <Route
                       path="/chart"
                       element={

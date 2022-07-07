@@ -93,7 +93,6 @@ export const CoordinateTopsRatio = ({
           <TextField
             type="number"
             label="半袖枚数"
-            helperText={!validateTopsNum() ? "不適切な入力値です" : undefined}
             error={!validateTopsNum()}
             value={shortSleeveNum}
             required
@@ -106,7 +105,6 @@ export const CoordinateTopsRatio = ({
           <TextField
             type="number"
             label="長袖枚数"
-            helperText={!validateTopsNum() ? "不適切な入力値です" : undefined}
             error={!validateTopsNum()}
             value={longSleeveNum}
             required
