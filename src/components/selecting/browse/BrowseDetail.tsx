@@ -69,7 +69,7 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
       case DetailStatus.Selecting: {
         dialog = (
           <PostSelectDialog
-            selectedItemId={handler.selectedItem.itemId}
+            selectedItemId={handler.selectedItem.id}
             previousItemId={props.previousSelectedItemId}
             callback={handler.postSelectCallback()}
           />

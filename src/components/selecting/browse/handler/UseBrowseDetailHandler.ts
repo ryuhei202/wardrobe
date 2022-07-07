@@ -1,3 +1,4 @@
+import { TItem } from "./../../../../model/selecting/TItem";
 import { useState } from "react";
 import { DetailItemTableCallback } from "../callback/DetailItemTableCallback";
 import { DetailSizeButtonArrayCallback } from "../callback/DetailSizeButtonArrayCallback";
@@ -5,7 +6,6 @@ import { DetailSizeButtonData } from "../../../../model/selecting/browse/props_d
 import { DetailItemTableData } from "../../../../model/selecting/browse/props_data/DetailItemTableData";
 import { DetailResponse } from "../../../../model/api/response/styling/browse/DetailResponse";
 import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
-import { SelectedItem } from "../../../../model/selecting/SelectedItem";
 import { PartSize } from "../../../../model/selecting/PartSize";
 import { DetailSizeItemRecordResponse } from "../../../../model/api/response/styling/browse/DetailSizeItemRecordResponse";
 import { ValidationDialogCallback } from "../callback/ValidationDialogCallback";
@@ -14,7 +14,7 @@ import { DetailStatus } from "../../../../model/selecting/browse/DetailStatus";
 import { PostSelectCallback } from "../callback/PostSelectCallback";
 
 export interface BrowseDetailHandler {
-  selectedItem: SelectedItem | null;
+  selectedItem: TItem | null;
   currentValidationErrors: ValidationError[];
   detailStatus: DetailStatus;
   onClickSelectItemButton: () => void;
@@ -36,7 +36,7 @@ export const useBrowseDetailHandler = (
   const [selectedSizeIndex, setSelectedSizeIndex] = useState<number | null>(
     null
   );
-  const [selectedItem, setSelectedItem] = useState<SelectedItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<TItem | null>(null);
   const [currentValidationErrors, setCurrentValidationErrors] = useState<
     ValidationError[]
   >([]);
@@ -77,25 +77,33 @@ export const useBrowseDetailHandler = (
           const itemRecord = selectedSize.itemRecords[index];
           setCurrentValidationErrors(itemRecord.validationErrors);
           setSelectedItem({
-            itemId: itemRecord.itemId,
-            itemImagePath: detail.itemImagePath,
+            id: itemRecord.itemId,
+            imagePath: detail.itemImagePath,
             partSizes: createPartSizes(columns, itemRecord),
             locationName: itemRecord.locationName,
             categoryName: detail.categoryName,
             mainColorName: detail.mainColor.name,
             subColorName: detail.subColor.name,
+            brandName: detail.brandName,
+            patternName: detail.patternName,
+            size: selectedSize.name,
+            dropSize: detail.dropSize,
           });
         } else {
           const unsizedItemRecords = detail.unsizedItemRecords[index];
           setCurrentValidationErrors(unsizedItemRecords.validationErrors);
           setSelectedItem({
-            itemId: unsizedItemRecords.itemId,
-            itemImagePath: detail.itemImagePath,
+            id: unsizedItemRecords.itemId,
+            imagePath: detail.itemImagePath,
             partSizes: createPartSizes([], unsizedItemRecords),
             locationName: unsizedItemRecords.locationName,
             categoryName: detail.categoryName,
             mainColorName: detail.mainColor.name,
             subColorName: detail.subColor.name,
+            brandName: detail.brandName,
+            patternName: detail.patternName,
+            size: "なし",
+            dropSize: detail.dropSize,
           });
         }
       },
@@ -124,7 +132,7 @@ export const useBrowseDetailHandler = (
   };
 
   const selectedItemId = (): string => {
-    return selectedItem?.itemId.toString() ?? "";
+    return selectedItem?.id.toString() ?? "";
   };
 
   const isSelectItemButtonDisabled = (): boolean => {
@@ -154,7 +162,7 @@ export const useBrowseDetailHandler = (
         return {
           itemId: item.itemId,
           values: item.values,
-          isSelected: selectedItem?.itemId === item.itemId ?? false,
+          isSelected: selectedItem?.id === item.itemId ?? false,
         };
       }),
     };
