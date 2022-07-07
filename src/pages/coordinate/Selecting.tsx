@@ -1,18 +1,28 @@
 import { Paper, Toolbar } from "@mui/material";
-import { ArrangeContainer } from "../../components/selecting/arrange/ArrangeContainer";
+import { Arrange } from "../../components/selecting/arrange/Arrange";
 import { BrowseContainer } from "../../components/selecting/browse/BrowseContainer";
 import { useSelectingHandler } from "../../components/selecting/handler/UseSelectingHandler";
 import { SelectionConfirmContainer } from "../../components/selecting/SelectionConfirmContainer";
 import { SelectionProgress } from "../../components/selecting/SelectionProgress";
 import { useSelectingStyle } from "../../components/selecting/style/UseSelectingStyle";
+import { CoordinateItemsIndexResponse } from "../../model/api/response/styling/coordinateItem/CoordinateItemsIndexResponse";
 import { KarteShowResponse } from "../../model/api/response/styling/karte/KarteShowResponse";
 import { MainContentType } from "../../model/selecting/MainContentType";
 
-type Props = { readonly karteShowResponse: KarteShowResponse };
+type Props = {
+  readonly karteShowResponse: KarteShowResponse;
+  readonly coordinateItemsIndexResponse: CoordinateItemsIndexResponse;
+};
 
-export const Selecting = (props: Props) => {
+export const Selecting = ({
+  karteShowResponse,
+  coordinateItemsIndexResponse,
+}: Props) => {
   const classes = useSelectingStyle();
-  const handler = useSelectingHandler(props.karteShowResponse);
+  const handler = useSelectingHandler(
+    karteShowResponse,
+    coordinateItemsIndexResponse
+  );
 
   let mainContent;
   switch (handler.mainContentType) {
@@ -21,9 +31,7 @@ export const Selecting = (props: Props) => {
         <div className={classes.selecting}>
           <BrowseContainer
             callback={handler.itemBrowseCallback()}
-            currentSelectedItemId={
-              handler.currentSelectedItem()?.itemId ?? null
-            }
+            currentSelectedItemId={handler.currentSelectedItem()?.id ?? null}
           />
           <Paper className={classes.selectionProgress}>
             <SelectionProgress
@@ -46,7 +54,7 @@ export const Selecting = (props: Props) => {
     }
     case MainContentType.Arrange: {
       mainContent = (
-        <ArrangeContainer
+        <Arrange
           data={handler.arrangeData()}
           callback={handler.arrangeCallback()}
         />

@@ -4,11 +4,13 @@ import { useKartesShow } from "../../hooks/api/UseKartesShow";
 import { useMembersShow } from "../../hooks/api/UseMembersShow";
 import {
   ChartIdContext,
+  CoordinateIdContext,
   MemberIdContext,
   MemberShowContext,
 } from "../../components/context/provider/ContextProvider";
 import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { Selecting } from "./Selecting";
+import { useCoordinateItemsIndex } from "../../hooks/api/UseCoordinateItemsIndex";
 
 export const CoordinateSelectingContainer = () => {
   const chartId = useContextDefinedState(ChartIdContext);
@@ -24,6 +26,10 @@ export const CoordinateSelectingContainer = () => {
     memberId,
   });
 
+  const coordinateId = useContextDefinedState(CoordinateIdContext);
+  const { data: coordinateItemsIndexData, error: coordinateItemsIndexError } =
+    useCoordinateItemsIndex({ coordinateId });
+
   useEffect(() => {
     if (
       memberShowState === null ||
@@ -33,10 +39,22 @@ export const CoordinateSelectingContainer = () => {
     }
   }, [memberShowRes, memberShowState, setMemberShowContext]);
 
-  if (!karteShowData || memberShowState === null)
-    return <CircularProgress sx={{ m: "auto" }} />;
+  if (coordinateItemsIndexError)
+    return (
+      <Typography sx={{ m: "auto" }}>
+        {coordinateItemsIndexError.message}
+      </Typography>
+    );
   if (karteShowError)
     return <Typography sx={{ m: "auto" }}>{karteShowError.message}</Typography>;
 
-  return <Selecting karteShowResponse={karteShowData} />;
+  if (!karteShowData || !memberShowState || !coordinateItemsIndexData)
+    return <CircularProgress sx={{ m: "auto" }} />;
+
+  return (
+    <Selecting
+      karteShowResponse={karteShowData}
+      coordinateItemsIndexResponse={coordinateItemsIndexData}
+    />
+  );
 };

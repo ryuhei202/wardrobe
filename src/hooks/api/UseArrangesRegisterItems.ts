@@ -7,7 +7,7 @@ type TArrangesRegisterItemsArg = PostRegisterItemsParamsParams;
 
 export const useArrangesRegisterItems = ({
   adminId,
-  chartId,
+  coordinateId,
   itemIds,
   createTrigger,
 }: TArrangesRegisterItemsArg): {
@@ -17,7 +17,7 @@ export const useArrangesRegisterItems = ({
 } => {
   const params = (): PostRegisterItemsParamsParams => {
     return {
-      chartId,
+      coordinateId,
       adminId,
       itemIds,
       createTrigger,
