@@ -1,5 +1,3 @@
-import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
 import { usePostRequest } from "./UsePostRequest";
 import { PostRegisterItemsParamsParams } from "../../model/api/request/styling/arrange/PostRegisterItemsParams";
 
@@ -10,24 +8,14 @@ export const useArrangesRegisterItems = ({
   coordinateId,
   itemIds,
   createTrigger,
-}: TArrangesRegisterItemsArg): {
-  mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
-  error: Error | null;
-  isLoading: boolean;
-} => {
-  const params = (): PostRegisterItemsParamsParams => {
-    return {
+}: TArrangesRegisterItemsArg) => {
+  const { mutate, error, isLoading } =
+    usePostRequest<PostRegisterItemsParamsParams>("arranges/register_items", {
       coordinateId,
       adminId,
       itemIds,
       createTrigger,
-    };
-  };
-
-  const { mutate, error, isLoading } = usePostRequest(
-    "arranges/register_items",
-    params()
-  );
+    });
 
   return {
     mutate,
