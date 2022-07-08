@@ -48,7 +48,6 @@ export const CoordinateSelectingContainer = () => {
   if (!coordinatesShowData || !memberShowState || !coordinateItemsIndexData)
     return <CircularProgress sx={{ m: "auto" }} />;
 
-  console.log(coordinatesShowData);
   return (
     <Selecting
       defaultItemNum={coordinatesShowData.coordinate.defaultItemNum}

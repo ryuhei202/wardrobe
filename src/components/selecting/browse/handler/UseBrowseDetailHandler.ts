@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { TItem } from "./../../../../model/selecting/TItem";
 import { useState } from "react";
 import { DetailItemTableCallback } from "../callback/DetailItemTableCallback";
@@ -11,17 +12,24 @@ import { DetailSizeItemRecordResponse } from "../../../../model/api/response/sty
 import { ValidationDialogCallback } from "../callback/ValidationDialogCallback";
 import { ValidationError } from "../../../../model/selecting/browse/ValidationError";
 import { DetailStatus } from "../../../../model/selecting/browse/DetailStatus";
-import { PostSelectCallback } from "../callback/PostSelectCallback";
+import { useBrowsesSelect } from "../../../../hooks/api/UseBrowsesSelect";
+import { useContextDefinedState } from "../../../context/UseContextDefinedState";
+import {
+  ChartIdContext,
+  CoordinateIdContext,
+} from "../../../context/provider/ContextProvider";
 
 export interface BrowseDetailHandler {
   selectedItem: TItem | null;
   currentValidationErrors: ValidationError[];
   detailStatus: DetailStatus;
+  isPostLoading: boolean;
+  postError: AxiosError | null;
+  resetPostError: () => void;
   onClickSelectItemButton: () => void;
   detailSizeButtonArrayCallback: () => DetailSizeButtonArrayCallback;
   detailItemTableCallback: () => DetailItemTableCallback;
   validationDialogCallback: () => ValidationDialogCallback;
-  postSelectCallback: () => PostSelectCallback;
   selectedSizeName: () => string;
   selectedItemId: () => string;
   isSelectItemButtonDisabled: () => boolean;
@@ -31,8 +39,11 @@ export interface BrowseDetailHandler {
 
 export const useBrowseDetailHandler = (
   detail: DetailResponse,
-  callback: BrowseDetailCallback
+  callback: BrowseDetailCallback,
+  previousItemId?: number
 ): BrowseDetailHandler => {
+  const chartId = useContextDefinedState(ChartIdContext);
+  const coordinateId = useContextDefinedState(CoordinateIdContext);
   const [selectedSizeIndex, setSelectedSizeIndex] = useState<number | null>(
     null
   );
@@ -43,6 +54,12 @@ export const useBrowseDetailHandler = (
   const [detailStatus, setDetailStatus] = useState<DetailStatus>(
     DetailStatus.Browsing
   );
+  const {
+    mutate,
+    error: postError,
+    isLoading: isPostLoading,
+    reset: resetPostError,
+  } = useBrowsesSelect();
 
   const createPartSizes = (
     columns: string[],
@@ -56,8 +73,24 @@ export const useBrowseDetailHandler = (
     });
   };
 
-  const onClickSelectItemButton = () =>
-    setDetailStatus(DetailStatus.Validating);
+  const onClickSelectItemButton = () => {
+    if (currentValidationErrors.length === 0) {
+      if (selectedItem) {
+        mutate(
+          { itemId: selectedItem.id, coordinateId, chartId, previousItemId },
+          {
+            onSuccess: () => {
+              if (selectedItem) {
+                callback.onSelectItem(selectedItem);
+              }
+            },
+          }
+        );
+      }
+    } else {
+      setDetailStatus(DetailStatus.Validating);
+    }
+  };
 
   const detailSizeButtonArrayCallback = (): DetailSizeButtonArrayCallback => {
     return {
@@ -113,16 +146,21 @@ export const useBrowseDetailHandler = (
   const validationDialogCallback = (): ValidationDialogCallback => {
     return {
       onClickCancelButton: () => setDetailStatus(DetailStatus.Browsing),
-      onClickSelectButton: () => setDetailStatus(DetailStatus.Selecting),
-    };
-  };
-
-  const postSelectCallback = (): PostSelectCallback => {
-    return {
-      onSuccess: () => {
-        if (selectedItem) callback.onSelectItem(selectedItem);
+      onClickSelectButton: () => {
+        setDetailStatus(DetailStatus.Browsing);
+        if (selectedItem) {
+          mutate(
+            { itemId: selectedItem.id, coordinateId, chartId, previousItemId },
+            {
+              onSuccess: () => {
+                if (selectedItem) {
+                  callback.onSelectItem(selectedItem);
+                }
+              },
+            }
+          );
+        }
       },
-      onFailure: () => setDetailStatus(DetailStatus.Browsing),
     };
   };
 
@@ -172,11 +210,13 @@ export const useBrowseDetailHandler = (
     selectedItem,
     currentValidationErrors,
     detailStatus,
+    isPostLoading,
+    postError,
+    resetPostError,
     onClickSelectItemButton,
     detailSizeButtonArrayCallback,
     detailItemTableCallback,
     validationDialogCallback,
-    postSelectCallback,
     selectedSizeName,
     selectedItemId,
     isSelectItemButtonDisabled,

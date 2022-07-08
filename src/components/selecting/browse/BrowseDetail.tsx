@@ -1,4 +1,14 @@
-import { Box, Button, IconButton, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import React from "react";
 import ReactImageGallery from "react-image-gallery";
@@ -8,7 +18,6 @@ import { BrowseDetailCallback } from "./callback/BrowseDetailCallback";
 import { DetailItemTable } from "./DetailItemTable";
 import { DetailSizeButtonArray } from "./DetailSizeButtonArray";
 import { useBrowseDetailHandler } from "./handler/UseBrowseDetailHandler";
-import { PostSelectDialog } from "./PostSelectDialog";
 import { useBrowseDetailStyle } from "./style/UseBrowseDetailStyle";
 import { ValidationDialog } from "./ValidationDialog";
 import { HostUrl } from "../../../model/HostUrl";
@@ -28,7 +37,11 @@ type itemImageGallery = {
 
 export const BrowseDetail = (props: BrowseDetailProps) => {
   const classes = useBrowseDetailStyle();
-  const handler = useBrowseDetailHandler(props.response, props.callback);
+  const handler = useBrowseDetailHandler(
+    props.response,
+    props.callback,
+    props.previousSelectedItemId ?? undefined
+  );
 
   let itemImage: itemImageGallery[] = [
     {
@@ -49,33 +62,17 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
       };
     }
   );
+
   let dialog;
   if (handler.selectedItem) {
-    switch (handler.detailStatus) {
-      case DetailStatus.Validating: {
-        if (handler.currentValidationErrors.length === 0) {
-          handler.validationDialogCallback().onClickSelectButton();
-        } else {
-          dialog = (
-            <ValidationDialog
-              isOpen={true}
-              errors={handler.currentValidationErrors}
-              callback={handler.validationDialogCallback()}
-            />
-          );
-        }
-        break;
-      }
-      case DetailStatus.Selecting: {
-        dialog = (
-          <PostSelectDialog
-            selectedItemId={handler.selectedItem.id}
-            previousItemId={props.previousSelectedItemId}
-            callback={handler.postSelectCallback()}
-          />
-        );
-        break;
-      }
+    if (handler.detailStatus === DetailStatus.Validating) {
+      dialog = (
+        <ValidationDialog
+          isOpen={true}
+          errors={handler.currentValidationErrors}
+          callback={handler.validationDialogCallback()}
+        />
+      );
     }
   }
 
@@ -184,6 +181,18 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
         </div>
       </Paper>
       {dialog}
+      <Dialog open={handler.isPostLoading} disableEscapeKeyDown>
+        <CircularProgress />
+      </Dialog>
+      <Dialog
+        open={handler.postError !== null}
+        onClose={handler.resetPostError}
+      >
+        <DialogTitle>エラー</DialogTitle>
+        <DialogContent>
+          <Typography>{handler.postError?.message ?? ""}</Typography>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
