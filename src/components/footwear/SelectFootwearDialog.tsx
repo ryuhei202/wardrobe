@@ -22,26 +22,37 @@ export const SelectFootwearDialog = ({
   onClose,
   onClick,
 }: TProps) => {
-  const handleClick = ({ footwearId }: { footwearId: number }) => {
-    onClick(footwearId);
-  };
-
   return (
     <>
-      <Dialog open={isOpen} onClose={onClose}>
+      <Dialog open={isOpen} onClose={onClose} maxWidth="xl">
         <DialogTitle>靴を選択</DialogTitle>
-        <div style={{ width: 600, textAlign: "center" }}>
+        <div
+          style={{
+            width: 1200,
+            display: "flex",
+            justifyContent: "space-evenly",
+            flexWrap: "wrap",
+            margin: 5,
+            height: "min-content",
+          }}
+        >
           {footwearIndexData.footwears.map((footwear) => (
-            <Card>
-              <CardActionArea
-                onClick={() => handleClick({ footwearId: footwear.id })}
-              >
-                <CardMedia
+            <Card sx={{ maxWidth: 150, margin: 1 }}>
+              <CardActionArea onClick={() => onClick(footwear.id)}>
+                {/* <CardMedia component="img"
+                style={{ width: 150, height: 150 }}
                   image={`${HostUrl()}/images/footwear/${footwear.id}.jpg`}
+                /> */}
+                <CardMedia
+                  component="img"
+                  style={{ width: 150, height: 150 }}
+                  image={`http://localhost:3000/images/color/3.jpg`}
                 />
                 <CardContent>
                   <Typography variant="body1">{footwear.name}</Typography>
-                  <Typography variant="body2">{footwear.formalRank}</Typography>
+                  <Typography variant="body2">
+                    キレイ度: {footwear.formalRank}
+                  </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
