@@ -12,7 +12,7 @@ export const ChartShowButton = () => {
   const chartId = useContext(ChartIdContext).state;
 
   return (
-    <>
+    <div style={{ flexGrow: 1 }}>
       <Button
         variant="contained"
         color="primary"
@@ -27,6 +27,6 @@ export const ChartShowButton = () => {
       >
         カルテ
       </Button>
-    </>
+    </div>
   );
 };
