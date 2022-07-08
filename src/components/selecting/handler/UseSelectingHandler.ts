@@ -1,4 +1,4 @@
-import { TFootwear } from "./../../../model/selecting/footwear/TFootwear";
+import { TCoordinateFootwearsShowResponse } from "./../../../model/api/response/styling/coordinateFootwear/TCoordianteFootwearsShowResponse";
 import { TItem } from "./../../../model/selecting/TItem";
 import { CoordinateItemsIndexResponse } from "./../../../model/api/response/styling/coordinateItem/CoordinateItemsIndexResponse";
 import { useState } from "react";
@@ -25,7 +25,8 @@ export interface SelectingHandler {
 
 export const useSelectingHandler = (
   defaultItemNum: number,
-  coordinateItemsIndexResponse: CoordinateItemsIndexResponse
+  coordinateItemsIndexResponse: CoordinateItemsIndexResponse,
+  coordinateFootwearShowData: TCoordinateFootwearsShowResponse
 ): SelectingHandler => {
   const [selectedItems, setSelectedItems] = useState<TItem[]>(
     coordinateItemsIndexResponse.coordinateItems
@@ -45,16 +46,13 @@ export const useSelectingHandler = (
       ? coordinateItemsIndexResponse.coordinateItems.length
       : defaultItemNum
   );
-  const [selecterFootwear, setSelectedFootwear] = useState<TFootwear | null>(
-    null
-  );
 
   const selectionProgressData = (): SelectionProgressData => {
     return {
       selectedIndex: currentIndex,
       items: selectedItems,
       rentableItemNum: rentableItemNum,
-      selecterFootwear,
+      selecterFootwear: coordinateFootwearShowData.coordinateFootwear,
     };
   };
 

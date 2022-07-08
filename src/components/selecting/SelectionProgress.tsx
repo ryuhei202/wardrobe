@@ -39,7 +39,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
     mouseY: null | number;
   }>(initialState);
   const coordinateId = useContextDefinedState(CoordinateIdContext);
-  const { mutate, isLoading } = useCoordinateFootwearsUpdate();
+  const { mutate } = useCoordinateFootwearsUpdate();
   const queryClient = useQueryClient();
   const handleSubmitFootwear = (footwearId: number) => {
     mutate(

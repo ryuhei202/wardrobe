@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { TFootwearsIndexResponse } from "../../model/api/response/styling/footwear/TFootwearsIndexResponse";
-import { HostUrl } from "../../model/HostUrl";
 
 type TProps = {
   readonly footwearIndexData: TFootwearsIndexResponse;
