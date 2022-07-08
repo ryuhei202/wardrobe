@@ -89,6 +89,7 @@ export const useSelectingHandler = (
   const selectionConfirmData = (): SelectionConfirmData => {
     return {
       items: selectedItems,
+      selectedFootwear: coordinateFootwearShowData.coordinateFootwear,
     };
   };
 

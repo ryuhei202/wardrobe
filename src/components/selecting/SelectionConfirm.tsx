@@ -83,7 +83,10 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
       <Typography variant="h6" noWrap>
         選択コーデ確認画面
       </Typography>
-      <SelectedItemArray data={props.data.items}></SelectedItemArray>
+      <SelectedItemArray
+        data={props.data.items}
+        footwear={props.data.selectedFootwear}
+      ></SelectedItemArray>
       <Paper className={classes.confirmInfoContainer}>
         <Typography variant="h6" className={classes.confirmInfoTitle}>
           確認要項
