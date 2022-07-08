@@ -10,9 +10,11 @@ export interface DetailResponse {
   readonly seriesFeature: string | null;
   readonly categoryName: string;
   readonly brandName: string;
+  readonly patternName: string;
   readonly mainColor: DetailColorResponse;
   readonly subColor: DetailColorResponse;
   readonly sizes: DetailSizeResponse[];
+  readonly dropSize: string;
   readonly wearingImages: WearingImage[];
   readonly unsizedItemRecords: DetailSizeItemRecordResponse[];
 }

@@ -18,7 +18,7 @@ import React, { Fragment, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useNgsDestroy } from "../../hooks/api/UseNgsDestroy";
 import { NgIndexResponse } from "../../model/api/response/styling/ng/NgIndexResponse";
-import { KarteDialogContainer } from "../karte/KarteDialogContainer";
+import { ChartDialogContainer } from "../chart/ChartDialogContainer";
 import { PopupImage } from "../shared/PopupImage";
 import { NgMemoDialogContainer } from "./NgMemoDialogContainer";
 
@@ -81,11 +81,13 @@ export const NgMemoCollection = (props: Props) => {
           onClose={() => setIsOpenNgMemoDialog(false)}
           editingNgId={editingNgId}
         />
-        <KarteDialogContainer
-          isOpen={selectedChartId !== undefined}
-          onClose={() => setSelectedChartId(undefined)}
-          chartId={selectedChartId}
-        />
+        {selectedChartId && (
+          <ChartDialogContainer
+            isOpen={selectedChartId !== undefined}
+            onClose={() => setSelectedChartId(undefined)}
+            chartId={selectedChartId}
+          />
+        )}
         <List dense style={{ width: "100%" }}>
           {props.response.map((ng_category, index) => (
             <Fragment key={index}>

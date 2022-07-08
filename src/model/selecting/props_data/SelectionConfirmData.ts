@@ -1,5 +1,5 @@
-import { SelectedItem } from "../SelectedItem";
+import { TItem } from "./../TItem";
 
 export interface SelectionConfirmData {
-  readonly items: SelectedItem[];
+  readonly items: TItem[];
 }

@@ -1,6 +1,6 @@
-import { SelectedItem } from "../../../../model/selecting/SelectedItem";
+import { TItem } from "../../../../model/selecting/TItem";
 
 export interface BrowseDetailCallback {
-  onSelectItem: (item: SelectedItem) => void;
+  onSelectItem: (item: TItem) => void;
   onClickBackButton: () => void;
 }

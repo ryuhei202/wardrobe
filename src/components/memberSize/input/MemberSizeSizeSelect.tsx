@@ -29,7 +29,7 @@ export const MemberSizeSizeSelect = ({
       size="small"
       className={className}
       style={{ ...customStyle, ...style }}
-      value={value}
+      value={value ?? ""}
       onChange={(e) => onChange(e.target.value as number)}
     >
       {options.map((option) => {

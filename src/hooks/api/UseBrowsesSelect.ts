@@ -1,49 +1,24 @@
-import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
+import { AxiosError } from "axios";
+import { ErrorResponse } from "../../model/api/response/shared/ErrorResponse";
 import { usePostRequest } from "./UsePostRequest";
 
-interface PostSelectParams {
+type PostSelectParams = {
   itemId: number;
   chartId: number;
+  coordinateId: number;
   previousItemId?: number;
-}
-
-type TBrowsesSelectArg = {
-  chartId: number;
-  itemId: number;
-  previousItemId: number | null;
 };
 
-export const useBrowsesSelect = ({
-  chartId,
-  itemId,
-  previousItemId,
-}: TBrowsesSelectArg): {
-  mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
-  error: Error | null;
-  isLoading: boolean;
-  isIdle: boolean;
-} => {
-  const params = (): PostSelectParams => {
-    var params: PostSelectParams = {
-      itemId: itemId,
-      chartId: chartId,
-    };
-    if (previousItemId) {
-      params.previousItemId = previousItemId;
-    }
-    return params;
-  };
-
-  const { mutate, error, isLoading, isIdle } = usePostRequest(
-    "browses/select",
-    params()
-  );
+export const useBrowsesSelect = () => {
+  const { mutate, error, isLoading, reset } = usePostRequest<
+    PostSelectParams,
+    AxiosError<ErrorResponse>
+  >("browses/select");
 
   return {
     mutate,
     error,
     isLoading,
-    isIdle,
+    reset,
   };
 };
