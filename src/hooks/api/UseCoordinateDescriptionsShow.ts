@@ -10,7 +10,7 @@ export const useCoordinateDescriptionsShow = ({
 }: TCoordinateDescriptionsShowArg) => {
   const { data, error, refetch } =
     useGetRequest<CoordinateDescriptionsShowResponse>(
-      `coordinates/${coordinateId}/coordinate_descriptions`
+      `coordinates/${coordinateId}/coordinate_description`
     );
 
   return { data, error, refetch };

@@ -26,7 +26,7 @@ export const useCoordinateStylistCommentsUpdate = ({
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateStylistCommentsUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/coordinate_stylist_comments`);
+  >(`coordinates/${coordinateId}/coordinate_stylist_comment`);
 
   return { mutate, isLoading };
 };

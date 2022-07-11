@@ -26,7 +26,7 @@ export const useCoordinateDescriptionsUpdate = ({
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateDescriptionsUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/coordinate_descriptions`);
+  >(`coordinates/${coordinateId}/coordinate_description`);
 
   return { mutate, isLoading };
 };

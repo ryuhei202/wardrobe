@@ -10,7 +10,7 @@ export const useCoordinateStylistCommentsShow = ({
 }: TCoordinateStylistCommentsShowArg) => {
   const { data, error, refetch } =
     useGetRequest<CoordinateStylistCommentsShowResponse>(
-      `coordinates/${coordinateId}/coordinate_stylist_comments`
+      `coordinates/${coordinateId}/coordinate_stylist_comment`
     );
 
   return { data, error, refetch };
