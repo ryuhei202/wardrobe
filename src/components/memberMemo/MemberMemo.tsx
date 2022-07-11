@@ -1,5 +1,5 @@
 import { Alert, Snackbar, Typography } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
 import { MemberMemoShowResponse } from "../../model/api/response/styling/member_memo/MemberMemoShowResponse";
@@ -20,30 +20,32 @@ export const MemberMemo = ({ response }: Props) => {
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
   const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMemberMemoUpdate({
-    memo,
-    memoNext,
-    memberId: useContextDefinedState(MemberIdContext),
-  });
+  const { mutate, isLoading } = useMemberMemoUpdate(
+    useContextDefinedState(MemberIdContext)
+  );
+
+  const handlePost = () => {
+    mutate(
+      { memo, memoNext },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(`member/member_memo`);
+          setSeverity("success");
+          setSnackBarText("ヒアリングの変更を保存しました");
+        },
+        onError: () => {
+          setSeverity("error");
+          setSnackBarText("ヒアリングの変更に失敗しました");
+        },
+        onSettled: () => {
+          setIsSnackBarOpen(true);
+        },
+      }
+    );
+  };
+
   const isChangedMemos =
     memo !== response.memo || memoNext !== response.memoNext;
-
-  const handlePost = useCallback(() => {
-    mutate(undefined, {
-      onSuccess: () => {
-        queryClient.invalidateQueries(`member/member_memo`);
-        setSeverity("success");
-        setSnackBarText("ヒアリングの変更を保存しました");
-      },
-      onError: () => {
-        setSeverity("error");
-        setSnackBarText("ヒアリングの変更に失敗しました");
-      },
-      onSettled: () => {
-        setIsSnackBarOpen(true);
-      },
-    });
-  }, [queryClient, mutate]);
 
   useEffect(() => {
     alertClosedWindow(!isChangedMemos);

@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./index.css";
 import { App } from "./components/App";
 import { reportWebVitals } from "./reportWebVitals";
@@ -7,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import { initializeApp } from "firebase/app";
+import { createRoot } from "react-dom/client";
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -23,15 +23,16 @@ const firebaseConfig = {
 };
 initializeApp(firebaseConfig);
 
-ReactDOM.render(
+const container = document.getElementById("root");
+const root = createRoot(container!);
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Sentry.ErrorBoundary>
         <App />
       </Sentry.ErrorBoundary>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -24,6 +24,7 @@ export const useSelectingStyle = makeStyles((theme: Theme) =>
       left: "360px",
       right: "360px",
       margin: "0 16px",
+      zIndex: 5,
     },
     browseContainer: {
       flexGrow: 1,

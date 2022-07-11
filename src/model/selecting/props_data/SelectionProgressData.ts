@@ -1,7 +1,7 @@
-import { SelectedItem } from "../SelectedItem";
+import { TItem } from "./../TItem";
 
 export interface SelectionProgressData {
   readonly rentableItemNum: number;
   readonly selectedIndex: number;
-  readonly items: SelectedItem[];
+  readonly items: TItem[];
 }

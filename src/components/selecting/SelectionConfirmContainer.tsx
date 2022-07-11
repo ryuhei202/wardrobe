@@ -1,6 +1,10 @@
+import { CircularProgress, Typography } from "@mui/material";
+import { useBrowsesConfirm } from "../../hooks/api/UseBrowsesConfirm";
 import { SelectionConfirmData } from "../../model/selecting/props_data/SelectionConfirmData";
+import { ChartIdContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
-import { useConfirmProvider } from "./provider/UseConfirmProvider";
+import { SelectionConfirm } from "./SelectionConfirm";
 
 export interface SelectionConfirmContainerProps {
   data: SelectionConfirmData;
@@ -10,9 +14,19 @@ export interface SelectionConfirmContainerProps {
 export const SelectionConfirmContainer = (
   props: SelectionConfirmContainerProps
 ) => {
-  const provider = useConfirmProvider(
-    props.data.items.map((item) => item.itemId)
-  );
+  const chartId = useContextDefinedState(ChartIdContext);
+  const { data, error, isFetching } = useBrowsesConfirm({
+    itemIds: props.data.items.map((item) => item.id),
+    chartId,
+  });
 
-  return provider.selectionConfirmComponent(props.data, props.callback);
+  if (error) return <Typography>{error.message}</Typography>;
+  if (!data || isFetching) return <CircularProgress />;
+  return (
+    <SelectionConfirm
+      data={props.data}
+      response={data}
+      callback={props.callback}
+    />
+  );
 };

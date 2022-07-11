@@ -14,7 +14,6 @@ export const ChartList = (props: Props) => {
           key={index}
           id={karte.id}
           rentalStartedAt={karte.rentalStartedAt}
-          memoNext={karte.memoNext}
           index={index}
         />
       ))}
