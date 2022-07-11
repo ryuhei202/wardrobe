@@ -35,11 +35,7 @@ export const CoordinatePage = () => {
         }}
       >
         <Toolbar />
-        <div
-          style={{
-            overflow: "auto",
-          }}
-        >
+        <div>
           <RightDrawerContents coordinateId={coordinateId} />
         </div>
       </Drawer>

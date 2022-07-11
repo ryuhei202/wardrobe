@@ -1,10 +1,10 @@
 import {
   Avatar,
-  Box,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
+  ListSubheader,
   Typography,
 } from "@mui/material";
 import { CoordinatePattern } from "../../model/api/response/styling/coordinatePattern/CoordinatePattern";
@@ -18,11 +18,9 @@ type TProps = {
 
 export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
   return (
-    <Box>
-      <Typography variant="body1" style={{ fontWeight: "bold" }}>
-        パターン{index + 1}
-      </Typography>
-      <ListItem key={coordinatePattern.id}>
+    <>
+      <ListSubheader>パターン {index + 1}</ListSubheader>
+      <ListItem>
         <List dense>
           {coordinatePattern.items.map((item) => (
             <ListItem key={item.id}>
@@ -37,35 +35,33 @@ export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={
-                  <Typography style={{ fontSize: 12 }}>
-                    {`${item.id} / ${item.brandName} / ${item.categoryName} / ${item.mainColorName}(${item.subColorName}) / ${item.patternName}`}
-                  </Typography>
-                }
+                primary={`${item.id} / ${item.brandName} / ${item.categoryName} / ${item.mainColorName}(${item.subColorName}) / ${item.patternName}`}
                 secondary={
-                  <Typography style={{ fontSize: 12, color: "gray" }}>
-                    {`${item.size}, ${item.partSizes
+                  <>
+                    <b>{item.size}</b>,&nbsp;
+                    {item.partSizes
                       .filter(
                         (partSize: PartSizeResponse) => partSize.value !== null
                       )
-                      .map(
-                        (partSize) => `${partSize.name}(${partSize.value})`
-                      )}, Drop(${item.dropSize})`}
-                  </Typography>
+                      .map((partSize) => (
+                        <>
+                          {partSize.name}(<b>{partSize.value}</b>),&nbsp;
+                        </>
+                      ))}
+                    Drop(<b>{item.dropSize}</b>)
+                  </>
                 }
               />
             </ListItem>
           ))}
+          <ListSubheader>アドバイス</ListSubheader>
+          {coordinatePattern.advices.map((advice, index) => (
+            <ListItem>
+              <ListItemText>{`${index + 1}. ${advice.title}`}</ListItemText>
+            </ListItem>
+          ))}
         </List>
       </ListItem>
-      <List dense>
-        <Typography variant="body2">アドバイス</Typography>
-        {coordinatePattern.advices.map((advice, index) => (
-          <p style={{ lineHeight: 0.5 }}>
-            {index + 1}. {advice.title}
-          </p>
-        ))}
-      </List>
-    </Box>
+    </>
   );
 };

@@ -1,4 +1,9 @@
-import { CircularProgress, Divider, Typography } from "@mui/material";
+import {
+  CircularProgress,
+  Divider,
+  ListSubheader,
+  Typography,
+} from "@mui/material";
 import { Fragment } from "react";
 import { useCoordinatesIndex } from "../../hooks/api/UseCoordinatesIndex";
 import { Coordinate } from "./Coordinate";
@@ -18,9 +23,7 @@ export const CoordinateContainer = ({ chartId }: TProps) => {
     <>
       {data.coordinates.map((coordinate, index) => (
         <Fragment key={coordinate.id}>
-          <Typography variant="body1" style={{ fontWeight: "bold" }}>
-            コーデ{index + 1}
-          </Typography>
+          <ListSubheader>コーデ {index + 1}</ListSubheader>
           <Coordinate coordinateId={coordinate.id} />
           <Divider variant="fullWidth" />
         </Fragment>
