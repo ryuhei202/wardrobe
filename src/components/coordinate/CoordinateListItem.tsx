@@ -5,7 +5,6 @@ import {
   ListItemAvatar,
   ListItemText,
   ListSubheader,
-  Typography,
 } from "@mui/material";
 import { CoordinatePattern } from "../../model/api/response/styling/coordinatePattern/CoordinatePattern";
 import { PartSizeResponse } from "../../model/api/response/styling/karte/KartePartSizeResponse";
