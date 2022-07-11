@@ -1,24 +1,24 @@
 import { Alert, Snackbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import { useCoordinateDescriptionsUpdate } from "../../hooks/api/UseCoordinateDescriptionsUpdate";
-import { CoordinateDescriptionsShowResponse } from "../../model/api/response/styling/coordinateDescription/CoordinateDescriptionsShowResponse";
+import { useCoordinateStylistCommentsUpdate } from "../../hooks/api/UseCoordinateStylistCommentsUpdate";
+import { CoordinateStylistCommentsShowResponse } from "../../model/api/response/styling/coordinateStylistComment/CoordinateStylistCommentsShowResponse";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { MemoForm } from "../shared/MemoForm";
 
 type TProps = {
-  data: CoordinateDescriptionsShowResponse;
+  data: CoordinateStylistCommentsShowResponse;
   coordinateId: number;
   onUpdateComplete: () => Promise<any>;
 };
 
-export const CoordinateDescription = ({
+export const CoordinateStylistComment = ({
   data,
   coordinateId,
   onUpdateComplete,
 }: TProps) => {
   const [text, setText] = useState(data.text ?? "");
-  const { mutate, isLoading } = useCoordinateDescriptionsUpdate({
+  const { mutate, isLoading } = useCoordinateStylistCommentsUpdate({
     coordinateId,
   });
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
@@ -31,12 +31,12 @@ export const CoordinateDescription = ({
         onSuccess: () => {
           onUpdateComplete().then(() => {
             setSeverity("success");
-            setSnackBarText("根拠説明の変更を保存しました");
+            setSnackBarText("気持ち文章の変更を保存しました");
           });
         },
         onError: () => {
           setSeverity("error");
-          setSnackBarText("根拠説明の変更に失敗しました");
+          setSnackBarText("気持ち文章の変更に失敗しました");
         },
         onSettled: () => {
           setIsSnackBarOpen(true);
@@ -60,7 +60,7 @@ export const CoordinateDescription = ({
         variant="h6"
         style={{ fontWeight: "bold", padding: "10px 0" }}
       >
-        根拠説明
+        気持ち文章
       </Typography>
       <Box style={{ margin: "0 1em" }}>
         <MemoForm
