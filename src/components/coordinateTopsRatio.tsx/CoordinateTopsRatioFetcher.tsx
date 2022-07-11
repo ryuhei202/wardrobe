@@ -4,20 +4,32 @@ import { CoordinateTopsRatio } from "./CoordinateTopsRatio";
 
 type TProps = {
   readonly coordinateId: number;
+  readonly isEditable: boolean;
 };
 
-export const CoordinateTopsRatioFetcher = ({ coordinateId }: TProps) => {
+export const CoordinateTopsRatioFetcher = ({
+  coordinateId,
+  isEditable,
+}: TProps) => {
   const { data, error, refetch } = useCoordinateTopsRatiosShow({
     coordinateId,
   });
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
+  if (isEditable)
+    return (
+      <CoordinateTopsRatio
+        coordinateId={coordinateId}
+        response={data}
+        onUpdateComplete={refetch}
+      />
+    );
+
   return (
-    <CoordinateTopsRatio
-      coordinateId={coordinateId}
-      response={data}
-      onUpdateComplete={refetch}
-    />
+    <div style={{ display: "block" }}>
+      <Typography variant="body2">半袖: {data.shortSleeveNum}</Typography>
+      <Typography variant="body2">長袖: {data.longSleeveNum}</Typography>
+    </div>
   );
 };

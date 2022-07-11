@@ -124,7 +124,10 @@ export const ChartMainContents = ({
           <Typography>コーデ作成</Typography>
         </Button>
       </Link>
-      <Coordinate coordinateId={coordinates[selectedCoordinateIndex].id} />
+      <Coordinate
+        coordinateId={coordinates[selectedCoordinateIndex].id}
+        isEditable
+      />
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={5000}
