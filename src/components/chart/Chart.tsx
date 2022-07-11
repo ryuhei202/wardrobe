@@ -4,11 +4,10 @@ import { CoordinateContainer } from "../coordinate/CoordinateContainer";
 type TProps = {
   readonly id: number;
   readonly rentalStartedAt: string | null;
-  readonly memoNext: string | null;
   readonly index: number;
 };
 
-export const Chart = ({ id, rentalStartedAt, memoNext, index }: TProps) => {
+export const Chart = ({ id, rentalStartedAt, index }: TProps) => {
   return (
     <ListItem key={index}>
       <ListItemText>

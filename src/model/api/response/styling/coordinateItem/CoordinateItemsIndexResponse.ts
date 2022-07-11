@@ -1,5 +1,5 @@
-import { CoordinateItemResponse } from "../coordinatePattern/CoordinateItemResponse";
+import { TItem } from "../../../../selecting/TItem";
 
 export interface CoordinateItemsIndexResponse {
-  readonly CoordinateItems: CoordinateItemResponse[];
+  readonly coordinateItems: TItem[];
 }

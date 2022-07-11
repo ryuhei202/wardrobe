@@ -1,3 +1,4 @@
+import { NgEditConvertResponse } from "./../../../model/api/response/styling/ng/NgEditConvertResponse";
 import { ChartItemIndexResponse } from "./../../../model/api/response/styling/chartItem/ChartItemIndexResponse";
 import { NgNewResponse } from "./../../../model/api/response/styling/ng/NgNewResponse";
 import { ItemCategoryNg } from "./../../../model/api/request/styling/ng/ItemCategoryNg";
@@ -10,6 +11,7 @@ import { MemberIdContext } from "../../context/provider/ContextProvider";
 import { useContextDefinedState } from "../../context/UseContextDefinedState";
 import { SizeNg } from "../../../model/api/request/styling/ng/SizeNg";
 import { useState } from "react";
+import { useNgsUpdate } from "../../../hooks/api/UseNgsUpdate";
 
 type NgFormHandlerArg = {
   readonly targetChartId?: number;
@@ -18,6 +20,7 @@ type NgFormHandlerArg = {
   readonly chartItemId?: number;
   readonly itemCategoryNg?: ItemCategoryNg;
   readonly sizeNg?: SizeNg;
+  readonly ngEditData?: NgEditConvertResponse;
   readonly onClose: () => void;
   readonly setNgCategoryId: React.Dispatch<React.SetStateAction<number>>;
   readonly setItemCategoryNg: React.Dispatch<
@@ -32,9 +35,11 @@ type UseNgFormHandler = {
   readonly handleChangeNgCategory: (value: number) => void;
   readonly handleChangeChartItem: (chartItemId: number) => void;
   readonly handleClickSubmit: () => void;
+  readonly handleClickUpdate: () => void;
   readonly chartItemsData?: ChartItemIndexResponse;
   readonly ngData?: NgNewResponse;
-  readonly isLoading: boolean;
+  readonly isCreateLoading: boolean;
+  readonly isUpdateLoading: boolean;
   readonly severity: "success" | "error" | undefined;
   readonly isSnackBarOpen: boolean;
   readonly snackBarText: string | undefined;
@@ -47,6 +52,7 @@ export const useNgFormHandler = ({
   chartItemId,
   itemCategoryNg,
   sizeNg,
+  ngEditData,
   onClose,
   setNgCategoryId,
   setItemCategoryNg,
@@ -66,7 +72,7 @@ export const useNgFormHandler = ({
     onError: () => {
       setSeverity("error");
       setIsSnackBarOpen(true);
-      setSnackBarText("NGメモを保存しました！");
+      setSnackBarText("NGメモの取得に失敗しました");
     },
   });
   const { data: ngData } = useNgsNew({
@@ -75,12 +81,21 @@ export const useNgFormHandler = ({
     onError: () => {
       setSeverity("error");
       setIsSnackBarOpen(true);
-      setSnackBarText("NGメモの保存に失敗しました");
+      setSnackBarText("NGメモの取得に失敗しました");
     },
   });
 
   const queryClient = useQueryClient();
-  const { mutate, isLoading } = useNgsCreate({
+  const { mutate: createMutate, isLoading: isCreateLoading } = useNgsCreate({
+    ngCategoryId,
+    freeText,
+    chartItemId,
+    itemCategoryNg,
+    sizeNg,
+  });
+
+  const { mutate: updateMutate, isLoading: isUpdateLoading } = useNgsUpdate({
+    id: ngEditData?.id as number,
     ngCategoryId,
     freeText,
     chartItemId,
@@ -110,8 +125,9 @@ export const useNgFormHandler = ({
       });
     }
   };
+
   const handleClickSubmit = () => {
-    mutate(undefined, {
+    createMutate(undefined, {
       onSuccess: () => {
         queryClient.invalidateQueries("member/ngs");
         setSeverity("success");
@@ -127,13 +143,32 @@ export const useNgFormHandler = ({
     });
   };
 
+  const handleClickUpdate = () => {
+    updateMutate(undefined, {
+      onSuccess: () => {
+        queryClient.invalidateQueries("member/ngs");
+        setSeverity("success");
+        setIsSnackBarOpen(true);
+        setSnackBarText("NGメモを更新しました！");
+        onClose();
+      },
+      onError: () => {
+        setSeverity("error");
+        setIsSnackBarOpen(true);
+        setSnackBarText("NGメモの更新に失敗しました");
+      },
+    });
+  };
+
   return {
     handleChangeNgCategory,
     handleChangeChartItem,
     handleClickSubmit,
+    handleClickUpdate,
     chartItemsData,
     ngData,
-    isLoading,
+    isCreateLoading,
+    isUpdateLoading,
     severity,
     isSnackBarOpen,
     snackBarText,
