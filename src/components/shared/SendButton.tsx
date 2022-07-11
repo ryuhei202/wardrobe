@@ -17,14 +17,16 @@ export const SendButton = ({ onClick, disabled, style }: Props) => {
       }
       followCursor
     >
-      <IconButton
-        onClick={onClick}
-        disabled={disabled}
-        color="primary"
-        style={style}
-      >
-        <SendIcon />
-      </IconButton>
+      <span>
+        <IconButton
+          onClick={onClick}
+          disabled={disabled}
+          color="primary"
+          style={style}
+        >
+          <SendIcon />
+        </IconButton>
+      </span>
     </Tooltip>
   );
 };

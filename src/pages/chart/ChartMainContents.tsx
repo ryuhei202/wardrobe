@@ -104,7 +104,11 @@ export const ChartMainContents = ({
           onChange={(_, newValue) => setSelectedCoordinateIndex(newValue)}
         >
           {coordinates.map((_, index) => (
-            <Tab label={`コーデ${index + 1}`} id={`coordinate-tab-${index}`} />
+            <Tab
+              label={`コーデ${index + 1}`}
+              id={`coordinate-tab-${index}`}
+              key={index}
+            />
           ))}
         </Tabs>
       </Box>

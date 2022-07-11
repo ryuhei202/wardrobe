@@ -15,8 +15,8 @@ export const CoordinateHearing = ({ hearings }: TProps) => {
       >
         ヒアリング
       </Typography>
-      {hearings.map((hearing) => (
-        <Box sx={{ marginBottom: "1em" }}>
+      {hearings.map((hearing, index) => (
+        <Box sx={{ marginBottom: "1em" }} key={index}>
           <Fragment key={hearing.hearingCategory}>
             <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
               {hearing.hearingCategory}
@@ -28,6 +28,7 @@ export const CoordinateHearing = ({ hearings }: TProps) => {
                   backgroundColor: "#F5F5F5",
                   padding: "0.5em 1em",
                 }}
+                key={question.title}
               >
                 <Typography variant="body1">{question.title}</Typography>
                 <Typography variant="body1" style={{ margin: "0" }}>
