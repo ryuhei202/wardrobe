@@ -27,7 +27,7 @@ export const useSelectingHandler = (
   coordinateItemsIndexResponse: CoordinateItemsIndexResponse
 ): SelectingHandler => {
   const [selectedItems, setSelectedItems] = useState<TItem[]>(
-    coordinateItemsIndexResponse.coordinateItems
+    coordinateItemsIndexResponse.coordinateItems.map((c) => c.itemInfo)
   );
   const [currentIndex, setCurrentIndex] = useState<number>(
     coordinateItemsIndexResponse.coordinateItems.length >= defaultItemNum
