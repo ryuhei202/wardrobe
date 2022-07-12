@@ -1,4 +1,4 @@
-import { List, ListItem, Typography } from "@mui/material";
+import { List, ListItem, ListItemText } from "@mui/material";
 import { Coordinate } from "../coordinate/Coordinate";
 import { PastChartsSection } from "../chart/PastChartsSection";
 
@@ -16,13 +16,13 @@ export const RightDrawerContents = ({ coordinateId }: TProps) => {
     >
       {coordinateId && (
         <>
-          <Typography>コーデ情報</Typography>
+          <ListItem>
+            <ListItemText>コーデ情報</ListItemText>
+          </ListItem>
           <Coordinate coordinateId={coordinateId} />
         </>
       )}
-      <ListItem>
-        <PastChartsSection />
-      </ListItem>
+      <PastChartsSection />
     </List>
   );
 };

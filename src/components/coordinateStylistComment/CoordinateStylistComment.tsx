@@ -1,5 +1,4 @@
-import { Alert, Snackbar, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCoordinateStylistCommentsUpdate } from "../../hooks/api/UseCoordinateStylistCommentsUpdate";
 import { CoordinateStylistCommentsShowResponse } from "../../model/api/response/styling/coordinateStylistComment/CoordinateStylistCommentsShowResponse";
@@ -52,20 +51,12 @@ export const CoordinateStylistComment = ({
 
   return (
     <>
-      <Typography
-        variant="h6"
-        style={{ fontWeight: "bold", padding: "10px 0" }}
-      >
-        気持ち文章
-      </Typography>
-      <Box style={{ margin: "0 1em" }}>
-        <MemoForm
-          value={text}
-          onChange={setText}
-          onPost={onPost}
-          disabled={!isTextChanged || isLoading}
-        />
-      </Box>
+      <MemoForm
+        value={text}
+        onChange={setText}
+        onPost={onPost}
+        disabled={!isTextChanged || isLoading}
+      />
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={5000}

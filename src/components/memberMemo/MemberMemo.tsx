@@ -1,4 +1,4 @@
-import { Alert, Snackbar, Typography } from "@mui/material";
+import { Alert, ListItem, ListSubheader, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
@@ -6,7 +6,6 @@ import { MemberMemoShowResponse } from "../../model/api/response/styling/member_
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { theme } from "../style/Theme";
 import { MemoForm } from "../shared/MemoForm";
 
 type Props = {
@@ -53,24 +52,24 @@ export const MemberMemo = ({ response }: Props) => {
 
   return (
     <>
-      <div>
-        <Typography variant="body2">パートナーメモ</Typography>
+      <ListSubheader>パートナーメモ</ListSubheader>
+      <ListItem style={{ display: "block" }}>
         <MemoForm
           value={memo}
           disabled={response.memo === memo || isLoading}
           onChange={setMemo}
           onPost={handlePost}
         />
-      </div>
-      <div style={{ marginTop: theme.spacing(2) }}>
-        <Typography variant="body2">次回コーデに関して</Typography>
+      </ListItem>
+      <ListSubheader>次回コーデに関して</ListSubheader>
+      <ListItem style={{ display: "block" }}>
         <MemoForm
           value={memoNext}
           disabled={response.memoNext === memoNext || isLoading}
           onChange={setMemoNext}
           onPost={handlePost}
         />
-      </div>
+      </ListItem>
 
       <Snackbar
         open={isSnackBarOpen}

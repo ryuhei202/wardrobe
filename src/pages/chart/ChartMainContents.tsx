@@ -131,6 +131,7 @@ export const ChartMainContents = ({
       </Link>
       <Coordinate
         coordinateId={coordinates[selectedCoordinateIndex].id}
+        isEditable
         key={coordinates[selectedCoordinateIndex].id}
       />
       <Snackbar

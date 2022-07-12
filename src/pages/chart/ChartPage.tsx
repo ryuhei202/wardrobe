@@ -16,7 +16,7 @@ export const ChartPage = () => {
       >
         <Toolbar />
         <div>
-          <LeftDrawerContents />
+          <LeftDrawerContents isEditable />
         </div>
       </Drawer>
       <div style={{ flexGrow: 1, paddingInline: theme.spacing(2) }}>
@@ -32,11 +32,7 @@ export const ChartPage = () => {
         }}
       >
         <Toolbar />
-        <div
-          style={{
-            overflow: "auto",
-          }}
-        >
+        <div>
           <RightDrawerContents />
         </div>
       </Drawer>
