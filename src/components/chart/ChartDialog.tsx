@@ -12,11 +12,7 @@ export const ChartDialog = ({ isOpen, onClose, data }: TProps) => {
   return (
     <Dialog onClose={onClose} open={isOpen}>
       <DialogTitle>過去コーデ一覧</DialogTitle>
-      <Chart
-        id={data.id}
-        rentalStartedAt={data.rentalStartedAt}
-        index={data.id}
-      />
+      <Chart id={data.id} rentalStartedAt={data.rentalStartedAt} />
     </Dialog>
   );
 };

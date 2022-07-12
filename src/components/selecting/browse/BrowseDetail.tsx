@@ -21,6 +21,7 @@ import { useBrowseDetailHandler } from "./handler/UseBrowseDetailHandler";
 import { useBrowseDetailStyle } from "./style/UseBrowseDetailStyle";
 import { ValidationDialog } from "./ValidationDialog";
 import { HostUrl } from "../../../model/HostUrl";
+import { theme } from "../../style/Theme";
 
 interface BrowseDetailProps {
   response: DetailResponse;
@@ -85,7 +86,7 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
         <ArrowBack />
       </IconButton>
       <Paper className={classes.itemInfo}>
-        <div className={classes.itemImageContainer}>
+        <div style={{ maxWidth: 400, marginRight: theme.spacing(2) }}>
           <ReactImageGallery
             showFullscreenButton={false}
             showPlayButton={false}
