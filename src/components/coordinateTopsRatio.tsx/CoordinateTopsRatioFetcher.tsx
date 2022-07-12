@@ -17,6 +17,7 @@ export const CoordinateTopsRatioFetcher = ({ coordinateId }: TProps) => {
     <CoordinateTopsRatio
       coordinateId={coordinateId}
       response={data}
+      key={String(data.longSleeveNum) + String(data.shortSleeveNum)}
       onUpdateComplete={refetch}
     />
   );

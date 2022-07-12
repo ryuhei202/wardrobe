@@ -17,6 +17,7 @@ export const CoordinateStylistCommentContainer = ({ coordinateId }: TProps) => {
   return (
     <CoordinateStylistComment
       data={data}
+      key={data.text}
       coordinateId={coordinateId}
       onUpdateComplete={refetch}
     />

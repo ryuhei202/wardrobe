@@ -45,10 +45,6 @@ export const CoordinateStylistComment = ({
     );
   };
 
-  useEffect(() => {
-    setText(data.text ?? "");
-  }, [coordinateId, data.text]);
-
   const isTextChanged = data.text === null ? text !== "" : text !== data.text;
   useEffect(() => {
     alertClosedWindow(!isTextChanged);

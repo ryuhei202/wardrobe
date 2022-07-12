@@ -17,6 +17,7 @@ export const CoordinateDescriptionContainer = ({ coordinateId }: TProps) => {
   return (
     <CoordinateDescription
       data={data}
+      key={data.text}
       coordinateId={coordinateId}
       onUpdateComplete={refetch}
     />
