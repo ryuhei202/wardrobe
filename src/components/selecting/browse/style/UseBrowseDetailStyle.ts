@@ -5,10 +5,6 @@ import makeStyles from "@mui/styles/makeStyles";
 
 export const useBrowseDetailStyle = makeStyles((theme: Theme) =>
   createStyles({
-    itemImageContainer: {
-      maxWidth: 300,
-      marginRight: theme.spacing(2),
-    },
     itemInfo: {
       display: "flex",
     },

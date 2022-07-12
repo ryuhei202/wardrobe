@@ -9,10 +9,13 @@ type TProps = {
   setter: React.Dispatch<boolean>;
 };
 export const PastChartsDialogContainer = ({ isOpen, setter }: TProps) => {
-  const KARTE_NUM = 10;
+  const LIMIT_NUM = 10;
+  const OFFSET_NUM = 1;
+
   const { data, error } = useKartesIndex({
     memberId: useContextDefinedState(MemberIdContext),
-    limit: KARTE_NUM,
+    limit: LIMIT_NUM,
+    offset: OFFSET_NUM,
   });
 
   if (error) return <Typography>{error.message}</Typography>;
