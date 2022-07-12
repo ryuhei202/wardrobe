@@ -29,7 +29,7 @@ export const CoordinateSelectingContainer = () => {
   const {
     data: coordinateFootwearShowData,
     error: coordinateFootwearsShowError,
-  } = useCoordinateFootwearsShow();
+  } = useCoordinateFootwearsShow({ coordinateId });
 
   useEffect(() => {
     if (
