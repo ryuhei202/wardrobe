@@ -120,6 +120,7 @@ export const ChartMainContents = ({
           disableElevation
           color="secondary"
           startIcon={<Checkroom />}
+          sx={{ marginTop: "1em" }}
         >
           <Typography>コーデ作成</Typography>
         </Button>

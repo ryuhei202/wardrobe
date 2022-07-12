@@ -1,3 +1,4 @@
+import { CoordinateDescriptionContainer } from "../coordinateDescription/CoordinateDescriptionContainer";
 import { CoordinateHearingFetcher } from "../coordinateHearing/CoordinateHearingFetcher";
 import { CoordinateMemoFetcher } from "../coordinateMemo/CoordinateMemoFetcher";
 import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatternContainer";
@@ -14,6 +15,7 @@ export const Coordinate = ({ coordinateId }: TProps) => {
       <CoordinateHearingFetcher coordinateId={coordinateId} />
       <CoordinateTopsRatioFetcher coordinateId={coordinateId} />
       <CoordinateMemoFetcher coordinateId={coordinateId} />
+      <CoordinateDescriptionContainer coordinateId={coordinateId} />
       <SelectedReviewContainer coordinateId={coordinateId} />
       <CoordinatePatternContainer coordinateId={coordinateId} />
     </>
