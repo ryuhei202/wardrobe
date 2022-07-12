@@ -6,7 +6,7 @@ import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
 import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 import { CoordinatePatternIndexResponse } from "../../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
-import { TItem } from "../../../../model/selecting/TItem";
+import { TCoordinateItem } from "../../../../model/coordinateItem/TCoordinateItem";
 
 export interface ArrangePatternHandler {
   coordinates: CoordinateBulkUpdateRequest[];
@@ -19,7 +19,7 @@ export interface ArrangePatternHandler {
 }
 
 export const useArrangePatternHandler = (
-  items: TItem[],
+  items: TCoordinateItem[],
   responses: CoordinatePatternIndexResponse
 ): ArrangePatternHandler => {
   const defaultCoordinate = {
@@ -70,8 +70,8 @@ export const useArrangePatternHandler = (
               if (item) {
                 result.push({
                   id: item.id,
-                  categoryName: item.categoryName,
-                  imagePath: item.imagePath.thumb,
+                  categoryName: item.itemInfo.categoryName,
+                  imagePath: item.itemInfo.imagePath.thumb,
                 });
               }
               return result;
@@ -127,8 +127,8 @@ export const useArrangePatternHandler = (
       items: items.map((item) => {
         return {
           itemId: item.id,
-          itemImagePath: item.imagePath.thumb,
-          categoryName: item.categoryName,
+          itemImagePath: item.itemInfo.imagePath.thumb,
+          categoryName: item.itemInfo.categoryName,
           isSelected: editingOutfit.itemIds.indexOf(item.id) >= 0,
         };
       }),
