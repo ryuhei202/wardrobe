@@ -2,6 +2,7 @@ import { CoordinateDescriptionContainer } from "../coordinateDescription/Coordin
 import { CoordinateHearingFetcher } from "../coordinateHearing/CoordinateHearingFetcher";
 import { CoordinateMemoFetcher } from "../coordinateMemo/CoordinateMemoFetcher";
 import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatternContainer";
+import { CoordinateStylistCommentContainer } from "../coordinateStylistComment/CoordinateStylistCommentContainer";
 import { CoordinateTopsRatioFetcher } from "../coordinateTopsRatio.tsx/CoordinateTopsRatioFetcher";
 import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 
@@ -16,6 +17,7 @@ export const Coordinate = ({ coordinateId }: TProps) => {
       <CoordinateTopsRatioFetcher coordinateId={coordinateId} />
       <CoordinateMemoFetcher coordinateId={coordinateId} />
       <CoordinateDescriptionContainer coordinateId={coordinateId} />
+      <CoordinateStylistCommentContainer coordinateId={coordinateId} />
       <SelectedReviewContainer coordinateId={coordinateId} />
       <CoordinatePatternContainer coordinateId={coordinateId} />
     </>
