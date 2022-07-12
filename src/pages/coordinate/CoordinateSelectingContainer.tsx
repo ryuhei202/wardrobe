@@ -2,7 +2,6 @@ import { CircularProgress, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { useMembersShow } from "../../hooks/api/UseMembersShow";
 import {
-  ChartIdContext,
   CoordinateIdContext,
   MemberIdContext,
   MemberShowContext,
