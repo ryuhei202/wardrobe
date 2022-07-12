@@ -8,7 +8,11 @@ import { HostUrl } from "../../model/HostUrl";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { MemberIdContext } from "../context/provider/ContextProvider";
 
-export const LeftDrawerContents = () => {
+type Props = {
+  readonly isEditable?: boolean;
+};
+
+export const LeftDrawerContents = ({ isEditable }: Props) => {
   const memberPhotoSUPath = `${HostUrl()}/igoue_admin/members/${useContextDefinedState(
     MemberIdContext
   )}/member_photos`;
@@ -36,15 +40,9 @@ export const LeftDrawerContents = () => {
       <ListItem>
         <MemberSizeFetcher />
       </ListItem>
-      <ListItem>
-        <NgMemosContainer />
-      </ListItem>
-      <ListItem>
-        <PurchasedItemsContainer />
-      </ListItem>
-      <ListItem style={{ display: "block" }}>
-        <MemberMemoFetcher />
-      </ListItem>
+      <MemberMemoFetcher isEditable={isEditable ?? false} />
+      <NgMemosContainer />
+      <PurchasedItemsContainer />
     </List>
   );
 };

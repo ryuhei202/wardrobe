@@ -4,23 +4,23 @@ import { CoordinateContainer } from "../coordinate/CoordinateContainer";
 type TProps = {
   readonly id: number;
   readonly rentalStartedAt: string | null;
-  readonly index: number;
 };
 
-export const Chart = ({ id, rentalStartedAt, index }: TProps) => {
+export const Chart = ({ id, rentalStartedAt }: TProps) => {
   return (
-    <ListItem key={index}>
-      <ListItemText>
-        <Typography variant="h6">カルテID: {id}</Typography>
-        <Typography variant="body2" style={{ color: "gray" }}>
-          発送日:
-          {rentalStartedAt
-            ? new Date(rentalStartedAt!).toLocaleDateString()
-            : ""}
-        </Typography>
-        <br />
-        <CoordinateContainer chartId={id} />
-      </ListItemText>
-    </ListItem>
+    <>
+      <ListItem key={id}>
+        <ListItemText>
+          <Typography variant="h6">カルテID: {id}</Typography>
+          <Typography variant="body2" style={{ color: "gray" }}>
+            発送日:
+            {rentalStartedAt
+              ? new Date(rentalStartedAt!).toLocaleDateString()
+              : ""}
+          </Typography>
+        </ListItemText>
+      </ListItem>
+      <CoordinateContainer chartId={id} />
+    </>
   );
 };

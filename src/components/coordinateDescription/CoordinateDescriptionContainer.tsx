@@ -1,23 +1,28 @@
 import { CircularProgress, Paper, Typography } from "@mui/material";
-import { useCoordinateMemosShow } from "../../hooks/api/UseCoordinateMemosShow";
-import { CoordinateMemo } from "./CoordinateMemo";
+import { useCoordinateDescriptionsShow } from "../../hooks/api/UseCoordinateDescriptionsShow";
+import { CoordinateDescription } from "./CoordinateDescription";
 
 type TProps = {
   readonly coordinateId: number;
   readonly isEditable: boolean;
 };
 
-export const CoordinateMemoFetcher = ({ coordinateId, isEditable }: TProps) => {
-  const { data, error, refetch } = useCoordinateMemosShow({ coordinateId });
+export const CoordinateDescriptionContainer = ({
+  coordinateId,
+  isEditable,
+}: TProps) => {
+  const { data, error, refetch } = useCoordinateDescriptionsShow({
+    coordinateId,
+  });
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
   if (isEditable)
     return (
-      <CoordinateMemo
+      <CoordinateDescription
+        data={data}
+        key={data.text}
         coordinateId={coordinateId}
-        key={data.memo}
-        response={data}
         onUpdateComplete={refetch}
       />
     );
@@ -25,7 +30,7 @@ export const CoordinateMemoFetcher = ({ coordinateId, isEditable }: TProps) => {
   return (
     <Paper variant="outlined">
       <Typography variant="body2" style={{ whiteSpace: "pre-line" }}>
-        {data.memo}
+        {data.text}
       </Typography>
     </Paper>
   );
