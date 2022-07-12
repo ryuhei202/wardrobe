@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { TFootwearsIndexResponse } from "../../model/api/response/styling/footwear/TFootwearsIndexResponse";
+import { HostUrl } from "../../model/HostUrl";
 
 type TProps = {
   readonly footwearIndexData: TFootwearsIndexResponse;
@@ -38,14 +39,10 @@ export const SelectFootwearDialog = ({
           {footwearIndexData.footwears.map((footwear) => (
             <Card sx={{ maxWidth: 150, margin: 1 }}>
               <CardActionArea onClick={() => onClick(footwear.id)}>
-                {/* <CardMedia component="img"
-                style={{ width: 150, height: 150 }}
-                  image={`${HostUrl()}/images/footwear/${footwear.id}.jpg`}
-                /> */}
                 <CardMedia
                   component="img"
                   style={{ width: 150, height: 150 }}
-                  image={`http://localhost:3000/images/color/3.jpg`}
+                  image={`${HostUrl()}/images/footwear/${footwear.id}.jpg`}
                 />
                 <CardContent>
                   <Typography variant="body1">{footwear.name}</Typography>

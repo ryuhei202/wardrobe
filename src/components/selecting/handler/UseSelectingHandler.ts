@@ -52,7 +52,7 @@ export const useSelectingHandler = (
       selectedIndex: currentIndex,
       items: selectedItems,
       rentableItemNum: rentableItemNum,
-      selecterFootwear: coordinateFootwearShowData.coordinateFootwear,
+      selectedFootwear: coordinateFootwearShowData.coordinateFootwear,
     };
   };
 

@@ -2,6 +2,7 @@ import { CircularProgress, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { useMembersShow } from "../../hooks/api/UseMembersShow";
 import {
+  ChartIdContext,
   CoordinateIdContext,
   MemberIdContext,
   MemberShowContext,
@@ -14,13 +15,13 @@ import { useCoordinateFootwearsShow } from "../../hooks/api/UseCoordinateFootwea
 
 export const CoordinateSelectingContainer = () => {
   const memberId = useContextDefinedState(MemberIdContext);
+  const coordinateId = useContextDefinedState(CoordinateIdContext);
+
   const { state: memberShowState, setter: setMemberShowContext } =
     useContext(MemberShowContext);
   const memberShowRes = useMembersShow({
     memberId,
   });
-
-  const coordinateId = useContextDefinedState(CoordinateIdContext);
   const { data: coordinatesShowData, error: coordinatesShowError } =
     useCoordinatesShow(coordinateId);
   const { data: coordinateItemsIndexData, error: coordinateItemsIndexError } =

@@ -5,5 +5,5 @@ export interface SelectionProgressData {
   readonly rentableItemNum: number;
   readonly selectedIndex: number;
   readonly items: TItem[];
-  readonly selecterFootwear: TFootwear | null;
+  readonly selectedFootwear: TFootwear | null;
 }

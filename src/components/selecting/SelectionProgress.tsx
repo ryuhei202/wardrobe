@@ -154,14 +154,15 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
         >
           {steps}
         </Stepper>
+
         <div style={{ width: 100 }}>
-          {!!props.data.selecterFootwear ? (
+          {!!props.data.selectedFootwear ? (
             <div style={{ height: "100%" }}>
               <Button onClick={() => setIsOpen(true)}>
                 <img
                   style={{ width: 70, height: 70 }}
                   src={`${HostUrl()}/images/footwear/${
-                    props.data.selecterFootwear.id
+                    props.data.selectedFootwear.id
                   }.jpg`}
                   alt="くつ"
                 />
