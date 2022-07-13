@@ -66,10 +66,10 @@ export const useArrangePatternHandler = (
               }[],
               itemId
             ) => {
-              const item = items.find((item) => item.id === itemId);
+              const item = items.find((item) => item.itemInfo.id === itemId);
               if (item) {
                 result.push({
-                  id: item.id,
+                  id: item.itemInfo.id,
                   categoryName: item.itemInfo.categoryName,
                   imagePath: item.itemInfo.imagePath.thumb,
                 });
@@ -126,10 +126,10 @@ export const useArrangePatternHandler = (
     return {
       items: items.map((item) => {
         return {
-          itemId: item.id,
+          itemId: item.itemInfo.id,
           itemImagePath: item.itemInfo.imagePath.thumb,
           categoryName: item.itemInfo.categoryName,
-          isSelected: editingOutfit.itemIds.indexOf(item.id) >= 0,
+          isSelected: editingOutfit.itemIds.indexOf(item.itemInfo.id) >= 0,
         };
       }),
       selectedAdviceIds: selectedAdviceIdArray,

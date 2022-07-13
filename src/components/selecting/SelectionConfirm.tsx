@@ -60,7 +60,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
 
   const { mutate, error, isLoading } = useArrangesRegisterItems({
     adminId: adminId ?? 0,
-    itemIds: props.data.items.map((item) => item.id),
+    itemIds: props.data.items.map((item) => item.itemInfo.id),
     coordinateId,
     createTrigger: selectedCreateTriggerId ?? undefined,
   });
