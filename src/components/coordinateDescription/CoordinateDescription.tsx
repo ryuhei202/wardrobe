@@ -1,5 +1,4 @@
-import { Alert, Snackbar, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCoordinateDescriptionsUpdate } from "../../hooks/api/UseCoordinateDescriptionsUpdate";
 import { CoordinateDescriptionsShowResponse } from "../../model/api/response/styling/coordinateDescription/CoordinateDescriptionsShowResponse";
@@ -45,10 +44,6 @@ export const CoordinateDescription = ({
     );
   };
 
-  useEffect(() => {
-    setText(data.text ?? "");
-  }, [coordinateId, data.text]);
-
   const isTextChanged = data.text === null ? text !== "" : text !== data.text;
   useEffect(() => {
     alertClosedWindow(!isTextChanged);
@@ -56,20 +51,12 @@ export const CoordinateDescription = ({
 
   return (
     <>
-      <Typography
-        variant="h6"
-        style={{ fontWeight: "bold", padding: "10px 0" }}
-      >
-        根拠説明
-      </Typography>
-      <Box style={{ margin: "0 1em" }}>
-        <MemoForm
-          value={text}
-          onChange={setText}
-          onPost={onPost}
-          disabled={!isTextChanged || isLoading}
-        />
-      </Box>
+      <MemoForm
+        value={text}
+        onChange={setText}
+        onPost={onPost}
+        disabled={!isTextChanged || isLoading}
+      />
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={5000}

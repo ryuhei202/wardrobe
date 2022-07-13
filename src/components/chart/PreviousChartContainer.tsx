@@ -5,10 +5,12 @@ import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { ChartList } from "./ChartList";
 
 export const PreviousChartContainer = () => {
-  const KARTE_NUM = 1;
+  const LIMIT_NUM = 1;
+  const OFFSET_NUM = 1;
   const { data, error } = useKartesIndex({
     memberId: useContextDefinedState(MemberIdContext),
-    limit: KARTE_NUM,
+    limit: LIMIT_NUM,
+    offset: OFFSET_NUM,
   });
 
   if (error) return <Typography>{error.message}</Typography>;

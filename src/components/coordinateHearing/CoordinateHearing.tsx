@@ -1,5 +1,4 @@
-import { Box, Typography } from "@mui/material";
-import { Fragment } from "react";
+import { List, ListItem, ListSubheader, Typography } from "@mui/material";
 import { CoordinateHearingsShowResponse } from "../../model/api/response/styling/coordinateHearing/CoordinateHearingsShowResponse";
 
 type TProps = {
@@ -8,42 +7,35 @@ type TProps = {
 
 export const CoordinateHearing = ({ hearings }: TProps) => {
   return (
-    <Box>
-      <Typography
-        variant="h6"
-        style={{ fontWeight: "bold", padding: "10px 0" }}
-      >
-        ヒアリング
-      </Typography>
+    <List dense>
       {hearings.map((hearing) => (
-        <Box sx={{ marginBottom: "1em" }}>
-          <Fragment key={hearing.hearingCategory}>
-            <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
-              {hearing.hearingCategory}
-            </Typography>
-            {hearing.hearingQuestions.map((question) => (
-              <Box
-                sx={{
-                  margin: "0 1em",
-                  backgroundColor: "#F5F5F5",
-                  padding: "0.5em 1em",
-                }}
+        <div key={hearing.hearingCategory}>
+          <ListSubheader>{hearing.hearingCategory}</ListSubheader>
+          {hearing.hearingQuestions.map((question) => (
+            <ListItem key={question.title} divider style={{ width: "100%" }}>
+              <Typography
+                variant="body2"
+                display="inline"
+                style={{ flexGrow: 1 }}
               >
-                <Typography variant="body1">{question.title}</Typography>
-                <Typography variant="body1" style={{ margin: "0" }}>
-                  →
-                  {question.answers
-                    .map((answer) => {
-                      if (answer.text) return `${answer.name}(${answer.text})`;
-                      return answer.name;
-                    })
-                    .join("、")}
-                </Typography>
-              </Box>
-            ))}
-          </Fragment>
-        </Box>
+                {question.title}
+              </Typography>
+              <Typography
+                variant="body2"
+                display="inline"
+                style={{ fontWeight: "bold" }}
+              >
+                {question.answers
+                  .map((answer) => {
+                    if (answer.text) return `${answer.name}(${answer.text})`;
+                    return answer.name;
+                  })
+                  .join("、")}
+              </Typography>
+            </ListItem>
+          ))}
+        </div>
       ))}
-    </Box>
+    </List>
   );
 };
