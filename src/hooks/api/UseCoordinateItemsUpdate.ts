@@ -12,7 +12,7 @@ type TCoordinateitemsUpdate = {
 };
 
 type TCoordinateItemsUpdateParams = {
-  readonly isChangeItem: string;
+  readonly isChangeItem: boolean;
 };
 
 type TCoordinateItemsUpdateArg = {
