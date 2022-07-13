@@ -24,7 +24,7 @@ export const useArrangePatternHandler = (
 ): ArrangePatternHandler => {
   const defaultCoordinate = {
     id: null,
-    itemIds: [],
+    itemIds: items.filter((i) => !i.isChangeItem).map((i) => i.itemInfo.id),
     adviceIds: [],
     formalLevel: 0,
   };
@@ -130,6 +130,7 @@ export const useArrangePatternHandler = (
           itemImagePath: item.itemInfo.imagePath.thumb,
           categoryName: item.itemInfo.categoryName,
           isSelected: editingOutfit.itemIds.indexOf(item.itemInfo.id) >= 0,
+          isChangeItem: item.isChangeItem,
         };
       }),
       selectedAdviceIds: selectedAdviceIdArray,
