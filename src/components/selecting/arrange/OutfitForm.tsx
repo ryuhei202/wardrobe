@@ -51,18 +51,6 @@ export const OutfitForm = (props: OutfitFormProps) => {
     getSelectedCategories()
   );
 
-  const isDisabledCheckbox = ({
-    isChangeItem,
-    isSelected,
-  }: {
-    isChangeItem: boolean;
-    isSelected: boolean;
-  }): boolean => {
-    if (isSelected) return false;
-    if (isChangeItem) return true;
-    return false;
-  };
-
   useEffect(() => {
     setSelectedCategories(getSelectedCategories());
   }, [getSelectedCategories]);
@@ -102,10 +90,7 @@ export const OutfitForm = (props: OutfitFormProps) => {
               dense
               button
               onClick={() => props.callback.onSelectItem(item.itemId)}
-              disabled={isDisabledCheckbox({
-                isChangeItem: item.isChangeItem,
-                isSelected: item.isSelected,
-              })}
+              disabled={!item.isSelected && item.isChangeItem}
             >
               <ListItemIcon>
                 <FormControlLabel
