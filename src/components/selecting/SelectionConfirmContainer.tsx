@@ -16,7 +16,7 @@ export const SelectionConfirmContainer = (
 ) => {
   const chartId = useContextDefinedState(ChartIdContext);
   const { data, error, isFetching } = useBrowsesConfirm({
-    itemIds: props.data.items.map((item) => item.id),
+    itemIds: props.data.items.map((item) => item.itemInfo.id),
     chartId,
   });
 

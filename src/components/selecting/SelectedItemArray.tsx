@@ -6,37 +6,38 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment } from "react";
-import { TItem } from "../../model/selecting/TItem";
+import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 import { useSelectedItemArrayStyle } from "./style/UseSelectedItemArrayStyle";
 
 export interface SelectionConfirmProps {
-  data: TItem[];
+  data: TCoordinateItem[];
 }
 
 export const SelectedItemArray = (props: SelectionConfirmProps) => {
   const classes = useSelectedItemArrayStyle();
+  console.log({ props: props.data });
 
   return (
     <div className={classes.selectedItemsContainer}>
       {props.data.map((selectedItem, index) => (
         <Card key={selectedItem.id} className={classes.selectedItemCard}>
-          <CardHeader subheader={`ID: ${props.data[index].id}`} />
+          <CardHeader subheader={`ID: ${props.data[index].itemInfo.id}`} />
           <CardMedia
             className={classes.selectedItemCardMedia}
             image={
-              props.data[index].imagePath.largeThumb ??
-              props.data[index].imagePath.large
+              props.data[index].itemInfo.imagePath.largeThumb ??
+              props.data[index].itemInfo.imagePath.large
             }
           />
           <CardContent>
             <Typography variant="subtitle1">
-              {`棚番: ${props.data[index].locationName}`}
+              {`棚番: ${props.data[index].itemInfo.locationName}`}
             </Typography>
             <br />
             <Typography variant="body2">
               サイズ情報:
               <br />
-              {props.data[index].partSizes.map((partSize, index) => (
+              {props.data[index].itemInfo.partSizes.map((partSize, index) => (
                 <Fragment key={index}>
                   {`${partSize.name}: ${partSize.value ?? ""}`}
                   <br />
@@ -45,11 +46,11 @@ export const SelectedItemArray = (props: SelectionConfirmProps) => {
             </Typography>
             <br />
             <Typography variant="body2">
-              カテゴリー: {props.data[index].categoryName}
+              カテゴリー: {props.data[index].itemInfo.categoryName}
               <br />
-              メインカラー: {props.data[index].mainColorName}
+              メインカラー: {props.data[index].itemInfo.mainColorName}
               <br />
-              サブカラー: {props.data[index].subColorName}
+              サブカラー: {props.data[index].itemInfo.subColorName}
             </Typography>
           </CardContent>
         </Card>
