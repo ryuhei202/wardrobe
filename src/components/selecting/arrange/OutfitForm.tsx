@@ -90,6 +90,7 @@ export const OutfitForm = (props: OutfitFormProps) => {
               dense
               button
               onClick={() => props.callback.onSelectItem(item.itemId)}
+              disabled={!item.isSelected && item.isChangeItem}
             >
               <ListItemIcon>
                 <FormControlLabel
