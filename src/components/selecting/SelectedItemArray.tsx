@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import React, { Fragment } from "react";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
+import { ChangeItemSwitch } from "../coordinateItem/ChangeItemSwitch";
 import { useSelectedItemArrayStyle } from "./style/UseSelectedItemArrayStyle";
 
 export interface SelectionConfirmProps {
@@ -15,13 +16,13 @@ export interface SelectionConfirmProps {
 
 export const SelectedItemArray = (props: SelectionConfirmProps) => {
   const classes = useSelectedItemArrayStyle();
-  console.log({ props: props.data });
 
   return (
     <div className={classes.selectedItemsContainer}>
       {props.data.map((selectedItem, index) => (
         <Card key={selectedItem.id} className={classes.selectedItemCard}>
           <CardHeader subheader={`ID: ${props.data[index].itemInfo.id}`} />
+          <ChangeItemSwitch coordinateItem={selectedItem} />
           <CardMedia
             className={classes.selectedItemCardMedia}
             image={
