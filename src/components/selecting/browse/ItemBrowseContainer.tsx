@@ -1,9 +1,5 @@
-import { CircularProgress, Typography } from "@mui/material";
-import { useBrowsesRefinementChoice } from "../../../hooks/api/UseBrowsesRefinementChoice";
-import { ChartIdContext } from "../../context/provider/ContextProvider";
-import { useContextDefinedState } from "../../context/UseContextDefinedState";
 import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
-import { ItemBrowse } from "./ItemBrowse";
+import { useRefinementChoiceProvider } from "./provider/UseRefinementChoiceProvider";
 
 export interface ItemBrowseContainerProps {
   callback: ItemBrowseCallback;
@@ -12,19 +8,15 @@ export interface ItemBrowseContainerProps {
 }
 
 export const ItemBrowseContainer = (props: ItemBrowseContainerProps) => {
-  const { data, error, isFetching } = useBrowsesRefinementChoice({
-    categoryId: props.categoryId,
-    chartId: useContextDefinedState(ChartIdContext),
-  });
-
-  if (error) return <Typography>{error.message}</Typography>;
-  if (!data || isFetching) return <CircularProgress />;
-
+  const refinementChoiceProvider = useRefinementChoiceProvider(
+    props.categoryId
+  );
   return (
-    <ItemBrowse
-      response={data}
-      callback={props.callback}
-      currentSelectedItemId={props.currentSelectedItemId}
-    />
+    <>
+      {refinementChoiceProvider.itemBrowseComponent(
+        props.callback,
+        props.currentSelectedItemId
+      )}
+    </>
   );
 };

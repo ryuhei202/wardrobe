@@ -1,7 +1,5 @@
-import { CircularProgress, Typography } from "@mui/material";
-import { useBrowsesSearchPrerequisite } from "../../../hooks/api/UseBrowsesSearchPrerequisite";
-import { Browse } from "./Browse";
 import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
+import { useCategoryChoiceProvider } from "./provider/UseCategoryChoiceProvider";
 
 export interface BrowseContainerProps {
   callback: ItemBrowseCallback;
@@ -9,16 +7,13 @@ export interface BrowseContainerProps {
 }
 
 export const BrowseContainer = (props: BrowseContainerProps) => {
-  const { data, error } = useBrowsesSearchPrerequisite();
-
-  if (error) return <Typography>{error.message}</Typography>;
-  if (!data) return <CircularProgress />;
-
+  const categoryChoiceProvider = useCategoryChoiceProvider();
   return (
-    <Browse
-      response={data}
-      callback={props.callback}
-      currentSelectedItemId={props.currentSelectedItemId}
-    />
+    <>
+      {categoryChoiceProvider.browseComponent(
+        props.callback,
+        props.currentSelectedItemId
+      )}
+    </>
   );
 };

@@ -7,8 +7,7 @@ type TProps = {
 };
 export const SelectedReviewContainer = ({ coordinateId }: TProps) => {
   const { data, error } = useReviewsShow({ coordinateId });
-
-  if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
+  if (error) return <Typography>{error.message}</Typography>;
   return <SelectedReview data={data} coordinateId={coordinateId} />;
 };

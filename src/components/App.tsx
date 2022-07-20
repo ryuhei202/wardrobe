@@ -1,3 +1,4 @@
+import { CropFree } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -24,17 +25,15 @@ import {
 import React, { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
-import { ChartPageContainer } from "../pages/chart/ChartPageContainer";
-import { CoordinatePageContainer } from "../pages/coordinate/CoordinatePageContainer";
 import { AdminShowContextSetter } from "./context/AdminShowContextSetter";
-import { ChartPageContextSetter } from "./context/ChartPageContextSetter";
-import { CoordinatePageContextSetter } from "./context/CoordinatePageContextSetter";
+import { HearingContextSetter } from "./context/HearingContextSetter";
 import { ContextProvider } from "./context/provider/ContextProvider";
-import { ChartPickQRDialog } from "./chartPick/ChartPickQRDialog";
+import { SelectingContextSetter } from "./context/SelectingContextSetter";
+import { CordePickQRDialog } from "./cordePick/CordePickQRDialog";
+import { HearingContainer } from "./hearing/HearingContainer";
+import { SelectingContainer } from "./selecting/SelectingContainer";
 import { theme } from "./style/Theme";
 import { useAppStyle } from "./style/UseAppStyle";
-import { ChartPickButton } from "./header/ChartPickButton";
-import { ChartShowButton } from "./header/ChartShowButton";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -90,8 +89,17 @@ export const App = () => {
                   <Typography variant="h6" noWrap className={classes.title}>
                     WARDROBE
                   </Typography>
-                  <ChartShowButton />
-                  <ChartPickButton onClick={() => setIsQRCodeOpen(true)} />
+                  <span className={classes.coordePickButton}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disableElevation
+                      startIcon={<CropFree />}
+                      onClick={() => setIsQRCodeOpen(true)}
+                    >
+                      コーデピック
+                    </Button>
+                  </span>
                   {user !== null && (
                     <div>
                       <IconButton
@@ -133,7 +141,7 @@ export const App = () => {
                   )}
                 </Toolbar>
               </AppBar>
-              <ChartPickQRDialog
+              <CordePickQRDialog
                 open={isQRCodeOpen}
                 onClose={() => setIsQRCodeOpen(false)}
               />
@@ -141,19 +149,19 @@ export const App = () => {
                 <AdminShowContextSetter email={user.email!}>
                   <Routes>
                     <Route
-                      path="/chart"
+                      path="/selecting"
                       element={
-                        <ChartPageContextSetter>
-                          <ChartPageContainer />
-                        </ChartPageContextSetter>
+                        <SelectingContextSetter>
+                          <SelectingContainer />
+                        </SelectingContextSetter>
                       }
-                    />
+                    ></Route>
                     <Route
-                      path="/coordinate"
+                      path="/hearing"
                       element={
-                        <CoordinatePageContextSetter>
-                          <CoordinatePageContainer />
-                        </CoordinatePageContextSetter>
+                        <HearingContextSetter>
+                          <HearingContainer />
+                        </HearingContextSetter>
                       }
                     />
                   </Routes>

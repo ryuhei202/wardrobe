@@ -47,14 +47,14 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
             >
               <img
                 className={classes.stepperImage}
-                src={props.data.items[index].imagePath.thumb}
+                src={props.data.items[index].itemImagePath.thumb}
                 alt=""
               />
             </Box>
           )}
         >
           {props.data.items.length > index
-            ? props.data.items[index].id.toString()
+            ? props.data.items[index].itemId.toString()
             : `アイテムNo.${index + 1}`}
         </StepLabel>
       );
@@ -62,7 +62,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
       stepLabel = (
         <StepLabel>
           {props.data.items.length > index
-            ? props.data.items[index].id.toString()
+            ? props.data.items[index].itemId.toString()
             : `アイテムNo.${index + 1}`}
         </StepLabel>
       );

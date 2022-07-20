@@ -1,3 +1,5 @@
+import { AxiosResponse } from "axios";
+import { UseMutateFunction } from "react-query";
 import { MemberIdContext } from "../../components/context/provider/ContextProvider";
 import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { NgCreateRequest } from "../../model/api/request/styling/ng/NgCreateRequest";
@@ -11,7 +13,12 @@ export const useNgsCreate = ({
   chartItemId,
   itemCategoryNg,
   sizeNg,
-}: TNgsCreateArg) => {
+}: TNgsCreateArg): {
+  mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
+  error: Error | null;
+  isLoading: boolean;
+  isIdle: boolean;
+} => {
   const params: NgCreateRequest = {
     ngCategoryId,
     freeText,
@@ -20,7 +27,7 @@ export const useNgsCreate = ({
     sizeNg,
   };
   const memberId = useContextDefinedState(MemberIdContext);
-  const { mutate, error, isLoading, isIdle } = usePostRequest<NgCreateRequest>(
+  const { mutate, error, isLoading, isIdle } = usePostRequest(
     `members/${memberId}/ngs`,
     params
   );

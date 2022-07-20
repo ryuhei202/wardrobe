@@ -1,5 +1,5 @@
-import { TCoordinate } from "./TCoordinate";
+import { Coordinate } from "./Coordinate";
 
 export type CoordinateIndexResponse = {
-  readonly coordinates: TCoordinate[];
+  readonly coordinates: Coordinate[];
 };

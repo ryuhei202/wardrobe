@@ -9,7 +9,7 @@ export const NgMemosContainer = () => {
     memberId: useContextDefinedState(MemberIdContext),
   });
 
-  if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
+  if (error) return <Typography>{error.message}</Typography>;
   return <NgMemoCollection response={data} />;
 };

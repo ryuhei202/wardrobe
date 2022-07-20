@@ -45,7 +45,7 @@ export const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
               button
               onClick={() => props.callback.onClick(index)}
             >
-              <ListItemIcon style={{ minWidth: "unset" }}>
+              <ListItemIcon>
                 <Checkbox
                   edge="start"
                   checked={row.isSelected}
