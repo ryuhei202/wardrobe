@@ -1,26 +1,29 @@
 import { baseUrl } from "./../../model/api/shared/BaseUrl";
 import { axiosClient } from "./../../model/api/shared/AxiosClient";
-import { useMutation } from "react-query";
 import { AxiosResponse } from "axios";
+import { UseMutateFunction, useMutation } from "react-query";
 
-export const usePostRequest = <TParams = {}, TError = any>(
+export const usePostRequest = (
   path: string,
-  params?: TParams,
+  params: {},
   afterMutation: {
-    onSuccess?: () => Promise<unknown> | void;
-    onError?: () => Promise<TError> | void;
+    onSuccess: () => Promise<unknown> | void;
+    onError: () => Promise<unknown> | void;
   } = { onSuccess: () => {}, onError: () => {} }
-) => {
-  const { mutate, error, isLoading, isSuccess, isIdle, reset } = useMutation<
-    AxiosResponse,
-    TError,
-    TParams | undefined
+): {
+  mutate: UseMutateFunction<AxiosResponse<any>, Error | null, void, unknown>;
+  error: Error | null;
+  isLoading: boolean;
+  isSuccess: boolean;
+  isIdle: boolean;
+} => {
+  const { mutate, error, isLoading, isSuccess, isIdle } = useMutation<
+    any,
+    Error
   >(
-    path,
-    (lateParams?: TParams) =>
-      axiosClient.post(`${baseUrl()}/styling/${path}`, lateParams ?? params),
+    () => axiosClient.post(`${baseUrl()}/styling/${path}`, params),
     afterMutation
   );
 
-  return { mutate, error, isLoading, isSuccess, isIdle, reset };
+  return { mutate, error, isLoading, isSuccess, isIdle };
 };

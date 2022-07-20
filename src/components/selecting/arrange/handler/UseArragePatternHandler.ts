@@ -2,11 +2,11 @@ import { CoordinateBulkUpdateRequest } from "../../../../model/api/request/styli
 import { alertClosedWindow } from "../../../../service/shared/alertClosedWindow";
 import { useCallback, useEffect, useState } from "react";
 import { AddedOutfitListData } from "../../../../model/selecting/arrange/props_data/AddedOutfitListData";
+import { SelectedItem } from "../../../../model/selecting/SelectedItem";
 import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
 import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 import { CoordinatePatternIndexResponse } from "../../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
-import { TItem } from "../../../../model/selecting/TItem";
 
 export interface ArrangePatternHandler {
   coordinates: CoordinateBulkUpdateRequest[];
@@ -19,7 +19,7 @@ export interface ArrangePatternHandler {
 }
 
 export const useArrangePatternHandler = (
-  items: TItem[],
+  items: SelectedItem[],
   responses: CoordinatePatternIndexResponse
 ): ArrangePatternHandler => {
   const defaultCoordinate = {
@@ -66,12 +66,12 @@ export const useArrangePatternHandler = (
               }[],
               itemId
             ) => {
-              const item = items.find((item) => item.id === itemId);
+              const item = items.find((item) => item.itemId === itemId);
               if (item) {
                 result.push({
-                  id: item.id,
+                  id: item.itemId,
                   categoryName: item.categoryName,
-                  imagePath: item.imagePath.thumb,
+                  imagePath: item.itemImagePath.thumb,
                 });
               }
               return result;
@@ -126,10 +126,10 @@ export const useArrangePatternHandler = (
     return {
       items: items.map((item) => {
         return {
-          itemId: item.id,
-          itemImagePath: item.imagePath.thumb,
+          itemId: item.itemId,
+          itemImagePath: item.itemImagePath.thumb,
           categoryName: item.categoryName,
-          isSelected: editingOutfit.itemIds.indexOf(item.id) >= 0,
+          isSelected: editingOutfit.itemIds.indexOf(item.itemId) >= 0,
         };
       }),
       selectedAdviceIds: selectedAdviceIdArray,

@@ -1,19 +1,35 @@
-import { usePatchRequest } from "./UsePatchRequest";
+import { useMemberPutRequest } from "./UseMemberPutRequest";
+import { AxiosResponse } from "axios";
+import { UseMutateFunction } from "react-query";
 import { TNextCoordeHearing } from "../../model/api/response/styling/member_memo/NextCoordeHearing";
-import { AxiosError } from "axios";
-import { ErrorResponse } from "../../model/api/response/shared/ErrorResponse";
 
-type TMemberMemoUpdateParams = {
-  memo?: string;
-  memoNext?: string;
-  nextCoordeHearing?: TNextCoordeHearing;
+type MemberMemoUpdate = {
+  readonly mutate: UseMutateFunction<AxiosResponse>;
+  readonly isLoading: boolean;
 };
 
-export const useMemberMemoUpdate = (memberId: number) => {
-  const { mutate, isLoading } = usePatchRequest<
-    TMemberMemoUpdateParams,
-    AxiosError<ErrorResponse>
-  >(`members/${memberId}/member_memo`);
+type TMemberMemoUpdateParams = {
+  memo: string;
+  memoNext: string;
+  nextCoordeHearing: TNextCoordeHearing;
+};
+
+type TMemberMemoUpdateArg = {
+  memberId: number;
+} & TMemberMemoUpdateParams;
+
+export const useMemberMemoUpdate = ({
+  memberId,
+  memo,
+  memoNext,
+  nextCoordeHearing,
+}: TMemberMemoUpdateArg): MemberMemoUpdate => {
+  const params: TMemberMemoUpdateParams = { memo, memoNext, nextCoordeHearing };
+  const { mutate, isLoading } = useMemberPutRequest({
+    memberId,
+    params,
+    path: "member_memo",
+  });
 
   return { mutate, isLoading };
 };

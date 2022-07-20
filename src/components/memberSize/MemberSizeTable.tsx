@@ -25,7 +25,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
   width: "25%",
-  padding: theme.spacing(0.5),
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -97,9 +96,7 @@ export const MemberSizeTable = ({
                   />
                 ) : null}
               </StyledTableCell>
-              <StyledTableCell>
-                <Typography>{rowData.referenceSize}</Typography>
-              </StyledTableCell>
+              <StyledTableCell>{rowData.referenceSize}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

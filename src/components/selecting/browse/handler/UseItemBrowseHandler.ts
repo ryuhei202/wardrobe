@@ -1,4 +1,3 @@
-import { TItem } from "./../../../../model/selecting/TItem";
 import { useCategoryRefinementHandler } from "./UseCategoryRefinementHandler";
 import { useState } from "react";
 import { FilterChoiceResponse } from "../../../../model/api/response/styling/browse/FilterChoiceResponse";
@@ -17,6 +16,7 @@ import { ItemCardCollectionCallback } from "../callback/ItemCardCollectionCallba
 import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
 import { ItemBrowseCallback } from "../callback/ItemBrowseCallback";
 import { ItemBrowsePaginationCallback } from "../callback/ItemBrowsePaginationCallback";
+import { SelectedItem } from "../../../../model/selecting/SelectedItem";
 import { ValueRefinement } from "../../../../model/selecting/browse/ValueRefinement";
 import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
@@ -437,7 +437,7 @@ export const useItemBrowseHandler = (
   const browseDetailCallback = (): BrowseDetailCallback => {
     return {
       onClickBackButton: () => setSelectedPreregisteredItemId(null),
-      onSelectItem: (item: TItem) => {
+      onSelectItem: (item: SelectedItem) => {
         callback.onSelectItem(item);
         resetRefinement();
         setSelectedPreregisteredItemId(null);

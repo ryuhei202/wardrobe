@@ -1,29 +1,15 @@
-import { ArrowBack } from "@mui/icons-material";
-import { IconButton, Typography } from "@mui/material";
 import { ArrangeData } from "../../../model/selecting/arrange/props_data/ArrangeData";
-import { CoordinateIdContext } from "../../context/provider/ContextProvider";
-import { useContextDefinedState } from "../../context/UseContextDefinedState";
-import { ArrangePatternFetcher } from "./ArrangePatternFetcher";
-import { ArrangeCallback } from "./callback/ArrangeCallback";
+import { useAdviceChoiceProvider } from "./provider/UseAdviceChoiceProvider";
 
 type TProps = {
   data: ArrangeData;
-  callback: ArrangeCallback;
+  coordinateId: number;
 };
 
-export const Arrange = ({ data, callback }: TProps) => {
-  const coordinateId = useContextDefinedState(CoordinateIdContext);
+export const Arrange = ({ data, coordinateId }: TProps) => {
+  const adviceChoiceProvider = useAdviceChoiceProvider({
+    coordinateId: coordinateId,
+  });
 
-  return (
-    <>
-      <IconButton onClick={() => callback.onClickBackButton()} size="large">
-        <ArrowBack />
-      </IconButton>
-      <br />
-      <Typography display="inline" variant="h6" paragraph>
-        着こなしアドバイス
-      </Typography>
-      <ArrangePatternFetcher data={data} coordinateId={coordinateId} />
-    </>
-  );
+  return <>{adviceChoiceProvider.arrangePatternComponent(data)}</>;
 };

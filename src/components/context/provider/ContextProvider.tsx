@@ -12,13 +12,6 @@ export const ChartIdContext = React.createContext<TContext<null | number>>({
   setter: () => {},
 });
 
-export const CoordinateIdContext = React.createContext<TContext<null | number>>(
-  {
-    state: null,
-    setter: () => {},
-  }
-);
-
 export const MemberIdContext = React.createContext<TContext<null | number>>({
   state: null,
   setter: () => {},
@@ -44,7 +37,6 @@ type TProps = {
 
 export const ContextProvider = ({ children }: TProps) => {
   const [chartId, setChartId] = useState<null | number>(null);
-  const [coordinateId, setCoordinateId] = useState<null | number>(null);
   const [memberId, setMemberId] = useState<null | number>(null);
   const [memberShow, setMemberShow] = useState<null | TMembersShow>(null);
   const [adminShow, setAdminShow] = useState<null | TAdminShowResponse>(null);
@@ -57,15 +49,11 @@ export const ContextProvider = ({ children }: TProps) => {
         value={{ state: memberId, setter: setMemberId }}
       >
         <ChartIdContext.Provider value={{ state: chartId, setter: setChartId }}>
-          <CoordinateIdContext.Provider
-            value={{ state: coordinateId, setter: setCoordinateId }}
+          <AdminShowContext.Provider
+            value={{ state: adminShow, setter: setAdminShow }}
           >
-            <AdminShowContext.Provider
-              value={{ state: adminShow, setter: setAdminShow }}
-            >
-              {children}
-            </AdminShowContext.Provider>
-          </CoordinateIdContext.Provider>
+            {children}
+          </AdminShowContext.Provider>
         </ChartIdContext.Provider>
       </MemberIdContext.Provider>
     </MemberShowContext.Provider>

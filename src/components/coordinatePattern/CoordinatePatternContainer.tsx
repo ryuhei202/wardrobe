@@ -1,23 +1,22 @@
-import { CircularProgress, List, Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import { useCoordinatePatternsIndex } from "../../hooks/api/UseCoordinatePatternsIndex";
+import { Coordinate } from "../../model/api/response/styling/coordinate/Coordinate";
 import { CoordinateListItem } from "../coordinate/CoordinateListItem";
 
 type TProps = {
-  readonly coordinateId: number;
+  readonly coordinate: Coordinate;
 };
-export const CoordinatePatternContainer = ({ coordinateId }: TProps) => {
-  const { data, error } = useCoordinatePatternsIndex({ coordinateId });
-
-  if (error) return <Typography>{error.message}</Typography>;
+export const CoordinatePatternContainer = ({ coordinate }: TProps) => {
+  const { data, error } = useCoordinatePatternsIndex({
+    coordinateId: coordinate.id,
+  });
   if (!data) return <CircularProgress />;
+  if (error) return <Typography>{error.message}</Typography>;
   return (
-    <List dense>
-      {data.selectedCoordinatePatterns.map((coordinatePattern, index) => (
-        <CoordinateListItem
-          coordinatePattern={coordinatePattern}
-          index={index}
-        />
+    <>
+      {data.selectedCoordinatePatterns.map((coordinate, index) => (
+        <CoordinateListItem coordinatePattern={coordinate} index={index} />
       ))}
-    </List>
+    </>
   );
 };

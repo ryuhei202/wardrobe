@@ -26,7 +26,7 @@ import { ValidationErrorType } from "../../model/selecting/browse/ValidationErro
 import { SelectionConfirmData } from "../../model/selecting/props_data/SelectionConfirmData";
 import {
   AdminShowContext,
-  CoordinateIdContext,
+  ChartIdContext,
   MemberShowContext,
 } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
@@ -41,7 +41,7 @@ export interface SelectionConfirmProps {
 }
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
-  const coordinateId = useContextDefinedState(CoordinateIdContext);
+  const chartId = useContextDefinedState(ChartIdContext);
   const isMarriagePlan =
     useContextDefinedState(MemberShowContext).data?.isMarriagePlan;
   const classes = useSelectionConfirmStyle();
@@ -60,8 +60,8 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
 
   const { mutate, error, isLoading } = useArrangesRegisterItems({
     adminId: adminId ?? 0,
-    itemIds: props.data.items.map((item) => item.id),
-    coordinateId,
+    itemIds: props.data.items.map((item) => item.itemId),
+    chartId,
     createTrigger: selectedCreateTriggerId ?? undefined,
   });
 

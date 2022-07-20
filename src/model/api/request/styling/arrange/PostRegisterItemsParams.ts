@@ -1,5 +1,5 @@
 export interface PostRegisterItemsParamsParams {
-  coordinateId: number;
+  chartId: number;
   adminId: number;
   itemIds: number[];
   createTrigger?: number;
