@@ -42,10 +42,10 @@ export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
                       .filter(
                         (partSize: PartSizeResponse) => partSize.value !== null
                       )
-                      .map((partSize) => (
-                        <>
+                      .map((partSize, index) => (
+                        <span key={index}>
                           {partSize.name}(<b>{partSize.value}</b>),&nbsp;
-                        </>
+                        </span>
                       ))}
                     Drop(<b>{item.dropSize}</b>)
                   </>
@@ -55,7 +55,7 @@ export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
           ))}
           <ListSubheader>アドバイス</ListSubheader>
           {coordinatePattern.advices.map((advice, index) => (
-            <ListItem>
+            <ListItem key={index}>
               <ListItemText>{`${index + 1}. ${advice.title}`}</ListItemText>
             </ListItem>
           ))}
