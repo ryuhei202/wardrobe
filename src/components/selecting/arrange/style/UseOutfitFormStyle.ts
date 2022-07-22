@@ -9,6 +9,9 @@ export const useOutfitFormStyle = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       minWidth: 360,
     },
+    adviceDeleteButton: {
+      margin: "1em 4em",
+    },
     registerButton: {
       margin: "0 0 0 auto",
       marginTop: theme.spacing(2),
