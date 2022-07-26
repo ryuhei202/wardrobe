@@ -179,7 +179,7 @@ export const OutfitForm = (props: OutfitFormProps) => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs>
+                <Grid item xs className={classes.adviceDeleteButton}>
                   <IconButton
                     onClick={() => props.callback.onClickDeleteAdvice(index)}
                   >
