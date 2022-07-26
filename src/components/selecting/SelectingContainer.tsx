@@ -13,8 +13,9 @@ import { Selecting } from "./Selecting";
 export const SelectingContainer = () => {
   const chartId = useContextDefinedState(ChartIdContext);
   const memberId = useContextDefinedState(MemberIdContext);
-  const { state: memberShowState, setter: setMemberShowContext } =
-    useContext(MemberShowContext);
+  const { state: memberShowState, setter: setMemberShowContext } = useContext(
+    MemberShowContext
+  );
 
   const { data: karteShowData, error: karteShowError } = useKartesShow({
     chartId,

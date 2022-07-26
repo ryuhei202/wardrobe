@@ -45,8 +45,10 @@ export const useItemBrowseHandler = (
   const [currentRefinement, setCurrentRefinement] = useState<Refinement>(
     choice.defaultRefinement
   );
-  const [selectedPreregisteredItemId, setSelectedPreregisteredItemId] =
-    useState<number | null>(null);
+  const [
+    selectedPreregisteredItemId,
+    setSelectedPreregisteredItemId,
+  ] = useState<number | null>(null);
 
   const onLargeCategoryChanged = (newId: number | null) => {
     const newRefinement = {

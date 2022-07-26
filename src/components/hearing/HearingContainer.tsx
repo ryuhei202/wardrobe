@@ -9,8 +9,9 @@ import { Hearing } from "./Hearing";
 
 export const HearingContainer = () => {
   const memberId = useContextDefinedState(MemberIdContext);
-  const { state: memberShowState, setter: setMemberShowContext } =
-    useContext(MemberShowContext);
+  const { state: memberShowState, setter: setMemberShowContext } = useContext(
+    MemberShowContext
+  );
 
   const memberShowRes = useMembersShow({
     memberId,
