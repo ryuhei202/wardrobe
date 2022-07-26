@@ -3,6 +3,7 @@ import {
   IconButton,
   ListItemSecondaryAction,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { useContext } from "react";
 import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
@@ -20,10 +21,14 @@ export const Member = (props: Props) => {
   return (
     <>
       <ListItemText
-        primary={`${props.response.name}(${props.response.age}), ${props.response.pref}`}
-        secondary={`パートナーID:${props.response.id}, ${
-          chartId !== null ? "カルテID:" + chartId : ""
-        }`}
+        primary={
+          <Typography variant="h4">{`${props.response.name}(${props.response.age}), ${props.response.pref}`}</Typography>
+        }
+        secondary={
+          <Typography variant="h6">{`パートナーID: ${props.response.id}, ${
+            chartId !== null ? "カルテID: " + chartId : ""
+          }`}</Typography>
+        }
       />
       <ListItemSecondaryAction>
         <IconButton

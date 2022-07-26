@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
 import { BrowseSearchPrerequisiteResponse } from "../../../model/api/response/styling/browse/BrowseSearchPrerequisiteResponse";
 import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
@@ -21,17 +15,6 @@ export const Browse = (props: BrowseProps) => {
   const classes = useBrowseStyle();
   const [categoryId, setCategoryId] = useState<number | null>(null);
 
-  let itemBrowse;
-  if (categoryId !== null) {
-    itemBrowse = (
-      <ItemBrowseContainer
-        callback={props.callback}
-        categoryId={categoryId!!}
-        currentSelectedItemId={props.currentSelectedItemId}
-      />
-    );
-  }
-
   return (
     <>
       <FormControl className={classes.categorySelection}>
@@ -40,7 +23,7 @@ export const Browse = (props: BrowseProps) => {
           labelId="category-select-label"
           id="category-select"
           value={categoryId ?? ""}
-          onChange={(event: SelectChangeEvent<string | number>) => {
+          onChange={(event) => {
             setCategoryId(event.target.value as number);
           }}
         >
@@ -52,7 +35,14 @@ export const Browse = (props: BrowseProps) => {
         </Select>
       </FormControl>
 
-      {itemBrowse}
+      {categoryId !== null && (
+        <ItemBrowseContainer
+          key={categoryId}
+          callback={props.callback}
+          categoryId={categoryId!!}
+          currentSelectedItemId={props.currentSelectedItemId}
+        />
+      )}
     </>
   );
 };

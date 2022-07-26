@@ -6,11 +6,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment } from "react";
-import { SelectedItem } from "../../model/selecting/SelectedItem";
+import { TItem } from "../../model/selecting/TItem";
 import { useSelectedItemArrayStyle } from "./style/UseSelectedItemArrayStyle";
 
 export interface SelectionConfirmProps {
-  data: SelectedItem[];
+  data: TItem[];
 }
 
 export const SelectedItemArray = (props: SelectionConfirmProps) => {
@@ -19,13 +19,13 @@ export const SelectedItemArray = (props: SelectionConfirmProps) => {
   return (
     <div className={classes.selectedItemsContainer}>
       {props.data.map((selectedItem, index) => (
-        <Card key={selectedItem.itemId} className={classes.selectedItemCard}>
-          <CardHeader subheader={`ID: ${props.data[index].itemId}`} />
+        <Card key={selectedItem.id} className={classes.selectedItemCard}>
+          <CardHeader subheader={`ID: ${props.data[index].id}`} />
           <CardMedia
             className={classes.selectedItemCardMedia}
             image={
-              props.data[index].itemImagePath.largeThumb ??
-              props.data[index].itemImagePath.large
+              props.data[index].imagePath.largeThumb ??
+              props.data[index].imagePath.large
             }
           />
           <CardContent>
