@@ -7,7 +7,7 @@ import makeStyles from "@mui/styles/makeStyles";
 export const useItemCardStyle = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      maxWidth: 200,
+      maxWidth: 150,
       margin: theme.spacing(1, 1),
       height: "min-content",
     },
@@ -15,8 +15,8 @@ export const useItemCardStyle = makeStyles((theme: Theme) =>
       backgroundColor: pink[500],
     },
     media: {
-      height: 300,
-      width: 200,
+      height: 225,
+      width: 150,
     },
     seriesFeatureChip: {
       float: "right",

@@ -33,12 +33,9 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
   });
 
   return (
-    <div style={{ marginLeft: 20, marginBottom: 20 }}>
-      <Typography variant="body2" style={{ fontWeight: "bold" }}>
-        レビュー
-      </Typography>
+    <>
       {data.review === null ? (
-        <span style={{ marginLeft: 20 }}>レビュー未回答</span>
+        <Typography variant="body1">レビュー未回答</Typography>
       ) : (
         <List dense>
           <ListItem divider>
@@ -84,7 +81,11 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
                 </a>
                 <EditIcon
                   onClick={() => setIsUrlEditing(true)}
-                  style={{ position: "absolute", right: 15, cursor: "pointer" }}
+                  style={{
+                    position: "absolute",
+                    right: 15,
+                    cursor: "pointer",
+                  }}
                 />
               </>
             )}
@@ -98,6 +99,6 @@ export const SelectedReview = ({ data, coordinateId }: TProps) => {
           </Box>
         </List>
       )}
-    </div>
+    </>
   );
 };

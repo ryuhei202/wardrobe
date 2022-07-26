@@ -7,8 +7,7 @@ export const useFilterGroupCollectionStyle = makeStyles((theme: Theme) =>
   createStyles({
     filterPaper: {
       flexShrink: 0,
-      width: 200,
-      maxWidth: 200,
+      maxWidth: 150,
     },
     idSearch: {
       marginTop: theme.spacing(1),

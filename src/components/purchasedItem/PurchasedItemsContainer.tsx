@@ -9,7 +9,7 @@ export const PurchasedItemsContainer = () => {
     memberId: useContextDefinedState(MemberIdContext),
   });
 
-  if (!data) return <CircularProgress />;
   if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
   return <PurchasedItemCollection data={data} />;
 };

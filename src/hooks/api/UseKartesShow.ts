@@ -7,14 +7,13 @@ type KartesShow = {
 };
 
 type TKartesShowArg = {
-  chartId?: number;
+  chartId: number;
 };
 
 export const useKartesShow = ({ chartId }: TKartesShowArg): KartesShow => {
   const { data, error } = useKarteGetRequest<KarteShowResponse>({
     path: "",
     chartId: chartId,
-    isEnabled: chartId !== undefined,
   });
 
   return {

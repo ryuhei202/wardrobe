@@ -1,5 +1,6 @@
 import { Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import { ReactNode } from "react";
+import { theme } from "../style/Theme";
 
 type TProps = {
   shouldActiveSubmitBtn: boolean;
@@ -22,7 +23,7 @@ export const MemberSize = ({
     <Paper
       variant="outlined"
       elevation={0}
-      style={{ padding: "2rem", ...style }}
+      style={{ padding: theme.spacing(1), ...style }}
     >
       {basicSizeComponent}
       <Divider style={{ margin: "16px 0" }} />
