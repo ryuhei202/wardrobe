@@ -55,17 +55,7 @@ export const memberBasicSizePresenter = ({
     )?.name ?? "";
 
   const referenceJacketSize = () => {
-    const jacketSize =
-      sizeChoiceResponse.sizeJacketChoices.find(
-        (c) => c.id === editingSizes.referenceJacketSize
-      )?.name ?? "";
-
-    const dropSize =
-      sizeChoiceResponse.sizeDropSizeChoices.find(
-        (c) => c.id === editingSizes.referenceJacketDropSize
-      )?.name ?? "";
-
-    return `${jacketSize}(${dropSize})`;
+    return `${editingSizes.referenceJacketSize}(${editingSizes.referenceJacketDropSize})`;
   };
 
   const heightInputProps: ComponentProps<typeof MemberSizeNumberInput> = {
