@@ -90,6 +90,7 @@ export const OutfitForm = (props: OutfitFormProps) => {
               dense
               button
               onClick={() => props.callback.onSelectItem(item.itemId)}
+              disabled={!item.isSelected && item.isChangeItem}
             >
               <ListItemIcon>
                 <FormControlLabel
@@ -178,7 +179,7 @@ export const OutfitForm = (props: OutfitFormProps) => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs>
+                <Grid item xs className={classes.adviceDeleteButton}>
                   <IconButton
                     onClick={() => props.callback.onClickDeleteAdvice(index)}
                   >
