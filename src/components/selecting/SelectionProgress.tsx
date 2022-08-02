@@ -12,10 +12,15 @@ import {
   Typography,
 } from "@mui/material";
 import React, { Fragment, useState } from "react";
+import { useQueryClient } from "react-query";
+import { useCoordinateFootwearsUpdate } from "../../hooks/api/UseCoordinateFootwearsUpdate";
+import { HostUrl } from "../../model/HostUrl";
 import { SelectionProgressData } from "../../model/selecting/props_data/SelectionProgressData";
+import { CoordinateIdContext } from "../context/provider/ContextProvider";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { SelectFootwearDialogContainer } from "../footwear/SelectFootwearDialogContainer";
 import { SelectionProgressCallback } from "./callback/SelectionProgressCallback";
 import { useSelectionProgressStyle } from "./style/UseSelectionProgressStyle";
-
 export interface SelectionProgressProps {
   data: SelectionProgressData;
   callback: SelectionProgressCallback;
@@ -27,12 +32,31 @@ const initialState = {
 };
 
 export const SelectionProgress = (props: SelectionProgressProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const classes = useSelectionProgressStyle();
   const [position, setPosition] = useState<{
     mouseX: null | Number;
     mouseY: null | number;
   }>(initialState);
-
+  const coordinateId = useContextDefinedState(CoordinateIdContext);
+  const { mutate } = useCoordinateFootwearsUpdate();
+  const queryClient = useQueryClient();
+  const handleSubmitFootwear = (footwearId: number) => {
+    mutate(
+      { footwearId },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(
+            `coordinates/${coordinateId}/coordinate_footwear`
+          );
+          setIsOpen(false);
+        },
+        onError: () => {
+          setIsOpen(false);
+        },
+      }
+    );
+  };
   let steps = [];
   for (let index = 0; index < props.data.rentableItemNum; index++) {
     let stepLabel;
@@ -122,13 +146,37 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
       }}
     >
       {completeButton}
-      <Stepper
-        activeStep={props.data.selectedIndex}
-        alternativeLabel
-        className={classes.stepper}
-      >
-        {steps}
-      </Stepper>
+      <div style={{ display: "flex" }}>
+        <Stepper
+          activeStep={props.data.selectedIndex}
+          alternativeLabel
+          className={classes.stepper}
+        >
+          {steps}
+        </Stepper>
+
+        <div style={{ width: 100 }}>
+          {!!props.data.selectedFootwear ? (
+            <div style={{ height: "100%" }}>
+              <Button onClick={() => setIsOpen(true)}>
+                <img
+                  style={{ width: 70, height: 70 }}
+                  src={`${HostUrl()}/images/footwear/${
+                    props.data.selectedFootwear.id
+                  }.jpg`}
+                  alt="くつ"
+                />
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <Button variant="outlined" onClick={() => setIsOpen(true)}>
+                靴を選ぶ
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
       <Menu
         keepMounted
         open={position.mouseY !== null}
@@ -152,6 +200,11 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
           アイテム数を追加
         </MenuItem>
       </Menu>
+      <SelectFootwearDialogContainer
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onClick={handleSubmitFootwear}
+      />
     </div>
   );
 };

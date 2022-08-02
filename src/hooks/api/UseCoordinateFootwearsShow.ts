@@ -6,13 +6,13 @@ type CoordinateFootwearsShow = {
   readonly error: Error | null;
 };
 
-type TCoordinateFootwearsShowArg = {
-  coordinateId: number;
+type TProps = {
+  readonly coordinateId: number;
 };
 
 export const useCoordinateFootwearsShow = ({
   coordinateId,
-}: TCoordinateFootwearsShowArg): CoordinateFootwearsShow => {
+}: TProps): CoordinateFootwearsShow => {
   const { data, error } = useGetRequest<TCoordinateFootwearsShowResponse>(
     `coordinates/${coordinateId}/coordinate_footwear`
   );
