@@ -104,7 +104,11 @@ export const ChartMainContents = ({
           onChange={(_, newValue) => setSelectedCoordinateIndex(newValue)}
         >
           {coordinates.map((_, index) => (
-            <Tab label={`コーデ${index + 1}`} id={`coordinate-tab-${index}`} />
+            <Tab
+              label={`コーデ${index + 1}`}
+              id={`coordinate-tab-${index}`}
+              key={index}
+            />
           ))}
         </Tabs>
       </Box>
@@ -120,6 +124,7 @@ export const ChartMainContents = ({
           disableElevation
           color="secondary"
           startIcon={<Checkroom />}
+          sx={{ marginTop: "1em" }}
         >
           <Typography>コーデ作成</Typography>
         </Button>
@@ -127,6 +132,7 @@ export const ChartMainContents = ({
       <Coordinate
         coordinateId={coordinates[selectedCoordinateIndex].id}
         isEditable
+        key={coordinates[selectedCoordinateIndex].id}
       />
       <Snackbar
         open={isSnackBarOpen}
