@@ -44,6 +44,7 @@ export const AddedOutfitList = (props: AddedOutfitListProps) => {
                       alignItems="center"
                       direction="row"
                       style={{ marginBottom: 2 }}
+                      key={item.id}
                     >
                       <Avatar variant="rounded" src={item.imagePath} />
                       {item.id}: {item.categoryName}
@@ -54,11 +55,11 @@ export const AddedOutfitList = (props: AddedOutfitListProps) => {
               }
               secondary={
                 <>
-                  {outfit.advices.map((advice) => (
-                    <>
+                  {outfit.advices.map((advice, index) => (
+                    <span key={index}>
                       {advice}
                       <br />
-                    </>
+                    </span>
                   ))}
                 </>
               }

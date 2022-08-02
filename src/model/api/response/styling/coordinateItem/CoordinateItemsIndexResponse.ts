@@ -1,5 +1,5 @@
-import { TItem } from "../../../../selecting/TItem";
+import { TCoordinateItem } from "../../../../coordinateItem/TCoordinateItem";
 
-export interface CoordinateItemsIndexResponse {
-  readonly coordinateItems: TItem[];
-}
+export type CoordinateItemsIndexResponse = {
+  readonly coordinateItems: TCoordinateItem[];
+};

@@ -1,5 +1,5 @@
-import { TItem } from "./../TItem";
+import { TCoordinateItem } from "./../../coordinateItem/TCoordinateItem";
 
 export interface SelectionConfirmData {
-  readonly items: TItem[];
+  readonly items: TCoordinateItem[];
 }

@@ -18,6 +18,7 @@ import {
   ChartIdContext,
   CoordinateIdContext,
 } from "../../../context/provider/ContextProvider";
+import { useQueryClient } from "react-query";
 
 export interface BrowseDetailHandler {
   selectedItem: TItem | null;
@@ -60,6 +61,7 @@ export const useBrowseDetailHandler = (
     isLoading: isPostLoading,
     reset: resetPostError,
   } = useBrowsesSelect();
+  const queryClient = useQueryClient();
 
   const createPartSizes = (
     columns: string[],
@@ -81,7 +83,10 @@ export const useBrowseDetailHandler = (
           {
             onSuccess: () => {
               if (selectedItem) {
-                callback.onSelectItem(selectedItem);
+                callback.onSelectItem();
+                queryClient.invalidateQueries(
+                  `coordinates/${coordinateId}/coordinate_items`
+                );
               }
             },
           }
@@ -154,7 +159,10 @@ export const useBrowseDetailHandler = (
             {
               onSuccess: () => {
                 if (selectedItem) {
-                  callback.onSelectItem(selectedItem);
+                  callback.onSelectItem();
+                  queryClient.invalidateQueries(
+                    `coordinates/${coordinateId}/coordinate_items`
+                  );
                 }
               },
             }
