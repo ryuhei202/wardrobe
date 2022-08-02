@@ -26,9 +26,7 @@ export const useSelectingHandler = (
   defaultItemNum: number,
   coordinateItemsIndexResponse: CoordinateItemsIndexResponse
 ): SelectingHandler => {
-  const [selectedItems, setSelectedItems] = useState<TItem[]>(
-    coordinateItemsIndexResponse.coordinateItems
-  );
+  const selectedItems = coordinateItemsIndexResponse.coordinateItems;
   const [currentIndex, setCurrentIndex] = useState<number>(
     coordinateItemsIndexResponse.coordinateItems.length >= defaultItemNum
       ? coordinateItemsIndexResponse.coordinateItems.length - 1
@@ -66,18 +64,11 @@ export const useSelectingHandler = (
 
   const itemBrowseCallback = (): ItemBrowseCallback => {
     return {
-      onSelectItem: (item: TItem) => {
-        let newSelectedItems = [...selectedItems];
-        if (currentIndex < selectedItems.length) {
-          newSelectedItems[currentIndex] = item;
-        } else {
-          newSelectedItems.push(item);
-        }
-        setSelectedItems(newSelectedItems);
-        if (newSelectedItems.length >= rentableItemNum) {
+      onSelectItem: () => {
+        if (selectedItems.length >= rentableItemNum) {
           setCurrentIndex(rentableItemNum - 1);
         } else {
-          setCurrentIndex(newSelectedItems.length);
+          setCurrentIndex(selectedItems.length);
         }
       },
     };
@@ -112,7 +103,7 @@ export const useSelectingHandler = (
     if (currentIndex >= selectedItems.length) {
       return null;
     } else {
-      return selectedItems[currentIndex];
+      return selectedItems[currentIndex].itemInfo;
     }
   };
 

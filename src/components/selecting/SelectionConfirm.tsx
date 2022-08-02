@@ -60,7 +60,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
 
   const { mutate, error, isLoading } = useArrangesRegisterItems({
     adminId: adminId ?? 0,
-    itemIds: props.data.items.map((item) => item.id),
+    itemIds: props.data.items.map((item) => item.itemInfo.id),
     coordinateId,
     createTrigger: selectedCreateTriggerId ?? undefined,
   });
@@ -83,7 +83,7 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
       <Typography variant="h6" noWrap>
         選択コーデ確認画面
       </Typography>
-      <SelectedItemArray data={props.data.items}></SelectedItemArray>
+      <SelectedItemArray data={props.data.items} />
       <Paper className={classes.confirmInfoContainer}>
         <Typography variant="h6" className={classes.confirmInfoTitle}>
           確認要項
