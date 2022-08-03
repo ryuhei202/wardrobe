@@ -17,6 +17,7 @@ export const CoordinatePatternContainer = ({ coordinateId }: TProps) => {
         <CoordinateListItem
           coordinatePattern={coordinatePattern}
           index={index}
+          key={index}
         />
       ))}
       <CoordinateFootwearFetcher coordinateId={coordinateId} />

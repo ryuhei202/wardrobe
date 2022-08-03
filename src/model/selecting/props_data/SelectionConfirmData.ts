@@ -1,7 +1,7 @@
+import { TCoordinateItem } from "../../coordinateItem/TCoordinateItem";
 import { TFootwear } from "./../footwear/TFootwear";
-import { TItem } from "./../TItem";
 
 export interface SelectionConfirmData {
-  readonly items: TItem[];
+  readonly items: TCoordinateItem[];
   readonly selectedFootwear: TFootwear | null;
 }

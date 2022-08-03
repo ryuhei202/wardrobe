@@ -1,4 +1,3 @@
-import { TItem } from "./../../../../model/selecting/TItem";
 import { useCategoryRefinementHandler } from "./UseCategoryRefinementHandler";
 import { useState } from "react";
 import { FilterChoiceResponse } from "../../../../model/api/response/styling/browse/FilterChoiceResponse";
@@ -437,8 +436,8 @@ export const useItemBrowseHandler = (
   const browseDetailCallback = (): BrowseDetailCallback => {
     return {
       onClickBackButton: () => setSelectedPreregisteredItemId(null),
-      onSelectItem: (item: TItem) => {
-        callback.onSelectItem(item);
+      onSelectItem: () => {
+        callback.onSelectItem();
         resetRefinement();
         setSelectedPreregisteredItemId(null);
       },

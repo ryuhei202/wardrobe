@@ -6,7 +6,7 @@ import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
 import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/OutfitFormData";
 import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 import { CoordinatePatternIndexResponse } from "../../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
-import { TItem } from "../../../../model/selecting/TItem";
+import { TCoordinateItem } from "../../../../model/coordinateItem/TCoordinateItem";
 
 export interface ArrangePatternHandler {
   coordinates: CoordinateBulkUpdateRequest[];
@@ -19,12 +19,12 @@ export interface ArrangePatternHandler {
 }
 
 export const useArrangePatternHandler = (
-  items: TItem[],
+  items: TCoordinateItem[],
   responses: CoordinatePatternIndexResponse
 ): ArrangePatternHandler => {
   const defaultCoordinate = {
     id: null,
-    itemIds: [],
+    itemIds: items.filter((i) => !i.isChangeItem).map((i) => i.itemInfo.id),
     adviceIds: [],
     formalLevel: 0,
   };
@@ -66,12 +66,12 @@ export const useArrangePatternHandler = (
               }[],
               itemId
             ) => {
-              const item = items.find((item) => item.id === itemId);
+              const item = items.find((item) => item.itemInfo.id === itemId);
               if (item) {
                 result.push({
-                  id: item.id,
-                  categoryName: item.categoryName,
-                  imagePath: item.imagePath.thumb,
+                  id: item.itemInfo.id,
+                  categoryName: item.itemInfo.categoryName,
+                  imagePath: item.itemInfo.imagePath.thumb,
                 });
               }
               return result;
@@ -126,10 +126,11 @@ export const useArrangePatternHandler = (
     return {
       items: items.map((item) => {
         return {
-          itemId: item.id,
-          itemImagePath: item.imagePath.thumb,
-          categoryName: item.categoryName,
-          isSelected: editingOutfit.itemIds.indexOf(item.id) >= 0,
+          itemId: item.itemInfo.id,
+          itemImagePath: item.itemInfo.imagePath.thumb,
+          categoryName: item.itemInfo.categoryName,
+          isSelected: editingOutfit.itemIds.indexOf(item.itemInfo.id) >= 0,
+          isChangeItem: item.isChangeItem,
         };
       }),
       selectedAdviceIds: selectedAdviceIdArray,

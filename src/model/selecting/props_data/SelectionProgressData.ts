@@ -1,9 +1,9 @@
 import { TFootwear } from "./../footwear/TFootwear";
-import { TItem } from "./../TItem";
+import { TCoordinateItem } from "../../coordinateItem/TCoordinateItem";
 
 export interface SelectionProgressData {
   readonly rentableItemNum: number;
   readonly selectedIndex: number;
-  readonly items: TItem[];
+  readonly items: TCoordinateItem[];
   readonly selectedFootwear: TFootwear | null;
 }
