@@ -16,7 +16,6 @@ export const CoordinateMemoFetcher = ({ coordinateId, isEditable }: TProps) => {
     return (
       <CoordinateMemo
         coordinateId={coordinateId}
-        key={data.memo}
         response={data}
         onUpdateComplete={refetch}
       />

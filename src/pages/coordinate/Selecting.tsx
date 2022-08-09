@@ -5,26 +5,22 @@ import { useSelectingHandler } from "../../components/selecting/handler/UseSelec
 import { SelectionConfirmContainer } from "../../components/selecting/SelectionConfirmContainer";
 import { SelectionProgress } from "../../components/selecting/SelectionProgress";
 import { useSelectingStyle } from "../../components/selecting/style/UseSelectingStyle";
-import { TCoordinateFootwearsShowResponse } from "../../model/api/response/styling/coordinateFootwear/TCoordianteFootwearsShowResponse";
 import { CoordinateItemsIndexResponse } from "../../model/api/response/styling/coordinateItem/CoordinateItemsIndexResponse";
 import { MainContentType } from "../../model/selecting/MainContentType";
 
 type Props = {
   readonly defaultItemNum: number;
   readonly coordinateItemsIndexResponse: CoordinateItemsIndexResponse;
-  readonly coordinateFootwearShowData: TCoordinateFootwearsShowResponse;
 };
 
 export const Selecting = ({
   defaultItemNum,
   coordinateItemsIndexResponse,
-  coordinateFootwearShowData,
 }: Props) => {
   const classes = useSelectingStyle();
   const handler = useSelectingHandler(
     defaultItemNum,
-    coordinateItemsIndexResponse,
-    coordinateFootwearShowData
+    coordinateItemsIndexResponse
   );
 
   let mainContent;
