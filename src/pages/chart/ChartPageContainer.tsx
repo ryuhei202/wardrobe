@@ -10,8 +10,9 @@ import { ChartPage } from "./ChartPage";
 
 export const ChartPageContainer = () => {
   const memberId = useContextDefinedState(MemberIdContext);
-  const { state: memberShowState, setter: setMemberShowContext } =
-    useContext(MemberShowContext);
+  const { state: memberShowState, setter: setMemberShowContext } = useContext(
+    MemberShowContext
+  );
 
   const memberShowRes = useMembersShow({
     memberId,
