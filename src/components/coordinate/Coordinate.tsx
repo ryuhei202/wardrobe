@@ -1,7 +1,9 @@
 import { List, ListItem, ListItemText } from "@mui/material";
+import { CoordinateDescriptionContainer } from "../coordinateDescription/CoordinateDescriptionContainer";
 import { CoordinateHearingFetcher } from "../coordinateHearing/CoordinateHearingFetcher";
 import { CoordinateMemoFetcher } from "../coordinateMemo/CoordinateMemoFetcher";
 import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatternContainer";
+import { CoordinateStylistCommentContainer } from "../coordinateStylistComment/CoordinateStylistCommentContainer";
 import { CoordinateTopsRatioFetcher } from "../coordinateTopsRatio.tsx/CoordinateTopsRatioFetcher";
 import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 
@@ -19,6 +21,7 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
       <ListItem style={{ display: "block" }}>
         <CoordinateHearingFetcher coordinateId={coordinateId} />
       </ListItem>
+
       <ListItem>
         <ListItemText secondary="トップス枚数" />
       </ListItem>
@@ -28,6 +31,27 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
           isEditable={isEditable ?? false}
         />
       </ListItem>
+
+      <ListItem>
+        <ListItemText secondary="根拠説明" />
+      </ListItem>
+      <ListItem style={{ display: "block" }}>
+        <CoordinateDescriptionContainer
+          coordinateId={coordinateId}
+          isEditable={isEditable ?? false}
+        />
+      </ListItem>
+
+      <ListItem>
+        <ListItemText secondary="気持ち文章" />
+      </ListItem>
+      <ListItem style={{ display: "block" }}>
+        <CoordinateStylistCommentContainer
+          coordinateId={coordinateId}
+          isEditable={isEditable ?? false}
+        />
+      </ListItem>
+
       <ListItem>
         <ListItemText secondary="コーデメモ" />
       </ListItem>
@@ -37,12 +61,14 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
           isEditable={isEditable ?? false}
         />
       </ListItem>
+
       <ListItem>
         <ListItemText secondary="レビュー" />
       </ListItem>
       <ListItem style={{ display: "block" }}>
         <SelectedReviewContainer coordinateId={coordinateId} />
       </ListItem>
+
       <ListItem>
         <ListItemText secondary="着こなし" />
       </ListItem>
