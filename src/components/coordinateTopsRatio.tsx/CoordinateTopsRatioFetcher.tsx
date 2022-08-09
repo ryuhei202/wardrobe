@@ -22,7 +22,6 @@ export const CoordinateTopsRatioFetcher = ({
       <CoordinateTopsRatio
         coordinateId={coordinateId}
         response={data}
-        key={String(data.longSleeveNum) + String(data.shortSleeveNum)}
         onUpdateComplete={refetch}
       />
     );

@@ -124,9 +124,9 @@ export const NgMemoDialog = ({
               >
                 <MenuItem value={undefined}>対象カルテなし</MenuItem>
                 {karteData.map((karte) => (
-                  <MenuItem value={karte.id} key={karte.id}>
-                    {`${karte.id} ${karte.rentalStartedAt ?? "未"}発送`}
-                  </MenuItem>
+                  <MenuItem value={karte.id} key={karte.id}>{`${karte.id} ${
+                    karte.rentalStartedAt ?? "未"
+                  }発送`}</MenuItem>
                 ))}
               </Select>
             </FormControl>
