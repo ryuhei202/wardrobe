@@ -10,20 +10,26 @@ import { useContextDefinedState } from "../../components/context/UseContextDefin
 import { Selecting } from "./Selecting";
 import { useCoordinateItemsIndex } from "../../hooks/api/UseCoordinateItemsIndex";
 import { useCoordinatesShow } from "../../hooks/api/UseCoordinatesShow";
+import { useCoordinateFootwearsShow } from "../../hooks/api/UseCoordinateFootwearsShow";
 
 export const CoordinateSelectingContainer = () => {
   const memberId = useContextDefinedState(MemberIdContext);
+  const coordinateId = useContextDefinedState(CoordinateIdContext);
+
   const { state: memberShowState, setter: setMemberShowContext } =
     useContext(MemberShowContext);
   const memberShowRes = useMembersShow({
     memberId,
   });
-
-  const coordinateId = useContextDefinedState(CoordinateIdContext);
   const { data: coordinatesShowData, error: coordinatesShowError } =
     useCoordinatesShow(coordinateId);
   const { data: coordinateItemsIndexData, error: coordinateItemsIndexError } =
     useCoordinateItemsIndex({ coordinateId });
+
+  const {
+    data: coordinateFootwearShowData,
+    error: coordinateFootwearsShowError,
+  } = useCoordinateFootwearsShow({ coordinateId });
 
   useEffect(() => {
     if (
@@ -44,8 +50,19 @@ export const CoordinateSelectingContainer = () => {
     return (
       <Typography sx={{ m: "auto" }}>{coordinatesShowError.message}</Typography>
     );
+  if (coordinateFootwearsShowError)
+    return (
+      <Typography sx={{ m: "auto" }}>
+        {coordinateFootwearsShowError.message}
+      </Typography>
+    );
 
-  if (!coordinatesShowData || !memberShowState || !coordinateItemsIndexData)
+  if (
+    !coordinatesShowData ||
+    !memberShowState ||
+    !coordinateItemsIndexData ||
+    !coordinateFootwearShowData
+  )
     return <CircularProgress sx={{ m: "auto" }} />;
 
   return (
@@ -55,6 +72,7 @@ export const CoordinateSelectingContainer = () => {
         .join()}
       defaultItemNum={coordinatesShowData.coordinate.defaultItemNum}
       coordinateItemsIndexResponse={coordinateItemsIndexData}
+      coordinateFootwearShowData={coordinateFootwearShowData}
     />
   );
 };

@@ -7,11 +7,14 @@ import {
 } from "@mui/material";
 import React, { Fragment } from "react";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
+import { HostUrl } from "../../model/HostUrl";
+import { TFootwear } from "../../model/selecting/footwear/TFootwear";
 import { ChangeItemSwitch } from "../coordinateItem/ChangeItemSwitch";
 import { useSelectedItemArrayStyle } from "./style/UseSelectedItemArrayStyle";
 
 export interface SelectionConfirmProps {
   data: TCoordinateItem[];
+  footwear: TFootwear | null;
 }
 
 export const SelectedItemArray = (props: SelectionConfirmProps) => {
@@ -56,6 +59,20 @@ export const SelectedItemArray = (props: SelectionConfirmProps) => {
           </CardContent>
         </Card>
       ))}
+      {!!props.footwear && (
+        <Card key={props.footwear.id} className={classes.selectedItemCard}>
+          <CardMedia
+            className={classes.selectedItemCardMedia}
+            image={`${HostUrl()}/images/footwear/${props.footwear.id}.jpg`}
+          />
+          <CardContent>
+            <Typography variant="subtitle1">{props.footwear.name}</Typography>
+            <Typography variant="body2">
+              キレイ度: {props.footwear.formalRank}
+            </Typography>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };
