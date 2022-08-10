@@ -70,7 +70,6 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
       (error) => error.errorType === ValidationErrorType.Rejected
     ).length === 0 &&
     adminId !== undefined &&
-    props.data.selectedFootwear !== null &&
     (!isMarriagePlan || selectedCreateTriggerId !== null);
 
   return (
