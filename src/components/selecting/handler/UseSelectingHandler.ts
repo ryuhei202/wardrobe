@@ -1,7 +1,7 @@
 import { TCoordinateFootwearsShowResponse } from "./../../../model/api/response/styling/coordinateFootwear/TCoordianteFootwearsShowResponse";
 import { TItem } from "./../../../model/selecting/TItem";
 import { CoordinateItemsIndexResponse } from "./../../../model/api/response/styling/coordinateItem/CoordinateItemsIndexResponse";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ItemBrowseCallback } from "../browse/callback/ItemBrowseCallback";
 import { SelectionConfirmData } from "../../../model/selecting/props_data/SelectionConfirmData";
 import { SelectionConfirmCallback } from "../callback/SelectionConfirmCallback";
@@ -44,6 +44,16 @@ export const useSelectingHandler = (
       ? coordinateItemsIndexResponse.coordinateItems.length
       : defaultItemNum
   );
+
+  useEffect(() => {
+    if (coordinateItemsIndexResponse.coordinateItems.length < defaultItemNum) {
+      setRentableItemNum(defaultItemNum);
+    }
+  }, [
+    defaultItemNum,
+    setRentableItemNum,
+    coordinateItemsIndexResponse.coordinateItems.length,
+  ]);
 
   const selectionProgressData = (): SelectionProgressData => {
     return {
