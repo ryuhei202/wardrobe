@@ -9,17 +9,20 @@ type CoordinateItemsIndex = {
 type TCoordinateItemsIndexArg = {
   coordinateId: number;
   isChangeItem?: boolean;
+  queryKey?: string;
 };
 
 export const useCoordinateItemsIndex = ({
   coordinateId,
   isChangeItem,
+  queryKey,
 }: TCoordinateItemsIndexArg): CoordinateItemsIndex => {
   const { data, error } = useGetRequest<TCoordinateItem[]>(
     `coordinates/${coordinateId}/coordinate_items`,
     {
       isChangeItem,
-    }
+    },
+    queryKey
   );
 
   return {

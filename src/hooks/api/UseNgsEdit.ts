@@ -14,6 +14,7 @@ export const useNgsEdit = ({ ngId }: TNgsEditArg): TNgsEdit => {
   const { data, error } = useGetRequest<NgEditResponse>(
     `ngs/${ngId}/edit`,
     {},
+    undefined,
     ngId !== undefined
   );
 
