@@ -35,7 +35,8 @@ export const useSelectingHandler = (
       : coordinateItemsIndexResponse.length
   );
   const [mainContentType, setMainContentType] = useState<MainContentType>(
-    coordinateItemsIndexResponse.length >= defaultItemNum
+    coordinateItemsIndexResponse.length >= defaultItemNum &&
+      coordinateFootwearShowData.coordinateFootwear !== null
       ? MainContentType.Confirm
       : MainContentType.Browse
   );
