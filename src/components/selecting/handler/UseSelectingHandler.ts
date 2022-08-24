@@ -1,6 +1,5 @@
 import { TCoordinateFootwearsShowResponse } from "./../../../model/api/response/styling/coordinateFootwear/TCoordianteFootwearsShowResponse";
 import { TItem } from "./../../../model/selecting/TItem";
-import { CoordinateItemsIndexResponse } from "./../../../model/api/response/styling/coordinateItem/CoordinateItemsIndexResponse";
 import { useEffect, useState } from "react";
 import { ItemBrowseCallback } from "../browse/callback/ItemBrowseCallback";
 import { SelectionConfirmData } from "../../../model/selecting/props_data/SelectionConfirmData";
@@ -10,6 +9,7 @@ import { ArrangeCallback } from "../arrange/callback/ArrangeCallback";
 import { MainContentType } from "../../../model/selecting/MainContentType";
 import { SelectionProgressData } from "../../../model/selecting/props_data/SelectionProgressData";
 import { SelectionProgressCallback } from "../callback/SelectionProgressCallback";
+import { TCoordinateItem } from "../../../model/coordinateItem/TCoordinateItem";
 
 export interface SelectingHandler {
   mainContentType: MainContentType | undefined;
@@ -25,35 +25,31 @@ export interface SelectingHandler {
 
 export const useSelectingHandler = (
   defaultItemNum: number,
-  coordinateItemsIndexResponse: CoordinateItemsIndexResponse,
+  coordinateItemsIndexResponse: TCoordinateItem[],
   coordinateFootwearShowData: TCoordinateFootwearsShowResponse
 ): SelectingHandler => {
-  const selectedItems = coordinateItemsIndexResponse.coordinateItems;
+  const selectedItems = coordinateItemsIndexResponse;
   const [currentIndex, setCurrentIndex] = useState<number>(
-    coordinateItemsIndexResponse.coordinateItems.length >= defaultItemNum
-      ? coordinateItemsIndexResponse.coordinateItems.length - 1
-      : coordinateItemsIndexResponse.coordinateItems.length
+    coordinateItemsIndexResponse.length >= defaultItemNum
+      ? coordinateItemsIndexResponse.length - 1
+      : coordinateItemsIndexResponse.length
   );
   const [mainContentType, setMainContentType] = useState<MainContentType>(
-    coordinateItemsIndexResponse.coordinateItems.length >= defaultItemNum
+    coordinateItemsIndexResponse.length >= defaultItemNum
       ? MainContentType.Confirm
       : MainContentType.Browse
   );
   const [rentableItemNum, setRentableItemNum] = useState<number>(
-    coordinateItemsIndexResponse.coordinateItems.length >= defaultItemNum
-      ? coordinateItemsIndexResponse.coordinateItems.length
+    coordinateItemsIndexResponse.length >= defaultItemNum
+      ? coordinateItemsIndexResponse.length
       : defaultItemNum
   );
 
   useEffect(() => {
-    if (coordinateItemsIndexResponse.coordinateItems.length < defaultItemNum) {
+    if (coordinateItemsIndexResponse.length < defaultItemNum) {
       setRentableItemNum(defaultItemNum);
     }
-  }, [
-    defaultItemNum,
-    setRentableItemNum,
-    coordinateItemsIndexResponse.coordinateItems.length,
-  ]);
+  }, [defaultItemNum, setRentableItemNum, coordinateItemsIndexResponse.length]);
 
   const selectionProgressData = (): SelectionProgressData => {
     return {
