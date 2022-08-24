@@ -18,6 +18,7 @@ export const CoordinateChangeItemFetcher = ({ coordinateId }: TProps) => {
   const { data, error } = useCoordinateItemsIndex({
     coordinateId,
     isChangeItem: true,
+    queryKey: `coordinate/${coordinateId}/coordinateItems/IsChangeItem`,
   });
 
   if (error) return <Typography>{error.message}</Typography>;
