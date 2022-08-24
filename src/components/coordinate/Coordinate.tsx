@@ -33,6 +33,23 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
       </ListItem>
 
       <ListItem>
+        <ListItemText secondary="コーデメモ" />
+      </ListItem>
+      <ListItem style={{ display: "block" }}>
+        <CoordinateMemoFetcher
+          coordinateId={coordinateId}
+          isEditable={isEditable ?? false}
+        />
+      </ListItem>
+
+      <ListItem>
+        <ListItemText secondary="着こなし" />
+      </ListItem>
+      <ListItem>
+        <CoordinatePatternContainer coordinateId={coordinateId} />
+      </ListItem>
+
+      <ListItem>
         <ListItemText secondary="根拠説明" />
       </ListItem>
       <ListItem style={{ display: "block" }}>
@@ -53,27 +70,10 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
       </ListItem>
 
       <ListItem>
-        <ListItemText secondary="コーデメモ" />
-      </ListItem>
-      <ListItem style={{ display: "block" }}>
-        <CoordinateMemoFetcher
-          coordinateId={coordinateId}
-          isEditable={isEditable ?? false}
-        />
-      </ListItem>
-
-      <ListItem>
         <ListItemText secondary="レビュー" />
       </ListItem>
       <ListItem style={{ display: "block" }}>
         <SelectedReviewContainer coordinateId={coordinateId} />
-      </ListItem>
-
-      <ListItem>
-        <ListItemText secondary="着こなし" />
-      </ListItem>
-      <ListItem>
-        <CoordinatePatternContainer coordinateId={coordinateId} />
       </ListItem>
     </List>
   );

@@ -6,12 +6,12 @@ import { SelectionConfirmContainer } from "../../components/selecting/SelectionC
 import { SelectionProgress } from "../../components/selecting/SelectionProgress";
 import { useSelectingStyle } from "../../components/selecting/style/UseSelectingStyle";
 import { TCoordinateFootwearsShowResponse } from "../../model/api/response/styling/coordinateFootwear/TCoordianteFootwearsShowResponse";
-import { CoordinateItemsIndexResponse } from "../../model/api/response/styling/coordinateItem/CoordinateItemsIndexResponse";
+import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 import { MainContentType } from "../../model/selecting/MainContentType";
 
 type Props = {
   readonly defaultItemNum: number;
-  readonly coordinateItemsIndexResponse: CoordinateItemsIndexResponse;
+  readonly coordinateItemsIndexResponse: TCoordinateItem[];
   readonly coordinateFootwearShowData: TCoordinateFootwearsShowResponse;
 };
 

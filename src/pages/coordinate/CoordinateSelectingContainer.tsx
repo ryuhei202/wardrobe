@@ -67,9 +67,7 @@ export const CoordinateSelectingContainer = () => {
 
   return (
     <Selecting
-      key={coordinateItemsIndexData.coordinateItems
-        .map((c) => c.itemInfo.id)
-        .join()}
+      key={coordinateItemsIndexData.map((c) => c.itemInfo.id).join()}
       defaultItemNum={coordinatesShowData.coordinate.defaultItemNum}
       coordinateItemsIndexResponse={coordinateItemsIndexData}
       coordinateFootwearShowData={coordinateFootwearShowData}
