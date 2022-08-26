@@ -8,6 +8,7 @@ type TProps = {
   basicSizeComponent: ReactNode;
   partSizeComponent: ReactNode;
   isLoadingSubmit: boolean;
+  aboutSize: string | null;
   style?: React.CSSProperties;
 };
 
@@ -18,6 +19,7 @@ export const MemberSize = ({
   partSizeComponent,
   isLoadingSubmit,
   style,
+  aboutSize,
 }: TProps) => {
   return (
     <Paper
@@ -28,6 +30,16 @@ export const MemberSize = ({
       {basicSizeComponent}
       <Divider style={{ margin: "16px 0" }} />
       {partSizeComponent}
+      <Typography
+        style={{ marginTop: 16, fontSize: "0.6rem", fontWeight: "bold" }}
+      >
+        お困りポイント
+      </Typography>
+      <Paper variant="outlined">
+        <Typography variant="body2" style={{ whiteSpace: "pre-line" }}>
+          {aboutSize ?? <span style={{ color: "gray" }}>なし</span>}
+        </Typography>
+      </Paper>
       <Grid container justifyContent={"flex-end"} mt={2}>
         <Button
           onClick={onClickSubmitBtn}
