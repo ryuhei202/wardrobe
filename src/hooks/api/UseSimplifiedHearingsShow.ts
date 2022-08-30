@@ -1,5 +1,4 @@
 import { useGetRequest } from "./UseGetRequest";
-import { CoordinateDescriptionsShowResponse } from "./../../model/api/response/styling/coordinateDescription/CoordinateDescriptionsShowResponse";
 import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
 
 type TSimplifiedHearingsShowArg = {
