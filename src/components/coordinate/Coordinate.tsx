@@ -6,6 +6,7 @@ import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatte
 import { CoordinateStylistCommentContainer } from "../coordinateStylistComment/CoordinateStylistCommentContainer";
 import { CoordinateTopsRatioFetcher } from "../coordinateTopsRatio.tsx/CoordinateTopsRatioFetcher";
 import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
+import { SimplifiedHearingContainer } from "../simplifiedHearing/SimplifiedHearingContainer";
 
 type TProps = {
   coordinateId: number;
@@ -20,6 +21,16 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
       </ListItem>
       <ListItem style={{ display: "block" }}>
         <CoordinateHearingFetcher coordinateId={coordinateId} />
+      </ListItem>
+
+      <ListItem>
+        <ListItemText secondary="簡易ヒアリング内容(着こなしシートに反映)" />
+      </ListItem>
+      <ListItem style={{ display: "block" }}>
+        <SimplifiedHearingContainer
+          coordinateId={coordinateId}
+          isEditable={isEditable ?? false}
+        />
       </ListItem>
 
       <ListItem>
