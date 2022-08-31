@@ -3,6 +3,7 @@ import {
   IconButton,
   ListItemSecondaryAction,
   ListItemText,
+  Paper,
   Typography,
 } from "@mui/material";
 import { useContext } from "react";
@@ -22,7 +23,25 @@ export const Member = (props: Props) => {
     <>
       <ListItemText
         primary={
-          <Typography variant="h4">{`${props.response.name}(${props.response.age}), ${props.response.pref}`}</Typography>
+          <>
+            <Paper
+              elevation={0}
+              style={{
+                backgroundColor: props.response.isLeeapPlan
+                  ? "#00266F"
+                  : "#E8E7DF",
+                textAlign: "center",
+              }}
+            >
+              <Typography
+                variant="h5"
+                color={props.response.isLeeapPlan ? "white" : "#4C5257"}
+              >
+                {props.response.planName}
+              </Typography>
+            </Paper>
+            <Typography variant="h4">{`${props.response.name}(${props.response.age}), ${props.response.pref}`}</Typography>
+          </>
         }
         secondary={
           <Typography variant="h6">{`パートナーID: ${props.response.id}, ${

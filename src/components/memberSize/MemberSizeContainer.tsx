@@ -21,12 +21,14 @@ type TProps = {
   style?: React.CSSProperties;
   memberSizeResponse: MemberSizeShowResponse;
   sizeChoiceResponse: MemberSizeSizeChoiceResponse;
+  aboutSize: string | null;
 };
 
 export const MemberSizeContainer = ({
   style,
   memberSizeResponse,
   sizeChoiceResponse,
+  aboutSize,
 }: TProps) => {
   const [fetchedSizes, setFetchedSizes] = useState<TMemberSizes>(
     convertResToMemberSizes(memberSizeResponse)
@@ -100,6 +102,7 @@ export const MemberSizeContainer = ({
           onClickSubmitBtn={handler.handleSubmit}
           shouldActiveSubmitBtn={isChangedSizes}
           isLoadingSubmit={isLoadingMutateSizes}
+          aboutSize={aboutSize}
         />
       </div>
       <Snackbar

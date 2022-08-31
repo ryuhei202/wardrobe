@@ -6,6 +6,7 @@ import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatte
 import { CoordinateStylistCommentContainer } from "../coordinateStylistComment/CoordinateStylistCommentContainer";
 import { CoordinateTopsRatioFetcher } from "../coordinateTopsRatio.tsx/CoordinateTopsRatioFetcher";
 import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
+import { SimplifiedHearingContainer } from "../simplifiedHearing/SimplifiedHearingContainer";
 
 type TProps = {
   coordinateId: number;
@@ -23,6 +24,16 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
       </ListItem>
 
       <ListItem>
+        <ListItemText secondary="簡易ヒアリング内容(着こなしシートに反映)" />
+      </ListItem>
+      <ListItem style={{ display: "block" }}>
+        <SimplifiedHearingContainer
+          coordinateId={coordinateId}
+          isEditable={isEditable ?? false}
+        />
+      </ListItem>
+
+      <ListItem>
         <ListItemText secondary="トップス枚数" />
       </ListItem>
       <ListItem>
@@ -30,6 +41,23 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
           coordinateId={coordinateId}
           isEditable={isEditable ?? false}
         />
+      </ListItem>
+
+      <ListItem>
+        <ListItemText secondary="コーデメモ" />
+      </ListItem>
+      <ListItem style={{ display: "block" }}>
+        <CoordinateMemoFetcher
+          coordinateId={coordinateId}
+          isEditable={isEditable ?? false}
+        />
+      </ListItem>
+
+      <ListItem>
+        <ListItemText secondary="着こなし" />
+      </ListItem>
+      <ListItem>
+        <CoordinatePatternContainer coordinateId={coordinateId} />
       </ListItem>
 
       <ListItem>
@@ -53,27 +81,10 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
       </ListItem>
 
       <ListItem>
-        <ListItemText secondary="コーデメモ" />
-      </ListItem>
-      <ListItem style={{ display: "block" }}>
-        <CoordinateMemoFetcher
-          coordinateId={coordinateId}
-          isEditable={isEditable ?? false}
-        />
-      </ListItem>
-
-      <ListItem>
         <ListItemText secondary="レビュー" />
       </ListItem>
       <ListItem style={{ display: "block" }}>
         <SelectedReviewContainer coordinateId={coordinateId} />
-      </ListItem>
-
-      <ListItem>
-        <ListItemText secondary="着こなし" />
-      </ListItem>
-      <ListItem>
-        <CoordinatePatternContainer coordinateId={coordinateId} />
       </ListItem>
     </List>
   );

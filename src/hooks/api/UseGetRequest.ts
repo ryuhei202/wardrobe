@@ -11,6 +11,7 @@ import qs from "qs";
 export const useGetRequest = <T>(
   path: string,
   params?: {},
+  queryKey?: string,
   isEnabled: boolean = true
 ): {
   data?: T;
@@ -21,7 +22,7 @@ export const useGetRequest = <T>(
   isFetching: boolean;
 } => {
   const { data, error, refetch, isFetching } = useQuery<T, Error>(
-    path,
+    queryKey ?? path,
     () =>
       axiosClient
         .get(`${baseUrl()}/styling/${path}`, {
