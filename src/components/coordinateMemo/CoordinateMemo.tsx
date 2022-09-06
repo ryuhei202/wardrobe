@@ -31,6 +31,7 @@ export const CoordinateMemo = ({
     <>
       <MemoForm
         value={memo}
+        rows={14}
         disabled={response.memo === memo || isLoading}
         onChange={setMemo}
         onPost={() => {
