@@ -53,6 +53,7 @@ export const CoordinateDescription = ({
     <>
       <MemoForm
         value={text}
+        rows={14}
         onChange={setText}
         onPost={onPost}
         disabled={!isTextChanged || isLoading}
