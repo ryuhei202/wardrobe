@@ -1,6 +1,6 @@
 # wardrobe
 
-leeap スタイリング web アプリ
+UWear スタイリング web アプリ
 
 ## 動作環境
 
