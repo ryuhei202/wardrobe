@@ -7,11 +7,13 @@ type Props = {
   readonly disabled: boolean;
   readonly onChange: (text: string) => void;
   readonly onPost: () => void;
+  readonly rows?: number;
   readonly label?: string;
 };
 
 export const MemoForm = ({
   label,
+  rows,
   value,
   disabled,
   onChange,
@@ -22,7 +24,7 @@ export const MemoForm = ({
       <TextField
         label={label}
         multiline
-        rows={8}
+        rows={rows ?? 8}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         onKeyDown={(event) => {

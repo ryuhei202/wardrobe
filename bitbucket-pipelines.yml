@@ -8,6 +8,8 @@ pipelines:
           script:
             - yarn install
             - REACT_APP_FIREBASE_API_KEY=$REACT_APP_STAGING_FIREBASE_API_KEY yarn build:staging
+            - REACT_APP_SENTRY_ORG=$REACT_APP_SENTRY_ORG REACT_APP_SENTRY_PROJECT=$REACT_APP_SENTRY_PROJECT REACT_APP_SENTRY_AUTH_TOKEN=$REACT_APP_SENTRY_AUTH_TOKEN yarn upload-sourcemaps
+            - find ./build -name *.map -delete
           artifacts:
             - build/**
       - step:
@@ -19,22 +21,14 @@ pipelines:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: "staging"
                 DEBUG: "true"
-      - step:
-          name: Set up Sentry
-          script:
-            - pipe: sentryio/sentry-new-release:0.3.0
-              variables:
-                SENTRY_AUTH_TOKEN: $REACT_APP_SENTRY_AUTH_TOKEN
-                SENTRY_ORG: $REACT_APP_SENTRY_ORG
-                SENTRY_PROJECT: $REACT_APP_SENTRY_PROJECT
-                ENVIRONMENT: "staging"
-                DEBUG: "true"
     master:
       - step:
           name: Build
           script:
             - yarn install
             - REACT_APP_FIREBASE_API_KEY=$REACT_APP_FIREBASE_API_KEY yarn build
+            - REACT_APP_SENTRY_ORG=$REACT_APP_SENTRY_ORG REACT_APP_SENTRY_PROJECT=$REACT_APP_SENTRY_PROJECT REACT_APP_SENTRY_AUTH_TOKEN=$REACT_APP_SENTRY_AUTH_TOKEN yarn upload-sourcemaps
+            - find ./build -name *.map -delete
           artifacts:
             - build/**
       - step:
@@ -45,14 +39,4 @@ pipelines:
               variables:
                 FIREBASE_TOKEN: $FIREBASE_TOKEN
                 PROJECT_ID: "production"
-                DEBUG: "true"
-      - step:
-          name: Set Up Sentry
-          script:
-            - pipe: sentryio/sentry-new-release:0.3.0
-              variables:
-                SENTRY_AUTH_TOKEN: $REACT_APP_SENTRY_AUTH_TOKEN
-                SENTRY_ORG: $REACT_APP_SENTRY_ORG
-                SENTRY_PROJECT: $REACT_APP_SENTRY_PROJECT
-                ENVIRONMENT: "production"
                 DEBUG: "true"

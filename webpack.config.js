@@ -7,6 +7,7 @@ module.exports = {
       org: process.env.REACT_APP_SENTRY_ORG,
       project: process.env.REACT_APP_SENTRY_PROJECT,
       authToken: process.env.REACT_APP_SENTRY_AUTH_TOKEN,
+      release: process.env.REACT_APP_VERSION,
       include: ".",
     }),
   ],
