@@ -47,11 +47,7 @@ export const CoordinateTopsRatio = ({
   }, [isChanged]);
 
   const validateTopsNum = () => {
-    if (shortSleeveNum === null || longSleeveNum === null) return false;
-    if (isJacketRequested)
-      return shortSleeveNum + longSleeveNum === response.jacketOption?.topsNum;
-    if (response.topsNum === null) return true;
-    return shortSleeveNum + longSleeveNum === response.topsNum;
+    return shortSleeveNum !== null && longSleeveNum != null;
   };
 
   return (
