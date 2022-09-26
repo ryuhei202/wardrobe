@@ -69,10 +69,6 @@ export const CoordinateTopsRatio = ({
   };
 
   useEffect(() => {
-    console.log(isSnackBarOpen);
-  }, [isSnackBarOpen]);
-
-  useEffect(() => {
     alertClosedWindow(!isChanged);
   }, [isChanged]);
 
