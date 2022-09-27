@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useCoordinateTopsRatiosUpdate } from "../../hooks/api/UseCoordinateTopsRatiosUpdate";
 import { CoordinateTopsRatiosShowResponse } from "../../model/api/response/styling/coordinateTopsRatio/CoordinateTopsRatiosShowResponse";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
@@ -38,17 +38,54 @@ export const CoordinateTopsRatio = ({
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
+  const isFirstRendering = useRef(false);
 
   const isChanged =
     shortSleeveNum !== response.shortSleeveNum ||
     longSleeveNum !== response.longSleeveNum;
+  const validateTopsNum = () => {
+    return shortSleeveNum !== null && longSleeveNum != null;
+  };
+  const handleSleeveNum = (value: string) => {
+    const num = Number(value);
+    return isNaN(num) || num < 0 ? null : num;
+  };
+  const handleSubmit = useCallback(
+    (text: string) => {
+      mutate(undefined, {
+        onSuccess: () => {
+          onUpdateComplete().then(() => {
+            setSeverity("success");
+            setSnackBarText(`${text}を保存しました`);
+          });
+        },
+        onError: () => {
+          setSeverity("error");
+          setSnackBarText(`${text}の変更に失敗しました`);
+        },
+        onSettled: () => {
+          setIsSnackBarOpen(true);
+        },
+      });
+    },
+    [mutate, onUpdateComplete]
+  );
+
   useEffect(() => {
     alertClosedWindow(!isChanged);
   }, [isChanged]);
 
-  const validateTopsNum = () => {
-    return shortSleeveNum !== null && longSleeveNum != null;
-  };
+  useEffect(() => {
+    isFirstRendering.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
+      return;
+    }
+    handleSubmit("ジャケットの有無");
+  }, [isJacketRequested, handleSubmit]);
 
   return (
     <>
@@ -58,8 +95,8 @@ export const CoordinateTopsRatio = ({
             control={
               <Switch
                 checked={isJacketRequested}
-                onChange={(event) => {
-                  setIsJacketRequested(event.target.checked);
+                onChange={() => {
+                  setIsJacketRequested((prev) => !prev);
                 }}
               />
             }
@@ -87,8 +124,8 @@ export const CoordinateTopsRatio = ({
             value={shortSleeveNum}
             required
             onChange={(event) => {
-              const value = Number(event.target.value);
-              setShortSleeveNum(isNaN(value) ? null : value);
+              const value = handleSleeveNum(event.target.value);
+              setShortSleeveNum(value);
             }}
             style={{ width: "100%" }}
           />
@@ -99,8 +136,8 @@ export const CoordinateTopsRatio = ({
             value={longSleeveNum}
             required
             onChange={(event) => {
-              const value = Number(event.target.value);
-              setLongSleeveNum(isNaN(value) ? null : value);
+              const value = handleSleeveNum(event.target.value);
+              setLongSleeveNum(value);
             }}
             style={{ width: "100%" }}
           />
@@ -109,23 +146,7 @@ export const CoordinateTopsRatio = ({
             color="secondary"
             disabled={!isChanged || !validateTopsNum() || isLoading}
             disableElevation
-            onClick={() => {
-              mutate(undefined, {
-                onSuccess: () => {
-                  onUpdateComplete().then(() => {
-                    setSeverity("success");
-                    setSnackBarText("コーデメモの変更を保存しました");
-                  });
-                },
-                onError: () => {
-                  setSeverity("error");
-                  setSnackBarText("トップス枚数の変更に失敗しました");
-                },
-                onSettled: () => {
-                  setIsSnackBarOpen(true);
-                },
-              });
-            }}
+            onClick={() => handleSubmit("トップス枚数")}
             style={{ width: "100%" }}
           >
             更新
