@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useCoordinateTopsRatiosUpdate } from "../../hooks/api/UseCoordinateTopsRatiosUpdate";
 import { CoordinateTopsRatiosShowResponse } from "../../model/api/response/styling/coordinateTopsRatio/CoordinateTopsRatiosShowResponse";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
@@ -50,23 +50,26 @@ export const CoordinateTopsRatio = ({
     const num = Number(value);
     return isNaN(num) || num < 0 ? null : num;
   };
-  const handleSubmit = (text: string) => {
-    mutate(undefined, {
-      onSuccess: () => {
-        onUpdateComplete().then(() => {
-          setSeverity("success");
-          setSnackBarText(`${text}を保存しました`);
-        });
-      },
-      onError: () => {
-        setSeverity("error");
-        setSnackBarText(`${text}の変更に失敗しました`);
-      },
-      onSettled: () => {
-        setIsSnackBarOpen(true);
-      },
-    });
-  };
+  const handleSubmit = useCallback(
+    (text: string) => {
+      mutate(undefined, {
+        onSuccess: () => {
+          onUpdateComplete().then(() => {
+            setSeverity("success");
+            setSnackBarText(`${text}を保存しました`);
+          });
+        },
+        onError: () => {
+          setSeverity("error");
+          setSnackBarText(`${text}の変更に失敗しました`);
+        },
+        onSettled: () => {
+          setIsSnackBarOpen(true);
+        },
+      });
+    },
+    [mutate, onUpdateComplete]
+  );
 
   useEffect(() => {
     alertClosedWindow(!isChanged);
@@ -82,7 +85,7 @@ export const CoordinateTopsRatio = ({
       return;
     }
     handleSubmit("ジャケットの有無");
-  }, [isJacketRequested]);
+  }, [isJacketRequested, handleSubmit]);
 
   return (
     <>
