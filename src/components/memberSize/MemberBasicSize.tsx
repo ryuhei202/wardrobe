@@ -130,7 +130,13 @@ export const MemberBasicSize = ({
               </StackRow>
               <StackColumn>
                 <Typography>参考サイズ</Typography>
-                <EmphasizedText>{presenter.referenceJacketSize}</EmphasizedText>
+                <Typography
+                  fontWeight="bold"
+                  variant="subtitle2"
+                  dangerouslySetInnerHTML={{
+                    __html: presenter.referenceJacketSize,
+                  }}
+                />
               </StackColumn>
             </Stack>
           </StackColumn>
