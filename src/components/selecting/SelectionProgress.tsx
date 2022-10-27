@@ -207,9 +207,9 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
           <MenuItem
             onClick={() => {
               if (
-                window.prompt(
-                  "このアイテムに紐づいているアドバイスも削除されます。削除してよろしければ「削除」と入力してください"
-                ) === "削除"
+                window.confirm(
+                  "このアイテムに紐づいているアドバイスも削除されます。よろしいですか？"
+                )
               ) {
                 coordinateItemDestroyMutate(
                   props.data.items[props.data.selectedIndex].id,
