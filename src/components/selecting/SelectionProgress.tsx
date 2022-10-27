@@ -14,6 +14,7 @@ import {
 import React, { Fragment, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useCoordinateFootwearsUpdate } from "../../hooks/api/UseCoordinateFootwearsUpdate";
+import { useCoordinateItemsDestroy } from "../../hooks/api/UseCoordinateItemsDestroy";
 import { HostUrl } from "../../model/HostUrl";
 import { SelectionProgressData } from "../../model/selecting/props_data/SelectionProgressData";
 import { CoordinateIdContext } from "../context/provider/ContextProvider";
@@ -40,6 +41,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
   }>(initialState);
   const coordinateId = useContextDefinedState(CoordinateIdContext);
   const { mutate } = useCoordinateFootwearsUpdate();
+  const { mutate: coordinateItemDestroyMutate } = useCoordinateItemsDestroy();
   const queryClient = useQueryClient();
   const handleSubmitFootwear = (footwearId: number) => {
     mutate(
@@ -201,6 +203,30 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
         >
           アイテム数を追加
         </MenuItem>
+        {props.data.items.length > props.data.selectedIndex && (
+          <MenuItem
+            onClick={() => {
+              if (
+                window.prompt(
+                  "このアイテムに紐づいているアドバイスも削除されます。削除してよろしければ「削除」と入力してください"
+                ) === "削除"
+              ) {
+                coordinateItemDestroyMutate(
+                  props.data.items[props.data.selectedIndex].id,
+                  {
+                    onSuccess: () => {
+                      queryClient.invalidateQueries(
+                        `coordinates/${coordinateId}/coordinate_items`
+                      );
+                    },
+                  }
+                );
+              }
+            }}
+          >
+            このアイテムを削除
+          </MenuItem>
+        )}
       </Menu>
       <SelectFootwearDialogContainer
         isOpen={isOpen}
