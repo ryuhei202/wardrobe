@@ -10,7 +10,7 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ChartIdContext,
@@ -19,33 +19,27 @@ import {
 import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { Coordinate } from "../../components/coordinate/Coordinate";
 import { theme } from "../../components/style/Theme";
-import { useMemberMemoUpdate } from "../../hooks/api/UseMemberMemoUpdate";
+import { useKartesUpdate } from "../../hooks/api/UseKartesUpdate";
 import { TCoordinate } from "../../model/api/response/styling/coordinate/TCoordinate";
-import {
-  NEXT_COORDE_HEARING,
-  TNextCoordeHearing,
-} from "../../model/api/response/styling/member_memo/NextCoordeHearing";
 
 type TProps = {
   coordinates: TCoordinate[];
-  nextCoordeHearing: TNextCoordeHearing;
+  hearingCompleted: boolean;
 };
 
 export const ChartMainContents = ({
   coordinates,
-  nextCoordeHearing,
+  hearingCompleted,
 }: TProps) => {
   const memberId = useContextDefinedState(MemberIdContext);
   const chartId = useContextDefinedState(ChartIdContext);
   const [selectedCoordinateIndex, setSelectedCoordinateIndex] = useState(0);
-  const [currentNextCoordeHearing, setCurrentNextCoordeHearing] =
-    useState(nextCoordeHearing);
+  const [currentHearingCompleted, setCurrentHearingCompleted] =
+    useState(hearingCompleted);
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
-  const { mutate, isLoading } = useMemberMemoUpdate(
-    useContextDefinedState(MemberIdContext)
-  );
+  const { mutate, isLoading } = useKartesUpdate({ chartId });
 
   if (coordinates.length === 0)
     return <Alert severity="error">コーデ情報が存在しません</Alert>;
@@ -58,16 +52,13 @@ export const ChartMainContents = ({
         control={
           <Switch
             disabled={isLoading}
-            checked={!!currentNextCoordeHearing}
-            onChange={() => {
+            checked={currentHearingCompleted}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
               mutate(
-                {
-                  nextCoordeHearing: !!currentNextCoordeHearing
-                    ? NEXT_COORDE_HEARING.HEARING
-                    : NEXT_COORDE_HEARING.HEARING_END,
-                },
+                { hearingCompleted: event.target.checked },
                 {
                   onSuccess: () => {
+                    setCurrentHearingCompleted((prev) => !prev);
                     setSeverity("success");
                     setSnackBarText("ヒアリング状態を保存しました");
                   },
@@ -76,11 +67,6 @@ export const ChartMainContents = ({
                     setSnackBarText("ヒアリング状態の保存に失敗しました");
                   },
                   onSettled: () => {
-                    setCurrentNextCoordeHearing(
-                      !!currentNextCoordeHearing
-                        ? NEXT_COORDE_HEARING.HEARING
-                        : NEXT_COORDE_HEARING.HEARING_END
-                    );
                     setIsSnackBarOpen(true);
                   },
                 }
@@ -91,9 +77,9 @@ export const ChartMainContents = ({
         }
         label={
           <Typography variant="subtitle2" fontWeight="bold">
-            {nextCoordeHearing
-              ? "次回ヒアリング完了済み"
-              : "次回ヒアリング未完了"}
+            {currentHearingCompleted
+              ? "ヒアリング完了済み"
+              : "ヒアリング未完了"}
           </Typography>
         }
         labelPlacement="end"
