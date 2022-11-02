@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext } from "react";
+import { TDeliveryDateShowResponse } from "../../model/api/response/styling/deliveryDate/DeliveryDateShowResponse";
 import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
 import { ChartIdContext } from "../context/provider/ContextProvider";
 import { useMemberHandler } from "./handler/UseMemberHandler";
@@ -14,6 +15,7 @@ import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 
 type Props = {
   readonly response: MemberShowResponse;
+  readonly deliveryDateData: TDeliveryDateShowResponse;
 };
 export const Member = (props: Props) => {
   const chartId = useContext(ChartIdContext).state;
@@ -44,9 +46,14 @@ export const Member = (props: Props) => {
           </>
         }
         secondary={
-          <Typography variant="h6">{`パートナーID: ${props.response.id}, ${
-            chartId !== null ? "カルテID: " + chartId : ""
-          }`}</Typography>
+          <>
+            <Typography variant="h6">{`パートナーID: ${props.response.id}, ${
+              chartId !== null ? "カルテID: " + chartId : ""
+            }`}</Typography>
+            <Typography variant="h6">
+              {`配送希望日: ${props.deliveryDateData.date} ${props.deliveryDateData.time}`}
+            </Typography>
+          </>
         }
       />
       <ListItemSecondaryAction>
