@@ -27,8 +27,10 @@ export const useGetRequest = <T>(
       axiosClient
         .get(`${baseUrl()}/styling/${path}`, {
           params,
-          paramsSerializer: (params) =>
-            qs.stringify(params, { arrayFormat: "brackets", encode: false }),
+          paramsSerializer: {
+            serialize: (params) =>
+              qs.stringify(params, { arrayFormat: "brackets", encode: false }),
+          },
         })
         .then((r) => r.data),
     {
