@@ -37,7 +37,7 @@ export const SelectFootwearDialog = ({
           }}
         >
           {footwearIndexData.footwears.map((footwear) => (
-            <Card sx={{ maxWidth: 150, margin: 1 }}>
+            <Card sx={{ maxWidth: 150, margin: 1 }} key={footwear.id}>
               <CardActionArea onClick={() => onClick(footwear.id)}>
                 <CardMedia
                   component="img"

@@ -49,9 +49,7 @@ export const CoordinateFootwearFetcher = ({ coordinateId }: TProps) => {
             ></ListItemText>
           </>
         ) : (
-          <ListItem>
-            <ListItemText>未選択</ListItemText>
-          </ListItem>
+          <ListItemText>未選択</ListItemText>
         )}
       </ListItem>
     </>
