@@ -17,7 +17,7 @@ export const CoordinateHearing = ({ hearingData }: TProps) => {
           </>
         ) : (
           <>
-            <FeedbackIcon color="info" />
+            <FeedbackIcon color="warning" />
             <span style={{ verticalAlign: "top" }}>ヒアリングが必要です</span>
           </>
         )}
