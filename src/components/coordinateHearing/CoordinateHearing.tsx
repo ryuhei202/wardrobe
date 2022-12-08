@@ -1,7 +1,7 @@
 import { List, ListItem, ListSubheader, Typography } from "@mui/material";
 import { CoordinateHearingsShowResponse } from "../../model/api/response/styling/coordinateHearing/CoordinateHearingsShowResponse";
 import FeedbackIcon from "@mui/icons-material/Feedback";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 type TProps = {
   readonly hearingData: CoordinateHearingsShowResponse;
 };
@@ -12,7 +12,7 @@ export const CoordinateHearing = ({ hearingData }: TProps) => {
       <Typography>
         {hearingData.isSameBeforeHearing ? (
           <>
-            <CheckBoxIcon color="success" />
+            <CheckCircleIcon color="success" />
             <span style={{ verticalAlign: "top" }}>前回と同じ</span>
           </>
         ) : (
