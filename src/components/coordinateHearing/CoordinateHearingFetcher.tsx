@@ -11,5 +11,5 @@ export const CoordinateHearingFetcher = ({ coordinateId }: TProps) => {
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
-  return <CoordinateHearing hearings={data} />;
+  return <CoordinateHearing hearingData={data} />;
 };
