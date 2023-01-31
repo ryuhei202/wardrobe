@@ -3,12 +3,12 @@ import {
   IconButton,
   ListItemSecondaryAction,
   ListItemText,
-  Paper,
   Typography,
 } from "@mui/material";
 import { useContext } from "react";
 import { MemberShowResponse } from "../../model/api/response/styling/member/MemberShowResponse";
 import { ChartIdContext } from "../context/provider/ContextProvider";
+import { PlanTag } from "../shared/PlanTag";
 import { useMemberHandler } from "./handler/UseMemberHandler";
 import { MemberImageCollectionDialog } from "./MemberImageCollectionDialog";
 
@@ -24,22 +24,14 @@ export const Member = (props: Props) => {
       <ListItemText
         primary={
           <>
-            <Paper
-              elevation={0}
-              style={{
-                backgroundColor: props.response.isLeeapPlan
-                  ? "#00266F"
-                  : "#E8E7DF",
-                textAlign: "center",
-              }}
-            >
-              <Typography
-                variant="h5"
-                color={props.response.isLeeapPlan ? "white" : "#4C5257"}
-              >
-                {props.response.planName}
-              </Typography>
-            </Paper>
+            {props.response.isSuspended ? (
+              <PlanTag color="plain" name="停止中" />
+            ) : (
+              <PlanTag
+                color={props.response.isLeeapPlan ? "leeap" : "uwear"}
+                name={props.response.planName}
+              />
+            )}
             <Typography variant="h4">{`${props.response.name}(${props.response.age}), ${props.response.pref}`}</Typography>
           </>
         }

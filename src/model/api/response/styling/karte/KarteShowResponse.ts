@@ -6,4 +6,6 @@ export interface KarteShowResponse {
   readonly rentalStartedAt: string | null;
   readonly defaultItemNum: number;
   readonly registeredItems: TItem[];
+  readonly isLeeapPlan: boolean;
+  readonly planName: string;
 }
