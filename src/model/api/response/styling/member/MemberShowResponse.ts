@@ -10,4 +10,5 @@ export interface MemberShowResponse {
   readonly aboutSize: string | null;
   readonly planName: string;
   readonly isLeeapPlan: boolean;
+  readonly isSuspended: boolean;
 }

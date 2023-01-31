@@ -18,6 +18,7 @@ import {
 } from "../../components/context/provider/ContextProvider";
 import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { Coordinate } from "../../components/coordinate/Coordinate";
+import { PlanTag } from "../../components/shared/PlanTag";
 import { theme } from "../../components/style/Theme";
 import { useKartesUpdate } from "../../hooks/api/UseKartesUpdate";
 import { TCoordinate } from "../../model/api/response/styling/coordinate/TCoordinate";
@@ -25,11 +26,15 @@ import { TCoordinate } from "../../model/api/response/styling/coordinate/TCoordi
 type TProps = {
   coordinates: TCoordinate[];
   hearingCompleted: boolean;
+  isLeeapPlan: boolean;
+  planName: string;
 };
 
 export const ChartMainContents = ({
   coordinates,
   hearingCompleted,
+  isLeeapPlan,
+  planName,
 }: TProps) => {
   const memberId = useContextDefinedState(MemberIdContext);
   const chartId = useContextDefinedState(ChartIdContext);
@@ -46,9 +51,12 @@ export const ChartMainContents = ({
 
   return (
     <Box>
+      <div style={{ marginTop: theme.spacing(2) }}>
+        <PlanTag color={isLeeapPlan ? "leeap" : "uwear"} name={planName} />
+      </div>
       <FormControlLabel
         value="end"
-        style={{ marginTop: theme.spacing(2), marginLeft: theme.spacing(1) }}
+        style={{ marginTop: theme.spacing(1), marginLeft: theme.spacing(1) }}
         control={
           <Switch
             disabled={isLoading}
