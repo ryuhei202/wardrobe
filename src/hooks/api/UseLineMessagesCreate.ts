@@ -6,16 +6,10 @@ export type TLineMessageCreateParams = {
   readonly messages: any[];
 };
 
-export const useLineMessagesCreate = ({
-  messages,
-}: TLineMessageCreateParams) => {
-  const params: TLineMessageCreateParams = {
-    messages,
-  };
+export const useLineMessagesCreate = () => {
   const memberId = useContextDefinedState(MemberIdContext);
   const { mutate, error, isLoading } = usePostRequest<TLineMessageCreateParams>(
-    `members/${memberId}/line_messages`,
-    params
+    `members/${memberId}/line_messages`
   );
 
   return {

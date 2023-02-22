@@ -1,15 +1,14 @@
+import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
+
 type TArgs = {
   coordinateDescription: string;
-  items: {
-    imageUrl: string;
-    colorText: string;
-  }[];
+  coordinateItems: TCoordinateItem[];
   isFirstTransmit: boolean;
 };
 
 export const createCoordinateFlexMessage = ({
   coordinateDescription,
-  items,
+  coordinateItems,
   isFirstTransmit,
 }: TArgs) => {
   const flexMessage = [];
@@ -23,12 +22,12 @@ export const createCoordinateFlexMessage = ({
 
   flexMessage.push({
     type: "carousel",
-    contents: items.map((item) => {
+    contents: coordinateItems.map((item) => {
       return {
         type: "bubble",
         hero: {
           type: "image",
-          url: item.imageUrl,
+          url: item.itemInfo.imagePath.large,
           aspectRatio: "2:3",
           size: "full",
         },
@@ -38,7 +37,7 @@ export const createCoordinateFlexMessage = ({
           contents: [
             {
               type: "text",
-              text: item.colorText,
+              text: `${item.itemInfo.categoryName} / ${item.itemInfo.mainColorName}`,
               size: "md",
               color: "#4C5257",
               weight: "bold",
