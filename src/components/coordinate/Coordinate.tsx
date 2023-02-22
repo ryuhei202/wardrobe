@@ -10,10 +10,15 @@ import { SimplifiedHearingContainer } from "../simplifiedHearing/SimplifiedHeari
 
 type TProps = {
   coordinateId: number;
+  defaultItemNum?: number;
   isEditable?: boolean;
 };
 
-export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
+export const Coordinate = ({
+  coordinateId,
+  defaultItemNum,
+  isEditable,
+}: TProps) => {
   return (
     <List dense>
       <ListItem>
@@ -66,6 +71,7 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
       <ListItem style={{ display: "block" }}>
         <CoordinateDescriptionContainer
           coordinateId={coordinateId}
+          defaultItemNum={defaultItemNum ?? undefined}
           isEditable={isEditable ?? false}
         />
       </ListItem>

@@ -125,6 +125,7 @@ export const ChartMainContents = ({
       </Link>
       <Coordinate
         coordinateId={coordinates[selectedCoordinateIndex].id}
+        defaultItemNum={coordinates[selectedCoordinateIndex].defaultItemNum}
         isEditable
         key={coordinates[selectedCoordinateIndex].id}
       />
