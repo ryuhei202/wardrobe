@@ -1,4 +1,4 @@
-type TProps = {
+type TArgs = {
   coordinateDescription: string;
   items: {
     imageUrl: string;
@@ -11,7 +11,7 @@ export const createCoordinateFlexMessage = ({
   coordinateDescription,
   items,
   isFirstTransmit,
-}: TProps) => {
+}: TArgs) => {
   const flexMessage = [];
   flexMessage.push({
     type: "text",
