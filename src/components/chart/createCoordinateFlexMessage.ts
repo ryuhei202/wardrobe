@@ -74,5 +74,5 @@ export const createCoordinateFlexMessage = ({
     },
   });
 
-  return JSON.stringify(flexMessage);
+  return flexMessage;
 };
