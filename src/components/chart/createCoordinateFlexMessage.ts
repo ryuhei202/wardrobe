@@ -17,7 +17,6 @@ export const createCoordinateFlexMessage = ({
       text: isFirstTransmit
         ? "診断フォームにご回答いただきありがとうございます！\nフォームの回答内容を元に早速コーデをお作りしましたのでご確認お願いします！"
         : "再度コーデをお作りしましたのでご確認お願いします！",
-      sender: true,
     },
   ];
 
