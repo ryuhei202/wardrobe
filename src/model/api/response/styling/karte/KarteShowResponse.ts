@@ -1,4 +1,5 @@
 import { TItem } from "../../../../selecting/TItem";
+import { Plan } from "./Plan";
 
 export interface KarteShowResponse {
   readonly id: number;
@@ -7,5 +8,5 @@ export interface KarteShowResponse {
   readonly defaultItemNum: number;
   readonly registeredItems: TItem[];
   readonly isLeeapPlan: boolean;
-  readonly planName: string;
+  readonly plan: Plan;
 }

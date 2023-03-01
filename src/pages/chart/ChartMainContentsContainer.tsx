@@ -24,7 +24,7 @@ export const ChartMainContentsContainer = () => {
     <ChartMainContents
       coordinates={coordinatesIndexData.coordinates}
       hearingCompleted={chartsShowData.hearingCompleted}
-      planName={chartsShowData.planName}
+      planName={chartsShowData.plan.name}
       isLeeapPlan={chartsShowData.isLeeapPlan}
     />
   );
