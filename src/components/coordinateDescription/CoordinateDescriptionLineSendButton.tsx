@@ -51,7 +51,13 @@ export const CoordinateDescriptionLineSendButton = ({
         disabled={disabled || isLoading}
         variant="contained"
         onClick={() => {
-          if (window.confirm("本当に送信してもよろしいでしょうか？")) {
+          if (
+            window.confirm(
+              isFirstTransmit
+                ? "初回提案として送信してもよろしいでしょうか？"
+                : "2回目以降の提案として送信してもよろしいでしょうか？"
+            )
+          ) {
             mutate(
               { messages },
               {
