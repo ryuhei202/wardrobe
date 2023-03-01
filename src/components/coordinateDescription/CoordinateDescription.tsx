@@ -30,6 +30,10 @@ export const CoordinateDescription = ({
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
+  const onChange = (value: string) => {
+    setText(value);
+    setIsTextChanged(data.text === null ? value !== "" : value !== data.text);
+  };
   const onPost = () => {
     mutate(
       { text },
@@ -52,10 +56,6 @@ export const CoordinateDescription = ({
   };
 
   useEffect(() => {
-    setIsTextChanged(data.text === null ? text !== "" : text !== data.text);
-  }, [text]);
-
-  useEffect(() => {
     alertClosedWindow(!isTextChanged);
   }, [isTextChanged]);
 
@@ -64,7 +64,7 @@ export const CoordinateDescription = ({
       <MemoForm
         value={text}
         rows={14}
-        onChange={setText}
+        onChange={onChange}
         onPost={onPost}
         disabled={!isTextChanged || isLoading}
       />

@@ -52,7 +52,6 @@ export const CoordinateDescriptionLineSendButton = ({
         variant="contained"
         onClick={() => {
           if (window.confirm("本当に送信してもよろしいでしょうか？")) {
-            console.log(messages);
             mutate(
               { messages },
               {

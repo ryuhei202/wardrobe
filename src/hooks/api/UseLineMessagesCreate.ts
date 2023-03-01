@@ -3,7 +3,7 @@ import { MemberIdContext } from "./../../components/context/provider/ContextProv
 import { useContextDefinedState } from "./../../components/context/UseContextDefinedState";
 
 export type TLineMessageCreateParams = {
-  readonly messages: any[];
+  readonly messages: string;
 };
 
 export const useLineMessagesCreate = () => {
