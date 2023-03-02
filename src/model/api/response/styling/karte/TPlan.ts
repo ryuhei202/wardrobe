@@ -1,4 +1,4 @@
-export interface Plan {
+export interface TPlan {
   readonly id: number | null;
   readonly name: string;
 }
