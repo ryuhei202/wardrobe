@@ -1,13 +1,13 @@
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 
 type TArgs = {
-  coordinateDescription: string;
+  descriptionText: string;
   coordinateItems: TCoordinateItem[];
   isFirstTransmit: boolean;
 };
 
 export const createCoordinateFlexMessage = ({
-  coordinateDescription,
+  descriptionText,
   coordinateItems,
   isFirstTransmit,
 }: TArgs) => {
@@ -57,7 +57,7 @@ export const createCoordinateFlexMessage = ({
 
   flexMessage.push({
     type: "text",
-    text: `${coordinateDescription}\n\n私としては今回の利用シーンと印象で、このようなコーデを考えていますがいかがでしょうか？`,
+    text: `${descriptionText}\n\n私としては今回の利用シーンと印象で、このようなコーデを考えていますがいかがでしょうか？`,
     quickReply: {
       items: [
         {

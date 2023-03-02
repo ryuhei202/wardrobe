@@ -24,9 +24,9 @@ export const CoordinateDescriptionLineSendButton = ({
 }: TProps) => {
   const [isFirstTransmit, setIsFirstTransmit] = useState(true);
   const messages = createCoordinateFlexMessage({
-    coordinateDescription: descriptionText,
-    coordinateItems: coordinateItems,
-    isFirstTransmit: isFirstTransmit,
+    descriptionText,
+    coordinateItems,
+    isFirstTransmit,
   });
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
