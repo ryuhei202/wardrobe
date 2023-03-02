@@ -1,5 +1,4 @@
-import { IconButton, Tooltip } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import { Button, Tooltip } from "@mui/material";
 
 type Props = {
   readonly onClick: () => void;
@@ -9,23 +8,18 @@ type Props = {
 export const SendButton = ({ onClick, disabled, style }: Props) => {
   return (
     <Tooltip
-      title={
-        <div style={{ textAlign: "center" }}>
-          更新する
-          <br /> alt(option) + Enter
-        </div>
-      }
+      title={<div style={{ textAlign: "center" }}>alt(option) + Enter</div>}
       followCursor
     >
       <span>
-        <IconButton
+        <Button
           onClick={onClick}
           disabled={disabled}
-          color="primary"
           style={style}
+          variant="contained"
         >
-          <SendIcon />
-        </IconButton>
+          保存
+        </Button>
       </span>
     </Tooltip>
   );
