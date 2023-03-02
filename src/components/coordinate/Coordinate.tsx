@@ -9,14 +9,16 @@ import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 import { SimplifiedHearingContainer } from "../simplifiedHearing/SimplifiedHearingContainer";
 
 type TProps = {
-  coordinateId: number;
-  defaultItemNum?: number;
-  isEditable?: boolean;
+  readonly coordinateId: number;
+  readonly defaultItemNum?: number;
+  readonly isOneShot?: boolean;
+  readonly isEditable?: boolean;
 };
 
 export const Coordinate = ({
   coordinateId,
   defaultItemNum,
+  isOneShot,
   isEditable,
 }: TProps) => {
   return (
@@ -71,7 +73,8 @@ export const Coordinate = ({
       <ListItem style={{ display: "block" }}>
         <CoordinateDescriptionContainer
           coordinateId={coordinateId}
-          defaultItemNum={defaultItemNum ?? undefined}
+          defaultItemNum={defaultItemNum}
+          isOneShot={isOneShot ?? false}
           isEditable={isEditable ?? false}
         />
       </ListItem>

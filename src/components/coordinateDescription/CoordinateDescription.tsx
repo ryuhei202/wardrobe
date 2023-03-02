@@ -8,11 +8,12 @@ import { MemoForm } from "../shared/MemoForm";
 import { CoordinateDescriptionLineSendButton } from "./CoordinateDescriptionLineSendButton";
 
 type TProps = {
-  data: CoordinateDescriptionsShowResponse;
-  coordinateId: number;
-  coordinateItems: TCoordinateItem[];
-  isLineMessagesSendDisable: boolean;
-  onUpdateComplete: () => Promise<any>;
+  readonly data: CoordinateDescriptionsShowResponse;
+  readonly coordinateId: number;
+  readonly coordinateItems: TCoordinateItem[];
+  readonly isLineMessagesSendDisable: boolean;
+  readonly isOneShot: boolean;
+  readonly onUpdateComplete: () => Promise<any>;
 };
 
 export const CoordinateDescription = ({
@@ -20,6 +21,7 @@ export const CoordinateDescription = ({
   coordinateId,
   coordinateItems,
   isLineMessagesSendDisable,
+  isOneShot,
   onUpdateComplete,
 }: TProps) => {
   const [text, setText] = useState(data.text ?? "");
@@ -68,11 +70,13 @@ export const CoordinateDescription = ({
         onPost={onPost}
         disabled={!isTextChanged || isLoading}
       />
-      <CoordinateDescriptionLineSendButton
-        descriptionText={text}
-        coordinateItems={coordinateItems}
-        disabled={isLineMessagesSendDisable || isTextChanged || text === ""}
-      />
+      {isOneShot && (
+        <CoordinateDescriptionLineSendButton
+          descriptionText={text}
+          coordinateItems={coordinateItems}
+          disabled={isLineMessagesSendDisable || isTextChanged || text === ""}
+        />
+      )}
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={5000}
