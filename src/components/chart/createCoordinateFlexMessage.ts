@@ -22,7 +22,7 @@ export const createCoordinateFlexMessage = ({
 
   flexMessage.push({
     type: "flex",
-    altText: "test",
+    altText: "【コーデ写真】",
     contents: {
       type: "carousel",
       contents: coordinateItems.map((item) => {
