@@ -22,19 +22,20 @@ import { PlanTag } from "../../components/shared/PlanTag";
 import { theme } from "../../components/style/Theme";
 import { useKartesUpdate } from "../../hooks/api/UseKartesUpdate";
 import { TCoordinate } from "../../model/api/response/styling/coordinate/TCoordinate";
+import { TPlan } from "../../model/api/response/styling/karte/TPlan";
 
 type TProps = {
   coordinates: TCoordinate[];
   hearingCompleted: boolean;
   isLeeapPlan: boolean;
-  planName: string;
+  plan: TPlan;
 };
 
 export const ChartMainContents = ({
   coordinates,
   hearingCompleted,
   isLeeapPlan,
-  planName,
+  plan,
 }: TProps) => {
   const memberId = useContextDefinedState(MemberIdContext);
   const chartId = useContextDefinedState(ChartIdContext);
@@ -52,7 +53,7 @@ export const ChartMainContents = ({
   return (
     <Box>
       <div style={{ marginTop: theme.spacing(2) }}>
-        <PlanTag color={isLeeapPlan ? "leeap" : "uwear"} name={planName} />
+        <PlanTag color={isLeeapPlan ? "leeap" : "uwear"} name={plan.name} />
       </div>
       <FormControlLabel
         value="end"
@@ -125,6 +126,8 @@ export const ChartMainContents = ({
       </Link>
       <Coordinate
         coordinateId={coordinates[selectedCoordinateIndex].id}
+        defaultItemNum={coordinates[selectedCoordinateIndex].defaultItemNum}
+        isOneShot={plan.id === null}
         isEditable
         key={coordinates[selectedCoordinateIndex].id}
       />

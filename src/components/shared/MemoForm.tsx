@@ -1,5 +1,4 @@
 import { Box, TextField } from "@mui/material";
-import React from "react";
 import { SendButton } from "./SendButton";
 
 type Props = {
@@ -38,7 +37,11 @@ export const MemoForm = ({
       <SendButton
         onClick={onPost}
         disabled={disabled}
-        style={{ position: "absolute", bottom: 16, right: 16 }}
+        style={{
+          position: "absolute",
+          bottom: 16,
+          right: 16,
+        }}
       />
     </Box>
   );

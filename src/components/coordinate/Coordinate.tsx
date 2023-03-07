@@ -9,11 +9,18 @@ import { SelectedReviewContainer } from "../review/SelectedReviewContainer";
 import { SimplifiedHearingContainer } from "../simplifiedHearing/SimplifiedHearingContainer";
 
 type TProps = {
-  coordinateId: number;
-  isEditable?: boolean;
+  readonly coordinateId: number;
+  readonly defaultItemNum?: number;
+  readonly isOneShot?: boolean;
+  readonly isEditable?: boolean;
 };
 
-export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
+export const Coordinate = ({
+  coordinateId,
+  defaultItemNum,
+  isOneShot,
+  isEditable,
+}: TProps) => {
   return (
     <List dense>
       <ListItem>
@@ -66,6 +73,8 @@ export const Coordinate = ({ coordinateId, isEditable }: TProps) => {
       <ListItem style={{ display: "block" }}>
         <CoordinateDescriptionContainer
           coordinateId={coordinateId}
+          defaultItemNum={defaultItemNum}
+          isOneShot={isOneShot ?? false}
           isEditable={isEditable ?? false}
         />
       </ListItem>
