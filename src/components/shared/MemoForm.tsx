@@ -19,30 +19,31 @@ export const MemoForm = ({
   onPost,
 }: Props) => {
   return (
-    <Box sx={{ my: 1, position: "relative" }}>
-      <TextField
-        label={label}
-        multiline
-        rows={rows ?? 8}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        onKeyDown={(event) => {
-          if (event.altKey && event.key === "Enter" && !disabled) {
-            onPost();
-          }
-        }}
-        style={{ width: "100%" }}
-        inputProps={{ style: { fontSize: ".8rem" } }}
-      />
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <Box sx={{ my: 1 }}>
+        <TextField
+          label={label}
+          multiline
+          rows={rows ?? 8}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.altKey && event.key === "Enter" && !disabled) {
+              onPost();
+            }
+          }}
+          style={{ width: "100%" }}
+          inputProps={{ style: { fontSize: ".8rem" } }}
+        />
+      </Box>
       <SendButton
         onClick={onPost}
         disabled={disabled}
         style={{
-          position: "absolute",
-          bottom: 16,
-          right: 16,
+          display: "flex",
+          marginLeft: "auto",
         }}
       />
-    </Box>
+    </div>
   );
 };
