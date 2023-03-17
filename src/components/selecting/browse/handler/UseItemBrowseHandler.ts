@@ -21,7 +21,6 @@ import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
 import { useNgRefinementHandler } from "./UseNgRefinementHandler";
 import { SelectChangeEvent } from "@mui/material";
-import { useFormalRankRefinementHandler } from "./UseFormalRankRefinementHandler";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -178,7 +177,6 @@ export const useItemBrowseHandler = (
   const patternHandler = usePatternRefinementHandler(onPatternChanged);
   const logoHandler = useLogoRefinementHandler(onLogoChanged);
   const dropSizeHandler = useDropSizeRefinementHandler(onDropSizeChanged);
-  const formalRankHandler = useFormalRankRefinementHandler(onFormalRankChanged);
   const ngHandler = useNgRefinementHandler(onNgChanged);
   const optionHandler = useOptionRefinementHandler(onOptionChanged);
 
@@ -231,11 +229,11 @@ export const useItemBrowseHandler = (
     );
     if (appliedLogos.length) result = result.concat(appliedLogos);
 
-    // const appliedFormalRanks = formalRankHandler.appliedFilters(
-    //   choice.formalRank,
-    //   currentRefinement.formalRanks
-    // );
-    // if (appliedFormalRanks.length) result = result.concat(appliedFormalRanks);
+    const appliedFormalRanks = {
+      name: `キレイ度${currentRefinement.formalRank[0]}~${currentRefinement.formalRank[1]}`,
+    };
+    if (currentRefinement.formalRank.toString() !== [1, 10].toString())
+      result = result.concat(appliedFormalRanks);
 
     const appliedNgs = ngHandler.appliedFilters(
       choice.ng,
@@ -335,16 +333,11 @@ export const useItemBrowseHandler = (
       }
       currentIndex += currentRefinement.logoIds.length;
     }
-    // if (currentRefinement.formalRanks) {
-    //   if (currentRefinement.formalRanks.length - 1 + currentIndex >= index) {
-    //     logoHandler.deleteFilter(
-    //       currentRefinement.formalRanks,
-    //       index - currentIndex
-    //     );
-    //     return;
-    //   }
-    //   currentIndex += currentRefinement.logoIds.length;
-    // }
+
+    if (currentIndex === index) {
+      setCurrentRefinement({ ...currentRefinement, formalRank: [1, 10] });
+      return;
+    }
     if (currentRefinement.ngIds.length > 0) {
       if (currentRefinement.ngIds.length - 1 + currentIndex >= index) {
         ngHandler.deleteFilter(currentRefinement.ngIds, index - currentIndex);
