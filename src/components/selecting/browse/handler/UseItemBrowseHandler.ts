@@ -95,7 +95,6 @@ export const useItemBrowseHandler = (
   };
 
   const onPartSizeChanged = (newValues: ValueRefinement[]) => {
-    console.log(currentRefinement);
     const newRefinement = {
       ...currentRefinement,
       partSizes: newValues,
@@ -146,7 +145,6 @@ export const useItemBrowseHandler = (
       formalRank: newFormalRank,
       pageNo: 1,
     };
-    console.log({ newRefinement });
     setCurrentRefinement(newRefinement);
   };
 

@@ -24,7 +24,6 @@ export const useBrowsesIndex = ({
   refinement,
   chartId,
 }: TBrowsesIndexArg): BrowsesIndex => {
-  console.log(refinement);
   const params = (): GetIndexParams => {
     var filterParams: GetIndexFilterParams = {
       smallCategory: refinement.smallCategoryIds,
