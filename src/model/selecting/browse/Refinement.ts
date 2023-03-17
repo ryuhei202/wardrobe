@@ -1,3 +1,4 @@
+import { FormalRankRefinement } from "./FormalRankRefinement";
 import { ValueRefinement } from "./ValueRefinement";
 
 export interface Refinement {
@@ -11,6 +12,7 @@ export interface Refinement {
   readonly patternIds: number[];
   readonly logoIds: number[];
   readonly dropSizes: number[];
+  readonly formalRank: number[];
   readonly ngIds: number[];
   readonly optionIds: number[];
   readonly sortId: number;

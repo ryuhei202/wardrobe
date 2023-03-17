@@ -46,13 +46,13 @@ export const ItemCard = (props: ItemCardProps) => {
             height="auto"
             alt=""
           />
-          {props.data.seriesFeature !== "" && (
+          {/* {props.data.seriesFeature !== "" && (
             <Chip
               size="small"
               label={props.data.seriesFeature}
               className={classes.seriesFeatureChip}
             />
-          )}
+          )} */}
           <Typography variant="body1">{props.data.seriesName}</Typography>
           <Typography variant="body2" color="textSecondary">
             {props.data.categoryName}

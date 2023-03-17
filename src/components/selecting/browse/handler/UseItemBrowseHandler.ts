@@ -21,6 +21,7 @@ import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
 import { useNgRefinementHandler } from "./UseNgRefinementHandler";
 import { SelectChangeEvent } from "@mui/material";
+import { useFormalRankRefinementHandler } from "./UseFormalRankRefinementHandler";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -44,10 +45,8 @@ export const useItemBrowseHandler = (
   const [currentRefinement, setCurrentRefinement] = useState<Refinement>(
     choice.defaultRefinement
   );
-  const [
-    selectedPreregisteredItemId,
-    setSelectedPreregisteredItemId,
-  ] = useState<number | null>(null);
+  const [selectedPreregisteredItemId, setSelectedPreregisteredItemId] =
+    useState<number | null>(null);
 
   const onLargeCategoryChanged = (newId: number | null) => {
     const newRefinement = {
@@ -96,6 +95,7 @@ export const useItemBrowseHandler = (
   };
 
   const onPartSizeChanged = (newValues: ValueRefinement[]) => {
+    console.log(currentRefinement);
     const newRefinement = {
       ...currentRefinement,
       partSizes: newValues,
@@ -140,6 +140,16 @@ export const useItemBrowseHandler = (
     setCurrentRefinement(newRefinement);
   };
 
+  const onFormalRankChanged = (newFormalRank: number[]) => {
+    const newRefinement = {
+      ...currentRefinement,
+      formalRank: newFormalRank,
+      pageNo: 1,
+    };
+    console.log({ newRefinement });
+    setCurrentRefinement(newRefinement);
+  };
+
   const onNgChanged = (newIds: number[]) => {
     const newRefinement = {
       ...currentRefinement,
@@ -170,6 +180,7 @@ export const useItemBrowseHandler = (
   const patternHandler = usePatternRefinementHandler(onPatternChanged);
   const logoHandler = useLogoRefinementHandler(onLogoChanged);
   const dropSizeHandler = useDropSizeRefinementHandler(onDropSizeChanged);
+  const formalRankHandler = useFormalRankRefinementHandler(onFormalRankChanged);
   const ngHandler = useNgRefinementHandler(onNgChanged);
   const optionHandler = useOptionRefinementHandler(onOptionChanged);
 
@@ -221,6 +232,12 @@ export const useItemBrowseHandler = (
       currentRefinement.logoIds
     );
     if (appliedLogos.length) result = result.concat(appliedLogos);
+
+    // const appliedFormalRanks = formalRankHandler.appliedFilters(
+    //   choice.formalRank,
+    //   currentRefinement.formalRanks
+    // );
+    // if (appliedFormalRanks.length) result = result.concat(appliedFormalRanks);
 
     const appliedNgs = ngHandler.appliedFilters(
       choice.ng,
@@ -320,6 +337,16 @@ export const useItemBrowseHandler = (
       }
       currentIndex += currentRefinement.logoIds.length;
     }
+    // if (currentRefinement.formalRanks) {
+    //   if (currentRefinement.formalRanks.length - 1 + currentIndex >= index) {
+    //     logoHandler.deleteFilter(
+    //       currentRefinement.formalRanks,
+    //       index - currentIndex
+    //     );
+    //     return;
+    //   }
+    //   currentIndex += currentRefinement.logoIds.length;
+    // }
     if (currentRefinement.ngIds.length > 0) {
       if (currentRefinement.ngIds.length - 1 + currentIndex >= index) {
         ngHandler.deleteFilter(currentRefinement.ngIds, index - currentIndex);
@@ -390,6 +417,14 @@ export const useItemBrowseHandler = (
         choice.filter.dropSize,
         currentRefinement.dropSizes
       ),
+      formalRankCallback: (value: number[]) => {
+        const newRefinement = {
+          ...currentRefinement,
+          formalRank: value,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+      },
       ngCallback: ngHandler.ngCallback(
         choice.filter.ng,
         currentRefinement.ngIds
@@ -478,6 +513,7 @@ export const useItemBrowseHandler = (
         choice.filter.dropSize,
         currentRefinement.dropSizes
       ),
+      formalRankData: currentRefinement.formalRank,
       ngData: ngHandler.ngData(choice.filter.ng, currentRefinement.ngIds),
       optionData: optionHandler.optionData(
         choice.filter.option,

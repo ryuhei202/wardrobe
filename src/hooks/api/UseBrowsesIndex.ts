@@ -24,6 +24,7 @@ export const useBrowsesIndex = ({
   refinement,
   chartId,
 }: TBrowsesIndexArg): BrowsesIndex => {
+  console.log(refinement);
   const params = (): GetIndexParams => {
     var filterParams: GetIndexFilterParams = {
       smallCategory: refinement.smallCategoryIds,
@@ -33,6 +34,10 @@ export const useBrowsesIndex = ({
       pattern: refinement.patternIds,
       logo: refinement.logoIds,
       dropSize: refinement.dropSizes,
+      formalRank: {
+        min: refinement.formalRank[0] ?? 1,
+        max: refinement.formalRank[1] ?? 10,
+      },
       ng: refinement.ngIds,
       option: refinement.optionIds,
     };
@@ -50,12 +55,8 @@ export const useBrowsesIndex = ({
     };
   };
 
-  const {
-    data,
-    error,
-    refetch,
-    isFetching,
-  } = useGetRequest<BrowseIndexResponse>("browses", params());
+  const { data, error, refetch, isFetching } =
+    useGetRequest<BrowseIndexResponse>("browses", params());
 
   return {
     data,

@@ -8,4 +8,5 @@ export interface ItemCardResponse {
   readonly brandName: string;
   readonly imagePath: string;
   readonly isMarriage: boolean;
+  readonly formalRank: number;
 }
