@@ -9,14 +9,24 @@ interface FilterSliderProps {
 }
 
 export const FilterFormalRank = ({ data, onChange }: FilterSliderProps) => {
+  const [currentValue, setCurrentValue] = useState([1, 10]);
+
+  const onSlided = (value: number | number[]) => {
+    setCurrentValue(value as number[]);
+  };
+  const onSliderMouseUp = (value: number | number[]) => {
+    onChange(value as number[]);
+  };
+
   return (
     <Slider
-      value={data.length > 0 ? data : [1, 10]}
+      value={data.length > 0 ? currentValue : [1, 10]}
       color="secondary"
       valueLabelDisplay="auto"
       min={1}
       max={10}
-      onChange={(_, value) => onChange(value as number[])}
+      onChange={(_, value) => onSlided(value)}
+      onChangeCommitted={(_, value) => onSliderMouseUp(value)}
     ></Slider>
   );
 };
