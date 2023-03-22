@@ -3,5 +3,5 @@ import { FormalRankRefinement } from "../browse/FormalRankRefinement";
 export type TFootwear = {
   readonly id: number;
   readonly name: string;
-  readonly formalRank: FormalRankRefinement;
+  readonly formalRank: number;
 };

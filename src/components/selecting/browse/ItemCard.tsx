@@ -21,7 +21,6 @@ interface ItemCardProps {
 
 export const ItemCard = (props: ItemCardProps) => {
   const classes = useItemCardStyle();
-
   return (
     <Card className={classes.card}>
       <CardActionArea onClick={() => props.callback.onClick()}>
@@ -48,7 +47,7 @@ export const ItemCard = (props: ItemCardProps) => {
           />
           <Chip
             size="small"
-            label={props.data.formalRank.min}
+            label={props.data.formalRank}
             className={classes.seriesFeatureChip}
           />
           <Typography variant="body1">{props.data.seriesName}</Typography>
