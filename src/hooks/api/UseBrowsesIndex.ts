@@ -34,8 +34,8 @@ export const useBrowsesIndex = ({
       logo: refinement.logoIds,
       dropSize: refinement.dropSizes,
       formalRank: {
-        min: refinement.formalRank[0] ?? 1,
-        max: refinement.formalRank[1] ?? 10,
+        min: refinement.formalRank.min ?? 1,
+        max: refinement.formalRank.max ?? 10,
       },
       ng: refinement.ngIds,
       option: refinement.optionIds,

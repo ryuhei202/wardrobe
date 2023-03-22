@@ -1,11 +1,10 @@
 import { Slider } from "@mui/material";
 import { useState } from "react";
-import { FilterFormalRankData } from "../../../model/selecting/browse/props_data/FilterFormalRankData";
-import { FilterSliderCallback } from "./callback/FilterSliderCallback";
+import { FormalRankRefinement } from "../../../model/selecting/browse/FormalRankRefinement";
 
 interface FilterSliderProps {
-  data: number[];
-  onChange: (value: number[]) => void;
+  data: FormalRankRefinement;
+  onChange: (value: FormalRankRefinement) => void;
 }
 
 export const FilterFormalRank = ({ data, onChange }: FilterSliderProps) => {
@@ -15,12 +14,14 @@ export const FilterFormalRank = ({ data, onChange }: FilterSliderProps) => {
     setCurrentValue(value as number[]);
   };
   const onSliderMouseUp = (value: number | number[]) => {
-    onChange(value as number[]);
+    if (typeof value == "object") {
+      onChange({ min: value[0], max: value[1] });
+    }
   };
 
   return (
     <Slider
-      value={data.length > 0 ? currentValue : [1, 10]}
+      value={currentValue}
       color="secondary"
       valueLabelDisplay="auto"
       min={1}

@@ -21,6 +21,7 @@ import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
 import { useNgRefinementHandler } from "./UseNgRefinementHandler";
 import { SelectChangeEvent } from "@mui/material";
+import { FormalRankRefinement } from "../../../../model/selecting/browse/FormalRankRefinement";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -138,15 +139,6 @@ export const useItemBrowseHandler = (
     setCurrentRefinement(newRefinement);
   };
 
-  const onFormalRankChanged = (newFormalRank: number[]) => {
-    const newRefinement = {
-      ...currentRefinement,
-      formalRank: newFormalRank,
-      pageNo: 1,
-    };
-    setCurrentRefinement(newRefinement);
-  };
-
   const onNgChanged = (newIds: number[]) => {
     const newRefinement = {
       ...currentRefinement,
@@ -230,7 +222,7 @@ export const useItemBrowseHandler = (
     if (appliedLogos.length) result = result.concat(appliedLogos);
 
     const appliedFormalRanks = {
-      name: `キレイ度${currentRefinement.formalRank[0]}~${currentRefinement.formalRank[1]}`,
+      name: `キレイ度${currentRefinement.formalRank.min}~${currentRefinement.formalRank.max}`,
     };
     if (currentRefinement.formalRank.toString() !== [1, 10].toString())
       result = result.concat(appliedFormalRanks);
@@ -335,7 +327,10 @@ export const useItemBrowseHandler = (
     }
 
     if (currentIndex === index) {
-      setCurrentRefinement({ ...currentRefinement, formalRank: [1, 10] });
+      setCurrentRefinement({
+        ...currentRefinement,
+        formalRank: { min: 1, max: 10 },
+      });
       return;
     }
     if (currentRefinement.ngIds.length > 0) {
@@ -408,7 +403,7 @@ export const useItemBrowseHandler = (
         choice.filter.dropSize,
         currentRefinement.dropSizes
       ),
-      formalRankCallback: (value: number[]) => {
+      formalRankCallback: (value: FormalRankRefinement) => {
         const newRefinement = {
           ...currentRefinement,
           formalRank: value,

@@ -12,7 +12,7 @@ export interface FilterChoiceResponse {
   readonly pattern: FilterMediaResponse[];
   readonly logo: FilterMediaResponse[];
   readonly dropSize: FilterResponse[];
-  readonly formalRank: number[];
+  readonly formalRank: FilterFormalRankResponse;
   readonly ng: FilterResponse[];
   readonly option: FilterResponse[];
 }
