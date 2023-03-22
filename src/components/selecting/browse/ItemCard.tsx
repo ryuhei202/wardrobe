@@ -48,7 +48,7 @@ export const ItemCard = (props: ItemCardProps) => {
           />
           <Chip
             size="small"
-            label={props.data.seriesFeature}
+            label={props.data.formalRank.min}
             className={classes.seriesFeatureChip}
           />
           <Typography variant="body1">{props.data.seriesName}</Typography>

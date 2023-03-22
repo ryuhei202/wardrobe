@@ -1,3 +1,5 @@
+import { FormalRankRefinement } from "../FormalRankRefinement";
+
 export interface ItemCardData {
   readonly mainColorImagePath: string;
   readonly subColorImagePath: string;
@@ -7,4 +9,5 @@ export interface ItemCardData {
   readonly brandName: string;
   readonly imagePath: string;
   readonly isMarriage: boolean;
+  readonly formalRank: FormalRankRefinement;
 }
