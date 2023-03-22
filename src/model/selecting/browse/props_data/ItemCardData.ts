@@ -1,5 +1,3 @@
-import { FormalRankRefinement } from "../FormalRankRefinement";
-
 export interface ItemCardData {
   readonly mainColorImagePath: string;
   readonly subColorImagePath: string;
