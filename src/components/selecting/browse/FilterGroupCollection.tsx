@@ -16,7 +16,6 @@ import { FilterSizeArray } from "./FilterSizeArray";
 import { FilterGroupCollectionData } from "../../../model/selecting/browse/props_data/FilterGroupCollectionData";
 import { FilterPartSize } from "./FilterPartSize";
 import { useFilterGroupCollectionStyle } from "./style/UseFilterGroupCollectionStyle";
-import { FilterSliderArray } from "./FilterPartSizeArray";
 import { FilterFormalRank } from "./FilterFormalRank";
 
 interface FilterGroupCollectionProps {
