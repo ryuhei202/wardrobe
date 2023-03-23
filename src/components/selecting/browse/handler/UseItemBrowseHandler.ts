@@ -224,7 +224,10 @@ export const useItemBrowseHandler = (
     const appliedFormalRanks = {
       name: `キレイ度${currentRefinement.formalRank.min}~${currentRefinement.formalRank.max}`,
     };
-    if (currentRefinement.formalRank.toString() !== [1, 10].toString())
+    if (
+      currentRefinement.formalRank.min !== 1 ||
+      currentRefinement.formalRank.max !== 10
+    )
       result = result.concat(appliedFormalRanks);
 
     const appliedNgs = ngHandler.appliedFilters(
