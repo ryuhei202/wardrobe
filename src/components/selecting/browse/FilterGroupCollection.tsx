@@ -16,6 +16,8 @@ import { FilterSizeArray } from "./FilterSizeArray";
 import { FilterGroupCollectionData } from "../../../model/selecting/browse/props_data/FilterGroupCollectionData";
 import { FilterPartSize } from "./FilterPartSize";
 import { useFilterGroupCollectionStyle } from "./style/UseFilterGroupCollectionStyle";
+import { FilterSliderArray } from "./FilterPartSizeArray";
+import { FilterFormalRank } from "./FilterFormalRank";
 
 interface FilterGroupCollectionProps {
   data: FilterGroupCollectionData;
@@ -135,6 +137,21 @@ export const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
             labelIdPrefix="drop-size-checkbox-list-label-"
             data={props.data.dropSizeData}
             callback={props.callback.dropSizeCallback}
+          />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="filter6a-content"
+          id="filter6a-header"
+        >
+          <Typography variant="body2">キレイ度</Typography>
+        </AccordionSummary>
+        <AccordionDetails className={classes.partSize}>
+          <FilterFormalRank
+            data={props.data.formalRankData}
+            onChange={props.callback.formalRankCallback}
           />
         </AccordionDetails>
       </Accordion>

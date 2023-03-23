@@ -1,3 +1,4 @@
+import { FormalRankRefinement } from "../../../../selecting/browse/FormalRankRefinement";
 import { GetIndexFilterPartSizeParams } from "./GetIndexFilterPartSizeParams";
 
 export interface GetIndexFilterParams {
@@ -11,6 +12,7 @@ export interface GetIndexFilterParams {
   pattern: number[];
   logo: number[];
   dropSize: number[];
+  formalRank: FormalRankRefinement;
   ng: number[];
   option: number[];
 }

@@ -21,6 +21,7 @@ import { usePartSizeRefinementHandler } from "./UsePartSizeRefinementHandler";
 import { useDropSizeRefinementHandler } from "./UseDropSizeRefinementHandler";
 import { useNgRefinementHandler } from "./UseNgRefinementHandler";
 import { SelectChangeEvent } from "@mui/material";
+import { FormalRankRefinement } from "../../../../model/selecting/browse/FormalRankRefinement";
 
 export interface ItemBrowseHandler {
   currentRefinement: Refinement;
@@ -44,10 +45,8 @@ export const useItemBrowseHandler = (
   const [currentRefinement, setCurrentRefinement] = useState<Refinement>(
     choice.defaultRefinement
   );
-  const [
-    selectedPreregisteredItemId,
-    setSelectedPreregisteredItemId,
-  ] = useState<number | null>(null);
+  const [selectedPreregisteredItemId, setSelectedPreregisteredItemId] =
+    useState<number | null>(null);
 
   const onLargeCategoryChanged = (newId: number | null) => {
     const newRefinement = {
@@ -222,6 +221,15 @@ export const useItemBrowseHandler = (
     );
     if (appliedLogos.length) result = result.concat(appliedLogos);
 
+    const appliedFormalRanks = {
+      name: `キレイ度${currentRefinement.formalRank.min}~${currentRefinement.formalRank.max}`,
+    };
+    if (
+      currentRefinement.formalRank.min !== 1 ||
+      currentRefinement.formalRank.max !== 10
+    )
+      result = result.concat(appliedFormalRanks);
+
     const appliedNgs = ngHandler.appliedFilters(
       choice.ng,
       currentRefinement.ngIds
@@ -320,6 +328,14 @@ export const useItemBrowseHandler = (
       }
       currentIndex += currentRefinement.logoIds.length;
     }
+
+    if (currentIndex === index) {
+      setCurrentRefinement({
+        ...currentRefinement,
+        formalRank: { min: 1, max: 10 },
+      });
+      return;
+    }
     if (currentRefinement.ngIds.length > 0) {
       if (currentRefinement.ngIds.length - 1 + currentIndex >= index) {
         ngHandler.deleteFilter(currentRefinement.ngIds, index - currentIndex);
@@ -390,6 +406,14 @@ export const useItemBrowseHandler = (
         choice.filter.dropSize,
         currentRefinement.dropSizes
       ),
+      formalRankCallback: (value: FormalRankRefinement) => {
+        const newRefinement = {
+          ...currentRefinement,
+          formalRank: value,
+          pageNo: 1,
+        };
+        setCurrentRefinement(newRefinement);
+      },
       ngCallback: ngHandler.ngCallback(
         choice.filter.ng,
         currentRefinement.ngIds
@@ -478,6 +502,7 @@ export const useItemBrowseHandler = (
         choice.filter.dropSize,
         currentRefinement.dropSizes
       ),
+      formalRankData: currentRefinement.formalRank,
       ngData: ngHandler.ngData(choice.filter.ng, currentRefinement.ngIds),
       optionData: optionHandler.optionData(
         choice.filter.option,

@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { FilterPartSizeData } from "../../../model/selecting/browse/props_data/FilterPartSizeData";
 import { FilterPartSizeCallback } from "./callback/FilterPartSizeCallback";
-import { FilterSliderArray } from "./FilterSliderArray";
+import { FilterSliderArray } from "./FilterPartSizeArray";
 import { useFilterPartSizeStyle } from "./style/UseFilterPartSizeStyle";
 
 interface FilterPartSizeProps {
