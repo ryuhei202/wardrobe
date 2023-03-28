@@ -23,6 +23,7 @@ export const useItemCardCollectionHandler = (
         brandName: item.brandName,
         imagePath: item.imagePath,
         isMarriage: item.isMarriage,
+        formalRank: item.formalRank,
       };
     });
   };

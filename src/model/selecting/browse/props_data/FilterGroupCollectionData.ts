@@ -3,6 +3,7 @@ import { FilterCategoryGroupData } from "./FilterCategoryGroupData";
 import { FilterCheckboxData } from "./FilterCheckboxData";
 import { FilterMediaData } from "./FilterMediaData";
 import { FilterSizeData } from "./FilterSizeData";
+import { FormalRankRefinement } from "../FormalRankRefinement";
 
 export interface FilterGroupCollectionData {
   readonly categoryData: FilterCategoryGroupData;
@@ -12,6 +13,7 @@ export interface FilterGroupCollectionData {
   readonly patternData: FilterMediaData[];
   readonly logoData: FilterMediaData[];
   readonly dropSizeData: FilterCheckboxData[];
+  readonly formalRankData: FormalRankRefinement;
   readonly ngData: FilterCheckboxData[];
   readonly optionData: FilterCheckboxData[];
 }

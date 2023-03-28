@@ -18,8 +18,6 @@ import {
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { CoordinateAdviceCategoryResponse } from "../../../model/api/response/styling/coordinatePattern/CoordinateAdviceCategoryResponse";
 import { OutfitFormData } from "../../../model/selecting/arrange/props_data/OutfitFormData";
-import { MemberShowContext } from "../../context/provider/ContextProvider";
-import { useContextDefinedState } from "../../context/UseContextDefinedState";
 import { OutfitFormCallback } from "./callback/OutfitFormCallback";
 import { useOutfitFormStyle } from "./style/UseOutfitFormStyle";
 
@@ -31,8 +29,6 @@ export interface OutfitFormProps {
 
 export const OutfitForm = (props: OutfitFormProps) => {
   const classes = useOutfitFormStyle();
-  const memberShow = useContextDefinedState(MemberShowContext);
-  const isMarriagePlan = memberShow.data?.isMarriagePlan ?? false;
 
   const getSelectedCategories = useCallback((): (number | null)[] => {
     return props.data.selectedAdviceIds.map((id) => {
@@ -57,29 +53,6 @@ export const OutfitForm = (props: OutfitFormProps) => {
 
   return (
     <>
-      {isMarriagePlan ? (
-        <FormControl margin="normal" style={{ width: 120 }}>
-          <InputLabel id="formal-level-select-label">
-            フォーマルレベル
-          </InputLabel>
-          <Select
-            labelId="formal-level-select-label"
-            id="formal-level-select"
-            value={props.data.formalLevel}
-            label="フォーマルレベル"
-            onChange={(event) => {
-              props.callback.onSelectFormalLevel(event.target.value as number);
-            }}
-          >
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
-            <MenuItem value={4}>4</MenuItem>
-          </Select>
-        </FormControl>
-      ) : (
-        <></>
-      )}
       <List>
         {props.data.items.map((item) => {
           const labelId = `color-checkbox-list-label-${item.itemId}`;

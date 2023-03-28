@@ -3,6 +3,7 @@ import { FilterCategoryGroupCallback } from "./FilterCategoryGroupCallback";
 import { FilterCheckboxArrayCallback } from "./FilterCheckboxArrayCallback";
 import { FilterMediaArrayCallback } from "./FilterMediaArrayCallback";
 import { FilterSizeArrayCallback } from "./FilterSizeArrayCallback";
+import { FormalRankRefinement } from "../../../../model/selecting/browse/FormalRankRefinement";
 
 export interface FilterGroupCollectionCallback {
   categoryCallback: FilterCategoryGroupCallback;
@@ -12,6 +13,7 @@ export interface FilterGroupCollectionCallback {
   patternCallback: FilterMediaArrayCallback;
   logoCallback: FilterMediaArrayCallback;
   dropSizeCallback: FilterCheckboxArrayCallback;
+  formalRankCallback: (value: FormalRankRefinement) => void;
   ngCallback: FilterCheckboxArrayCallback;
   optionCallback: FilterCheckboxArrayCallback;
   onItemIdChanged: (newId: number) => void;

@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardMedia,
   Chip,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -46,13 +47,14 @@ export const ItemCard = (props: ItemCardProps) => {
             height="auto"
             alt=""
           />
-          {props.data.seriesFeature !== "" && (
+          <Tooltip title="キレイ度">
             <Chip
               size="small"
-              label={props.data.seriesFeature}
+              label={props.data.formalRank}
               className={classes.seriesFeatureChip}
             />
-          )}
+          </Tooltip>
+
           <Typography variant="body1">{props.data.seriesName}</Typography>
           <Typography variant="body2" color="textSecondary">
             {props.data.categoryName}

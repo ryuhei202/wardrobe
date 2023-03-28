@@ -19,7 +19,7 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { useArrangesRegisterItems } from "../../hooks/api/UseArrangesRegisterItems";
 import { ConfirmResponse } from "../../model/api/response/styling/browse/ConfirmResponse";
 import { ValidationErrorType } from "../../model/selecting/browse/ValidationErrorType";
@@ -27,7 +27,6 @@ import { SelectionConfirmData } from "../../model/selecting/props_data/Selection
 import {
   AdminShowContext,
   CoordinateIdContext,
-  MemberShowContext,
 } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
 import { SelectionConfirmCallback } from "./callback/SelectionConfirmCallback";
@@ -42,8 +41,6 @@ export interface SelectionConfirmProps {
 
 export const SelectionConfirm = (props: SelectionConfirmProps) => {
   const coordinateId = useContextDefinedState(CoordinateIdContext);
-  const isMarriagePlan =
-    useContextDefinedState(MemberShowContext).data?.isMarriagePlan;
   const classes = useSelectionConfirmStyle();
   const adminShow = useContextDefinedState(AdminShowContext);
   const [adminId, setAdminId] = useState<number | undefined>(
@@ -54,23 +51,17 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
         ? adminShow.id
         : undefined)
   );
-  const [selectedCreateTriggerId, setSelectedCreateTriggerId] = useState<
-    number | null
-  >(props.response.createTrigger?.selectedId ?? null);
 
   const { mutate, error, isLoading } = useArrangesRegisterItems({
     adminId: adminId ?? 0,
     itemIds: props.data.items.map((item) => item.itemInfo.id),
     coordinateId,
-    createTrigger: selectedCreateTriggerId ?? undefined,
   });
 
   const isValidSubmit =
     props.response.validateErrors.filter(
       (error) => error.errorType === ValidationErrorType.Rejected
-    ).length === 0 &&
-    adminId !== undefined &&
-    (!isMarriagePlan || selectedCreateTriggerId !== null);
+    ).length === 0 && adminId !== undefined;
 
   return (
     <>
@@ -109,28 +100,6 @@ export const SelectionConfirm = (props: SelectionConfirmProps) => {
             ))}
           </Select>
         </FormControl>
-
-        {isMarriagePlan ? (
-          <FormControl className={classes.formControl}>
-            <InputLabel id="createTriggerInput">作成トリガー</InputLabel>
-            <Select
-              labelId="createTriggerInput"
-              label="作成トリガー"
-              value={selectedCreateTriggerId ?? ""}
-              onChange={(event: SelectChangeEvent<string | number>) => {
-                setSelectedCreateTriggerId(event.target.value as number);
-              }}
-            >
-              {props.response.createTrigger?.selectChoices.map((choice) => (
-                <MenuItem key={choice.id} value={choice.id}>
-                  {choice.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        ) : (
-          <></>
-        )}
 
         {props.response.validateErrors.length > 0 ? (
           <Paper>
