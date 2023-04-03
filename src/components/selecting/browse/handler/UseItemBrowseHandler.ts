@@ -348,7 +348,6 @@ export const useItemBrowseHandler = (
         });
         return;
       }
-      console.log({ currentIndex });
       currentIndex += 1;
     }
 
