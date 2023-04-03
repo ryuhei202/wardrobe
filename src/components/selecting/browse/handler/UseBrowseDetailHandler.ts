@@ -21,7 +21,7 @@ import {
 import { useQueryClient } from "react-query";
 
 export interface BrowseDetailHandler {
-  selectedItem: TItem | null;
+  selectedItem: Omit<TItem, "rank"> | null;
   currentValidationErrors: ValidationError[];
   detailStatus: DetailStatus;
   isPostLoading: boolean;
@@ -48,7 +48,9 @@ export const useBrowseDetailHandler = (
   const [selectedSizeIndex, setSelectedSizeIndex] = useState<number | null>(
     null
   );
-  const [selectedItem, setSelectedItem] = useState<TItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Omit<TItem, "rank"> | null>(
+    null
+  );
   const [currentValidationErrors, setCurrentValidationErrors] = useState<
     ValidationError[]
   >([]);
