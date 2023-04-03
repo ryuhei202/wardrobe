@@ -237,6 +237,13 @@ export const useItemBrowseHandler = (
     );
     if (appliedNgs.length) result = result.concat(appliedNgs);
 
+    const appliedRank = currentRefinement.rank.map((rank) => {
+      return {
+        name: `ランク: ${rank}`,
+      };
+    });
+    if (appliedRank.length) result = result.concat(appliedRank);
+
     const appliedOptions = optionHandler.appliedFilters(
       choice.option,
       currentRefinement.optionIds
@@ -330,13 +337,21 @@ export const useItemBrowseHandler = (
       currentIndex += currentRefinement.logoIds.length;
     }
 
-    if (currentIndex === index) {
-      setCurrentRefinement({
-        ...currentRefinement,
-        formalRank: { min: 1, max: 10 },
-      });
-      return;
+    if (
+      currentRefinement.formalRank.min !== 1 ||
+      currentRefinement.formalRank.max !== 10
+    ) {
+      if (currentIndex === index) {
+        setCurrentRefinement({
+          ...currentRefinement,
+          formalRank: { min: 1, max: 10 },
+        });
+        return;
+      }
+      console.log({ currentIndex });
+      currentIndex += 1;
     }
+
     if (currentRefinement.ngIds.length > 0) {
       if (currentRefinement.ngIds.length - 1 + currentIndex >= index) {
         ngHandler.deleteFilter(currentRefinement.ngIds, index - currentIndex);
@@ -344,6 +359,18 @@ export const useItemBrowseHandler = (
       }
       currentIndex += currentRefinement.ngIds.length;
     }
+
+    if (currentRefinement.rank.length > 0) {
+      if (currentRefinement.rank.length - 1 + currentIndex >= index) {
+        const newRank = currentRefinement.rank.filter(
+          (_, rankIndex) => rankIndex !== index - currentIndex
+        );
+        setCurrentRefinement({ ...currentRefinement, rank: newRank });
+        return;
+      }
+      currentIndex += currentRefinement.rank.length;
+    }
+
     if (currentRefinement.optionIds.length > 0) {
       if (currentRefinement.optionIds.length - 1 + currentIndex >= index) {
         optionHandler.deleteFilter(
