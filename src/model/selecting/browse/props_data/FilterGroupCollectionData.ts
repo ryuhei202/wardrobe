@@ -1,9 +1,9 @@
-import { FilterPartSizeData } from "./FilterPartSizeData";
+import { FormalRankRefinement } from "../FormalRankRefinement";
 import { FilterCategoryGroupData } from "./FilterCategoryGroupData";
 import { FilterCheckboxData } from "./FilterCheckboxData";
 import { FilterMediaData } from "./FilterMediaData";
+import { FilterPartSizeData } from "./FilterPartSizeData";
 import { FilterSizeData } from "./FilterSizeData";
-import { FormalRankRefinement } from "../FormalRankRefinement";
 
 export interface FilterGroupCollectionData {
   readonly categoryData: FilterCategoryGroupData;
@@ -15,5 +15,6 @@ export interface FilterGroupCollectionData {
   readonly dropSizeData: FilterCheckboxData[];
   readonly formalRankData: FormalRankRefinement;
   readonly ngData: FilterCheckboxData[];
+  readonly rankData: FilterCheckboxData[];
   readonly optionData: FilterCheckboxData[];
 }
