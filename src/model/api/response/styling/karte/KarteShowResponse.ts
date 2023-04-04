@@ -9,5 +9,5 @@ export interface KarteShowResponse {
   readonly registeredItems: TItem[];
   readonly isLeeapPlan: boolean;
   readonly plan: TPlan;
-  readonly isAvailableBRank: boolean;
+  readonly isSelectableBRank: boolean;
 }
