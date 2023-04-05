@@ -211,6 +211,7 @@ export const useBrowseDetailHandler = (
           itemId: item.itemId,
           values: item.values,
           isSelected: selectedItem?.id === item.itemId ?? false,
+          rank: item.rank,
         };
       }),
     };
