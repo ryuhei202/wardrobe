@@ -1,8 +1,8 @@
-import { FilterFormalRankResponse } from "./FilterFormalRankResponse";
 import { FilterMediaResponse } from "./FilterMediaResponse";
-import { FilterPartSizeResponse } from "./FilterPartSizeResponse";
 import { FilterResponse } from "./FilterResponse";
 import { LargeCategoryChoiceResponse } from "./LargeCategoryChoiceResponse";
+import { FilterPartSizeResponse } from "./FilterPartSizeResponse";
+import { FilterFormalRankResponse } from "./FilterFormalRankResponse";
 
 export interface FilterChoiceResponse {
   readonly largeCategory: LargeCategoryChoiceResponse[];

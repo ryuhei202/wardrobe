@@ -15,5 +15,4 @@ export interface GetIndexFilterParams {
   formalRank: FormalRankRefinement;
   ng: number[];
   option: number[];
-  rank: string[];
 }

@@ -29,7 +29,6 @@ type TProps = {
   hearingCompleted: boolean;
   isLeeapPlan: boolean;
   plan: TPlan;
-  isSelectableBRank: boolean;
 };
 
 export const ChartMainContents = ({
@@ -37,7 +36,6 @@ export const ChartMainContents = ({
   hearingCompleted,
   isLeeapPlan,
   plan,
-  isSelectableBRank,
 }: TProps) => {
   const memberId = useContextDefinedState(MemberIdContext);
   const chartId = useContextDefinedState(ChartIdContext);
@@ -55,10 +53,7 @@ export const ChartMainContents = ({
   return (
     <Box>
       <div style={{ marginTop: theme.spacing(2) }}>
-        <PlanTag
-          color={isLeeapPlan ? "leeap" : "uwear"}
-          name={`${plan.name}${isSelectableBRank ? "(Bランク可)" : ""}`}
-        />
+        <PlanTag color={isLeeapPlan ? "leeap" : "uwear"} name={plan.name} />
       </div>
       <FormControlLabel
         value="end"
