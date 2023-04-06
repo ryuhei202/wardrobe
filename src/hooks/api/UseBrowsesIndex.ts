@@ -1,13 +1,13 @@
+import { Refinement } from "./../../model/selecting/browse/Refinement";
+import { GetIndexFilterParams } from "../../model/api/request/styling/browse/GetIndexFilterParams";
+import { GetIndexParams } from "../../model/api/request/styling/browse/GetIndexParams";
+import { BrowseIndexResponse } from "../../model/api/response/styling/browse/BrowseIndexResponse";
+import { useGetRequest } from "./UseGetRequest";
 import {
   QueryObserverResult,
   RefetchOptions,
   RefetchQueryFilters,
 } from "react-query";
-import { GetIndexFilterParams } from "../../model/api/request/styling/browse/GetIndexFilterParams";
-import { GetIndexParams } from "../../model/api/request/styling/browse/GetIndexParams";
-import { BrowseIndexResponse } from "../../model/api/response/styling/browse/BrowseIndexResponse";
-import { Refinement } from "./../../model/selecting/browse/Refinement";
-import { useGetRequest } from "./UseGetRequest";
 
 type BrowsesIndex = {
   readonly data?: BrowseIndexResponse;
@@ -39,7 +39,6 @@ export const useBrowsesIndex = ({
       },
       ng: refinement.ngIds,
       option: refinement.optionIds,
-      rank: refinement.rank,
     };
     if (refinement.mediumCategoryId)
       filterParams.mediumCategory = refinement.mediumCategoryId;

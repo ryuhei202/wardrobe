@@ -55,8 +55,6 @@ export const SelectedItemArray = (props: SelectionConfirmProps) => {
               メインカラー: {props.data[index].itemInfo.mainColorName}
               <br />
               サブカラー: {props.data[index].itemInfo.subColorName}
-              <br />
-              ランク: {props.data[index].itemInfo.rank}
             </Typography>
           </CardContent>
         </Card>

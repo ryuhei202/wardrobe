@@ -22,7 +22,7 @@ export const DetailItemTable = (props: DetailItemTableProps) => {
       <Table aria-label="item table">
         <TableHead>
           <TableRow>
-            <TableCell>アイテムID（ランク）</TableCell>
+            <TableCell>アイテムID</TableCell>
             {props.data.columns.map((column, index) => (
               <TableCell key={index}>{column}</TableCell>
             ))}
@@ -35,7 +35,7 @@ export const DetailItemTable = (props: DetailItemTableProps) => {
               onClick={() => props.callback.onSelect(index)}
               key={row.itemId}
             >
-              <TableCell>{`${row.itemId}（${row.rank}）`}</TableCell>
+              <TableCell>{row.itemId}</TableCell>
               {row.values.map((value, index) => (
                 <TableCell key={index}>{value ?? ""}</TableCell>
               ))}

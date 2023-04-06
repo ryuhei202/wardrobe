@@ -13,5 +13,4 @@ export type TItem = {
   readonly partSizes: PartSize[];
   readonly locationName: string;
   readonly dropSize: string;
-  readonly rank: string;
 };
