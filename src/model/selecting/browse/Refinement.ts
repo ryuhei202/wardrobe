@@ -19,5 +19,6 @@ export interface Refinement {
   readonly ngIds: number[];
   readonly optionIds: number[];
   readonly sortId: number;
+  readonly rank: string[];
   readonly pageNo: number;
 }

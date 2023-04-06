@@ -1,3 +1,4 @@
+import { ExpandMore, Search } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -6,17 +7,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { ExpandMore, Search } from "@mui/icons-material";
-import React from "react";
+import { FilterGroupCollectionData } from "../../../model/selecting/browse/props_data/FilterGroupCollectionData";
 import { FilterGroupCollectionCallback } from "./callback/FilterGroupCollectionCallback";
 import { FilterCategoryGroup } from "./FilterCategoryGroup";
-import { FilterMediaArray } from "./FilterMediaArray";
 import { FilterCheckboxArray } from "./FilterCheckboxArray";
-import { FilterSizeArray } from "./FilterSizeArray";
-import { FilterGroupCollectionData } from "../../../model/selecting/browse/props_data/FilterGroupCollectionData";
-import { FilterPartSize } from "./FilterPartSize";
-import { useFilterGroupCollectionStyle } from "./style/UseFilterGroupCollectionStyle";
 import { FilterFormalRank } from "./FilterFormalRank";
+import { FilterMediaArray } from "./FilterMediaArray";
+import { FilterPartSize } from "./FilterPartSize";
+import { FilterSizeArray } from "./FilterSizeArray";
+import { useFilterGroupCollectionStyle } from "./style/UseFilterGroupCollectionStyle";
 
 interface FilterGroupCollectionProps {
   data: FilterGroupCollectionData;
@@ -167,6 +166,22 @@ export const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
             labelIdPrefix="option-checkbox-list-label-"
             data={props.data.ngData}
             callback={props.callback.ngCallback}
+          />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="filter7a-content"
+          id="filter7a-header"
+        >
+          <Typography variant="body2">ランク</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FilterCheckboxArray
+            labelIdPrefix="option-checkbox-list-label-"
+            data={props.data.rankData}
+            callback={props.callback.rankCallback}
           />
         </AccordionDetails>
       </Accordion>
