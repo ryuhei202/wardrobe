@@ -26,6 +26,7 @@ export const ChartMainContentsContainer = () => {
       hearingCompleted={chartsShowData.hearingCompleted}
       plan={chartsShowData.plan}
       isLeeapPlan={chartsShowData.isLeeapPlan}
+      isSelectableBRank={chartsShowData.isSelectableBRank}
     />
   );
 };
