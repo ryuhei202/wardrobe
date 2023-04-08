@@ -27,8 +27,12 @@ export const CoordinateTopsRatio = ({
   const [isJacketRequested, setIsJacketRequested] = useState(
     response.jacketOption?.isJacketRequested
   );
-  const [shortSleeveNum, setShortSleeveNum] = useState(response.shortSleeveNum);
-  const [longSleeveNum, setLongSleeveNum] = useState(response.longSleeveNum);
+  const [shortSleeveNum, setShortSleeveNum] = useState<number | null>(
+    response.shortSleeveNum || 0
+  );
+  const [longSleeveNum, setLongSleeveNum] = useState<number | null>(
+    response.longSleeveNum || 0
+  );
   const { mutate, isLoading } = useCoordinateTopsRatiosUpdate({
     coordinateId,
     longSleeveNum: longSleeveNum ?? 0,
