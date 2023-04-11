@@ -48,15 +48,14 @@ export const CoordinateTopsRatio = ({
     shortSleeveNum !== response.shortSleeveNum ||
     longSleeveNum !== response.longSleeveNum;
   const validateTopsNum = () => {
-    if (isJacketRequested && shortSleeveNum >= 0 && longSleeveNum >= 0) {
-      return shortSleeveNum + longSleeveNum == response.jacketOption?.topsNum;
-    } else if (shortSleeveNum >= 0 && longSleeveNum >= 0) {
-      return shortSleeveNum + longSleeveNum == response.topsNum;
-    }
+    if (shortSleeveNum < 0 || longSleeveNum < 0) return false;
+    const totalNum = isJacketRequested
+      ? response.jacketOption?.topsNum
+      : response.topsNum;
+    return shortSleeveNum + longSleeveNum === totalNum;
   };
   const handleSleeveNum = (value: string) => {
-    const num = Number(value);
-    return num;
+    return Number(value);
   };
   const handleSubmit = useCallback(
     (text: string) => {
