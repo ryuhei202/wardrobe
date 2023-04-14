@@ -5,4 +5,5 @@ export interface GetDetailFilterParams {
   size: number[];
   partSize: GetIndexFilterPartSizeParams[];
   ng: number[];
+  ranks: string[];
 }
