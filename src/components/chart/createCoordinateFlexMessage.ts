@@ -26,6 +26,24 @@ export const createCoordinateFlexMessage = ({
     contents: {
       type: "carousel",
       contents: coordinateItems.map((item) => {
+        const bodyContents = [];
+        if (item.isChangeItem) {
+          bodyContents.push({
+            type: "text",
+            text: "[チェンジアイテム]",
+            size: "md",
+            color: "#4C5257",
+            align: "center",
+          });
+        }
+        bodyContents.push({
+          type: "text",
+          text: `${item.itemInfo.categoryName} / ${item.itemInfo.mainColorName}`,
+          size: "md",
+          color: "#4C5257",
+          weight: "bold",
+          align: "center",
+        });
         return {
           type: "bubble",
           hero: {
@@ -37,23 +55,7 @@ export const createCoordinateFlexMessage = ({
           body: {
             type: "box",
             layout: "vertical",
-            contents: [
-              {
-                type: "text",
-                text: item.isChangeItem ? "[チェンジアイテム]" : "",
-                size: "md",
-                color: "#4C5257",
-                align: "center",
-              },
-              {
-                type: "text",
-                text: `${item.itemInfo.categoryName} / ${item.itemInfo.mainColorName}`,
-                size: "md",
-                color: "#4C5257",
-                weight: "bold",
-                align: "center",
-              },
-            ],
+            contents: bodyContents,
             paddingAll: "md",
             backgroundColor: "#E8E7DF",
           },
