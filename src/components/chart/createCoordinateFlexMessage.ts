@@ -32,12 +32,19 @@ export const createCoordinateFlexMessage = ({
             type: "image",
             url: item.itemInfo.imagePath.large,
             aspectRatio: "2:3",
-            size: "full",
+            size: "xl",
           },
           body: {
             type: "box",
             layout: "vertical",
             contents: [
+              item.isChangeItem && {
+                type: "text",
+                text: "[チェンジアイテム]",
+                size: "md",
+                color: "#4C5257",
+                align: "center",
+              },
               {
                 type: "text",
                 text: `${item.itemInfo.categoryName} / ${item.itemInfo.mainColorName}`,
