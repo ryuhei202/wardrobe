@@ -38,9 +38,9 @@ export const createCoordinateFlexMessage = ({
             type: "box",
             layout: "vertical",
             contents: [
-              item.isChangeItem && {
+              {
                 type: "text",
-                text: "[チェンジアイテム]",
+                text: item.isChangeItem ? "[チェンジアイテム]" : "",
                 size: "md",
                 color: "#4C5257",
                 align: "center",
