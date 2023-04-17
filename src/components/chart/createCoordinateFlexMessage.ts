@@ -72,7 +72,7 @@ export const createCoordinateFlexMessage = ({
           action: {
             type: "message",
             label: "こちらのコーデでお願いします！",
-            text: "＞こちらのコーデでお願いします！",
+            text: "こちらのコーデでお願いします！",
           },
         },
         {
@@ -80,7 +80,7 @@ export const createCoordinateFlexMessage = ({
           action: {
             type: "message",
             label: "コーデの変更を依頼したいです！",
-            text: "＞コーデの変更を依頼したいです！",
+            text: "コーデの変更を依頼したいです！",
           },
         },
       ],
