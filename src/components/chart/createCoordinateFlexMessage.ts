@@ -32,7 +32,7 @@ export const createCoordinateFlexMessage = ({
             type: "image",
             url: item.itemInfo.imagePath.large,
             aspectRatio: "2:3",
-            size: "full",
+            size: "xl",
           },
           body: {
             type: "box",
