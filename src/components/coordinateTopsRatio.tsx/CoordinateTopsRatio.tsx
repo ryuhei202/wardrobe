@@ -27,12 +27,16 @@ export const CoordinateTopsRatio = ({
   const [isJacketRequested, setIsJacketRequested] = useState(
     response.jacketOption?.isJacketRequested
   );
-  const [shortSleeveNum, setShortSleeveNum] = useState(response.shortSleeveNum);
-  const [longSleeveNum, setLongSleeveNum] = useState(response.longSleeveNum);
+  const [shortSleeveNum, setShortSleeveNum] = useState<number>(
+    response.shortSleeveNum || 0
+  );
+  const [longSleeveNum, setLongSleeveNum] = useState<number>(
+    response.longSleeveNum || 0
+  );
   const { mutate, isLoading } = useCoordinateTopsRatiosUpdate({
     coordinateId,
-    longSleeveNum: longSleeveNum ?? 0,
-    shortSleeveNum: shortSleeveNum ?? 0,
+    longSleeveNum: longSleeveNum,
+    shortSleeveNum: shortSleeveNum,
     isJacketRequested,
   });
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
@@ -44,11 +48,14 @@ export const CoordinateTopsRatio = ({
     shortSleeveNum !== response.shortSleeveNum ||
     longSleeveNum !== response.longSleeveNum;
   const validateTopsNum = () => {
-    return shortSleeveNum !== null && longSleeveNum != null;
+    if (shortSleeveNum < 0 || longSleeveNum < 0) return false;
+    const totalNum = isJacketRequested
+      ? response.jacketOption?.topsNum
+      : response.topsNum;
+    return shortSleeveNum + longSleeveNum === totalNum;
   };
   const handleSleeveNum = (value: string) => {
-    const num = Number(value);
-    return isNaN(num) || num < 0 ? null : num;
+    return Number(value);
   };
   const handleSubmit = useCallback(
     (text: string) => {

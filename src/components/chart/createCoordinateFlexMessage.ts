@@ -26,27 +26,36 @@ export const createCoordinateFlexMessage = ({
     contents: {
       type: "carousel",
       contents: coordinateItems.map((item) => {
+        const bodyContents = [];
+        if (item.isChangeItem) {
+          bodyContents.push({
+            type: "text",
+            text: "[チェンジアイテム]",
+            size: "md",
+            color: "#4C5257",
+            align: "center",
+          });
+        }
+        bodyContents.push({
+          type: "text",
+          text: `${item.itemInfo.categoryName} / ${item.itemInfo.mainColorName}`,
+          size: "md",
+          color: "#4C5257",
+          weight: "bold",
+          align: "center",
+        });
         return {
           type: "bubble",
           hero: {
             type: "image",
             url: item.itemInfo.imagePath.large,
             aspectRatio: "2:3",
-            size: "full",
+            size: "xl",
           },
           body: {
             type: "box",
             layout: "vertical",
-            contents: [
-              {
-                type: "text",
-                text: `${item.itemInfo.categoryName} / ${item.itemInfo.mainColorName}`,
-                size: "md",
-                color: "#4C5257",
-                weight: "bold",
-                align: "center",
-              },
-            ],
+            contents: bodyContents,
             paddingAll: "md",
             backgroundColor: "#E8E7DF",
           },
@@ -65,7 +74,7 @@ export const createCoordinateFlexMessage = ({
           action: {
             type: "message",
             label: "こちらのコーデでお願いします！",
-            text: "＞こちらのコーデでお願いします！",
+            text: "こちらのコーデでお願いします！",
           },
         },
         {
@@ -73,7 +82,7 @@ export const createCoordinateFlexMessage = ({
           action: {
             type: "message",
             label: "コーデの変更を依頼したいです！",
-            text: "＞コーデの変更を依頼したいです！",
+            text: "コーデの変更を依頼したいです！",
           },
         },
       ],
