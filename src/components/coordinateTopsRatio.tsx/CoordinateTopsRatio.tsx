@@ -49,10 +49,11 @@ export const CoordinateTopsRatio = ({
     longSleeveNum !== response.longSleeveNum;
   const validateTopsNum = () => {
     if (shortSleeveNum < 0 || longSleeveNum < 0) return false;
+    if (response.topsNum === null) return true;
     const totalNum = isJacketRequested
-      ? response.jacketOption?.topsNum
+      ? (response.jacketOption?.topsNum as number)
       : response.topsNum;
-    return shortSleeveNum + longSleeveNum === totalNum;
+    return shortSleeveNum + longSleeveNum <= totalNum;
   };
   const handleSleeveNum = (value: string) => {
     return Number(value);
