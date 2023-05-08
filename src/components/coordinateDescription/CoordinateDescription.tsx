@@ -1,6 +1,7 @@
 import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useCoordinateDescriptionsUpdate } from "../../hooks/api/UseCoordinateDescriptionsUpdate";
+import { useSimplifiedHearingsShow } from "../../hooks/api/UseSimplifiedHearingsShow";
 import { CoordinateDescriptionsShowResponse } from "../../model/api/response/styling/coordinateDescription/CoordinateDescriptionsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
@@ -26,6 +27,9 @@ export const CoordinateDescription = ({
 }: TProps) => {
   const [text, setText] = useState(data.text ?? "");
   const { mutate, isLoading } = useCoordinateDescriptionsUpdate({
+    coordinateId,
+  });
+  const { data: simplifiedHearingData } = useSimplifiedHearingsShow({
     coordinateId,
   });
   const [isTextChanged, setIsTextChanged] = useState(false);
@@ -75,6 +79,7 @@ export const CoordinateDescription = ({
           descriptionText={text}
           coordinateItems={coordinateItems}
           disabled={isLineMessagesSendDisable || isTextChanged || text === ""}
+          simplifiedHearing={simplifiedHearingData}
         />
       )}
       <Snackbar
