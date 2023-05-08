@@ -19,14 +19,14 @@ type TCoordinateFormalRanksUpdateArg = {
   coordinateId: number;
 } & TCoordinateFormalRanksUpdateParams;
 
-export const useCoordinateTopsRatiosUpdate = ({
+export const useCoordinateFormalRanksUpdate = ({
   coordinateId,
   formalRank,
 }: TCoordinateFormalRanksUpdateArg): CoordinateFormalRanksUpdate => {
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateFormalRanksUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/coordinate_tops_ratios`, {
+  >(`coordinates/${coordinateId}/coordinate_formal_ranks`, {
     formalRank,
   });
 
