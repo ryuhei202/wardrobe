@@ -10,7 +10,7 @@ export const useCoordinateFormalRanksShow = ({
 }: useCoordinateFormalRanksShowArg) => {
   const { data, error, refetch } =
     useGetRequest<CoordinateFormalRanksShowResponse>(
-      `coordinates/${coordinateId}/coordinate_formal_ranks`
+      `coordinates/${coordinateId}/coordinate_formal_rank`
     );
 
   return {
