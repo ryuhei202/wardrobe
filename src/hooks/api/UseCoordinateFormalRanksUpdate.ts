@@ -1,15 +1,4 @@
-import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
 import { usePatchRequest } from "./UsePatchRequest";
-
-type CoordinateFormalRanksUpdate = {
-  readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
-    Error,
-    TCoordinateFormalRanksUpdateParams | undefined
-  >;
-  readonly isLoading: boolean;
-};
 
 type TCoordinateFormalRanksUpdateParams = {
   formalRank: number;
@@ -22,7 +11,7 @@ type TCoordinateFormalRanksUpdateArg = {
 export const useCoordinateFormalRanksUpdate = ({
   coordinateId,
   formalRank,
-}: TCoordinateFormalRanksUpdateArg): CoordinateFormalRanksUpdate => {
+}: TCoordinateFormalRanksUpdateArg) => {
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateFormalRanksUpdateParams,
     Error
