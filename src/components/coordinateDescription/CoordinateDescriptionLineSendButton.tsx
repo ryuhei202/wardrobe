@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { useLineMessagesCreate } from "../../hooks/api/UseLineMessagesCreate";
+import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 import { createCoordinateFlexMessage } from "../chart/createCoordinateFlexMessage";
 
@@ -15,18 +16,21 @@ type TProps = {
   descriptionText: string;
   coordinateItems: TCoordinateItem[];
   disabled: boolean;
+  simplifiedHearing?: SimplifiedHearingsShowResponse;
 };
 
 export const CoordinateDescriptionLineSendButton = ({
   descriptionText,
   coordinateItems,
   disabled,
+  simplifiedHearing,
 }: TProps) => {
   const [isFirstTransmit, setIsFirstTransmit] = useState(true);
   const messages = createCoordinateFlexMessage({
     descriptionText,
     coordinateItems,
     isFirstTransmit,
+    simplifiedHearing,
   });
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
@@ -48,7 +52,7 @@ export const CoordinateDescriptionLineSendButton = ({
         label="初回送信"
       />
       <Button
-        disabled={disabled || isLoading}
+        disabled={disabled || isLoading || simplifiedHearing === undefined}
         variant="contained"
         onClick={() => {
           if (
