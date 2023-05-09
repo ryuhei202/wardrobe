@@ -35,26 +35,23 @@ export const CoordinateFormalRanks = ({
     return Number(value);
   };
 
-  const handleSubmit = useCallback(
-    (text: string) => {
-      mutate(undefined, {
-        onSuccess: () => {
-          onUpdateComplete().then(() => {
-            setSeverity("success");
-            setSnackBarText(`${text}を保存しました`);
-          });
-        },
-        onError: () => {
-          setSeverity("error");
-          setSnackBarText(`${text}の変更に失敗しました`);
-        },
-        onSettled: () => {
-          setIsSnackBarOpen(true);
-        },
-      });
-    },
-    [mutate, onUpdateComplete]
-  );
+  const handleSubmit = useCallback(() => {
+    mutate(undefined, {
+      onSuccess: () => {
+        onUpdateComplete().then(() => {
+          setSeverity("success");
+          setSnackBarText("キレイ度を保存しました");
+        });
+      },
+      onError: () => {
+        setSeverity("error");
+        setSnackBarText("キレイ度の変更に失敗しました");
+      },
+      onSettled: () => {
+        setIsSnackBarOpen(true);
+      },
+    });
+  }, [mutate, onUpdateComplete]);
   return (
     <Box sx={{ margin: "0 1em" }}>
       <Box
@@ -82,7 +79,7 @@ export const CoordinateFormalRanks = ({
           color="secondary"
           disabled={!isChanged || !validateFormalRank() || isLoading}
           disableElevation
-          onClick={() => handleSubmit("キレイ度")}
+          onClick={() => handleSubmit()}
           style={{ width: "100%" }}
         >
           更新
