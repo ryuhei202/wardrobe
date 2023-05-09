@@ -15,7 +15,7 @@ export const useCoordinateFormalRanksUpdate = ({
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateFormalRanksUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/coordinate_formal_ranks`, {
+  >(`coordinates/${coordinateId}/coordinate_formal_rank`, {
     formalRank,
   });
 
