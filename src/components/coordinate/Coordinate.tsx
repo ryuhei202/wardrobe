@@ -1,5 +1,6 @@
 import { List, ListItem, ListItemText } from "@mui/material";
 import { CoordinateDescriptionContainer } from "../coordinateDescription/CoordinateDescriptionContainer";
+import { CoordinateFormalRanksFetcher } from "../coordinateFomalRank/CoordinateFomalRanksFetcher";
 import { CoordinateHearingFetcher } from "../coordinateHearing/CoordinateHearingFetcher";
 import { CoordinateMemoFetcher } from "../coordinateMemo/CoordinateMemoFetcher";
 import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatternContainer";
@@ -45,6 +46,16 @@ export const Coordinate = ({
       </ListItem>
       <ListItem>
         <CoordinateTopsRatioFetcher
+          coordinateId={coordinateId}
+          isEditable={isEditable ?? false}
+        />
+      </ListItem>
+
+      <ListItem>
+        <ListItemText secondary="キレイ度" />
+      </ListItem>
+      <ListItem>
+        <CoordinateFormalRanksFetcher
           coordinateId={coordinateId}
           isEditable={isEditable ?? false}
         />
