@@ -5,12 +5,12 @@ import {
   Typography,
   TypographyProps,
 } from "@mui/material";
-import { MemberSizeSizeChoiceResponse } from "../../model/api/response/styling/member_size/MemberSizeSizeChoiceResponse";
 import { TMemberBasicSizes } from "../../model/memberSize/MemberSizeTypes";
 import { memberBasicSizeHandler } from "./MemberBasicSizeHandler";
 import { memberBasicSizePresenter } from "./MemberBasicSizePresenter";
 import { MemberSizeNumberInput } from "./input/MemberSizeNumberInput";
 import { MemberSizeSizeSelect } from "./input/MemberSizeSizeSelect";
+import { MemberSizeSizeChoiceResponse } from "../../model/api/response/styling/member_size/MemberSizeSizeChoiceResponse";
 
 type TProps = {
   editingSizes: TMemberBasicSizes;
@@ -21,15 +21,15 @@ type TProps = {
   style?: React.CSSProperties;
 };
 
-export const EmphasizedText = (props: TypographyProps) => {
+const EmphasizedText = (props: TypographyProps) => {
   return <Typography {...props} fontWeight={"bold"} variant="subtitle2" />;
 };
 
-export const StackColumn = (props: StackProps) => {
+const StackColumn = (props: StackProps) => {
   return <Stack {...props} direction={"row"} spacing={2} alignItems="center" />;
 };
 
-export const StackRow = (props: StackProps) => {
+const StackRow = (props: StackProps) => {
   return <Stack {...props} direction={"row"} spacing={4} />;
 };
 
