@@ -21,6 +21,7 @@ export const convertResToMemberSizes = (
       bmi,
       height,
       weight,
+      choices,
     } = response;
 
     return {
@@ -35,6 +36,7 @@ export const convertResToMemberSizes = (
       bmi,
       height,
       weight,
+      choices,
     };
   };
 
