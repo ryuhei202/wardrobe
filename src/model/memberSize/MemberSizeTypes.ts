@@ -24,18 +24,7 @@ export type TMemberBasicSizesEditableKey =
   | "dropSizeAdmin";
 
 export type TMemberBasicSizes = {
-  bmi: number;
-  height: number;
-  weight: number;
-  tops: number;
-  topsAdmin: number;
-  bottoms: number;
-  bottomsAdmin: number;
-  jacketAdmin: number;
-  dropSizeAdmin: number;
-  referenceJacketSize: number;
-  referenceJacketDropSize: number;
-  choices: Object;
+  [key in TMemberBasicSizesKey]: number;
 };
 
 export type TMemberPartSizesKey =
