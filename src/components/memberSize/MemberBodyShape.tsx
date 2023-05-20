@@ -6,7 +6,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { StyledTableCell, StyledTableRow } from "./MemberSizeTable";
+import { StyledTableCell } from "./styleTable/StyledTableCell";
+import { StyledTableRow } from "./styleTable/StyledTableRow";
 
 type TProps = {
   readonly shapeWaist: string;
@@ -33,7 +34,7 @@ export const MemberBodyShape = ({
         <TableBody>
           <StyledTableRow>
             <StyledTableCell>
-              <Typography fontWeight={"bold"} variant={"subtitle2"} p={1}>
+              <Typography fontWeight="bold" variant="subtitle2" p={1}>
                 肩幅のタイプ
               </Typography>
             </StyledTableCell>
@@ -43,7 +44,7 @@ export const MemberBodyShape = ({
           </StyledTableRow>
           <StyledTableRow>
             <StyledTableCell>
-              <Typography fontWeight={"bold"} variant={"subtitle2"} p={1}>
+              <Typography fontWeight="bold" variant="subtitle2" p={1}>
                 胸板のタイプ
               </Typography>
             </StyledTableCell>
@@ -53,7 +54,7 @@ export const MemberBodyShape = ({
           </StyledTableRow>
           <StyledTableRow>
             <StyledTableCell>
-              <Typography fontWeight={"bold"} variant={"subtitle2"} p={1}>
+              <Typography fontWeight="bold" variant="subtitle2" p={1}>
                 お腹周りのタイプ
               </Typography>
             </StyledTableCell>
@@ -63,7 +64,7 @@ export const MemberBodyShape = ({
           </StyledTableRow>
           <StyledTableRow>
             <StyledTableCell>
-              <Typography fontWeight={"bold"} variant={"subtitle2"} p={1}>
+              <Typography fontWeight="bold" variant="subtitle2" p={1}>
                 ヒップのタイプ
               </Typography>
             </StyledTableCell>
