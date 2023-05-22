@@ -7,6 +7,7 @@ type TProps = {
   onClickSubmitBtn: () => void;
   basicSizeComponent: ReactNode;
   partSizeComponent: ReactNode;
+  bodyShapeComponent: ReactNode;
   isLoadingSubmit: boolean;
   aboutSize: string | null;
   style?: React.CSSProperties;
@@ -17,6 +18,7 @@ export const MemberSize = ({
   onClickSubmitBtn,
   basicSizeComponent,
   partSizeComponent,
+  bodyShapeComponent,
   isLoadingSubmit,
   style,
   aboutSize,
@@ -28,8 +30,11 @@ export const MemberSize = ({
       style={{ padding: theme.spacing(1), ...style }}
     >
       {basicSizeComponent}
+
       <Divider style={{ margin: "16px 0" }} />
       {partSizeComponent}
+      <Divider style={{ margin: "16px 0" }} />
+      {bodyShapeComponent}
       <Typography
         style={{ marginTop: 16, fontSize: "0.6rem", fontWeight: "bold" }}
       >
