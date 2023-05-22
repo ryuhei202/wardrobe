@@ -132,7 +132,7 @@ export const ChartMainContents = ({
       <Coordinate
         coordinateId={coordinates[selectedCoordinateIndex].id}
         defaultItemNum={coordinates[selectedCoordinateIndex].defaultItemNum}
-        isOneShot={plan.id === null}
+        isLeeapPlan={isLeeapPlan}
         isEditable
         key={coordinates[selectedCoordinateIndex].id}
       />
