@@ -84,7 +84,7 @@ export const CoordinateFormalRanks = ({
           disabled={!isChanged || !validateFormalRank() || isLoading}
           disableElevation
           onClick={() => handleSubmit()}
-          style={{ width: "100" }}
+          style={{ width: "100%" }}
         >
           更新
         </Button>
