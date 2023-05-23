@@ -6,14 +6,12 @@ import { CoordinateDescription } from "./CoordinateDescription";
 type TProps = {
   readonly coordinateId: number;
   readonly defaultItemNum: number | undefined;
-  readonly isOneShot: boolean;
   readonly isEditable: boolean;
 };
 
 export const CoordinateDescriptionContainer = ({
   coordinateId,
   defaultItemNum,
-  isOneShot,
   isEditable,
 }: TProps) => {
   const {
@@ -44,7 +42,6 @@ export const CoordinateDescriptionContainer = ({
         coordinateId={coordinateId}
         coordinateItems={coordinateItemData}
         isLineMessagesSendDisable={coordinateItemData.length !== defaultItemNum}
-        isOneShot={isOneShot}
         onUpdateComplete={refetchCoordinateDescription}
       />
     );

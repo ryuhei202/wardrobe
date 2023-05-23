@@ -13,7 +13,6 @@ type TProps = {
   readonly coordinateId: number;
   readonly coordinateItems: TCoordinateItem[];
   readonly isLineMessagesSendDisable: boolean;
-  readonly isOneShot: boolean;
   readonly onUpdateComplete: () => Promise<any>;
 };
 
@@ -22,7 +21,6 @@ export const CoordinateDescription = ({
   coordinateId,
   coordinateItems,
   isLineMessagesSendDisable,
-  isOneShot,
   onUpdateComplete,
 }: TProps) => {
   const [text, setText] = useState(data.text ?? "");
@@ -67,21 +65,22 @@ export const CoordinateDescription = ({
 
   return (
     <>
-      <MemoForm
-        value={text}
-        rows={14}
-        onChange={onChange}
-        onPost={onPost}
-        disabled={!isTextChanged || isLoading}
-      />
-      {isOneShot && (
+      <>
+        <MemoForm
+          value={text}
+          rows={14}
+          onChange={onChange}
+          onPost={onPost}
+          disabled={!isTextChanged || isLoading}
+        />
         <CoordinateDescriptionLineSendButton
           descriptionText={text}
           coordinateItems={coordinateItems}
           disabled={isLineMessagesSendDisable || isTextChanged || text === ""}
           simplifiedHearing={simplifiedHearingData}
         />
-      )}
+      </>
+
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={5000}
