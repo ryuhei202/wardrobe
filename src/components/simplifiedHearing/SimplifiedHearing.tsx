@@ -39,21 +39,36 @@ export const SimplifiedHearing = ({
           label="意識する相手"
           value={target}
           onChange={(event) => setTarget(event.target.value)}
-          style={{ width: "100%" }}
+          style={{
+            width: "100%",
+          }}
+          InputLabelProps={{
+            style: { fontSize: 14, color: "#333333" },
+          }}
           inputProps={{ style: { fontSize: ".8rem" } }}
         />
         <TextField
           label="シーン"
           value={scene}
           onChange={(event) => setScene(event.target.value)}
-          style={{ width: "100%" }}
+          style={{
+            width: "100%",
+          }}
+          InputLabelProps={{
+            style: { fontSize: 14, color: "#333333" },
+          }}
           inputProps={{ style: { fontSize: ".8rem" } }}
         />
         <TextField
           label="印象"
           value={impression}
           onChange={(event) => setImpression(event.target.value)}
-          style={{ width: "100%" }}
+          style={{
+            width: "100%",
+          }}
+          InputLabelProps={{
+            style: { fontSize: 14, color: "#333333" },
+          }}
           inputProps={{ style: { fontSize: ".8rem" } }}
         />
         <Button
