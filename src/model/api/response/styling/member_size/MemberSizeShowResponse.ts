@@ -32,4 +32,10 @@ export interface MemberSizeShowResponse {
   readonly referenceLengthLegSize: number;
   readonly roundCalf: number;
   readonly referenceRoundCalfSize: number;
+  readonly choices: {
+    readonly shapeWaist: string;
+    readonly shoulder: string;
+    readonly hip: string;
+    readonly bust: string;
+  };
 }
