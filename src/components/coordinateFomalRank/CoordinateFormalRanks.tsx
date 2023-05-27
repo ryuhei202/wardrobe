@@ -1,6 +1,5 @@
 import { Alert, Box, Button, Snackbar, TextField } from "@mui/material";
 import { useCallback, useState } from "react";
-
 import { useCoordinateFormalRanksUpdate } from "../../hooks/api/UseCoordinateFormalRanksUpdate";
 import { CoordinateFormalRanksShowResponse } from "../../model/api/response/styling/coordinateFormalRank/CoordinateFormalRanksShowResponse";
 
@@ -72,7 +71,12 @@ export const CoordinateFormalRanks = ({
             const value = handleFormalRank(event.target.value);
             setFormalRank(value);
           }}
-          style={{ width: "100%" }}
+          style={{
+            width: "100%",
+          }}
+          InputLabelProps={{
+            style: { fontSize: 14, color: "#333333" },
+          }}
         />
         <Button
           variant="contained"

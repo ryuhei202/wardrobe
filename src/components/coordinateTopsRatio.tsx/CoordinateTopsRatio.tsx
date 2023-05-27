@@ -135,7 +135,12 @@ export const CoordinateTopsRatio = ({
               const value = handleSleeveNum(event.target.value);
               setShortSleeveNum(value);
             }}
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+            }}
+            InputLabelProps={{
+              style: { fontSize: 14, color: "#333333" },
+            }}
           />
           <TextField
             type="number"
@@ -147,7 +152,12 @@ export const CoordinateTopsRatio = ({
               const value = handleSleeveNum(event.target.value);
               setLongSleeveNum(value);
             }}
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+            }}
+            InputLabelProps={{
+              style: { fontSize: 14, color: "#333333" },
+            }}
           />
           <Button
             variant="contained"
