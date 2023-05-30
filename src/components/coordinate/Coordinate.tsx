@@ -12,14 +12,14 @@ import { SimplifiedHearingContainer } from "../simplifiedHearing/SimplifiedHeari
 type TProps = {
   readonly coordinateId: number;
   readonly defaultItemNum?: number;
-  readonly isOneShot?: boolean;
+  readonly isLeeapPlan?: boolean;
   readonly isEditable?: boolean;
 };
 
 export const Coordinate = ({
   coordinateId,
   defaultItemNum,
-  isOneShot,
+  isLeeapPlan,
   isEditable,
 }: TProps) => {
   return (
@@ -77,28 +77,30 @@ export const Coordinate = ({
       <ListItem>
         <CoordinatePatternContainer coordinateId={coordinateId} />
       </ListItem>
+      {!isLeeapPlan && (
+        <>
+          <ListItem>
+            <ListItemText secondary="根拠説明" />
+          </ListItem>
+          <ListItem style={{ display: "block" }}>
+            <CoordinateDescriptionContainer
+              coordinateId={coordinateId}
+              defaultItemNum={defaultItemNum}
+              isEditable={isEditable ?? false}
+            />
+          </ListItem>
 
-      <ListItem>
-        <ListItemText secondary="根拠説明" />
-      </ListItem>
-      <ListItem style={{ display: "block" }}>
-        <CoordinateDescriptionContainer
-          coordinateId={coordinateId}
-          defaultItemNum={defaultItemNum}
-          isOneShot={isOneShot ?? false}
-          isEditable={isEditable ?? false}
-        />
-      </ListItem>
-
-      <ListItem>
-        <ListItemText secondary="気持ち文章" />
-      </ListItem>
-      <ListItem style={{ display: "block" }}>
-        <CoordinateStylistCommentContainer
-          coordinateId={coordinateId}
-          isEditable={isEditable ?? false}
-        />
-      </ListItem>
+          <ListItem>
+            <ListItemText secondary="気持ち文章" />
+          </ListItem>
+          <ListItem style={{ display: "block" }}>
+            <CoordinateStylistCommentContainer
+              coordinateId={coordinateId}
+              isEditable={isEditable ?? false}
+            />
+          </ListItem>
+        </>
+      )}
 
       <ListItem>
         <ListItemText secondary="レビュー" />

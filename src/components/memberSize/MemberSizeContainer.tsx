@@ -3,16 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useMemberSizesUpdate } from "../../hooks/api/UseMemberSizesUpdate";
 import { MemberSizeShowResponse } from "../../model/api/response/styling/member_size/MemberSizeShowResponse";
 import { MemberSizeSizeChoiceResponse } from "../../model/api/response/styling/member_size/MemberSizeSizeChoiceResponse";
-import { convertResToMemberSizes } from "../../model/memberSize/convertResToMemberSizes";
 import {
   TMemberBasicSizes,
   TMemberPartSizes,
   TMemberSizes,
 } from "../../model/memberSize/MemberSizeTypes";
-import { MemberIdContext } from "../context/provider/ContextProvider";
+import { convertResToMemberSizes } from "../../model/memberSize/convertResToMemberSizes";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { MemberIdContext } from "../context/provider/ContextProvider";
 
 import { MemberBasicSize } from "./MemberBasicSize";
+import { MemberBodyShape } from "./MemberBodyShape";
 import { MemberSize } from "./MemberSize";
 import { memberSizeContainerHandler } from "./MemberSizeContainerHandler";
 import { MemberSizeTable } from "./MemberSizeTable";
@@ -103,6 +104,14 @@ export const MemberSizeContainer = ({
           shouldActiveSubmitBtn={isChangedSizes}
           isLoadingSubmit={isLoadingMutateSizes}
           aboutSize={aboutSize}
+          bodyShapeComponent={
+            <MemberBodyShape
+              bust={memberSizeResponse.choices.bust}
+              shapeWaist={memberSizeResponse.choices.shapeWaist}
+              shoulder={memberSizeResponse.choices.shoulder}
+              hip={memberSizeResponse.choices.hip}
+            />
+          }
         />
       </div>
       <Snackbar

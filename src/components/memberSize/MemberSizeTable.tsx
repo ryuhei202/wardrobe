@@ -1,9 +1,6 @@
 import {
-  styled,
   Table,
   TableBody,
-  TableCell,
-  tableCellClasses,
   TableContainer,
   TableHead,
   TableRow,
@@ -11,32 +8,11 @@ import {
 } from "@mui/material";
 import React from "react";
 import { TMemberPartSizes } from "../../model/memberSize/MemberSizeTypes";
-import { MemberSizeNumberInput } from "./input/MemberSizeNumberInput";
 import { MemberSizeTableHandler } from "./MemberSizeTableHandler";
 import { memberSizeTablePresenter } from "./MemberSizeTablePresenter";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "black",
-    color: "white",
-    fontWeight: "bold",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-  width: "25%",
-  padding: theme.spacing(0.5),
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+import { MemberSizeNumberInput } from "./input/MemberSizeNumberInput";
+import { StyledTableCell } from "./styleTable/StyledTableCell";
+import { StyledTableRow } from "./styleTable/StyledTableRow";
 
 type TProps = {
   editingSizes: TMemberPartSizes;
