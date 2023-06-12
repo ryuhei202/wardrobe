@@ -53,7 +53,7 @@ export const CoordinateTopsRatio = ({
     const totalNum = isJacketRequested
       ? (response.jacketOption?.topsNum as number)
       : response.topsNum;
-    return shortSleeveNum + longSleeveNum <= totalNum;
+    return shortSleeveNum + longSleeveNum >= totalNum;
   };
   const handleSleeveNum = (value: string) => {
     return Number(value);
