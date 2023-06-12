@@ -41,7 +41,10 @@ export const CoordinateDescriptionContainer = ({
         key={coordinateDescriptionData.text}
         coordinateId={coordinateId}
         coordinateItems={coordinateItemData}
-        isLineMessagesSendDisable={coordinateItemData.length !== defaultItemNum}
+        isLineMessagesSendDisable={
+          defaultItemNum !== undefined &&
+          coordinateItemData.length < defaultItemNum
+        }
         onUpdateComplete={refetchCoordinateDescription}
       />
     );
