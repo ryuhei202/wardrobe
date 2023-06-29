@@ -1,12 +1,5 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Snackbar,
-} from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { Alert, Box, Button, Snackbar } from "@mui/material";
+import { useState } from "react";
 import { useLineMessagesCreate } from "../../hooks/api/UseLineMessagesCreate";
 import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
@@ -25,11 +18,9 @@ export const CoordinateDescriptionLineSendButton = ({
   disabled,
   simplifiedHearing,
 }: TProps) => {
-  const [isFirstTransmit, setIsFirstTransmit] = useState(true);
   const messages = createCoordinateFlexMessage({
     descriptionText,
     coordinateItems,
-    isFirstTransmit,
     simplifiedHearing,
   });
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
@@ -39,29 +30,11 @@ export const CoordinateDescriptionLineSendButton = ({
 
   return (
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={isFirstTransmit}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setIsFirstTransmit(event.target.checked)
-            }
-            disabled={disabled || isLoading}
-          />
-        }
-        label="初回送信"
-      />
       <Button
         disabled={disabled || isLoading || simplifiedHearing === undefined}
         variant="contained"
         onClick={() => {
-          if (
-            window.confirm(
-              isFirstTransmit
-                ? "初回提案として送信してもよろしいでしょうか？"
-                : "2回目以降の提案として送信してもよろしいでしょうか？"
-            )
-          ) {
+          if (window.confirm("コーデ提案を送信しますか？")) {
             mutate(
               { messages },
               {
