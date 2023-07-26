@@ -11,6 +11,7 @@ export type TItem = {
   readonly patternName: string;
   readonly size: string;
   readonly partSizes: PartSize[];
+  readonly locationId: number;
   readonly locationName: string;
   readonly dropSize: string;
   readonly rank: string;

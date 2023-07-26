@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { usePatchRequest } from "./UsePatchRequest";
 import { UseMutateFunction } from "react-query";
 import { ErrorResponse } from "../../model/api/response/shared/ErrorResponse";
+import { usePatchRequest } from "./UsePatchRequest";
 
 type TKartesUpdate = {
   readonly mutate: UseMutateFunction<
@@ -27,6 +27,6 @@ export const useKartesUpdate = ({
   const { mutate, isLoading } = usePatchRequest<
     TKartesUpdateParams,
     AxiosError<ErrorResponse>
-  >(`kartes/${chartId}`);
+  >(`styling/kartes/${chartId}`);
   return { mutate, isLoading };
 };

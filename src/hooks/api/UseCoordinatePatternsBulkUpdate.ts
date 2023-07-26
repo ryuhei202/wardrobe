@@ -31,8 +31,8 @@ export const useCoordinatePatternsBulkUpdate = ({
   };
 
   const { mutate, error, isLoading, isSuccess } = usePatchRequest(
-    `coordinates/${coordinateId}/coordinate_patterns/bulk_update`,
-    params()
+    `styling/coordinates/${coordinateId}/coordinate_patterns/bulk_update`,
+    params(),
   );
 
   return {

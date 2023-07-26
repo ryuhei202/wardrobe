@@ -14,7 +14,7 @@ export const useCoordinateFootwearsShow = ({
   coordinateId,
 }: TProps): CoordinateFootwearsShow => {
   const { data, error } = useGetRequest<TCoordinateFootwearsShowResponse>(
-    `coordinates/${coordinateId}/coordinate_footwear`
+    `styling/coordinates/${coordinateId}/coordinate_footwear`,
   );
 
   return {

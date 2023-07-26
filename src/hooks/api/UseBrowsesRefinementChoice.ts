@@ -10,7 +10,7 @@ type BrowsesRefinementChoice = {
   readonly data?: BrowseRefinementChoiceResponse;
   readonly error: Error | null;
   readonly refetch: <TPageData>(
-    options?: RefetchOptions & RefetchQueryFilters<TPageData>
+    options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<QueryObserverResult<BrowseRefinementChoiceResponse, Error>>;
   readonly isFetching: boolean;
 };
@@ -28,15 +28,11 @@ export const useBrowsesRefinementChoice = ({
     categoryId,
     chartId,
   };
-  const {
-    data,
-    error,
-    refetch,
-    isFetching,
-  } = useGetRequest<BrowseRefinementChoiceResponse>(
-    "browses/refinement_choice",
-    params
-  );
+  const { data, error, refetch, isFetching } =
+    useGetRequest<BrowseRefinementChoiceResponse>(
+      "styling/browses/refinement_choice",
+      params,
+    );
 
   return {
     data,

@@ -1,8 +1,8 @@
-import { usePatchRequest } from "./UsePatchRequest";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { CoordinateIdContext } from "../../components/context/provider/ContextProvider";
+import { usePatchRequest } from "./UsePatchRequest";
 
 type CoordinateFootwearsUpdate = {
   readonly mutate: UseMutateFunction<
@@ -22,7 +22,7 @@ export const useCoordinateFootwearsUpdate = (): CoordinateFootwearsUpdate => {
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateFootwearsUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/coordinate_footwear`);
+  >(`styling/coordinates/${coordinateId}/coordinate_footwear`);
 
   return { mutate, isLoading };
 };

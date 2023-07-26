@@ -12,7 +12,7 @@ type TCoordinateitemsDestroy = {
 };
 
 export const useCoordinateItemsDestroy = (): TCoordinateitemsDestroy => {
-  const { mutate } = useDeleteRequest(`coordinate_items`);
+  const { mutate } = useDeleteRequest(`styling/coordinate_items`);
 
   return { mutate };
 };

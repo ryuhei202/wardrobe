@@ -1,5 +1,5 @@
-import { usePostRequest } from "./UsePostRequest";
 import { PostRegisterItemsParamsParams } from "../../model/api/request/styling/arrange/PostRegisterItemsParams";
+import { usePostRequest } from "./UsePostRequest";
 
 type TArrangesRegisterItemsArg = PostRegisterItemsParamsParams;
 
@@ -9,11 +9,14 @@ export const useArrangesRegisterItems = ({
   itemIds,
 }: TArrangesRegisterItemsArg) => {
   const { mutate, error, isLoading } =
-    usePostRequest<PostRegisterItemsParamsParams>("arranges/register_items", {
-      coordinateId,
-      adminId,
-      itemIds,
-    });
+    usePostRequest<PostRegisterItemsParamsParams>(
+      "styling/arranges/register_items",
+      {
+        coordinateId,
+        adminId,
+        itemIds,
+      },
+    );
 
   return {
     mutate,

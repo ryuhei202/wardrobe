@@ -1,0 +1,19 @@
+import { usePatchRequest } from "./UsePatchRequest";
+
+type TArgs = {
+  readonly rentalId: number;
+  readonly itemId: number;
+};
+type TParams = {
+  readonly previousItemId?: number;
+};
+
+export const useItemsUpdate = ({ rentalId, itemId }: TArgs) => {
+  const { mutate, isLoading } = usePatchRequest<TParams>(
+    `rentals/${rentalId}/items/${itemId}`,
+  );
+  return {
+    mutate,
+    isLoading,
+  };
+};

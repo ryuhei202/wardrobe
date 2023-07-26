@@ -16,12 +16,12 @@ export const useMemberPatchRequest = <TParams = {}, TError = unknown>({
   const queryClient = useQueryClient();
 
   return usePatchRequest<TParams, TError>(
-    `members/${memberId}/${path}`,
+    `styling/members/${memberId}/${path}`,
     params,
     {
       onSuccess: () => {
         queryClient.invalidateQueries(`member/${path}`);
       },
-    }
+    },
   );
 };

@@ -1,7 +1,7 @@
 import { GetDetailFilterParams } from "./GetDetailFilterParams";
 
 export interface GetDetailParams {
-  chartId: number;
+  chartId?: number;
   preregisteredItemId: number;
   filter: GetDetailFilterParams;
 }
