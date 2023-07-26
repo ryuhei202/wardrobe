@@ -1,5 +1,5 @@
-import { useGetRequest } from "./UseGetRequest";
 import { CoordinateHearingsShowResponse } from "../../model/api/response/styling/coordinateHearing/CoordinateHearingsShowResponse";
+import { useGetRequest } from "./UseGetRequest";
 
 type CoordinateHearingsShow = {
   readonly data?: CoordinateHearingsShowResponse;
@@ -14,7 +14,7 @@ export const useCoordinateHearingsShow = ({
   coordinateId,
 }: TCoordinateHearingsShowArg): CoordinateHearingsShow => {
   const { data, error } = useGetRequest<CoordinateHearingsShowResponse>(
-    `coordinates/${coordinateId}/coordinate_hearings`
+    `styling/coordinates/${coordinateId}/coordinate_hearings`,
   );
 
   return {

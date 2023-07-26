@@ -15,7 +15,10 @@ type TAdminShowArg = {
 };
 
 export const useAdminShow = (params: TAdminShowArg): TAdminShow => {
-  const { data, error } = useGetRequest<TAdminShowResponse>("admin", params);
+  const { data, error } = useGetRequest<TAdminShowResponse>(
+    "styling/admin",
+    params,
+  );
 
   return {
     data,
