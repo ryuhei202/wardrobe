@@ -18,7 +18,7 @@ type BrowsesIndex = {
   readonly isFetching: boolean;
 };
 
-type TBrowsesIndexArg = { refinement: Refinement; chartId: number };
+type TBrowsesIndexArg = { refinement: Refinement; chartId?: number };
 
 export const useBrowsesIndex = ({
   refinement,

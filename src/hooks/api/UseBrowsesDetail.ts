@@ -11,7 +11,7 @@ type BrowsesDetail = {
 };
 
 type TBrowsesDetailArg = {
-  chartId: number;
+  chartId?: number;
   preregisteredItemId: number;
   refinement: Refinement;
 };
