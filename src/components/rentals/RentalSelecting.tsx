@@ -90,7 +90,7 @@ export const RentalSelecting = ({
           position: "fixed",
           bottom: 0,
           left: "360px",
-          right: "360px",
+          right: "16px",
           margin: "0 16px",
           zIndex: 5,
         }}
