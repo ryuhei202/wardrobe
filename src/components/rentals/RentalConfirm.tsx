@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext, useState } from "react";
+import { useQueryClient } from "react-query";
 import { TRentalCoordinateShowResponse } from "../../hooks/api/UseRentalCoordinateShow";
 import { useRentalCoordinateUpdate } from "../../hooks/api/UseRentalCoordinateUpdate";
 import { useRentalRequestShow } from "../../hooks/api/UseRentalRequestShow";
@@ -27,6 +28,7 @@ export const RentalConfirm = ({
   onClickBackButton,
 }: TProps) => {
   const { rentalId } = useContext(RentalIdContext);
+  const queryClient = useQueryClient();
   const {
     mutate: updateCoordinateChoice,
     isLoading: isUpdateCoordinateLoading,
@@ -136,6 +138,9 @@ export const RentalConfirm = ({
                 {
                   onSuccess: () => {
                     alert("更新しました");
+                    queryClient.invalidateQueries(
+                      `rentals/${rentalId}/rental_coordinate`,
+                    );
                   },
                   onError: (error) => {
                     alert(error.message);
