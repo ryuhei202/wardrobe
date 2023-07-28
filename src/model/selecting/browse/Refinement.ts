@@ -1,8 +1,5 @@
-import { FilterFormalRankResponse } from "../../api/response/styling/browse/FilterFormalRankResponse";
 import { FormalRankRefinement } from "./FormalRankRefinement";
 import { ValueRefinement } from "./ValueRefinement";
-
-type NewType = FilterFormalRankResponse;
 
 export interface Refinement {
   readonly itemId: number | null;
@@ -16,7 +13,7 @@ export interface Refinement {
   readonly logoIds: number[];
   readonly dropSizes: number[];
   readonly formalRank: FormalRankRefinement;
-  readonly ngIds: number[];
+  readonly ngIds?: number[];
   readonly optionIds: number[];
   readonly sortId: number;
   readonly rank: string[];

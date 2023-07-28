@@ -3,10 +3,10 @@ import { useState } from "react";
 import { BrowseRefinementChoiceResponse } from "../../../../model/api/response/styling/browse/BrowseRefinementChoiceResponse";
 import { FilterChoiceResponse } from "../../../../model/api/response/styling/browse/FilterChoiceResponse";
 import { FormalRankRefinement } from "../../../../model/selecting/browse/FormalRankRefinement";
-import { AppliedFilterData } from "../../../../model/selecting/browse/props_data/AppliedFilterData";
-import { FilterGroupCollectionData } from "../../../../model/selecting/browse/props_data/FilterGroupCollectionData";
 import { Refinement } from "../../../../model/selecting/browse/Refinement";
 import { ValueRefinement } from "../../../../model/selecting/browse/ValueRefinement";
+import { AppliedFilterData } from "../../../../model/selecting/browse/props_data/AppliedFilterData";
+import { FilterGroupCollectionData } from "../../../../model/selecting/browse/props_data/FilterGroupCollectionData";
 import { AppliedFiltersCallback } from "../callback/AppliedFiltersCallback";
 import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
 import { FilterGroupCollectionCallback } from "../callback/FilterGroupCollectionCallback";
@@ -41,10 +41,10 @@ export interface ItemBrowseHandler {
 
 export const useItemBrowseHandler = (
   choice: BrowseRefinementChoiceResponse,
-  callback: ItemBrowseCallback
+  callback: ItemBrowseCallback,
 ): ItemBrowseHandler => {
   const [currentRefinement, setCurrentRefinement] = useState<Refinement>(
-    choice.defaultRefinement
+    choice.defaultRefinement,
   );
   const [selectedPreregisteredItemId, setSelectedPreregisteredItemId] =
     useState<number | null>(null);
@@ -174,7 +174,7 @@ export const useItemBrowseHandler = (
   const optionHandler = useOptionRefinementHandler(onOptionChanged);
 
   const getAppliedFilterData = (
-    choice: FilterChoiceResponse
+    choice: FilterChoiceResponse,
   ): AppliedFilterData[] => {
     let result: AppliedFilterData[] = [];
 
@@ -188,37 +188,37 @@ export const useItemBrowseHandler = (
       choice.largeCategory,
       currentRefinement.largeCategoryId,
       currentRefinement.mediumCategoryId,
-      currentRefinement.smallCategoryIds
+      currentRefinement.smallCategoryIds,
     );
     if (appliedCategories.length) result = result.concat(appliedCategories);
 
     const appliedSizes = sizeHandler.appliedFilters(
       choice.size,
-      currentRefinement.sizeIds
+      currentRefinement.sizeIds,
     );
     if (appliedSizes.length) result = result.concat(appliedSizes);
 
     const appliedPartSizes = partSizeHandler.appliedFilters(
       choice.partSize,
-      currentRefinement.partSizes
+      currentRefinement.partSizes,
     );
     if (appliedPartSizes.length) result = result.concat(appliedPartSizes);
 
     const appliedColors = colorHandler.appliedFilters(
       choice.color,
-      currentRefinement.colorIds
+      currentRefinement.colorIds,
     );
     if (appliedColors.length) result = result.concat(appliedColors);
 
     const appliedPatterns = patternHandler.appliedFilters(
       choice.pattern,
-      currentRefinement.patternIds
+      currentRefinement.patternIds,
     );
     if (appliedPatterns.length) result = result.concat(appliedPatterns);
 
     const appliedLogos = logoHandler.appliedFilters(
       choice.logo,
-      currentRefinement.logoIds
+      currentRefinement.logoIds,
     );
     if (appliedLogos.length) result = result.concat(appliedLogos);
 
@@ -233,7 +233,7 @@ export const useItemBrowseHandler = (
 
     const appliedNgs = ngHandler.appliedFilters(
       choice.ng,
-      currentRefinement.ngIds
+      currentRefinement.ngIds ?? [],
     );
     if (appliedNgs.length) result = result.concat(appliedNgs);
 
@@ -246,7 +246,7 @@ export const useItemBrowseHandler = (
 
     const appliedOptions = optionHandler.appliedFilters(
       choice.option,
-      currentRefinement.optionIds
+      currentRefinement.optionIds,
     );
     if (appliedOptions.length) result = result.concat(appliedOptions);
 
@@ -268,7 +268,7 @@ export const useItemBrowseHandler = (
       if (currentRefinement.smallCategoryIds.length + currentIndex >= index) {
         categoryHandler.deleteSmallCategoryFilter(
           currentRefinement.smallCategoryIds,
-          index - currentIndex
+          index - currentIndex,
         );
         return;
       }
@@ -290,7 +290,7 @@ export const useItemBrowseHandler = (
       if (currentRefinement.sizeIds.length - 1 + currentIndex >= index) {
         sizeHandler.deleteFilter(
           currentRefinement.sizeIds,
-          index - currentIndex
+          index - currentIndex,
         );
         return;
       }
@@ -300,7 +300,7 @@ export const useItemBrowseHandler = (
       if (currentRefinement.partSizes.length - 1 + currentIndex >= index) {
         partSizeHandler.deleteFilter(
           currentRefinement.partSizes,
-          index - currentIndex
+          index - currentIndex,
         );
         return;
       }
@@ -310,7 +310,7 @@ export const useItemBrowseHandler = (
       if (currentRefinement.colorIds.length - 1 + currentIndex >= index) {
         colorHandler.deleteFilter(
           currentRefinement.colorIds,
-          index - currentIndex
+          index - currentIndex,
         );
         return;
       }
@@ -320,7 +320,7 @@ export const useItemBrowseHandler = (
       if (currentRefinement.patternIds.length - 1 + currentIndex >= index) {
         patternHandler.deleteFilter(
           currentRefinement.patternIds,
-          index - currentIndex
+          index - currentIndex,
         );
         return;
       }
@@ -330,7 +330,7 @@ export const useItemBrowseHandler = (
       if (currentRefinement.logoIds.length - 1 + currentIndex >= index) {
         logoHandler.deleteFilter(
           currentRefinement.logoIds,
-          index - currentIndex
+          index - currentIndex,
         );
         return;
       }
@@ -351,18 +351,18 @@ export const useItemBrowseHandler = (
       currentIndex += 1;
     }
 
-    if (currentRefinement.ngIds.length > 0) {
-      if (currentRefinement.ngIds.length - 1 + currentIndex >= index) {
-        ngHandler.deleteFilter(currentRefinement.ngIds, index - currentIndex);
+    if (currentRefinement.ngIds!.length > 0) {
+      if (currentRefinement.ngIds!.length - 1 + currentIndex >= index) {
+        ngHandler.deleteFilter(currentRefinement.ngIds!, index - currentIndex);
         return;
       }
-      currentIndex += currentRefinement.ngIds.length;
+      currentIndex += currentRefinement.ngIds!.length;
     }
 
     if (currentRefinement.rank.length > 0) {
       if (currentRefinement.rank.length - 1 + currentIndex >= index) {
         const newRank = currentRefinement.rank.filter(
-          (_, rankIndex) => rankIndex !== index - currentIndex
+          (_, rankIndex) => rankIndex !== index - currentIndex,
         );
         setCurrentRefinement({ ...currentRefinement, rank: newRank });
         return;
@@ -374,7 +374,7 @@ export const useItemBrowseHandler = (
       if (currentRefinement.optionIds.length - 1 + currentIndex >= index) {
         optionHandler.deleteFilter(
           currentRefinement.optionIds,
-          index - currentIndex
+          index - currentIndex,
         );
         return;
       }
@@ -407,31 +407,31 @@ export const useItemBrowseHandler = (
         choice.filter.largeCategory,
         currentRefinement.largeCategoryId,
         currentRefinement.mediumCategoryId,
-        currentRefinement.smallCategoryIds
+        currentRefinement.smallCategoryIds,
       ),
       sizeCallback: sizeHandler.sizeCallback(
         choice.filter.size,
-        currentRefinement.sizeIds
+        currentRefinement.sizeIds,
       ),
       partSizeCallback: partSizeHandler.partSizeCallback(
         choice.filter.partSize,
-        currentRefinement.partSizes
+        currentRefinement.partSizes,
       ),
       colorCallback: colorHandler.colorCallback(
         choice.filter.color,
-        currentRefinement.colorIds
+        currentRefinement.colorIds,
       ),
       patternCallback: patternHandler.patternCallback(
         choice.filter.pattern,
-        currentRefinement.patternIds
+        currentRefinement.patternIds,
       ),
       logoCallback: logoHandler.logoCallback(
         choice.filter.logo,
-        currentRefinement.logoIds
+        currentRefinement.logoIds,
       ),
       dropSizeCallback: dropSizeHandler.dropSizeCallback(
         choice.filter.dropSize,
-        currentRefinement.dropSizes
+        currentRefinement.dropSizes,
       ),
       formalRankCallback: (value: FormalRankRefinement) => {
         const newRefinement = {
@@ -443,7 +443,7 @@ export const useItemBrowseHandler = (
       },
       ngCallback: ngHandler.ngCallback(
         choice.filter.ng,
-        currentRefinement.ngIds
+        currentRefinement.ngIds ?? [],
       ),
       rankCallback: {
         onClick: (index: number) => {
@@ -464,7 +464,7 @@ export const useItemBrowseHandler = (
       },
       optionCallback: optionHandler.optionCallback(
         choice.filter.option,
-        currentRefinement.optionIds
+        currentRefinement.optionIds,
       ),
       onItemIdChanged: (newId: number) => {
         let newRefinement;
@@ -520,34 +520,34 @@ export const useItemBrowseHandler = (
         choice.filter.largeCategory,
         currentRefinement.largeCategoryId,
         currentRefinement.mediumCategoryId,
-        currentRefinement.smallCategoryIds
+        currentRefinement.smallCategoryIds,
       ),
       sizeData: sizeHandler.sizeData(
         choice.filter.size,
-        currentRefinement.sizeIds
+        currentRefinement.sizeIds,
       ),
       partSizeData: partSizeHandler.partSizeData(
         choice.filter.partSize,
-        currentRefinement.partSizes
+        currentRefinement.partSizes,
       ),
       colorData: colorHandler.colorData(
         choice.filter.color,
-        currentRefinement.colorIds
+        currentRefinement.colorIds,
       ),
       patternData: patternHandler.patternData(
         choice.filter.pattern,
-        currentRefinement.patternIds
+        currentRefinement.patternIds,
       ),
       logoData: logoHandler.logoData(
         choice.filter.logo,
-        currentRefinement.logoIds
+        currentRefinement.logoIds,
       ),
       dropSizeData: dropSizeHandler.dropSizeData(
         choice.filter.dropSize,
-        currentRefinement.dropSizes
+        currentRefinement.dropSizes,
       ),
       formalRankData: currentRefinement.formalRank,
-      ngData: ngHandler.ngData(choice.filter.ng, currentRefinement.ngIds),
+      ngData: ngHandler.ngData(choice.filter.ng, currentRefinement.ngIds!),
       rankData: ranks.map((rank) => {
         return {
           name: rank,
@@ -556,7 +556,7 @@ export const useItemBrowseHandler = (
       }),
       optionData: optionHandler.optionData(
         choice.filter.option,
-        currentRefinement.optionIds
+        currentRefinement.optionIds,
       ),
     };
   };

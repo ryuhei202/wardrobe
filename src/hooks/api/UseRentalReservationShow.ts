@@ -4,11 +4,11 @@ type TResponse = {
   readonly data?: TRentalReservationShowResponse;
   readonly error: Error | null;
 };
-type TRentalReservationShowResponse = {
+export type TRentalReservationShowResponse = {
   id: number;
   firstName: string;
   lastName: string;
-  onetMembership_no: number;
+  onetMembershipNo: number;
   age: number;
   shootingAt: string;
 };

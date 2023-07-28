@@ -25,7 +25,7 @@ export const useBrowsesDetail = ({
     let filterParams: GetDetailFilterParams = {
       size: refinement.sizeIds,
       partSize: refinement.partSizes,
-      ng: refinement.ngIds,
+      ng: refinement.ngIds ?? [],
       ranks: refinement.rank,
     };
     if (refinement.itemId) filterParams.itemId = refinement.itemId;

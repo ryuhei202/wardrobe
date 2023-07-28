@@ -37,7 +37,7 @@ export const useBrowsesIndex = ({
         min: refinement.formalRank.min ?? 1,
         max: refinement.formalRank.max ?? 10,
       },
-      ng: refinement.ngIds,
+      ng: refinement.ngIds ?? undefined,
       option: refinement.optionIds,
       rank: refinement.rank,
     };
@@ -56,7 +56,11 @@ export const useBrowsesIndex = ({
   };
 
   const { data, error, refetch, isFetching } =
-    useGetRequest<BrowseIndexResponse>("styling/browses", params());
+    useGetRequest<BrowseIndexResponse>(
+      "styling/browses",
+      params(),
+      `styling/browses${JSON.stringify(params())}`,
+    );
 
   return {
     data,
