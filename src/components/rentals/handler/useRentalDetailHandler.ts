@@ -159,12 +159,12 @@ export const useRentalDetailHandler = ({
         {
           onSuccess: () => {
             if (selectedItem) {
-              onItemSelect();
-              onClickBackButton();
-              onChangeCurrentRefinement(defaultRefinement);
               queryClient.invalidateQueries(
                 `rentals/${rentalId}/rental_coordinate`,
               );
+              onClickBackButton();
+              onChangeCurrentRefinement(defaultRefinement);
+              onItemSelect();
             }
           },
         },

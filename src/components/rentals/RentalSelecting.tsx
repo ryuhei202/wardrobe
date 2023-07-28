@@ -42,7 +42,7 @@ export const RentalSelecting = ({
     if (rentalCoordinateItems.length >= RENTABLE_NUM) {
       setCurrentIndex(RENTABLE_NUM - 1);
     } else {
-      setCurrentIndex(rentalCoordinateItems.length);
+      setCurrentIndex(rentalCoordinateItems.length + 1);
     }
   };
 

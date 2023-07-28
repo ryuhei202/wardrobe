@@ -85,8 +85,6 @@ export const getFilterGroupCollectionHandler = ({
         selectedPresetIndex: null,
         presets: [],
         sliders: filter.rangesOfPartSizes.map((partSize) => {
-          console.log({ partSize });
-          console.log({ currentRefinement });
           return {
             key: partSize.id,
             name: partSize.name,
