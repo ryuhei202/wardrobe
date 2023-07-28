@@ -97,19 +97,6 @@ export const RentalSelectionProgress = ({
       </Tooltip>,
     );
   }
-  let completeButton;
-
-  if (rentableNum === items.length) {
-    completeButton = (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={onClickCompleteButton}
-      >
-        アイテム選択完了
-      </Button>
-    );
-  }
 
   return (
     <div
@@ -121,7 +108,13 @@ export const RentalSelectionProgress = ({
         });
       }}
     >
-      {completeButton}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={onClickCompleteButton}
+      >
+        アイテム選択完了
+      </Button>
       <div style={{ display: "flex" }}>
         <Stepper
           activeStep={selectedIndex}
