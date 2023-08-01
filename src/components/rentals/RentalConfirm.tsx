@@ -33,7 +33,7 @@ export const RentalConfirm = ({
   } = useRentalCoordinateUpdate({
     rentalId,
   });
-  const { mutate: updateStatus, isLoading: isUpdateLoading } =
+  const { mutate: updateStatus, isLoading: isUpdateShipmentStatusLoading } =
     useRentalUpdateToPreparingShipment({ rentalId });
   const { data: rentalRequest, error: rentalRequestError } =
     useRentalRequestShow({ rentalId });
@@ -75,7 +75,7 @@ export const RentalConfirm = ({
               width: "150px",
             }}
             disabled={
-              isUpdateLoading ||
+              isUpdateShipmentStatusLoading ||
               rentalCoordinate.items.length !== 3 ||
               rentalCoordinate.items.some((item) => item.locationId !== null)
             }
