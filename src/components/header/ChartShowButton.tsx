@@ -14,7 +14,7 @@ export const ChartShowButton = () => {
 
   return (
     <div style={{ flexGrow: 1 }}>
-      {!pathname.includes("rentals") && (
+      {!pathname.startsWith("/rentals") && (
         <Button
           variant="contained"
           color="primary"
