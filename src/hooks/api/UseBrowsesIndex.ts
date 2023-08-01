@@ -56,7 +56,11 @@ export const useBrowsesIndex = ({
   };
 
   const { data, error, refetch, isFetching } =
-    useGetRequest<BrowseIndexResponse>("styling/browses", params());
+    useGetRequest<BrowseIndexResponse>(
+      "styling/browses",
+      params(),
+      `styling/browses${JSON.stringify(params())}`,
+    );
 
   return {
     data,

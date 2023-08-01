@@ -4,7 +4,7 @@ type TResponse = {
   readonly data?: TRentalRequestShowResponse;
   readonly error: Error | null;
 };
-type TRentalRequestShowResponse = {
+export type TRentalRequestShowResponse = {
   id: number;
   coordinateChoices: TCoordinateChoice[];
   height: number;
@@ -16,8 +16,8 @@ type TRentalRequestShowResponse = {
   bust: string;
   hip: string;
   freeText: string | null;
-  referenceJacketSize: number;
-  referenceJacketDropSize: number;
+  referenceJacketSize: string;
+  referenceJacketDropSize: string;
   referenceShoulderSize: number;
   referenceBustSize: number;
   referenceWaistSize: number;
@@ -33,6 +33,7 @@ type TCoordinateChoice = {
   id: number;
   name: string;
   preferenceChoice: number;
+  imageFilePath: string;
 };
 
 type TArgs = {

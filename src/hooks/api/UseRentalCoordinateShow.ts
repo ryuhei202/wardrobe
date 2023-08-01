@@ -5,7 +5,7 @@ type TResponse = {
   readonly data?: TRentalCoordinateShowResponse;
   readonly error: Error | null;
 };
-type TRentalCoordinateShowResponse = {
+export type TRentalCoordinateShowResponse = {
   id: number;
   coordinateChoiceId: number;
   items: TItem[];

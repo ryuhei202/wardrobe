@@ -9,11 +9,12 @@ type TParams = {
 };
 
 export const useItemsUpdate = ({ rentalId, itemId }: TArgs) => {
-  const { mutate, isLoading } = usePatchRequest<TParams>(
+  const { mutate, isLoading, error } = usePatchRequest<TParams>(
     `rentals/${rentalId}/items/${itemId}`,
   );
   return {
     mutate,
     isLoading,
+    error,
   };
 };
