@@ -8,7 +8,7 @@ pipelines:
           script:
             - yarn install
             - REACT_APP_FIREBASE_API_KEY=$REACT_APP_STAGING_FIREBASE_API_KEY yarn build:staging
-            - REACT_APP_SENTRY_ORG=$REACT_APP_SENTRY_ORG REACT_APP_SENTRY_PROJECT=$REACT_APP_SENTRY_PROJECT REACT_APP_SENTRY_AUTH_TOKEN=$REACT_APP_SENTRY_AUTH_TOKEN yarn upload-sourcemaps --log-level=debug
+            - REACT_APP_SENTRY_ORG=$REACT_APP_SENTRY_ORG REACT_APP_SENTRY_PROJECT=$REACT_APP_SENTRY_PROJECT REACT_APP_SENTRY_AUTH_TOKEN=$REACT_APP_SENTRY_AUTH_TOKEN yarn upload-sourcemaps
             - find ./build -name *.map -delete
           artifacts:
             - build/**
