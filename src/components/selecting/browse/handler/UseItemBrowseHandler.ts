@@ -233,7 +233,7 @@ export const useItemBrowseHandler = (
 
     const appliedNgs = ngHandler.appliedFilters(
       choice.ng,
-      currentRefinement.ngIds ?? [],
+      currentRefinement.ngIds,
     );
     if (appliedNgs.length) result = result.concat(appliedNgs);
 
@@ -351,12 +351,12 @@ export const useItemBrowseHandler = (
       currentIndex += 1;
     }
 
-    if (currentRefinement.ngIds!.length > 0) {
-      if (currentRefinement.ngIds!.length - 1 + currentIndex >= index) {
-        ngHandler.deleteFilter(currentRefinement.ngIds!, index - currentIndex);
+    if (currentRefinement.ngIds.length > 0) {
+      if (currentRefinement.ngIds.length - 1 + currentIndex >= index) {
+        ngHandler.deleteFilter(currentRefinement.ngIds, index - currentIndex);
         return;
       }
-      currentIndex += currentRefinement.ngIds!.length;
+      currentIndex += currentRefinement.ngIds.length;
     }
 
     if (currentRefinement.rank.length > 0) {
@@ -443,7 +443,7 @@ export const useItemBrowseHandler = (
       },
       ngCallback: ngHandler.ngCallback(
         choice.filter.ng,
-        currentRefinement.ngIds ?? [],
+        currentRefinement.ngIds,
       ),
       rankCallback: {
         onClick: (index: number) => {
@@ -547,7 +547,7 @@ export const useItemBrowseHandler = (
         currentRefinement.dropSizes,
       ),
       formalRankData: currentRefinement.formalRank,
-      ngData: ngHandler.ngData(choice.filter.ng, currentRefinement.ngIds!),
+      ngData: ngHandler.ngData(choice.filter.ng, currentRefinement.ngIds),
       rankData: ranks.map((rank) => {
         return {
           name: rank,
