@@ -7,8 +7,9 @@ type NgsIndex = {
 };
 
 export const useNgCategoriesIndex = (): NgsIndex => {
-  const { data, error } =
-    useGetRequest<NgCategoryIndexResponse>("ng_categories");
+  const { data, error } = useGetRequest<NgCategoryIndexResponse>(
+    "styling/ng_categories",
+  );
 
   return {
     data,

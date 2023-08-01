@@ -1,8 +1,8 @@
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
-import { NgCreateRequest } from "../../model/api/request/styling/ng/NgCreateRequest";
 import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { MemberIdContext } from "../../components/context/provider/ContextProvider";
+import { NgCreateRequest } from "../../model/api/request/styling/ng/NgCreateRequest";
 import { usePatchRequest } from "./UsePatchRequest";
 
 type TNgUpdate = {
@@ -33,7 +33,7 @@ export const useNgsUpdate = ({
     sizeNg,
     memberId: useContextDefinedState(MemberIdContext),
   };
-  const { mutate, isLoading } = usePatchRequest(`ngs/${id}`, params);
+  const { mutate, isLoading } = usePatchRequest(`styling/ngs/${id}`, params);
 
   return { mutate, isLoading };
 };

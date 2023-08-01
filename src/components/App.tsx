@@ -14,27 +14,29 @@ import {
   ThemeProvider,
 } from "@mui/material/styles";
 import {
-  getAuth,
   GoogleAuthProvider,
+  User,
+  getAuth,
   onAuthStateChanged,
   signInWithPopup,
   signOut,
-  User,
 } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import { ChartPageContainer } from "../pages/chart/ChartPageContainer";
 import { CoordinatePageContainer } from "../pages/coordinate/CoordinatePageContainer";
+import { RentalPageContainer } from "../pages/rentals/RentalPageContainer";
+import { ChartPickQRDialog } from "./chartPick/ChartPickQRDialog";
 import { AdminShowContextSetter } from "./context/AdminShowContextSetter";
 import { ChartPageContextSetter } from "./context/ChartPageContextSetter";
 import { CoordinatePageContextSetter } from "./context/CoordinatePageContextSetter";
+import { RentalContextProvider } from "./context/RentalContextProvider";
 import { ContextProvider } from "./context/provider/ContextProvider";
-import { ChartPickQRDialog } from "./chartPick/ChartPickQRDialog";
-import { theme } from "./style/Theme";
-import { useAppStyle } from "./style/UseAppStyle";
 import { ChartPickButton } from "./header/ChartPickButton";
 import { ChartShowButton } from "./header/ChartShowButton";
+import { theme } from "./style/Theme";
+import { useAppStyle } from "./style/UseAppStyle";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -154,6 +156,14 @@ export const App = () => {
                         <CoordinatePageContextSetter>
                           <CoordinatePageContainer />
                         </CoordinatePageContextSetter>
+                      }
+                    />
+                    <Route
+                      path="/rentals/:rentalId"
+                      element={
+                        <RentalContextProvider>
+                          <RentalPageContainer />
+                        </RentalContextProvider>
                       }
                     />
                   </Routes>

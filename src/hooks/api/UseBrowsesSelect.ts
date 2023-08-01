@@ -13,7 +13,7 @@ export const useBrowsesSelect = () => {
   const { mutate, error, isLoading, reset } = usePostRequest<
     PostSelectParams,
     AxiosError<ErrorResponse>
-  >("browses/select");
+  >("styling/browses/select");
 
   return {
     mutate,

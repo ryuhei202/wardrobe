@@ -7,7 +7,8 @@ type FootwearsIndex = {
 };
 
 export const useFootwearsIndex = (): FootwearsIndex => {
-  const { data, error } = useGetRequest<TFootwearsIndexResponse>("footwears");
+  const { data, error } =
+    useGetRequest<TFootwearsIndexResponse>("styling/footwears");
 
   return {
     data,

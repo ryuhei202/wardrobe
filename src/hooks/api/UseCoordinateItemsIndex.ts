@@ -18,11 +18,11 @@ export const useCoordinateItemsIndex = ({
   queryKey,
 }: TCoordinateItemsIndexArg): CoordinateItemsIndex => {
   const { data, error } = useGetRequest<TCoordinateItem[]>(
-    `coordinates/${coordinateId}/coordinate_items`,
+    `styling/coordinates/${coordinateId}/coordinate_items`,
     {
       isChangeItem,
     },
-    queryKey
+    queryKey,
   );
 
   return {

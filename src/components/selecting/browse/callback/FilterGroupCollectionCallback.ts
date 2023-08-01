@@ -19,3 +19,8 @@ export interface FilterGroupCollectionCallback {
   optionCallback: FilterCheckboxArrayCallback;
   onItemIdChanged: (newId: number) => void;
 }
+
+export type TRentalFilterGroupCollectionCallback = Omit<
+  FilterGroupCollectionCallback,
+  "ngCallback"
+>;

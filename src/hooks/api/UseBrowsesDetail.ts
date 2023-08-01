@@ -11,7 +11,7 @@ type BrowsesDetail = {
 };
 
 type TBrowsesDetailArg = {
-  chartId: number;
+  chartId?: number;
   preregisteredItemId: number;
   refinement: Refinement;
 };
@@ -38,8 +38,8 @@ export const useBrowsesDetail = ({
   };
 
   const { data, error, isFetching } = useGetRequest<DetailResponse>(
-    "browses/detail",
-    params()
+    "styling/browses/detail",
+    params(),
   );
 
   return {

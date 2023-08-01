@@ -9,8 +9,8 @@ export const useReviewsUpdate = ({
   lineMessageUrl,
 }: TReviewsUpdateArg) => {
   const { mutate, isSuccess, isLoading } = usePatchRequest(
-    `coordinates/${coordinateId}/review`,
-    { lineMessageUrl }
+    `styling/coordinates/${coordinateId}/review`,
+    { lineMessageUrl },
   );
   return { mutate, isSuccess, isLoading };
 };

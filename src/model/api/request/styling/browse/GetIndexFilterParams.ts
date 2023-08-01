@@ -13,7 +13,7 @@ export interface GetIndexFilterParams {
   logo: number[];
   dropSize: number[];
   formalRank: FormalRankRefinement;
-  ng: number[];
+  ng?: number[];
   option: number[];
   rank: string[];
 }

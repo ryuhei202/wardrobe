@@ -25,7 +25,7 @@ export const useCoordinateItemsUpdate = ({
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateItemsUpdateParams,
     Error
-  >(`coordinate_items/${coordinateItemId}`);
+  >(`styling/coordinate_items/${coordinateItemId}`);
 
   return { mutate, isLoading };
 };

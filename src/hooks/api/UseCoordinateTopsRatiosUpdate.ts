@@ -1,8 +1,8 @@
-import { usePatchRequest } from "./UsePatchRequest";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
 import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { AdminShowContext } from "../../components/context/provider/ContextProvider";
+import { usePatchRequest } from "./UsePatchRequest";
 
 type CoordinateTopsRatiosUpdate = {
   readonly mutate: UseMutateFunction<
@@ -34,7 +34,7 @@ export const useCoordinateTopsRatiosUpdate = ({
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateTopsRatiosUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/coordinate_tops_ratios`, {
+  >(`styling/coordinates/${coordinateId}/coordinate_tops_ratios`, {
     longSleeveNum,
     shortSleeveNum,
     isJacketRequested,

@@ -1,4 +1,4 @@
-import { axiosClient } from "./../../model/api/shared/AxiosClient";
+import qs from "qs";
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -6,18 +6,18 @@ import {
   useQuery,
 } from "react-query";
 import { baseUrl } from "../../model/api/shared/BaseUrl";
-import qs from "qs";
+import { axiosClient } from "./../../model/api/shared/AxiosClient";
 
 export const useGetRequest = <T>(
   path: string,
   params?: {},
   queryKey?: string,
-  isEnabled: boolean = true
+  isEnabled: boolean = true,
 ): {
   data?: T;
   error: Error | null;
   refetch: <TPageData>(
-    options?: RefetchOptions & RefetchQueryFilters<TPageData>
+    options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<QueryObserverResult<T, Error>>;
   isFetching: boolean;
 } => {
@@ -25,7 +25,7 @@ export const useGetRequest = <T>(
     queryKey ?? path,
     () =>
       axiosClient
-        .get(`${baseUrl()}/styling/${path}`, {
+        .get(`${baseUrl()}/${path}`, {
           params,
           paramsSerializer: {
             serialize: (params) =>
@@ -35,7 +35,7 @@ export const useGetRequest = <T>(
         .then((r) => r.data),
     {
       enabled: isEnabled,
-    }
+    },
   );
 
   return {

@@ -13,12 +13,12 @@ type BrowsesIndex = {
   readonly data?: BrowseIndexResponse;
   readonly error: Error | null;
   readonly refetch: <TPageData>(
-    options?: RefetchOptions & RefetchQueryFilters<TPageData>
+    options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<QueryObserverResult<BrowseIndexResponse, Error>>;
   readonly isFetching: boolean;
 };
 
-type TBrowsesIndexArg = { refinement: Refinement; chartId: number };
+type TBrowsesIndexArg = { refinement: Refinement; chartId?: number };
 
 export const useBrowsesIndex = ({
   refinement,
@@ -56,7 +56,11 @@ export const useBrowsesIndex = ({
   };
 
   const { data, error, refetch, isFetching } =
-    useGetRequest<BrowseIndexResponse>("browses", params());
+    useGetRequest<BrowseIndexResponse>(
+      "styling/browses",
+      params(),
+      `styling/browses${JSON.stringify(params())}`,
+    );
 
   return {
     data,
