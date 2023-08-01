@@ -13,7 +13,7 @@ export interface Refinement {
   readonly logoIds: number[];
   readonly dropSizes: number[];
   readonly formalRank: FormalRankRefinement;
-  readonly ngIds?: number[];
+  readonly ngIds: number[];
   readonly optionIds: number[];
   readonly sortId: number;
   readonly rank: string[];

@@ -37,7 +37,7 @@ export const useBrowsesIndex = ({
         min: refinement.formalRank.min ?? 1,
         max: refinement.formalRank.max ?? 10,
       },
-      ng: refinement.ngIds ?? undefined,
+      ng: refinement.ngIds,
       option: refinement.optionIds,
       rank: refinement.rank,
     };
