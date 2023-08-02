@@ -7,7 +7,12 @@ type TRentalPickQRDialogProps = {
 };
 
 export const RentalPickQRDialog = (props: TRentalPickQRDialogProps) => {
-  const { rentalId } = useParams();
+  const { rentalId: rentalIdString } = useParams();
+
+  if (rentalIdString === undefined) throw new Error("rentalIdが無効です");
+  const rentalId = parseInt(rentalIdString);
+
+  if (Number.isNaN(rentalId)) throw new Error("rentalIdが無効です");
 
   return (
     <QRCodeDialog
