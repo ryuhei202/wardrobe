@@ -87,7 +87,7 @@ export const useBrowseDetailHandler = (
               if (selectedItem) {
                 callback.onSelectItem();
                 queryClient.invalidateQueries(
-                  `coordinates/${coordinateId}/coordinate_items`,
+                  `styling/coordinates/${coordinateId}/coordinate_items`,
                 );
               }
             },
@@ -165,7 +165,7 @@ export const useBrowseDetailHandler = (
                 if (selectedItem) {
                   callback.onSelectItem();
                   queryClient.invalidateQueries(
-                    `coordinates/${coordinateId}/coordinate_items`,
+                    `styling/coordinates/${coordinateId}/coordinate_items`,
                   );
                 }
               },
