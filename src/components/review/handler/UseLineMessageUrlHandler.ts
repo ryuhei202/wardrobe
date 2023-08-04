@@ -4,7 +4,7 @@ import { SelectedReviewFormCallback } from "../callback/SelectedReviewFormCallba
 
 type LineMessageUrlFormHandler = {
   readonly handleChangeText: (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => void;
   readonly handleSendClickButton: () => void;
   readonly handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
@@ -42,7 +42,7 @@ export const useLineMessageUrlHandler = ({
 }: LineMessageUrlHandlerArgs): LineMessageUrlFormHandler => {
   const queryClient = useQueryClient();
   const handleChangeText = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     setLineMessageUrlText(event.target.value);
     prevLineMessageUrl !== event.target.value
@@ -55,7 +55,9 @@ export const useLineMessageUrlHandler = ({
   const handleSendClickButton = () => {
     mutate(undefined, {
       onSuccess: () => {
-        queryClient.invalidateQueries(`coordinates/${coordinateId}/review`);
+        queryClient.invalidateQueries(
+          `styling/coordinates/${coordinateId}/review`,
+        );
         setIsEditing(false);
         callback.onSuccess();
         setIsUrlEditing(false);

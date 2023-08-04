@@ -17,8 +17,8 @@ import { useCoordinateFootwearsUpdate } from "../../hooks/api/UseCoordinateFootw
 import { useCoordinateItemsDestroy } from "../../hooks/api/UseCoordinateItemsDestroy";
 import { HostUrl } from "../../model/HostUrl";
 import { SelectionProgressData } from "../../model/selecting/props_data/SelectionProgressData";
-import { CoordinateIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { CoordinateIdContext } from "../context/provider/ContextProvider";
 import { SelectFootwearDialogContainer } from "../footwear/SelectFootwearDialogContainer";
 import { SelectionProgressCallback } from "./callback/SelectionProgressCallback";
 import { useSelectionProgressStyle } from "./style/UseSelectionProgressStyle";
@@ -49,14 +49,14 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(
-            `coordinates/${coordinateId}/coordinate_footwear`
+            `styling/coordinates/${coordinateId}/coordinate_footwear`,
           );
           setIsOpen(false);
         },
         onError: () => {
           setIsOpen(false);
         },
-      }
+      },
     );
   };
   let steps = [];
@@ -106,7 +106,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
                       {`${partSize.name}: ${partSize.value ?? ""}`}
                       <br />
                     </Fragment>
-                  )
+                  ),
                 )
               : []}
           </Typography>
@@ -121,7 +121,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
             {stepLabel}
           </StepButton>
         </Step>
-      </Tooltip>
+      </Tooltip>,
     );
   }
 
@@ -208,7 +208,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
             onClick={() => {
               if (
                 window.confirm(
-                  "このアイテムに紐づいているアドバイスも削除されます。よろしいですか？"
+                  "このアイテムに紐づいているアドバイスも削除されます。よろしいですか？",
                 )
               ) {
                 coordinateItemDestroyMutate(
@@ -216,10 +216,10 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
                   {
                     onSuccess: () => {
                       queryClient.invalidateQueries(
-                        `coordinates/${coordinateId}/coordinate_items`
+                        `styling/coordinates/${coordinateId}/coordinate_items`,
                       );
                     },
-                  }
+                  },
                 );
               }
             }}
