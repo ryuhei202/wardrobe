@@ -8,7 +8,7 @@ type BrowsesSearchPrerequisite = {
 
 export const useBrowsesSearchPrerequisite = (): BrowsesSearchPrerequisite => {
   const { data, error } = useGetRequest<BrowseSearchPrerequisiteResponse>(
-    "browses/search_prerequisite"
+    "styling/browses/search_prerequisite",
   );
 
   return {

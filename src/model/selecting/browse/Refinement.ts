@@ -1,8 +1,5 @@
-import { FilterFormalRankResponse } from "../../api/response/styling/browse/FilterFormalRankResponse";
 import { FormalRankRefinement } from "./FormalRankRefinement";
 import { ValueRefinement } from "./ValueRefinement";
-
-type NewType = FilterFormalRankResponse;
 
 export interface Refinement {
   readonly itemId: number | null;

@@ -21,8 +21,8 @@ export const useNgsCreate = ({
   };
   const memberId = useContextDefinedState(MemberIdContext);
   const { mutate, error, isLoading, isIdle } = usePostRequest<NgCreateRequest>(
-    `members/${memberId}/ngs`,
-    params
+    `styling/members/${memberId}/ngs`,
+    params,
   );
 
   return {

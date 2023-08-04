@@ -1,5 +1,6 @@
 import { CropFree } from "@mui/icons-material";
 import { Button } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
 import { useAppStyle } from "../style/UseAppStyle";
 
 type TProps = {
@@ -19,7 +20,10 @@ export const ChartPickButton = ({ onClick }: TProps) => {
         onClick={onClick}
         sx={{ fontWeight: "bold" }}
       >
-        カルテピック
+        <Routes>
+          <Route path="/rentals/:rentalId" element="レンタルピック"></Route>
+          <Route path="*" element="カルテピック"></Route>
+        </Routes>
       </Button>
     </div>
   );

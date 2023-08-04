@@ -21,8 +21,8 @@ export const useBrowsesConfirm = ({
     };
   };
   const { data, error, isFetching } = useGetRequest<ConfirmResponse>(
-    "browses/confirm",
-    params()
+    "styling/browses/confirm",
+    params(),
   );
 
   return {

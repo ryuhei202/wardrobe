@@ -18,3 +18,8 @@ export interface FilterGroupCollectionData {
   readonly rankData: FilterCheckboxData[];
   readonly optionData: FilterCheckboxData[];
 }
+
+export type TRentalFilterGroupCollectionData = Omit<
+  FilterGroupCollectionData,
+  "ngData"
+>;

@@ -1,24 +1,24 @@
 import { AxiosError } from "axios";
-import { TItem } from "./../../../../model/selecting/TItem";
 import { useState } from "react";
-import { DetailItemTableCallback } from "../callback/DetailItemTableCallback";
-import { DetailSizeButtonArrayCallback } from "../callback/DetailSizeButtonArrayCallback";
-import { DetailSizeButtonData } from "../../../../model/selecting/browse/props_data/DetailSizeButtonData";
-import { DetailItemTableData } from "../../../../model/selecting/browse/props_data/DetailItemTableData";
-import { DetailResponse } from "../../../../model/api/response/styling/browse/DetailResponse";
-import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
-import { PartSize } from "../../../../model/selecting/PartSize";
-import { DetailSizeItemRecordResponse } from "../../../../model/api/response/styling/browse/DetailSizeItemRecordResponse";
-import { ValidationDialogCallback } from "../callback/ValidationDialogCallback";
-import { ValidationError } from "../../../../model/selecting/browse/ValidationError";
-import { DetailStatus } from "../../../../model/selecting/browse/DetailStatus";
+import { useQueryClient } from "react-query";
 import { useBrowsesSelect } from "../../../../hooks/api/UseBrowsesSelect";
+import { DetailResponse } from "../../../../model/api/response/styling/browse/DetailResponse";
+import { DetailSizeItemRecordResponse } from "../../../../model/api/response/styling/browse/DetailSizeItemRecordResponse";
+import { PartSize } from "../../../../model/selecting/PartSize";
+import { DetailStatus } from "../../../../model/selecting/browse/DetailStatus";
+import { ValidationError } from "../../../../model/selecting/browse/ValidationError";
+import { DetailItemTableData } from "../../../../model/selecting/browse/props_data/DetailItemTableData";
+import { DetailSizeButtonData } from "../../../../model/selecting/browse/props_data/DetailSizeButtonData";
 import { useContextDefinedState } from "../../../context/UseContextDefinedState";
 import {
   ChartIdContext,
   CoordinateIdContext,
 } from "../../../context/provider/ContextProvider";
-import { useQueryClient } from "react-query";
+import { BrowseDetailCallback } from "../callback/BrowseDetailCallback";
+import { DetailItemTableCallback } from "../callback/DetailItemTableCallback";
+import { DetailSizeButtonArrayCallback } from "../callback/DetailSizeButtonArrayCallback";
+import { ValidationDialogCallback } from "../callback/ValidationDialogCallback";
+import { TItem } from "./../../../../model/selecting/TItem";
 
 export interface BrowseDetailHandler {
   selectedItem: Omit<TItem, "rank"> | null;
@@ -41,21 +41,21 @@ export interface BrowseDetailHandler {
 export const useBrowseDetailHandler = (
   detail: DetailResponse,
   callback: BrowseDetailCallback,
-  previousItemId?: number
+  previousItemId?: number,
 ): BrowseDetailHandler => {
   const chartId = useContextDefinedState(ChartIdContext);
   const coordinateId = useContextDefinedState(CoordinateIdContext);
   const [selectedSizeIndex, setSelectedSizeIndex] = useState<number | null>(
-    null
+    null,
   );
   const [selectedItem, setSelectedItem] = useState<Omit<TItem, "rank"> | null>(
-    null
+    null,
   );
   const [currentValidationErrors, setCurrentValidationErrors] = useState<
     ValidationError[]
   >([]);
   const [detailStatus, setDetailStatus] = useState<DetailStatus>(
-    DetailStatus.Browsing
+    DetailStatus.Browsing,
   );
   const {
     mutate,
@@ -67,7 +67,7 @@ export const useBrowseDetailHandler = (
 
   const createPartSizes = (
     columns: string[],
-    itemRecord: DetailSizeItemRecordResponse
+    itemRecord: DetailSizeItemRecordResponse,
   ): PartSize[] => {
     return columns.map((column, index) => {
       return {
@@ -87,11 +87,11 @@ export const useBrowseDetailHandler = (
               if (selectedItem) {
                 callback.onSelectItem();
                 queryClient.invalidateQueries(
-                  `coordinates/${coordinateId}/coordinate_items`
+                  `coordinates/${coordinateId}/coordinate_items`,
                 );
               }
             },
-          }
+          },
         );
       }
     } else {
@@ -120,6 +120,7 @@ export const useBrowseDetailHandler = (
             id: itemRecord.itemId,
             imagePath: detail.itemImagePath,
             partSizes: createPartSizes(columns, itemRecord),
+            locationId: itemRecord.locationId,
             locationName: itemRecord.locationName,
             categoryName: detail.categoryName,
             mainColorName: detail.mainColor.name,
@@ -136,6 +137,7 @@ export const useBrowseDetailHandler = (
             id: unsizedItemRecords.itemId,
             imagePath: detail.itemImagePath,
             partSizes: createPartSizes([], unsizedItemRecords),
+            locationId: unsizedItemRecords.locationId,
             locationName: unsizedItemRecords.locationName,
             categoryName: detail.categoryName,
             mainColorName: detail.mainColor.name,
@@ -163,11 +165,11 @@ export const useBrowseDetailHandler = (
                 if (selectedItem) {
                   callback.onSelectItem();
                   queryClient.invalidateQueries(
-                    `coordinates/${coordinateId}/coordinate_items`
+                    `coordinates/${coordinateId}/coordinate_items`,
                   );
                 }
               },
-            }
+            },
           );
         }
       },

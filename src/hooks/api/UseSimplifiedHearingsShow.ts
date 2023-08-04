@@ -1,5 +1,5 @@
-import { useGetRequest } from "./UseGetRequest";
 import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
+import { useGetRequest } from "./UseGetRequest";
 
 type TSimplifiedHearingsShowArg = {
   coordinateId: number;
@@ -10,7 +10,7 @@ export const useSimplifiedHearingsShow = ({
 }: TSimplifiedHearingsShowArg) => {
   const { data, error, refetch } =
     useGetRequest<SimplifiedHearingsShowResponse>(
-      `coordinates/${coordinateId}/simplified_hearing`
+      `styling/coordinates/${coordinateId}/simplified_hearing`,
     );
 
   return { data, error, refetch };

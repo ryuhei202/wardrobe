@@ -7,7 +7,8 @@ export const useNgsDestroy = (): {
   error: Error | null;
   isLoading: boolean;
 } => {
-  const { mutate, error, isLoading } = useDeleteRequest<undefined>(`ngs`);
+  const { mutate, error, isLoading } =
+    useDeleteRequest<undefined>(`styling/ngs`);
 
   return {
     mutate,
