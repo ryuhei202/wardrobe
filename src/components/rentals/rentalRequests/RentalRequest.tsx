@@ -58,6 +58,7 @@ export const RentalRequest = ({
     {
       part: "ウエスト",
       size: rentalRequestResponse.referenceWaistSize,
+      option: `${rentalRequestResponse.waist ?? "なし"}`,
     },
     {
       part: "ヒップ",
@@ -157,7 +158,7 @@ export const RentalRequest = ({
               <TableRow>
                 <StyledTableCell>部位</StyledTableCell>
                 <StyledTableCell>参考サイズ</StyledTableCell>
-                <StyledTableCell>選択</StyledTableCell>
+                <StyledTableCell>入力</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
