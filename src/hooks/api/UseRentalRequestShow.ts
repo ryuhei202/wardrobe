@@ -15,6 +15,7 @@ export type TRentalRequestShowResponse = {
   shoulder: string;
   bust: string;
   hip: string;
+  waist: number | null;
   freeText: string | null;
   referenceJacketSize: string;
   referenceJacketDropSize: string;
