@@ -31,7 +31,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-image-gallery": "^1.2.12",
-    "react-qr-code": "^2.0.8",
+    "react-qr-code": "^2.0.12",
     "react-query": "^3.39.3",
     "react-router-dom": "6.14.1",
     "react-scripts": "5.0.1",
