@@ -164,7 +164,6 @@ export const useRentalDetailHandler = ({
               );
               onClickBackButton();
               onChangeCurrentRefinement(defaultRefinement);
-              onItemSelect();
             }
           },
         },
