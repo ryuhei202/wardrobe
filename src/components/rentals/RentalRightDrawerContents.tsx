@@ -23,6 +23,7 @@ export const RentalRightDrawerContents = () => {
     case "selecting":
       return (
         <RentalSelecting
+          key={rentalCoordinate.items.length}
           rentalCoordinateItems={rentalCoordinate.items}
           onClickCompleteButton={() => setStatus("confirmed")}
         />
