@@ -9,8 +9,6 @@ type TProps = {
 export const ChartHearingStatusContainer = ({ chartId }: TProps) => {
   const { data, error } = useKarteHearingStatusShow({ chartId });
 
-  console.log(data);
-
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
 

@@ -38,7 +38,6 @@ export const ChartHearingStatus = ({
           queryClient.invalidateQueries(
             `styling/kartes/${chartId}/chart_hearing_status`,
           );
-          console.log("成功したよ！！");
         },
       },
     );
