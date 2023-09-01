@@ -12,11 +12,12 @@ import {
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { ChartHearingStatusContainer } from "../../components/chartHearingStatus/ChartHearingStatusContainer";
+import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import {
   ChartIdContext,
   MemberIdContext,
 } from "../../components/context/provider/ContextProvider";
-import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { Coordinate } from "../../components/coordinate/Coordinate";
 import { PlanTag } from "../../components/shared/PlanTag";
 import { theme } from "../../components/style/Theme";
@@ -60,44 +61,48 @@ export const ChartMainContents = ({
           name={`${plan.name}${isSelectableBRank ? "(Bランク可)" : ""}`}
         />
       </div>
-      <FormControlLabel
-        value="end"
-        style={{ marginTop: theme.spacing(1), marginLeft: theme.spacing(1) }}
-        control={
-          <Switch
-            disabled={isLoading}
-            checked={currentHearingCompleted}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              mutate(
-                { hearingCompleted: event.target.checked },
-                {
-                  onSuccess: () => {
-                    setCurrentHearingCompleted((prev) => !prev);
-                    setSeverity("success");
-                    setSnackBarText("ヒアリング状態を保存しました");
+      {isLeeapPlan ? (
+        <FormControlLabel
+          value="end"
+          style={{ marginTop: theme.spacing(1), marginLeft: theme.spacing(1) }}
+          control={
+            <Switch
+              disabled={isLoading}
+              checked={currentHearingCompleted}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                mutate(
+                  { hearingCompleted: event.target.checked },
+                  {
+                    onSuccess: () => {
+                      setCurrentHearingCompleted((prev) => !prev);
+                      setSeverity("success");
+                      setSnackBarText("ヒアリング状態を保存しました");
+                    },
+                    onError: () => {
+                      setSeverity("error");
+                      setSnackBarText("ヒアリング状態の保存に失敗しました");
+                    },
+                    onSettled: () => {
+                      setIsSnackBarOpen(true);
+                    },
                   },
-                  onError: () => {
-                    setSeverity("error");
-                    setSnackBarText("ヒアリング状態の保存に失敗しました");
-                  },
-                  onSettled: () => {
-                    setIsSnackBarOpen(true);
-                  },
-                }
-              );
-            }}
-            size="small"
-          />
-        }
-        label={
-          <Typography variant="subtitle2" fontWeight="bold">
-            {currentHearingCompleted
-              ? "ヒアリング完了済み"
-              : "ヒアリング未完了"}
-          </Typography>
-        }
-        labelPlacement="end"
-      />
+                );
+              }}
+              size="small"
+            />
+          }
+          label={
+            <Typography variant="subtitle2" fontWeight="bold">
+              {currentHearingCompleted
+                ? "ヒアリング完了済み"
+                : "ヒアリング未完了"}
+            </Typography>
+          }
+          labelPlacement="end"
+        />
+      ) : (
+        <ChartHearingStatusContainer chartId={chartId} />
+      )}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={selectedCoordinateIndex}
