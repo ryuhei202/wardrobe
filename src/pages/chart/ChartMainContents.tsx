@@ -101,7 +101,7 @@ export const ChartMainContents = ({
           labelPlacement="end"
         />
       ) : (
-        <ChartHearingStatusContainer chartId={chartId} />
+        <ChartHearingStatusContainer />
       )}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs

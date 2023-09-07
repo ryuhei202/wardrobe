@@ -1,12 +1,11 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { useKarteHearingStatusShow } from "../../hooks/api/UseKarteHearingStatusShow";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { ChartIdContext } from "../context/provider/ContextProvider";
 import { ChartHearingStatus } from "./ChartHearingStatus";
 
-type TProps = {
-  chartId: number;
-};
-
-export const ChartHearingStatusContainer = ({ chartId }: TProps) => {
+export const ChartHearingStatusContainer = () => {
+  const chartId = useContextDefinedState(ChartIdContext);
   const { data, error } = useKarteHearingStatusShow({ chartId });
 
   if (error) return <Typography>{error.message}</Typography>;
@@ -14,7 +13,6 @@ export const ChartHearingStatusContainer = ({ chartId }: TProps) => {
 
   return (
     <ChartHearingStatus
-      chartId={chartId}
       currentStatus={data.currentStatus}
       nextStatuses={data.nextStatuses}
     />

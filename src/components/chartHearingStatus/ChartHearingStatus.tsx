@@ -3,18 +3,16 @@ import { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useKarteHearingStatusUpdate } from "../../hooks/api/UseKarteHearingStatusUpdate";
 import { NextStatuses } from "../../model/api/response/styling/chartHearingStatus/NextStatuses";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { ChartIdContext } from "../context/provider/ContextProvider";
 
 type TProps = {
-  chartId: number;
   currentStatus: string;
   nextStatuses: NextStatuses;
 };
 
-export const ChartHearingStatus = ({
-  chartId,
-  currentStatus,
-  nextStatuses,
-}: TProps) => {
+export const ChartHearingStatus = ({ currentStatus, nextStatuses }: TProps) => {
+  const chartId = useContextDefinedState(ChartIdContext);
   const queryClient = useQueryClient();
   const { mutate } = useKarteHearingStatusUpdate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
