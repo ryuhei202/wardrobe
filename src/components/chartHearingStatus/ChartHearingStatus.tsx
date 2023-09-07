@@ -20,7 +20,7 @@ export const ChartHearingStatus = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    (currentStatus === "提案済み" || currentStatus === "修正待ち") &&
+    ["提案済み", "修正待ち"].includes(currentStatus) &&
       setAnchorEl(event.currentTarget);
   };
   const handleClickChangeStatus = (chartId: number, nextStatusId: number) => {
@@ -75,7 +75,7 @@ export const ChartHearingStatus = ({
           "aria-labelledby": "basic-button",
         }}
       >
-        {(currentStatus === "提案済み" || currentStatus === "修正待ち") &&
+        {["提案済み", "修正待ち"].includes(currentStatus) &&
           nextStatuses.map((nextStatus) => (
             <MenuItem
               key={nextStatus.id}
