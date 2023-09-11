@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
-import { useKarteHearingStatusShow } from "../../hooks/api/UseKarteHearingStatusShow";
-import { useKarteHearingStatusUpdate } from "../../hooks/api/UseKarteHearingStatusUpdate";
+import { useChartHearingStatusShow } from "../../hooks/api/UseChartHearingStatusShow";
+import { useChartHearingStatusUpdate } from "../../hooks/api/UseChartHearingStatusUpdate";
 import { useLineMessagesCreate } from "../../hooks/api/UseLineMessagesCreate";
 import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
@@ -45,8 +45,8 @@ export const CoordinateDescriptionLineSendButton = ({
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useLineMessagesCreate();
-  const { mutate: mutateStatus } = useKarteHearingStatusUpdate();
-  const { data, error } = useKarteHearingStatusShow({ chartId });
+  const { mutate: mutateStatus } = useChartHearingStatusUpdate(chartId);
+  const { data, error } = useChartHearingStatusShow({ chartId });
   const currentStatus = data?.currentStatus;
   const nextStatuses = data?.nextStatuses;
 
@@ -87,7 +87,7 @@ export const CoordinateDescriptionLineSendButton = ({
                   currentStatus === "確認中" &&
                     nextStatuses &&
                     mutateStatus(
-                      { karte_id: chartId, status: nextStatuses[0].id },
+                      { status: nextStatuses[0].id },
                       {
                         onSuccess: () => {
                           queryClient.invalidateQueries(

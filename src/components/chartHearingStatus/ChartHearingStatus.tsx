@@ -1,20 +1,22 @@
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
-import { useKarteHearingStatusUpdate } from "../../hooks/api/UseKarteHearingStatusUpdate";
+import { useChartHearingStatusUpdate } from "../../hooks/api/UseChartHearingStatusUpdate";
 import { NextStatuses } from "../../model/api/response/styling/chartHearingStatus/NextStatuses";
-import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { ChartIdContext } from "../context/provider/ContextProvider";
 
 type TProps = {
   currentStatus: string;
   nextStatuses: NextStatuses;
+  chartId: number;
 };
 
-export const ChartHearingStatus = ({ currentStatus, nextStatuses }: TProps) => {
-  const chartId = useContextDefinedState(ChartIdContext);
+export const ChartHearingStatus = ({
+  currentStatus,
+  nextStatuses,
+  chartId,
+}: TProps) => {
   const queryClient = useQueryClient();
-  const { mutate } = useKarteHearingStatusUpdate();
+  const { mutate } = useChartHearingStatusUpdate(chartId);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,7 +26,7 @@ export const ChartHearingStatus = ({ currentStatus, nextStatuses }: TProps) => {
   const handleClickChangeStatus = (chartId: number, nextStatusId: number) => {
     handleClose();
     mutate(
-      { karte_id: chartId, status: nextStatusId },
+      { status: nextStatusId },
       {
         onError: (error) => {
           alert(error.message);

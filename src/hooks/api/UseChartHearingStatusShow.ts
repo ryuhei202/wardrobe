@@ -1,5 +1,5 @@
 import { ChartHearingStatusShowResponse } from "../../model/api/response/styling/chartHearingStatus/ChartHearingStatusShowResponse";
-import { useGetRequest } from "./UseGetRequest";
+import { useKarteGetRequest } from "./UseKarteGetRequest";
 
 type KarteHearingStatusShow = {
   readonly data?: ChartHearingStatusShowResponse;
@@ -10,12 +10,13 @@ type TProps = {
   chartId: number;
 };
 
-export const useKarteHearingStatusShow = ({
+export const useChartHearingStatusShow = ({
   chartId,
 }: TProps): KarteHearingStatusShow => {
-  const { data, error } = useGetRequest<ChartHearingStatusShowResponse>(
-    `styling/kartes/${chartId}/chart_hearing_status`,
-  );
+  const { data, error } = useKarteGetRequest<ChartHearingStatusShowResponse>({
+    path: `chart_hearing_status`,
+    chartId,
+  });
 
   return { data, error };
 };
