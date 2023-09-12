@@ -43,13 +43,16 @@ export const ChartHearingStatus = ({
     setAnchorEl(null);
   };
   const displayBackgroundColor = (currentStatus: string) => {
-    if (currentStatus === "確認中") {
-      return "secondary";
-    }
-    if (currentStatus === "作成待ち" || currentStatus === "修正待ち") {
-      return "primary";
-    } else {
-      return "inherit";
+    switch (currentStatus) {
+      case "確認中":
+        return "secondary";
+      case "作成待ち":
+      case "修正待ち":
+        return "primary";
+      case "提案済み":
+        return "info";
+      default:
+        return "inherit";
     }
   };
   return (
