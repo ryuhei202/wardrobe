@@ -47,6 +47,7 @@ export const ChartMainContents = ({
     useState(hearingCompleted);
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
+  const [isHearingStatusUnset, setIsHearingStatusUnset] = useState(false);
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useKartesUpdate({ chartId });
 
@@ -61,7 +62,7 @@ export const ChartMainContents = ({
           name={`${plan.name}${isSelectableBRank ? "(Bランク可)" : ""}`}
         />
       </div>
-      {isLeeapPlan ? (
+      {isLeeapPlan || isHearingStatusUnset ? (
         <FormControlLabel
           value="end"
           style={{ marginTop: theme.spacing(1), marginLeft: theme.spacing(1) }}
@@ -101,7 +102,9 @@ export const ChartMainContents = ({
           labelPlacement="end"
         />
       ) : (
-        <ChartHearingStatusContainer />
+        <ChartHearingStatusContainer
+          onUnsetStatusFetched={() => setIsHearingStatusUnset(true)}
+        />
       )}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
