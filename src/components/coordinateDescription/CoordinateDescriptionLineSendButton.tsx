@@ -91,7 +91,7 @@ export const CoordinateDescriptionLineSendButton = ({
                       {
                         onSuccess: () => {
                           queryClient.invalidateQueries(
-                            `styling/kartes/${chartId}/chart_hearing_status`,
+                            `${chartId}/chart_hearing_status`,
                           );
                         },
                         onError: (error) => {
