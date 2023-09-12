@@ -3,14 +3,21 @@ import {
   Box,
   Button,
   Checkbox,
+  CircularProgress,
   FormControlLabel,
   Snackbar,
+  Typography,
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
+import { useQueryClient } from "react-query";
+import { useChartHearingStatusShow } from "../../hooks/api/UseChartHearingStatusShow";
+import { useChartHearingStatusUpdate } from "../../hooks/api/UseChartHearingStatusUpdate";
 import { useLineMessagesCreate } from "../../hooks/api/UseLineMessagesCreate";
 import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 import { createCoordinateFlexMessage } from "../chart/createCoordinateFlexMessage";
+import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { ChartIdContext } from "../context/provider/ContextProvider";
 
 type TProps = {
   descriptionText: string;
@@ -25,6 +32,8 @@ export const CoordinateDescriptionLineSendButton = ({
   disabled,
   simplifiedHearing,
 }: TProps) => {
+  const chartId = useContextDefinedState(ChartIdContext);
+  const queryClient = useQueryClient();
   const [isFirstTransmit, setIsFirstTransmit] = useState(true);
   const messages = createCoordinateFlexMessage({
     descriptionText,
@@ -36,6 +45,13 @@ export const CoordinateDescriptionLineSendButton = ({
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useLineMessagesCreate();
+  const { mutate: mutateStatus } = useChartHearingStatusUpdate(chartId);
+  const { data, error } = useChartHearingStatusShow({ chartId });
+  const currentStatus = data?.currentStatus;
+  const nextStatuses = data?.nextStatuses;
+
+  if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
 
   return (
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -59,7 +75,7 @@ export const CoordinateDescriptionLineSendButton = ({
             window.confirm(
               isFirstTransmit
                 ? "初回提案として送信してもよろしいでしょうか？"
-                : "2回目以降の提案として送信してもよろしいでしょうか？"
+                : "2回目以降の提案として送信してもよろしいでしょうか？",
             )
           ) {
             mutate(
@@ -68,6 +84,21 @@ export const CoordinateDescriptionLineSendButton = ({
                 onSuccess: () => {
                   setSeverity("success");
                   setSnackBarText("メッセージを送信しました");
+                  currentStatus === "確認中" &&
+                    nextStatuses &&
+                    mutateStatus(
+                      { status: nextStatuses[0].id },
+                      {
+                        onSuccess: () => {
+                          queryClient.invalidateQueries(
+                            `styling/kartes/${chartId}/chart_hearing_status`,
+                          );
+                        },
+                        onError: (error) => {
+                          alert(error.message);
+                        },
+                      },
+                    );
                 },
                 onError: () => {
                   setSeverity("error");
@@ -76,7 +107,7 @@ export const CoordinateDescriptionLineSendButton = ({
                 onSettled: () => {
                   setIsSnackBarOpen(true);
                 },
-              }
+              },
             );
           }
         }}
