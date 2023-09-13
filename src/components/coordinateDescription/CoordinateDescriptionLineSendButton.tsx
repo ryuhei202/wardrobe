@@ -2,13 +2,11 @@ import {
   Alert,
   Box,
   Button,
-  Checkbox,
   CircularProgress,
-  FormControlLabel,
   Snackbar,
   Typography,
 } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useChartHearingStatusShow } from "../../hooks/api/UseChartHearingStatusShow";
 import { useChartHearingStatusUpdate } from "../../hooks/api/UseChartHearingStatusUpdate";
@@ -34,11 +32,9 @@ export const CoordinateDescriptionLineSendButton = ({
 }: TProps) => {
   const chartId = useContextDefinedState(ChartIdContext);
   const queryClient = useQueryClient();
-  const [isFirstTransmit, setIsFirstTransmit] = useState(true);
   const messages = createCoordinateFlexMessage({
     descriptionText,
     coordinateItems,
-    isFirstTransmit,
     simplifiedHearing,
   });
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
@@ -55,29 +51,11 @@ export const CoordinateDescriptionLineSendButton = ({
 
   return (
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={isFirstTransmit}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setIsFirstTransmit(event.target.checked)
-            }
-            disabled={disabled || isLoading}
-          />
-        }
-        label="初回送信"
-      />
       <Button
         disabled={disabled || isLoading || simplifiedHearing === undefined}
         variant="contained"
         onClick={() => {
-          if (
-            window.confirm(
-              isFirstTransmit
-                ? "初回提案として送信してもよろしいでしょうか？"
-                : "2回目以降の提案として送信してもよろしいでしょうか？",
-            )
-          ) {
+          if (window.confirm("コーデ提案を送信しますか？")) {
             mutate(
               { messages },
               {
