@@ -1,5 +1,5 @@
-import { useGetRequest } from "./UseGetRequest";
 import { CoordinateStylistCommentsShowResponse } from "./../../model/api/response/styling/coordinateStylistComment/CoordinateStylistCommentsShowResponse";
+import { useGetRequest } from "./UseGetRequest";
 
 type TCoordinateStylistCommentsShowArg = {
   coordinateId: number;
@@ -10,7 +10,7 @@ export const useCoordinateStylistCommentsShow = ({
 }: TCoordinateStylistCommentsShowArg) => {
   const { data, error, refetch } =
     useGetRequest<CoordinateStylistCommentsShowResponse>(
-      `coordinates/${coordinateId}/coordinate_stylist_comment`
+      `styling/coordinates/${coordinateId}/coordinate_stylist_comment`,
     );
 
   return { data, error, refetch };

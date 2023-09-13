@@ -28,7 +28,7 @@ export const useSimplifiedHearingsUpdate = ({
   const { mutate, isLoading } = usePatchRequest<
     TSimplifiedHearingsUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/simplified_hearing`);
+  >(`styling/coordinates/${coordinateId}/simplified_hearing`);
 
   return { mutate, isLoading };
 };

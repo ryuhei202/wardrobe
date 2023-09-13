@@ -111,7 +111,7 @@ export const createCoordinateFlexMessage = ({
           }
           bodyContents.push({
             type: "text",
-            text: `${item.itemInfo.categoryName} / ${item.itemInfo.mainColorName}`,
+            text: `${item.itemInfo.categoryName} / ${item.itemInfo.mainColorName} / ${item.itemInfo.patternName}`,
             size: "md",
             color: "#4C5257",
             weight: "bold",

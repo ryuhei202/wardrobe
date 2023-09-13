@@ -1,5 +1,4 @@
 import { Chip } from "@mui/material";
-import React from "react";
 import { AppliedFilterData } from "../../../model/selecting/browse/props_data/AppliedFilterData";
 import { AppliedFiltersCallback } from "./callback/AppliedFiltersCallback";
 import { useBrowseStyle } from "./style/UseBrowseStyle";

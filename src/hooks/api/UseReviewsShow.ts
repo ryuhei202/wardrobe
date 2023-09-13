@@ -12,7 +12,7 @@ export const useReviewsShow = ({
   coordinateId,
 }: TReviewsShowArg): ReviewsShow => {
   const { data, error } = useGetRequest<ReviewShowResponse>(
-    `coordinates/${coordinateId}/review`
+    `styling/coordinates/${coordinateId}/review`,
   );
   return {
     data,

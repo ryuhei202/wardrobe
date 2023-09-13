@@ -1,6 +1,6 @@
-import { usePatchRequest } from "./UsePatchRequest";
 import { AxiosError } from "axios";
 import { ErrorResponse } from "../../model/api/response/shared/ErrorResponse";
+import { usePatchRequest } from "./UsePatchRequest";
 
 type TMemberMemoUpdateParams = {
   memo?: string;
@@ -11,7 +11,7 @@ export const useMemberMemoUpdate = (memberId: number) => {
   const { mutate, isLoading } = usePatchRequest<
     TMemberMemoUpdateParams,
     AxiosError<ErrorResponse>
-  >(`members/${memberId}/member_memo`);
+  >(`styling/members/${memberId}/member_memo`);
 
   return { mutate, isLoading };
 };

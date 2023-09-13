@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useCoordinateItemsUpdate } from "../../hooks/api/UseCoordinateItemsUpdate";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
-import { CoordinateIdContext } from "../context/provider/ContextProvider";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
+import { CoordinateIdContext } from "../context/provider/ContextProvider";
 
 type TProps = {
   readonly coordinateItem: TCoordinateItem;
@@ -26,7 +26,7 @@ export const ChangeItemSwitch = ({ coordinateItem }: TProps) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(
-            `coordinates/${coordinateId}/coordinate_items`
+            `styling/coordinates/${coordinateId}/coordinate_items`,
           );
           setIsSnackBarOpen(true);
           setSeverity("success");
@@ -37,7 +37,7 @@ export const ChangeItemSwitch = ({ coordinateItem }: TProps) => {
           setSeverity("error");
           setSnackBarText("チェンジアイテムの変更に失敗しました");
         },
-      }
+      },
     );
   };
 

@@ -10,7 +10,7 @@ type CoordinatePatternsIndex = {
   readonly data?: CoordinatePatternIndexResponse;
   readonly error: Error | null;
   readonly refetch: <TPageData>(
-    options?: RefetchOptions & RefetchQueryFilters<TPageData>
+    options?: RefetchOptions & RefetchQueryFilters<TPageData>,
   ) => Promise<QueryObserverResult<CoordinatePatternIndexResponse, Error>>;
   readonly isFetching: boolean;
 };
@@ -24,7 +24,7 @@ export const useCoordinatePatternsIndex = ({
 }: TCoordinatePatternsIndexArg): CoordinatePatternsIndex => {
   const { data, error, refetch, isFetching } =
     useGetRequest<CoordinatePatternIndexResponse>(
-      `coordinates/${coordinateId}/coordinate_patterns`
+      `styling/coordinates/${coordinateId}/coordinate_patterns`,
     );
 
   return {

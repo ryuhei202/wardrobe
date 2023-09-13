@@ -1,6 +1,6 @@
-import { usePatchRequest } from "./UsePatchRequest";
 import { AxiosResponse } from "axios";
 import { UseMutateFunction } from "react-query";
+import { usePatchRequest } from "./UsePatchRequest";
 
 type CoordinateMemosUpdate = {
   readonly mutate: UseMutateFunction<
@@ -25,7 +25,7 @@ export const useCoordinateMemosUpdate = ({
   const { mutate, isLoading } = usePatchRequest<
     TCoordinateMemosUpdateParams,
     Error
-  >(`coordinates/${coordinateId}/coordinate_memos`);
+  >(`styling/coordinates/${coordinateId}/coordinate_memos`);
 
   return { mutate, isLoading };
 };

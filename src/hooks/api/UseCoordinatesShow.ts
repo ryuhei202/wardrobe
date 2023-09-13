@@ -3,7 +3,7 @@ import { useGetRequest } from "./UseGetRequest";
 
 export const useCoordinatesShow = (coordinateId: number) => {
   const { data, error } = useGetRequest<CoordinateShowResponse>(
-    `coordinates/${coordinateId}`
+    `styling/coordinates/${coordinateId}`,
   );
 
   return {
