@@ -32,9 +32,7 @@ export const ChartHearingStatus = ({
           alert(error.message);
         },
         onSuccess: () => {
-          queryClient.invalidateQueries(
-            `styling/kartes/${chartId}/chart_hearing_status`,
-          );
+          queryClient.invalidateQueries(`${chartId}/chart_hearing_status`);
         },
       },
     );

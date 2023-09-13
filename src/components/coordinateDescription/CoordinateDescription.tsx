@@ -48,9 +48,7 @@ export const CoordinateDescription = ({
       { text },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(
-            `styling/kartes/${chartId}/chart_hearing_status`,
-          );
+          queryClient.invalidateQueries(`${chartId}/chart_hearing_status`);
           onUpdateComplete().then(() => {
             setSeverity("success");
             setSnackBarText("根拠説明の変更を保存しました");
