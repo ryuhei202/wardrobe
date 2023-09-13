@@ -68,7 +68,12 @@ export const CoordinateDescriptionLineSendButton = ({
         label="初回送信"
       />
       <Button
-        disabled={disabled || isLoading || simplifiedHearing === undefined}
+        disabled={
+          disabled ||
+          isLoading ||
+          simplifiedHearing === undefined ||
+          currentStatus !== "確認中"
+        }
         variant="contained"
         onClick={() => {
           if (
