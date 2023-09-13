@@ -6,8 +6,6 @@ import { useSimplifiedHearingsShow } from "../../hooks/api/UseSimplifiedHearings
 import { CoordinateDescriptionsShowResponse } from "../../model/api/response/styling/coordinateDescription/CoordinateDescriptionsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
-import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { ChartIdContext } from "../context/provider/ContextProvider";
 import { MemoForm } from "../shared/MemoForm";
 import { CoordinateDescriptionLineSendButton } from "./CoordinateDescriptionLineSendButton";
 
@@ -27,7 +25,6 @@ export const CoordinateDescription = ({
   onUpdateComplete,
 }: TProps) => {
   const queryClient = useQueryClient();
-  const chartId = useContextDefinedState(ChartIdContext);
   const [text, setText] = useState(data.text ?? "");
   const { mutate, isLoading } = useCoordinateDescriptionsUpdate({
     coordinateId,
@@ -48,7 +45,9 @@ export const CoordinateDescription = ({
       { text },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(`${chartId}/chart_hearing_status`);
+          queryClient.invalidateQueries(
+            `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
+          );
           onUpdateComplete().then(() => {
             setSeverity("success");
             setSnackBarText("根拠説明の変更を保存しました");
@@ -80,6 +79,7 @@ export const CoordinateDescription = ({
           disabled={!isTextChanged || isLoading}
         />
         <CoordinateDescriptionLineSendButton
+          coordinateId={coordinateId}
           descriptionText={text}
           coordinateItems={coordinateItems}
           disabled={isLineMessagesSendDisable || isTextChanged || text === ""}

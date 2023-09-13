@@ -1,4 +1,4 @@
-import { NextStatuses } from "./NextStatuses";
+import { NextStatuses } from "../coordinateHearingStatus/NextStatuses";
 
 export type ChartHearingStatusShowResponse = {
   readonly currentStatus: string;

@@ -1,29 +1,32 @@
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
-import { useChartHearingStatusUpdate } from "../../hooks/api/UseChartHearingStatusUpdate";
+import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateHearingStatusUpdate";
 import { NextStatuses } from "../../model/api/response/styling/coordinateHearingStatus/NextStatuses";
 
 type TProps = {
   currentStatus: string;
   nextStatuses: NextStatuses;
-  chartId: number;
+  coordinateId: number;
 };
 
-export const ChartHearingStatus = ({
+export const CoordinateHearingStatus = ({
   currentStatus,
   nextStatuses,
-  chartId,
+  coordinateId,
 }: TProps) => {
   const queryClient = useQueryClient();
-  const { mutate } = useChartHearingStatusUpdate(chartId);
+  const { mutate } = useCoordinateHearingStatusUpdate(coordinateId);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     ["提案済み", "修正待ち"].includes(currentStatus) &&
       setAnchorEl(event.currentTarget);
   };
-  const handleClickChangeStatus = (chartId: number, nextStatusId: number) => {
+  const handleClickChangeStatus = (
+    coordinateId: number,
+    nextStatusId: number,
+  ) => {
     handleClose();
     mutate(
       { status: nextStatusId },
@@ -32,7 +35,9 @@ export const ChartHearingStatus = ({
           alert(error.message);
         },
         onSuccess: () => {
-          queryClient.invalidateQueries(`${chartId}/chart_hearing_status`);
+          queryClient.invalidateQueries(
+            `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
+          );
         },
       },
     );
@@ -80,7 +85,9 @@ export const ChartHearingStatus = ({
           nextStatuses.map((nextStatus) => (
             <MenuItem
               key={nextStatus.id}
-              onClick={() => handleClickChangeStatus(chartId, nextStatus.id)}
+              onClick={() =>
+                handleClickChangeStatus(coordinateId, nextStatus.id)
+              }
             >
               {nextStatus.name}
             </MenuItem>

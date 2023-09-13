@@ -1,6 +1,7 @@
 import { Checkroom } from "@mui/icons-material";
 import {
   Alert,
+  AlertTitle,
   Box,
   Button,
   FormControlLabel,
@@ -12,7 +13,6 @@ import {
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChartHearingStatusContainer } from "../../components/chartHearingStatus/ChartHearingStatusContainer";
 import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import {
   ChartIdContext,
@@ -47,7 +47,6 @@ export const ChartMainContents = ({
     useState(hearingCompleted);
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
-  const [isHearingStatusUnset, setIsHearingStatusUnset] = useState(false);
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useKartesUpdate({ chartId });
 
@@ -62,49 +61,51 @@ export const ChartMainContents = ({
           name={`${plan.name}${isSelectableBRank ? "(Bランク可)" : ""}`}
         />
       </div>
-      {isLeeapPlan || isHearingStatusUnset ? (
-        <FormControlLabel
-          value="end"
-          style={{ marginTop: theme.spacing(1), marginLeft: theme.spacing(1) }}
-          control={
-            <Switch
-              disabled={isLoading}
-              checked={currentHearingCompleted}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                mutate(
-                  { hearingCompleted: event.target.checked },
-                  {
-                    onSuccess: () => {
-                      setCurrentHearingCompleted((prev) => !prev);
-                      setSeverity("success");
-                      setSnackBarText("ヒアリング状態を保存しました");
-                    },
-                    onError: () => {
-                      setSeverity("error");
-                      setSnackBarText("ヒアリング状態の保存に失敗しました");
-                    },
-                    onSettled: () => {
-                      setIsSnackBarOpen(true);
-                    },
+      <FormControlLabel
+        value="end"
+        style={{ marginTop: theme.spacing(1), marginLeft: theme.spacing(1) }}
+        control={
+          <Switch
+            disabled={isLoading}
+            checked={currentHearingCompleted}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              mutate(
+                { hearingCompleted: event.target.checked },
+                {
+                  onSuccess: () => {
+                    setCurrentHearingCompleted((prev) => !prev);
+                    setSeverity("success");
+                    setSnackBarText("ヒアリング状態を保存しました");
                   },
-                );
-              }}
-              size="small"
-            />
-          }
-          label={
-            <Typography variant="subtitle2" fontWeight="bold">
-              {currentHearingCompleted
-                ? "ヒアリング完了済み"
-                : "ヒアリング未完了"}
-            </Typography>
-          }
-          labelPlacement="end"
-        />
-      ) : (
-        <ChartHearingStatusContainer
-          onUnsetStatusFetched={() => setIsHearingStatusUnset(true)}
-        />
+                  onError: () => {
+                    setSeverity("error");
+                    setSnackBarText("ヒアリング状態の保存に失敗しました");
+                  },
+                  onSettled: () => {
+                    setIsSnackBarOpen(true);
+                  },
+                },
+              );
+            }}
+            size="small"
+          />
+        }
+        label={
+          <Typography variant="subtitle2" fontWeight="bold">
+            {currentHearingCompleted
+              ? "ヒアリング完了済み"
+              : "ヒアリング未完了"}
+          </Typography>
+        }
+        labelPlacement="end"
+      />
+      {/* TODO: 全てのUWearプランカルテがコーデ提案ステータスでの管理に移ったら、leeapプランのみ上のswitchを表示するようにする */}
+      {!isLeeapPlan && (
+        <Alert severity="error">
+          <AlertTitle>
+            コーデごとに提案ステータスが存在する場合変更しないでください
+          </AlertTitle>
+        </Alert>
       )}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
