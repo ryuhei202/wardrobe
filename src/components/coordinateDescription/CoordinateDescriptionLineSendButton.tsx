@@ -52,7 +52,12 @@ export const CoordinateDescriptionLineSendButton = ({
   return (
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
       <Button
-        disabled={disabled || isLoading || simplifiedHearing === undefined}
+        disabled={
+          disabled ||
+          isLoading ||
+          simplifiedHearing === undefined ||
+          currentStatus !== "確認中"
+        }
         variant="contained"
         onClick={() => {
           if (window.confirm("コーデ提案を送信しますか？")) {
