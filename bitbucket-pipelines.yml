@@ -16,7 +16,7 @@ pipelines:
           name: Deploy to Firebase
           deployment: staging
           script:
-            - pipe: atlassian/firebase-deploy:4.1.0
+            - pipe: atlassian/firebase-deploy:4.2.0
               variables:
                 KEY_FILE: $KEY_FILE_STAGING
                 PROJECT_ID: "staging"
