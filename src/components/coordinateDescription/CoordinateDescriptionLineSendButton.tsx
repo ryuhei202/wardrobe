@@ -8,20 +8,19 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
-import { useChartHearingStatusShow } from "../../hooks/api/UseChartHearingStatusShow";
-import { useChartHearingStatusUpdate } from "../../hooks/api/UseChartHearingStatusUpdate";
+import { useCoordinateHearingStatusShow } from "../../hooks/api/UseCoordinateHearingStatusShow";
+import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateHearingStatusUpdate";
 import { useLineMessagesCreate } from "../../hooks/api/UseLineMessagesCreate";
 import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 import { createCoordinateFlexMessage } from "../chart/createCoordinateFlexMessage";
-import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { ChartIdContext } from "../context/provider/ContextProvider";
 
 type TProps = {
   descriptionText: string;
   coordinateItems: TCoordinateItem[];
   disabled: boolean;
   simplifiedHearing?: SimplifiedHearingsShowResponse;
+  coordinateId: number;
 };
 
 export const CoordinateDescriptionLineSendButton = ({
@@ -29,8 +28,8 @@ export const CoordinateDescriptionLineSendButton = ({
   coordinateItems,
   disabled,
   simplifiedHearing,
+  coordinateId,
 }: TProps) => {
-  const chartId = useContextDefinedState(ChartIdContext);
   const queryClient = useQueryClient();
   const messages = createCoordinateFlexMessage({
     descriptionText,
@@ -41,8 +40,9 @@ export const CoordinateDescriptionLineSendButton = ({
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useLineMessagesCreate();
-  const { mutate: mutateStatus } = useChartHearingStatusUpdate(chartId);
-  const { data, error } = useChartHearingStatusShow({ chartId });
+  const { mutate: mutateStatus } =
+    useCoordinateHearingStatusUpdate(coordinateId);
+  const { data, error } = useCoordinateHearingStatusShow({ coordinateId });
   const currentStatus = data?.currentStatus;
   const nextStatuses = data?.nextStatuses;
 
@@ -69,7 +69,7 @@ export const CoordinateDescriptionLineSendButton = ({
                       {
                         onSuccess: () => {
                           queryClient.invalidateQueries(
-                            `${chartId}/chart_hearing_status`,
+                            `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
                           );
                         },
                         onError: (error) => {
