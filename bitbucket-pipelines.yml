@@ -35,7 +35,7 @@ pipelines:
           name: Deploy to Firebase
           deployment: production
           script:
-            - pipe: atlassian/firebase-deploy:3.1.1
+            - pipe: atlassian/firebase-deploy:4.2.0
               variables:
                 KEY_FILE: $KEY_FILE_PRODUCTION
                 PROJECT_ID: "production"
