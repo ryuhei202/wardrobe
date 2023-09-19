@@ -7,6 +7,7 @@ import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateH
 import { useSimplifiedHearingsShow } from "../../hooks/api/UseSimplifiedHearingsShow";
 import { CoordinateDescriptionsShowResponse } from "../../model/api/response/styling/coordinateDescription/CoordinateDescriptionsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
+import { HEARING_STATUS } from "../../model/shared/HearingStatus";
 import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 import { MemoForm } from "../shared/MemoForm";
 import { CoordinateDescriptionLineSendButton } from "./CoordinateDescriptionLineSendButton";
@@ -48,16 +49,14 @@ export const CoordinateDescription = ({
     setIsTextChanged(data.text === null ? value !== "" : value !== data.text);
   };
   const currentStatus = hearingStatusData?.currentStatus;
-  const nextStatuses = hearingStatusData?.nextStatuses;
   const onPost = () => {
     mutate(
       { text },
       {
         onSuccess: () => {
           currentStatus === "修正待ち" &&
-            nextStatuses &&
             mutateStatus(
-              { status: nextStatuses[0].id },
+              { status: HEARING_STATUS.CHECKING },
               {
                 onSuccess: () => {
                   queryClient.invalidateQueries(
