@@ -13,6 +13,7 @@ import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateH
 import { useLineMessagesCreate } from "../../hooks/api/UseLineMessagesCreate";
 import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
+import { HEARING_STATUS } from "../../model/shared/HearingStatus";
 import { createCoordinateFlexMessage } from "../chart/createCoordinateFlexMessage";
 
 type TProps = {
@@ -44,7 +45,6 @@ export const CoordinateDescriptionLineSendButton = ({
     useCoordinateHearingStatusUpdate(coordinateId);
   const { data, error } = useCoordinateHearingStatusShow({ coordinateId });
   const currentStatus = data?.currentStatus;
-  const nextStatuses = data?.nextStatuses;
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
@@ -68,9 +68,8 @@ export const CoordinateDescriptionLineSendButton = ({
                   setSeverity("success");
                   setSnackBarText("メッセージを送信しました");
                   currentStatus === "確認中" &&
-                    nextStatuses &&
                     mutateStatus(
-                      { status: nextStatuses[0].id },
+                      { status: HEARING_STATUS.SUGGESTING },
                       {
                         onSuccess: () => {
                           queryClient.invalidateQueries(
