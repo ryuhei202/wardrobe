@@ -1,21 +1,31 @@
 import { CircularProgress, List, Typography } from "@mui/material";
 import { useCoordinatePatternsIndex } from "../../hooks/api/UseCoordinatePatternsIndex";
-import { CoordinateListItem } from "../coordinate/CoordinateListItem";
+import { CoordinatePatternItemList } from "../coordinate/CoordinatePatternItemList";
 import { CoordinateFootwearFetcher } from "../coordinateFootwear/CoordinateFootwearFetcher";
 import { CoordinateChangeItemFetcher } from "../coordinateItem/CoordinateChangeItemFetcher";
+import { CoordinateItem } from "../coordinateItem/CoordinateItem";
 
 type TProps = {
   readonly coordinateId: number;
+  readonly isLeeapPlan?: boolean;
 };
-export const CoordinatePatternContainer = ({ coordinateId }: TProps) => {
+export const CoordinatePatternContainer = ({
+  coordinateId,
+  isLeeapPlan,
+}: TProps) => {
   const { data, error } = useCoordinatePatternsIndex({ coordinateId });
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
+  console.log(data.coordinateItems);
   return (
     <List dense>
+      {!isLeeapPlan &&
+        data.coordinateItems.map((coordinateItem, index) => (
+          <CoordinateItem item={coordinateItem} />
+        ))}
       {data.selectedCoordinatePatterns.map((coordinatePattern, index) => (
-        <CoordinateListItem
+        <CoordinatePatternItemList
           coordinatePattern={coordinatePattern}
           index={index}
           key={index}
