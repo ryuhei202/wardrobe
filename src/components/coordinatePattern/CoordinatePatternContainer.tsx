@@ -17,7 +17,6 @@ export const CoordinatePatternContainer = ({
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
-  console.log(data.coordinateItems);
   return (
     <List dense>
       {!isLeeapPlan &&
