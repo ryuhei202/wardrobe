@@ -14,22 +14,29 @@ export const CoordinatePatternContainer = ({
   coordinateId,
   isLeeapPlan,
 }: TProps) => {
-  const { data: CoordinatePatterns, error } = useCoordinatePatternsIndex({
-    coordinateId,
-  });
-  const { data: coordinateItems } = useCoordinateItemsIndex({ coordinateId });
+  const { data: coordinatePatterns, error: coordinatePatternsError } =
+    useCoordinatePatternsIndex({
+      coordinateId,
+    });
+  const { data: coordinateItems, error: coordinateItemsError } =
+    useCoordinateItemsIndex({ coordinateId });
 
-  if (error) return <Typography>{error.message}</Typography>;
-  if (!CoordinatePatterns) return <CircularProgress />;
+  if (coordinatePatternsError)
+    return <Typography>{coordinatePatternsError.message}</Typography>;
+  if (!coordinatePatterns) return <CircularProgress />;
+
+  if (coordinateItemsError)
+    return <Typography>{coordinateItemsError.message}</Typography>;
+  if (!coordinateItems) return <CircularProgress />;
 
   return (
     <List dense>
-      {CoordinatePatterns.selectedCoordinatePatterns.length === 0
+      {coordinatePatterns.selectedCoordinatePatterns.length === 0
         ? !isLeeapPlan &&
           coordinateItems?.map((ItemInfo, id) => (
             <CoordinateItem item={ItemInfo.itemInfo} key={id} />
           ))
-        : CoordinatePatterns.selectedCoordinatePatterns.map(
+        : coordinatePatterns.selectedCoordinatePatterns.map(
             (coordinatePattern, index) => (
               <CoordinatePatternItemList
                 coordinatePattern={coordinatePattern}
