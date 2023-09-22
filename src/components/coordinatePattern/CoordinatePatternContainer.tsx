@@ -21,7 +21,7 @@ export const CoordinatePatternContainer = ({
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!CoordinatePatterns) return <CircularProgress />;
-  console.log(CoordinatePatterns.selectedCoordinatePatterns);
+
   return (
     <List dense>
       {CoordinatePatterns.selectedCoordinatePatterns.length === 0
