@@ -14,24 +14,31 @@ export const CoordinatePatternContainer = ({
   coordinateId,
   isLeeapPlan,
 }: TProps) => {
-  const { data, error } = useCoordinatePatternsIndex({ coordinateId });
+  const { data: CoordinatePatterns, error } = useCoordinatePatternsIndex({
+    coordinateId,
+  });
   const { data: coordinateItems } = useCoordinateItemsIndex({ coordinateId });
 
   if (error) return <Typography>{error.message}</Typography>;
-  if (!data) return <CircularProgress />;
+  if (!CoordinatePatterns) return <CircularProgress />;
+  console.log(CoordinatePatterns.selectedCoordinatePatterns);
   return (
     <List dense>
-      {!isLeeapPlan &&
-        coordinateItems?.map((ItemInfo) => (
-          <CoordinateItem item={ItemInfo.itemInfo} />
-        ))}
-      {data.selectedCoordinatePatterns.map((coordinatePattern, index) => (
-        <CoordinatePatternItemList
-          coordinatePattern={coordinatePattern}
-          index={index}
-          key={index}
-        />
-      ))}
+      {CoordinatePatterns.selectedCoordinatePatterns.length === 0
+        ? !isLeeapPlan &&
+          coordinateItems?.map((ItemInfo, id) => (
+            <CoordinateItem item={ItemInfo.itemInfo} key={id} />
+          ))
+        : CoordinatePatterns.selectedCoordinatePatterns.map(
+            (coordinatePattern, index) => (
+              <CoordinatePatternItemList
+                coordinatePattern={coordinatePattern}
+                index={index}
+                key={index}
+              />
+            ),
+          )}
+
       <CoordinateChangeItemFetcher coordinateId={coordinateId} />
       <CoordinateFootwearFetcher coordinateId={coordinateId} />
     </List>
