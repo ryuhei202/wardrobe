@@ -15,7 +15,10 @@ type TProps = {
   readonly index: number;
 };
 
-export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
+export const CoordinatePatternItemList = ({
+  coordinatePattern,
+  index,
+}: TProps) => {
   return (
     <>
       <ListSubheader>パターン {index + 1}</ListSubheader>
@@ -40,7 +43,7 @@ export const CoordinateListItem = ({ coordinatePattern, index }: TProps) => {
                     <b>{item.size}</b>,&nbsp;
                     {item.partSizes
                       .filter(
-                        (partSize: PartSizeResponse) => partSize.value !== null
+                        (partSize: PartSizeResponse) => partSize.value !== null,
                       )
                       .map((partSize, index) => (
                         <span key={index}>

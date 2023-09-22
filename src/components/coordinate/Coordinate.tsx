@@ -77,7 +77,10 @@ export const Coordinate = ({
         <ListItemText secondary="着こなし" />
       </ListItem>
       <ListItem>
-        <CoordinatePatternContainer coordinateId={coordinateId} />
+        <CoordinatePatternContainer
+          coordinateId={coordinateId}
+          isLeeapPlan={isLeeapPlan}
+        />
       </ListItem>
       {!isLeeapPlan && (
         <>
