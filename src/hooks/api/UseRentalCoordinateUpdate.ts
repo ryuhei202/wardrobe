@@ -9,7 +9,7 @@ type TParams = {
 
 export const useRentalCoordinateUpdate = ({ rentalId }: TArgs) => {
   const { mutate, isLoading, error } = usePatchRequest<TParams>(
-    `rentals/${rentalId}/rental_coordinate`,
+    `biz/rentals/${rentalId}/rental_coordinate`,
   );
   return {
     mutate,

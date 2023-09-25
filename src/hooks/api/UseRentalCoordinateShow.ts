@@ -16,7 +16,7 @@ type TArgs = {
 };
 export const useRentalCoordinateShow = ({ rentalId }: TArgs): TResponse => {
   const { data, error } = useGetRequest<TRentalCoordinateShowResponse>(
-    `rentals/${rentalId}/rental_coordinate`,
+    `biz/rentals/${rentalId}/rental_coordinate`,
   );
   return {
     data,
