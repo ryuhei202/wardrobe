@@ -2,14 +2,18 @@ import {
   Alert,
   Box,
   Button,
-  Checkbox,
-  FormControlLabel,
+  CircularProgress,
   Snackbar,
+  Typography,
 } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { useQueryClient } from "react-query";
+import { useCoordinateHearingStatusShow } from "../../hooks/api/UseCoordinateHearingStatusShow";
+import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateHearingStatusUpdate";
 import { useLineMessagesCreate } from "../../hooks/api/UseLineMessagesCreate";
 import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling/simplifiedHearing/SimplifiedHearingsShowResponse";
 import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
+import { HEARING_STATUS } from "../../model/shared/HearingStatus";
 import { createCoordinateFlexMessage } from "../chart/createCoordinateFlexMessage";
 
 type TProps = {
@@ -17,6 +21,7 @@ type TProps = {
   coordinateItems: TCoordinateItem[];
   disabled: boolean;
   simplifiedHearing?: SimplifiedHearingsShowResponse;
+  coordinateId: number;
 };
 
 export const CoordinateDescriptionLineSendButton = ({
@@ -24,50 +29,58 @@ export const CoordinateDescriptionLineSendButton = ({
   coordinateItems,
   disabled,
   simplifiedHearing,
+  coordinateId,
 }: TProps) => {
-  const [isFirstTransmit, setIsFirstTransmit] = useState(true);
+  const queryClient = useQueryClient();
   const messages = createCoordinateFlexMessage({
     descriptionText,
     coordinateItems,
-    isFirstTransmit,
     simplifiedHearing,
   });
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useLineMessagesCreate();
+  const { mutate: mutateStatus } =
+    useCoordinateHearingStatusUpdate(coordinateId);
+  const { data, error } = useCoordinateHearingStatusShow({ coordinateId });
+  const currentStatus = data?.currentStatus;
+
+  if (error) return <Typography>{error.message}</Typography>;
+  if (!data) return <CircularProgress />;
 
   return (
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={isFirstTransmit}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setIsFirstTransmit(event.target.checked)
-            }
-            disabled={disabled || isLoading}
-          />
-        }
-        label="初回送信"
-      />
       <Button
-        disabled={disabled || isLoading || simplifiedHearing === undefined}
+        disabled={
+          disabled ||
+          isLoading ||
+          simplifiedHearing === undefined ||
+          currentStatus !== "確認中"
+        }
         variant="contained"
         onClick={() => {
-          if (
-            window.confirm(
-              isFirstTransmit
-                ? "初回提案として送信してもよろしいでしょうか？"
-                : "2回目以降の提案として送信してもよろしいでしょうか？"
-            )
-          ) {
+          if (window.confirm("コーデ提案を送信しますか？")) {
             mutate(
               { messages },
               {
                 onSuccess: () => {
                   setSeverity("success");
                   setSnackBarText("メッセージを送信しました");
+                  currentStatus === "確認中" &&
+                    mutateStatus(
+                      { status: HEARING_STATUS.SUGGESTING },
+                      {
+                        onSuccess: () => {
+                          queryClient.invalidateQueries(
+                            `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
+                          );
+                        },
+                        onError: (error) => {
+                          alert(error.message);
+                        },
+                      },
+                    );
                 },
                 onError: () => {
                   setSeverity("error");
@@ -76,7 +89,7 @@ export const CoordinateDescriptionLineSendButton = ({
                 onSettled: () => {
                   setIsSnackBarOpen(true);
                 },
-              }
+              },
             );
           }
         }}

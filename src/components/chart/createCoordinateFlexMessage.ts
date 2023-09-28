@@ -4,24 +4,15 @@ import { TCoordinateItem } from "../../model/coordinateItem/TCoordinateItem";
 type TArgs = {
   descriptionText: string;
   coordinateItems: TCoordinateItem[];
-  isFirstTransmit: boolean;
   simplifiedHearing?: SimplifiedHearingsShowResponse;
 };
 
 export const createCoordinateFlexMessage = ({
   descriptionText,
   coordinateItems,
-  isFirstTransmit,
   simplifiedHearing,
 }: TArgs) => {
-  const flexMessage: any[] = [
-    {
-      type: "text",
-      text: isFirstTransmit
-        ? "診断フォームにご回答いただきありがとうございます！\nフォームの回答内容を元に早速コーデをお作りしましたのでご確認お願いします！"
-        : "再度コーデをお作りしましたのでご確認お願いします！",
-    },
-  ];
+  const flexMessage: any[] = [];
 
   const simplifiedHearingContent = {
     type: "bubble",

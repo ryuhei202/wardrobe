@@ -9,7 +9,8 @@ import {
 
 export const convertMemberSizeToParams = (
   fetchedSizes: TMemberSizes,
-  editingSizes: TMemberSizes
+  editingSizes: TMemberSizes,
+  chartId: number,
 ): MemberSizeUpdateParams => {
   const valueIfChangedBasic = (sizeName: TMemberBasicSizesEditableKey) => {
     const editingValue = editingSizes.basicSizes[sizeName];
@@ -20,7 +21,7 @@ export const convertMemberSizeToParams = (
 
   const valueIfChangedPart = (
     partName: TMemberPartSizesKey,
-    sizeName: TMemberPartSizeEditableKey
+    sizeName: TMemberPartSizeEditableKey,
   ) => {
     const editingValue = editingSizes.partSizes[partName][sizeName];
     return fetchedSizes.partSizes[partName][sizeName] !== editingValue
@@ -50,10 +51,11 @@ export const convertMemberSizeToParams = (
   };
 
   (Object.keys(updateSizes) as (keyof UpdateSizes)[]).forEach(
-    (key) => updateSizes[key] === undefined && delete updateSizes[key]
+    (key) => updateSizes[key] === undefined && delete updateSizes[key],
   );
 
   return {
+    chartId,
     sizes: updateSizes,
   };
 };

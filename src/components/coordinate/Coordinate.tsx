@@ -2,6 +2,7 @@ import { List, ListItem, ListItemText } from "@mui/material";
 import { CoordinateDescriptionContainer } from "../coordinateDescription/CoordinateDescriptionContainer";
 import { CoordinateFormalRanksFetcher } from "../coordinateFomalRank/CoordinateFomalRanksFetcher";
 import { CoordinateHearingFetcher } from "../coordinateHearing/CoordinateHearingFetcher";
+import { CoordinateHearingStatusContainer } from "../coordinateHearingStatus/CoordinateHearingStatusContainer";
 import { CoordinateMemoFetcher } from "../coordinateMemo/CoordinateMemoFetcher";
 import { CoordinatePatternContainer } from "../coordinatePattern/CoordinatePatternContainer";
 import { CoordinateStylistCommentContainer } from "../coordinateStylistComment/CoordinateStylistCommentContainer";
@@ -24,6 +25,7 @@ export const Coordinate = ({
 }: TProps) => {
   return (
     <List dense>
+      <CoordinateHearingStatusContainer coordinateId={coordinateId} />
       <ListItem>
         <ListItemText secondary="ヒアリング" />
       </ListItem>
@@ -75,7 +77,10 @@ export const Coordinate = ({
         <ListItemText secondary="着こなし" />
       </ListItem>
       <ListItem>
-        <CoordinatePatternContainer coordinateId={coordinateId} />
+        <CoordinatePatternContainer
+          coordinateId={coordinateId}
+          isLeeapPlan={isLeeapPlan}
+        />
       </ListItem>
       {!isLeeapPlan && (
         <>

@@ -1,6 +1,7 @@
 import { Checkroom } from "@mui/icons-material";
 import {
   Alert,
+  AlertTitle,
   Box,
   Button,
   FormControlLabel,
@@ -12,11 +13,11 @@ import {
 } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import {
   ChartIdContext,
   MemberIdContext,
 } from "../../components/context/provider/ContextProvider";
-import { useContextDefinedState } from "../../components/context/UseContextDefinedState";
 import { Coordinate } from "../../components/coordinate/Coordinate";
 import { PlanTag } from "../../components/shared/PlanTag";
 import { theme } from "../../components/style/Theme";
@@ -83,7 +84,7 @@ export const ChartMainContents = ({
                   onSettled: () => {
                     setIsSnackBarOpen(true);
                   },
-                }
+                },
               );
             }}
             size="small"
@@ -98,6 +99,14 @@ export const ChartMainContents = ({
         }
         labelPlacement="end"
       />
+      {/* TODO: 全てのUWearプランカルテがコーデ提案ステータスでの管理に移ったら、leeapプランのみ上のswitchを表示するようにする */}
+      {!isLeeapPlan && (
+        <Alert severity="error">
+          <AlertTitle>
+            コーデごとに提案ステータスが存在する場合変更しないでください
+          </AlertTitle>
+        </Alert>
+      )}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={selectedCoordinateIndex}

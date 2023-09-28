@@ -12,6 +12,7 @@ type TArgs = {
     severity: "success" | "error";
     text: string;
   }) => void;
+  chartId: number;
 };
 
 type TState = {
@@ -24,11 +25,16 @@ export const memberSizeContainerHandler = ({
   mutateSizes,
   isChangedSizes,
   setSnackBarState,
+  chartId,
 }: TArgs): TState => {
   const handleSubmit = () => {
     if (!isChangedSizes) return;
 
-    const params = convertMemberSizeToParams(fetchedSizes, editingSizes);
+    const params = convertMemberSizeToParams(
+      fetchedSizes,
+      editingSizes,
+      chartId,
+    );
     mutateSizes(params, {
       onSuccess: () => {
         setSnackBarState({

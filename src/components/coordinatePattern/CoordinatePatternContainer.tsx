@@ -1,26 +1,51 @@
 import { CircularProgress, List, Typography } from "@mui/material";
+import { useCoordinateItemsIndex } from "../../hooks/api/UseCoordinateItemsIndex";
 import { useCoordinatePatternsIndex } from "../../hooks/api/UseCoordinatePatternsIndex";
-import { CoordinateListItem } from "../coordinate/CoordinateListItem";
+import { CoordinatePatternItemList } from "../coordinate/CoordinatePatternItemList";
 import { CoordinateFootwearFetcher } from "../coordinateFootwear/CoordinateFootwearFetcher";
 import { CoordinateChangeItemFetcher } from "../coordinateItem/CoordinateChangeItemFetcher";
+import { CoordinateItem } from "../coordinateItem/CoordinateItem";
 
 type TProps = {
   readonly coordinateId: number;
+  readonly isLeeapPlan?: boolean;
 };
-export const CoordinatePatternContainer = ({ coordinateId }: TProps) => {
-  const { data, error } = useCoordinatePatternsIndex({ coordinateId });
+export const CoordinatePatternContainer = ({
+  coordinateId,
+  isLeeapPlan,
+}: TProps) => {
+  const { data: coordinatePatterns, error: coordinatePatternsError } =
+    useCoordinatePatternsIndex({
+      coordinateId,
+    });
+  const { data: coordinateItems, error: coordinateItemsError } =
+    useCoordinateItemsIndex({ coordinateId });
 
-  if (error) return <Typography>{error.message}</Typography>;
-  if (!data) return <CircularProgress />;
+  if (coordinatePatternsError)
+    return <Typography>{coordinatePatternsError.message}</Typography>;
+  if (!coordinatePatterns) return <CircularProgress />;
+
+  if (coordinateItemsError)
+    return <Typography>{coordinateItemsError.message}</Typography>;
+  if (!coordinateItems) return <CircularProgress />;
+
   return (
     <List dense>
-      {data.selectedCoordinatePatterns.map((coordinatePattern, index) => (
-        <CoordinateListItem
-          coordinatePattern={coordinatePattern}
-          index={index}
-          key={index}
-        />
-      ))}
+      {coordinatePatterns.selectedCoordinatePatterns.length === 0
+        ? !isLeeapPlan &&
+          coordinateItems?.map((ItemInfo, id) => (
+            <CoordinateItem item={ItemInfo.itemInfo} key={id} />
+          ))
+        : coordinatePatterns.selectedCoordinatePatterns.map(
+            (coordinatePattern, index) => (
+              <CoordinatePatternItemList
+                coordinatePattern={coordinatePattern}
+                index={index}
+                key={index}
+              />
+            ),
+          )}
+
       <CoordinateChangeItemFetcher coordinateId={coordinateId} />
       <CoordinateFootwearFetcher coordinateId={coordinateId} />
     </List>

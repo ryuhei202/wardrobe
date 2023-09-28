@@ -10,7 +10,10 @@ import {
 } from "../../model/memberSize/MemberSizeTypes";
 import { convertResToMemberSizes } from "../../model/memberSize/convertResToMemberSizes";
 import { useContextDefinedState } from "../context/UseContextDefinedState";
-import { MemberIdContext } from "../context/provider/ContextProvider";
+import {
+  ChartIdContext,
+  MemberIdContext,
+} from "../context/provider/ContextProvider";
 
 import { MemberBasicSize } from "./MemberBasicSize";
 import { MemberBodyShape } from "./MemberBodyShape";
@@ -32,11 +35,12 @@ export const MemberSizeContainer = ({
   aboutSize,
 }: TProps) => {
   const [fetchedSizes, setFetchedSizes] = useState<TMemberSizes>(
-    convertResToMemberSizes(memberSizeResponse)
+    convertResToMemberSizes(memberSizeResponse),
   );
+  const chartId = useContextDefinedState(ChartIdContext);
 
   const [editingSizes, setEditingSizes] = useState<TMemberSizes>(
-    convertResToMemberSizes(memberSizeResponse)
+    convertResToMemberSizes(memberSizeResponse),
   );
 
   const [snackBarState, setSnackBarState] = useState<{
@@ -71,6 +75,7 @@ export const MemberSizeContainer = ({
     mutateSizes,
     isChangedSizes,
     setSnackBarState,
+    chartId,
   });
 
   useEffect(() => {

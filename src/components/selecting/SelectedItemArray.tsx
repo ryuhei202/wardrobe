@@ -19,6 +19,7 @@ export const SelectedItemArray = (props: SelectionConfirmProps) => {
         <ItemConfirmCard
           item={props.data[index].itemInfo}
           selectedItem={selectedItem}
+          key={index}
         />
       ))}
       {!!props.footwear && (
