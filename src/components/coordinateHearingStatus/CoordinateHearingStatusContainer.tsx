@@ -11,7 +11,7 @@ export const CoordinateHearingStatusContainer = ({ coordinateId }: TProps) => {
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
-  if (!Object.hasOwn(data, "currentStatus")) return <></>;
+  if (!("currentStatus" in data && "nextStatuses" in data)) return <></>;
 
   return (
     <CoordinateHearingStatus
