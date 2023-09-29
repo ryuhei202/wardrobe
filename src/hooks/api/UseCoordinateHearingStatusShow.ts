@@ -11,9 +11,9 @@ type TArgs = {
 };
 
 export const useCoordinateHearingStatusShow = ({ coordinateId }: TArgs) => {
-  const { data, error } = useGetRequest<TCoordinateHearingStatusShowResponse>(
-    `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
-  );
+  const { data, error } = useGetRequest<
+    TCoordinateHearingStatusShowResponse | {}
+  >(`styling/coordinates/${coordinateId}/coordinate_hearing_status`);
 
   return { data, error };
 };
