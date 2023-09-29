@@ -2,7 +2,6 @@ import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useCoordinateDescriptionsUpdate } from "../../hooks/api/UseCoordinateDescriptionsUpdate";
-import { useCoordinateHearingStatusShow } from "../../hooks/api/UseCoordinateHearingStatusShow";
 import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateHearingStatusUpdate";
 import { useSimplifiedHearingsShow } from "../../hooks/api/UseSimplifiedHearingsShow";
 import { CoordinateDescriptionsShowResponse } from "../../model/api/response/styling/coordinateDescription/CoordinateDescriptionsShowResponse";
@@ -32,9 +31,7 @@ export const CoordinateDescription = ({
   const { mutate, isLoading } = useCoordinateDescriptionsUpdate({
     coordinateId,
   });
-  const { data: hearingStatusData } = useCoordinateHearingStatusShow({
-    coordinateId,
-  });
+
   const { mutate: mutateStatus } =
     useCoordinateHearingStatusUpdate(coordinateId);
   const { data: simplifiedHearingData } = useSimplifiedHearingsShow({
@@ -48,26 +45,25 @@ export const CoordinateDescription = ({
     setText(value);
     setIsTextChanged(data.text === null ? value !== "" : value !== data.text);
   };
-  const currentStatus = hearingStatusData?.currentStatus;
+
   const onPost = () => {
     mutate(
       { text },
       {
         onSuccess: () => {
-          currentStatus === "修正待ち" &&
-            mutateStatus(
-              { status: HEARING_STATUS.CHECKING },
-              {
-                onSuccess: () => {
-                  queryClient.invalidateQueries(
-                    `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
-                  );
-                },
-                onError: (error) => {
-                  alert(error.message);
-                },
+          mutateStatus(
+            { status: HEARING_STATUS.CHECKING },
+            {
+              onSuccess: () => {
+                queryClient.invalidateQueries(
+                  `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
+                );
               },
-            );
+              onError: (error) => {
+                alert(error.message);
+              },
+            },
+          );
           onUpdateComplete().then(() => {
             setSeverity("success");
             setSnackBarText("根拠説明の変更を保存しました");
