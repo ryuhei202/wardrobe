@@ -44,10 +44,12 @@ export const CoordinateDescriptionLineSendButton = ({
   const { mutate: mutateStatus } =
     useCoordinateHearingStatusUpdate(coordinateId);
   const { data, error } = useCoordinateHearingStatusShow({ coordinateId });
-  const currentStatus = data?.currentStatus;
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
+
+  const currentStatus: string | undefined =
+    "currentStatus" in data ? data.currentStatus : undefined;
 
   return (
     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -56,7 +58,7 @@ export const CoordinateDescriptionLineSendButton = ({
           disabled ||
           isLoading ||
           simplifiedHearing === undefined ||
-          currentStatus !== "確認中"
+          (currentStatus ? currentStatus !== "確認中" : false)
         }
         variant="contained"
         onClick={() => {
