@@ -2,6 +2,7 @@ import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useCoordinateDescriptionsUpdate } from "../../hooks/api/UseCoordinateDescriptionsUpdate";
+import { TCoordinateHearingStatusShowResponse } from "../../hooks/api/UseCoordinateHearingStatusShow";
 import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateHearingStatusUpdate";
 import { useSimplifiedHearingsShow } from "../../hooks/api/UseSimplifiedHearingsShow";
 import { CoordinateDescriptionsShowResponse } from "../../model/api/response/styling/coordinateDescription/CoordinateDescriptionsShowResponse";
@@ -17,6 +18,7 @@ type TProps = {
   readonly coordinateItems: TCoordinateItem[];
   readonly isLineMessagesSendDisable: boolean;
   readonly onUpdateComplete: () => Promise<any>;
+  readonly hearingStatusData: TCoordinateHearingStatusShowResponse | {};
 };
 
 export const CoordinateDescription = ({
@@ -25,6 +27,7 @@ export const CoordinateDescription = ({
   coordinateItems,
   isLineMessagesSendDisable,
   onUpdateComplete,
+  hearingStatusData,
 }: TProps) => {
   const queryClient = useQueryClient();
   const [text, setText] = useState(data.text ?? "");
@@ -46,24 +49,35 @@ export const CoordinateDescription = ({
     setIsTextChanged(data.text === null ? value !== "" : value !== data.text);
   };
 
+  const currentStatus: string | undefined =
+    "currentStatus" in hearingStatusData
+      ? hearingStatusData.currentStatus
+      : undefined;
+
   const onPost = () => {
     mutate(
       { text },
       {
         onSuccess: () => {
-          mutateStatus(
-            { status: HEARING_STATUS.CHECKING },
-            {
-              onSuccess: () => {
-                queryClient.invalidateQueries(
-                  `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
-                );
+          if (
+            currentStatus !== undefined &&
+            currentStatus !== "確認中" &&
+            currentStatus !== "提案済み"
+          ) {
+            mutateStatus(
+              { status: HEARING_STATUS.CHECKING },
+              {
+                onSuccess: () => {
+                  queryClient.invalidateQueries(
+                    `styling/coordinates/${coordinateId}/coordinate_hearing_status`,
+                  );
+                },
+                onError: (error) => {
+                  alert(error.message);
+                },
               },
-              onError: (error) => {
-                alert(error.message);
-              },
-            },
-          );
+            );
+          }
           onUpdateComplete().then(() => {
             setSeverity("success");
             setSnackBarText("根拠説明の変更を保存しました");
