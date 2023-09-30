@@ -1,5 +1,6 @@
 import { CircularProgress, Paper, Typography } from "@mui/material";
 import { useCoordinateDescriptionsShow } from "../../hooks/api/UseCoordinateDescriptionsShow";
+import { useCoordinateHearingStatusShow } from "../../hooks/api/UseCoordinateHearingStatusShow";
 import { useCoordinateItemsIndex } from "../../hooks/api/UseCoordinateItemsIndex";
 import { CoordinateDescription } from "./CoordinateDescription";
 
@@ -14,6 +15,9 @@ export const CoordinateDescriptionContainer = ({
   defaultItemNum,
   isEditable,
 }: TProps) => {
+  const { data: hearingStatusData, error: hearingStatusError } =
+    useCoordinateHearingStatusShow({ coordinateId });
+
   const {
     data: coordinateDescriptionData,
     error: coordinateDescriptionError,
@@ -26,13 +30,15 @@ export const CoordinateDescriptionContainer = ({
       coordinateId,
     });
 
-  if (coordinateDescriptionError || coordinateItemError)
+  if (coordinateDescriptionError || coordinateItemError || hearingStatusError)
     return (
       <Typography>
-        {coordinateDescriptionError?.message ?? coordinateItemError?.message}
+        {coordinateDescriptionError?.message ??
+          coordinateItemError?.message ??
+          hearingStatusError?.message}
       </Typography>
     );
-  if (!coordinateDescriptionData || !coordinateItemData)
+  if (!coordinateDescriptionData || !coordinateItemData || !hearingStatusData)
     return <CircularProgress />;
   if (isEditable)
     return (
@@ -46,6 +52,7 @@ export const CoordinateDescriptionContainer = ({
           coordinateItemData.length < defaultItemNum
         }
         onUpdateComplete={refetchCoordinateDescription}
+        hearingStatusData={hearingStatusData}
       />
     );
 
