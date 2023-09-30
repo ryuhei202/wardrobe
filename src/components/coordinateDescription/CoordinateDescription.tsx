@@ -61,8 +61,7 @@ export const CoordinateDescription = ({
         onSuccess: () => {
           if (
             currentStatus !== undefined &&
-            currentStatus !== "確認中" &&
-            currentStatus !== "提案済み"
+            (currentStatus === "作成待ち" || currentStatus === "修正待ち")
           ) {
             mutateStatus(
               { status: HEARING_STATUS.CHECKING },
