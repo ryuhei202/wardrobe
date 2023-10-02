@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   CircularProgress,
+  Dialog,
   Snackbar,
   Typography,
 } from "@mui/material";
@@ -38,12 +39,18 @@ export const CoordinateDescriptionLineSendButton = ({
     simplifiedHearing,
   });
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
+  const [isPostLoading, setIsPostLoading] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useLineMessagesCreate();
   const { mutate: mutateStatus } =
     useCoordinateHearingStatusUpdate(coordinateId);
   const { data, error } = useCoordinateHearingStatusShow({ coordinateId });
+
+  const onUnload = (e: any) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
 
   if (error) return <Typography>{error.message}</Typography>;
   if (!data) return <CircularProgress />;
@@ -63,6 +70,8 @@ export const CoordinateDescriptionLineSendButton = ({
         variant="contained"
         onClick={() => {
           if (window.confirm("コーデ提案を送信しますか？")) {
+            window.addEventListener("beforeunload", onUnload);
+            setIsPostLoading(true);
             mutate(
               { messages },
               {
@@ -90,6 +99,8 @@ export const CoordinateDescriptionLineSendButton = ({
                 },
                 onSettled: () => {
                   setIsSnackBarOpen(true);
+                  setIsPostLoading(false);
+                  window.removeEventListener("beforeunload", onUnload);
                 },
               },
             );
@@ -105,6 +116,18 @@ export const CoordinateDescriptionLineSendButton = ({
       >
         <Alert severity={severity}>{snackBarText}</Alert>
       </Snackbar>
+      <Dialog open={isPostLoading} disableEscapeKeyDown>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress />
+        </div>
+        <Alert severity="warning">送信中です。画面を閉じないでください</Alert>
+      </Dialog>
     </Box>
   );
 };
