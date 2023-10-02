@@ -1,7 +1,7 @@
 import { NextStatuses } from "../../model/api/response/styling/coordinateHearingStatus/NextStatuses";
 import { useGetRequest } from "./UseGetRequest";
 
-type TCoordinateHearingStatusShowResponse = {
+export type TCoordinateHearingStatusShowResponse = {
   readonly currentStatus: string;
   readonly nextStatuses: NextStatuses;
 };
