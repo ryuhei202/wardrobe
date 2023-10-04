@@ -139,7 +139,7 @@ export const RentalConfirm = ({
                   onSuccess: () => {
                     alert("更新しました");
                     queryClient.invalidateQueries(
-                      `rentals/${rentalId}/rental_coordinate`,
+                      `biz/rentals/${rentalId}/rental_coordinate`,
                     );
                   },
                   onError: (error) => {

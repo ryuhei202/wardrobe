@@ -6,7 +6,7 @@ type TArgs = {
 
 export const useRentalUpdateToPreparingShipment = ({ rentalId }: TArgs) => {
   const { mutate, isLoading } = usePatchRequest(
-    `rentals/${rentalId}/preparing_shipment`,
+    `biz/rentals/${rentalId}/preparing_shipment`,
   );
   return {
     mutate,
