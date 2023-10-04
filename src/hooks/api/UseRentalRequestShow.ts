@@ -42,7 +42,7 @@ type TArgs = {
 };
 export const useRentalRequestShow = ({ rentalId }: TArgs): TResponse => {
   const { data, error } = useGetRequest<TRentalRequestShowResponse>(
-    `rentals/${rentalId}/rental_request`,
+    `biz/rentals/${rentalId}/rental_request`,
   );
   return {
     data,

@@ -43,9 +43,9 @@ export const useRentalFilters = ({
     categoryId,
   };
   const { data, error, isFetching } = useGetRequest<TRentalFiltersResponse>(
-    `rentals/${rentalId}/filters`,
+    `biz/rentals/${rentalId}/filters`,
     params,
-    `rentals/${rentalId}/filters/?category_id=${categoryId}`,
+    `biz/rentals/${rentalId}/filters/?category_id=${categoryId}`,
   );
   return {
     data,

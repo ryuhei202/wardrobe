@@ -160,7 +160,7 @@ export const useRentalDetailHandler = ({
           onSuccess: () => {
             if (selectedItem) {
               queryClient.invalidateQueries(
-                `rentals/${rentalId}/rental_coordinate`,
+                `biz/rentals/${rentalId}/rental_coordinate`,
               );
               onClickBackButton();
               onChangeCurrentRefinement(defaultRefinement);
