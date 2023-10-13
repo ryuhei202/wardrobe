@@ -105,7 +105,7 @@ export const CoordinateHearingStatus = ({
             key={prevStatus.id}
             onClick={() => handleClickChangeStatus(coordinateId, prevStatus.id)}
           >
-            「{prevStatus.name}」に戻す
+            <span style={{ color: "red" }}>「{prevStatus.name}」に戻す</span>
           </MenuItem>
         )}
       </Menu>
