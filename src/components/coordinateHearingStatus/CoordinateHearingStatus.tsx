@@ -63,12 +63,6 @@ export const CoordinateHearingStatus = ({
         return "inherit";
     }
   };
-
-  const targetStatuses = () => {
-    if (prevStatus === null) return nextStatuses;
-    return [prevStatus, ...nextStatuses];
-  };
-
   return (
     <Box pt={1.5}>
       <Button
