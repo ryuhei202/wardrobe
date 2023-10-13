@@ -17,6 +17,7 @@ export const CoordinateHearingStatusContainer = ({ coordinateId }: TProps) => {
     <CoordinateHearingStatus
       coordinateId={coordinateId}
       currentStatus={data.currentStatus}
+      prevStatus={data.prevStatus}
       nextStatuses={data.nextStatuses}
     />
   );
