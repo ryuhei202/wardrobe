@@ -2,11 +2,11 @@ import { Box, Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateHearingStatusUpdate";
-import { NextStatuses } from "../../model/api/response/styling/coordinateHearingStatus/NextStatuses";
+import { THearingStatus } from "../../model/api/response/styling/coordinateHearingStatus/NextStatuses";
 
 type TProps = {
   currentStatus: string;
-  nextStatuses: NextStatuses;
+  nextStatuses: THearingStatus[];
   coordinateId: number;
 };
 

@@ -1,9 +1,10 @@
-import { NextStatuses } from "../../model/api/response/styling/coordinateHearingStatus/NextStatuses";
+import { THearingStatus } from "../../model/api/response/styling/coordinateHearingStatus/NextStatuses";
 import { useGetRequest } from "./UseGetRequest";
 
 export type TCoordinateHearingStatusShowResponse = {
   readonly currentStatus: string;
-  readonly nextStatuses: NextStatuses;
+  readonly nextStatuses: THearingStatus[];
+  readonly prevStatus: THearingStatus | null;
 };
 
 type TArgs = {
