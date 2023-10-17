@@ -2,17 +2,19 @@ import { Box, Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useCoordinateHearingStatusUpdate } from "../../hooks/api/UseCoordinateHearingStatusUpdate";
-import { NextStatuses } from "../../model/api/response/styling/coordinateHearingStatus/NextStatuses";
+import { THearingStatus } from "../../model/api/response/styling/coordinateHearingStatus/NextStatuses";
 
 type TProps = {
   currentStatus: string;
-  nextStatuses: NextStatuses;
+  nextStatuses: THearingStatus[];
+  prevStatus: THearingStatus | null;
   coordinateId: number;
 };
 
 export const CoordinateHearingStatus = ({
   currentStatus,
   nextStatuses,
+  prevStatus,
   coordinateId,
 }: TProps) => {
   const queryClient = useQueryClient();
@@ -20,13 +22,16 @@ export const CoordinateHearingStatus = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    ["提案済み", "修正待ち"].includes(currentStatus) &&
-      setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget);
   };
   const handleClickChangeStatus = (
     coordinateId: number,
     nextStatusId: number,
   ) => {
+    if (!["提案済み", "修正待ち"].includes(currentStatus)) {
+      if (!window.confirm("手動で変更しますか？")) return;
+    }
+
     handleClose();
     mutate(
       { status: nextStatusId },
@@ -81,17 +86,22 @@ export const CoordinateHearingStatus = ({
           "aria-labelledby": "basic-button",
         }}
       >
-        {["提案済み", "修正待ち"].includes(currentStatus) &&
-          nextStatuses.map((nextStatus) => (
-            <MenuItem
-              key={nextStatus.id}
-              onClick={() =>
-                handleClickChangeStatus(coordinateId, nextStatus.id)
-              }
-            >
-              {nextStatus.name}
-            </MenuItem>
-          ))}
+        {nextStatuses.map((status) => (
+          <MenuItem
+            key={status.id}
+            onClick={() => handleClickChangeStatus(coordinateId, status.id)}
+          >
+            {status.name}
+          </MenuItem>
+        ))}
+        {prevStatus !== null && (
+          <MenuItem
+            key={prevStatus.id}
+            onClick={() => handleClickChangeStatus(coordinateId, prevStatus.id)}
+          >
+            <span style={{ color: "red" }}>「{prevStatus.name}」に戻す</span>
+          </MenuItem>
+        )}
       </Menu>
     </Box>
   );

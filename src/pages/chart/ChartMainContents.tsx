@@ -1,7 +1,6 @@
 import { Checkroom } from "@mui/icons-material";
 import {
   Alert,
-  AlertTitle,
   Box,
   Button,
   FormControlLabel,
@@ -61,51 +60,45 @@ export const ChartMainContents = ({
           name={`${plan.name}${isSelectableBRank ? "(Bランク可)" : ""}`}
         />
       </div>
-      <FormControlLabel
-        value="end"
-        style={{ marginTop: theme.spacing(1), marginLeft: theme.spacing(1) }}
-        control={
-          <Switch
-            disabled={isLoading}
-            checked={currentHearingCompleted}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              mutate(
-                { hearingCompleted: event.target.checked },
-                {
-                  onSuccess: () => {
-                    setCurrentHearingCompleted((prev) => !prev);
-                    setSeverity("success");
-                    setSnackBarText("ヒアリング状態を保存しました");
+      {isLeeapPlan && (
+        <FormControlLabel
+          value="end"
+          style={{ marginTop: theme.spacing(1), marginLeft: theme.spacing(1) }}
+          control={
+            <Switch
+              disabled={isLoading}
+              checked={currentHearingCompleted}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                mutate(
+                  { hearingCompleted: event.target.checked },
+                  {
+                    onSuccess: () => {
+                      setCurrentHearingCompleted((prev) => !prev);
+                      setSeverity("success");
+                      setSnackBarText("ヒアリング状態を保存しました");
+                    },
+                    onError: () => {
+                      setSeverity("error");
+                      setSnackBarText("ヒアリング状態の保存に失敗しました");
+                    },
+                    onSettled: () => {
+                      setIsSnackBarOpen(true);
+                    },
                   },
-                  onError: () => {
-                    setSeverity("error");
-                    setSnackBarText("ヒアリング状態の保存に失敗しました");
-                  },
-                  onSettled: () => {
-                    setIsSnackBarOpen(true);
-                  },
-                },
-              );
-            }}
-            size="small"
-          />
-        }
-        label={
-          <Typography variant="subtitle2" fontWeight="bold">
-            {currentHearingCompleted
-              ? "ヒアリング完了済み"
-              : "ヒアリング未完了"}
-          </Typography>
-        }
-        labelPlacement="end"
-      />
-      {/* TODO: 全てのUWearプランカルテがコーデ提案ステータスでの管理に移ったら、leeapプランのみ上のswitchを表示するようにする */}
-      {!isLeeapPlan && (
-        <Alert severity="error">
-          <AlertTitle>
-            コーデごとに提案ステータスが存在する場合変更しないでください
-          </AlertTitle>
-        </Alert>
+                );
+              }}
+              size="small"
+            />
+          }
+          label={
+            <Typography variant="subtitle2" fontWeight="bold">
+              {currentHearingCompleted
+                ? "ヒアリング完了済み"
+                : "ヒアリング未完了"}
+            </Typography>
+          }
+          labelPlacement="end"
+        />
       )}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
