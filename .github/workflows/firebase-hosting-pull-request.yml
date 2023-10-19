@@ -2,20 +2,20 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-'on': pull_request
+"on": pull_request
 jobs:
   build_and_preview:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: | 
+      - run: |
           yarn install
           REACT_APP_FIREBASE_API_KEY=${{ secrets.REACT_APP_STAGING_FIREBASE_API_KEY }} yarn build:staging
           REACT_APP_SENTRY_ORG=${{ secrets.REACT_APP_SENTRY_ORG }} REACT_APP_SENTRY_PROJECT=${{ secrets.REACT_APP_SENTRY_PROJECT }} REACT_APP_SENTRY_AUTH_TOKEN=${{ secrets.REACT_APP_SENTRY_AUTH_TOKEN }} yarn upload-sourcemaps
           find ./build -name *.map -delete
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WARDROBE_STG_UWEAR }}'
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_WARDROBE_STG_UWEAR }}"
           projectId: wardrobe-stg-uwear
