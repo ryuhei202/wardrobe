@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: |
           yarn install
-          REACT_APP_FIREBASE_API_KEY=${{ secrets.REACT_APP_FIREBASE_API_KEY }} yarn build:staging
+          REACT_APP_FIREBASE_API_KEY=${{ secrets.REACT_APP_FIREBASE_API_KEY }} yarn build
           REACT_APP_SENTRY_ORG=${{ secrets.REACT_APP_SENTRY_ORG }} REACT_APP_SENTRY_PROJECT=${{ secrets.REACT_APP_SENTRY_PROJECT }} REACT_APP_SENTRY_AUTH_TOKEN=${{ secrets.REACT_APP_SENTRY_AUTH_TOKEN }} yarn upload-sourcemaps
           find ./build -name *.map -delete
       - uses: FirebaseExtended/action-hosting-deploy@v0
