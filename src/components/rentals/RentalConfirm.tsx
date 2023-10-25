@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { useQueryClient } from "react-query";
-import { useLocation } from "react-router-dom";
 import { TRentalCoordinateShowResponse } from "../../hooks/api/UseRentalCoordinateShow";
 import { useRentalCoordinateUpdate } from "../../hooks/api/UseRentalCoordinateUpdate";
 import { useRentalRequestShow } from "../../hooks/api/UseRentalRequestShow";
@@ -28,8 +27,6 @@ export const RentalConfirm = ({
   rentalCoordinate,
   onClickBackButton,
 }: TProps) => {
-  const PREPARING_SHIPMENT = 20;
-  const search = useLocation().search;
   const { rentalId } = useContext(RentalIdContext);
   const queryClient = useQueryClient();
   const {
@@ -44,11 +41,6 @@ export const RentalConfirm = ({
     useRentalRequestShow({ rentalId });
   const [selectedCoordinateChoiceId, setSelectedCoordinateChoiceId] =
     useState<number>(rentalCoordinate.coordinateChoiceId);
-
-  const statusQuery = new URLSearchParams(search);
-  const isRentalStatusPreparingShipment =
-    parseInt(statusQuery.get("status") ?? "") === PREPARING_SHIPMENT;
-  console.log(statusQuery.get("status"));
 
   if (rentalRequestError)
     return <Typography>{rentalRequestError.message}</Typography>;
@@ -87,8 +79,7 @@ export const RentalConfirm = ({
             disabled={
               isUpdateShipmentStatusLoading ||
               rentalCoordinate.items.length !== 3 ||
-              rentalCoordinate.items.some((item) => item.locationId !== null) ||
-              isRentalStatusPreparingShipment
+              rentalCoordinate.items.some((item) => item.locationId !== null)
             }
             onClick={() => {
               if (window.confirm("出荷準備に移動しますか？")) {
@@ -103,7 +94,7 @@ export const RentalConfirm = ({
               }
             }}
           >
-            {isRentalStatusPreparingShipment ? "出荷準備中" : "出荷準備に移動"}
+            出荷準備に移動
           </Button>
         </div>
         <div
