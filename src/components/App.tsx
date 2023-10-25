@@ -90,7 +90,7 @@ export const App = () => {
               <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                   <Typography variant="h6" noWrap className={classes.title}>
-                    WARDROBE
+                    WARDROBEa
                   </Typography>
                   <ChartShowButton />
                   <ChartPickButton onClick={() => setIsQRCodeOpen(true)} />
