@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extra-non-null-assertion */
 import { FilterChoiceResponse } from "../../../hooks/api/UseRentalFilters";
 import { LargeCategoryChoiceResponse } from "../../../model/api/response/styling/browse/LargeCategoryChoiceResponse";
 import { FormalRankRefinement } from "../../../model/selecting/browse/FormalRankRefinement";
@@ -21,12 +22,8 @@ export const getFilterGroupCollectionHandler = ({
   onChangeCurrentRefinement,
 }: TArgs) => {
   // 現在の大カテを返す
-  const getCurrentLargeCategory = ():
-    | LargeCategoryChoiceResponse
-    | undefined => {
-    return filter.largeCategory.find(
-      (c) => c.id === currentRefinement.largeCategoryId,
-    );
+  const getCurrentLargeCategory = (): LargeCategoryChoiceResponse | undefined => {
+    return filter.largeCategory.find((c) => c.id === currentRefinement.largeCategoryId);
   };
   const getBroaderCategory = () => {
     if (currentRefinement.mediumCategoryId) {
@@ -36,6 +33,7 @@ export const getFilterGroupCollectionHandler = ({
       if (currentRefinement.largeCategoryId) {
         // 大カテが既に指定されている場合
         const selectedLargeCategory = getCurrentLargeCategory();
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return selectedLargeCategory!!.mediumCategory.map((filter) => {
           return { name: filter.name };
         });
@@ -90,12 +88,10 @@ export const getFilterGroupCollectionHandler = ({
             name: partSize.name,
             range: [partSize.min, partSize.max],
             selectedValue: [
-              currentRefinement.partSizes.find(
-                (value) => value.id === partSize.id,
-              )?.min ?? partSize.min,
-              currentRefinement.partSizes.find(
-                (value) => value.id === partSize.id,
-              )?.max ?? partSize.max,
+              currentRefinement.partSizes.find((value) => value.id === partSize.id)?.min ??
+                partSize.min,
+              currentRefinement.partSizes.find((value) => value.id === partSize.id)?.max ??
+                partSize.max,
             ],
           };
         }),
@@ -179,9 +175,7 @@ export const getFilterGroupCollectionHandler = ({
     );
     if (mediumCategoryChoice) {
       const smallCategoryChoice = mediumCategoryChoice.smallCategory[index];
-      const currentIndex = currentRefinement.smallCategoryIds.indexOf(
-        smallCategoryChoice.id,
-      );
+      const currentIndex = currentRefinement.smallCategoryIds.indexOf(smallCategoryChoice.id);
       const newIds = [...currentRefinement.smallCategoryIds];
       if (currentIndex === -1) {
         newIds.push(smallCategoryChoice.id);
@@ -243,7 +237,7 @@ export const getFilterGroupCollectionHandler = ({
 
   const getPartSizeCallback = () => {
     return {
-      onPresetChanged: (_: number) => undefined,
+      onPresetChanged: () => undefined,
       filterSliderArrayCallback: {
         onChange: (index: number, value: number[]) => {
           const currentIndex = currentRefinement.partSizes.findIndex(

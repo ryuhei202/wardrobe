@@ -16,23 +16,15 @@ import { alertClosedWindow } from "../../service/shared/alertClosedWindow";
 type TProps = {
   readonly coordinateId: number;
   readonly response: CoordinateTopsRatiosShowResponse;
-  readonly onUpdateComplete: () => Promise<any>;
+  readonly onUpdateComplete: () => Promise<unknown>;
 };
 
-export const CoordinateTopsRatio = ({
-  coordinateId,
-  response,
-  onUpdateComplete,
-}: TProps) => {
+export const CoordinateTopsRatio = ({ coordinateId, response, onUpdateComplete }: TProps) => {
   const [isJacketRequested, setIsJacketRequested] = useState(
-    response.jacketOption?.isJacketRequested
+    response.jacketOption?.isJacketRequested,
   );
-  const [shortSleeveNum, setShortSleeveNum] = useState<number>(
-    response.shortSleeveNum || 0
-  );
-  const [longSleeveNum, setLongSleeveNum] = useState<number>(
-    response.longSleeveNum || 0
-  );
+  const [shortSleeveNum, setShortSleeveNum] = useState<number>(response.shortSleeveNum || 0);
+  const [longSleeveNum, setLongSleeveNum] = useState<number>(response.longSleeveNum || 0);
   const { mutate, isLoading } = useCoordinateTopsRatiosUpdate({
     coordinateId,
     longSleeveNum: longSleeveNum,
@@ -45,8 +37,7 @@ export const CoordinateTopsRatio = ({
   const isFirstRendering = useRef(false);
 
   const isChanged =
-    shortSleeveNum !== response.shortSleeveNum ||
-    longSleeveNum !== response.longSleeveNum;
+    shortSleeveNum !== response.shortSleeveNum || longSleeveNum !== response.longSleeveNum;
   const validateTopsNum = () => {
     if (shortSleeveNum < 0 || longSleeveNum < 0) return false;
     if (response.topsNum === null) return true;
@@ -76,7 +67,7 @@ export const CoordinateTopsRatio = ({
         },
       });
     },
-    [mutate, onUpdateComplete]
+    [mutate, onUpdateComplete],
   );
 
   useEffect(() => {

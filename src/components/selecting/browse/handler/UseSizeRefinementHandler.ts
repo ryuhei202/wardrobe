@@ -4,23 +4,14 @@ import { FilterSizeData } from "../../../../model/selecting/browse/props_data/Fi
 import { FilterSizeArrayCallback } from "../callback/FilterSizeArrayCallback";
 
 export interface SizeRefinementHandler {
-  sizeCallback: (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ) => FilterSizeArrayCallback;
-  sizeData: (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ) => FilterSizeData[];
-  appliedFilters: (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ) => AppliedFilterData[];
+  sizeCallback: (choice: FilterResponse[], currentIds: number[]) => FilterSizeArrayCallback;
+  sizeData: (choice: FilterResponse[], currentIds: number[]) => FilterSizeData[];
+  appliedFilters: (choice: FilterResponse[], currentIds: number[]) => AppliedFilterData[];
   deleteFilter: (currentIds: number[], index: number) => void;
 }
 
 export const useSizeRefinementHandler = (
-  onChange: (newIds: number[]) => void
+  onChange: (newIds: number[]) => void,
 ): SizeRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
@@ -35,7 +26,7 @@ export const useSizeRefinementHandler = (
 
   const sizeCallback = (
     choice: FilterResponse[],
-    currentIds: number[]
+    currentIds: number[],
   ): FilterSizeArrayCallback => {
     return {
       onClick: (index: number) => {
@@ -45,10 +36,7 @@ export const useSizeRefinementHandler = (
     };
   };
 
-  const sizeData = (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ): FilterSizeData[] => {
+  const sizeData = (choice: FilterResponse[], currentIds: number[]): FilterSizeData[] => {
     return choice.map((filter) => {
       return {
         name: filter.name,
@@ -57,10 +45,7 @@ export const useSizeRefinementHandler = (
     });
   };
 
-  const appliedFilters = (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ): AppliedFilterData[] => {
+  const appliedFilters = (choice: FilterResponse[], currentIds: number[]): AppliedFilterData[] => {
     return currentIds.map((currentId) => {
       return {
         name: choice.find((filter) => filter.id === currentId)?.name ?? "",
@@ -69,7 +54,7 @@ export const useSizeRefinementHandler = (
   };
 
   const deleteFilter = (currentIds: number[], index: number) => {
-    let newSizes = [...currentIds];
+    const newSizes = [...currentIds];
     newSizes.splice(index, 1);
     onChange(newSizes);
   };

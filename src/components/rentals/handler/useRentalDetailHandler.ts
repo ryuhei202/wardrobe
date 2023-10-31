@@ -26,14 +26,11 @@ export const useRentalDetailHandler = ({
   defaultRefinement,
   onClickBackButton,
   onChangeCurrentRefinement,
-  onItemSelect,
   currentItemId,
 }: TArgs) => {
   const { rentalId } = useContext(RentalIdContext);
   const [selectedSizeIndex, setSelectedSizeIndex] = useState<number>();
-  const [selectedItem, setSelectedItem] = useState<Omit<TItem, "rank"> | null>(
-    null,
-  );
+  const [selectedItem, setSelectedItem] = useState<Omit<TItem, "rank"> | null>(null);
   const {
     mutate,
     isLoading: isPatchLoading,
@@ -73,10 +70,7 @@ export const useRentalDetailHandler = ({
   };
 
   const detailItemTableData = (): DetailItemTableData => {
-    const columns =
-      selectedSizeIndex === undefined
-        ? []
-        : detail.sizes[selectedSizeIndex].columns;
+    const columns = selectedSizeIndex === undefined ? [] : detail.sizes[selectedSizeIndex].columns;
     const itemRecords =
       selectedSizeIndex === undefined
         ? detail.unsizedItemRecords
@@ -159,9 +153,7 @@ export const useRentalDetailHandler = ({
         {
           onSuccess: () => {
             if (selectedItem) {
-              queryClient.invalidateQueries(
-                `biz/rentals/${rentalId}/rental_coordinate`,
-              );
+              queryClient.invalidateQueries(`biz/rentals/${rentalId}/rental_coordinate`);
               onClickBackButton();
               onChangeCurrentRefinement(defaultRefinement);
             }

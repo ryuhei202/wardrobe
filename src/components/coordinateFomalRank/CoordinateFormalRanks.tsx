@@ -6,17 +6,11 @@ import { CoordinateFormalRanksShowResponse } from "../../model/api/response/styl
 type TProps = {
   coordinateId: number;
   response: CoordinateFormalRanksShowResponse;
-  onUpdateComplete: () => Promise<any>;
+  onUpdateComplete: () => Promise<unknown>;
 };
 
-export const CoordinateFormalRanks = ({
-  coordinateId,
-  response,
-  onUpdateComplete,
-}: TProps) => {
-  const [formalRank, setFormalRank] = useState<number>(
-    response.formalRank || 0
-  );
+export const CoordinateFormalRanks = ({ coordinateId, response, onUpdateComplete }: TProps) => {
+  const [formalRank, setFormalRank] = useState<number>(response.formalRank || 0);
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");

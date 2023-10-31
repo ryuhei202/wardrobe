@@ -6,14 +6,10 @@ import { SimplifiedHearingsShowResponse } from "../../model/api/response/styling
 type TProps = {
   data: SimplifiedHearingsShowResponse;
   coordinateId: number;
-  onUpdateComplete: () => Promise<any>;
+  onUpdateComplete: () => Promise<unknown>;
 };
 
-export const SimplifiedHearing = ({
-  data,
-  coordinateId,
-  onUpdateComplete,
-}: TProps) => {
+export const SimplifiedHearing = ({ data, coordinateId, onUpdateComplete }: TProps) => {
   const [target, setTarget] = useState<string>(data.target ?? "");
   const [scene, setScene] = useState<string>(data.scene ?? "");
   const [impression, setImpression] = useState<string>(data.impression ?? "");
@@ -97,7 +93,7 @@ export const SimplifiedHearing = ({
                 onSettled: () => {
                   setIsSnackBarOpen(true);
                 },
-              }
+              },
             );
           }}
           style={{ width: "100%" }}

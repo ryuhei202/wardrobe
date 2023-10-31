@@ -8,8 +8,9 @@ export const useDeleteRequest = <T>(
   afterMutation: {
     onSuccess: () => Promise<unknown> | void;
     onError: () => Promise<unknown> | void;
-  } = { onSuccess: () => {}, onError: () => {} },
+  } = { onSuccess: () => undefined, onError: () => undefined },
 ) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { mutate, error, isLoading } = useMutation<any, Error, number | string>(
     path,
     (id) =>

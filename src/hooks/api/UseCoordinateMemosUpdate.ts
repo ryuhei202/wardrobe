@@ -4,7 +4,7 @@ import { usePatchRequest } from "./UsePatchRequest";
 
 type CoordinateMemosUpdate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse<unknown, unknown>,
     Error,
     TCoordinateMemosUpdateParams | undefined
   >;
@@ -22,10 +22,9 @@ type TCoordinateMemosUpdateArg = {
 export const useCoordinateMemosUpdate = ({
   coordinateId,
 }: TCoordinateMemosUpdateArg): CoordinateMemosUpdate => {
-  const { mutate, isLoading } = usePatchRequest<
-    TCoordinateMemosUpdateParams,
-    Error
-  >(`styling/coordinates/${coordinateId}/coordinate_memos`);
+  const { mutate, isLoading } = usePatchRequest<TCoordinateMemosUpdateParams, Error>(
+    `styling/coordinates/${coordinateId}/coordinate_memos`,
+  );
 
   return { mutate, isLoading };
 };

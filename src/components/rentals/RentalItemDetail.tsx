@@ -64,7 +64,7 @@ export const RentalItemDetail = ({
     currentItemId,
   });
 
-  let itemImage: itemImageGallery[] = [
+  const itemImage: itemImageGallery[] = [
     {
       originalImagePath: browseDetail.itemImagePath.large,
       thumbnailImagePath: browseDetail.itemImagePath.thumb,
@@ -73,16 +73,14 @@ export const RentalItemDetail = ({
     },
   ];
 
-  let wearingImages: itemImageGallery[] = browseDetail.wearingImages.map(
-    (wearingImage) => {
-      return {
-        originalImagePath: wearingImage.imagePath.large,
-        thumbnailImagePath: wearingImage.imagePath.thumb,
-        itemSize: wearingImage.itemSize,
-        height: wearingImage.height,
-      };
-    },
-  );
+  const wearingImages: itemImageGallery[] = browseDetail.wearingImages.map((wearingImage) => {
+    return {
+      originalImagePath: wearingImage.imagePath.large,
+      thumbnailImagePath: wearingImage.imagePath.thumb,
+      itemSize: wearingImage.itemSize,
+      height: wearingImage.height,
+    };
+  });
 
   return (
     <>
@@ -112,14 +110,8 @@ export const RentalItemDetail = ({
           />
         </div>
         <div className={classes.itemInfoTextContainer}>
-          <Typography
-            className={classes.itemInfoText}
-            variant="h5"
-            color="textSecondary"
-          >
-            {`${browseDetail.seriesName ?? ""}, ${
-              browseDetail.seriesFeature ?? ""
-            }`}
+          <Typography className={classes.itemInfoText} variant="h5" color="textSecondary">
+            {`${browseDetail.seriesName ?? ""}, ${browseDetail.seriesFeature ?? ""}`}
           </Typography>
           <Typography className={classes.itemInfoText} variant="h4">
             {browseDetail.categoryName}
@@ -127,9 +119,7 @@ export const RentalItemDetail = ({
           <Typography className={classes.itemInfoText} variant="h3">
             {browseDetail.brandName}
           </Typography>
-          <Typography variant="body1">
-            メインカラー：{browseDetail.mainColor.name}
-          </Typography>
+          <Typography variant="body1">メインカラー：{browseDetail.mainColor.name}</Typography>
           <div>
             <Box display="flex">
               <img
@@ -141,9 +131,7 @@ export const RentalItemDetail = ({
               />
             </Box>
           </div>
-          <Typography variant="body1">
-            サブカラー：{browseDetail.subColor.name}
-          </Typography>
+          <Typography variant="body1">サブカラー：{browseDetail.subColor.name}</Typography>
           <div>
             <Box display="flex">
               <img
@@ -164,10 +152,7 @@ export const RentalItemDetail = ({
           </div>
           <Typography variant="body1">アイテム：{selectedItemId()}</Typography>
           <div className={classes.itemTableContainer}>
-            <DetailItemTable
-              data={detailItemTableData()}
-              callback={detailItemTableCallback()}
-            />
+            <DetailItemTable data={detailItemTableData()} callback={detailItemTableCallback()} />
           </div>
           <Button
             variant="contained"

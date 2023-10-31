@@ -7,7 +7,7 @@ import { usePatchRequest } from "./UsePatchRequest";
 
 type TNgUpdate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse,
     unknown,
     (NgCreateRequest & { readonly memberId: number }) | undefined,
     unknown

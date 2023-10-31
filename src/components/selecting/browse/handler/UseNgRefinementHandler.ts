@@ -4,23 +4,14 @@ import { FilterCheckboxData } from "../../../../model/selecting/browse/props_dat
 import { FilterCheckboxArrayCallback } from "../callback/FilterCheckboxArrayCallback";
 
 export interface NgRefinementHandler {
-  ngCallback: (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ) => FilterCheckboxArrayCallback;
-  ngData: (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ) => FilterCheckboxData[];
-  appliedFilters: (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ) => AppliedFilterData[];
+  ngCallback: (choice: FilterResponse[], currentIds: number[]) => FilterCheckboxArrayCallback;
+  ngData: (choice: FilterResponse[], currentIds: number[]) => FilterCheckboxData[];
+  appliedFilters: (choice: FilterResponse[], currentIds: number[]) => AppliedFilterData[];
   deleteFilter: (currentIds: number[], index: number) => void;
 }
 
 export const useNgRefinementHandler = (
-  onChange: (newIds: number[]) => void
+  onChange: (newIds: number[]) => void,
 ): NgRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
@@ -35,7 +26,7 @@ export const useNgRefinementHandler = (
 
   const ngCallback = (
     choice: FilterResponse[],
-    currentIds: number[]
+    currentIds: number[],
   ): FilterCheckboxArrayCallback => {
     return {
       onClick: (index: number) => {
@@ -45,10 +36,7 @@ export const useNgRefinementHandler = (
     };
   };
 
-  const ngData = (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ): FilterCheckboxData[] => {
+  const ngData = (choice: FilterResponse[], currentIds: number[]): FilterCheckboxData[] => {
     return choice.map((filter) => {
       return {
         name: filter.name,
@@ -57,17 +45,15 @@ export const useNgRefinementHandler = (
     });
   };
 
-  const appliedFilters = (
-    choice: FilterResponse[],
-    currentIds: number[]
-  ): AppliedFilterData[] => {
+  const appliedFilters = (choice: FilterResponse[], currentIds: number[]): AppliedFilterData[] => {
     return currentIds.map((currentId) => {
-      return { name: choice.find((filter) => filter.id === currentId)!!.name };
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      return { name: choice.find((filter) => filter.id === currentId)!.name };
     });
   };
 
   const deleteFilter = (currentIds: number[], index: number) => {
-    let newNgs = [...currentIds];
+    const newNgs = [...currentIds];
     newNgs.splice(index, 1);
     onChange(newNgs);
   };

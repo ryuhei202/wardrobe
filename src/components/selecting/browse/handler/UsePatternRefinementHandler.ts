@@ -6,21 +6,15 @@ import { FilterMediaArrayCallback } from "../callback/FilterMediaArrayCallback";
 export interface PatternRefinementHandler {
   patternCallback: (
     choice: FilterMediaResponse[],
-    currentIds: number[]
+    currentIds: number[],
   ) => FilterMediaArrayCallback;
-  patternData: (
-    choice: FilterMediaResponse[],
-    currentIds: number[]
-  ) => FilterMediaData[];
-  appliedFilters: (
-    choice: FilterMediaResponse[],
-    currentIds: number[]
-  ) => AppliedFilterData[];
+  patternData: (choice: FilterMediaResponse[], currentIds: number[]) => FilterMediaData[];
+  appliedFilters: (choice: FilterMediaResponse[], currentIds: number[]) => AppliedFilterData[];
   deleteFilter: (currentIds: number[], index: number) => void;
 }
 
 export const usePatternRefinementHandler = (
-  onChange: (newIds: number[]) => void
+  onChange: (newIds: number[]) => void,
 ): PatternRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
@@ -35,7 +29,7 @@ export const usePatternRefinementHandler = (
 
   const patternCallback = (
     choice: FilterMediaResponse[],
-    currentIds: number[]
+    currentIds: number[],
   ): FilterMediaArrayCallback => {
     return {
       onClick: (index: number) => {
@@ -45,10 +39,7 @@ export const usePatternRefinementHandler = (
     };
   };
 
-  const patternData = (
-    choice: FilterMediaResponse[],
-    currentIds: number[]
-  ): FilterMediaData[] => {
+  const patternData = (choice: FilterMediaResponse[], currentIds: number[]): FilterMediaData[] => {
     return choice.map((filter) => {
       return {
         name: filter.name,
@@ -60,15 +51,16 @@ export const usePatternRefinementHandler = (
 
   const appliedFilters = (
     choice: FilterMediaResponse[],
-    currentIds: number[]
+    currentIds: number[],
   ): AppliedFilterData[] => {
     return currentIds.map((currentId) => {
-      return { name: choice.find((filter) => filter.id === currentId)!!.name };
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      return { name: choice.find((filter) => filter.id === currentId)!.name };
     });
   };
 
   const deleteFilter = (currentIds: number[], index: number) => {
-    let newPatterns = [...currentIds];
+    const newPatterns = [...currentIds];
     newPatterns.splice(index, 1);
     onChange(newPatterns);
   };

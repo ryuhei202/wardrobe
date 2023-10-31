@@ -4,7 +4,7 @@ import { usePatchRequest } from "./UsePatchRequest";
 
 type CoordinateStylistCommentsUpdate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse<unknown, unknown>,
     Error,
     TCoordinateStylistCommentsUpdateParams | undefined,
     unknown
@@ -23,10 +23,9 @@ type TCoordinateStylistCommentsUpdateArgs = {
 export const useCoordinateStylistCommentsUpdate = ({
   coordinateId,
 }: TCoordinateStylistCommentsUpdateArgs): CoordinateStylistCommentsUpdate => {
-  const { mutate, isLoading } = usePatchRequest<
-    TCoordinateStylistCommentsUpdateParams,
-    Error
-  >(`styling/coordinates/${coordinateId}/coordinate_stylist_comment`);
+  const { mutate, isLoading } = usePatchRequest<TCoordinateStylistCommentsUpdateParams, Error>(
+    `styling/coordinates/${coordinateId}/coordinate_stylist_comment`,
+  );
 
   return { mutate, isLoading };
 };
