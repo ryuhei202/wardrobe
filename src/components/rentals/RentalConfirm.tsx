@@ -23,21 +23,27 @@ type TProps = {
   rentalCoordinate: TRentalCoordinateShowResponse;
   onClickBackButton: () => void;
 };
-export const RentalConfirm = ({ rentalCoordinate, onClickBackButton }: TProps) => {
+export const RentalConfirm = ({
+  rentalCoordinate,
+  onClickBackButton,
+}: TProps) => {
   const { rentalId } = useContext(RentalIdContext);
   const queryClient = useQueryClient();
-  const { mutate: updateCoordinateChoice, isLoading: isUpdateCoordinateLoading } =
-    useRentalCoordinateUpdate({
-      rentalId,
-    });
+  const {
+    mutate: updateCoordinateChoice,
+    isLoading: isUpdateCoordinateLoading,
+  } = useRentalCoordinateUpdate({
+    rentalId,
+  });
   const { mutate: updateStatus, isLoading: isUpdateShipmentStatusLoading } =
     useRentalUpdateToPreparingShipment({ rentalId });
-  const { data: rentalRequest, error: rentalRequestError } = useRentalRequestShow({ rentalId });
-  const [selectedCoordinateChoiceId, setSelectedCoordinateChoiceId] = useState<number>(
-    rentalCoordinate.coordinateChoiceId,
-  );
+  const { data: rentalRequest, error: rentalRequestError } =
+    useRentalRequestShow({ rentalId });
+  const [selectedCoordinateChoiceId, setSelectedCoordinateChoiceId] =
+    useState<number>(rentalCoordinate.coordinateChoiceId);
 
-  if (rentalRequestError) return <Typography>{rentalRequestError.message}</Typography>;
+  if (rentalRequestError)
+    return <Typography>{rentalRequestError.message}</Typography>;
 
   if (!rentalRequest) return <CircularProgress />;
 
@@ -81,9 +87,12 @@ export const RentalConfirm = ({ rentalCoordinate, onClickBackButton }: TProps) =
                   onSuccess: () => {
                     alert("登録しました");
                   },
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  onError: (error: any) => {
-                    alert(error.message);
+                  onError(error: AxiosError) {
+                    alert(
+                      `出荷準備の登録に失敗しました。 ${(
+                        error.response?.data as { message: string }
+                      )?.message}`,
+                    );
                   },
                 });
               }
@@ -133,7 +142,9 @@ export const RentalConfirm = ({ rentalCoordinate, onClickBackButton }: TProps) =
                 {
                   onSuccess: () => {
                     alert("更新しました");
-                    queryClient.invalidateQueries(`biz/rentals/${rentalId}/rental_coordinate`);
+                    queryClient.invalidateQueries(
+                      `biz/rentals/${rentalId}/rental_coordinate`,
+                    );
                   },
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   onError: (error: any) => {
