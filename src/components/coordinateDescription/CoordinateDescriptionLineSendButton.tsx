@@ -1,12 +1,4 @@
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  Dialog,
-  Snackbar,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Button, CircularProgress, Dialog, Snackbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useCoordinateHearingStatusShow } from "../../hooks/api/UseCoordinateHearingStatusShow";
@@ -43,11 +35,10 @@ export const CoordinateDescriptionLineSendButton = ({
   const [severity, setSeverity] = useState<"success" | "error">("success");
   const [snackBarText, setSnackBarText] = useState("");
   const { mutate, isLoading } = useLineMessagesCreate();
-  const { mutate: mutateStatus } =
-    useCoordinateHearingStatusUpdate(coordinateId);
+  const { mutate: mutateStatus } = useCoordinateHearingStatusUpdate(coordinateId);
   const { data, error } = useCoordinateHearingStatusShow({ coordinateId });
 
-  const onUnload = (e: any) => {
+  const onUnload = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = "";
   };

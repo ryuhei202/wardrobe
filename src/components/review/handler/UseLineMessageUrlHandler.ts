@@ -16,7 +16,7 @@ type LineMessageUrlHandlerArgs = {
   readonly setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   readonly setIsUrlEditing: React.Dispatch<React.SetStateAction<boolean>>;
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse<unknown, unknown>,
     unknown,
     | {
         lineMessageUrl: string;
@@ -41,13 +41,9 @@ export const useLineMessageUrlHandler = ({
   prevLineMessageUrl,
 }: LineMessageUrlHandlerArgs): LineMessageUrlFormHandler => {
   const queryClient = useQueryClient();
-  const handleChangeText = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-  ) => {
+  const handleChangeText = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setLineMessageUrlText(event.target.value);
-    prevLineMessageUrl !== event.target.value
-      ? setIsEditing(true)
-      : setIsEditing(false);
+    prevLineMessageUrl !== event.target.value ? setIsEditing(true) : setIsEditing(false);
     if (prevLineMessageUrl === (null || undefined) && event.target.value === "")
       setIsEditing(false);
   };
@@ -55,9 +51,7 @@ export const useLineMessageUrlHandler = ({
   const handleSendClickButton = () => {
     mutate(undefined, {
       onSuccess: () => {
-        queryClient.invalidateQueries(
-          `styling/coordinates/${coordinateId}/review`,
-        );
+        queryClient.invalidateQueries(`styling/coordinates/${coordinateId}/review`);
         setIsEditing(false);
         callback.onSuccess();
         setIsUrlEditing(false);

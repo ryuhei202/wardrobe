@@ -30,8 +30,7 @@ export const RentalItemDetailContainer = ({
     refinement: currentRefinement,
   });
 
-  if (browseDetailError)
-    return <Typography>{browseDetailError.message}</Typography>;
+  if (browseDetailError) return <Typography>{browseDetailError.message}</Typography>;
   if (!browseDetail || isFetching) return <CircularProgress />;
 
   return (

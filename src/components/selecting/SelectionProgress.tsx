@@ -36,7 +36,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const classes = useSelectionProgressStyle();
   const [position, setPosition] = useState<{
-    mouseX: null | Number;
+    mouseX: null | number;
     mouseY: null | number;
   }>(initialState);
   const coordinateId = useContextDefinedState(CoordinateIdContext);
@@ -48,9 +48,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
       { footwearId },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(
-            `styling/coordinates/${coordinateId}/coordinate_footwear`,
-          );
+          queryClient.invalidateQueries(`styling/coordinates/${coordinateId}/coordinate_footwear`);
           setIsOpen(false);
         },
         onError: () => {
@@ -59,7 +57,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
       },
     );
   };
-  let steps = [];
+  const steps = [];
   for (let index = 0; index < props.data.rentableItemNum; index++) {
     let stepLabel;
     if (props.data.items.length > index) {
@@ -100,24 +98,19 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
         title={
           <Typography variant="body2">
             {props.data.items.length > index
-              ? props.data.items[index].itemInfo.partSizes.map(
-                  (partSize, index) => (
-                    <Fragment key={index}>
-                      {`${partSize.name}: ${partSize.value ?? ""}`}
-                      <br />
-                    </Fragment>
-                  ),
-                )
+              ? props.data.items[index].itemInfo.partSizes.map((partSize, index) => (
+                  <Fragment key={index}>
+                    {`${partSize.name}: ${partSize.value ?? ""}`}
+                    <br />
+                  </Fragment>
+                ))
               : []}
           </Typography>
         }
         placement="top-start"
       >
         <Step disabled={props.data.items.length < index}>
-          <StepButton
-            className={classes.stepButton}
-            onClick={() => props.callback.onSelect(index)}
-          >
+          <StepButton className={classes.stepButton} onClick={() => props.callback.onSelect(index)}>
             {stepLabel}
           </StepButton>
         </Step>
@@ -129,11 +122,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
 
   if (props.data.rentableItemNum !== 0 && props.data.items.length !== 0) {
     completeButton = (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={props.callback.onClickCompleteButton}
-      >
+      <Button variant="contained" color="primary" onClick={props.callback.onClickCompleteButton}>
         アイテム選択完了
       </Button>
     );
@@ -151,11 +140,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
     >
       {completeButton}
       <div style={{ display: "flex" }}>
-        <Stepper
-          activeStep={props.data.selectedIndex}
-          alternativeLabel
-          className={classes.stepper}
-        >
+        <Stepper activeStep={props.data.selectedIndex} alternativeLabel className={classes.stepper}>
           {steps}
         </Stepper>
 
@@ -165,9 +150,7 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
               <Button onClick={() => setIsOpen(true)}>
                 <img
                   style={{ width: 70, height: 70 }}
-                  src={`${HostUrl()}/images/footwear/${
-                    props.data.selectedFootwear.id
-                  }.jpg`}
+                  src={`${HostUrl()}/images/footwear/${props.data.selectedFootwear.id}.jpg`}
                   alt="くつ"
                 />
               </Button>
@@ -211,16 +194,13 @@ export const SelectionProgress = (props: SelectionProgressProps) => {
                   "このアイテムに紐づいているアドバイスも削除されます。よろしいですか？",
                 )
               ) {
-                coordinateItemDestroyMutate(
-                  props.data.items[props.data.selectedIndex].id,
-                  {
-                    onSuccess: () => {
-                      queryClient.invalidateQueries(
-                        `styling/coordinates/${coordinateId}/coordinate_items`,
-                      );
-                    },
+                coordinateItemDestroyMutate(props.data.items[props.data.selectedIndex].id, {
+                  onSuccess: () => {
+                    queryClient.invalidateQueries(
+                      `styling/coordinates/${coordinateId}/coordinate_items`,
+                    );
                   },
-                );
+                });
               }
             }}
           >

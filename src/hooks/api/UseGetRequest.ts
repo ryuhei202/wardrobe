@@ -1,18 +1,13 @@
 import qs from "qs";
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-  useQuery,
-} from "react-query";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useQuery } from "react-query";
 import { baseUrl } from "../../model/api/shared/BaseUrl";
 import { axiosClient } from "./../../model/api/shared/AxiosClient";
 
 export const useGetRequest = <T>(
   path: string,
-  params?: {},
+  params?: object,
   queryKey?: string,
-  isEnabled: boolean = true,
+  isEnabled = true,
 ): {
   data?: T;
   error: Error | null;
@@ -28,8 +23,7 @@ export const useGetRequest = <T>(
         .get(`${baseUrl()}/${path}`, {
           params,
           paramsSerializer: {
-            serialize: (params) =>
-              qs.stringify(params, { arrayFormat: "brackets", encode: false }),
+            serialize: (params) => qs.stringify(params, { arrayFormat: "brackets", encode: false }),
           },
         })
         .then((r) => r.data),

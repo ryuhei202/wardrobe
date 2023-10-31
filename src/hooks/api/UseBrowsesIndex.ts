@@ -1,8 +1,4 @@
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-} from "react-query";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
 import { GetIndexFilterParams } from "../../model/api/request/styling/browse/GetIndexFilterParams";
 import { GetIndexParams } from "../../model/api/request/styling/browse/GetIndexParams";
 import { BrowseIndexResponse } from "../../model/api/response/styling/browse/BrowseIndexResponse";
@@ -20,12 +16,9 @@ type BrowsesIndex = {
 
 type TBrowsesIndexArg = { refinement: Refinement; chartId?: number };
 
-export const useBrowsesIndex = ({
-  refinement,
-  chartId,
-}: TBrowsesIndexArg): BrowsesIndex => {
+export const useBrowsesIndex = ({ refinement, chartId }: TBrowsesIndexArg): BrowsesIndex => {
   const params = (): GetIndexParams => {
-    var filterParams: GetIndexFilterParams = {
+    const filterParams: GetIndexFilterParams = {
       smallCategory: refinement.smallCategoryIds,
       size: refinement.sizeIds,
       partSize: refinement.partSizes,
@@ -41,10 +34,8 @@ export const useBrowsesIndex = ({
       option: refinement.optionIds,
       rank: refinement.rank,
     };
-    if (refinement.mediumCategoryId)
-      filterParams.mediumCategory = refinement.mediumCategoryId;
-    if (refinement.largeCategoryId)
-      filterParams.largeCategory = refinement.largeCategoryId;
+    if (refinement.mediumCategoryId) filterParams.mediumCategory = refinement.mediumCategoryId;
+    if (refinement.largeCategoryId) filterParams.largeCategory = refinement.largeCategoryId;
     if (refinement.itemId) filterParams.itemId = refinement.itemId;
 
     return {
@@ -55,12 +46,11 @@ export const useBrowsesIndex = ({
     };
   };
 
-  const { data, error, refetch, isFetching } =
-    useGetRequest<BrowseIndexResponse>(
-      "styling/browses",
-      params(),
-      `styling/browses${JSON.stringify(params())}`,
-    );
+  const { data, error, refetch, isFetching } = useGetRequest<BrowseIndexResponse>(
+    "styling/browses",
+    params(),
+    `styling/browses${JSON.stringify(params())}`,
+  );
 
   return {
     data,

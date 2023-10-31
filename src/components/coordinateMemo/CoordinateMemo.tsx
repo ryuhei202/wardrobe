@@ -8,14 +8,10 @@ import { MemoForm } from "../shared/MemoForm";
 type TProps = {
   readonly coordinateId: number;
   readonly response: CoordinateMemosShowResponse;
-  readonly onUpdateComplete: () => Promise<any>;
+  readonly onUpdateComplete: () => Promise<unknown>;
 };
 
-export const CoordinateMemo = ({
-  coordinateId,
-  response,
-  onUpdateComplete,
-}: TProps) => {
+export const CoordinateMemo = ({ coordinateId, response, onUpdateComplete }: TProps) => {
   const [memo, setMemo] = useState(response.memo);
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [severity, setSeverity] = useState<"success" | "error">("success");
@@ -51,7 +47,7 @@ export const CoordinateMemo = ({
               onSettled: () => {
                 setIsSnackBarOpen(true);
               },
-            }
+            },
           );
         }}
       />

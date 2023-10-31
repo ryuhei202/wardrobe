@@ -21,10 +21,7 @@ type TProps = {
   filterCollection: TRentalFilterGroupCollectionData;
   callback: TRentalFilterGroupCollectionCallback;
 };
-export const RentalFilterGroupCollection = ({
-  filterCollection,
-  callback,
-}: TProps) => {
+export const RentalFilterGroupCollection = ({ filterCollection, callback }: TProps) => {
   const classes = useFilterGroupCollectionStyle();
   return (
     <div className={classes.filterPaper}>
@@ -54,10 +51,7 @@ export const RentalFilterGroupCollection = ({
           <Typography variant="body2">サイズ</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FilterSizeArray
-            data={filterCollection.sizeData}
-            callback={callback.sizeCallback}
-          />
+          <FilterSizeArray data={filterCollection.sizeData} callback={callback.sizeCallback} />
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -192,6 +186,7 @@ export const RentalFilterGroupCollection = ({
         InputProps={{ startAdornment: <Search /> }}
         color="secondary"
         type="number"
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onKeyPress={(event: any) => {
           if (event.key === "Enter") {
             callback.onItemIdChanged(event.target.value as number);

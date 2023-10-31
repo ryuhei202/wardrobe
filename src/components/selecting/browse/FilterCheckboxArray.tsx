@@ -1,13 +1,5 @@
-import {
-  Checkbox,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
-import React from "react";
+import { Checkbox, IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { FilterCheckboxData } from "../../../model/selecting/browse/props_data/FilterCheckboxData";
 import { FilterCheckboxArrayCallback } from "./callback/FilterCheckboxArrayCallback";
 
@@ -23,7 +15,8 @@ export const FilterCheckboxArray = (props: FilterCheckboxArrayProps) => {
     backButton = (
       <IconButton
         onClick={() => {
-          props.callback.onClickBackButton!!();
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          props.callback.onClickBackButton!();
         }}
         size="large"
       >

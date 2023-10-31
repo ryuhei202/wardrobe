@@ -10,19 +10,19 @@ export interface CategoryRefinementHandler {
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
     mediumCategoryId: number | null,
-    smallCategoryIds: number[]
+    smallCategoryIds: number[],
   ) => FilterCategoryGroupCallback;
   categoryData: (
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
     mediumCategoryId: number | null,
-    smallCategoryIds: number[]
+    smallCategoryIds: number[],
   ) => FilterCategoryGroupData;
   appliedFilters: (
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
     mediumCategoryId: number | null,
-    smallCategoryIds: number[]
+    smallCategoryIds: number[],
   ) => AppliedFilterData[];
   deleteLargeCategoryFilter: () => void;
   deleteMediumCategoryFilter: () => void;
@@ -37,12 +37,12 @@ export interface CategoryRefinementCallback {
 }
 
 export const useCategoryRefinementHandler = (
-  callback: CategoryRefinementCallback
+  callback: CategoryRefinementCallback,
 ): CategoryRefinementHandler => {
   const onBroaderCategoryChanged = (
     index: number,
     choice: LargeCategoryChoiceResponse[],
-    largeCategoryId: number | null
+    largeCategoryId: number | null,
   ) => {
     if (largeCategoryId) {
       onMediumCategoryChanged(index, choice, largeCategoryId);
@@ -51,25 +51,18 @@ export const useCategoryRefinementHandler = (
     }
   };
 
-  const onLargeCategoryChanged = (
-    index: number,
-    choice: LargeCategoryChoiceResponse[]
-  ) => {
+  const onLargeCategoryChanged = (index: number, choice: LargeCategoryChoiceResponse[]) => {
     callback.onLargeCategoryChange(choice[index].id);
   };
 
   const onMediumCategoryChanged = (
     index: number,
     choice: LargeCategoryChoiceResponse[],
-    currentLargeCategoryId: number
+    currentLargeCategoryId: number,
   ) => {
-    const largeCategoryChoice = choice.find(
-      (elem) => elem.id === currentLargeCategoryId
-    );
+    const largeCategoryChoice = choice.find((elem) => elem.id === currentLargeCategoryId);
     if (largeCategoryChoice) {
-      callback.onMediumCategoryChange(
-        largeCategoryChoice.mediumCategory[index].id
-      );
+      callback.onMediumCategoryChange(largeCategoryChoice.mediumCategory[index].id);
     }
   };
 
@@ -78,18 +71,16 @@ export const useCategoryRefinementHandler = (
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
     mediumCategoryId: number | null,
-    smallCategoryIds: number[]
+    smallCategoryIds: number[],
   ) => {
-    const largeCategoryChoice = choice.find(
-      (elem) => elem.id === largeCategoryId
-    );
+    const largeCategoryChoice = choice.find((elem) => elem.id === largeCategoryId);
     const mediumCategoryChoice = largeCategoryChoice?.mediumCategory.find(
-      (elem) => elem.id === mediumCategoryId
+      (elem) => elem.id === mediumCategoryId,
     );
     if (mediumCategoryChoice) {
       const newSmallCategories = newFilterArray(
         mediumCategoryChoice.smallCategory[index].id,
-        smallCategoryIds
+        smallCategoryIds,
       );
       callback.onSmallCategoryChange(newSmallCategories);
     }
@@ -109,7 +100,7 @@ export const useCategoryRefinementHandler = (
   const broaderCategoryData = (
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
-    mediumCategoryId: number | null
+    mediumCategoryId: number | null,
   ): FilterListButtonData[] | null => {
     if (mediumCategoryId) {
       // 中カテが既に指定されている場合
@@ -117,10 +108,9 @@ export const useCategoryRefinementHandler = (
     } else {
       if (largeCategoryId) {
         // 大カテが既に指定されている場合
-        const largeCategoryChoice = choice.find(
-          (elem) => elem.id === largeCategoryId
-        );
-        return largeCategoryChoice!!.mediumCategory.map((filter) => {
+        const largeCategoryChoice = choice.find((elem) => elem.id === largeCategoryId);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return largeCategoryChoice!.mediumCategory.map((filter) => {
           return { name: filter.name };
         });
       } else {
@@ -135,13 +125,11 @@ export const useCategoryRefinementHandler = (
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
     mediumCategoryId: number | null,
-    smallCategoryIds: number[]
+    smallCategoryIds: number[],
   ): FilterCheckboxData[] => {
-    const largeCategoryChoice = choice.find(
-      (elem) => elem.id === largeCategoryId
-    );
+    const largeCategoryChoice = choice.find((elem) => elem.id === largeCategoryId);
     const mediumCategoryChoice = largeCategoryChoice?.mediumCategory.find(
-      (elem) => elem.id === mediumCategoryId
+      (elem) => elem.id === mediumCategoryId,
     );
     if (mediumCategoryChoice) {
       return mediumCategoryChoice.smallCategory.map((filter) => {
@@ -159,12 +147,11 @@ export const useCategoryRefinementHandler = (
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
     mediumCategoryId: number | null,
-    smallCategoryIds: number[]
+    smallCategoryIds: number[],
   ): FilterCategoryGroupCallback => {
     return {
       broaderCategoryCallback: {
-        onClick: (index: number) =>
-          onBroaderCategoryChanged(index, choice, largeCategoryId),
+        onClick: (index: number) => onBroaderCategoryChanged(index, choice, largeCategoryId),
       },
       smallerCategoryCallback: {
         onClick: (index: number) =>
@@ -173,7 +160,7 @@ export const useCategoryRefinementHandler = (
             choice,
             largeCategoryId,
             mediumCategoryId,
-            smallCategoryIds
+            smallCategoryIds,
           ),
         onClickBackButton: () => {
           callback.onMediumCategoryCancelled();
@@ -186,19 +173,15 @@ export const useCategoryRefinementHandler = (
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
     mediumCategoryId: number | null,
-    smallCategoryIds: number[]
+    smallCategoryIds: number[],
   ): FilterCategoryGroupData => {
     return {
-      broaderCategoryData: broaderCategoryData(
-        choice,
-        largeCategoryId,
-        mediumCategoryId
-      ),
+      broaderCategoryData: broaderCategoryData(choice, largeCategoryId, mediumCategoryId),
       smallCategoryData: smallCategoryData(
         choice,
         largeCategoryId,
         mediumCategoryId,
-        smallCategoryIds
+        smallCategoryIds,
       ),
     };
   };
@@ -207,20 +190,17 @@ export const useCategoryRefinementHandler = (
     choice: LargeCategoryChoiceResponse[],
     largeCategoryId: number | null,
     mediumCategoryId: number | null,
-    smallCategoryIds: number[]
+    smallCategoryIds: number[],
   ): AppliedFilterData[] => {
-    const largeCategoryChoice = choice.find(
-      (elem) => elem.id === largeCategoryId
-    );
+    const largeCategoryChoice = choice.find((elem) => elem.id === largeCategoryId);
     const mediumCategoryChoice = largeCategoryChoice?.mediumCategory.find(
-      (elem) => elem.id === mediumCategoryId
+      (elem) => elem.id === mediumCategoryId,
     );
     if (mediumCategoryChoice && smallCategoryIds.length) {
       return smallCategoryIds.map((categoryId) => {
         return {
-          name: mediumCategoryChoice.smallCategory.find(
-            (filter) => filter.id === categoryId
-          )!!.name,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          name: mediumCategoryChoice.smallCategory.find((filter) => filter.id === categoryId)!.name,
         };
       });
     }
@@ -238,7 +218,7 @@ export const useCategoryRefinementHandler = (
   };
 
   const deleteSmallCategoryFilter = (currentIds: number[], index: number) => {
-    let newSmallCategories = [...currentIds];
+    const newSmallCategories = [...currentIds];
     newSmallCategories.splice(index, 1);
     callback.onSmallCategoryChange(newSmallCategories);
   };

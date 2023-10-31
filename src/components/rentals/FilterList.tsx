@@ -22,9 +22,7 @@ export const FilterList = ({
   onItemSelect,
   currentItemId,
 }: TProps) => {
-  const [currentRefinement, setCurrentRefinement] = useState<Refinement>(
-    filter.defaultRefinement,
-  );
+  const [currentRefinement, setCurrentRefinement] = useState<Refinement>(filter.defaultRefinement);
 
   const handleChangeCurrentRefinement = (refinement: Refinement) => {
     setCurrentRefinement(refinement);

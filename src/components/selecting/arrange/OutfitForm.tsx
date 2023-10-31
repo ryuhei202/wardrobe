@@ -43,9 +43,7 @@ export const OutfitForm = (props: OutfitFormProps) => {
     });
   }, [props.data.selectedAdviceIds, props.response]);
 
-  const [selectedCategories, setSelectedCategories] = useState(
-    getSelectedCategories()
-  );
+  const [selectedCategories, setSelectedCategories] = useState(getSelectedCategories());
 
   useEffect(() => {
     setSelectedCategories(getSelectedCategories());
@@ -75,14 +73,7 @@ export const OutfitForm = (props: OutfitFormProps) => {
                       inputProps={{ "aria-labelledby": labelId }}
                     />
                   }
-                  label={
-                    <img
-                      src={item.itemImagePath}
-                      width="40px"
-                      height="auto"
-                      alt=""
-                    />
-                  }
+                  label={<img src={item.itemImagePath} width="40px" height="auto" alt="" />}
                 ></FormControlLabel>
               </ListItemIcon>
               <ListItemText>
@@ -94,28 +85,23 @@ export const OutfitForm = (props: OutfitFormProps) => {
       </List>
       <div>
         {props.data.selectedAdviceIds.map((selectedAdviceId, index) => {
-          let selectedCategoryIndex = selectedCategories[index];
-          let selectedCategory =
-            selectedCategoryIndex !== null
-              ? props.response[selectedCategoryIndex]
-              : null;
+          const selectedCategoryIndex = selectedCategories[index];
+          const selectedCategory =
+            selectedCategoryIndex !== null ? props.response[selectedCategoryIndex] : null;
           return (
             <Fragment key={index}>
               <Grid container spacing={2}>
                 <Grid item xs={3} xl={2}>
                   <FormControl fullWidth className={classes.formControl}>
-                    <InputLabel id={`category-select-label-${index}`}>
-                      カテゴリ
-                    </InputLabel>
+                    <InputLabel id={`category-select-label-${index}`}>カテゴリ</InputLabel>
                     <Select
                       labelId={`category-select-label-${index}`}
                       id={`category-select-${index}`}
                       value={selectedCategories[index] ?? ""}
                       label="カテゴリ"
                       onChange={(event) => {
-                        let newSelectedCategories = [...selectedCategories];
-                        newSelectedCategories[index] = event.target
-                          .value as number;
+                        const newSelectedCategories = [...selectedCategories];
+                        newSelectedCategories[index] = event.target.value as number;
                         setSelectedCategories(newSelectedCategories);
                       }}
                     >
@@ -129,19 +115,14 @@ export const OutfitForm = (props: OutfitFormProps) => {
                 </Grid>
                 <Grid item xs={6} xl={4}>
                   <FormControl fullWidth className={classes.adviceFormControl}>
-                    <InputLabel id={`advice-select-label-${index}`}>
-                      アドバイス
-                    </InputLabel>
+                    <InputLabel id={`advice-select-label-${index}`}>アドバイス</InputLabel>
                     <Select
                       labelId={`advice-select-label-${index}`}
                       id={`advice-select-${index}`}
                       value={selectedAdviceId ?? ""}
                       label="アドバイス"
                       onChange={(event) => {
-                        props.callback.onSelectAdvice(
-                          event.target.value as number,
-                          index
-                        );
+                        props.callback.onSelectAdvice(event.target.value as number, index);
                       }}
                     >
                       {selectedCategory?.advice.map((advice) => (
@@ -153,17 +134,14 @@ export const OutfitForm = (props: OutfitFormProps) => {
                   </FormControl>
                 </Grid>
                 <Grid item xs className={classes.adviceDeleteButton}>
-                  <IconButton
-                    onClick={() => props.callback.onClickDeleteAdvice(index)}
-                  >
+                  <IconButton onClick={() => props.callback.onClickDeleteAdvice(index)}>
                     <Delete />
                   </IconButton>
                 </Grid>
               </Grid>
               <Typography variant="body1" marginBottom={2}>
-                {selectedCategory?.advice.find(
-                  (advice) => advice.id === selectedAdviceId
-                )?.description ?? ""}
+                {selectedCategory?.advice.find((advice) => advice.id === selectedAdviceId)
+                  ?.description ?? ""}
               </Typography>
             </Fragment>
           );

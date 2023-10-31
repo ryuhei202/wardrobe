@@ -6,7 +6,7 @@ import { usePatchRequest } from "./UsePatchRequest";
 
 type CoordinateTopsRatiosUpdate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse,
     Error,
     TCoordinateTopsRatiosUpdateParams | undefined
   >;
@@ -31,15 +31,15 @@ export const useCoordinateTopsRatiosUpdate = ({
   isJacketRequested,
 }: TCoordinateTopsRatiosUpdateArg): CoordinateTopsRatiosUpdate => {
   const adminShow = useContextDefinedState(AdminShowContext);
-  const { mutate, isLoading } = usePatchRequest<
-    TCoordinateTopsRatiosUpdateParams,
-    Error
-  >(`styling/coordinates/${coordinateId}/coordinate_tops_ratios`, {
-    longSleeveNum,
-    shortSleeveNum,
-    isJacketRequested,
-    adminId: adminShow.id,
-  });
+  const { mutate, isLoading } = usePatchRequest<TCoordinateTopsRatiosUpdateParams, Error>(
+    `styling/coordinates/${coordinateId}/coordinate_tops_ratios`,
+    {
+      longSleeveNum,
+      shortSleeveNum,
+      isJacketRequested,
+      adminId: adminShow.id,
+    },
+  );
 
   return { mutate, isLoading };
 };

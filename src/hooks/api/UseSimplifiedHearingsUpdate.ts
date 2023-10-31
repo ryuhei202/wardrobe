@@ -4,7 +4,7 @@ import { usePatchRequest } from "./UsePatchRequest";
 
 type TSimplifiedHearingsUpdate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse,
     Error,
     TSimplifiedHearingsUpdateParams | undefined,
     unknown
@@ -25,10 +25,9 @@ type TSimplifiedHearingsUpdateArgs = {
 export const useSimplifiedHearingsUpdate = ({
   coordinateId,
 }: TSimplifiedHearingsUpdateArgs): TSimplifiedHearingsUpdate => {
-  const { mutate, isLoading } = usePatchRequest<
-    TSimplifiedHearingsUpdateParams,
-    Error
-  >(`styling/coordinates/${coordinateId}/simplified_hearing`);
+  const { mutate, isLoading } = usePatchRequest<TSimplifiedHearingsUpdateParams, Error>(
+    `styling/coordinates/${coordinateId}/simplified_hearing`,
+  );
 
   return { mutate, isLoading };
 };

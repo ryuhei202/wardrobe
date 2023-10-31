@@ -23,27 +23,21 @@ type TProps = {
   rentalCoordinate: TRentalCoordinateShowResponse;
   onClickBackButton: () => void;
 };
-export const RentalConfirm = ({
-  rentalCoordinate,
-  onClickBackButton,
-}: TProps) => {
+export const RentalConfirm = ({ rentalCoordinate, onClickBackButton }: TProps) => {
   const { rentalId } = useContext(RentalIdContext);
   const queryClient = useQueryClient();
-  const {
-    mutate: updateCoordinateChoice,
-    isLoading: isUpdateCoordinateLoading,
-  } = useRentalCoordinateUpdate({
-    rentalId,
-  });
+  const { mutate: updateCoordinateChoice, isLoading: isUpdateCoordinateLoading } =
+    useRentalCoordinateUpdate({
+      rentalId,
+    });
   const { mutate: updateStatus, isLoading: isUpdateShipmentStatusLoading } =
     useRentalUpdateToPreparingShipment({ rentalId });
-  const { data: rentalRequest, error: rentalRequestError } =
-    useRentalRequestShow({ rentalId });
-  const [selectedCoordinateChoiceId, setSelectedCoordinateChoiceId] =
-    useState<number>(rentalCoordinate.coordinateChoiceId);
+  const { data: rentalRequest, error: rentalRequestError } = useRentalRequestShow({ rentalId });
+  const [selectedCoordinateChoiceId, setSelectedCoordinateChoiceId] = useState<number>(
+    rentalCoordinate.coordinateChoiceId,
+  );
 
-  if (rentalRequestError)
-    return <Typography>{rentalRequestError.message}</Typography>;
+  if (rentalRequestError) return <Typography>{rentalRequestError.message}</Typography>;
 
   if (!rentalRequest) return <CircularProgress />;
 
@@ -87,7 +81,8 @@ export const RentalConfirm = ({
                   onSuccess: () => {
                     alert("登録しました");
                   },
-                  onError: (error) => {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  onError: (error: any) => {
                     alert(error.message);
                   },
                 });
@@ -138,11 +133,10 @@ export const RentalConfirm = ({
                 {
                   onSuccess: () => {
                     alert("更新しました");
-                    queryClient.invalidateQueries(
-                      `biz/rentals/${rentalId}/rental_coordinate`,
-                    );
+                    queryClient.invalidateQueries(`biz/rentals/${rentalId}/rental_coordinate`);
                   },
-                  onError: (error) => {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  onError: (error: any) => {
                     alert(error.message);
                   },
                 },
@@ -159,8 +153,8 @@ export const RentalConfirm = ({
             marginTop: 50,
           }}
         >
-          {rentalCoordinate.items.map((item, index) => (
-            <ItemConfirmCard item={item} />
+          {rentalCoordinate.items.map((item) => (
+            <ItemConfirmCard item={item} key={item.id} />
           ))}
         </div>
       </div>

@@ -7,7 +7,7 @@ interface FilterSliderProps {
   onChange: (value: FormalRankRefinement) => void;
 }
 
-export const FilterFormalRank = ({ data, onChange }: FilterSliderProps) => {
+export const FilterFormalRank = ({ onChange }: FilterSliderProps) => {
   const [currentValue, setCurrentValue] = useState([1, 10]);
 
   const onSlided = (value: number | number[]) => {

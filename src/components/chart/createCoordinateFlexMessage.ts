@@ -12,7 +12,7 @@ export const createCoordinateFlexMessage = ({
   coordinateItems,
   simplifiedHearing,
 }: TArgs) => {
-  const flexMessage: any[] = [];
+  const flexMessage: object[] = [];
 
   const simplifiedHearingContent = {
     type: "bubble",

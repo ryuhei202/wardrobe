@@ -8,13 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import { FilterGroupCollectionData } from "../../../model/selecting/browse/props_data/FilterGroupCollectionData";
-import { FilterGroupCollectionCallback } from "./callback/FilterGroupCollectionCallback";
 import { FilterCategoryGroup } from "./FilterCategoryGroup";
 import { FilterCheckboxArray } from "./FilterCheckboxArray";
 import { FilterFormalRank } from "./FilterFormalRank";
 import { FilterMediaArray } from "./FilterMediaArray";
 import { FilterPartSize } from "./FilterPartSize";
 import { FilterSizeArray } from "./FilterSizeArray";
+import { FilterGroupCollectionCallback } from "./callback/FilterGroupCollectionCallback";
 import { useFilterGroupCollectionStyle } from "./style/UseFilterGroupCollectionStyle";
 
 interface FilterGroupCollectionProps {
@@ -53,10 +53,7 @@ export const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
           <Typography variant="body2">サイズ</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <FilterSizeArray
-            data={props.data.sizeData}
-            callback={props.callback.sizeCallback}
-          />
+          <FilterSizeArray data={props.data.sizeData} callback={props.callback.sizeCallback} />
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -207,6 +204,7 @@ export const FilterGroupCollection = (props: FilterGroupCollectionProps) => {
         InputProps={{ startAdornment: <Search /> }}
         color="secondary"
         type="number"
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onKeyPress={(event: any) => {
           if (event.key === "Enter") {
             props.callback.onItemIdChanged(event.target.value as number);

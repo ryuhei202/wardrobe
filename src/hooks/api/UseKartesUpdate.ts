@@ -5,7 +5,7 @@ import { usePatchRequest } from "./UsePatchRequest";
 
 type TKartesUpdate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse,
     unknown,
     TKartesUpdateParams | undefined,
     unknown
@@ -21,12 +21,9 @@ type TKartesUpdateArg = {
   chartId: number;
 };
 
-export const useKartesUpdate = ({
-  chartId,
-}: TKartesUpdateArg): TKartesUpdate => {
-  const { mutate, isLoading } = usePatchRequest<
-    TKartesUpdateParams,
-    AxiosError<ErrorResponse>
-  >(`styling/kartes/${chartId}`);
+export const useKartesUpdate = ({ chartId }: TKartesUpdateArg): TKartesUpdate => {
+  const { mutate, isLoading } = usePatchRequest<TKartesUpdateParams, AxiosError<ErrorResponse>>(
+    `styling/kartes/${chartId}`,
+  );
   return { mutate, isLoading };
 };
