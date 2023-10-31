@@ -10,11 +10,14 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
+import { AxiosError } from "axios";
 import { useContext, useState } from "react";
 import { useQueryClient } from "react-query";
+import { CREATING_COORDINATE_STATUS } from "../../constants/rentalStatus";
 import { TRentalCoordinateShowResponse } from "../../hooks/api/UseRentalCoordinateShow";
 import { useRentalCoordinateUpdate } from "../../hooks/api/UseRentalCoordinateUpdate";
 import { useRentalRequestShow } from "../../hooks/api/UseRentalRequestShow";
+import { useRentalRequestStatus } from "../../hooks/api/UseRentalRequestStatus";
 import { useRentalUpdateToPreparingShipment } from "../../hooks/api/UseRentalUpdateToPreparingShipment";
 import { RentalIdContext } from "../context/RentalContextProvider";
 import { ItemConfirmCard } from "../shared/ItemConfirmCard";
@@ -35,6 +38,8 @@ export const RentalConfirm = ({
   } = useRentalCoordinateUpdate({
     rentalId,
   });
+  const { data: rentalStatusData, error: rentalStatusError } =
+    useRentalRequestStatus({ rentalId });
   const { mutate: updateStatus, isLoading: isUpdateShipmentStatusLoading } =
     useRentalUpdateToPreparingShipment({ rentalId });
   const { data: rentalRequest, error: rentalRequestError } =
@@ -44,8 +49,10 @@ export const RentalConfirm = ({
 
   if (rentalRequestError)
     return <Typography>{rentalRequestError.message}</Typography>;
+  if (rentalStatusError)
+    return <Typography>{rentalStatusError.message}</Typography>;
 
-  if (!rentalRequest) return <CircularProgress />;
+  if (!rentalRequest || !rentalStatusData) return <CircularProgress />;
 
   return (
     <>
@@ -79,7 +86,8 @@ export const RentalConfirm = ({
             disabled={
               isUpdateShipmentStatusLoading ||
               rentalCoordinate.items.length !== 3 ||
-              rentalCoordinate.items.some((item) => item.locationId !== null)
+              rentalCoordinate.items.some((item) => item.locationId !== null) ||
+              rentalStatusData.rentalStatus !== CREATING_COORDINATE_STATUS
             }
             onClick={() => {
               if (window.confirm("出荷準備に移動しますか？")) {

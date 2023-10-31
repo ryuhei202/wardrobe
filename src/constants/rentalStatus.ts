@@ -1,0 +1,1 @@
+export const CREATING_COORDINATE_STATUS = 10;
