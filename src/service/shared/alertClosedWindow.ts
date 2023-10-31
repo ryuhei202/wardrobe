@@ -8,6 +8,7 @@ export const alertClosedWindow = (isClosable: boolean) => {
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onUnload = (e: any) => {
   e.preventDefault();
   e.returnValue = "";

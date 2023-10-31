@@ -1,3 +1,4 @@
+import { ArrowBack } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -9,19 +10,17 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
-import React from "react";
 import ReactImageGallery from "react-image-gallery";
+import { HostUrl } from "../../../model/HostUrl";
 import { DetailResponse } from "../../../model/api/response/styling/browse/DetailResponse";
 import { DetailStatus } from "../../../model/selecting/browse/DetailStatus";
-import { BrowseDetailCallback } from "./callback/BrowseDetailCallback";
+import { theme } from "../../style/Theme";
 import { DetailItemTable } from "./DetailItemTable";
 import { DetailSizeButtonArray } from "./DetailSizeButtonArray";
+import { ValidationDialog } from "./ValidationDialog";
+import { BrowseDetailCallback } from "./callback/BrowseDetailCallback";
 import { useBrowseDetailHandler } from "./handler/UseBrowseDetailHandler";
 import { useBrowseDetailStyle } from "./style/UseBrowseDetailStyle";
-import { ValidationDialog } from "./ValidationDialog";
-import { HostUrl } from "../../../model/HostUrl";
-import { theme } from "../../style/Theme";
 
 interface BrowseDetailProps {
   response: DetailResponse;
@@ -41,10 +40,10 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
   const handler = useBrowseDetailHandler(
     props.response,
     props.callback,
-    props.previousSelectedItemId ?? undefined
+    props.previousSelectedItemId ?? undefined,
   );
 
-  let itemImage: itemImageGallery[] = [
+  const itemImage: itemImageGallery[] = [
     {
       originalImagePath: props.response.itemImagePath.large,
       thumbnailImagePath: props.response.itemImagePath.thumb,
@@ -53,16 +52,14 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
     },
   ];
 
-  let wearingImages: itemImageGallery[] = props.response.wearingImages.map(
-    (wearingImage) => {
-      return {
-        originalImagePath: wearingImage.imagePath.large,
-        thumbnailImagePath: wearingImage.imagePath.thumb,
-        itemSize: wearingImage.itemSize,
-        height: wearingImage.height,
-      };
-    }
-  );
+  const wearingImages: itemImageGallery[] = props.response.wearingImages.map((wearingImage) => {
+    return {
+      originalImagePath: wearingImage.imagePath.large,
+      thumbnailImagePath: wearingImage.imagePath.thumb,
+      itemSize: wearingImage.itemSize,
+      height: wearingImage.height,
+    };
+  });
 
   let dialog;
   if (handler.selectedItem) {
@@ -79,10 +76,7 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
 
   return (
     <>
-      <IconButton
-        onClick={() => props.callback.onClickBackButton()}
-        size="large"
-      >
+      <IconButton onClick={() => props.callback.onClickBackButton()} size="large">
         <ArrowBack />
       </IconButton>
       <Paper className={classes.itemInfo}>
@@ -108,14 +102,8 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
           />
         </div>
         <div className={classes.itemInfoTextContainer}>
-          <Typography
-            className={classes.itemInfoText}
-            variant="h5"
-            color="textSecondary"
-          >
-            {`${props.response.seriesName ?? ""}, ${
-              props.response.seriesFeature ?? ""
-            }`}
+          <Typography className={classes.itemInfoText} variant="h5" color="textSecondary">
+            {`${props.response.seriesName ?? ""}, ${props.response.seriesFeature ?? ""}`}
           </Typography>
           <Typography className={classes.itemInfoText} variant="h4">
             {props.response.categoryName}
@@ -123,9 +111,7 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
           <Typography className={classes.itemInfoText} variant="h3">
             {props.response.brandName}
           </Typography>
-          <Typography variant="body1">
-            メインカラー：{props.response.mainColor.name}
-          </Typography>
+          <Typography variant="body1">メインカラー：{props.response.mainColor.name}</Typography>
           <div>
             <Box display="flex">
               <img
@@ -137,9 +123,7 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
               />
             </Box>
           </div>
-          <Typography variant="body1">
-            サブカラー：{props.response.subColor.name}
-          </Typography>
+          <Typography variant="body1">サブカラー：{props.response.subColor.name}</Typography>
           <div>
             <Box display="flex">
               <img
@@ -151,18 +135,14 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
               />
             </Box>
           </div>
-          <Typography variant="body1">
-            サイズ：{handler.selectedSizeName()}
-          </Typography>
+          <Typography variant="body1">サイズ：{handler.selectedSizeName()}</Typography>
           <div>
             <DetailSizeButtonArray
               data={handler.detailSizeButtonArrayData()}
               callback={handler.detailSizeButtonArrayCallback()}
             />
           </div>
-          <Typography variant="body1">
-            アイテム：{handler.selectedItemId()}
-          </Typography>
+          <Typography variant="body1">アイテム：{handler.selectedItemId()}</Typography>
           <div className={classes.itemTableContainer}>
             <DetailItemTable
               data={handler.detailItemTableData()}
@@ -185,10 +165,7 @@ export const BrowseDetail = (props: BrowseDetailProps) => {
       <Dialog open={handler.isPostLoading} disableEscapeKeyDown>
         <CircularProgress />
       </Dialog>
-      <Dialog
-        open={handler.postError !== null}
-        onClose={handler.resetPostError}
-      >
+      <Dialog open={handler.postError !== null} onClose={handler.resetPostError}>
         <DialogTitle>エラー</DialogTitle>
         <DialogContent>
           <Typography>{handler.postError?.message ?? ""}</Typography>

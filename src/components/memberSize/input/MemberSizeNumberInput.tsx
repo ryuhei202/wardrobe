@@ -28,7 +28,7 @@ export const MemberSizeNumberInput = ({
     const v = e.target.value;
     if (v === "") return onChange(null);
 
-    const isNumber = (arg: any): arg is number => {
+    const isNumber = (arg: unknown): arg is number => {
       return !Number.isNaN(arg);
     };
 

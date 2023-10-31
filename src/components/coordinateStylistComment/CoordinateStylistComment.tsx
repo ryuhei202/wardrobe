@@ -8,14 +8,10 @@ import { MemoForm } from "../shared/MemoForm";
 type TProps = {
   data: CoordinateStylistCommentsShowResponse;
   coordinateId: number;
-  onUpdateComplete: () => Promise<any>;
+  onUpdateComplete: () => Promise<unknown>;
 };
 
-export const CoordinateStylistComment = ({
-  data,
-  coordinateId,
-  onUpdateComplete,
-}: TProps) => {
+export const CoordinateStylistComment = ({ data, coordinateId, onUpdateComplete }: TProps) => {
   const [text, setText] = useState(data.text ?? "");
   const { mutate, isLoading } = useCoordinateStylistCommentsUpdate({
     coordinateId,
@@ -40,7 +36,7 @@ export const CoordinateStylistComment = ({
         onSettled: () => {
           setIsSnackBarOpen(true);
         },
-      }
+      },
     );
   };
 

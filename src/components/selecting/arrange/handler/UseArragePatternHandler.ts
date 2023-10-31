@@ -1,12 +1,12 @@
-import { CoordinateBulkUpdateRequest } from "../../../../model/api/request/styling/coordinate/CoordinateBulkUpdateRequest";
-import { alertClosedWindow } from "../../../../service/shared/alertClosedWindow";
 import { useCallback, useEffect, useState } from "react";
-import { AddedOutfitListData } from "../../../../model/selecting/arrange/props_data/AddedOutfitListData";
-import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
-import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/OutfitFormData";
-import { OutfitFormCallback } from "../callback/OutfitFormCallback";
+import { CoordinateBulkUpdateRequest } from "../../../../model/api/request/styling/coordinate/CoordinateBulkUpdateRequest";
 import { CoordinatePatternIndexResponse } from "../../../../model/api/response/styling/coordinatePattern/CoordinatePatternIndexResponse";
 import { TCoordinateItem } from "../../../../model/coordinateItem/TCoordinateItem";
+import { AddedOutfitListData } from "../../../../model/selecting/arrange/props_data/AddedOutfitListData";
+import { OutfitFormData } from "../../../../model/selecting/arrange/props_data/OutfitFormData";
+import { alertClosedWindow } from "../../../../service/shared/alertClosedWindow";
+import { AddedOutfitListCallback } from "../callback/AddedOutfitListCallback";
+import { OutfitFormCallback } from "../callback/OutfitFormCallback";
 
 export interface ArrangePatternHandler {
   coordinates: CoordinateBulkUpdateRequest[];
@@ -20,7 +20,7 @@ export interface ArrangePatternHandler {
 
 export const useArrangePatternHandler = (
   items: TCoordinateItem[],
-  responses: CoordinatePatternIndexResponse
+  responses: CoordinatePatternIndexResponse,
 ): ArrangePatternHandler => {
   const defaultCoordinate = {
     id: null,
@@ -41,9 +41,7 @@ export const useArrangePatternHandler = (
   };
   const [coordinates, setCoordinates] =
     useState<CoordinateBulkUpdateRequest[]>(formattedCoordinates);
-  const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(
-    coordinates.length
-  );
+  const [editingOutfitIndex, setEditingOutfitIndex] = useState<number>(coordinates.length);
   const [editingOutfit, setEditingOutfit] =
     useState<CoordinateBulkUpdateRequest>(defaultCoordinate);
   const [isPostComplete, setIsPostComplete] = useState(false);
@@ -64,7 +62,7 @@ export const useArrangePatternHandler = (
                 categoryName: string;
                 imagePath: string;
               }[],
-              itemId
+              itemId,
             ) => {
               const item = items.find((item) => item.itemInfo.id === itemId);
               if (item) {
@@ -76,7 +74,7 @@ export const useArrangePatternHandler = (
               }
               return result;
             },
-            []
+            [],
           ),
           advices: coordinate.adviceIds.map((adviceId) => {
             let adviceTitle = "";
@@ -121,7 +119,7 @@ export const useArrangePatternHandler = (
   };
 
   const outfitFormData = (): OutfitFormData => {
-    let selectedAdviceIdArray: (number | null)[] = [...editingOutfit.adviceIds];
+    const selectedAdviceIdArray: (number | null)[] = [...editingOutfit.adviceIds];
     selectedAdviceIdArray.push(null);
     return {
       items: items.map((item) => {
@@ -141,7 +139,7 @@ export const useArrangePatternHandler = (
   const outfitFormCallback = (): OutfitFormCallback => {
     return {
       onClickAddOutfit: () => {
-        let newOutfits = [...coordinates];
+        const newOutfits = [...coordinates];
         if (editingOutfitIndex >= newOutfits.length) {
           newOutfits.push(editingOutfit);
         } else {
@@ -153,7 +151,7 @@ export const useArrangePatternHandler = (
         setIsPostComplete(false);
       },
       onSelectAdvice: (adviceId: number, index: number) => {
-        let newAdviceIds = [...editingOutfit.adviceIds];
+        const newAdviceIds = [...editingOutfit.adviceIds];
         if (index > editingOutfit.adviceIds.length) {
           newAdviceIds.push(adviceId);
         } else {

@@ -54,8 +54,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "@kiizan_kiizan/eslint-config"
     ]
   },
   "browserslist": {
@@ -71,7 +70,10 @@
     ]
   },
   "devDependencies": {
+    "@kiizan_kiizan/eslint-config": "^0.0.7",
+    "@kiizan_kiizan/prettier-config": "^0.0.5",
     "@sentry/webpack-plugin": "^2.7.1",
     "husky": "^8.0.2"
-  }
+  },
+  "prettier": "@kiizan_kiizan/prettier-config"
 }

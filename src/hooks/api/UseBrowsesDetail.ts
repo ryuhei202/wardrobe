@@ -22,12 +22,13 @@ export const useBrowsesDetail = ({
   refinement,
 }: TBrowsesDetailArg): BrowsesDetail => {
   const params = (): GetDetailParams => {
-    let filterParams: GetDetailFilterParams = {
+    const filterParams: GetDetailFilterParams = {
       size: refinement.sizeIds,
       partSize: refinement.partSizes,
       ng: refinement.ngIds,
       ranks: refinement.rank,
     };
+
     if (refinement.itemId) filterParams.itemId = refinement.itemId;
 
     return {

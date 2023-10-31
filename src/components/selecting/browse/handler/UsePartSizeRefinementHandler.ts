@@ -1,36 +1,34 @@
 import { useState } from "react";
+import { FilterPartSizeResponse } from "../../../../model/api/response/styling/browse/FilterPartSizeResponse";
+import { ValueRefinement } from "../../../../model/selecting/browse/ValueRefinement";
+import { AppliedFilterData } from "../../../../model/selecting/browse/props_data/AppliedFilterData";
 import { FilterPartSizeData } from "../../../../model/selecting/browse/props_data/FilterPartSizeData";
 import { FilterPartSizeCallback } from "../callback/FilterPartSizeCallback";
-import { FilterPartSizeResponse } from "../../../../model/api/response/styling/browse/FilterPartSizeResponse";
-import { AppliedFilterData } from "../../../../model/selecting/browse/props_data/AppliedFilterData";
-import { ValueRefinement } from "../../../../model/selecting/browse/ValueRefinement";
 
 export interface PartSizeRefinementHandler {
   partSizeCallback: (
     choice: FilterPartSizeResponse,
-    currentValues: ValueRefinement[]
+    currentValues: ValueRefinement[],
   ) => FilterPartSizeCallback;
   partSizeData: (
     choice: FilterPartSizeResponse,
-    currentValues: ValueRefinement[]
+    currentValues: ValueRefinement[],
   ) => FilterPartSizeData;
   appliedFilters: (
     choice: FilterPartSizeResponse,
-    currentValues: ValueRefinement[]
+    currentValues: ValueRefinement[],
   ) => AppliedFilterData[];
   deleteFilter: (currentValues: ValueRefinement[], index: number) => void;
   resetPresetIndex: () => void;
 }
 
 export const usePartSizeRefinementHandler = (
-  onChange: (newValues: ValueRefinement[]) => void
+  onChange: (newValues: ValueRefinement[]) => void,
 ): PartSizeRefinementHandler => {
-  const [selectedPresetIndex, setSelectedPresetIndex] = useState<number | null>(
-    null
-  );
+  const [selectedPresetIndex, setSelectedPresetIndex] = useState<number | null>(null);
   const partSizeCallback = (
     choice: FilterPartSizeResponse,
-    currentValues: ValueRefinement[]
+    currentValues: ValueRefinement[],
   ): FilterPartSizeCallback => {
     return {
       onPresetChanged: (index: number) => {
@@ -40,7 +38,7 @@ export const usePartSizeRefinementHandler = (
       filterSliderArrayCallback: {
         onChange: (index: number, value: number[]) => {
           const currentIndex = currentValues.findIndex(
-            (filter) => filter.id === choice.ranges[index].id
+            (filter) => filter.id === choice.ranges[index].id,
           );
           const newPartSizes = [...currentValues];
           const newValue = {
@@ -61,7 +59,7 @@ export const usePartSizeRefinementHandler = (
 
   const partSizeData = (
     choice: FilterPartSizeResponse,
-    currentValues: ValueRefinement[]
+    currentValues: ValueRefinement[],
   ): FilterPartSizeData => {
     return {
       selectedPresetIndex: selectedPresetIndex,
@@ -74,10 +72,8 @@ export const usePartSizeRefinementHandler = (
           name: filter.name,
           range: [filter.min, filter.max],
           selectedValue: [
-            currentValues.find((value) => value.id === filter.id)?.min ??
-              filter.min,
-            currentValues.find((value) => value.id === filter.id)?.max ??
-              filter.max,
+            currentValues.find((value) => value.id === filter.id)?.min ?? filter.min,
+            currentValues.find((value) => value.id === filter.id)?.max ?? filter.max,
           ],
         };
       }),
@@ -86,10 +82,10 @@ export const usePartSizeRefinementHandler = (
 
   const appliedFilters = (
     choice: FilterPartSizeResponse,
-    currentValues: ValueRefinement[]
+    currentValues: ValueRefinement[],
   ): AppliedFilterData[] => {
     return currentValues.map((valueRefinement) => {
-      let filter = choice.ranges.find((row) => row.id === valueRefinement.id);
+      const filter = choice.ranges.find((row) => row.id === valueRefinement.id);
       return {
         name: `${filter?.name} ${valueRefinement.min}~${valueRefinement.max}`,
       };
@@ -97,7 +93,7 @@ export const usePartSizeRefinementHandler = (
   };
 
   const deleteFilter = (currentValues: ValueRefinement[], index: number) => {
-    let newPartSizes = [...currentValues];
+    const newPartSizes = [...currentValues];
     newPartSizes.splice(index, 1);
     onChange(newPartSizes);
   };

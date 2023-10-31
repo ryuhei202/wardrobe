@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  Pagination,
-  Select,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { FormControl, Pagination, Select, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import { TRentalFiltersResponse } from "../../hooks/api/UseRentalFilters";
 import { Refinement } from "../../model/selecting/browse/Refinement";
@@ -33,22 +27,19 @@ export const RentalItemBrowseContainer = ({
 
   const [totalCount, setTotalCount] = useState<number>(0);
   const [totalPageNum, setTotalPageNum] = useState<number>(0);
-  const { appliedFilterArrayData, handleClickDelete, handleClickClear } =
-    getFilterListHandler({
-      filter: filter.filter,
-      currentRefinement,
-      defaultRefinement: filter.defaultRefinement,
-      sort: filter.sort,
-      categoryId,
-      onChangeCurrentRefinement,
-    });
+  const { appliedFilterArrayData, handleClickDelete, handleClickClear } = getFilterListHandler({
+    filter: filter.filter,
+    currentRefinement,
+    defaultRefinement: filter.defaultRefinement,
+    categoryId,
+    onChangeCurrentRefinement,
+  });
 
-  const { filterCollection, filterCollectionCallback } =
-    getFilterGroupCollectionHandler({
-      filter: filter.filter,
-      currentRefinement,
-      onChangeCurrentRefinement,
-    });
+  const { filterCollection, filterCollectionCallback } = getFilterGroupCollectionHandler({
+    filter: filter.filter,
+    currentRefinement,
+    onChangeCurrentRefinement,
+  });
 
   const onPageChanged = (page: number) => {
     onChangeCurrentRefinement({
@@ -83,11 +74,7 @@ export const RentalItemBrowseContainer = ({
           <FormControl className={classes.sortSelection}>
             <Select
               native
-              value={
-                filter.sort.findIndex(
-                  (sort) => sort.id === currentRefinement.sortId,
-                ) ?? 0
-              }
+              value={filter.sort.findIndex((sort) => sort.id === currentRefinement.sortId) ?? 0}
               onChange={(e) => {
                 const index = parseInt(e.target.value as string);
                 const newRefinement = {

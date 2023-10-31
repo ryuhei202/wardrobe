@@ -15,8 +15,8 @@ type TProps = {
   readonly coordinateId: number;
   readonly coordinateItems: TCoordinateItem[];
   readonly isLineMessagesSendDisable: boolean;
-  readonly onUpdateComplete: () => Promise<any>;
-  readonly hearingStatusData: TCoordinateHearingStatusShowResponse | {};
+  readonly onUpdateComplete: () => Promise<unknown>;
+  readonly hearingStatusData: TCoordinateHearingStatusShowResponse | object;
 };
 
 export const CoordinateDescription = ({

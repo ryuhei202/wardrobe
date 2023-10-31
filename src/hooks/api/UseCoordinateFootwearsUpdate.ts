@@ -6,7 +6,7 @@ import { usePatchRequest } from "./UsePatchRequest";
 
 type CoordinateFootwearsUpdate = {
   readonly mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse<unknown, unknown>,
     Error,
     TCoordinateFootwearsUpdateParams | undefined
   >;
@@ -19,10 +19,9 @@ type TCoordinateFootwearsUpdateParams = {
 
 export const useCoordinateFootwearsUpdate = (): CoordinateFootwearsUpdate => {
   const coordinateId = useContextDefinedState(CoordinateIdContext);
-  const { mutate, isLoading } = usePatchRequest<
-    TCoordinateFootwearsUpdateParams,
-    Error
-  >(`styling/coordinates/${coordinateId}/coordinate_footwear`);
+  const { mutate, isLoading } = usePatchRequest<TCoordinateFootwearsUpdateParams, Error>(
+    `styling/coordinates/${coordinateId}/coordinate_footwear`,
+  );
 
   return { mutate, isLoading };
 };

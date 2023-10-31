@@ -1,8 +1,8 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BrowseSearchPrerequisiteResponse } from "../../../model/api/response/styling/browse/BrowseSearchPrerequisiteResponse";
-import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
 import { ItemBrowseContainer } from "./ItemBrowseContainer";
+import { ItemBrowseCallback } from "./callback/ItemBrowseCallback";
 import { useBrowseStyle } from "./style/UseBrowseStyle";
 
 interface BrowseProps {
@@ -39,7 +39,8 @@ export const Browse = (props: BrowseProps) => {
         <ItemBrowseContainer
           key={categoryId}
           callback={props.callback}
-          categoryId={categoryId!!}
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          categoryId={categoryId!}
           currentSelectedItemId={props.currentSelectedItemId}
         />
       )}

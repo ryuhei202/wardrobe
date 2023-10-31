@@ -35,27 +35,19 @@ export const RentalSelectionProgress = ({
 }: TProps) => {
   const classes = useSelectionProgressStyle();
   const [position, setPosition] = useState<{
-    mouseX: null | Number;
+    mouseX: null | number;
     mouseY: null | number;
   }>(initialState);
 
-  let steps = [];
+  const steps = [];
   for (let i = 0; i < rentableNum; i++) {
     let stepLabel;
     if (items.length > i) {
       stepLabel = (
         <StepLabel
           StepIconComponent={() => (
-            <Box
-              display="flex"
-              border={selectedIndex === i ? 1 : 0}
-              borderColor="primary.main"
-            >
-              <img
-                className={classes.stepperImage}
-                src={items[i].imagePath.thumb}
-                alt=""
-              />
+            <Box display="flex" border={selectedIndex === i ? 1 : 0} borderColor="primary.main">
+              <img className={classes.stepperImage} src={items[i].imagePath.thumb} alt="" />
             </Box>
           )}
         >
@@ -64,9 +56,7 @@ export const RentalSelectionProgress = ({
       );
     } else {
       stepLabel = (
-        <StepLabel>
-          {items.length > i ? items[i].id.toString() : `アイテムNo.${i + 1}`}
-        </StepLabel>
+        <StepLabel>{items.length > i ? items[i].id.toString() : `アイテムNo.${i + 1}`}</StepLabel>
       );
     }
     steps.push(
@@ -87,10 +77,7 @@ export const RentalSelectionProgress = ({
         placement="top-start"
       >
         <Step disabled={items.length < i}>
-          <StepButton
-            className={classes.stepButton}
-            onClick={() => onSelect(i)}
-          >
+          <StepButton className={classes.stepButton} onClick={() => onSelect(i)}>
             {stepLabel}
           </StepButton>
         </Step>
@@ -108,19 +95,11 @@ export const RentalSelectionProgress = ({
         });
       }}
     >
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={onClickCompleteButton}
-      >
+      <Button variant="contained" color="primary" onClick={onClickCompleteButton}>
         アイテム選択完了
       </Button>
       <div style={{ display: "flex" }}>
-        <Stepper
-          activeStep={selectedIndex}
-          alternativeLabel
-          className={classes.stepper}
-        >
+        <Stepper activeStep={selectedIndex} alternativeLabel className={classes.stepper}>
           {steps}
         </Stepper>
         <div style={{ width: 100 }}>

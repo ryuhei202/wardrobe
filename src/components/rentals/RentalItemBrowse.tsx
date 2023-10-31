@@ -23,17 +23,12 @@ export const RentalItemBrowse = ({
   useEffect(() => {
     onChangeTotalCount(browsesIndex?.totalCount ?? 0);
     onChangeTotalPageNum(browsesIndex?.totalPageNum ?? 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [browsesIndex]);
 
-  if (browsesIndexError)
-    return <Typography>{browsesIndexError.message}</Typography>;
+  if (browsesIndexError) return <Typography>{browsesIndexError.message}</Typography>;
   if (!browsesIndex) return <CircularProgress />;
 
   return (
-    <RentalItemCardCollection
-      items={browsesIndex.itemCard}
-      onClickItemCard={onClickItemCard}
-    />
+    <RentalItemCardCollection items={browsesIndex.itemCard} onClickItemCard={onClickItemCard} />
   );
 };

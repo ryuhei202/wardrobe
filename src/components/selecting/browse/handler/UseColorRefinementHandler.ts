@@ -4,23 +4,14 @@ import { FilterMediaData } from "../../../../model/selecting/browse/props_data/F
 import { FilterMediaArrayCallback } from "../callback/FilterMediaArrayCallback";
 
 export interface ColorRefinementHandler {
-  colorCallback: (
-    choice: FilterMediaResponse[],
-    currentIds: number[]
-  ) => FilterMediaArrayCallback;
-  colorData: (
-    choice: FilterMediaResponse[],
-    currentIds: number[]
-  ) => FilterMediaData[];
-  appliedFilters: (
-    choice: FilterMediaResponse[],
-    currentIds: number[]
-  ) => AppliedFilterData[];
+  colorCallback: (choice: FilterMediaResponse[], currentIds: number[]) => FilterMediaArrayCallback;
+  colorData: (choice: FilterMediaResponse[], currentIds: number[]) => FilterMediaData[];
+  appliedFilters: (choice: FilterMediaResponse[], currentIds: number[]) => AppliedFilterData[];
   deleteFilter: (currentIds: number[], index: number) => void;
 }
 
 export const useColorRefinementHandler = (
-  onChange: (newIds: number[]) => void
+  onChange: (newIds: number[]) => void,
 ): ColorRefinementHandler => {
   const newFilterArray = (id: number, currentArray: number[]): number[] => {
     const currentIndex = currentArray.indexOf(id);
@@ -35,7 +26,7 @@ export const useColorRefinementHandler = (
 
   const colorCallback = (
     choice: FilterMediaResponse[],
-    currentIds: number[]
+    currentIds: number[],
   ): FilterMediaArrayCallback => {
     return {
       onClick: (index: number) => {
@@ -45,10 +36,7 @@ export const useColorRefinementHandler = (
     };
   };
 
-  const colorData = (
-    choice: FilterMediaResponse[],
-    currentIds: number[]
-  ): FilterMediaData[] => {
+  const colorData = (choice: FilterMediaResponse[], currentIds: number[]): FilterMediaData[] => {
     return choice.map((filter) => {
       return {
         name: filter.name,
@@ -60,15 +48,16 @@ export const useColorRefinementHandler = (
 
   const appliedFilters = (
     choice: FilterMediaResponse[],
-    currentIds: number[]
+    currentIds: number[],
   ): AppliedFilterData[] => {
     return currentIds.map((currentId) => {
-      return { name: choice.find((filter) => filter.id === currentId)!!.name };
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      return { name: choice.find((filter) => filter.id === currentId)!.name };
     });
   };
 
   const deleteFilter = (currentIds: number[], index: number) => {
-    let newColors = [...currentIds];
+    const newColors = [...currentIds];
     newColors.splice(index, 1);
     onChange(newColors);
   };

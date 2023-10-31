@@ -17,7 +17,7 @@ export const useCoordinatePatternsBulkUpdate = ({
   coordinateId,
 }: TArrangesCreateOutfitsArg): {
   mutate: UseMutateFunction<
-    AxiosResponse<any, any>,
+    AxiosResponse<unknown, unknown>,
     unknown,
     PostCreateOutfitParams | undefined,
     unknown

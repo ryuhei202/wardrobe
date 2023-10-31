@@ -1,17 +1,12 @@
 import { FilterChoiceResponse } from "../../../hooks/api/UseRentalFilters";
-import { FilterResponse } from "../../../model/api/response/styling/browse/FilterResponse";
 import { LargeCategoryChoiceResponse } from "../../../model/api/response/styling/browse/LargeCategoryChoiceResponse";
-import {
-  TRentalAppliedFilterData,
-  TType,
-} from "../../../model/rental/TRentalAppliedFilterData";
+import { TRentalAppliedFilterData, TType } from "../../../model/rental/TRentalAppliedFilterData";
 import { Refinement } from "../../../model/selecting/browse/Refinement";
 
 type TArgs = {
   readonly filter: FilterChoiceResponse;
   readonly currentRefinement: Refinement;
   readonly defaultRefinement: Refinement;
-  readonly sort: FilterResponse[];
   readonly categoryId: number;
   readonly onChangeCurrentRefinement: (refinement: Refinement) => void;
 };
@@ -19,7 +14,6 @@ export const getFilterListHandler = ({
   filter,
   currentRefinement,
   defaultRefinement,
-  sort,
   categoryId,
   onChangeCurrentRefinement,
 }: TArgs) => {
@@ -35,9 +29,8 @@ export const getFilterListHandler = ({
     if (selectedMediumCategory && currentRefinement.smallCategoryIds.length) {
       return currentRefinement.smallCategoryIds.map((sId) => {
         return {
-          name: selectedMediumCategory.smallCategory.find(
-            (filter) => filter.id === sId,
-          )!!.name,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          name: selectedMediumCategory.smallCategory.find((filter) => filter.id === sId)!.name,
           type: "smallCategory",
           id: sId,
         };
@@ -65,7 +58,8 @@ export const getFilterListHandler = ({
   const appliedSizeFilter = (): TRentalAppliedFilterData[] => {
     return currentRefinement.sizeIds.map((sizeId) => {
       return {
-        name: filter.size.find((size) => size.id === sizeId)!!.name,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: filter.size.find((size) => size.id === sizeId)!.name,
         type: "size",
         id: sizeId,
       };
@@ -74,9 +68,8 @@ export const getFilterListHandler = ({
 
   const appliedPartSizeFilter = (): TRentalAppliedFilterData[] => {
     return currentRefinement.partSizes.map((p) => {
-      const partSizeName = filter.rangesOfPartSizes.find(
-        (partSize) => partSize.id === p.id,
-      )!!.name;
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const partSizeName = filter.rangesOfPartSizes.find((partSize) => partSize.id === p.id)!.name;
       return {
         name: `${partSizeName} ${p.min}〜${p.max}`,
         type: "partSize",
@@ -88,7 +81,8 @@ export const getFilterListHandler = ({
   const appliedColorFilter = (): TRentalAppliedFilterData[] => {
     return currentRefinement.colorIds.map((colorId) => {
       return {
-        name: filter.color.find((color) => color.id === colorId)!!.name,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: filter.color.find((color) => color.id === colorId)!.name,
         type: "color",
         id: colorId,
       };
@@ -98,7 +92,8 @@ export const getFilterListHandler = ({
   const appliedPatternFilter = (): TRentalAppliedFilterData[] => {
     return currentRefinement.patternIds.map((patternId) => {
       return {
-        name: filter.pattern.find((pattern) => pattern.id === patternId)!!.name,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: filter.pattern.find((pattern) => pattern.id === patternId)!.name,
         type: "pattern",
         id: patternId,
       };
@@ -108,7 +103,8 @@ export const getFilterListHandler = ({
   const appliedLogoFilter = (): TRentalAppliedFilterData[] => {
     return currentRefinement.logoIds.map((logoId) => {
       return {
-        name: filter.logo.find((logo) => logo.id === logoId)!!.name,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: filter.logo.find((logo) => logo.id === logoId)!.name,
         type: "logo",
         id: logoId,
       };
@@ -137,7 +133,8 @@ export const getFilterListHandler = ({
   const appliedOptionFilter = (): TRentalAppliedFilterData[] => {
     return currentRefinement.optionIds.map((optionId) => {
       return {
-        name: filter.option.find((option) => option.id === optionId)!!.name,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: filter.option.find((option) => option.id === optionId)!.name,
         type: "option",
         id: optionId,
       };
@@ -187,9 +184,7 @@ export const getFilterListHandler = ({
       case "smallCategory":
         onChangeCurrentRefinement({
           ...currentRefinement,
-          smallCategoryIds: currentRefinement.smallCategoryIds.filter(
-            (sId) => sId !== id,
-          ),
+          smallCategoryIds: currentRefinement.smallCategoryIds.filter((sId) => sId !== id),
         });
         break;
       case "mediumCategory":

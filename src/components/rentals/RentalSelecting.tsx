@@ -19,10 +19,7 @@ type TProps = {
   onClickCompleteButton: () => void;
 };
 
-export const RentalSelecting = ({
-  rentalCoordinateItems,
-  onClickCompleteButton,
-}: TProps) => {
+export const RentalSelecting = ({ rentalCoordinateItems, onClickCompleteButton }: TProps) => {
   const classes = useBrowseStyle();
   const RENTABLE_NUM = 3;
   const { data, error } = useBrowsesSearchPrerequisite();
@@ -32,8 +29,7 @@ export const RentalSelecting = ({
       ? rentalCoordinateItems.length - 1
       : rentalCoordinateItems.length,
   );
-  const [selectedPreregisteredItemId, setSelectedPreregisteredItemId] =
-    useState<number>();
+  const [selectedPreregisteredItemId, setSelectedPreregisteredItemId] = useState<number>();
 
   const currentItemId: number | undefined = rentalCoordinateItems[currentIndex]
     ? rentalCoordinateItems[currentIndex].id

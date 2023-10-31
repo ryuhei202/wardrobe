@@ -14,9 +14,7 @@ export const Chart = ({ id, rentalStartedAt }: TProps) => {
           <Typography variant="h6">カルテID: {id}</Typography>
           <Typography variant="body2" style={{ color: "gray" }}>
             発送日:
-            {rentalStartedAt
-              ? new Date(rentalStartedAt!).toLocaleDateString()
-              : ""}
+            {rentalStartedAt ? new Date(rentalStartedAt!).toLocaleDateString() : ""}
           </Typography>
         </ListItemText>
       </ListItem>
