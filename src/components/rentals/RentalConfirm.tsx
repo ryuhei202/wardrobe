@@ -27,32 +27,25 @@ type TProps = {
   rentalCoordinate: TRentalCoordinateShowResponse;
   onClickBackButton: () => void;
 };
-export const RentalConfirm = ({
-  rentalCoordinate,
-  onClickBackButton,
-}: TProps) => {
+export const RentalConfirm = ({ rentalCoordinate, onClickBackButton }: TProps) => {
   const { rentalId } = useContext(RentalIdContext);
   const queryClient = useQueryClient();
-  const {
-    mutate: updateCoordinateChoice,
-    isLoading: isUpdateCoordinateLoading,
-  } = useRentalCoordinateUpdate({
-    rentalId,
-  });
+  const { mutate: updateCoordinateChoice, isLoading: isUpdateCoordinateLoading } =
+    useRentalCoordinateUpdate({
+      rentalId,
+    });
   const { data: rentalStatusData, error: rentalStatusError } = useRentalShow({
     rentalId,
   });
   const { mutate: updateStatus, isLoading: isUpdateShipmentStatusLoading } =
     useRentalUpdateToPreparingShipment({ rentalId });
-  const { data: rentalRequest, error: rentalRequestError } =
-    useRentalRequestShow({ rentalId });
-  const [selectedCoordinateChoiceId, setSelectedCoordinateChoiceId] =
-    useState<number>(rentalCoordinate.coordinateChoiceId);
+  const { data: rentalRequest, error: rentalRequestError } = useRentalRequestShow({ rentalId });
+  const [selectedCoordinateChoiceId, setSelectedCoordinateChoiceId] = useState<number>(
+    rentalCoordinate.coordinateChoiceId,
+  );
 
-  if (rentalRequestError)
-    return <Typography>{rentalRequestError.message}</Typography>;
-  if (rentalStatusError)
-    return <Typography>{rentalStatusError.message}</Typography>;
+  if (rentalRequestError) return <Typography>{rentalRequestError.message}</Typography>;
+  if (rentalStatusError) return <Typography>{rentalStatusError.message}</Typography>;
 
   if (!rentalRequest || !rentalStatusData) return <CircularProgress />;
 
@@ -89,8 +82,7 @@ export const RentalConfirm = ({
               isUpdateShipmentStatusLoading ||
               rentalCoordinate.items.length !== 3 ||
               rentalCoordinate.items.some((item) => item.locationId !== null) ||
-              rentalStatusData.rentalStatus !==
-                CREATING_COORDINATE_O_RENTAL_STATUS
+              rentalStatusData.rentalStatus !== CREATING_COORDINATE_O_RENTAL_STATUS
             }
             onClick={() => {
               if (window.confirm("出荷準備に移動しますか？")) {
@@ -153,9 +145,7 @@ export const RentalConfirm = ({
                 {
                   onSuccess: () => {
                     alert("更新しました");
-                    queryClient.invalidateQueries(
-                      `biz/rentals/${rentalId}/rental_coordinate`,
-                    );
+                    queryClient.invalidateQueries(`biz/rentals/${rentalId}/rental_coordinate`);
                   },
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   onError: (error: any) => {
