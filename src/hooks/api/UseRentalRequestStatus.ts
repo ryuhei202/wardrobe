@@ -1,19 +1,19 @@
 import { useGetRequest } from "./UseGetRequest";
 
 type TResponse = {
-  readonly data?: TRentalRequestStatusResponse;
+  readonly data?: TRentalShowResponse;
   readonly error: Error | null;
 };
-export type TRentalRequestStatusResponse = {
+export type TRentalShowResponse = {
   rentalStatus: number;
 };
 
 type TArgs = {
   readonly rentalId: number;
 };
-export const useRentalRequestStatus = ({ rentalId }: TArgs): TResponse => {
-  const { data, error } = useGetRequest<TRentalRequestStatusResponse>(
-    `biz/rentals/${rentalId}/status`,
+export const useRentalShow = ({ rentalId }: TArgs): TResponse => {
+  const { data, error } = useGetRequest<TRentalShowResponse>(
+    `biz/rentals/${rentalId}`,
   );
   return {
     data,

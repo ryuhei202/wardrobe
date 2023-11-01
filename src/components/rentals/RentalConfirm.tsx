@@ -13,11 +13,12 @@ import {
 import { AxiosError } from "axios";
 import { useContext, useState } from "react";
 import { useQueryClient } from "react-query";
-import { CREATING_COORDINATE_STATUS } from "../../constants/rentalStatus";
+import { CREATING_COORDINATE_O_RENTAL_STATUS } from "../../constants/oRentalStatus";
 import { TRentalCoordinateShowResponse } from "../../hooks/api/UseRentalCoordinateShow";
 import { useRentalCoordinateUpdate } from "../../hooks/api/UseRentalCoordinateUpdate";
 import { useRentalRequestShow } from "../../hooks/api/UseRentalRequestShow";
-import { useRentalRequestStatus } from "../../hooks/api/UseRentalRequestStatus";
+
+import { useRentalShow } from "../../hooks/api/UseRentalRequestStatus";
 import { useRentalUpdateToPreparingShipment } from "../../hooks/api/UseRentalUpdateToPreparingShipment";
 import { RentalIdContext } from "../context/RentalContextProvider";
 import { ItemConfirmCard } from "../shared/ItemConfirmCard";
@@ -38,8 +39,9 @@ export const RentalConfirm = ({
   } = useRentalCoordinateUpdate({
     rentalId,
   });
-  const { data: rentalStatusData, error: rentalStatusError } =
-    useRentalRequestStatus({ rentalId });
+  const { data: rentalStatusData, error: rentalStatusError } = useRentalShow({
+    rentalId,
+  });
   const { mutate: updateStatus, isLoading: isUpdateShipmentStatusLoading } =
     useRentalUpdateToPreparingShipment({ rentalId });
   const { data: rentalRequest, error: rentalRequestError } =
@@ -87,7 +89,8 @@ export const RentalConfirm = ({
               isUpdateShipmentStatusLoading ||
               rentalCoordinate.items.length !== 3 ||
               rentalCoordinate.items.some((item) => item.locationId !== null) ||
-              rentalStatusData.rentalStatus !== CREATING_COORDINATE_STATUS
+              rentalStatusData.rentalStatus !==
+                CREATING_COORDINATE_O_RENTAL_STATUS
             }
             onClick={() => {
               if (window.confirm("出荷準備に移動しますか？")) {
