@@ -18,7 +18,7 @@ import { TRentalCoordinateShowResponse } from "../../hooks/api/UseRentalCoordina
 import { useRentalCoordinateUpdate } from "../../hooks/api/UseRentalCoordinateUpdate";
 import { useRentalRequestShow } from "../../hooks/api/UseRentalRequestShow";
 
-import { useRentalShow } from "../../hooks/api/UseRentalRequestStatus";
+import { useRentalShow } from "../../hooks/api/UseRentalShow";
 import { useRentalUpdateToPreparingShipment } from "../../hooks/api/UseRentalUpdateToPreparingShipment";
 import { RentalIdContext } from "../context/RentalContextProvider";
 import { ItemConfirmCard } from "../shared/ItemConfirmCard";

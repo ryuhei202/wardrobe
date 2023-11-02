@@ -12,9 +12,7 @@ type TArgs = {
   readonly rentalId: number;
 };
 export const useRentalShow = ({ rentalId }: TArgs): TResponse => {
-  const { data, error } = useGetRequest<TRentalShowResponse>(
-    `biz/rentals/${rentalId}`,
-  );
+  const { data, error } = useGetRequest<TRentalShowResponse>(`biz/rentals/${rentalId}`);
   return {
     data,
     error,
