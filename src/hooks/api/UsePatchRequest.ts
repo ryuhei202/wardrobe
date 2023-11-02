@@ -3,7 +3,6 @@ import { useMutation } from "react-query";
 import { axiosClient } from "./../../model/api/shared/AxiosClient";
 import { baseUrl } from "./../../model/api/shared/BaseUrl";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const usePatchRequest = <TParams = object, TError = AxiosError>(
   path: string,
   params?: TParams,
