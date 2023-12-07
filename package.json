@@ -72,7 +72,7 @@
   "devDependencies": {
     "@kiizan_kiizan/eslint-config": "^0.0.7",
     "@kiizan_kiizan/prettier-config": "^0.0.5",
-    "@sentry/webpack-plugin": "^2.9.0",
+    "@sentry/webpack-plugin": "^2.10.2",
     "husky": "^8.0.2"
   },
   "prettier": "@kiizan_kiizan/prettier-config"
